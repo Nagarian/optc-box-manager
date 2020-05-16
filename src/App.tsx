@@ -1,8 +1,12 @@
 import React from 'react'
-import './App.css'
+import Box from './components/Box'
 
 function App () {
-  return <div></div>
+  return (
+    <Box margin="2" padding="1">
+      Hello
+    </Box>
+  )
 }
 
 export default App

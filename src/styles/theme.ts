@@ -70,4 +70,7 @@ export default {
     menu: 10,
     popin: 20,
   },
+  shadows: {
+    small: '0 1px 4px rgba(0, 0, 0, .125)',
+  },
 }
