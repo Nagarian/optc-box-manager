@@ -1,0 +1,3 @@
+[submodule "src/optcdb"]
+	path = src/optcdb
+	url = https://github.com/optc-db/optc-db.github.io.git
