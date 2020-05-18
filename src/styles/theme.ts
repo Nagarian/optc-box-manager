@@ -44,7 +44,7 @@ space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
 
-const breakpoints: any = [768, 970, 1024]
+const breakpoints: any = ['768px', '970px', '1024px']
 breakpoints.minimalRequired = '320px'
 
 export default {
@@ -61,9 +61,9 @@ export default {
 
   breakpoints,
   mediaQueries: {
-    tablet: `@media screen and (min-width: ${breakpoints[0]}px)`,
-    desktop: `@media screen and (min-width: ${breakpoints[1]}px)`,
-    largeDesktop: `@media screen and (min-width: ${breakpoints[2]}px)`,
+    tablet: `@media screen and (min-width: ${breakpoints[0]})`,
+    desktop: `@media screen and (min-width: ${breakpoints[1]})`,
+    largeDesktop: `@media screen and (min-width: ${breakpoints[2]})`,
   },
   zIndices: {
     highlight: 1,
