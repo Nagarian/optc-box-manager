@@ -45,19 +45,24 @@ space.medium = space[2]
 space.large = space[3]
 
 const breakpoints: any = ['768px', '970px', '1024px']
-breakpoints.minimalRequired = '320px'
 
 export default {
   colors: {
     ...baseColors,
-    primary: '',
-    secondary: '',
+    primary: baseColors.gold,
+    secondary: baseColors.yellow,
     background: baseColors.white,
     text: baseColors.black,
+    primaryText: baseColors.white,
+    secondaryText: baseColors.black,
     orbColors,
   },
   fontSizes,
   space,
+
+  sizes: {
+    minimalRequired: '320px',
+  },
 
   breakpoints,
   mediaQueries: {

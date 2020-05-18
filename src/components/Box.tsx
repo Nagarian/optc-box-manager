@@ -10,6 +10,10 @@ import {
   ShadowProps,
   space,
   SpaceProps,
+  GridProps,
+  grid,
+  position,
+  PositionProps,
 } from 'styled-system'
 
 const Box = styled.div<
@@ -17,13 +21,17 @@ const Box = styled.div<
     LayoutProps &
     ShadowProps &
     BackgroundProps &
-    BackgroundColorProps
+    BackgroundColorProps &
+    GridProps &
+    PositionProps
 >`
   ${shadow}
   ${space}
   ${layout}
   ${background}
   ${color}
+  ${grid}
+  ${position}
 `
 
 Box.defaultProps = {
