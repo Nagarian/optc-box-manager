@@ -61,7 +61,7 @@ type LimitBreak = {
   description: string
 }
 
-type PotentialKey =
+export type PotentialKey =
   | 'Enrage'
   | 'Reduce No Healing duration'
   | '[QCK] Damage Reduction'
