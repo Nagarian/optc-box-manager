@@ -8,9 +8,12 @@ import {
   BorderProps,
   compose,
   variant,
+  typography,
+  FontSizeProps,
+  FontWeightProps,
 } from 'styled-system'
 
-type ButtonProps = SpaceProps & ColorProps & BorderProps & {
+type ButtonProps = SpaceProps & ColorProps & BorderProps & FontSizeProps & FontWeightProps & {
   variant: 'primary' | 'secondary' | 'link' | 'text'
 }
 
@@ -19,36 +22,21 @@ const Button = styled('button')<ButtonProps>(
     space,
     color,
     border,
+    typography,
   ),
-  variant(({
+  variant({
+    scale: 'buttons',
     variants: {
-      primary: {
-        backgroundColor: 'primary',
-        color: 'primaryText',
-      },
-      secondary: {
-        backgroundColor: 'secondary',
-        color: 'secondaryText',
-      },
-      link: {
-        backgroundColor: 'transparent',
-        color: 'primary',
-      },
-      text: {
-        backgroundColor: 'transparent',
-        color: 'text',
-      },
+      primary: {},
     },
-  })),
+  }),
 )
 
 Button.defaultProps = {
-  backgroundColor: 'primary',
-  color: 'primaryText',
-  border: 'none',
-  borderRadius: 0,
+  variant: 'primary',
   px: 2,
   py: 1,
+  fontWeight: 2,
 }
 
 export default Button

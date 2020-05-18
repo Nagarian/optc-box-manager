@@ -10,6 +10,8 @@ const baseColors = {
   yellow: '#F4BA70',
   pink: '#DEA5A4',
   brown: '#993300',
+  browns: ['#5d3d1b'],
+  orange: '#cf892b',
   darkpurple: '#7D3C98',
   gold: '#B38F15',
   darkblue: '#183578',
@@ -44,13 +46,16 @@ space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
 
+const sizes: any = ['1rem', '2rem', '4rem', '8rem', '16rem', '32rem']
+sizes.minimalRequired = '320px'
+
 const breakpoints: any = ['768px', '970px', '1024px']
 
 export default {
   colors: {
     ...baseColors,
-    primary: baseColors.gold,
-    secondary: baseColors.yellow,
+    primary: baseColors.orange,
+    secondary: baseColors.white,
     background: baseColors.white,
     text: baseColors.black,
     primaryText: baseColors.white,
@@ -59,10 +64,7 @@ export default {
   },
   fontSizes,
   space,
-
-  sizes: {
-    minimalRequired: '320px',
-  },
+  sizes,
 
   breakpoints,
   mediaQueries: {
@@ -77,5 +79,28 @@ export default {
   },
   shadows: {
     small: '0 1px 4px rgba(0, 0, 0, .125)',
+  },
+
+  buttons: {
+    primary: {
+      backgroundColor: 'primary',
+      color: 'primaryText',
+      '&:hover': {
+        filter: 'opacity(0.5)',
+      },
+    },
+    secondary: {
+      backgroundColor: 'secondary',
+      color: 'secondaryText',
+      borderColor: 'secondaryText',
+    },
+    link: {
+      backgroundColor: 'transparent',
+      color: 'primary',
+    },
+    text: {
+      backgroundColor: 'transparent',
+      color: 'text',
+    },
   },
 }
