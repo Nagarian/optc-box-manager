@@ -1,22 +1,48 @@
-import React, { useMemo } from 'react'
+import React, { useState } from 'react'
 import Box from 'components/Box'
-import { DBUnit } from 'services/units'
-import Image from 'components/Image'
+import Add from 'pages/Add'
+import Button from 'components/Button'
+import styled from 'styled-components'
+import { layout, LayoutProps } from 'styled-system'
+
+type DisplayedPanel = 'Box' | 'Add' | 'Settings'
+
+const AppBlock = styled.div<LayoutProps>`
+  ${layout}
+`
 
 function App () {
-  const units = useMemo(() => DBUnit.getAllUnits(), [])
+  const [displayed, setDisplayed] = useState<DisplayedPanel>('Box')
+
+  const MenuButton = ({ type, label }: { type: DisplayedPanel, label: string }) => (
+    <Button
+      onClick={() => setDisplayed(type)}
+      variant={displayed === type ? 'primary' : 'link'}
+    >
+      {label}
+    </Button>
+  )
+
   return (
-    <Box margin="2" padding="1">
-      {units.map((unit) => (
-        <Image
-          src={unit.images.thumbnail}
-          alt={unit.name}
-          key={unit.number}
-          width="60"
-          height="60"
-        />
-      ))}
-    </Box>
+    <AppBlock minWidth="minimalRequired">
+      <Box
+        backgroundColor="background"
+        minWidth="minimalRequired"
+        display="grid"
+        gridTemplateRows="auto"
+        gridAutoFlow="column"
+        position={['fixed', 'static']}
+        bottom={0}
+        left={0}
+        right={0}
+      >
+        <MenuButton type="Box" label="Box" />
+        <MenuButton type="Add" label="Add" />
+        <MenuButton type="Settings" label="Settings" />
+      </Box>
+
+      {displayed === 'Add' && <Add />}
+    </AppBlock>
   )
 }
 
