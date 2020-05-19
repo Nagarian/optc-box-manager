@@ -36,10 +36,18 @@ const orbColors = {
   EMPTY: '#777',
 }
 
-const fontSizes: any = [12, 14, 16, 20, 24, 32]
+type FontSizes = number[] & {
+  body?: number
+  title?: number
+  subtitle?: number
+}
+
+const fontSizes: FontSizes = [12, 14, 16, 20, 24, 32]
 fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]
+
+const fontWeights : number[] = [400, 700]
 
 const space: any = [0, 4, 8, 16, 32]
 space.small = space[1]
@@ -63,6 +71,7 @@ export default {
     orbColors,
   },
   fontSizes,
+  fontWeights,
   space,
   sizes,
 
@@ -79,6 +88,7 @@ export default {
   },
   shadows: {
     small: '0 1px 4px rgba(0, 0, 0, .125)',
+    normal: '0px 4px 8px 0px rgba(0, 0, 0, 0.1)',
   },
 
   buttons: {
