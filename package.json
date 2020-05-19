@@ -23,13 +23,15 @@
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
     "styled-system": "^5.1.5",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.0",
     "@types/styled-system": "^5.1.9",
     "@types/styled-system__should-forward-prop": "^5.1.1",
     "@types/styled-system__theme-get": "^5.0.0",
+    "@types/uuid": "^7.0.3",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
