@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   color,
   space,
@@ -12,28 +12,36 @@ import {
   FontSizeProps,
   FontWeightProps,
 } from 'styled-system'
+import { cleanStyledSystem } from 'styles'
 
-type ButtonProps = SpaceProps & ColorProps & BorderProps & FontSizeProps & FontWeightProps & {
-  variant: 'primary' | 'secondary' | 'link' | 'text'
-}
+type ButtonProps = SpaceProps &
+  ColorProps &
+  BorderProps &
+  FontSizeProps &
+  FontWeightProps & {
+    variant?: 'none' | 'primary' | 'secondary' | 'link' | 'text'
+  }
 
-const Button = styled('button')<ButtonProps>(
-  compose(
-    space,
-    color,
-    border,
-    typography,
-  ),
+const Button = styled('button').withConfig(cleanStyledSystem)<ButtonProps>(
+  compose(space, color, border, typography),
   variant({
     scale: 'buttons',
     variants: {
-      primary: {},
+      none: {},
     },
   }),
+  css`
+    display: grid;
+    grid-template: auto 1fr;
+    grid-gap: 0.8em;
+    grid-auto-flow: column;
+    place-items: center;
+    place-content: center;
+  `,
 )
 
 Button.defaultProps = {
-  variant: 'primary',
+  variant: 'none',
   px: 2,
   py: 1,
   fontWeight: 1,

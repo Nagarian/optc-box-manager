@@ -35,7 +35,7 @@ const Box = styled.div<
 `
 
 Box.defaultProps = {
-  boxShadow: 'small',
+  boxShadow: 'normal',
 }
 
 export default Box

@@ -4,6 +4,7 @@ import Add from 'pages/Add'
 import Button from 'components/Button'
 import styled from 'styled-components'
 import { layout, LayoutProps } from 'styled-system'
+import UserBox from 'pages/UserBox'
 
 type DisplayedPanel = 'Box' | 'Add' | 'Settings'
 
@@ -14,10 +15,17 @@ const AppBlock = styled.div<LayoutProps>`
 function App () {
   const [displayed, setDisplayed] = useState<DisplayedPanel>('Box')
 
-  const MenuButton = ({ type, label }: { type: DisplayedPanel, label: string }) => (
+  const MenuButton = ({
+    type,
+    label,
+  }: {
+    type: DisplayedPanel
+    label: string
+  }) => (
     <Button
       onClick={() => setDisplayed(type)}
       variant={displayed === type ? 'primary' : 'link'}
+      py={2}
     >
       {label}
     </Button>
@@ -35,12 +43,14 @@ function App () {
         bottom={0}
         left={0}
         right={0}
+        marginBottom={[0, 2]}
       >
         <MenuButton type="Box" label="Box" />
         <MenuButton type="Add" label="Add" />
         <MenuButton type="Settings" label="Settings" />
       </Box>
 
+      {displayed === 'Box' && <UserBox />}
       {displayed === 'Add' && <Add />}
     </AppBlock>
   )

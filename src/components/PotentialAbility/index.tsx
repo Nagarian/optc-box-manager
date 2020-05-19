@@ -3,7 +3,7 @@ import Image from 'components/Image'
 import { PotentialKey } from 'models/units'
 import styled from 'styled-components'
 import { SpaceProps, space, size, SizeProps } from 'styled-system'
-import shouldForwardProp from '@styled-system/should-forward-prop'
+import { cleanStyledSystem } from 'styles'
 
 import ImageSkill01 from './images/potentialskill_icon_s_001.png'
 import ImageSkill02 from './images/potentialskill_icon_s_002.png'
@@ -58,9 +58,7 @@ type PotentialAbilityProps = SpaceProps &
     type: PotentialKey
   }
 
-const Container = styled('div').withConfig({
-  shouldForwardProp: (p) => shouldForwardProp(p),
-})<SizeProps>`
+const Container = styled('div').withConfig(cleanStyledSystem)<SizeProps>`
   ${space}
   ${size}
   display: grid;

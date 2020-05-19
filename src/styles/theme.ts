@@ -10,8 +10,9 @@ const baseColors = {
   yellow: '#F4BA70',
   pink: '#DEA5A4',
   brown: '#993300',
-  browns: ['#5d3d1b'],
+  browns: ['#5d3d1b', '#47362a'],
   orange: '#cf892b',
+  oranges: ['#efaf55'],
   darkpurple: '#7D3C98',
   gold: '#B38F15',
   darkblue: '#183578',
@@ -97,6 +98,9 @@ export default {
       color: 'primaryText',
       '&:hover': {
         filter: 'opacity(0.5)',
+      },
+      svg: {
+        fill: 'primary',
       },
     },
     secondary: {
