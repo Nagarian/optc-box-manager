@@ -36,7 +36,8 @@ Button.defaultProps = {
   variant: 'primary',
   px: 2,
   py: 1,
-  fontWeight: 2,
+  fontWeight: 1,
+  fontSize: 1,
 }
 
 export default Button

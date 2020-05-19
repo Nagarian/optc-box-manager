@@ -47,7 +47,7 @@ fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]
 
-const fontWeights : number[] = [400, 700]
+const fontWeights : number[] = [400, 600]
 
 const space: any = [0, 4, 8, 16, 32]
 space.small = space[1]
