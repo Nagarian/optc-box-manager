@@ -16,8 +16,8 @@ export type UnitStar = 1 | 2 | 3 | 4 | '4+' | 5 | '5+' | 6 | '6+'
 
 export type BaseUnit = {
   name: string
-  type: UnitType | UnitType[2]
-  class: UnitClass[] | UnitClass[][3]
+  type: UnitType | [UnitType, UnitType]
+  class: UnitClass | UnitClass[] | [UnitClass[], UnitClass[], UnitClass[]]
   stars: UnitStar
   cost: number
   combo: number
@@ -104,7 +104,7 @@ type UnitDetail = {
   support: Support[]
 }
 
-type UnitCooldown = number[2]
+type UnitCooldown = [number, number]
 
 type UnitEvolution = {
   evolution: number
