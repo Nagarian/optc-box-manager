@@ -2,7 +2,6 @@ import { themeGet } from '@styled-system/theme-get'
 import { createGlobalStyle } from 'styled-components'
 
 export const FontCss = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
   html {
     font-family: 'Open Sans', Arial, sans-serif;
     /* set base font-size to equiv "10px", which is adapted to rem unit */
