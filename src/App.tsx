@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
 import Box from 'components/Box'
-import Add from 'pages/Add'
 import Button from 'components/Button'
-import styled from 'styled-components'
-import { layout, LayoutProps, SpaceProps, space } from 'styled-system'
+import Add from 'pages/Add'
 import UserBox from 'pages/UserBox'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { layout, LayoutProps, space, SpaceProps } from 'styled-system'
 
 type DisplayedPanel = 'Box' | 'Add' | 'Settings'
 
@@ -55,7 +55,7 @@ function App () {
       </Box>
 
       {displayed === 'Box' && <UserBox />}
-      {displayed === 'Add' && <Add />}
+      {displayed === 'Add' && <Add onCancel={() => {}} onSubmit={u => {}} />}
     </AppBlock>
   )
 }

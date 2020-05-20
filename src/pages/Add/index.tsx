@@ -7,7 +7,15 @@ import React, { useMemo, useState } from 'react'
 import { DBUnit } from 'services/units'
 import { Container, FormActionPanel, ResultList, SelectedList } from './styled'
 
-export default function Add () {
+type AddProps = {
+  onCancel: () => void
+  onSubmit: (selectUnits: ExtendedUnit[]) => void
+}
+
+export default function Add ({
+  onCancel,
+  onSubmit,
+}: AddProps) {
   const units = useMemo(() => DBUnit.getAllUnits(), [])
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
   const { filters } = useUnitFilters()
@@ -54,8 +62,8 @@ export default function Add () {
       <hr />
 
       <FormActionPanel>
-        <Button variant="secondary">Cancel</Button>
-        <Button variant="primary">Confirm</Button>
+        <Button variant="secondary" onClick={() => onCancel()}>Cancel</Button>
+        <Button variant="primary" onClick={() => onSubmit(selectedUnits)}>Confirm</Button>
       </FormActionPanel>
     </Container>
   )
