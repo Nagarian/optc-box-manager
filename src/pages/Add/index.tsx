@@ -1,10 +1,10 @@
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
-import { useUnitFilters } from 'components/filters'
+import SearchPanel from 'components/SearchPanel'
 import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
 import React, { useEffect, useRef, useState } from 'react'
-import { Container, FormActionPanel, ResultList, SelectedList } from './styled'
+import { Container, FormActionPanel, SelectedList } from './styled'
 
 type AddProps = {
   onCancel: () => void
@@ -14,7 +14,6 @@ type AddProps = {
 
 export default function Add ({ onCancel, onSubmit, units }: AddProps) {
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
-  const { filters } = useUnitFilters()
   const selectedPanelRef = useRef<HTMLDivElement>(null)
 
   const toggle = (unit: ExtendedUnit, include: boolean) => {
@@ -35,18 +34,12 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
     <Container>
       <Title>Select your new units</Title>
 
-      <ResultList>
-        {units
-          .filter(filters)
-          .sort((u1, u2) => u2.id - u1.id)
-          .map(unit => (
-            <CharacterBox
-              key={unit.id}
-              unit={unit}
-              onClick={u => toggle(u, !selectedUnits.includes(u))}
-            />
-          ))}
-      </ResultList>
+      <SearchPanel
+        units={units}
+        onUnitClick={u => toggle(u, !selectedUnits.includes(u))}
+        margin="2"
+        flex="1"
+      />
 
       {selectedUnits.length > 0 && (
         <>

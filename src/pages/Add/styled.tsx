@@ -5,6 +5,7 @@ import styled from 'styled-components'
 export const Container = styled(Box)`
   margin: ${themeGet('space.2')};
   padding: ${themeGet('space.2')};
+  background-color: ${themeGet('colors.background')};
   display: flex;
   flex-direction: column;
   place-items: center;
@@ -12,20 +13,10 @@ export const Container = styled(Box)`
   overflow: hidden;
 `
 
-export const ResultList = styled('div')`
-  margin: ${themeGet('space.2')};
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow-y: auto;
-`
-
 export const SelectedList = styled('div')`
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  flex: 1 0;
   width: 100%;
 `
 

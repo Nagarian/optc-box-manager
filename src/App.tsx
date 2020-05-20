@@ -1,3 +1,7 @@
+import { themeGet } from '@styled-system/theme-get'
+import Button from 'components/Button'
+import { AddSvg } from 'components/Icon'
+import Popup from 'components/Popup'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import Add from 'pages/Add'
@@ -5,11 +9,14 @@ import MyUserBox from 'pages/MyUserBox'
 import React, { useMemo, useState } from 'react'
 import { DBUnit } from 'services/units'
 import styled from 'styled-components'
-import { layout, LayoutProps, space, SpaceProps } from 'styled-system'
 
-const AppBlock = styled.div<LayoutProps & SpaceProps>`
-  ${layout}
-  ${space}
+const AppBlock = styled.div`
+  display: grid;
+  grid-template-rows: 1fr;
+  height: 100vh;
+  width: 100vw;
+  min-width: ${themeGet('sizes.minimalRequired')};
+  position: relative;
 `
 
 function App () {
@@ -23,7 +30,7 @@ function App () {
   }
 
   return (
-    <AppBlock minWidth="minimalRequired" marginBottom="4">
+    <AppBlock>
       <MyUserBox
         userBox={userBox}
         units={unitDatabase}
@@ -31,11 +38,13 @@ function App () {
       />
 
       {showAddUnit && (
-        <Add
-          units={unitDatabase}
-          onCancel={() => setShowAddUnit(false)}
-          onSubmit={addSelectedUnits}
-        />
+        <Popup>
+          <Add
+            units={unitDatabase}
+            onCancel={() => setShowAddUnit(false)}
+            onSubmit={addSelectedUnits}
+          />
+        </Popup>
       )}
 
       {/* <Box
@@ -55,6 +64,9 @@ function App () {
         <MenuButton type="Settings" label="Settings" />
 
       </Box> */}
+      <Button px="0" py="0" my="2" onClick={() => setShowAddUnit(true)}>
+        <AddSvg size="2" fill="browns.1" color="oranges.0" />
+      </Button>
     </AppBlock>
   )
 }
