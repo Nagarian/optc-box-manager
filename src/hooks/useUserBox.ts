@@ -11,7 +11,7 @@ export default function useUserBox () {
   useEffect(() => {
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      setUserBox(JSON.parse(userBoxKey))
+      setUserBox(JSON.parse(json))
     }
   }, [])
 
