@@ -1,7 +1,8 @@
 {
   "extends": ["react-app", "standard"],
   "rules": {
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "no-unused-vars": ["warn"]
   },
   "overrides": [
     {
