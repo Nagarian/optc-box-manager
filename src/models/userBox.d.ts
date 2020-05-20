@@ -14,12 +14,19 @@ export type UserUnitSupport = {
   lvl: number
 }
 
+export type UserUnitCottonCandy = {
+  hp: number
+  rcv: numver
+  atk: number
+}
+
 export type UserUnit = {
   id: string
   unitId: number
   special?: UserUnitSpecial
   potentials: UserUnitPotentialAbility[]
   support?: UserUnitSupport
+  cc: UserUnitCottonCandy
 }
 
 export type UserBox = UserUnit[]

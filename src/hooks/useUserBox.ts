@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { UserBox, UserUnit } from 'models/userBox'
 import { ExtendedUnit } from 'models/units'
+import { UserBox, UserUnit } from 'models/userBox'
+import { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 const userBoxKey = 'userBox'
@@ -26,20 +26,29 @@ export default function useUserBox () {
   return {
     userBox,
     add: (unit: ExtendedUnit) => {
-      const userUnit : UserUnit = {
+      const userUnit: UserUnit = {
         id: uuid(),
         unitId: unit.id,
-        potentials: unit.detail?.potential?.map(potential => ({
-          type: potential.Name,
-          lvl: 0,
-        })) ?? [],
+        potentials:
+          unit.detail?.potential?.map(potential => ({
+            type: potential.Name,
+            lvl: 0,
+          })) ?? [],
         special: unit.cooldown && {
           lvl: 1,
           lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
         },
-        support: unit.detail?.support?.length > 0 ? {
-          lvl: 0,
-        } : undefined,
+        support:
+          unit.detail?.support?.length > 0
+            ? {
+              lvl: 0,
+            }
+            : undefined,
+        cc: {
+          hp: 0,
+          atk: 0,
+          rcv: 0,
+        },
       }
 
       setUserBox([...userBox, userUnit])
