@@ -3,17 +3,18 @@ import Box from 'components/Box'
 import Add from 'pages/Add'
 import Button from 'components/Button'
 import styled from 'styled-components'
-import { layout, LayoutProps } from 'styled-system'
+import { layout, LayoutProps, SpaceProps, space } from 'styled-system'
 import UserBox from 'pages/UserBox'
 
 type DisplayedPanel = 'Box' | 'Add' | 'Settings'
 
-const AppBlock = styled.div<LayoutProps>`
+const AppBlock = styled.div<LayoutProps & SpaceProps>`
   ${layout}
+  ${space}
 `
 
 function App () {
-  const [displayed, setDisplayed] = useState<DisplayedPanel>('Box')
+  const [displayed, setDisplayed] = useState<DisplayedPanel>('Add')
 
   const MenuButton = ({
     type,
@@ -32,7 +33,7 @@ function App () {
   )
 
   return (
-    <AppBlock minWidth="minimalRequired">
+    <AppBlock minWidth="minimalRequired" marginBottom="4">
       <Box
         backgroundColor="background"
         minWidth="minimalRequired"
@@ -48,6 +49,9 @@ function App () {
         <MenuButton type="Box" label="Box" />
         <MenuButton type="Add" label="Add" />
         <MenuButton type="Settings" label="Settings" />
+        {/* <Button px="0" py="0">
+        <AddSvg size="2" fill="browns.1" color="oranges.0" />
+      </Button> */}
       </Box>
 
       {displayed === 'Box' && <UserBox />}

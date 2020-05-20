@@ -50,12 +50,12 @@ fontSizes.subtitle = fontSizes[4]
 
 const fontWeights : number[] = [400, 600]
 
-const space: any = [0, 4, 8, 16, 32]
+const space: any = [0, '.4rem', '.8rem', '1.6rem', '3.2rem']
 space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
 
-const sizes: any = ['1rem', '2rem', '4rem', '8rem', '16rem', '32rem']
+const sizes: any = ['1rem', '2rem', '4rem', '6rem', '8rem', '10rem', '12rem', '14rem']
 sizes.minimalRequired = '320px'
 
 const breakpoints: any = ['768px', '970px', '1024px']
