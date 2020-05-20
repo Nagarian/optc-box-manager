@@ -1,42 +1,24 @@
-import React, { useMemo, useState, useEffect } from 'react'
-import { DBUnit } from 'services/units'
-import CharacterBox from 'components/CharacterBox'
-import { ExtendedUnit, UnitStar } from 'models/units'
 import Button from 'components/Button'
-import { Container, ResultList, SelectedList, FormActionPanel } from './styled'
-import { Title, SubTitle } from 'components/Title'
-import { useRainbowInput } from 'components/forms/RainbowInput'
-
-type UnitFilter = (unit: ExtendedUnit) => boolean
-
-const Filters = {
-  hideUnEvolved: (unit: ExtendedUnit) => !unit.evolution,
-  filterStar: (criteria: UnitStar[]) => (unit: ExtendedUnit) =>
-    criteria.includes(unit.stars),
-  globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
-}
+import CharacterBox from 'components/CharacterBox'
+import { useUnitFilters } from 'components/filters'
+import { SubTitle, Title } from 'components/Title'
+import { ExtendedUnit } from 'models/units'
+import React, { useMemo, useState } from 'react'
+import { DBUnit } from 'services/units'
+import { Container, FormActionPanel, ResultList, SelectedList } from './styled'
 
 export default function Add () {
   const units = useMemo(() => DBUnit.getAllUnits(), [])
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
-  const [filters, setFilters] = useState<UnitFilter[]>([])
-  const [showAddSetting, setShowAddSetting] = useState<boolean>(false)
-  const { IsRainbowedInput } = useRainbowInput()
-
-  useEffect(() => {
-    setFilters([
-      Filters.hideUnEvolved,
-      Filters.filterStar([4, 5, 6, '4+', '5+', '6+']),
-    ])
-  }, [])
+  const { filters } = useUnitFilters()
 
   return (
     <Container>
       <Title>Select your new units</Title>
 
-      <ResultList show={!showAddSetting}>
+      <ResultList>
         {units
-          .filter(unit => filters.some(f => f(unit)))
+          .filter(filters)
           .sort((u1, u2) => u2.id - u1.id)
           .map(unit => (
             <CharacterBox
@@ -69,25 +51,10 @@ export default function Add () {
         </>
       )}
 
-      {showAddSetting && (
-        <>
-          <SubTitle>Configure default value for all added units</SubTitle>
-          <div>
-            <IsRainbowedInput />
-          </div>
-        </>
-      )}
-
       <hr />
 
       <FormActionPanel>
         <Button variant="secondary">Cancel</Button>
-        <Button
-          variant="secondary"
-          onClick={() => setShowAddSetting(!showAddSetting)}
-        >
-          {showAddSetting ? 'Add new units' : 'Change Default value'}
-        </Button>
         <Button variant="primary">Confirm</Button>
       </FormActionPanel>
     </Container>

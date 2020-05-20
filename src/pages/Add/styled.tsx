@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import Box from 'components/Box'
 import { themeGet } from '@styled-system/theme-get'
+import Box from 'components/Box'
+import styled from 'styled-components'
 
 export const Container = styled(Box)`
   margin: ${themeGet('space.2')};
@@ -12,13 +12,9 @@ export const Container = styled(Box)`
   overflow: hidden;
 `
 
-type ShowProp = {
-  show: boolean
-}
-
-export const ResultList = styled('div')<ShowProp>`
+export const ResultList = styled('div')`
   margin: ${themeGet('space.2')};
-  display: ${p => p.show ? 'flex' : 'none'};
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
