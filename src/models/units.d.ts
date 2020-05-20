@@ -57,7 +57,7 @@ export type BaseUnit = {
   preview: boolean
 }
 
-type LimitBreak = {
+export type LimitBreak = {
   description: string
 }
 
@@ -78,17 +78,17 @@ export type PotentialKey =
   | 'Reduce Ship Bind duration'
   | 'Reduce Sailor Despair duration'
 
-type Potential = {
+export type Potential = {
   Name: PotentialKey
   description: string[]
 }
 
-type Support = {
+export type Support = {
   Characters: string
   description: string[]
 }
 
-type UnitDetail = {
+export type UnitDetail = {
   captain: string
   special: string
   sailor: {
@@ -104,19 +104,19 @@ type UnitDetail = {
   support: Support[]
 }
 
-type UnitCooldown = [number, number]
+export type UnitCooldown = [number, number]
 
-type UnitEvolution = {
+export type UnitEvolution = {
   evolution: number
   evolvers: any[]
 }
 
-type UnitImages = {
+export type UnitImages = {
   thumbnail: string
   full: string
 }
 
-type UnitFlags = {
+export type UnitFlags = {
   /** global available */
   global: 1 | undefined
 
@@ -149,7 +149,7 @@ type UnitFlags = {
   special: 1 | undefined
 }
 
-type ExtendedUnit = BaseUnit & {
+export type ExtendedUnit = BaseUnit & {
   /** OPTC-DB real ID (used in url) */
   id: number
   images: UnitImage

@@ -1,21 +1,22 @@
 import React from 'react'
 import { ExtendedUnit } from 'models/units'
 import Image from 'components/Image'
+import Button from 'components/Button'
 
 type CharacterBoxProps = {
   unit: ExtendedUnit
+  onClick?: (unit: ExtendedUnit) => void
 }
 
-export default function CharacterBox ({
-  unit,
-}: CharacterBoxProps) {
+export default function CharacterBox ({ unit, onClick }: CharacterBoxProps) {
   return (
-    <Image
-      src={unit.images.thumbnail}
-      alt={unit.name}
-      title={unit.name}
-      width="60"
-      height="60"
-    />
+    <Button backgroundColor="primary" px="0" py="0" m="1" onClick={() => onClick?.(unit)}>
+      <Image
+        src={unit.images.thumbnail}
+        alt={unit.name}
+        title={unit.name}
+        size="3"
+      />
+    </Button>
   )
 }
