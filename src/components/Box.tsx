@@ -4,21 +4,22 @@ import {
   BackgroundColorProps,
   BackgroundProps,
   color,
+  flexbox,
+  FlexboxProps,
+  grid,
+  GridProps,
   layout,
   LayoutProps,
+  position,
+  PositionProps,
   shadow,
   ShadowProps,
   space,
   SpaceProps,
-  GridProps,
-  grid,
-  position,
-  PositionProps,
-  flex,
-  FlexboxProps,
 } from 'styled-system'
+import { cleanStyledSystem } from 'styles'
 
-const Box = styled.div<
+const Box = styled.div.withConfig(cleanStyledSystem)<
   SpaceProps &
     LayoutProps &
     ShadowProps &
@@ -28,14 +29,14 @@ const Box = styled.div<
     PositionProps &
     FlexboxProps
 >`
-  ${shadow}
-  ${space}
   ${layout}
+  ${shadow}
   ${background}
   ${color}
+  ${space}
   ${grid}
-  ${flex}
   ${position}
+  ${flexbox}
 `
 
 Box.defaultProps = {

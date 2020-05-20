@@ -1,0 +1,27 @@
+import Box from 'components/Box'
+import Button from 'components/Button'
+import { AddSvg } from 'components/Icon'
+import { ExtendedUnit } from 'models/units'
+import { UserBox } from 'models/userBox'
+import React from 'react'
+
+type UserBoxProps = {
+  userBox: UserBox
+  onAddUnit: () => void
+  units: ExtendedUnit[]
+}
+
+export default function MyUserBox ({ userBox, onAddUnit, units }: UserBoxProps) {
+  if (userBox.length === 0) {
+    return (
+      <Box display="flex" alignItems="center" flexDirection="column">
+        It's seem pretty lonely here, try adding some units !
+        <Button px="0" py="0" onClick={() => onAddUnit()}>
+          <AddSvg size="2" fill="browns.1" color="oranges.0" />
+        </Button>
+      </Box>
+    )
+  }
+
+  return <div>yeah</div>
+}

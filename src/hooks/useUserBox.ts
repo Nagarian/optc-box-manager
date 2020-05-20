@@ -5,6 +5,33 @@ import { v4 as uuid } from 'uuid'
 
 const userBoxKey = 'userBox'
 
+function UserUnitFactory (unit: ExtendedUnit) : UserUnit {
+  return {
+    id: uuid(),
+    unitId: unit.id,
+    potentials:
+      unit.detail?.potential?.map(potential => ({
+        type: potential.Name,
+        lvl: 0,
+      })) ?? [],
+    special: unit.cooldown && {
+      lvl: 1,
+      lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
+    },
+    support:
+      unit.detail?.support?.length > 0
+        ? {
+          lvl: 0,
+        }
+        : undefined,
+    cc: {
+      hp: 0,
+      atk: 0,
+      rcv: 0,
+    },
+  }
+}
+
 export default function useUserBox () {
   const [userBox, setUserBox] = useState<UserBox>([])
 
@@ -25,33 +52,9 @@ export default function useUserBox () {
 
   return {
     userBox,
-    add: (unit: ExtendedUnit) => {
-      const userUnit: UserUnit = {
-        id: uuid(),
-        unitId: unit.id,
-        potentials:
-          unit.detail?.potential?.map(potential => ({
-            type: potential.Name,
-            lvl: 0,
-          })) ?? [],
-        special: unit.cooldown && {
-          lvl: 1,
-          lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
-        },
-        support:
-          unit.detail?.support?.length > 0
-            ? {
-              lvl: 0,
-            }
-            : undefined,
-        cc: {
-          hp: 0,
-          atk: 0,
-          rcv: 0,
-        },
-      }
-
-      setUserBox([...userBox, userUnit])
+    add: (...units: ExtendedUnit[]) => {
+      const userUnits = units.map(UserUnitFactory)
+      setUserBox(userBox.concat(userUnits))
     },
     update: (userUnit: UserUnit) => {
       const index = userBox.findIndex(uu => uu.id === userUnit.id)
