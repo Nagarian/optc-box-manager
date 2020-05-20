@@ -14,6 +14,8 @@ import {
   grid,
   position,
   PositionProps,
+  flex,
+  FlexboxProps,
 } from 'styled-system'
 
 const Box = styled.div<
@@ -23,7 +25,8 @@ const Box = styled.div<
     BackgroundProps &
     BackgroundColorProps &
     GridProps &
-    PositionProps
+    PositionProps &
+    FlexboxProps
 >`
   ${shadow}
   ${space}
@@ -31,6 +34,7 @@ const Box = styled.div<
   ${background}
   ${color}
   ${grid}
+  ${flex}
   ${position}
 `
 

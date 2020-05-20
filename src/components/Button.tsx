@@ -11,10 +11,13 @@ import {
   typography,
   FontSizeProps,
   FontWeightProps,
+  GridAreaProps,
+  gridArea,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
 type ButtonProps = SpaceProps &
+  GridAreaProps &
   ColorProps &
   BorderProps &
   FontSizeProps &
@@ -23,7 +26,7 @@ type ButtonProps = SpaceProps &
   }
 
 const Button = styled('button').withConfig(cleanStyledSystem)<ButtonProps>(
-  compose(space, color, border, typography),
+  compose(space, color, border, typography, gridArea),
   variant({
     scale: 'buttons',
     variants: {
