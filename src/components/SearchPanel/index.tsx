@@ -28,7 +28,7 @@ export default function SearchPanel ({
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
   const { filters } = useUnitFilters()
-  const { sorts } = useUnitSort()
+  const { sorts } = useUnitSort('Default')
   return (
     <ResultList {...rest}>
       {units

@@ -1,5 +1,4 @@
 import { ExtendedUnit, UnitStar, UnitType } from 'models/units'
-import { useEffect, useState } from 'react'
 
 type UnitSort = (unit1: ExtendedUnit, unit2: ExtendedUnit) => number
 
@@ -35,8 +34,8 @@ const _ParseType = (type: UnitType): number => {
 
 const ParseType = (type: UnitType | [UnitType, UnitType]): number => {
   return Array.isArray(type)
-    ? _ParseType(type[0] as UnitType)
-    : _ParseType(type as UnitType) + 5
+    ? 0 // dual unit
+    : _ParseType(type as UnitType)
 }
 
 type SortsFunc = {
@@ -54,13 +53,26 @@ export const Sorts: SortsFunc = {
   byType: (unit1, unit2) => ParseType(unit1.type) - ParseType(unit2.type),
 }
 
-export function useUnitSort () {
-  const [sorts, setSorts] = useState<UnitSort[]>([])
+type SortCriteria = 'Default' | 'Rarity' | 'Type' | 'Id' | 'IdReverse'
 
-  useEffect(() => {
-    setSorts([Sorts.byType, Sorts.byRarity, Sorts.byId])
-  }, [])
+function SortCriteriaToFunc (sortCriteria: SortCriteria): UnitSort[] {
+  switch (sortCriteria) {
+    case 'Rarity':
+      return [Sorts.byRarity]
+    case 'Type':
+      return [Sorts.byType]
+    case 'Id':
+      return [Sorts.byId]
+    case 'IdReverse':
+      return [Sorts.byIdReverse]
+    case 'Default':
+    default:
+      return [Sorts.byType, Sorts.byRarity, Sorts.byId]
+  }
+}
 
+export function useUnitSort (...sortCriteria: SortCriteria[]) {
+  const sorts = sortCriteria.flatMap(SortCriteriaToFunc)
   return {
     sorts: <UnitSort>(unit1: ExtendedUnit, unit2: ExtendedUnit) => {
       for (const sort of sorts) {
@@ -70,6 +82,5 @@ export function useUnitSort () {
 
       return 0
     },
-    arr: sorts,
   }
 }

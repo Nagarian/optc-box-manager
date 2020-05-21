@@ -43,7 +43,7 @@ function App () {
 
       {showAddUnit && (
         <Add
-          units={unitDatabase}
+          units={unitDatabase.filter(unit => !userBox.some(uu => uu.unitId === unit.id))}
           onCancel={() => setShowAddUnit(false)}
           onSubmit={addSelectedUnits}
         />
