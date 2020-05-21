@@ -1,0 +1,89 @@
+import { renderHook } from '@testing-library/react-hooks'
+import { ExtendedUnit } from 'models/units'
+import { Sorts, useUnitSort } from './UnitSort'
+
+const unitsMock = () => [
+  {
+    id: 3,
+    type: 'STR',
+    stars: 5,
+    name: 'Luffy',
+  } as ExtendedUnit,
+  {
+    id: 2,
+    type: 'DEX',
+    stars: 6,
+    name: 'Zoro',
+  } as ExtendedUnit,
+  {
+    id: 1,
+    type: 'STR',
+    stars: 6,
+    name: 'Ace',
+  } as ExtendedUnit,
+  {
+    id: 4,
+    type: 'QCK',
+    stars: '6+',
+    name: 'Sanji',
+  } as ExtendedUnit,
+]
+
+describe('UnitSort', () => {
+  describe('Sorts functions', () => {
+    it('should order by unit id', () => {
+      expect(
+        unitsMock()
+          .sort(Sorts.byId)
+          .map(u => u.id),
+      ).toStrictEqual([1, 2, 3, 4])
+    })
+
+    it('should order by unit id reverse', () => {
+      expect(
+        unitsMock()
+          .sort(Sorts.byIdReverse)
+          .map(u => u.id),
+      ).toStrictEqual([4, 3, 2, 1])
+    })
+
+    it('should order by rarity', () => {
+      expect(
+        unitsMock()
+          .sort(Sorts.byRarity)
+          .map(u => u.stars),
+      ).toStrictEqual(['6+', 6, 6, 5])
+    })
+
+    it('should order by type', () => {
+      expect(
+        unitsMock()
+          .sort(Sorts.byType)
+          .map(u => u.type),
+      ).toStrictEqual(['STR', 'STR', 'DEX', 'QCK'])
+    })
+
+    it('should order by type, put dual unit first', () => {
+      expect(
+        unitsMock()
+          .concat({
+            id: 8,
+            type: ['QCK', 'INT'],
+            stars: '6+',
+            name: 'Zoro/Mihawk',
+          } as ExtendedUnit)
+          .sort(Sorts.byType)
+          .map(u => u.type),
+      ).toStrictEqual([['QCK', 'INT'], 'STR', 'STR', 'DEX', 'QCK'])
+    })
+  })
+
+  it('should return sorts function', async () => {
+    const units = unitsMock()
+
+    const { result } = await renderHook(useUnitSort)
+    const subject = [...units].sort(result.current.sorts)
+
+    expect(subject).toStrictEqual([units[2], units[0], units[1], units[3]])
+  })
+})

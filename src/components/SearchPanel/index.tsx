@@ -1,9 +1,10 @@
 import CharacterBox from 'components/CharacterBox'
-import { useUnitFilters } from 'components/filters'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
+import { useUnitFilters } from './UnitFilters'
+import { useUnitSort } from './UnitSort'
 
 const ResultList = styled.div<SpaceProps & FlexProps>`
   ${flex}
@@ -27,12 +28,12 @@ export default function SearchPanel ({
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
   const { filters } = useUnitFilters()
-
+  const { sorts } = useUnitSort()
   return (
     <ResultList {...rest}>
       {units
         .filter(filters)
-        .sort((u1, u2) => u2.id - u1.id)
+        .sort(sorts)
         .slice(0, 50)
         .map(unit => (
           <CharacterBox
