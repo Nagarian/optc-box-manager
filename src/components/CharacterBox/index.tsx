@@ -11,6 +11,7 @@ type CharacterBoxProps = {
 export default function CharacterBox ({ unit, onClick }: CharacterBoxProps) {
   return (
     <Button
+      variant="link"
       backgroundColor="primary"
       px="0"
       py="0"

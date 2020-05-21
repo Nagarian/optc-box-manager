@@ -3,20 +3,21 @@ const baseColors = {
   white: '#FFF',
   grey: '#BFBFBF',
   greys: ['#CCCCCC', '#808080', '#8C8C8C', '#666666'],
+
+  red: '#E96D63',
   green: '#7FCA9F',
   blue: '#85C1F5',
-  red: '#E96D63',
-  purple: '#DA70D6',
-  yellow: '#F4BA70',
-  pink: '#DEA5A4',
-  brown: '#993300',
-  browns: ['#5d3d1b', '#47362a'],
-  orange: '#cf892b',
-  oranges: ['#efaf55'],
-  darkpurple: '#7D3C98',
-  gold: '#B38F15',
-  darkblue: '#183578',
-  limegreen: '#32CD32',
+
+  brown: '#47362a',
+  orange: '#efaf55',
+
+  // yellow: '#F4BA70',
+  // pink: '#DEA5A4',
+  // purple: '#DA70D6',
+  // darkpurple: '#7D3C98',
+  // gold: '#B38F15',
+  // darkblue: '#183578',
+  // limegreen: '#32CD32',
 }
 
 const orbColors = {
@@ -48,14 +49,23 @@ fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]
 
-const fontWeights : number[] = [400, 600]
+const fontWeights: number[] = [400, 600]
 
 const space: any = [0, '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
 space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
 
-const sizes: any = ['1rem', '2rem', '4rem', '6rem', '8rem', '10rem', '12rem', '14rem']
+const sizes: any = [
+  '1rem',
+  '2rem',
+  '4rem',
+  '6rem',
+  '8rem',
+  '10rem',
+  '12rem',
+  '14rem',
+]
 sizes.minimalRequired = '320px'
 
 const breakpoints: any = ['768px', '970px', '1024px']
@@ -63,12 +73,12 @@ const breakpoints: any = ['768px', '970px', '1024px']
 export default {
   colors: {
     ...baseColors,
-    primary: baseColors.orange,
+    primary: baseColors.brown,
     secondary: baseColors.white,
     background: baseColors.white,
     text: baseColors.black,
-    primaryText: baseColors.white,
-    secondaryText: baseColors.black,
+    primaryText: baseColors.orange,
+    secondaryText: baseColors.orange,
     orbColors,
   },
   fontSizes,
@@ -99,22 +109,20 @@ export default {
       '&:hover': {
         filter: 'opacity(0.5)',
       },
-      svg: {
-        fill: 'primary',
-      },
     },
     secondary: {
       backgroundColor: 'secondary',
       color: 'secondaryText',
-      borderColor: 'secondaryText',
     },
     link: {
-      backgroundColor: 'transparent',
+      background: 'none',
       color: 'primary',
+      border: 'none',
     },
-    text: {
-      backgroundColor: 'transparent',
-      color: 'text',
+    danger: {
+      backgroundColor: 'red',
+      color: 'white',
+      borderColor: 'red',
     },
   },
 }

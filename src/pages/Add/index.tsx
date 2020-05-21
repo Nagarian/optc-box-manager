@@ -1,10 +1,10 @@
-import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
+import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
 import React, { useEffect, useRef, useState } from 'react'
-import { Container, FormActionPanel, SelectedList } from './styled'
+import { SelectedList } from './styled'
 
 type AddProps = {
   onCancel: () => void
@@ -26,12 +26,15 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
 
   useEffect(() => {
     if (selectedPanelRef.current) {
-      selectedPanelRef.current.scrollTo({ left: selectedPanelRef.current.scrollWidth, behavior: 'smooth' })
+      selectedPanelRef.current.scrollTo({
+        left: selectedPanelRef.current.scrollWidth,
+        behavior: 'smooth',
+      })
     }
   }, [selectedUnits])
 
   return (
-    <Container>
+    <Popup onCancel={onCancel} onValidate={() => onSubmit(selectedUnits)}>
       <Title>Select your new units</Title>
 
       <SearchPanel
@@ -56,17 +59,6 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
           </SelectedList>
         </>
       )}
-
-      <hr />
-
-      <FormActionPanel>
-        <Button variant="secondary" onClick={() => onCancel()}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={() => onSubmit(selectedUnits)}>
-          Confirm
-        </Button>
-      </FormActionPanel>
-    </Container>
+    </Popup>
   )
 }
