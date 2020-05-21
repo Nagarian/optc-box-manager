@@ -65,9 +65,10 @@ export default function Button ({
 
 Button.defaultProps = {
   variant: 'primary',
-  px: 2,
-  py: 1,
+  px: 3,
+  py: 2,
   fontWeight: 1,
-  fontSize: 1,
-  border: 'currentColor solid medium',
+  fontSize: 3,
+  border: 'currentColor solid thick',
+  borderRadius: 4,
 }

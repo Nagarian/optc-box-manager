@@ -14,6 +14,7 @@ export const PopupBackground = styled.div<SpaceProps>`
   z-index: 1;
   ${space}
   display: grid;
+  place-content: center;
 `
 
 export const PopupContainer = styled(Box)<SpaceProps>`
@@ -26,5 +27,8 @@ export const PopupContainer = styled(Box)<SpaceProps>`
 `
 
 export const PopupActionPanel = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: ${themeGet('sizes.2')};
+  justify-content: center;
 `
