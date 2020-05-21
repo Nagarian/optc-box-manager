@@ -14,7 +14,6 @@ const AppBlock = styled.div`
   display: grid;
   grid-template-rows: 1fr;
   height: 100vh;
-  width: 100vw;
   min-width: ${themeGet('sizes.minimalRequired')};
   position: relative;
 `
@@ -38,7 +37,7 @@ function App () {
       />
 
       {showAddUnit && (
-        <Popup>
+        <Popup onClick={() => setShowAddUnit(false)}>
           <Add
             units={unitDatabase}
             onCancel={() => setShowAddUnit(false)}

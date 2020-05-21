@@ -3,7 +3,6 @@ import Box from 'components/Box'
 import styled from 'styled-components'
 
 export const Container = styled(Box)`
-  margin: ${themeGet('space.2')};
   padding: ${themeGet('space.2')};
   background-color: ${themeGet('colors.background')};
   display: flex;

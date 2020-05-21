@@ -12,6 +12,7 @@ const ResultList = styled.div<SpaceProps & FlexProps>`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
   overflow-y: auto;
 `
 
@@ -32,6 +33,7 @@ export default function SearchPanel ({
       {units
         .filter(filters)
         .sort((u1, u2) => u2.id - u1.id)
+        .slice(0, 50)
         .map(unit => (
           <CharacterBox
             key={unit.id}

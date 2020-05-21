@@ -35,9 +35,10 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
       <Title>Select your new units</Title>
 
       <SearchPanel
-        units={units}
+        units={units.filter(u => !selectedUnits.some(su => su.id === u.id))}
         onUnitClick={u => toggle(u, !selectedUnits.includes(u))}
-        margin="2"
+        my="2"
+        mx={[0, 2]}
         flex="1"
       />
 

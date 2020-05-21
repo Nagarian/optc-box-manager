@@ -50,7 +50,7 @@ fontSizes.subtitle = fontSizes[4]
 
 const fontWeights : number[] = [400, 600]
 
-const space: any = [0, '.4rem', '.8rem', '1.6rem', '3.2rem']
+const space: any = [0, '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
 space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
