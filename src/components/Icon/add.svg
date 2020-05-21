@@ -1,4 +1,4 @@
-<svg version="1.2" baseProfile="tiny"
-  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117.4 117.4">
-  <path d="M63.5 36.3H54v16.5H36.9v9.5H54v16.5h9.5V62.3h15.9v-9.5H63.5z" />
+<svg viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg">
+  <path d="M120.1,20H84.4v62.1H20v35.8h64.4V180h35.8v-62.1H180V82.1h-59.9V20z"/>
 </svg>

@@ -23,6 +23,7 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   flex-direction: column;
   place-items: center;
   overflow: hidden;
+  border-radius: .5rem;
   ${space}
 `
 

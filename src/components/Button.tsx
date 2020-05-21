@@ -54,10 +54,10 @@ export default function Button ({
   variant,
   ...rest
 }: ButtonProps) {
-  const defaultPaddingFix = !!Icon && !children ? { px: 0, py: 0 } : {}
+  const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
   return (
     <Btn variant={variant} {...rest} {...defaultPaddingFix}>
-      {Icon && <Icon size={2} />}
+      {Icon && <Icon size={1} />}
       {children}
     </Btn>
   )

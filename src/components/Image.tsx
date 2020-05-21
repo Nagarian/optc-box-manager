@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { size, SizeProps, SpaceProps, space } from 'styled-system'
+import { size, SizeProps, space, SpaceProps } from 'styled-system'
 
 const Image = styled.img<SizeProps & SpaceProps>`
   ${size}
