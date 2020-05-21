@@ -4,7 +4,9 @@ import Button from 'components/Button'
 import { AddSvg, SettingsSvg } from 'components/Icon'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
+import { UserUnit } from 'models/userBox'
 import Add from 'pages/Add'
+import Detail from 'pages/Detail'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
 import React, { useMemo, useState } from 'react'
@@ -14,7 +16,7 @@ import { size, SizeProps } from 'styled-system'
 
 const AppBlock = styled.div`
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr auto;
   height: 100vh;
   min-width: ${themeGet('sizes.minimalRequired')};
   position: relative;
@@ -26,11 +28,17 @@ function App () {
   const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
   const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
-  const { userBox, add } = useUserBox()
+  const [showDetail, setShowDetail] = useState<ExtendedUnit>()
+  const { userBox, add, reset, update } = useUserBox()
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
     add(...units)
     setShowAddUnit(false)
+  }
+
+  const updateUnit = (unit: UserUnit) => {
+    update(unit)
+    setShowDetail(undefined)
   }
 
   return (
@@ -39,17 +47,31 @@ function App () {
         userBox={userBox}
         units={unitDatabase}
         onAddUnit={() => setShowAddUnit(true)}
+        onShowDetail={unit => setShowDetail(unit)}
       />
 
       {showAddUnit && (
         <Add
-          units={unitDatabase.filter(unit => !userBox.some(uu => uu.unitId === unit.id))}
+          units={unitDatabase.filter(
+            unit => !userBox.some(uu => uu.unitId === unit.id),
+          )}
           onCancel={() => setShowAddUnit(false)}
           onSubmit={addSelectedUnits}
         />
       )}
 
-      {showSettings && <Settings onClose={() => setShowSettings(false)} />}
+      {!!showDetail && (
+        <Detail
+          onCancel={() => setShowDetail(undefined)}
+          onValidate={updateUnit}
+          unit={showDetail}
+          userUnit={userBox.find(uu => uu.unitId === showDetail.id)}
+        />
+      )}
+
+      {showSettings && (
+        <Settings onClose={() => setShowSettings(false)} onReset={reset} />
+      )}
 
       <Box
         display="grid"

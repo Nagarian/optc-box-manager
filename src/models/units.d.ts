@@ -152,7 +152,7 @@ export type UnitFlags = {
 export type ExtendedUnit = BaseUnit & {
   /** OPTC-DB real ID (used in url) */
   id: number
-  images: UnitImage
+  images: UnitImages
   evolution?: UnitEvolution
   cooldown: UnitCooldown
   detail: UnitDetail

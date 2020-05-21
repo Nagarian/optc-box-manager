@@ -65,5 +65,8 @@ export default function useUserBox () {
     delete: (id: string) => {
       setUserBox(userBox.filter(u => u.id === id))
     },
+    reset: () => {
+      setUserBox([])
+    },
   }
 }

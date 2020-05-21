@@ -5,14 +5,15 @@ import React from 'react'
 
 type SettingsProps = {
   onClose: () => void
+  onReset: () => void
 }
 
-export default function Settings ({ onClose }: SettingsProps) {
+export default function Settings ({ onClose, onReset }: SettingsProps) {
   return (
     <Popup onCancel={onClose} onValidate={onClose}>
       <Title>Settings</Title>
 
-      <Button variant="danger" onClick={() => {}}>
+      <Button variant="danger" onClick={onReset}>
         Reset
       </Button>
     </Popup>

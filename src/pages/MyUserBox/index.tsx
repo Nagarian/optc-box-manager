@@ -9,27 +9,30 @@ import React from 'react'
 type UserBoxProps = {
   userBox: UserBox
   onAddUnit: () => void
+  onShowDetail: (unit: ExtendedUnit) => void
   units: ExtendedUnit[]
 }
 
-export default function MyUserBox ({ userBox, onAddUnit, units }: UserBoxProps) {
-  const myUnits = units.filter(unit => userBox.some(uu => uu.unitId === unit.id))
+export default function MyUserBox ({
+  userBox,
+  onAddUnit,
+  onShowDetail,
+  units,
+}: UserBoxProps) {
+  const myUnits = units.filter(unit =>
+    userBox.some(uu => uu.unitId === unit.id),
+  )
 
   if (userBox.length === 0) {
     return (
       <Box display="flex" alignItems="center" flexDirection="column">
         It's seem pretty lonely here, try adding some units !
-        <Button px="0" py="0" onClick={() => onAddUnit()}>
-          <AddSvg size="2" fill="browns.1" color="oranges.0" />
-        </Button>
+        <Button onClick={() => onAddUnit()} icon={AddSvg} />
       </Box>
     )
   }
 
-  return <div>
-    <SearchPanel
-      units={myUnits}
-      onUnitClick={unit => console.log(unit)}
-    />
-  </div>
+  return (
+    <SearchPanel units={myUnits} onUnitClick={unit => onShowDetail(unit)} />
+  )
 }
