@@ -43,6 +43,42 @@ const specificColors = {
   ccHp: '#fcb20f',
   ccRcv: '#7ef6ad',
   support: '#12b791',
+  rainbow: `linear-gradient(
+    160deg,
+    #fff77d 0%,
+    #eb504d 25%,
+    #a350de 33%,
+    #fff77d 50%,
+    #eb504d 67%,
+    #a350de 75%,
+    #fff77d 100%
+  )`,
+  rainbowPlus: `linear-gradient(
+    155deg,
+    #fa8072,
+    #da70d6,
+    #90ee90,
+    #87cefa,
+    #ffd700,
+
+    #fa8072,
+    #da70d6,
+    #90ee90,
+    #87cefa,
+    #ffd700,
+
+    #fa8072,
+    #da70d6,
+    #90ee90,
+    #87cefa,
+    #ffd700,
+
+    #fa8072,
+    #da70d6,
+    #90ee90,
+    #87cefa,
+    #ffd700
+  )`,
 }
 
 type FontSizes = number[] & {
