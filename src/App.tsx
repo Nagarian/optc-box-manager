@@ -1,7 +1,7 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { AddSvg, SettingsSvg } from 'components/Icon'
+import { AddIcon, SettingsIcon } from 'components/Icon'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
@@ -82,8 +82,8 @@ function App () {
         boxShadow="none"
       >
         <DummyBlock size={2} />
-        <Button onClick={() => setShowAddUnit(true)} icon={AddSvg} />
-        <Button onClick={() => setShowSettings(true)} icon={SettingsSvg} />
+        <Button onClick={() => setShowAddUnit(true)} icon={AddIcon} />
+        <Button onClick={() => setShowSettings(true)} icon={SettingsIcon} />
       </Box>
     </AppBlock>
   )

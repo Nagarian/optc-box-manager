@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import styled, { css } from 'styled-components'
-import { color, ColorProps, space, SpaceProps } from 'styled-system'
+import { space, SpaceProps } from 'styled-system'
 
 const track = css<RangeInputProps>`
   width: 100%;
@@ -9,7 +9,8 @@ const track = css<RangeInputProps>`
     calc(${themeGet('sizes.0')} * 1.5)
     calc(${themeGet('sizes.0')} * 1.5);
   cursor: pointer;
-  ${p => p.range && color(p.range)}
+  background-color: ${themeGet('colors.grey')};
+  ${p => p.range}
   border-radius: ${themeGet('sizes.2')};
 `
 
@@ -31,7 +32,10 @@ const thumb = css<RangeInputProps>`
 type RangeInputProps = {
   thumbImage?: string
   thumbSvg?: string
-  range?: ColorProps
+  range?: {
+    color?: any
+    backgroundColor?: any
+  }
 }
 
 const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<

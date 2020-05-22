@@ -1,5 +1,6 @@
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
+import SupportInput from 'components/forms/SupportInput'
 import Popup from 'components/Popup'
 import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
@@ -20,11 +21,13 @@ export default function Detail ({
   unit,
   userUnit,
 }: DetailProps) {
-  const { potentials, special, support, cc } = userUnit
+  const { potentials, special, support: sup, cc } = userUnit
 
   const [rcv, setRcv] = useState<number>(cc.rcv)
   const [hp, setHp] = useState<number>(cc.hp)
   const [atk, setAtk] = useState<number>(cc.atk)
+  const [support, setSupport] = useState<number | undefined>(sup?.lvl)
+
   const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
     potentials[0],
   )
@@ -131,6 +134,19 @@ export default function Detail ({
           {potential3.lvl}
         </label>
       )}
+
+      <SubTitle>Support</SubTitle>
+      {support !== undefined && (
+        <label>
+          <SupportInput
+            name="support"
+            value={support}
+            onChange={e => setSupport(Number(e.target.value))}
+          />
+          {support}
+        </label>
+      )}
+
     </Popup>
   )
 }

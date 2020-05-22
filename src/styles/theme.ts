@@ -38,6 +38,13 @@ const orbColors = {
   EMPTY: '#777',
 }
 
+const specificColors = {
+  ccAtk: '#fe7871',
+  ccHp: '#fcb20f',
+  ccRcv: '#7ef6ad',
+  support: '#12b791',
+}
+
 type FontSizes = number[] & {
   body?: number
   title?: number
@@ -79,7 +86,8 @@ export default {
     text: baseColors.black,
     primaryText: baseColors.orange,
     secondaryText: baseColors.orange,
-    orbColors,
+    orb: orbColors,
+    specific: specificColors,
   },
   fontSizes,
   fontWeights,

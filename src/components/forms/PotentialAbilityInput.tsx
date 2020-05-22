@@ -11,9 +11,6 @@ const PotentialAbilityInput = styled(RangeInput).attrs<PotentialAbilityInputProp
   min: 0,
   max: 5,
   thumbImage: PotentialAbilityToImage(variant as PotentialKey),
-  range: {
-    backgroundColor: 'grey',
-  },
 }))<PotentialAbilityInputProps>``
 
 export default PotentialAbilityInput

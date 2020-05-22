@@ -1,4 +1,4 @@
-import CottonCandySvg from 'components/Icon/cottoncandy.svg'
+import { CottonCandySvg } from 'components/Icon'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 import RangeInput from './RangeInput'
@@ -14,16 +14,13 @@ const CottonCandyInput = styled(RangeInput).attrs(p => ({
   range: variant({
     variants: {
       atk: {
-        backgroundColor: 'grey',
-        color: 'red',
+        color: 'specific.ccAtk',
       },
       rcv: {
-        backgroundColor: 'grey',
-        color: 'green',
+        color: 'specific.ccRcv',
       },
       hp: {
-        backgroundColor: 'grey',
-        color: 'orange',
+        color: 'specific.ccHp',
       },
     },
   })(p),

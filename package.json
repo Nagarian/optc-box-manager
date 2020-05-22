@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@styled-system/css": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "@testing-library/jest-dom": "^5.7.0",
@@ -30,6 +31,7 @@
     "@testing-library/react-hooks": "^3.2.1",
     "@types/styled-components": "^5.1.0",
     "@types/styled-system": "^5.1.9",
+    "@types/styled-system__css": "^5.0.9",
     "@types/styled-system__should-forward-prop": "^5.1.1",
     "@types/styled-system__theme-get": "^5.0.0",
     "@types/uuid": "^7.0.3",
