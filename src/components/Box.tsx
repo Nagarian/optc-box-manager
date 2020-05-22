@@ -39,8 +39,4 @@ const Box = styled.div.withConfig(cleanStyledSystem)<
   ${flexbox}
 `
 
-Box.defaultProps = {
-  boxShadow: 'normal',
-}
-
 export default Box

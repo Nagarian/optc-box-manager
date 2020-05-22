@@ -1,7 +1,7 @@
 import Button from 'components/Button'
 import React, { ReactNode } from 'react'
 import { SpaceProps } from 'styled-system'
-import { PopupActionPanel, PopupBackground, PopupContainer } from './styled'
+import { PopupActionPanel, PopupBackground, PopupContainer, PopupPanel } from './styled'
 
 type PopupProps = {
   onCancel: () => void
@@ -21,7 +21,7 @@ export default function Popup ({
       onClick={event => event.currentTarget === event.target && onCancel()}
     >
       <PopupContainer padding="2">
-        {children}
+        <PopupPanel>{children}</PopupPanel>
 
         <hr />
 
