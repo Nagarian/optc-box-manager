@@ -1,5 +1,7 @@
+import CharacterBox from 'components/CharacterBox'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
+import SpecialLevelInput from 'components/forms/SpecialLevelInput'
 import SupportInput from 'components/forms/SupportInput'
 import Popup from 'components/Popup'
 import { SubTitle, Title } from 'components/Title'
@@ -23,10 +25,12 @@ export default function Detail ({
 }: DetailProps) {
   const { potentials, special, support: sup, cc } = userUnit
 
+  const [specialLvl, setSpecialLvl] = useState<number | undefined>(special?.lvl)
+  const [support, setSupport] = useState<number | undefined>(sup?.lvl)
+
   const [rcv, setRcv] = useState<number>(cc.rcv)
   const [hp, setHp] = useState<number>(cc.hp)
   const [atk, setAtk] = useState<number>(cc.atk)
-  const [support, setSupport] = useState<number | undefined>(sup?.lvl)
 
   const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
     potentials[0],
@@ -50,11 +54,27 @@ export default function Detail ({
             atk,
           },
           potentials: [potential1, potential2, potential3].filter(Boolean),
+          support:
+            support !== undefined
+              ? {
+                lvl: support!,
+              }
+              : undefined,
+          special:
+            specialLvl !== undefined
+              ? {
+                lvl: specialLvl!,
+                lvlMax: special!.lvlMax,
+              }
+              : undefined,
         })
       }
     >
       <ImageFull src={unit.images.full} alt={unit.name} />
-      <Title fontSize="0">{unit.name}</Title>
+      <Title fontSize="0">
+        N°{unit.id} - {unit.name}
+      </Title>
+      <CharacterBox unit={unit} userUnit={userUnit} />
 
       <SubTitle>Cotton Candies</SubTitle>
       <label>
@@ -147,6 +167,18 @@ export default function Detail ({
         </label>
       )}
 
+      <SubTitle>Special</SubTitle>
+      {special !== undefined && special.lvlMax > 1 && (
+        <label>
+          <SpecialLevelInput
+            name="support"
+            max={special!.lvlMax}
+            value={specialLvl!}
+            onChange={e => setSpecialLvl(Number(e.target.value))}
+          />
+          {specialLvl}
+        </label>
+      )}
     </Popup>
   )
 }
