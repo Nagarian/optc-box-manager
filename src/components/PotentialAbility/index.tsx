@@ -1,10 +1,10 @@
-import React from 'react'
 import Image from 'components/Image'
 import { PotentialKey } from 'models/units'
+import React from 'react'
 import styled from 'styled-components'
-import { SpaceProps, space, size, SizeProps } from 'styled-system'
+import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
-
+import ImageFrame from './images/potentialskill_iconframe.png'
 import ImageSkill01 from './images/potentialskill_icon_s_001.png'
 import ImageSkill02 from './images/potentialskill_icon_s_002.png'
 import ImageSkill03 from './images/potentialskill_icon_s_003.png'
@@ -18,9 +18,8 @@ import ImageSkill11 from './images/potentialskill_icon_s_011.png'
 import ImageSkill12 from './images/potentialskill_icon_s_012.png'
 import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
-import ImageFrame from './images/potentialskill_iconframe.png'
 
-function TypeToImage (type: PotentialKey) {
+export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
     case 'Reduce Slot Bind duration':
       return ImageSkill01
@@ -76,7 +75,7 @@ export default function PotentialAbility ({
   size = 3,
   ...rest
 }: PotentialAbilityProps) {
-  const src = TypeToImage(type)
+  const src = PotentialAbilityToImage(type)
   return (
     <Container size={size} {...rest}>
       <Image src={ImageFrame} />

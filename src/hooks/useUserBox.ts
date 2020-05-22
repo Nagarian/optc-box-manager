@@ -60,7 +60,9 @@ export default function useUserBox () {
       const index = userBox.findIndex(uu => uu.id === userUnit.id)
       if (index === -1) return
 
-      setUserBox([...userBox].splice(index, 1, userUnit))
+      const updated = [...userBox]
+      updated.splice(index, 1, userUnit)
+      setUserBox(updated)
     },
     delete: (id: string) => {
       setUserBox(userBox.filter(u => u.id === id))

@@ -2,44 +2,44 @@ import { themeGet } from '@styled-system/theme-get'
 import styled, { css } from 'styled-components'
 import { color, ColorProps, space, SpaceProps } from 'styled-system'
 
-const track = css<IconProps>`
+const track = css<RangeInputProps>`
   width: 100%;
   height: ${themeGet('sizes.0')};
-  margin: calc(${themeGet('sizes.0')} * 1.5) ${themeGet('sizes.0')};
+  margin:
+    calc(${themeGet('sizes.0')} * 1.5)
+    calc(${themeGet('sizes.0')} * 1.5);
   cursor: pointer;
-  background: currentColor;
+  ${p => p.range && color(p.range)}
   border-radius: ${themeGet('sizes.2')};
-
-  filter: opacity(0.5);
-
-  &:focus {
-    filter: ${p => (p.thumbSvg ? 'saturate(40%)' : null)};
-  }
 `
 
-const thumb = css<IconProps>`
+const thumb = css<RangeInputProps>`
+  -webkit-appearance: none;
+  cursor: pointer;
   height: ${themeGet('sizes.0')};
   width: ${themeGet('sizes.0')};
-  background: ${p => (p.thumbImage ? `url(${p.thumbImage})` : 'currentColor')};
-  mask: ${p => (p.thumbSvg ? `url(${p.thumbSvg})` : null)};
-  cursor: pointer;
-  -webkit-appearance: none;
-  filter: ${p => (p.thumbSvg ? 'saturate(250%)' : null)};
   transform: scale(4);
+
+  // as image
+  background: ${p => p.thumbImage && `url(${p.thumbImage}) center / contain no-repeat`};
+
+  // as svg mask
+  background-color: ${p => p.thumbSvg && 'currentColor'};
+  mask: ${p => p.thumbSvg && `url(${p.thumbSvg})`};
 `
 
-type IconProps = {
+type RangeInputProps = {
   thumbImage?: string
   thumbSvg?: string
+  range?: ColorProps
 }
 
 const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
-  ColorProps & SpaceProps & IconProps
+  SpaceProps & RangeInputProps
 >`
   -webkit-appearance: none;
   width: 100%;
-  background: transparent;
-  ${color}
+  background-color: transparent;
   ${space}
 
   ::-webkit-slider-runnable-track {

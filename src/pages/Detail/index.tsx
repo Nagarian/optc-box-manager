@@ -1,8 +1,9 @@
 import CottonCandyInput from 'components/forms/CottonCandyInput'
+import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
 import Popup from 'components/Popup'
 import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
-import { UserUnit } from 'models/userBox'
+import { UserUnit, UserUnitPotentialAbility } from 'models/userBox'
 import React, { useState } from 'react'
 import { ImageFull } from './styled'
 
@@ -24,6 +25,15 @@ export default function Detail ({
   const [rcv, setRcv] = useState<number>(cc.rcv)
   const [hp, setHp] = useState<number>(cc.hp)
   const [atk, setAtk] = useState<number>(cc.atk)
+  const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
+    potentials[0],
+  )
+  const [potential2, setPotential2] = useState<UserUnitPotentialAbility>(
+    potentials[1],
+  )
+  const [potential3, setPotential3] = useState<UserUnitPotentialAbility>(
+    potentials[2],
+  )
 
   return (
     <Popup
@@ -36,6 +46,7 @@ export default function Detail ({
             hp,
             atk,
           },
+          potentials: [potential1, potential2, potential3].filter(Boolean),
         })
       }
     >
@@ -70,6 +81,56 @@ export default function Detail ({
         />
         {rcv}
       </label>
+
+      <SubTitle>Potential Abilities</SubTitle>
+      {potential1 && (
+        <label>
+          <PotentialAbilityInput
+            name={potential1.type}
+            value={potential1.lvl}
+            variant={potential1.type}
+            onChange={e =>
+              setPotential1({
+                lvl: Number(e.target.value),
+                type: potential1.type,
+              })
+            }
+          />
+          {potential1.lvl}
+        </label>
+      )}
+      {potential2 && (
+        <label>
+          <PotentialAbilityInput
+            name={potential2.type}
+            value={potential2.lvl}
+            variant={potential2.type}
+            onChange={e =>
+              setPotential2({
+                lvl: Number(e.target.value),
+                type: potential2.type,
+              })
+            }
+          />
+          {potential2.lvl}
+        </label>
+      )}
+      {potential3 && (
+        <label>
+          <PotentialAbilityInput
+            name={potential3.type}
+            value={potential3.lvl}
+            variant={potential3.type}
+            onChange={e =>
+              setPotential3({
+                lvl: Number(e.target.value),
+                type: potential3.type,
+              })
+            }
+          />
+          {potential3.lvl}
+        </label>
+      )}
     </Popup>
   )
 }
