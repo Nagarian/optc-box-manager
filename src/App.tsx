@@ -65,7 +65,7 @@ function App () {
           onCancel={() => setShowDetail(undefined)}
           onValidate={updateUnit}
           unit={showDetail}
-          userUnit={userBox.find(uu => uu.unitId === showDetail.id)}
+          userUnit={userBox.find(uu => uu.unitId === showDetail.id)!}
         />
       )}
 

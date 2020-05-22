@@ -2,6 +2,7 @@ import styled, { StyledComponent } from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
+import { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import { ReactComponent as Settings } from './settings.svg'
 
 const BaseSvg = (
@@ -24,3 +25,4 @@ export type Icon = StyledComponent<
 
 export const AddSvg: Icon = BaseSvg(Add)
 export const SettingsSvg: Icon = BaseSvg(Settings)
+export const CottonCandySvg: Icon = BaseSvg(CottonCandy)
