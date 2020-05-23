@@ -16,7 +16,7 @@ import {
   variant,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
-import { Icon } from './Icon'
+import { Icon, LoaderIcon } from './Icon'
 
 const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
   compose(space, color, border, typography, gridArea),
@@ -46,17 +46,25 @@ type StyledButtonProps = SpaceProps &
 
 type ButtonProps = StyledButtonProps & {
   icon?: Icon
-} & React.HTMLAttributes<HTMLButtonElement>
+  isLoading?: boolean
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 export default function Button ({
   icon: Icon,
   children,
   variant,
+  isLoading,
   ...rest
 }: ButtonProps) {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
   return (
-    <Btn variant={variant} {...rest} {...defaultPaddingFix}>
+    <Btn
+      variant={variant}
+      disabled={isLoading}
+      {...rest}
+      {...defaultPaddingFix}
+    >
+      {isLoading && <LoaderIcon size={1} />}
       {Icon && <Icon size={1} />}
       {children}
     </Btn>

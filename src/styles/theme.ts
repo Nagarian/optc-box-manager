@@ -150,8 +150,12 @@ export default {
     primary: {
       backgroundColor: 'primary',
       color: 'primaryText',
-      '&:hover': {
+      '&:hover:enabled': {
         filter: 'opacity(0.5)',
+      },
+      ':disabled': {
+        backgroundColor: 'grey',
+        color: 'greys.1',
       },
     },
     secondary: {

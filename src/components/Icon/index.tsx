@@ -6,6 +6,7 @@ import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
+import { ReactComponent as TailSpin } from './tail-spin.svg'
 
 const BaseSvg = (
   svg: React.FunctionComponent<
@@ -31,3 +32,4 @@ export const AddIcon: Icon = BaseSvg(Add)
 export const SettingsIcon: Icon = BaseSvg(Settings)
 export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const SupportIcon: Icon = BaseSvg(Support)
+export const LoaderIcon: Icon = BaseSvg(TailSpin)
