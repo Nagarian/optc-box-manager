@@ -4,6 +4,7 @@ import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
+import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
 
 const BaseSvg = (
@@ -24,7 +25,7 @@ export type Icon = StyledComponent<
   never
 >
 
-export { CottonCandySvg, SettingsSvg, SupportSvg }
+export { CottonCandySvg, SettingsSvg, SupportSvg, SpecialLvl }
 
 export const AddIcon: Icon = BaseSvg(Add)
 export const SettingsIcon: Icon = BaseSvg(Settings)
