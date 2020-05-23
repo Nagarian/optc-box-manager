@@ -1,5 +1,4 @@
 import { themeGet } from '@styled-system/theme-get'
-import Button from 'components/Button'
 import Image from 'components/Image'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
@@ -46,10 +45,11 @@ const supportCss = css<BtnProps>`
   }
 `
 
-const Btn = styled(Button)<BtnProps>`
+const Btn = styled.button<BtnProps>`
   padding: 0;
   background-color: ${themeGet('primary')};
   position: relative;
+  display: flex;
   ${p => p.support && supportCss}
   ${p => p.rainbow && rainbowCss}
 `
@@ -63,7 +63,6 @@ export default function CharacterBox ({
 
   return (
     <Btn
-      variant="link"
       support={
         support !== undefined
           ? support > 0
