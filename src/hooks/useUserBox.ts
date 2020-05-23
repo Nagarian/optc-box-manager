@@ -64,8 +64,8 @@ export default function useUserBox () {
       updated.splice(index, 1, userUnit)
       setUserBox(updated)
     },
-    delete: (id: string) => {
-      setUserBox(userBox.filter(u => u.id === id))
+    remove: (id: string) => {
+      setUserBox(userBox.filter(u => u.id !== id))
     },
     reset: () => {
       setUserBox([])

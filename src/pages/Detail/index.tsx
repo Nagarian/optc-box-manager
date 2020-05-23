@@ -1,3 +1,4 @@
+import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
@@ -15,6 +16,7 @@ type DetailProps = {
   unit: ExtendedUnit
   onCancel: () => void
   onValidate: (updated: UserUnit) => void
+  onDelete: (id: string) => void
 }
 
 export default function Detail ({
@@ -22,6 +24,7 @@ export default function Detail ({
   onValidate,
   unit,
   userUnit,
+  onDelete,
 }: DetailProps) {
   const { potentials, special, support: sup, cc } = userUnit
 
@@ -179,6 +182,10 @@ export default function Detail ({
           {specialLvl}
         </label>
       )}
+
+      <Button variant="danger" onClick={() => onDelete(userUnit.id)}>
+        Supprimer
+      </Button>
     </Popup>
   )
 }

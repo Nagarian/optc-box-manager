@@ -29,7 +29,7 @@ function App () {
   const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<ExtendedUnit>()
-  const { userBox, add, reset, update } = useUserBox()
+  const { userBox, add, reset, update, remove } = useUserBox()
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
     add(...units)
@@ -38,6 +38,11 @@ function App () {
 
   const updateUnit = (unit: UserUnit) => {
     update(unit)
+    setShowDetail(undefined)
+  }
+
+  const deleteUnit = (id: string) => {
+    remove(id)
     setShowDetail(undefined)
   }
 
@@ -63,6 +68,7 @@ function App () {
       {!!showDetail && (
         <Detail
           onCancel={() => setShowDetail(undefined)}
+          onDelete={deleteUnit}
           onValidate={updateUnit}
           unit={showDetail}
           userUnit={userBox.find(uu => uu.unitId === showDetail.id)!}
