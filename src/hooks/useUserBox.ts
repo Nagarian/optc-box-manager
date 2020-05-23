@@ -45,8 +45,6 @@ export default function useUserBox () : MyUserBox {
   useEffect(() => {
     if (userBox) {
       localStorage.setItem('userBox', JSON.stringify(userBox))
-    } else {
-      localStorage.removeItem(userBoxKey)
     }
   }, [userBox])
 
