@@ -30,3 +30,12 @@ export type UserUnit = {
 }
 
 export type UserBox = UserUnit[]
+
+export type MyUserBox = {
+  userBox: UserBox
+  add: (...units: ExtendedUnit[]) => void
+  update: (userUnit: UserUnit) => void
+  remove: (id: string) => void
+  reset: () => void
+  importDB: (json: string) => void
+}

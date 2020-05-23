@@ -1,5 +1,5 @@
 import { ExtendedUnit } from 'models/units'
-import { UserBox, UserUnit } from 'models/userBox'
+import { MyUserBox, UserBox, UserUnit } from 'models/userBox'
 import { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
@@ -32,7 +32,7 @@ function UserUnitFactory (unit: ExtendedUnit) : UserUnit {
   }
 }
 
-export default function useUserBox () {
+export default function useUserBox () : MyUserBox {
   const [userBox, setUserBox] = useState<UserBox>([])
 
   useEffect(() => {
@@ -69,6 +69,15 @@ export default function useUserBox () {
     },
     reset: () => {
       setUserBox([])
+    },
+    importDB: (json: string) => {
+      const db = JSON.parse(json)
+      if (!Array.isArray(db)) {
+        // TODO: make more check
+        throw new Error('invalid JSON file')
+      }
+
+      setUserBox(db as UserBox)
     },
   }
 }

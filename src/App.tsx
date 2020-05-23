@@ -29,7 +29,8 @@ function App () {
   const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<ExtendedUnit>()
-  const { userBox, add, reset, update, remove } = useUserBox()
+  const myUserBox = useUserBox()
+  const { userBox, add, update, remove } = myUserBox
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
     add(...units)
@@ -76,7 +77,10 @@ function App () {
       )}
 
       {showSettings && (
-        <Settings onClose={() => setShowSettings(false)} onReset={reset} />
+        <Settings
+          onClose={() => setShowSettings(false)}
+          myUserBox={myUserBox}
+        />
       )}
 
       <Box
