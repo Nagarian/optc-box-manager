@@ -13,11 +13,6 @@ export function exportAsJson (object: any, filename: string) : Promise<void> {
       document.body.removeChild(a)
       window.URL.revokeObjectURL(url)
       resolve()
-    }, 5000)
+    }, 0)
   })
-}
-
-export async function importJson<T> (file: File): Promise<T> {
-  const content = await file.text()
-  return JSON.parse(content) as T
 }
