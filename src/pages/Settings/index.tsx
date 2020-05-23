@@ -1,6 +1,5 @@
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import { Title } from 'components/Title'
 import { MyUserBox } from 'models/userBox'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { exportAsJson } from 'services/share'
@@ -15,12 +14,15 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [successMessage, setSuccessMessage] = useState<string>()
+  const [showResetWarning, setShowResetWarning] = useState<boolean>(false)
+
   const importRef = useRef<HTMLInputElement>(null)
 
   const exportFn = async () => {
     setIsLoading(true)
     await exportAsJson(userBox, 'optc-my-box')
     setIsLoading(false)
+    setSuccessMessage('Your Box has been exported successfully !')
   }
 
   const importFn = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,18 +37,24 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
   }
 
   return (
-    <Popup onCancel={onClose} onValidate={onClose}>
-      <Title>Settings</Title>
-
+    <Popup title="Settings" onClose={onClose}>
       {successMessage && (
         <Popup
-          onCancel={() => setSuccessMessage(undefined)}
-          onValidate={() => setSuccessMessage(undefined)}
-        >
-          {successMessage}
-        </Popup>
+          onClose={() => setSuccessMessage(undefined)}
+          title={successMessage}
+        />
       )}
-      <Button variant="danger" onClick={reset}>
+      {showResetWarning && (
+        <Popup
+          onValidate={() => {
+            setShowResetWarning(false)
+            reset()
+          }}
+          onCancel={() => setShowResetWarning(false)}
+          title="Are you really sure ?"
+        />
+      )}
+      <Button variant="danger" onClick={() => setShowResetWarning(true)}>
         Reset
       </Button>
       <Button onClick={exportFn} isLoading={isLoading}>

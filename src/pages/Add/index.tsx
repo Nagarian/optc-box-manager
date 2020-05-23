@@ -1,7 +1,7 @@
 import CharacterBox from 'components/CharacterBox'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
-import { SubTitle, Title } from 'components/Title'
+import { SubTitle } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
 import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
@@ -34,9 +34,11 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
   }, [selectedUnits])
 
   return (
-    <Popup onCancel={onCancel} onValidate={() => onSubmit(selectedUnits)}>
-      <Title>Select your new units</Title>
-
+    <Popup
+      title="Select your new units"
+      onCancel={onCancel}
+      onValidate={() => onSubmit(selectedUnits)}
+    >
       <SearchPanel
         units={units.filter(u => !selectedUnits.some(su => su.id === u.id))}
         onUnitClick={u => toggle(u, !selectedUnits.includes(u))}

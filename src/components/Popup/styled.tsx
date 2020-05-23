@@ -42,6 +42,5 @@ export const PopupPanel = styled(Box)<SpaceProps>`
 export const PopupActionPanel = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: ${themeGet('sizes.2')};
-  justify-content: center;
+  justify-content: space-evenly;
 `
