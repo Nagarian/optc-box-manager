@@ -8,6 +8,7 @@ import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
+import { Max } from '.'
 
 const Container = styled(Box)`
   display: grid;
@@ -53,20 +54,20 @@ export default function RecapBox ({
           <Element>
             <SpecialLvlIcon size="2" />
             {special.lvl === special.lvlMax
-              ? 'Max'
+              ? <Max />
               : `${special.lvl}/${special.lvlMax}`}
           </Element>
         )}
 
         <Element>
           <CottonCandyIcon size="2" color="specific.ccAtk" />
-          {atk === 100 ? 'Max' : '+' + atk}
+          {atk === 100 ? <Max /> : '+' + atk}
 
           <CottonCandyIcon size="2" color="specific.ccHp" />
-          {hp === 100 ? 'Max' : '+' + hp}
+          {hp === 100 ? <Max /> : '+' + hp}
 
           <CottonCandyIcon size="2" color="specific.ccRcv" />
-          {rcv === 100 ? 'Max' : '+' + rcv}
+          {rcv === 100 ? <Max /> : '+' + rcv}
         </Element>
 
         {potentials.length > 0 && (
@@ -74,7 +75,7 @@ export default function RecapBox ({
             {potentials.map(({ type, lvl }, i) => (
               <Element key={i}>
                 <PotentialAbility size="2" type={type} />
-                {lvl === 5 ? 'Max' : `${lvl}/${5}`}
+                {lvl === 5 ? <Max /> : `${lvl}/${5}`}
               </Element>
             ))}
           </Element>
@@ -84,7 +85,7 @@ export default function RecapBox ({
           <Element>
             <SupportIcon size="2" color="specific.support" />
             {support.lvl === 5
-              ? 'Max'
+              ? <Max />
               : support.lvl === 0
                 ? 'not unlocked'
                 : `${support.lvl}/${5}`}

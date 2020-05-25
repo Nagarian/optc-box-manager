@@ -14,7 +14,7 @@ Max.defaultProps = {
   color: 'primaryText',
 }
 
-const Displayer = styled.label`
+export const Displayer = styled.label`
   display: flex;
   align-items: center;
 `

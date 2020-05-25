@@ -60,32 +60,25 @@ export default function Detail ({
       {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
       <RecapBox unit={unit} userUnit={userUnitUpdated} marginBottom="3" />
 
-      {userUnitUpdated.special !== undefined &&
-        userUnitUpdated.special.lvlMax > 1 && (
-        <ExpansionPanel title="Special">
-          <SpecialLvlEdit
-            special={userUnitUpdated.special}
-            onChange={special =>
-              setUserUnitUpdated({
-                ...userUnitUpdated,
-                special,
-              })
-            }
-          />
-        </ExpansionPanel>
-      )}
+      <SpecialLvlEdit
+        special={userUnitUpdated.special}
+        onChange={special =>
+          setUserUnitUpdated({
+            ...userUnitUpdated,
+            special,
+          })
+        }
+      />
 
-      <ExpansionPanel title="Cotton Candies">
-        <CottonCandyEdit
-          cc={userUnitUpdated.cc}
-          onChange={cc =>
-            setUserUnitUpdated({
-              ...userUnitUpdated,
-              cc,
-            })
-          }
-        />
-      </ExpansionPanel>
+      <CottonCandyEdit
+        cc={userUnitUpdated.cc}
+        onChange={cc =>
+          setUserUnitUpdated({
+            ...userUnitUpdated,
+            cc,
+          })
+        }
+      />
 
       {support !== undefined && (
         <ExpansionPanel title="Support">

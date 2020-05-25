@@ -1,3 +1,4 @@
+import ExpansionPanel from 'components/ExpansionPanel'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import { UserUnitCottonCandy } from 'models/userBox'
 import React from 'react'
@@ -36,7 +37,7 @@ export default function CottonCandyEdit ({
   onChange,
 }: CottonCandyEditProps) {
   return (
-    <>
+    <ExpansionPanel title="Cotton Candies">
       <Wrapper
         type="atk"
         value={cc.atk}
@@ -52,6 +53,6 @@ export default function CottonCandyEdit ({
         value={cc.rcv}
         onChange={v => onChange({ ...cc, rcv: v })}
       />
-    </>
+    </ExpansionPanel>
   )
 }
