@@ -1,7 +1,6 @@
 import Button from 'components/Button'
 import ExpansionPanel from 'components/ExpansionPanel'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
-import SupportInput from 'components/forms/SupportInput'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitPotentialAbility } from 'models/userBox'
@@ -9,6 +8,7 @@ import React, { useState } from 'react'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import RecapBox from './components/RecapBox'
 import SpecialLvlEdit from './components/SpecialLvlEdit'
+import SupportEdit from './components/SupportEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -25,9 +25,8 @@ export default function Detail ({
   userUnit,
   onDelete,
 }: DetailProps) {
-  const { potentials, support: sup } = userUnit
+  const { potentials } = userUnit
   const [userUnitUpdated, setUserUnitUpdated] = useState<UserUnit>(userUnit)
-  const [support, setSupport] = useState<number | undefined>(sup?.lvl)
 
   const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
     potentials[0],
@@ -47,12 +46,7 @@ export default function Detail ({
           ...userUnit!,
           cc: userUnitUpdated.cc,
           potentials: [potential1, potential2, potential3].filter(Boolean),
-          support:
-            support !== undefined
-              ? {
-                lvl: support!,
-              }
-              : undefined,
+          support: userUnitUpdated.support,
           special: userUnitUpdated.special,
         })
       }
@@ -80,24 +74,16 @@ export default function Detail ({
         }
       />
 
-      {support !== undefined && (
-        <ExpansionPanel title="Support">
-          <label>
-            <SupportInput
-              name="support"
-              value={support}
-              onChange={e => setSupport(Number(e.target.value))}
-            />
-            {support}
-          </label>
-          <p>{unit.detail.support[0].Characters}</p>
-          {unit.detail.support[0].description.map((desc, i) => (
-            <p key={i}>
-              {i}: {desc}
-            </p>
-          ))}
-        </ExpansionPanel>
-      )}
+      <SupportEdit
+        support={userUnitUpdated.support}
+        supportDetail={unit.detail.support[0]}
+        onChange={support =>
+          setUserUnitUpdated({
+            ...userUnitUpdated,
+            support,
+          })
+        }
+      />
 
       <ExpansionPanel title="Potential Abilities">
         {potential1 && (

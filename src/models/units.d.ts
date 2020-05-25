@@ -83,7 +83,7 @@ export type Potential = {
   description: string[]
 }
 
-export type Support = {
+export type UnitSupport = {
   Characters: string
   description: string[]
 }
@@ -101,7 +101,7 @@ export type UnitDetail = {
   limit: LimitBreak[]
   potential: Potential[]
   potentialNotes: string
-  support: Support[]
+  support: UnitSupport[]
 }
 
 export type UnitCooldown = [number, number]
