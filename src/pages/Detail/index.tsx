@@ -1,7 +1,6 @@
 import Button from 'components/Button'
 import ExpansionPanel from 'components/ExpansionPanel'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
-import SpecialLevelInput from 'components/forms/SpecialLevelInput'
 import SupportInput from 'components/forms/SupportInput'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
@@ -9,6 +8,7 @@ import { UserUnit, UserUnitPotentialAbility } from 'models/userBox'
 import React, { useState } from 'react'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import RecapBox from './components/RecapBox'
+import SpecialLvlEdit from './components/SpecialLvlEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -25,10 +25,8 @@ export default function Detail ({
   userUnit,
   onDelete,
 }: DetailProps) {
-  const { potentials, special, support: sup } = userUnit
+  const { potentials, support: sup } = userUnit
   const [userUnitUpdated, setUserUnitUpdated] = useState<UserUnit>(userUnit)
-
-  const [specialLvl, setSpecialLvl] = useState<number | undefined>(special?.lvl)
   const [support, setSupport] = useState<number | undefined>(sup?.lvl)
 
   const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
@@ -55,40 +53,37 @@ export default function Detail ({
                 lvl: support!,
               }
               : undefined,
-          special:
-            specialLvl !== undefined
-              ? {
-                lvl: specialLvl!,
-                lvlMax: special!.lvlMax,
-              }
-              : undefined,
+          special: userUnitUpdated.special,
         })
       }
     >
       {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
       <RecapBox unit={unit} userUnit={userUnitUpdated} marginBottom="3" />
 
-      {special !== undefined && special.lvlMax > 1 && (
+      {userUnitUpdated.special !== undefined &&
+        userUnitUpdated.special.lvlMax > 1 && (
         <ExpansionPanel title="Special">
-          <label>
-            <SpecialLevelInput
-              name="support"
-              max={special!.lvlMax}
-              value={specialLvl!}
-              onChange={e => setSpecialLvl(Number(e.target.value))}
-            />
-            {specialLvl}
-          </label>
+          <SpecialLvlEdit
+            special={userUnitUpdated.special}
+            onChange={special =>
+              setUserUnitUpdated({
+                ...userUnitUpdated,
+                special,
+              })
+            }
+          />
         </ExpansionPanel>
       )}
 
       <ExpansionPanel title="Cotton Candies">
         <CottonCandyEdit
           cc={userUnitUpdated.cc}
-          onChange={cc => setUserUnitUpdated({
-            ...userUnitUpdated,
-            cc,
-          })}
+          onChange={cc =>
+            setUserUnitUpdated({
+              ...userUnitUpdated,
+              cc,
+            })
+          }
         />
       </ExpansionPanel>
 

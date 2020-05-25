@@ -1,12 +1,8 @@
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import { UserUnitCottonCandy } from 'models/userBox'
 import React from 'react'
-import styled from 'styled-components'
+import { InputLabel } from '.'
 
-const Displayer = styled.label`
-  display: flex;
-  align-items: center;
-`
 type CottonCandyType = 'atk' | 'rcv' | 'hp'
 
 function Wrapper ({
@@ -19,15 +15,14 @@ function Wrapper ({
   onChange: (value: number) => void
 }) {
   return (
-    <Displayer>
+    <InputLabel value={value} max={100}>
       <CottonCandyInput
         name={type}
         variant={type}
         value={value}
         onChange={e => onChange(Number(e.target.value))}
       />
-      {value}
-    </Displayer>
+    </InputLabel>
   )
 }
 
