@@ -1,6 +1,5 @@
 import Button from 'components/Button'
 import ExpansionPanel from 'components/ExpansionPanel'
-import CottonCandyInput from 'components/forms/CottonCandyInput'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
 import SpecialLevelInput from 'components/forms/SpecialLevelInput'
 import SupportInput from 'components/forms/SupportInput'
@@ -8,6 +7,7 @@ import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitPotentialAbility } from 'models/userBox'
 import React, { useState } from 'react'
+import CottonCandyEdit from './components/CottonCandyEdit'
 import RecapBox from './components/RecapBox'
 
 type DetailProps = {
@@ -25,14 +25,11 @@ export default function Detail ({
   userUnit,
   onDelete,
 }: DetailProps) {
-  const { potentials, special, support: sup, cc } = userUnit
+  const { potentials, special, support: sup } = userUnit
+  const [userUnitUpdated, setUserUnitUpdated] = useState<UserUnit>(userUnit)
 
   const [specialLvl, setSpecialLvl] = useState<number | undefined>(special?.lvl)
   const [support, setSupport] = useState<number | undefined>(sup?.lvl)
-
-  const [rcv, setRcv] = useState<number>(cc.rcv)
-  const [hp, setHp] = useState<number>(cc.hp)
-  const [atk, setAtk] = useState<number>(cc.atk)
 
   const [potential1, setPotential1] = useState<UserUnitPotentialAbility>(
     potentials[0],
@@ -50,11 +47,7 @@ export default function Detail ({
       onValidate={() =>
         onValidate({
           ...userUnit!,
-          cc: {
-            rcv,
-            hp,
-            atk,
-          },
+          cc: userUnitUpdated.cc,
           potentials: [potential1, potential2, potential3].filter(Boolean),
           support:
             support !== undefined
@@ -72,8 +65,8 @@ export default function Detail ({
         })
       }
     >
-      {/* <ImageFull src={unit.images.full} alt={unit.name} /> */}
-      <RecapBox unit={unit} userUnit={userUnit} />
+      {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
+      <RecapBox unit={unit} userUnit={userUnitUpdated} marginBottom="3" />
 
       {special !== undefined && special.lvlMax > 1 && (
         <ExpansionPanel title="Special">
@@ -90,33 +83,13 @@ export default function Detail ({
       )}
 
       <ExpansionPanel title="Cotton Candies">
-        <label>
-          <CottonCandyInput
-            name="atk"
-            variant="atk"
-            value={atk}
-            onChange={e => setAtk(Number(e.target.value))}
-          />
-          {atk}
-        </label>
-        <label>
-          <CottonCandyInput
-            name="rcv"
-            variant="hp"
-            value={hp}
-            onChange={e => setHp(Number(e.target.value))}
-          />
-          {hp}
-        </label>
-        <label>
-          <CottonCandyInput
-            name="rcv"
-            variant="rcv"
-            value={rcv}
-            onChange={e => setRcv(Number(e.target.value))}
-          />
-          {rcv}
-        </label>
+        <CottonCandyEdit
+          cc={userUnitUpdated.cc}
+          onChange={cc => setUserUnitUpdated({
+            ...userUnitUpdated,
+            cc,
+          })}
+        />
       </ExpansionPanel>
 
       {support !== undefined && (
@@ -189,7 +162,7 @@ export default function Detail ({
         )}
       </ExpansionPanel>
 
-      <Button variant="danger" onClick={() => onDelete(userUnit.id)}>
+      <Button variant="danger" my="1" onClick={() => onDelete(userUnit.id)}>
         Supprimer
       </Button>
     </Popup>

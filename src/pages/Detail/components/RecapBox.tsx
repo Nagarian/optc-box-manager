@@ -7,6 +7,7 @@ import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
+import { SpaceProps } from 'styled-system'
 
 const Container = styled(Box)`
   display: grid;
@@ -25,10 +26,11 @@ const Element = styled.div`
 export default function RecapBox ({
   unit,
   userUnit,
+  ...rest
 }: {
   unit: ExtendedUnit
   userUnit: UserUnit
-}) {
+} & SpaceProps) {
   const {
     potentials,
     special,
