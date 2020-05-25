@@ -6,6 +6,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
+import { gridArea, GridAreaProps } from 'styled-system'
+import { PlaceProps, place } from 'styles'
 
 type CharacterBoxProps = {
   unit: ExtendedUnit
@@ -45,24 +47,30 @@ const supportCss = css<BtnProps>`
   }
 `
 
-const Btn = styled.button<BtnProps>`
+export type CharacterBoxStyledProps = GridAreaProps & PlaceProps
+
+const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
   padding: 0;
   background-color: ${themeGet('primary')};
   position: relative;
   display: flex;
   ${p => p.support && supportCss}
   ${p => p.rainbow && rainbowCss}
+  ${gridArea}
+  ${place}
 `
 
 export default function CharacterBox ({
   unit,
   userUnit,
   onClick,
-}: CharacterBoxProps) {
+  ...rest
+}: CharacterBoxProps & CharacterBoxStyledProps) {
   const support = userUnit?.support?.lvl
 
   return (
     <Btn
+      {...rest}
       support={
         support !== undefined
           ? support > 0

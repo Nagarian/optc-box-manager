@@ -1,15 +1,14 @@
 import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
+import ExpansionPanel from 'components/ExpansionPanel'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
 import SpecialLevelInput from 'components/forms/SpecialLevelInput'
 import SupportInput from 'components/forms/SupportInput'
 import Popup from 'components/Popup'
-import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitPotentialAbility } from 'models/userBox'
 import React, { useState } from 'react'
-import { ImageFull } from './styled'
+import RecapBox from './components/RecapBox'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -73,115 +72,122 @@ export default function Detail ({
         })
       }
     >
-      <ImageFull src={unit.images.full} alt={unit.name} />
-      <Title fontSize="0">
-        N°{unit.id} - {unit.name}
-      </Title>
-      <CharacterBox unit={unit} userUnit={userUnit} />
+      {/* <ImageFull src={unit.images.full} alt={unit.name} /> */}
+      <RecapBox unit={unit} userUnit={userUnit} />
 
-      <SubTitle>Cotton Candies</SubTitle>
-      <label>
-        <CottonCandyInput
-          name="atk"
-          variant="atk"
-          value={atk}
-          onChange={e => setAtk(Number(e.target.value))}
-        />
-        {atk}
-      </label>
-      <label>
-        <CottonCandyInput
-          name="rcv"
-          variant="hp"
-          value={hp}
-          onChange={e => setHp(Number(e.target.value))}
-        />
-        {hp}
-      </label>
-      <label>
-        <CottonCandyInput
-          name="rcv"
-          variant="rcv"
-          value={rcv}
-          onChange={e => setRcv(Number(e.target.value))}
-        />
-        {rcv}
-      </label>
-
-      <SubTitle>Potential Abilities</SubTitle>
-      {potential1 && (
-        <label>
-          <PotentialAbilityInput
-            name={potential1.type}
-            value={potential1.lvl}
-            variant={potential1.type}
-            onChange={e =>
-              setPotential1({
-                lvl: Number(e.target.value),
-                type: potential1.type,
-              })
-            }
-          />
-          {potential1.lvl}
-        </label>
-      )}
-      {potential2 && (
-        <label>
-          <PotentialAbilityInput
-            name={potential2.type}
-            value={potential2.lvl}
-            variant={potential2.type}
-            onChange={e =>
-              setPotential2({
-                lvl: Number(e.target.value),
-                type: potential2.type,
-              })
-            }
-          />
-          {potential2.lvl}
-        </label>
-      )}
-      {potential3 && (
-        <label>
-          <PotentialAbilityInput
-            name={potential3.type}
-            value={potential3.lvl}
-            variant={potential3.type}
-            onChange={e =>
-              setPotential3({
-                lvl: Number(e.target.value),
-                type: potential3.type,
-              })
-            }
-          />
-          {potential3.lvl}
-        </label>
-      )}
-
-      <SubTitle>Support</SubTitle>
-      {support !== undefined && (
-        <label>
-          <SupportInput
-            name="support"
-            value={support}
-            onChange={e => setSupport(Number(e.target.value))}
-          />
-          {support}
-        </label>
-      )}
-
-      <SubTitle>Special</SubTitle>
       {special !== undefined && special.lvlMax > 1 && (
-        <label>
-          <SpecialLevelInput
-            name="support"
-            max={special!.lvlMax}
-            value={specialLvl!}
-            onChange={e => setSpecialLvl(Number(e.target.value))}
-          />
-          {specialLvl}
-        </label>
+        <ExpansionPanel title="Special">
+          <label>
+            <SpecialLevelInput
+              name="support"
+              max={special!.lvlMax}
+              value={specialLvl!}
+              onChange={e => setSpecialLvl(Number(e.target.value))}
+            />
+            {specialLvl}
+          </label>
+        </ExpansionPanel>
       )}
+
+      <ExpansionPanel title="Cotton Candies">
+        <label>
+          <CottonCandyInput
+            name="atk"
+            variant="atk"
+            value={atk}
+            onChange={e => setAtk(Number(e.target.value))}
+          />
+          {atk}
+        </label>
+        <label>
+          <CottonCandyInput
+            name="rcv"
+            variant="hp"
+            value={hp}
+            onChange={e => setHp(Number(e.target.value))}
+          />
+          {hp}
+        </label>
+        <label>
+          <CottonCandyInput
+            name="rcv"
+            variant="rcv"
+            value={rcv}
+            onChange={e => setRcv(Number(e.target.value))}
+          />
+          {rcv}
+        </label>
+      </ExpansionPanel>
+
+      {support !== undefined && (
+        <ExpansionPanel title="Support">
+          <label>
+            <SupportInput
+              name="support"
+              value={support}
+              onChange={e => setSupport(Number(e.target.value))}
+            />
+            {support}
+          </label>
+          <p>{unit.detail.support[0].Characters}</p>
+          {unit.detail.support[0].description.map((desc, i) => (
+            <p key={i}>
+              {i}: {desc}
+            </p>
+          ))}
+        </ExpansionPanel>
+      )}
+
+      <ExpansionPanel title="Potential Abilities">
+        {potential1 && (
+          <label>
+            <PotentialAbilityInput
+              name={potential1.type}
+              value={potential1.lvl}
+              variant={potential1.type}
+              onChange={e =>
+                setPotential1({
+                  lvl: Number(e.target.value),
+                  type: potential1.type,
+                })
+              }
+            />
+            {potential1.lvl}
+          </label>
+        )}
+        {potential2 && (
+          <label>
+            <PotentialAbilityInput
+              name={potential2.type}
+              value={potential2.lvl}
+              variant={potential2.type}
+              onChange={e =>
+                setPotential2({
+                  lvl: Number(e.target.value),
+                  type: potential2.type,
+                })
+              }
+            />
+            {potential2.lvl}
+          </label>
+        )}
+        {potential3 && (
+          <label>
+            <PotentialAbilityInput
+              name={potential3.type}
+              value={potential3.lvl}
+              variant={potential3.type}
+              onChange={e =>
+                setPotential3({
+                  lvl: Number(e.target.value),
+                  type: potential3.type,
+                })
+              }
+            />
+            {potential3.lvl}
+          </label>
+        )}
+      </ExpansionPanel>
 
       <Button variant="danger" onClick={() => onDelete(userUnit.id)}>
         Supprimer

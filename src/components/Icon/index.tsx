@@ -1,5 +1,5 @@
 import styled, { StyledComponent } from 'styled-components'
-import { size, SizeProps, space, SpaceProps } from 'styled-system'
+import { color, size, SizeProps, space, SpaceProps } from 'styled-system'
 import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
@@ -16,7 +16,7 @@ const BaseSvg = (
 ) => styled(svg).withConfig(clean('color', 'fill'))<SpaceProps & SizeProps>`
   ${space}
   ${size}
-  color: ${p => p.color};
+  ${color}
   fill: currentColor;
 `
 
@@ -35,3 +35,11 @@ export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const SupportIcon: Icon = BaseSvg(Support)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
+
+export const SpecialLvlIcon = styled.img.attrs(() => ({
+  src: SpecialLvl,
+}))<SpaceProps & SizeProps>`
+  object-fit: contain;
+  ${space}
+  ${size}
+`
