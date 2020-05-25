@@ -76,7 +76,7 @@ export default function Detail ({
 
       <SupportEdit
         support={userUnitUpdated.support}
-        supportDetail={unit.detail.support[0]}
+        supportDetail={unit.detail.support?.[0]}
         onChange={support =>
           setUserUnitUpdated({
             ...userUnitUpdated,
