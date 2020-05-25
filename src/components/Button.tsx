@@ -61,8 +61,8 @@ export default function Button ({
       {...rest}
       {...defaultPaddingFix}
     >
-      {isLoading && <LoaderIcon size={1} marginRight={2} />}
-      {Icon && <Icon size={1} marginRight={2} />}
+      {isLoading && <LoaderIcon size={1} marginRight={children ? 2 : 0} />}
+      {Icon && <Icon size={1} marginRight={children ? 2 : 0} />}
       {children}
     </Btn>
   )
