@@ -44,6 +44,7 @@ type SortsFunc = {
   byIdReverse: UnitSort
   byRarity: UnitSort
   byType: UnitSort
+  byFamily: UnitSort
 }
 
 export const Sorts: SortsFunc = {
@@ -51,9 +52,10 @@ export const Sorts: SortsFunc = {
   byIdReverse: (unit1, unit2) => unit2.id - unit1.id,
   byRarity: (unit1, unit2) => ParseStar(unit2.stars) - ParseStar(unit1.stars),
   byType: (unit1, unit2) => ParseType(unit1.type) - ParseType(unit2.type),
+  byFamily: (unit1, unit2) => unit1.family.id - unit2.family.id,
 }
 
-type SortCriteria = 'Default' | 'Rarity' | 'Type' | 'Id' | 'IdReverse'
+type SortCriteria = 'Default' | 'Rarity' | 'Type' | 'Id' | 'IdReverse' | 'Family'
 
 function SortCriteriaToFunc (sortCriteria: SortCriteria): UnitSort[] {
   switch (sortCriteria) {
@@ -65,9 +67,11 @@ function SortCriteriaToFunc (sortCriteria: SortCriteria): UnitSort[] {
       return [Sorts.byId]
     case 'IdReverse':
       return [Sorts.byIdReverse]
+    case 'Family':
+      return [Sorts.byFamily]
     case 'Default':
     default:
-      return [Sorts.byType, Sorts.byRarity, Sorts.byId]
+      return [Sorts.byType, Sorts.byRarity, Sorts.byFamily, Sorts.byId]
   }
 }
 

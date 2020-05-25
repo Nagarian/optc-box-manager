@@ -149,6 +149,13 @@ export type UnitFlags = {
   special: 1 | undefined
 }
 
+export type UnitFamily = string | null | string[]
+
+export type ExtendedUnitFamily = {
+  name: UnitFamily
+  id: number
+}
+
 export type ExtendedUnit = BaseUnit & {
   /** OPTC-DB real ID (used in url) */
   id: number
@@ -157,4 +164,5 @@ export type ExtendedUnit = BaseUnit & {
   cooldown: UnitCooldown
   detail: UnitDetail
   flags: UnitFlags
+  family: ExtendedUnitFamily
 }
