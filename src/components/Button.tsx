@@ -27,9 +27,7 @@ const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
     },
   }),
   css`
-    display: grid;
-    grid-gap: 0.8em;
-    grid-auto-flow: column;
+    display: flex;
   `,
 )
 
@@ -63,8 +61,8 @@ export default function Button ({
       {...rest}
       {...defaultPaddingFix}
     >
-      {isLoading && <LoaderIcon size={1} />}
-      {Icon && <Icon size={1} />}
+      {isLoading && <LoaderIcon size={1} marginRight={2} />}
+      {Icon && <Icon size={1} marginRight={2} />}
       {children}
     </Btn>
   )
