@@ -15,11 +15,11 @@ import {
   typography,
   variant,
 } from 'styled-system'
-import { cleanStyledSystem } from 'styles'
+import { cleanStyledSystem, place, PlaceProps } from 'styles'
 import { Icon, LoaderIcon } from './Icon'
 
 const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
-  compose(space, color, border, typography, gridArea),
+  compose(space, color, border, typography, gridArea, place),
   variant({
     scale: 'buttons',
     variants: {
@@ -30,13 +30,12 @@ const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
     display: grid;
     grid-gap: 0.8em;
     grid-auto-flow: column;
-    place-items: center;
-    place-content: center;
   `,
 )
 
 type StyledButtonProps = SpaceProps &
   GridAreaProps &
+  PlaceProps &
   ColorProps &
   BorderProps &
   FontSizeProps &
@@ -79,4 +78,6 @@ Button.defaultProps = {
   fontSize: 3,
   border: 'currentColor solid thick',
   borderRadius: 4,
+  placeItems: 'center',
+  placeContent: 'center',
 }

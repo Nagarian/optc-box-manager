@@ -1,8 +1,10 @@
-import React from 'react'
-import { FontCss } from './font'
-import { ResetCss } from './reset'
-import { FormsCss } from './forms'
 import shouldForwardProp from '@styled-system/should-forward-prop'
+import * as CSS from 'csstype'
+import React from 'react'
+import { system } from 'styled-system'
+import { FontCss } from './font'
+import { FormsCss } from './forms'
+import { ResetCss } from './reset'
 
 export default function DefaultStyles () {
   return (
@@ -19,3 +21,27 @@ export const clean = (...propsToClean: string[]) => ({
 })
 
 export const cleanStyledSystem = clean()
+
+export interface PlaceProps {
+  alignItems?: CSS.AlignItemsProperty,
+  alignContent?: CSS.AlignContentProperty,
+  alignSelf?: CSS.AlignSelfProperty,
+  justifyItems?: CSS.JustifyItemsProperty,
+  justifyContent?: CSS.JustifyContentProperty,
+  justifySelf?: CSS.JustifySelfProperty,
+  placeItems?: CSS.PlaceItemsProperty,
+  placeContent?: CSS.PlaceContentProperty,
+  placeSelf?: CSS.PlaceSelfProperty,
+}
+
+export const place = system({
+  alignItems: true,
+  alignContent: true,
+  alignSelf: true,
+  justifyItems: true,
+  justifyContent: true,
+  justifySelf: true,
+  placeItems: true,
+  placeContent: true,
+  placeSelf: true,
+})

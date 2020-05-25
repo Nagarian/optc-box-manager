@@ -2,6 +2,7 @@ import styled, { StyledComponent } from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
+import { ReactComponent as Arrow } from './arrow.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
@@ -33,3 +34,4 @@ export const SettingsIcon: Icon = BaseSvg(Settings)
 export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const SupportIcon: Icon = BaseSvg(Support)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
+export const ArrowIcon: Icon = BaseSvg(Arrow)

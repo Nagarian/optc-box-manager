@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { StyledComponent } from 'styled-components'
 import {
   background,
   BackgroundColorProps,
@@ -19,16 +19,18 @@ import {
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
-const Box = styled.div.withConfig(cleanStyledSystem)<
-  SpaceProps &
-    LayoutProps &
-    ShadowProps &
-    BackgroundProps &
-    BackgroundColorProps &
-    GridProps &
-    PositionProps &
-    FlexboxProps
->`
+export type BoxProps = SpaceProps &
+  LayoutProps &
+  ShadowProps &
+  BackgroundProps &
+  BackgroundColorProps &
+  GridProps &
+  PositionProps &
+  FlexboxProps
+
+export type BoxStyledProps = StyledComponent<'div', any, BoxProps, never>
+
+const Box: BoxStyledProps = styled.div.withConfig(cleanStyledSystem)<BoxProps>`
   ${layout}
   ${shadow}
   ${background}
