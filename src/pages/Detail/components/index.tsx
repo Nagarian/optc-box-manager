@@ -17,6 +17,11 @@ Max.defaultProps = {
 export const Displayer = styled.label`
   display: flex;
   align-items: center;
+
+  span {
+    width: 5ch;
+    text-align: left;
+  }
 `
 
 type InputLabelProps = {
@@ -28,8 +33,8 @@ type InputLabelProps = {
 export function InputLabel ({ value, max, children }: InputLabelProps) {
   return (
     <Displayer>
+      {value === max ? <Max /> : <span>{value}</span>}
       {children}
-      {value === max ? <Max /> : value}
     </Displayer>
   )
 }

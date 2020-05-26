@@ -6,21 +6,21 @@ import React from 'react'
 import { InputLabel } from '.'
 
 type SupportEditProps = {
-  supportDetail?: UnitSupport
+  detail?: UnitSupport
   support?: UserUnitSupport
   onChange: (support: UserUnitSupport) => void
 }
 
 export default function SupportEdit ({
   support,
-  supportDetail,
+  detail,
   onChange,
 }: SupportEditProps) {
   if (!support) return null
 
   const { lvl } = support!
 
-  const { Characters, description } = supportDetail!
+  const { Characters, description } = detail!
 
   return (
     <ExpansionPanel title="Support">

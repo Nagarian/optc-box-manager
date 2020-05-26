@@ -78,7 +78,7 @@ export type PotentialKey =
   | 'Reduce Ship Bind duration'
   | 'Reduce Sailor Despair duration'
 
-export type Potential = {
+export type UnitPotential = {
   Name: PotentialKey
   description: string[]
 }
@@ -99,7 +99,7 @@ export type UnitDetail = {
   sailorNotes: string
   specialName: string
   limit: LimitBreak[]
-  potential: Potential[]
+  potential: UnitPotential[]
   potentialNotes: string
   support: UnitSupport[]
 }
