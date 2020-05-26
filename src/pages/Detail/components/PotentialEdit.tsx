@@ -7,13 +7,20 @@ import { InputLabel } from '.'
 
 function Wrapper ({
   potential: { type, lvl },
+  detail: { description, Name },
   onChange,
 }: {
   potential: UserUnitPotentialAbility
+  detail: UnitPotential
   onChange: (potential: UserUnitPotentialAbility) => void
 }) {
   return (
-    <InputLabel value={lvl} max={5}>
+    <InputLabel
+      value={lvl}
+      max={5}
+      name={Name}
+      descriptions={description}
+    >
       <PotentialAbilityInput
         name={type}
         value={lvl}
@@ -37,6 +44,7 @@ type PotentialEditProps = {
 
 export default function PotentialEdit ({
   potentials,
+  details,
   onChange,
 }: PotentialEditProps) {
   if (potentials.length === 0) {
@@ -47,7 +55,9 @@ export default function PotentialEdit ({
     <ExpansionPanel title="Potential Abilities">
       {potentials.map(potential => (
         <Wrapper
+          key={potential.type}
           potential={potential}
+          detail={details.find(d => d.Name === potential.type)!}
           onChange={potential =>
             onChange(
               potentials.map(p => (p.type === potential.type ? potential : p)),

@@ -21,7 +21,7 @@ const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
   overflow: ${p => !p.isOpen && 'hidden'};
   transition: max-height .25s ease;
-  margin: ${p => p.isOpen && themeGet('space.2')} 0;
+  margin-bottom: ${p => p.isOpen && themeGet('space.2')};
 
   display: flex;
   flex-direction: column;
@@ -64,6 +64,7 @@ export default function ExpansionPanel ({
       <ExpandButton
         isOpen={isOpen}
         onClick={() => setIsOpen(!isOpen)}
+        my="1"
       >
         {title}
       </ExpandButton>

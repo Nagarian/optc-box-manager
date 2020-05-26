@@ -88,9 +88,14 @@ export type UnitSupport = {
   description: string[]
 }
 
+export type UnitSpecial = string | {
+  cooldown: UnitCooldown
+  description: string
+}[]
+
 export type UnitDetail = {
   captain: string
-  special: string
+  special: UnitSpecial
   sailor: {
     base: string
     level1: string

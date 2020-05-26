@@ -33,6 +33,7 @@ export default function Detail ({
 
       <SpecialLvlEdit
         special={userUnit.special}
+        detail={unit.detail}
         onChange={special => setUserUnit({ ...userUnit, special })}
       />
 

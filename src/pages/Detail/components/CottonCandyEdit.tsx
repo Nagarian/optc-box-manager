@@ -16,7 +16,7 @@ function Wrapper ({
   onChange: (value: number) => void
 }) {
   return (
-    <InputLabel value={value} max={100}>
+    <InputLabel value={value} max={100} name={type.toUpperCase()}>
       <CottonCandyInput
         name={type}
         variant={type}

@@ -1,7 +1,5 @@
-import Box from 'components/Box'
 import ExpansionPanel from 'components/ExpansionPanel'
 import SupportInput from 'components/forms/SupportInput'
-import { SubTitle } from 'components/Title'
 import { UnitSupport } from 'models/units'
 import { UserUnitSupport } from 'models/userBox'
 import React from 'react'
@@ -26,24 +24,17 @@ export default function SupportEdit ({
 
   return (
     <ExpansionPanel title="Support">
-      <Box my="2">
-        <SubTitle fontSize="1">
-          <strong>For: </strong>
-          {Characters}
-        </SubTitle>
-        <p>
-          <strong>max: </strong>
-          {description[description.length - 1]}
-        </p>
-        {lvl > 0 && lvl < 5 && (
-          <p>
-            <strong>Level {lvl}: </strong>
-            {description[lvl - 1]}
-          </p>
-        )}
-      </Box>
-
-      <InputLabel value={lvl} max={5}>
+      <InputLabel
+        value={lvl}
+        max={5}
+        name={
+          <>
+            <strong>For: </strong>
+            {Characters}
+          </>
+        }
+        descriptions={description}
+      >
         <SupportInput
           name="support"
           value={lvl}
