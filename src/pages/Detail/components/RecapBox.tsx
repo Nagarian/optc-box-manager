@@ -16,7 +16,7 @@ const Container = styled(Box)`
     'title title'
     'num info'
     'icon info';
-    place-items: center;
+  place-items: center;
 `
 
 const Element = styled.div`
@@ -40,7 +40,7 @@ export default function RecapBox ({
   } = userUnit
 
   return (
-    <Container>
+    <Container {...rest}>
       <Title gridArea="title">{unit.name}</Title>
       <SubTitle gridArea="num">N°{unit.id}</SubTitle>
       <CharacterBox
@@ -53,9 +53,11 @@ export default function RecapBox ({
         {special && (
           <Element>
             <SpecialLvlIcon size="2" />
-            {special.lvl === special.lvlMax
-              ? <Max />
-              : `${special.lvl}/${special.lvlMax}`}
+            {special.lvl === special.lvlMax ? (
+              <Max />
+            ) : (
+              `${special.lvl}/${special.lvlMax}`
+            )}
           </Element>
         )}
 
@@ -84,11 +86,13 @@ export default function RecapBox ({
         {support && (
           <Element>
             <SupportIcon size="2" color="specific.support" />
-            {support.lvl === 5
-              ? <Max />
-              : support.lvl === 0
-                ? 'not unlocked'
-                : `${support.lvl}/${5}`}
+            {support.lvl === 5 ? (
+              <Max />
+            ) : support.lvl === 0 ? (
+              'not unlocked'
+            ) : (
+              `${support.lvl}/${5}`
+            )}
           </Element>
         )}
       </Box>

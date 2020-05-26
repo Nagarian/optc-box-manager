@@ -1,3 +1,4 @@
+import { themeGet } from '@styled-system/theme-get'
 import React, { ReactNode, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Box, { BoxProps } from './Box'
@@ -19,7 +20,8 @@ const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
   overflow: ${p => !p.isOpen && 'hidden'};
-  transition: all .25s ease;
+  transition: max-height .25s ease;
+  margin: ${p => p.isOpen && themeGet('space.2')} 0;
 
   display: flex;
   flex-direction: column;

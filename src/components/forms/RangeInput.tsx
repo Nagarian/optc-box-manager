@@ -52,6 +52,7 @@ const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
 
   ::-webkit-slider-thumb {
     ${thumb}
+    ${p => p.value === 0 && 'filter: grayscale(0.6);'}
   }
 
   ::-moz-range-track {
@@ -60,6 +61,7 @@ const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
 
   ::-moz-range-thumb {
     ${thumb}
+    ${p => p.value === 0 && 'filter: grayscale(0.6);'}
   }
 `
 
