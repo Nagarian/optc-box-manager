@@ -53,6 +53,13 @@ export default function Detail ({
         onChange={potentials => setUserUnit({ ...userUnit, potentials })}
       />
 
+      <Button
+        href={`https://optc-db.github.io/characters/#/view/${unit.id}`}
+        variant="link"
+      >
+        See on OPTC-DB
+      </Button>
+
       <Button variant="danger" my="1" onClick={() => onDelete(userUnit.id)}>
         Supprimer
       </Button>

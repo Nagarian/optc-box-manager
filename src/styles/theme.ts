@@ -164,7 +164,7 @@ export default {
     },
     link: {
       background: 'none',
-      color: 'primary',
+      color: 'primaryText',
       border: 'none',
     },
     danger: {

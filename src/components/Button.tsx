@@ -39,6 +39,7 @@ type StyledButtonProps = SpaceProps &
   FontSizeProps &
   FontWeightProps & {
     variant: 'primary' | 'secondary' | 'link' | 'danger'
+    href?: string
   }
 
 type ButtonProps = StyledButtonProps & {
@@ -51,13 +52,16 @@ export default function Button ({
   children,
   variant,
   isLoading,
+  href,
   ...rest
 }: ButtonProps) {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
+  const asLink = href ? { as: 'a', href, target: '_blank' } : ({} as any)
   return (
     <Btn
       variant={variant}
       disabled={isLoading}
+      {...asLink}
       {...rest}
       {...defaultPaddingFix}
     >
