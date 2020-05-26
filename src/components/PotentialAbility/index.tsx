@@ -79,7 +79,7 @@ export default function PotentialAbility ({
   return (
     <Container size={size} {...rest}>
       <Image src={ImageFrame} />
-      {src && <Image src={src} margin="20%" />}
+      {src && <Image src={src} margin="20%" title={type} />}
     </Container>
   )
 }
