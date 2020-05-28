@@ -12,7 +12,8 @@ export type UnitClass =
   | 'Evolver'
   | 'Booster'
 
-export type UnitStar = 1 | 2 | 3 | 4 | '4+' | 5 | '5+' | 6 | '6+'
+export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
+export type UnitStar = typeof Rarity[number]
 
 export type BaseUnit = {
   name: string
@@ -91,10 +92,12 @@ export type UnitSupport = {
   description: string[]
 }
 
-export type UnitSpecial = string | {
-  cooldown: UnitCooldown
-  description: string
-}[]
+export type UnitSpecial =
+  | string
+  | {
+      cooldown: UnitCooldown
+      description: string
+    }[]
 
 export type UnitDetail = {
   captain: string
