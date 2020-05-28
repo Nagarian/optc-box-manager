@@ -5,6 +5,7 @@ import { ByPotentialInput } from 'components/SearchPanel/Filters/Units/ByPotenti
 import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
 import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
 import { ByTypeInput } from 'components/SearchPanel/Filters/Units/ByType'
+import { ByUnclassableInput } from 'components/SearchPanel/Filters/Units/ByUnclassable'
 import { Search } from 'models/search'
 import React, { useState } from 'react'
 
@@ -80,6 +81,16 @@ export default function FilterSort ({
           setUnitFilter({
             ...unitFilter,
             byType,
+          })
+        }
+      />
+
+      <ByUnclassableInput
+        criteria={unitFilter.byUnclassable}
+        onChange={byUnclassable =>
+          setUnitFilter({
+            ...unitFilter,
+            byUnclassable,
           })
         }
       />
