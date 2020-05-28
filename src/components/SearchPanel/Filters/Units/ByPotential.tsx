@@ -39,7 +39,7 @@ export function ByPotentialInput ({
   }
 
   return (
-    <FilterContainer title="Potentials" onReset={() => onChange(undefined)}>
+    <FilterContainer title="Potential" onReset={() => onChange(undefined)}>
       {Potentials.map(potential => (
         <label key={potential}>
           <input
