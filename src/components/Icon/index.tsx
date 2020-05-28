@@ -4,6 +4,7 @@ import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
+import FilterSortSvg, { ReactComponent as FilterSort } from './filtersort.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
@@ -27,7 +28,7 @@ export type Icon = StyledComponent<
   never
 >
 
-export { CottonCandySvg, SettingsSvg, SupportSvg, SpecialLvl }
+export { CottonCandySvg, SettingsSvg, SupportSvg, SpecialLvl, FilterSortSvg }
 
 export const AddIcon: Icon = BaseSvg(Add)
 export const SettingsIcon: Icon = BaseSvg(Settings)
@@ -35,6 +36,7 @@ export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const SupportIcon: Icon = BaseSvg(Support)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
+export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,
