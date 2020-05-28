@@ -1,16 +1,16 @@
 export type UnitType = 'STR' | 'DEX' | 'QCK' | 'INT' | 'PSY'
 
-export type UnitClass =
-  | 'Fighter'
-  | 'Shooter'
-  | 'Slasher'
-  | 'Striker'
-  | 'Free Spirit'
-  | 'Cerebral'
-  | 'Powerhouse'
-  | 'Driven'
-  | 'Evolver'
-  | 'Booster'
+export const UnitClasses = [
+  'Fighter',
+  'Shooter',
+  'Slasher',
+  'Striker',
+  'Free Spirit',
+  'Cerebral',
+  'Powerhouse',
+  'Driven',
+] as const
+export type UnitClass = typeof UnitClasses[number] | 'Evolver' | 'Booster'
 
 export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
 export type UnitStar = typeof Rarity[number]

@@ -1,5 +1,6 @@
 import Popup from 'components/Popup'
 import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
+import { ByClassInput } from 'components/SearchPanel/Filters/Units/ByClass'
 import { ByPotentialInput } from 'components/SearchPanel/Filters/Units/ByPotential'
 import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
 import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
@@ -58,6 +59,16 @@ export default function FilterSort ({
           setUnitFilter({
             ...unitFilter,
             byPotential,
+          })
+        }
+      />
+
+      <ByClassInput
+        criteria={unitFilter.byClass}
+        onChange={byClass =>
+          setUnitFilter({
+            ...unitFilter,
+            byClass,
           })
         }
       />
