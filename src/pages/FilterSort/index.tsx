@@ -1,6 +1,8 @@
 import Popup from 'components/Popup'
+import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
 import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
-import { Search, SearchFilterUnits } from 'models/search'
+import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
+import { Search } from 'models/search'
 import React, { useState } from 'react'
 
 type FilterSortProps = {
@@ -35,6 +37,16 @@ export default function FilterSort ({
           setUnitFilter({
             ...unitFilter,
             byRarity,
+          })
+        }
+      />
+
+      <BySupportInput
+        criteria={unitFilter.bySupport}
+        onChange={bySupport =>
+          setUnitFilter({
+            ...unitFilter,
+            bySupport,
           })
         }
       />
