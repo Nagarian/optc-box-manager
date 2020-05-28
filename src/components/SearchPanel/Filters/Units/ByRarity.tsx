@@ -1,3 +1,5 @@
+import Button from 'components/Button'
+import { SubTitle } from 'components/Title'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitStar } from 'models/units'
 import React from 'react'
@@ -6,27 +8,39 @@ export interface ByRarityCriteria extends UnitFilterCriteria {
   values: UnitStar[]
 }
 
-export const ByRarityFilter = (criteria: ByRarityCriteria) => (unit: ExtendedUnit) =>
-  criteria.values.includes(unit.stars)
+export const ByRarityFilter = (criteria: ByRarityCriteria) => (
+  unit: ExtendedUnit,
+) => criteria.values.includes(unit.stars)
 
 export type ByRarityInputProps = {
-  criteria: ByRarityCriteria
-  onChange: (criteria: ByRarityCriteria) => void
+  criteria?: ByRarityCriteria
+  onChange: (criteria?: ByRarityCriteria) => void
 }
 
-export function ByRarityInput ({ criteria, onChange }: ByRarityInputProps) {
+export function ByRarityInput ({
+  criteria = { values: [] },
+  onChange,
+}: ByRarityInputProps) {
   const values: UnitStar[] = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+']
 
   const triggerChange = (value: UnitStar, check: boolean) => {
-    onChange({
-      values: check
-        ? criteria.values.concat(value)
-        : criteria.values.filter(v => v !== value),
-    })
+    const values = check
+      ? criteria.values.concat(value)
+      : criteria.values.filter(v => v !== value)
+
+    onChange(
+      values.length
+        ? {
+          values,
+        }
+        : undefined,
+    )
   }
 
   return (
     <div>
+      <SubTitle>By Rarity</SubTitle>
+      <Button onClick={() => onChange(undefined)}>Reset</Button>
       {values.map(value => (
         <label key={value}>
           <input

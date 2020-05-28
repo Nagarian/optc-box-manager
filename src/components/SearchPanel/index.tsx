@@ -1,12 +1,12 @@
 import CharacterBox from 'components/CharacterBox'
 import Pagination from 'components/Pagination'
 import usePagination from 'hooks/usePagination'
+import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
-import { useUnitFilters } from './UnitFilters'
 import { useUnitSort } from './UnitSort'
 
 const ResultList = styled.div<SpaceProps & FlexProps>`
@@ -28,10 +28,11 @@ type SearchPanelProps = {
 
 export default function SearchPanel ({
   units,
+  search,
   onUnitClick,
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
-  const { filters } = useUnitFilters()
+  const { filters } = useSearch(search)
   const { sorts } = useUnitSort('Default')
   const filtered = units.filter(filters).sort(sorts)
   const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)

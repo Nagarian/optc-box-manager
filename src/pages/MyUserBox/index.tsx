@@ -2,12 +2,14 @@ import Box from 'components/Box'
 import Button from 'components/Button'
 import { AddIcon } from 'components/Icon'
 import SearchPanel from 'components/SearchPanel'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserBox } from 'models/userBox'
 import React from 'react'
 
 type UserBoxProps = {
   userBox: UserBox
+  search?: Search
   onAddUnit: () => void
   onShowDetail: (unit: ExtendedUnit) => void
   units: ExtendedUnit[]
@@ -15,6 +17,7 @@ type UserBoxProps = {
 
 export default function MyUserBox ({
   userBox,
+  search,
   onAddUnit,
   onShowDetail,
   units,
@@ -33,6 +36,6 @@ export default function MyUserBox ({
   }
 
   return (
-    <SearchPanel units={myUnits} onUnitClick={unit => onShowDetail(unit)} />
+    <SearchPanel units={myUnits} onUnitClick={unit => onShowDetail(unit)} search={search} />
   )
 }

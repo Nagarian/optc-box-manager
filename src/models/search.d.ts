@@ -1,3 +1,4 @@
+import { ByRarityCriteria } from 'components/SearchPanel/Filters/Units/ByRarity'
 
 export type LogicalMode = 'AND' | 'OR'
 
@@ -12,11 +13,14 @@ type UnitFilter = (unit: ExtendedUnit) => boolean
 
 export interface UserUnitFilterCriteria {}
 
+export type SearchFilterUnits = {
+  // [key: string]: UnitFilterCriteria
+  byRarity?: ByRarityCriteria
+}
+
 export type Search = {
   filters: {
-    units?: {
-      [key: string]: UnitFilterCriteria
-    },
+    units?: SearchFilterUnits,
     userUnits?: {
       [key: string]: UserUnitFilterCriteria
     }

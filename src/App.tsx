@@ -1,18 +1,19 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { AddIcon, SettingsIcon } from 'components/Icon'
+import { AddIcon, FilterSortIcon, SettingsIcon } from 'components/Icon'
+import { useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import Add from 'pages/Add'
 import Detail from 'pages/Detail'
+import FilterSort from 'pages/FilterSort'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
 import React, { useMemo, useState } from 'react'
 import { DBUnit } from 'services/units'
 import styled from 'styled-components'
-import { size, SizeProps } from 'styled-system'
 
 const AppBlock = styled.div`
   display: grid;
@@ -22,13 +23,14 @@ const AppBlock = styled.div`
   position: relative;
 `
 
-const DummyBlock = styled('div')<SizeProps>(size)
-
 function App () {
   const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
   const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
+  const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<ExtendedUnit>()
+  const { search, setSearch } = useSavedSearch()
+
   const myUserBox = useUserBox()
   const { userBox, add, update, remove } = myUserBox
 
@@ -52,6 +54,7 @@ function App () {
       <MyUserBox
         userBox={userBox}
         units={unitDatabase}
+        search={search}
         onAddUnit={() => setShowAddUnit(true)}
         onShowDetail={unit => setShowDetail(unit)}
       />
@@ -83,6 +86,17 @@ function App () {
         />
       )}
 
+      {showFilterSort && (
+        <FilterSort
+          onCancel={() => setShowFilterSort(false)}
+          onSubmit={search => {
+            setSearch(search)
+            setShowFilterSort(false)
+          }}
+          search={search}
+        />
+      )}
+
       <Box
         display="grid"
         gridAutoFlow="column"
@@ -91,7 +105,7 @@ function App () {
         py="2"
         boxShadow="none"
       >
-        <DummyBlock size={2} />
+        <Button onClick={() => setShowFilterSort(true)} icon={FilterSortIcon} />
         <Button onClick={() => setShowAddUnit(true)} icon={AddIcon} />
         <Button onClick={() => setShowSettings(true)} icon={SettingsIcon} />
       </Box>
