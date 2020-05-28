@@ -1,7 +1,6 @@
+import { UnitFilter } from 'models/search'
 import { ExtendedUnit, UnitStar } from 'models/units'
 import { useEffect, useState } from 'react'
-
-type UnitFilter = (unit: ExtendedUnit) => boolean
 
 const Filters = {
   hasSuperEvolved: (unit: ExtendedUnit) => !unit.evolution,

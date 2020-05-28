@@ -1,6 +1,7 @@
 import CharacterBox from 'components/CharacterBox'
 import Pagination from 'components/Pagination'
 import usePagination from 'hooks/usePagination'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import styled from 'styled-components'
@@ -21,6 +22,7 @@ const ResultList = styled.div<SpaceProps & FlexProps>`
 
 type SearchPanelProps = {
   units: ExtendedUnit[]
+  search?: Search
   onUnitClick: (unit: ExtendedUnit) => void
 }
 
