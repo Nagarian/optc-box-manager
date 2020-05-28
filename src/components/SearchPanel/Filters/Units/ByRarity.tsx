@@ -1,8 +1,7 @@
-import Button from 'components/Button'
-import { SubTitle } from 'components/Title'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitStar } from 'models/units'
 import React from 'react'
+import FilterContainer from './FilterContainer'
 
 export interface ByRarityCriteria extends UnitFilterCriteria {
   values: UnitStar[]
@@ -38,9 +37,7 @@ export function ByRarityInput ({
   }
 
   return (
-    <div>
-      <SubTitle>By Rarity</SubTitle>
-      <Button onClick={() => onChange(undefined)}>Reset</Button>
+    <FilterContainer title="Rarity" onReset={() => onChange(undefined)}>
       {values.map(value => (
         <label key={value}>
           <input
@@ -52,6 +49,6 @@ export function ByRarityInput ({
           ⭐{value}
         </label>
       ))}
-    </div>
+    </FilterContainer>
   )
 }

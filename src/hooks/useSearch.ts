@@ -1,20 +1,7 @@
-import { ByRarityCriteria, ByRarityFilter } from 'components/SearchPanel/Filters/Units/ByRarity'
-import { Search, UnitFilter, UnitFilterCriteria } from 'models/search'
+import { UnitFilterBuilder } from 'components/SearchPanel/Filters/Units'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { useEffect, useState } from 'react'
-
-function UnitFilterBuilder (
-  key: string,
-  criteria: UnitFilterCriteria,
-): UnitFilter {
-  switch (key) {
-    case 'byRarity':
-      return ByRarityFilter(criteria as ByRarityCriteria)
-
-    default:
-      throw new Error(`Invalid filter " ${key} "`)
-  }
-}
 
 export const DefaultSearch: Search = {
   filters: {
