@@ -50,7 +50,7 @@ export default function Detail ({
 
       <PotentialEdit
         potentials={userUnit.potentials}
-        details={unit.detail.potential}
+        details={unit.detail.potential ?? []}
         onChange={potentials => setUserUnit({ ...userUnit, potentials })}
       />
 

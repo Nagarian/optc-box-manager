@@ -61,22 +61,25 @@ export type LimitBreak = {
   description: string
 }
 
-export type PotentialKey =
-  | 'Enrage'
-  | 'Reduce No Healing duration'
-  | '[QCK] Damage Reduction'
-  | 'Critical Hit'
-  | 'Pinch Healing'
-  | 'Reduce Slot Bind duration'
-  | 'Barrier Penetration'
-  | '[STR] Damage Reduction'
-  | '[INT] Damage Reduction'
-  | '[PSY] Damage Reduction'
-  | '[DEX] Damage Reduction'
-  | 'Cooldown Reduction'
-  | 'Double Special Activation'
-  | 'Reduce Ship Bind duration'
-  | 'Reduce Sailor Despair duration'
+export const Potentials = [
+  'Enrage',
+  'Critical Hit',
+  'Reduce Slot Bind duration',
+  'Reduce No Healing duration',
+  'Pinch Healing',
+  'Barrier Penetration',
+  '[STR] Damage Reduction',
+  '[DEX] Damage Reduction',
+  '[QCK] Damage Reduction',
+  '[INT] Damage Reduction',
+  '[PSY] Damage Reduction',
+  'Cooldown Reduction',
+  'Double Special Activation',
+  'Reduce Ship Bind duration',
+  'Reduce Sailor Despair duration',
+] as const
+
+export type PotentialKey = typeof Potentials[number]
 
 export type UnitPotential = {
   Name: PotentialKey
@@ -104,7 +107,7 @@ export type UnitDetail = {
   sailorNotes: string
   specialName: string
   limit: LimitBreak[]
-  potential: UnitPotential[]
+  potential?: UnitPotential[]
   potentialNotes: string
   support: UnitSupport[]
 }
