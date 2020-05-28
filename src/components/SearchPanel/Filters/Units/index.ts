@@ -3,6 +3,7 @@ import { ByClassCriteria, ByClassFilter } from './ByClass'
 import { ByPotentialCriteria, ByPotentialFilter } from './ByPotential'
 import { ByRarityCriteria, ByRarityFilter } from './ByRarity'
 import { BySupportCriteria, BySupportFilter } from './BySupport'
+import { ByTypeCriteria, ByTypeFilter } from './ByType'
 
 export type SearchFilterUnits = {
   // [key: string]: UnitFilterCriteria
@@ -10,6 +11,7 @@ export type SearchFilterUnits = {
   bySupport?: BySupportCriteria
   byPotential?: ByPotentialCriteria
   byClass?: ByClassCriteria
+  byType?: ByTypeCriteria
 }
 
 export function UnitFilterBuilder (
@@ -25,6 +27,8 @@ export function UnitFilterBuilder (
       return ByPotentialFilter(criteria as ByPotentialCriteria)
     case 'byClass':
       return ByClassFilter(criteria as ByClassCriteria)
+    case 'byType':
+      return ByTypeFilter(criteria as ByTypeCriteria)
     default:
       throw new Error(`Invalid filter " ${key} "`)
   }

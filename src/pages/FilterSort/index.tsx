@@ -4,6 +4,7 @@ import { ByClassInput } from 'components/SearchPanel/Filters/Units/ByClass'
 import { ByPotentialInput } from 'components/SearchPanel/Filters/Units/ByPotential'
 import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
 import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
+import { ByTypeInput } from 'components/SearchPanel/Filters/Units/ByType'
 import { Search } from 'models/search'
 import React, { useState } from 'react'
 
@@ -69,6 +70,16 @@ export default function FilterSort ({
           setUnitFilter({
             ...unitFilter,
             byClass,
+          })
+        }
+      />
+
+      <ByTypeInput
+        criteria={unitFilter.byType}
+        onChange={byType =>
+          setUnitFilter({
+            ...unitFilter,
+            byType,
           })
         }
       />

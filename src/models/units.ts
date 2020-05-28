@@ -1,4 +1,5 @@
-export type UnitType = 'STR' | 'DEX' | 'QCK' | 'INT' | 'PSY'
+export const UnitTypes = ['STR', 'DEX', 'QCK', 'INT', 'PSY'] as const
+export type UnitType = typeof UnitTypes[number]
 
 export const UnitClasses = [
   'Fighter',
