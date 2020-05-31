@@ -4,7 +4,7 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 import { useUnitSort } from './UnitSort'
@@ -32,14 +32,21 @@ export default function SearchPanel ({
   onUnitClick,
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
+  const pageScrollRef = useRef<HTMLDivElement>(null)
   const { unitFilters } = useSearch(search)
   const { sorts } = useUnitSort('Default')
   const filtered = units.filter(unitFilters).sort(sorts)
   const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
 
+  useEffect(() => {
+    if (pageScrollRef.current) {
+      pageScrollRef.current.scrollTo(0, 0)
+    }
+  }, [paginationProps])
+
   return (
     <>
-      <ResultList {...rest}>
+      <ResultList {...rest} ref={pageScrollRef}>
         {filtered.slice(...slice).map(unit => (
           <CharacterBox key={unit.id} unit={unit} onClick={onUnitClick} />
         ))}
