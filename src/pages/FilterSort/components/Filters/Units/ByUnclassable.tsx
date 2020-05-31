@@ -12,7 +12,7 @@ export interface ByUnclassableCriteria extends UnitFilterCriteria {
 const UnclassedFilters = {
   hasSuperEvolved: (unit: ExtendedUnit) => !unit.evolution,
   hasEvolved: (unit: ExtendedUnit) =>
-    !unit.evolution || unit.evolution.evolvers[0].startsWith?.('skull'),
+    (!unit.evolution || unit.evolution.evolvers[0].startsWith?.('skull') || false) as boolean,
   globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
 }
 
@@ -21,10 +21,10 @@ export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) => {
     !!criteria.evolvedOnly && UnclassedFilters.hasEvolved,
     !!criteria.superEvolvedOnly && UnclassedFilters.hasSuperEvolved,
     !!criteria.globalOnly && UnclassedFilters.globalOnly,
-  ].filter(Boolean) as ((unit: ExtendedUnit) => void)[]
+  ].filter(Boolean) as ((unit: ExtendedUnit) => boolean)[]
   return filters.length === 0
     ? (unit: ExtendedUnit) => true
-    : (unit: ExtendedUnit) => filters.some(fn => fn(unit))
+    : (unit: ExtendedUnit) => !filters.some(fn => !fn(unit))
 }
 
 export type ByUnclassableInputProps = {
