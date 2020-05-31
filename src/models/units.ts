@@ -77,11 +77,9 @@ export const Potentials = [
   '[PSY] Damage Reduction',
   'Cooldown Reduction',
   'Double Special Activation',
-  'Reduce Ship Bind duration',
-  'Reduce Sailor Despair duration',
 ] as const
 
-export type PotentialKey = typeof Potentials[number]
+export type PotentialKey = typeof Potentials[number] | 'Reduce Ship Bind duration' | 'Reduce Sailor Despair duration'
 
 export type UnitPotential = {
   Name: PotentialKey
