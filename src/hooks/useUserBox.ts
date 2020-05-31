@@ -32,15 +32,18 @@ function UserUnitFactory (unit: ExtendedUnit): UserUnit {
   }
 }
 
-const reviver = (units: ExtendedUnit[] = []) => (key: string, value: any) => {
-  if (key !== 'unit') return value
+const reviver = (units: ExtendedUnit[] = []) =>
+  units.length === 0
+    ? undefined
+    : (key: string, value: any) => {
+      if (key !== 'unit') return value
 
-  if (typeof value === 'number') {
-    return units.find(x => x.id === value)
-  }
+      if (typeof value === 'number') {
+        return units.find(x => x.id === value)
+      }
 
-  return value
-}
+      return value
+    }
 
 const replacer = (key: string, value: any) => {
   if (key !== 'unit') return value
@@ -54,14 +57,6 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
   useEffect(() => {
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      setUserBox(JSON.parse(json))
-    }
-  }, [])
-
-  useEffect(() => {
-    if (units.length > 0) {
-      const json = localStorage.getItem(userBoxKey)
-      if (!json) return
       setUserBox(JSON.parse(json, reviver(units)))
     }
   }, [units])
@@ -93,7 +88,7 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
       setUserBox([])
     },
     importDB: (json: string) => {
-      const db = JSON.parse(json)
+      const db = JSON.parse(json, reviver(units))
       if (!Array.isArray(db)) {
         // TODO: make more check
         throw new Error('invalid JSON file')
