@@ -31,6 +31,7 @@ export default function FilterSort ({
         onSubmit({
           filters: {
             units: unitFilter,
+            userUnits: userUnitFilter,
           },
         })
       }
