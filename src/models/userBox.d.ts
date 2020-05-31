@@ -16,7 +16,7 @@ export type UserUnitSupport = {
 
 export type UserUnitCottonCandy = {
   hp: number
-  rcv: numver
+  rcv: number
   atk: number
 }
 
