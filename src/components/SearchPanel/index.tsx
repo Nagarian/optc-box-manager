@@ -32,9 +32,9 @@ export default function SearchPanel ({
   onUnitClick,
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
-  const { filters } = useSearch(search)
+  const { unitFilters } = useSearch(search)
   const { sorts } = useUnitSort('Default')
-  const filtered = units.filter(filters).sort(sorts)
+  const filtered = units.filter(unitFilters).sort(sorts)
   const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
 
   return (

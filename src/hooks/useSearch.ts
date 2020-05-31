@@ -1,6 +1,8 @@
 import { UnitFilterBuilder } from 'components/SearchPanel/Filters/Units'
+import { SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from 'components/SearchPanel/Filters/UserUnits'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
+import { UserUnit } from 'models/userBox'
 import { useEffect, useState } from 'react'
 
 export const DefaultSearch: Search = {
@@ -18,15 +20,24 @@ export const DefaultSearch: Search = {
 }
 
 export function useSearch (search: Search = DefaultSearch) {
-  const filters = Object.entries(
-    search.filters.units || {},
-  )
+  const unitFilters = Object.entries(search.filters.units || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) => UnitFilterBuilder(key, criteria!))
 
+  const userUnitFilters = Object.entries(search.filters.userUnits || {})
+    .filter(([key, criteria]) => Boolean(criteria))
+    .map(([key, criteria]) =>
+      UserUnitFilterBuilder(key as SearchFilterUserUnitsKeys, criteria!),
+    )
+
   return {
     search,
-    filters: (unit: ExtendedUnit) => !filters.some(f => !f(unit)),
+    unitFilters: (unit: ExtendedUnit) => !unitFilters.some(f => !f(unit)),
+    userUnitFilters: (userUnit: UserUnit) =>
+      !userUnitFilters.some(f => !f(userUnit)),
+    filters: ({ unit, userUnit }: { unit: ExtendedUnit; userUnit: UserUnit }) =>
+      !unitFilters.some(f => !f(unit)) &&
+      !userUnitFilters.some(f => !f(userUnit)),
   }
 }
 
