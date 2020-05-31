@@ -4,10 +4,10 @@ import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { gridArea, GridAreaProps } from 'styled-system'
+import { place, PlaceProps } from 'styles'
 import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
-import { gridArea, GridAreaProps } from 'styled-system'
-import { PlaceProps, place } from 'styles'
 
 type CharacterBoxProps = {
   unit: ExtendedUnit
@@ -72,13 +72,12 @@ export default function CharacterBox ({
     <Btn
       {...rest}
       support={
-        support !== undefined
-          ? support > 0
-            ? SupportMax
-            : Support
-          : undefined
+        support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
       }
-      rainbow={!(userUnit?.potentials.some(p => p.lvl < 5) ?? true)}
+      rainbow={
+        (userUnit?.potentials.length ?? 0) > 0 &&
+        !userUnit?.potentials.some(p => p.lvl < 5)
+      }
       onClick={() => onClick?.(unit)}
     >
       <Image
