@@ -2,7 +2,7 @@ import PotentialAbility from 'components/PotentialAbility'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 import React from 'react'
-import FilterContainer from './FilterContainer'
+import FilterContainer from '../FilterContainer'
 
 export interface ByPotentialCriteria extends UnitFilterCriteria {
   values: PotentialKey[]

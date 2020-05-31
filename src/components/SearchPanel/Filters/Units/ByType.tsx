@@ -1,7 +1,7 @@
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitType, UnitTypes } from 'models/units'
 import React from 'react'
-import FilterContainer from './FilterContainer'
+import FilterContainer from '../FilterContainer'
 
 export interface ByTypeCriteria extends UnitFilterCriteria {
   values: UnitType[]

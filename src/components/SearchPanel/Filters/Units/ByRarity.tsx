@@ -1,7 +1,7 @@
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
 import React from 'react'
-import FilterContainer from './FilterContainer'
+import FilterContainer from '../FilterContainer'
 
 export interface ByRarityCriteria extends UnitFilterCriteria {
   values: UnitStar[]

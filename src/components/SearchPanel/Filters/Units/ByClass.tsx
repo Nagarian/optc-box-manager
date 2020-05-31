@@ -2,7 +2,7 @@ import { UnitClassIcon } from 'components/Class'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
 import React from 'react'
-import FilterContainer from './FilterContainer'
+import FilterContainer from '../FilterContainer'
 
 export interface ByClassCriteria extends UnitFilterCriteria {
   values: UnitClass[]
