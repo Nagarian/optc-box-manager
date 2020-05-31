@@ -1,11 +1,11 @@
-import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
-import { ByClassInput } from 'components/SearchPanel/Filters/Units/ByClass'
-import { ByPotentialInput } from 'components/SearchPanel/Filters/Units/ByPotential'
-import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
-import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
-import { ByTypeInput } from 'components/SearchPanel/Filters/Units/ByType'
-import { ByUnclassableInput } from 'components/SearchPanel/Filters/Units/ByUnclassable'
 import React from 'react'
+import { SearchFilterUnits } from './Units'
+import { ByClassInput } from './Units/ByClass'
+import { ByPotentialInput } from './Units/ByPotential'
+import { ByRarityInput } from './Units/ByRarity'
+import { BySupportInput } from './Units/BySupport'
+import { ByTypeInput } from './Units/ByType'
+import { ByUnclassableInput } from './Units/ByUnclassable'
 
 export type UnitFiltersProps = {
   unitFilter: SearchFilterUnits

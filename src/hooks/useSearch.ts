@@ -1,8 +1,8 @@
-import { UnitFilterBuilder } from 'components/SearchPanel/Filters/Units'
-import { SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from 'components/SearchPanel/Filters/UserUnits'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
+import { UnitFilterBuilder } from 'pages/FilterSort/components/Filters/Units'
+import { SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from 'pages/FilterSort/components/Filters/UserUnits'
 import { useEffect, useState } from 'react'
 
 export const DefaultSearch: Search = {

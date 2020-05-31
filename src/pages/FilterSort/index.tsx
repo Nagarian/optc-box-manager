@@ -1,10 +1,10 @@
 import Popup from 'components/Popup'
-import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
-import { SearchFilterUserUnits } from 'components/SearchPanel/Filters/UserUnits'
 import { Search } from 'models/search'
+import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
+import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { useState } from 'react'
-import UnitFilters from './components/UnitFilters'
-import UserUnitFilters from './components/UserUnitFilters'
+import UnitFilters from './components/Filters/UnitFilters'
+import UserUnitFilters from './components/Filters/UserUnitFilters'
 
 type FilterSortProps = {
   onCancel: () => void

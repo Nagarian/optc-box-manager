@@ -1,5 +1,5 @@
-import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
-import { SearchFilterUserUnits } from 'components/SearchPanel/Filters/UserUnits'
+import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
+import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import { UserUnit } from './userBox'
 
 export type LogicalMode = 'AND' | 'OR'

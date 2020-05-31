@@ -1,6 +1,6 @@
-import { SearchFilterUserUnits } from 'components/SearchPanel/Filters/UserUnits'
-import { ByUserPotentialInput } from 'components/SearchPanel/Filters/UserUnits/ByUserPotential'
 import React from 'react'
+import { SearchFilterUserUnits } from './UserUnits'
+import { ByUserPotentialInput } from './UserUnits/ByUserPotential'
 
 export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits
