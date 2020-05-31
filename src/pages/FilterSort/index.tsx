@@ -1,13 +1,10 @@
 import Popup from 'components/Popup'
 import { SearchFilterUnits } from 'components/SearchPanel/Filters/Units'
-import { ByClassInput } from 'components/SearchPanel/Filters/Units/ByClass'
-import { ByPotentialInput } from 'components/SearchPanel/Filters/Units/ByPotential'
-import { ByRarityInput } from 'components/SearchPanel/Filters/Units/ByRarity'
-import { BySupportInput } from 'components/SearchPanel/Filters/Units/BySupport'
-import { ByTypeInput } from 'components/SearchPanel/Filters/Units/ByType'
-import { ByUnclassableInput } from 'components/SearchPanel/Filters/Units/ByUnclassable'
+import { SearchFilterUserUnits } from 'components/SearchPanel/Filters/UserUnits'
 import { Search } from 'models/search'
 import React, { useState } from 'react'
+import UnitFilters from './components/UnitFilters'
+import UserUnitFilters from './components/UserUnitFilters'
 
 type FilterSortProps = {
   onCancel: () => void
@@ -23,6 +20,9 @@ export default function FilterSort ({
   const [unitFilter, setUnitFilter] = useState<SearchFilterUnits>(
     search.filters.units || {},
   )
+  const [userUnitFilter, setUserUnitFilter] = useState<SearchFilterUserUnits>(
+    search.filters.userUnits || {},
+  )
 
   return (
     <Popup
@@ -35,65 +35,8 @@ export default function FilterSort ({
         })
       }
     >
-      <ByRarityInput
-        criteria={unitFilter.byRarity}
-        onChange={byRarity =>
-          setUnitFilter({
-            ...unitFilter,
-            byRarity,
-          })
-        }
-      />
-
-      <BySupportInput
-        criteria={unitFilter.bySupport}
-        onChange={bySupport =>
-          setUnitFilter({
-            ...unitFilter,
-            bySupport,
-          })
-        }
-      />
-
-      <ByPotentialInput
-        criteria={unitFilter.byPotential}
-        onChange={byPotential =>
-          setUnitFilter({
-            ...unitFilter,
-            byPotential,
-          })
-        }
-      />
-
-      <ByClassInput
-        criteria={unitFilter.byClass}
-        onChange={byClass =>
-          setUnitFilter({
-            ...unitFilter,
-            byClass,
-          })
-        }
-      />
-
-      <ByTypeInput
-        criteria={unitFilter.byType}
-        onChange={byType =>
-          setUnitFilter({
-            ...unitFilter,
-            byType,
-          })
-        }
-      />
-
-      <ByUnclassableInput
-        criteria={unitFilter.byUnclassable}
-        onChange={byUnclassable =>
-          setUnitFilter({
-            ...unitFilter,
-            byUnclassable,
-          })
-        }
-      />
+      <UnitFilters unitFilter={unitFilter} onChange={setUnitFilter} />
+      <UserUnitFilters userUnitFilter={userUnitFilter} onChange={setUserUnitFilter} />
     </Popup>
   )
 }

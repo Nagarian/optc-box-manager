@@ -62,7 +62,7 @@ function PotentialStateInput ({
         <label key={stateKey}>
           <input
             type="radio"
-            name="userunit-potentials"
+            name={`userunit-potentials-${potential}`}
             checked={state === stateKey}
             onChange={e => onChange(stateKey)}
           />
@@ -81,6 +81,7 @@ export function ByUserPotentialInput ({
     <FilterContainer title="Potential" onReset={() => onChange(undefined)}>
       {Potentials.map(potential => (
         <PotentialStateInput
+          key={potential}
           potential={potential}
           state={criteria?.[potential]}
           onChange={state =>

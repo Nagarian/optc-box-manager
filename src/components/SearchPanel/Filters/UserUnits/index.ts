@@ -4,7 +4,7 @@ import { ByUserPotentialCriteria, ByUserPotentialFilter } from './ByUserPotentia
 export type SearchFilterUserUnitsKeys = 'byUserPotential'
 
 export type SearchFilterUserUnits = {
-  [key in SearchFilterUserUnitsKeys]: UserUnitFilterCriteria
+  [key in SearchFilterUserUnitsKeys]?: UserUnitFilterCriteria
 }
 
 export function UserUnitFilterBuilder (
