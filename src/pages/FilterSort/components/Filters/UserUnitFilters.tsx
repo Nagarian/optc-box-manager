@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchFilterUserUnits } from './UserUnits'
 import { ByCottonCandyInput } from './UserUnits/ByCottonCandy'
 import { ByUserPotentialInput } from './UserUnits/ByUserPotential'
+import { ByUserSpecialCriteria, ByUserSpecialInput } from './UserUnits/ByUserSpecial'
 import { ByUserSupportCriteria, ByUserSupportInput } from './UserUnits/ByUserSupport'
 
 export type UserUnitFiltersProps = {
@@ -38,6 +39,15 @@ export default function UserUnitFilters ({
           onChange({
             ...userUnitFilter,
             byUserSupport,
+          })
+        }
+      />
+      <ByUserSpecialInput
+        criteria={userUnitFilter.byUserSpecial as ByUserSpecialCriteria}
+        onChange={byUserSpecial =>
+          onChange({
+            ...userUnitFilter,
+            byUserSpecial,
           })
         }
       />
