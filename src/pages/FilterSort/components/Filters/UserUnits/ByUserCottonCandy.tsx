@@ -10,7 +10,7 @@ export type CottonCandyState = typeof CottonCandyStateKeys[number]
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
 export type CottonCandyType = typeof CottonCandyTypeKeys[number]
 
-export type ByCottonCandyCriteria = UserUnitFilterCriteria & {
+export type ByUserCottonCandyCriteria = UserUnitFilterCriteria & {
   [type in CottonCandyType]?: CottonCandyState
 }
 
@@ -27,16 +27,16 @@ const ccFilter = (value: number, state?: CottonCandyState) => {
   }
 }
 
-export const ByCottonCandyFilter = (criteria: ByCottonCandyCriteria) => (
+export const ByUserCottonCandyFilter = (criteria: ByUserCottonCandyCriteria) => (
   userUnit: UserUnit,
 ) =>
   ccFilter(userUnit.cc.atk, criteria.atk) &&
   ccFilter(userUnit.cc.hp, criteria.hp) &&
   ccFilter(userUnit.cc.rcv, criteria.rcv)
 
-export type ByCottonCandyInputProps = {
-  criteria?: ByCottonCandyCriteria
-  onChange: (criteria?: ByCottonCandyCriteria) => void
+export type ByUserCottonCandyInputProps = {
+  criteria?: ByUserCottonCandyCriteria
+  onChange: (criteria?: ByUserCottonCandyCriteria) => void
 }
 
 type CottonCandyStateInputProps = {
@@ -67,10 +67,10 @@ function CottonCandyStateInput ({
   )
 }
 
-export function ByCottonCandyInput ({
+export function ByUserCottonCandyInput ({
   criteria,
   onChange,
-}: ByCottonCandyInputProps) {
+}: ByUserCottonCandyInputProps) {
   return (
     <FilterContainer title="Cotton Candy" onReset={() => onChange(undefined)}>
       {CottonCandyTypeKeys.map(type => (

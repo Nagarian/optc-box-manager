@@ -1,12 +1,12 @@
 import { UnitFilter, UserUnitFilterCriteria } from 'models/search'
-import { ByCottonCandyCriteria, ByCottonCandyFilter } from './ByCottonCandy'
+import { ByUserCottonCandyCriteria, ByUserCottonCandyFilter } from './ByUserCottonCandy'
 import { ByUserPotentialCriteria, ByUserPotentialFilter } from './ByUserPotential'
 import { ByUserSpecialCriteria, ByUserSpecialFilter } from './ByUserSpecial'
 import { ByUserSupportCriteria, ByUserSupportFilter } from './ByUserSupport'
 
 export type SearchFilterUserUnitsKeys =
   | 'byUserPotential'
-  | 'byCottonCandy'
+  | 'byUserCottonCandy'
   | 'byUserSupport'
   | 'byUserSpecial'
 
@@ -21,8 +21,8 @@ export function UserUnitFilterBuilder (
   switch (key) {
     case 'byUserPotential':
       return ByUserPotentialFilter(criteria as ByUserPotentialCriteria)
-    case 'byCottonCandy':
-      return ByCottonCandyFilter(criteria as ByCottonCandyCriteria)
+    case 'byUserCottonCandy':
+      return ByUserCottonCandyFilter(criteria as ByUserCottonCandyCriteria)
     case 'byUserSupport':
       return ByUserSupportFilter(criteria as ByUserSupportCriteria)
     case 'byUserSpecial':
