@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 import { useUnitSort } from './UnitSort'
 
-const ResultList = styled.div<SpaceProps & FlexProps>`
+export const ResultList = styled.div<SpaceProps & FlexProps>`
   ${flex}
   ${space}
   display: flex;

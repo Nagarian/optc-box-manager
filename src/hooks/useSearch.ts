@@ -34,9 +34,7 @@ export function useSearch (search: Search = DefaultSearch) {
     search,
     unitFilters: (unit: ExtendedUnit) => !unitFilters.some(f => !f(unit)),
     userUnitFilters: (userUnit: UserUnit) =>
-      !userUnitFilters.some(f => !f(userUnit)),
-    filters: ({ unit, userUnit }: { unit: ExtendedUnit; userUnit: UserUnit }) =>
-      !unitFilters.some(f => !f(unit)) &&
+      !unitFilters.some(f => !f(userUnit.unit)) &&
       !userUnitFilters.some(f => !f(userUnit)),
   }
 }

@@ -55,7 +55,7 @@ function App () {
         userBox={userBox}
         search={search}
         onAddUnit={() => setShowAddUnit(true)}
-        onShowDetail={unit => setShowDetail(userBox.find(uu => uu.unit.id === unit.id)!)}
+        onShowDetail={userUnit => setShowDetail(userUnit)}
       />
 
       {showAddUnit && (
