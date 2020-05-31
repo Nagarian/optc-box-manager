@@ -1,8 +1,13 @@
+import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
+import { FilterSortIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
+import { DefaultSearch } from 'hooks/useSearch'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
+import FilterSort from 'pages/FilterSort'
 import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -33,13 +38,20 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
     }
   }, [selectedUnits])
 
+  const [showSettings, setShowSettings] = useState<boolean>(false)
+  const [search, setSearch] = useState<Search>(DefaultSearch)
+
   return (
     <Popup
       title="Select your new units"
       onCancel={onCancel}
       onValidate={() => onSubmit(selectedUnits)}
+      customAction={
+        <Button onClick={() => setShowSettings(true)} icon={FilterSortIcon} />
+      }
     >
       <SearchPanel
+        search={search}
         units={units.filter(u => !selectedUnits.some(su => su.id === u.id))}
         onUnitClick={u => toggle(u, !selectedUnits.includes(u))}
         my="2"
@@ -60,6 +72,19 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
             ))}
           </SelectedList>
         </>
+      )}
+
+      {showSettings && (
+        <FilterSort
+          unitOnly
+          onCancel={() => setShowSettings(false)}
+          search={search}
+          onSubmit={s => {
+            console.log(s)
+            setSearch(s)
+            setShowSettings(false)
+          }}
+        />
       )}
     </Popup>
   )

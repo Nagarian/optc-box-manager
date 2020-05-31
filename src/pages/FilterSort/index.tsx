@@ -10,10 +10,12 @@ type FilterSortProps = {
   onCancel: () => void
   onSubmit: (search: Search) => void
   search: Search
+  unitOnly?: boolean
 }
 
 export default function FilterSort ({
   search,
+  unitOnly = false,
   onCancel,
   onSubmit,
 }: FilterSortProps) {
@@ -37,7 +39,12 @@ export default function FilterSort ({
       }
     >
       <UnitFilters unitFilter={unitFilter} onChange={setUnitFilter} />
-      <UserUnitFilters userUnitFilter={userUnitFilter} onChange={setUserUnitFilter} />
+      {!unitOnly && (
+        <UserUnitFilters
+          userUnitFilter={userUnitFilter}
+          onChange={setUserUnitFilter}
+        />
+      )}
     </Popup>
   )
 }
