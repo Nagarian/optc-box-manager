@@ -12,7 +12,6 @@ type UserBoxProps = {
   search?: Search
   onAddUnit: () => void
   onShowDetail: (unit: ExtendedUnit) => void
-  units: ExtendedUnit[]
 }
 
 export default function MyUserBox ({
@@ -20,12 +19,7 @@ export default function MyUserBox ({
   search,
   onAddUnit,
   onShowDetail,
-  units,
 }: UserBoxProps) {
-  const myUnits = units.filter(unit =>
-    userBox.some(uu => uu.unitId === unit.id),
-  )
-
   if (userBox.length === 0) {
     return (
       <Box display="flex" alignItems="center" flexDirection="column">
@@ -36,6 +30,6 @@ export default function MyUserBox ({
   }
 
   return (
-    <SearchPanel units={myUnits} onUnitClick={unit => onShowDetail(unit)} search={search} />
+    <SearchPanel units={userBox.map(u => u.unit)} onUnitClick={unit => onShowDetail(unit)} search={search} />
   )
 }

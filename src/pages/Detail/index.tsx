@@ -1,6 +1,5 @@
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React, { useState } from 'react'
 import CottonCandyEdit from './components/CottonCandyEdit'
@@ -11,7 +10,6 @@ import SupportEdit from './components/SupportEdit'
 
 type DetailProps = {
   userUnit: UserUnit
-  unit: ExtendedUnit
   onCancel: () => void
   onValidate: (updated: UserUnit) => void
   onDelete: (id: string) => void
@@ -20,11 +18,11 @@ type DetailProps = {
 export default function Detail ({
   onCancel,
   onValidate,
-  unit,
   userUnit: original,
   onDelete,
 }: DetailProps) {
   const [userUnit, setUserUnit] = useState<UserUnit>(original)
+  const { unit } = original
 
   return (
     <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>

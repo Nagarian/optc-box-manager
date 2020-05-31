@@ -28,10 +28,10 @@ function App () {
   const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
-  const [showDetail, setShowDetail] = useState<ExtendedUnit>()
+  const [showDetail, setShowDetail] = useState<UserUnit>()
   const { search, setSearch } = useSavedSearch()
 
-  const myUserBox = useUserBox()
+  const myUserBox = useUserBox(unitDatabase)
   const { userBox, add, update, remove } = myUserBox
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
@@ -53,16 +53,15 @@ function App () {
     <AppBlock>
       <MyUserBox
         userBox={userBox}
-        units={unitDatabase}
         search={search}
         onAddUnit={() => setShowAddUnit(true)}
-        onShowDetail={unit => setShowDetail(unit)}
+        onShowDetail={unit => setShowDetail(userBox.find(uu => uu.unit.id === unit.id)!)}
       />
 
       {showAddUnit && (
         <Add
           units={unitDatabase.filter(
-            unit => !userBox.some(uu => uu.unitId === unit.id),
+            unit => !userBox.some(uu => uu.unit.id === unit.id),
           )}
           onCancel={() => setShowAddUnit(false)}
           onSubmit={addSelectedUnits}
@@ -74,8 +73,7 @@ function App () {
           onCancel={() => setShowDetail(undefined)}
           onDelete={deleteUnit}
           onValidate={updateUnit}
-          unit={showDetail}
-          userUnit={userBox.find(uu => uu.unitId === showDetail.id)!}
+          userUnit={showDetail}
         />
       )}
 

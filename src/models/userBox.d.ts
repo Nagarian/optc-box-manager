@@ -22,7 +22,7 @@ export type UserUnitCottonCandy = {
 
 export type UserUnit = {
   id: string
-  unitId: number
+  unit: ExtendedUnit
   special?: UserUnitSpecial
   potentials: UserUnitPotentialAbility[]
   support?: UserUnitSupport

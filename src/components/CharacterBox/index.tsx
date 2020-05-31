@@ -10,7 +10,7 @@ import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
 
 type CharacterBoxProps = {
-  unit: ExtendedUnit
+  unit?: ExtendedUnit
   userUnit?: UserUnit
   onClick?: (unit: ExtendedUnit) => void
 }
@@ -61,11 +61,12 @@ const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
 `
 
 export default function CharacterBox ({
-  unit,
+  unit: u,
   userUnit,
   onClick,
   ...rest
 }: CharacterBoxProps & CharacterBoxStyledProps) {
+  const unit : ExtendedUnit = userUnit?.unit ?? u
   const support = userUnit?.support?.lvl
 
   return (

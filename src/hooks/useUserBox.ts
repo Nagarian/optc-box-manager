@@ -5,10 +5,10 @@ import { v4 as uuid } from 'uuid'
 
 const userBoxKey = 'userBox'
 
-function UserUnitFactory (unit: ExtendedUnit) : UserUnit {
+function UserUnitFactory (unit: ExtendedUnit): UserUnit {
   return {
     id: uuid(),
-    unitId: unit.id,
+    unit,
     potentials:
       unit.detail?.potential?.map(potential => ({
         type: potential.Name,
@@ -32,7 +32,23 @@ function UserUnitFactory (unit: ExtendedUnit) : UserUnit {
   }
 }
 
-export default function useUserBox () : MyUserBox {
+const reviver = (units: ExtendedUnit[] = []) => (key: string, value: any) => {
+  if (key !== 'unit') return value
+
+  if (typeof value === 'number') {
+    return units.find(x => x.id === value)
+  }
+
+  return value
+}
+
+const replacer = (key: string, value: any) => {
+  if (key !== 'unit') return value
+  if (typeof value === 'number') return value
+  return (value as ExtendedUnit).id
+}
+
+export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
   const [userBox, setUserBox] = useState<UserBox>([])
 
   useEffect(() => {
@@ -43,8 +59,16 @@ export default function useUserBox () : MyUserBox {
   }, [])
 
   useEffect(() => {
+    if (units.length > 0) {
+      const json = localStorage.getItem(userBoxKey)
+      if (!json) return
+      setUserBox(JSON.parse(json, reviver(units)))
+    }
+  }, [units])
+
+  useEffect(() => {
     if (userBox) {
-      localStorage.setItem('userBox', JSON.stringify(userBox))
+      localStorage.setItem(userBoxKey, JSON.stringify(userBox, replacer))
     }
   }, [userBox])
 
