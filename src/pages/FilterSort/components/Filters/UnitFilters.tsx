@@ -1,3 +1,4 @@
+import Box from 'components/Box'
 import { Title } from 'components/Title'
 import React from 'react'
 import { SearchFilterUnits } from './Units'
@@ -17,7 +18,7 @@ export default function UnitFilters ({
   onChange,
 }: UnitFiltersProps) {
   return (
-    <div>
+    <Box overflowY="auto">
       <Title>Units Filters</Title>
       <ByUnclassableInput
         criteria={unitFilter.byUnclassable}
@@ -78,6 +79,6 @@ export default function UnitFilters ({
           })
         }
       />
-    </div>
+    </Box>
   )
 }

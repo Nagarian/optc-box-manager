@@ -1,3 +1,4 @@
+import Box from 'components/Box'
 import { Title } from 'components/Title'
 import React from 'react'
 import { SearchFilterUserUnits } from './UserUnits'
@@ -15,7 +16,7 @@ export default function UserUnitFilters ({
   onChange,
 }: UserUnitFiltersProps) {
   return (
-    <div>
+    <Box overflowY="auto">
       <Title>My Box Filters</Title>
       <ByUserSpecialInput
         criteria={userUnitFilter.byUserSpecial as ByUserSpecialCriteria}
@@ -53,6 +54,6 @@ export default function UserUnitFilters ({
           })
         }
       />
-    </div>
+    </Box>
   )
 }
