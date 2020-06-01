@@ -1,4 +1,5 @@
 import Button from 'components/Button'
+import { CancelIcon, ConfirmIcon } from 'components/Icon'
 import { Title } from 'components/Title'
 import React, { ReactNode } from 'react'
 import { SpaceProps } from 'styled-system'
@@ -39,23 +40,32 @@ export default function Popup ({
 
         <PopupActionPanel>
           {onCancel && (
-            <Button variant="secondary" onClick={onCancel}>
-              Cancel
-            </Button>
+            <Button
+              variant="secondary"
+              onClick={onCancel}
+              icon={CancelIcon}
+              title="Cancel"
+            />
           )}
 
           {customAction}
 
           {onValidate && (
-            <Button variant="primary" onClick={onValidate}>
-              Confirm
-            </Button>
+            <Button
+              variant="primary"
+              onClick={onValidate}
+              icon={ConfirmIcon}
+              title="Confirm"
+            />
           )}
 
           {onClose && (
-            <Button variant="primary" onClick={onClose}>
-              Close
-            </Button>
+            <Button
+              variant="primary"
+              onClick={onClose}
+              icon={CancelIcon}
+              title="Close"
+            />
           )}
         </PopupActionPanel>
       </PopupContainer>

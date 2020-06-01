@@ -103,9 +103,21 @@ function App () {
         py="2"
         boxShadow="none"
       >
-        <Button onClick={() => setShowFilterSort(true)} icon={FilterSortIcon} />
-        <Button onClick={() => setShowAddUnit(true)} icon={AddIcon} />
-        <Button onClick={() => setShowSettings(true)} icon={SettingsIcon} />
+        <Button
+          onClick={() => setShowFilterSort(true)}
+          icon={FilterSortIcon}
+          title="Filter/Sort"
+        />
+        <Button
+          onClick={() => setShowAddUnit(true)}
+          icon={AddIcon}
+          title="Add new units"
+        />
+        <Button
+          onClick={() => setShowSettings(true)}
+          icon={SettingsIcon}
+          title="Settings"
+        />
       </Box>
     </AppBlock>
   )

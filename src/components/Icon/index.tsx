@@ -3,6 +3,8 @@ import { color, size, SizeProps, space, SpaceProps } from 'styled-system'
 import { clean } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
+import { ReactComponent as Cancel } from './cancel.svg'
+import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import FilterSortSvg, { ReactComponent as FilterSort } from './filtersort.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
@@ -37,6 +39,8 @@ export const SupportIcon: Icon = BaseSvg(Support)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const CancelIcon: Icon = BaseSvg(Cancel)
+export const ConfirmIcon: Icon = BaseSvg(Confirm)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,

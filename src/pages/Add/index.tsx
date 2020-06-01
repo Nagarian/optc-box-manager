@@ -47,7 +47,11 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
       onCancel={onCancel}
       onValidate={() => onSubmit(selectedUnits)}
       customAction={
-        <Button onClick={() => setShowSettings(true)} icon={FilterSortIcon} />
+        <Button
+          onClick={() => setShowSettings(true)}
+          icon={FilterSortIcon}
+          title="Filter/Sort"
+        />
       }
     >
       <SearchPanel
