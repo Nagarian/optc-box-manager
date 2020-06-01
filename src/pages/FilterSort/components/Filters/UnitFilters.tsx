@@ -1,3 +1,4 @@
+import { Title } from 'components/Title'
 import React from 'react'
 import { SearchFilterUnits } from './Units'
 import { ByClassInput } from './Units/ByClass'
@@ -11,9 +12,43 @@ export type UnitFiltersProps = {
   unitFilter: SearchFilterUnits
   onChange: (unitFilter: SearchFilterUnits) => void
 }
-export default function UnitFilters ({ unitFilter, onChange }: UnitFiltersProps) {
+export default function UnitFilters ({
+  unitFilter,
+  onChange,
+}: UnitFiltersProps) {
   return (
     <div>
+      <Title>Units Filters</Title>
+      <ByUnclassableInput
+        criteria={unitFilter.byUnclassable}
+        onChange={byUnclassable =>
+          onChange({
+            ...unitFilter,
+            byUnclassable,
+          })
+        }
+      />
+
+      <ByTypeInput
+        criteria={unitFilter.byType}
+        onChange={byType =>
+          onChange({
+            ...unitFilter,
+            byType,
+          })
+        }
+      />
+
+      <ByClassInput
+        criteria={unitFilter.byClass}
+        onChange={byClass =>
+          onChange({
+            ...unitFilter,
+            byClass,
+          })
+        }
+      />
+
       <ByRarityInput
         criteria={unitFilter.byRarity}
         onChange={byRarity =>
@@ -40,36 +75,6 @@ export default function UnitFilters ({ unitFilter, onChange }: UnitFiltersProps)
           onChange({
             ...unitFilter,
             byPotential,
-          })
-        }
-      />
-
-      <ByClassInput
-        criteria={unitFilter.byClass}
-        onChange={byClass =>
-          onChange({
-            ...unitFilter,
-            byClass,
-          })
-        }
-      />
-
-      <ByTypeInput
-        criteria={unitFilter.byType}
-        onChange={byType =>
-          onChange({
-            ...unitFilter,
-            byType,
-          })
-        }
-      />
-
-      <ByUnclassableInput
-        criteria={unitFilter.byUnclassable}
-        onChange={byUnclassable =>
-          onChange({
-            ...unitFilter,
-            byUnclassable,
           })
         }
       />
