@@ -6,8 +6,9 @@ pages:
   - npm ci
   - npm run test
   - npm run build
+  - rm -r public && mv build public
   artifacts:
     paths:
-    - build
+    - public
   only:
   - master
