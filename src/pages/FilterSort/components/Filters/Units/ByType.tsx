@@ -1,3 +1,5 @@
+import ImageInput from 'components/forms/ImageInput'
+import Type from 'components/Type'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitType, UnitTypes } from 'models/units'
 import React from 'react'
@@ -42,15 +44,15 @@ export function ByTypeInput ({
   return (
     <FilterContainer title="Type" onReset={() => onChange(undefined)}>
       {UnitTypes.map(unitType => (
-        <label key={unitType}>
-          <input
-            type="checkbox"
-            name="unit-type"
-            checked={criteria.values.includes(unitType)}
-            onChange={e => triggerChange(unitType, e.target.checked)}
-          />
-          {unitType}
-        </label>
+        <ImageInput
+          key={unitType}
+          type="checkbox"
+          name="unit-type"
+          checked={criteria.values.includes(unitType)}
+          onChange={e => triggerChange(unitType, e.target.checked)}
+        >
+          <Type value={unitType} margin="2" />
+        </ImageInput>
       ))}
     </FilterContainer>
   )
