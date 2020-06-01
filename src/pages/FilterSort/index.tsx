@@ -1,3 +1,4 @@
+import Button from 'components/Button'
 import Popup from 'components/Popup'
 import { Search } from 'models/search'
 import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
@@ -36,6 +37,17 @@ export default function FilterSort ({
             userUnits: userUnitFilter,
           },
         })
+      }
+      customAction={
+        <Button
+          onClick={() => {
+            setUnitFilter({})
+            setUserUnitFilter({})
+          }}
+          variant="danger"
+        >
+          Clear all
+        </Button>
       }
     >
       <UnitFilters unitFilter={unitFilter} onChange={setUnitFilter} />
