@@ -1,5 +1,7 @@
 pages:
   image: node:latest
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
   - npm ci
   - npm run test
