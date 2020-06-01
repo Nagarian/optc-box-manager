@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import {
+  color,
+  gridArea,
+  GridAreaProps,
   space,
   SpaceProps,
   typography,
   TypographyProps,
-  gridArea,
-  GridAreaProps,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
@@ -25,6 +26,7 @@ export const SubTitle = styled('h2').withConfig(cleanStyledSystem)<TypoProps>(
   space,
   typography,
   gridArea,
+  color,
 )
 SubTitle.defaultProps = {
   fontSize: '3',

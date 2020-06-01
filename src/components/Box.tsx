@@ -16,6 +16,8 @@ import {
   ShadowProps,
   space,
   SpaceProps,
+  border,
+  BorderProps,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
@@ -26,11 +28,13 @@ export type BoxProps = SpaceProps &
   BackgroundColorProps &
   GridProps &
   PositionProps &
-  FlexboxProps
+  FlexboxProps &
+  BorderProps
 
 export type BoxStyledProps = StyledComponent<'div', any, BoxProps, never>
 
 const Box: BoxStyledProps = styled.div.withConfig(cleanStyledSystem)<BoxProps>`
+  ${border}
   ${layout}
   ${shadow}
   ${background}

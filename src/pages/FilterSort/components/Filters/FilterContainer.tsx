@@ -1,3 +1,4 @@
+import Box from 'components/Box'
 import Button from 'components/Button'
 import { SubTitle } from 'components/Title'
 import React, { ReactNode } from 'react'
@@ -14,10 +15,24 @@ export default function FilterContainer ({
   onReset,
 }: FilterContainerProps) {
   return (
-    <div>
-      <SubTitle>{title}</SubTitle>
-      <Button onClick={onReset}>Reset</Button>
+    <Box padding="2" borderTop="solid medium" borderTopColor="primary">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="2"
+      >
+        <SubTitle>{title}</SubTitle>
+        <Button
+          onClick={onReset}
+          fontSize="1"
+          borderWidth="medium"
+          variant="secondary"
+        >
+          Clear
+        </Button>
+      </Box>
       {children}
-    </div>
+    </Box>
   )
 }
