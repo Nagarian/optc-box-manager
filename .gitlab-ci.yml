@@ -1,0 +1,11 @@
+pages:
+  image: node:latest
+  script:
+  - npm ci
+  - npm run test
+  - npm run build
+  artifacts:
+    paths:
+    - build
+  only:
+  - master
