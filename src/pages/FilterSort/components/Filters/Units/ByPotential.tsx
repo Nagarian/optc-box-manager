@@ -40,7 +40,11 @@ export function ByPotentialInput ({
   }
 
   return (
-    <FilterContainer title="Potential" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Potential"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria.values.length}
+    >
       {Potentials.map(potential => (
         <ImageInput
           key={potential}

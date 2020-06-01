@@ -1,8 +1,8 @@
-import Box from 'components/Box'
+import { SupportIcon } from 'components/Icon'
 import { UserUnitFilterCriteria } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
+import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export const SupportStateKeys = [
   'locked',
@@ -31,7 +31,8 @@ const compareLvlToState = (state: SupportState, lvl: number) => {
 
 export const ByUserSupportFilter = (criteria: ByUserSupportCriteria) => (
   userUnit: UserUnit,
-) => !!userUnit?.support && compareLvlToState(criteria.state, userUnit.support.lvl)
+) =>
+  !!userUnit?.support && compareLvlToState(criteria.state, userUnit.support.lvl)
 
 export type ByUserSupportInputProps = {
   criteria?: ByUserSupportCriteria
@@ -43,8 +44,13 @@ export function ByUserSupportInput ({
   onChange,
 }: ByUserSupportInputProps) {
   return (
-    <FilterContainer title="Support" onReset={() => onChange(undefined)}>
-      <Box display="flex">
+    <FilterContainer
+      title="Support"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria}
+    >
+      <FilterContainerPanel>
+        <SupportIcon color="specific.support" size="2" title="Support" />
         Support level
         {SupportStateKeys.map(stateKey => (
           <label key={stateKey}>
@@ -52,14 +58,16 @@ export function ByUserSupportInput ({
               type="radio"
               name="userunit-support"
               checked={criteria?.state === stateKey}
-              onChange={e => onChange({
-                state: stateKey,
-              })}
+              onChange={e =>
+                onChange({
+                  state: stateKey,
+                })
+              }
             />
             {stateKey}
           </label>
         ))}
-      </Box>
+      </FilterContainerPanel>
     </FilterContainer>
   )
 }

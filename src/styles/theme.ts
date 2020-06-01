@@ -161,6 +161,9 @@ export default {
     secondary: {
       backgroundColor: 'secondary',
       color: 'secondaryText',
+      ':disabled': {
+        color: 'greys.1',
+      },
     },
     link: {
       background: 'none',

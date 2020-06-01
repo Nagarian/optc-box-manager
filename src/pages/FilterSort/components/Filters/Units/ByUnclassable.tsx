@@ -1,7 +1,7 @@
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
+import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria extends UnitFilterCriteria {
   globalOnly?: boolean
@@ -12,7 +12,9 @@ export interface ByUnclassableCriteria extends UnitFilterCriteria {
 const UnclassedFilters = {
   hasSuperEvolved: (unit: ExtendedUnit) => !unit.evolution,
   hasEvolved: (unit: ExtendedUnit) =>
-    (!unit.evolution || unit.evolution.evolvers[0].startsWith?.('skull') || false) as boolean,
+    (!unit.evolution ||
+      unit.evolution.evolvers[0].startsWith?.('skull') ||
+      false) as boolean,
   globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
 }
 
@@ -37,47 +39,60 @@ export function ByUnclassableInput ({
   onChange,
 }: ByUnclassableInputProps) {
   return (
-    <FilterContainer title="Common" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Common"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria}
+    >
       <label>
         <input
           type="checkbox"
           name="global-only"
           checked={criteria?.globalOnly ?? false}
-          onChange={e => onChange({
-            ...criteria,
-            globalOnly: e.target.checked,
-          })}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              globalOnly: e.target.checked,
+            })
+          }
         />
         Show global only
       </label>
 
-      <label>
-        <input
-          type="radio"
-          name="evolved-only"
-          checked={criteria?.evolvedOnly ?? false}
-          onChange={e => onChange({
-            ...criteria,
-            superEvolvedOnly: !e.target.checked,
-            evolvedOnly: e.target.checked,
-          })}
-        />
-        Show evolved units only
-      </label>
+      <FilterContainerPanel marginTop="2">
+        Hide
+        <label>
+          <input
+            type="radio"
+            name="evolved-only"
+            checked={criteria?.evolvedOnly ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                superEvolvedOnly: !e.target.checked,
+                evolvedOnly: e.target.checked,
+              })
+            }
+          />
+          unevolved
+        </label>
 
-      <label>
-        <input
-          type="radio"
-          name="evolved-only"
-          checked={criteria?.superEvolvedOnly ?? false}
-          onChange={e => onChange({
-            ...criteria,
-            superEvolvedOnly: e.target.checked,
-            evolvedOnly: !e.target.checked,
-          })}
-        />
-        Show super-evolved units only (this hide 6 when 6+ is available)
-      </label>
+        <label>
+          <input
+            type="radio"
+            name="evolved-only"
+            checked={criteria?.superEvolvedOnly ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                superEvolvedOnly: e.target.checked,
+                evolvedOnly: !e.target.checked,
+              })
+            }
+          />
+          unevolved + not super-evolved
+        </label>
+      </FilterContainerPanel>
     </FilterContainer>
   )
 }

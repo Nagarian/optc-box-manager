@@ -1,8 +1,8 @@
-import Box from 'components/Box'
+import { CottonCandyIcon } from 'components/Icon'
 import { UserUnitFilterCriteria } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
+import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export const CottonCandyStateKeys = ['none', 'ongoing', 'maxed'] as const
 export type CottonCandyState = typeof CottonCandyStateKeys[number]
@@ -10,9 +10,10 @@ export type CottonCandyState = typeof CottonCandyStateKeys[number]
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
 export type CottonCandyType = typeof CottonCandyTypeKeys[number]
 
-export type ByUserCottonCandyCriteria = UserUnitFilterCriteria & {
-  [type in CottonCandyType]?: CottonCandyState
-}
+export type ByUserCottonCandyCriteria = UserUnitFilterCriteria &
+  {
+    [type in CottonCandyType]?: CottonCandyState
+  }
 
 const ccFilter = (value: number, state?: CottonCandyState) => {
   switch (state) {
@@ -27,9 +28,9 @@ const ccFilter = (value: number, state?: CottonCandyState) => {
   }
 }
 
-export const ByUserCottonCandyFilter = (criteria: ByUserCottonCandyCriteria) => (
-  userUnit: UserUnit,
-) =>
+export const ByUserCottonCandyFilter = (
+  criteria: ByUserCottonCandyCriteria,
+) => (userUnit: UserUnit) =>
   ccFilter(userUnit.cc.atk, criteria.atk) &&
   ccFilter(userUnit.cc.hp, criteria.hp) &&
   ccFilter(userUnit.cc.rcv, criteria.rcv)
@@ -49,9 +50,11 @@ function CottonCandyStateInput ({
   state,
   onChange,
 }: CottonCandyStateInputProps) {
+  const color = 'specific.cc' + type[0].toUpperCase() + type.slice(1)
   return (
-    <Box display="flex">
-      {type}
+    <FilterContainerPanel>
+      <CottonCandyIcon color={color} size={2} title={type} />
+      {type.toUpperCase()}
       {CottonCandyStateKeys.map(stateKey => (
         <label key={stateKey}>
           <input
@@ -63,7 +66,7 @@ function CottonCandyStateInput ({
           {stateKey}
         </label>
       ))}
-    </Box>
+    </FilterContainerPanel>
   )
 }
 
@@ -72,7 +75,11 @@ export function ByUserCottonCandyInput ({
   onChange,
 }: ByUserCottonCandyInputProps) {
   return (
-    <FilterContainer title="Cotton Candy" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Cotton Candy"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria}
+    >
       {CottonCandyTypeKeys.map(type => (
         <CottonCandyStateInput
           key={type}

@@ -37,7 +37,11 @@ export function ByRarityInput ({
   }
 
   return (
-    <FilterContainer title="Rarity" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Rarity"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria.values.length}
+    >
       {Rarity.map(value => (
         <ImageInput
           key={value}

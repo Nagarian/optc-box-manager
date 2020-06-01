@@ -1,7 +1,8 @@
+import { SpecialLvlIcon } from 'components/Icon'
 import { UserUnitFilterCriteria } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
+import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const
 export type UserSpecialState = typeof UserSpecialStateKeys[number]
@@ -41,20 +42,30 @@ export function ByUserSpecialInput ({
   onChange,
 }: ByUserSpecialInputProps) {
   return (
-    <FilterContainer title="Special" onReset={() => onChange(undefined)}>
-      {UserSpecialStateKeys.map(stateKey => (
-        <label key={stateKey}>
-          <input
-            type="radio"
-            name="userunit-special"
-            checked={criteria?.state === stateKey}
-            onChange={e => onChange({
-              state: stateKey,
-            })}
-          />
-          {stateKey}
-        </label>
-      ))}
+    <FilterContainer
+      title="Special"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria}
+    >
+      <FilterContainerPanel>
+        <SpecialLvlIcon size="2" />
+        Special level
+        {UserSpecialStateKeys.map(stateKey => (
+          <label key={stateKey}>
+            <input
+              type="radio"
+              name="userunit-special"
+              checked={criteria?.state === stateKey}
+              onChange={e =>
+                onChange({
+                  state: stateKey,
+                })
+              }
+            />
+            {stateKey}
+          </label>
+        ))}
+      </FilterContainerPanel>
     </FilterContainer>
   )
 }

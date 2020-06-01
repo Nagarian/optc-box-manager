@@ -42,7 +42,11 @@ export function ByTypeInput ({
   }
 
   return (
-    <FilterContainer title="Type" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Type"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria.values.length}
+    >
       {UnitTypes.map(unitType => (
         <ImageInput
           key={unitType}

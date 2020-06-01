@@ -46,7 +46,11 @@ export function ByClassInput ({
   }
 
   return (
-    <FilterContainer title="Class" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Class"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria.values.length}
+    >
       {UnitClasses.map(unitClass => (
         <ImageInput
           key={unitClass}

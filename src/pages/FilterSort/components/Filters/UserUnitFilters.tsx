@@ -1,3 +1,4 @@
+import { Title } from 'components/Title'
 import React from 'react'
 import { SearchFilterUserUnits } from './UserUnits'
 import { ByUserCottonCandyInput } from './UserUnits/ByUserCottonCandy'
@@ -15,12 +16,13 @@ export default function UserUnitFilters ({
 }: UserUnitFiltersProps) {
   return (
     <div>
-      <ByUserPotentialInput
-        criteria={userUnitFilter.byUserPotential}
-        onChange={byUserPotential =>
+      <Title>My Box Filters</Title>
+      <ByUserSpecialInput
+        criteria={userUnitFilter.byUserSpecial as ByUserSpecialCriteria}
+        onChange={byUserSpecial =>
           onChange({
             ...userUnitFilter,
-            byUserPotential,
+            byUserSpecial,
           })
         }
       />
@@ -42,12 +44,12 @@ export default function UserUnitFilters ({
           })
         }
       />
-      <ByUserSpecialInput
-        criteria={userUnitFilter.byUserSpecial as ByUserSpecialCriteria}
-        onChange={byUserSpecial =>
+      <ByUserPotentialInput
+        criteria={userUnitFilter.byUserPotential}
+        onChange={byUserPotential =>
           onChange({
             ...userUnitFilter,
-            byUserSpecial,
+            byUserPotential,
           })
         }
       />

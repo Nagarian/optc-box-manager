@@ -1,10 +1,9 @@
-import Box from 'components/Box'
 import PotentialAbility from 'components/PotentialAbility'
 import { UserUnitFilterCriteria } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
+import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export const PotentialStateKeys = [
   'locked',
@@ -14,9 +13,10 @@ export const PotentialStateKeys = [
 ] as const
 export type PotentialState = typeof PotentialStateKeys[number]
 
-export type ByUserPotentialCriteria = UserUnitFilterCriteria & {
-  [key in PotentialKey]?: PotentialState
-}
+export type ByUserPotentialCriteria = UserUnitFilterCriteria &
+  {
+    [key in PotentialKey]?: PotentialState
+  }
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
   switch (state) {
@@ -56,7 +56,7 @@ function PotentialStateInput ({
   onChange,
 }: PotentialStateInputProps) {
   return (
-    <Box display="flex">
+    <FilterContainerPanel>
       <PotentialAbility type={potential} />
       {PotentialStateKeys.map(stateKey => (
         <label key={stateKey}>
@@ -69,7 +69,7 @@ function PotentialStateInput ({
           {stateKey}
         </label>
       ))}
-    </Box>
+    </FilterContainerPanel>
   )
 }
 
@@ -78,7 +78,11 @@ export function ByUserPotentialInput ({
   onChange,
 }: ByUserPotentialInputProps) {
   return (
-    <FilterContainer title="Potential" onReset={() => onChange(undefined)}>
+    <FilterContainer
+      title="Potential"
+      onReset={() => onChange(undefined)}
+      disableReset={!criteria}
+    >
       {Potentials.map(potential => (
         <PotentialStateInput
           key={potential}
