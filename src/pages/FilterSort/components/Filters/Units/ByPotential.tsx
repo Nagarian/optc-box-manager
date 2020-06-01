@@ -1,3 +1,4 @@
+import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
@@ -41,15 +42,15 @@ export function ByPotentialInput ({
   return (
     <FilterContainer title="Potential" onReset={() => onChange(undefined)}>
       {Potentials.map(potential => (
-        <label key={potential}>
-          <input
-            type="checkbox"
-            name="unit-potentials"
-            checked={criteria.values.includes(potential)}
-            onChange={e => triggerChange(potential, e.target.checked)}
-          />
-          <PotentialAbility type={potential} size="2" />
-        </label>
+        <ImageInput
+          key={potential}
+          type="checkbox"
+          name="unit-potentials"
+          checked={criteria.values.includes(potential)}
+          onChange={e => triggerChange(potential, e.target.checked)}
+        >
+          <PotentialAbility type={potential} size="3" />
+        </ImageInput>
       ))}
     </FilterContainer>
   )

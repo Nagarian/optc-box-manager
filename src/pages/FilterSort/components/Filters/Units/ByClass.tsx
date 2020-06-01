@@ -1,4 +1,5 @@
 import { UnitClassIcon } from 'components/Class'
+import ImageInput from 'components/forms/ImageInput'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
 import React from 'react'
@@ -47,15 +48,15 @@ export function ByClassInput ({
   return (
     <FilterContainer title="Class" onReset={() => onChange(undefined)}>
       {UnitClasses.map(unitClass => (
-        <label key={unitClass}>
-          <input
-            type="checkbox"
-            name="unit-class"
-            checked={criteria.values.includes(unitClass)}
-            onChange={e => triggerChange(unitClass, e.target.checked)}
-          />
-          <UnitClassIcon type={unitClass} size="2" />
-        </label>
+        <ImageInput
+          key={unitClass}
+          type="checkbox"
+          name="unit-class"
+          checked={criteria.values.includes(unitClass)}
+          onChange={e => triggerChange(unitClass, e.target.checked)}
+        >
+          <UnitClassIcon type={unitClass} size="2" margin="2" />
+        </ImageInput>
       ))}
     </FilterContainer>
   )

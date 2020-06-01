@@ -1,13 +1,5 @@
 import styled from 'styled-components'
-import {
-  color,
-  gridArea,
-  GridAreaProps,
-  space,
-  SpaceProps,
-  typography,
-  TypographyProps,
-} from 'styled-system'
+import { color, gridArea, GridAreaProps, space, SpaceProps, typography, TypographyProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
 export type TypoProps = SpaceProps & TypographyProps & GridAreaProps
@@ -32,3 +24,10 @@ SubTitle.defaultProps = {
   fontSize: '3',
   textAlign: 'center',
 }
+
+export const Text = styled('span').withConfig(cleanStyledSystem)<TypoProps>(
+  space,
+  typography,
+  gridArea,
+  color,
+)

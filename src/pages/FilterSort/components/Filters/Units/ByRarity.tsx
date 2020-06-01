@@ -1,3 +1,5 @@
+import ImageInput from 'components/forms/ImageInput'
+import { Text } from 'components/Title'
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
 import React from 'react'
@@ -37,15 +39,18 @@ export function ByRarityInput ({
   return (
     <FilterContainer title="Rarity" onReset={() => onChange(undefined)}>
       {Rarity.map(value => (
-        <label key={value}>
-          <input
-            type="checkbox"
-            name="rarity-filter"
-            checked={criteria.values.includes(value)}
-            onChange={e => triggerChange(value, e.target.checked)}
-          />
-          ⭐{value}
-        </label>
+        <ImageInput
+          key={value}
+          type="checkbox"
+          name="rarity-filter"
+          checked={criteria.values.includes(value)}
+          onChange={e => triggerChange(value, e.target.checked)}
+        >
+          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+          <Text fontSize="2" margin="2">
+            ⭐{value}
+          </Text>
+        </ImageInput>
       ))}
     </FilterContainer>
   )
