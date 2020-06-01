@@ -26,8 +26,13 @@ export default function MyUserBox ({
 }: UserBoxProps) {
   const { userUnitFilters } = useSearch(search)
   const { sorts } = useUnitSort('Default')
-  const filtered = userBox.filter(userUnitFilters)
-  const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
+  const filtered = userBox
+    .filter(userUnitFilters)
+    .sort((uu1, uu2) => sorts(uu1.unit, uu2.unit))
+  const { slice, paginationProps, setPage } = usePagination(
+    filtered.length,
+    100,
+  )
 
   if (userBox.length === 0) {
     return (
@@ -42,7 +47,11 @@ export default function MyUserBox ({
     <>
       <ResultList>
         {filtered.slice(...slice).map(userUnit => (
-          <CharacterBox key={userUnit.id} userUnit={userUnit} onClick={() => onShowDetail(userUnit)} />
+          <CharacterBox
+            key={userUnit.id}
+            userUnit={userUnit}
+            onClick={() => onShowDetail(userUnit)}
+          />
         ))}
       </ResultList>
       <Pagination {...paginationProps} onPageChange={page => setPage(page)} />
