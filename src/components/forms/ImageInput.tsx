@@ -1,8 +1,10 @@
+import { themeGet } from '@styled-system/theme-get'
 import React, { InputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`
-  display: none;
+  width: 0;
+  height: 0;
 
   + * {
     transition: filter 150ms;
@@ -11,6 +13,14 @@ const Input = styled.input`
 
   :checked + * {
     filter: none;
+  }
+`
+const Label = styled.label`
+  display: inline-flex;
+  position: relative;
+
+  :focus-within {
+    filter: drop-shadow(0 0 1rem ${themeGet('grey')});
   }
 `
 
@@ -24,9 +34,9 @@ export default function ImageInput ({
   ...rest
 }: ImageInputProps) {
   return (
-    <label>
+    <Label>
       <Input type={type} {...rest} />
       {children}
-    </label>
+    </Label>
   )
 }
