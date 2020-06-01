@@ -4,8 +4,7 @@ import { FilterSortIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
-import { DefaultSearch } from 'hooks/useSearch'
-import { Search } from 'models/search'
+import { useSavedSearch } from 'hooks/useSearch'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
 import React, { useEffect, useRef, useState } from 'react'
@@ -39,7 +38,7 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
   }, [selectedUnits])
 
   const [showSettings, setShowSettings] = useState<boolean>(false)
-  const [search, setSearch] = useState<Search>(DefaultSearch)
+  const { search, setSearch } = useSavedSearch('addSettingSearch')
 
   return (
     <Popup

@@ -39,9 +39,7 @@ export function useSearch (search: Search = DefaultSearch) {
   }
 }
 
-const savedSearchKey = 'search'
-
-export function useSavedSearch () {
+export function useSavedSearch (savedSearchKey : string = 'search') {
   const [search, setSearch] = useState<Search>(DefaultSearch)
 
   useEffect(() => {
@@ -49,13 +47,13 @@ export function useSavedSearch () {
     if (json) {
       setSearch(JSON.parse(json))
     }
-  }, [])
+  }, [savedSearchKey])
 
   useEffect(() => {
     if (search) {
       localStorage.setItem(savedSearchKey, JSON.stringify(search))
     }
-  }, [search])
+  }, [savedSearchKey, search])
 
   const seaarch = useSearch(search)
 
