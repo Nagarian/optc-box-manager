@@ -1,10 +1,9 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { CancelIcon, FilterSortIcon } from 'components/Icon'
-import { Title } from 'components/Title'
 import { SearchSortCriteria } from 'models/search'
 import React from 'react'
-import { SearchSortTypeKeys } from '.'
+import { SearchSortBuilder, UnitSortTypeKeys, UserUnitSortTypeKeys } from '.'
 
 export type SortProps = {
   unitOnly: boolean
@@ -17,18 +16,52 @@ export default function Sort ({
   onChange,
 }: SortProps) {
   return (
-    <Box minHeight="60vh">
-      <Title>Sort</Title>
+    <Box minHeight="60vh" display="flex">
+      {/* <Title>Sort</Title> */}
       <Box display="flex" flexDirection="column" overflowY="auto">
-        {SearchSortTypeKeys.map(sortType => (
+        <Button
+          onClick={() =>
+            onChange([
+              { by: 'byType', order: 'asc' },
+              { by: 'byRarity', order: 'desc' },
+              { by: 'byFamily', order: 'asc' },
+              { by: 'byId', order: 'asc' },
+            ])
+          }
+        >
+          Default (Favorite like)
+        </Button>
+        <Button
+          onClick={() =>
+            onChange([
+              { by: 'byId', order: 'desc' },
+            ])
+          }
+        >
+          " Newest "
+        </Button>
+        <hr/>
+        {UnitSortTypeKeys.map(sortType => (
           <Button
+            key={sortType}
             onClick={() =>
               onChange(searchSort.concat({ by: sortType, order: 'desc' }))
             }
           >
-            {sortType}
+            {SearchSortBuilder[sortType].label}
           </Button>
         ))}
+        {!unitOnly &&
+          UserUnitSortTypeKeys.map(sortType => (
+            <Button
+              key={sortType}
+              onClick={() =>
+                onChange(searchSort.concat({ by: sortType, order: 'desc' }))
+              }
+            >
+              {SearchSortBuilder[sortType].label}
+            </Button>
+          ))}
       </Box>
       <Box display="flex" flexDirection="column">
         <Box display="flex" flexDirection="column" overflowY="auto" flex="1">
@@ -59,7 +92,9 @@ export default function Sort ({
             </Box>
           ))}
         </Box>
-        <Button variant="danger">Clear</Button>
+        <Button variant="danger" onClick={() => onChange([])}>
+          Clear
+        </Button>
       </Box>
     </Box>
   )
