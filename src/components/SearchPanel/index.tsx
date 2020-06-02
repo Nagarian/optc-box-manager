@@ -7,7 +7,6 @@ import { ExtendedUnit } from 'models/units'
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
-import { useUnitSort } from './UnitSort'
 
 export const ResultList = styled.div<SpaceProps & FlexProps>`
   ${flex}
@@ -33,9 +32,8 @@ export default function SearchPanel ({
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
   const pageScrollRef = useRef<HTMLDivElement>(null)
-  const { unitFilters } = useSearch(search)
-  const { sorts } = useUnitSort('Default')
-  const filtered = units.filter(unitFilters).sort(sorts)
+  const { unitFilters, unitSort } = useSearch(search)
+  const filtered = units.filter(unitFilters).sort(unitSort)
   const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import CharacterBox from 'components/CharacterBox'
 import { AddIcon } from 'components/Icon'
 import Pagination from 'components/Pagination'
 import { ResultList } from 'components/SearchPanel'
-import { useUnitSort } from 'components/SearchPanel/UnitSort'
 import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
@@ -24,11 +23,10 @@ export default function MyUserBox ({
   onAddUnit,
   onShowDetail,
 }: UserBoxProps) {
-  const { userUnitFilters } = useSearch(search)
-  const { sorts } = useUnitSort('Default')
+  const { userUnitFilters, unitSort } = useSearch(search)
   const filtered = userBox
     .filter(userUnitFilters)
-    .sort((uu1, uu2) => sorts(uu1.unit, uu2.unit))
+    .sort((uu1, uu2) => unitSort(uu1.unit, uu2.unit))
   const { slice, paginationProps, setPage } = usePagination(
     filtered.length,
     100,

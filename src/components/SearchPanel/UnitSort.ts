@@ -1,19 +1,5 @@
-import { ExtendedUnit, UnitStar, UnitType } from 'models/units'
-
-type UnitSort = (unit1: ExtendedUnit, unit2: ExtendedUnit) => number
-
-const ParseStar = (star: UnitStar): number => {
-  switch (star) {
-    case '4+':
-      return 4.5
-    case '5+':
-      return 5.5
-    case '6+':
-      return 6.6
-    default:
-      return star as number
-  }
-}
+import { UnitSort } from 'models/search'
+import { ExtendedUnit, UnitType } from 'models/units'
 
 const _ParseType = (type: UnitType): number => {
   switch (type) {
@@ -42,7 +28,6 @@ type SortsFunc = {
   [name: string]: UnitSort
   byId: UnitSort
   byIdReverse: UnitSort
-  byRarity: UnitSort
   byType: UnitSort
   byFamily: UnitSort
 }
@@ -50,17 +35,14 @@ type SortsFunc = {
 export const Sorts: SortsFunc = {
   byId: (unit1, unit2) => unit1.id - unit2.id,
   byIdReverse: (unit1, unit2) => unit2.id - unit1.id,
-  byRarity: (unit1, unit2) => ParseStar(unit2.stars) - ParseStar(unit1.stars),
   byType: (unit1, unit2) => ParseType(unit1.type) - ParseType(unit2.type),
   byFamily: (unit1, unit2) => unit1.family.id - unit2.family.id,
 }
 
-type SortCriteria = 'Default' | 'Rarity' | 'Type' | 'Id' | 'IdReverse' | 'Family'
+type SortCriteria = 'Default' | 'Type' | 'Id' | 'IdReverse' | 'Family'
 
 function SortCriteriaToFunc (sortCriteria: SortCriteria): UnitSort[] {
   switch (sortCriteria) {
-    case 'Rarity':
-      return [Sorts.byRarity]
     case 'Type':
       return [Sorts.byType]
     case 'Id':
@@ -71,7 +53,7 @@ function SortCriteriaToFunc (sortCriteria: SortCriteria): UnitSort[] {
       return [Sorts.byFamily]
     case 'Default':
     default:
-      return [Sorts.byType, Sorts.byRarity, Sorts.byFamily, Sorts.byId]
+      return [Sorts.byType, Sorts.byFamily, Sorts.byId]
   }
 }
 

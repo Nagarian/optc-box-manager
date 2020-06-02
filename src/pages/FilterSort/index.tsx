@@ -1,14 +1,15 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import { Search } from 'models/search'
+import { Search, SearchSortCriteria } from 'models/search'
 import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { useState } from 'react'
 import UnitFilters from './components/Filters/UnitFilters'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
+import Sort from './components/Sorts/Sort'
 
-type DisplayedPanel = 'unit-filter' | 'userunit-filter'
+type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort'
 
 type FilterSortProps = {
   onCancel: () => void
@@ -28,6 +29,9 @@ export default function FilterSort ({
   const [userUnitFilter, setUserUnitFilter] = useState<SearchFilterUserUnits>(
     search.filters.userUnits || {},
   )
+  const [sorts, setSorts] = useState<SearchSortCriteria[]>(
+    search.sorts || [],
+  )
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
   return (
@@ -39,6 +43,7 @@ export default function FilterSort ({
             units: unitFilter,
             userUnits: userUnitFilter,
           },
+          sorts,
         })
       }
       customAction={
@@ -63,6 +68,15 @@ export default function FilterSort ({
           onChange={setUserUnitFilter}
         />
       )}
+
+      {displayed === 'sort' &&
+        <Sort
+          searchSort={sorts}
+          unitOnly={unitOnly}
+          onChange={setSorts}
+        />
+      }
+
       <Box display="flex" justifyContent="space-evenly" padding="2">
         <Button
           onClick={() => setDisplayed('unit-filter')}
@@ -71,6 +85,7 @@ export default function FilterSort ({
         >
           Unit Filter
         </Button>
+
         {!unitOnly && (
           <Button
             onClick={() => setDisplayed('userunit-filter')}
@@ -80,6 +95,14 @@ export default function FilterSort ({
             My Box Filter
           </Button>
         )}
+
+        <Button
+          onClick={() => setDisplayed('sort')}
+          fontSize="1"
+          disabled={displayed === 'sort'}
+        >
+          Sort
+        </Button>
       </Box>
     </Popup>
   )
