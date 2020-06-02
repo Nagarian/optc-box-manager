@@ -5,6 +5,7 @@ import { SearchFilterUnits } from './Units'
 import { ByClassInput } from './Units/ByClass'
 import { ByPotentialInput } from './Units/ByPotential'
 import { ByRarityInput } from './Units/ByRarity'
+import { ByRcvFinderInput } from './Units/ByRcvFinder'
 import { BySupportInput } from './Units/BySupport'
 import { ByTypeInput } from './Units/ByType'
 import { ByUnclassableInput } from './Units/ByUnclassable'
@@ -76,6 +77,16 @@ export default function UnitFilters ({
           onChange({
             ...unitFilter,
             byPotential,
+          })
+        }
+      />
+
+      <ByRcvFinderInput
+        criteria={unitFilter.byRcvFinder}
+        onChange={byRcvFinder =>
+          onChange({
+            ...unitFilter,
+            byRcvFinder,
           })
         }
       />

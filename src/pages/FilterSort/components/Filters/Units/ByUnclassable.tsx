@@ -1,6 +1,7 @@
 import { UnitFilterCriteria } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
+import { BooleanUnitFilterMapper } from 'services/filterHelper'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria extends UnitFilterCriteria {
@@ -18,16 +19,12 @@ const UnclassedFilters = {
   globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
 }
 
-export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) => {
-  const filters = [
-    !!criteria.evolvedOnly && UnclassedFilters.hasEvolved,
-    !!criteria.superEvolvedOnly && UnclassedFilters.hasSuperEvolved,
-    !!criteria.globalOnly && UnclassedFilters.globalOnly,
-  ].filter(Boolean) as ((unit: ExtendedUnit) => boolean)[]
-  return filters.length === 0
-    ? (unit: ExtendedUnit) => true
-    : (unit: ExtendedUnit) => !filters.some(fn => !fn(unit))
-}
+export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
+  BooleanUnitFilterMapper(
+    [criteria.evolvedOnly, UnclassedFilters.hasEvolved],
+    [criteria.superEvolvedOnly, UnclassedFilters.hasSuperEvolved],
+    [criteria.globalOnly, UnclassedFilters.globalOnly],
+  )
 
 export type ByUnclassableInputProps = {
   criteria?: ByUnclassableCriteria
@@ -76,7 +73,6 @@ export function ByUnclassableInput ({
           />
           unevolved
         </label>
-
         <label>
           <input
             type="radio"
