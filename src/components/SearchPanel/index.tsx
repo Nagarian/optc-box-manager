@@ -36,11 +36,12 @@ export default function SearchPanel ({
   const filtered = units.filter(unitFilters).sort(unitSort)
   const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
 
+  const pageDep = paginationProps.current
   useEffect(() => {
     if (pageScrollRef.current) {
       pageScrollRef.current.scrollTo(0, 0)
     }
-  }, [paginationProps])
+  }, [pageDep])
 
   return (
     <>
