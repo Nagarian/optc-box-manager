@@ -1,4 +1,4 @@
-import { UnitFilter, UserUnitFilterCriteria } from 'models/search'
+import { UserUnitFilter, UserUnitFilterCriteria } from 'models/search'
 import { ByUserCottonCandyCriteria, ByUserCottonCandyFilter } from './ByUserCottonCandy'
 import { ByUserPotentialCriteria, ByUserPotentialFilter } from './ByUserPotential'
 import { ByUserSpecialCriteria, ByUserSpecialFilter } from './ByUserSpecial'
@@ -17,7 +17,7 @@ export type SearchFilterUserUnits = {
 export function UserUnitFilterBuilder (
   key: SearchFilterUserUnitsKeys,
   criteria: UserUnitFilterCriteria,
-): UnitFilter {
+): UserUnitFilter {
   switch (key) {
     case 'byUserPotential':
       return ByUserPotentialFilter(criteria as ByUserPotentialCriteria)
