@@ -27,7 +27,9 @@ const noImage =
 const getImage = (func: (id: number) => string) => (id: number): string => {
   try {
     const imagePath = func(id)
-    return imagePath?.replace('../res', 'https://optc-db.github.io/res/')
+    return imagePath
+      ?.replace('../res', 'https://optc-db.github.io/res/')
+      .replace('http:', 'https:')
   } catch (error) {
     console.trace('Invalid unit :', id)
     return noImage
