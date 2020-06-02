@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { ExtendedUnit } from 'models/units'
-import { Sorts, useUnitSort } from './UnitSort'
+import { Sorts, useUnitSort } from '../../../../components/SearchPanel/UnitSort'
 
 const unitsMock = () => [
   {
