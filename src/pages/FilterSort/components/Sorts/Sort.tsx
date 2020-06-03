@@ -1,9 +1,10 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { CancelIcon, FilterSortIcon } from 'components/Icon'
+import { SubTitle } from 'components/Title'
 import { SearchSortCriteria } from 'models/search'
 import React from 'react'
 import { SearchSortBuilder, UnitSortTypeKeys, UserUnitSortTypeKeys } from '.'
+import SearchSortItem from './components/SearchSortItem'
 
 export type SortProps = {
   unitOnly: boolean
@@ -15,84 +16,85 @@ export default function Sort ({
   searchSort = [],
   onChange,
 }: SortProps) {
+  const SortItemRender = (criteria: SearchSortCriteria) => (
+    <Button
+      key={criteria.by}
+      onClick={() => onChange(searchSort.concat(criteria))}
+      fontSize="1"
+      margin="1"
+    >
+      {SearchSortBuilder[criteria.by].label}
+    </Button>
+  )
+
   return (
     <Box minHeight="60vh" display="flex">
-      {/* <Title>Sort</Title> */}
       <Box display="flex" flexDirection="column" overflowY="auto">
         <Button
           onClick={() =>
-            onChange([
-              { by: 'byType', order: 'asc' },
-              { by: 'byRarity', order: 'desc' },
-              { by: 'byFamily', order: 'asc' },
-              { by: 'byId', order: 'asc' },
-            ])
+            onChange(
+              searchSort.concat([
+                { by: 'byType', order: 'asc' },
+                { by: 'byRarity', order: 'desc' },
+                { by: 'byFamily', order: 'asc' },
+                { by: 'byId', order: 'asc' },
+              ]),
+            )
           }
+          fontSize="1"
+          margin="1"
         >
-          Default (Favorite like)
+          Default
         </Button>
+
         <Button
           onClick={() =>
-            onChange([
-              { by: 'byId', order: 'desc' },
-            ])
+            onChange(searchSort.concat([{ by: 'byId', order: 'desc' }]))
           }
+          fontSize="1"
+          margin="1"
         >
           " Newest "
         </Button>
-        <hr/>
-        {UnitSortTypeKeys.map(sortType => (
-          <Button
-            key={sortType}
-            onClick={() =>
-              onChange(searchSort.concat({ by: sortType, order: 'desc' }))
-            }
-          >
-            {SearchSortBuilder[sortType].label}
-          </Button>
-        ))}
-        {!unitOnly &&
-          UserUnitSortTypeKeys.map(sortType => (
-            <Button
-              key={sortType}
-              onClick={() =>
-                onChange(searchSort.concat({ by: sortType, order: 'desc' }))
-              }
-            >
-              {SearchSortBuilder[sortType].label}
-            </Button>
-          ))}
+
+        <hr />
+        <SubTitle>Unit sort</SubTitle>
+        {UnitSortTypeKeys.map(s => SortItemRender({ by: s, order: 'asc' }))}
+
+        {!unitOnly && (
+          <>
+            <hr />
+            <SubTitle>My Box sort</SubTitle>
+            {UserUnitSortTypeKeys.map(s =>
+              SortItemRender({ by: s, order: 'desc' }),
+            )}
+          </>
+        )}
       </Box>
-      <Box display="flex" flexDirection="column">
+
+      <Box display="flex" flexDirection="column" flex="1">
         <Box display="flex" flexDirection="column" overflowY="auto" flex="1">
           {searchSort.map((criteria, i) => (
-            <Box key={i} display="flex">
-              <Box flex="1">{criteria.by}</Box>
-              <Button
-                icon={FilterSortIcon}
-                onClick={() =>
-                  onChange(
-                    searchSort.map(ss =>
-                      ss !== criteria
-                        ? ss
-                        : {
-                          by: criteria.by,
-                          order: criteria.order === 'asc' ? 'desc' : 'asc',
-                        },
-                    ),
-                  )
-                }
-              />
-              <Button
-                icon={CancelIcon}
-                onClick={() =>
-                  onChange(searchSort.filter(ss => ss !== criteria))
-                }
-              />
-            </Box>
+            <SearchSortItem
+              key={i}
+              criteria={criteria}
+              label={SearchSortBuilder[criteria.by].label}
+              onUpdate={(oldCriteria, newCriteria) =>
+                onChange(
+                  searchSort.map(ss => (ss !== oldCriteria ? ss : newCriteria)),
+                )
+              }
+              onDelete={() =>
+                onChange(searchSort.filter(ss => ss !== criteria))
+              }
+            />
           ))}
         </Box>
-        <Button variant="danger" onClick={() => onChange([])}>
+        <Button
+          variant="danger"
+          onClick={() => onChange([])}
+          alignSelf="center"
+        >
           Clear
         </Button>
       </Box>

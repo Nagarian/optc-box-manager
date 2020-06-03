@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { color, gridArea, GridAreaProps, space, SpaceProps, typography, TypographyProps } from 'styled-system'
+import { color, flex, FlexProps, gridArea, GridAreaProps, space, SpaceProps, typography, TypographyProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
-export type TypoProps = SpaceProps & TypographyProps & GridAreaProps
+export type TypoProps = SpaceProps & TypographyProps & GridAreaProps & FlexProps
 
 export const Title = styled('h1').withConfig(cleanStyledSystem)<TypoProps>(
   space,
@@ -30,4 +30,5 @@ export const Text = styled('span').withConfig(cleanStyledSystem)<TypoProps>(
   typography,
   gridArea,
   color,
+  flex,
 )
