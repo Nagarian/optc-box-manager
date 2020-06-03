@@ -11,3 +11,11 @@ It is hosted on github pages, although you can just download it and run a local 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Backlog
+
+- [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/speical lvl progression)
+- [ ] Sort by Potential lvl
+- [ ] Bulk update
+- [ ] Evolve unit
+- [ ] Rework DB schema
