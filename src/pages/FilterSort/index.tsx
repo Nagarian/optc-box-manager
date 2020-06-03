@@ -51,6 +51,7 @@ export default function FilterSort ({
           onClick={() => {
             setUnitFilter({})
             setUserUnitFilter({})
+            setSorts([])
           }}
           variant="danger"
         >

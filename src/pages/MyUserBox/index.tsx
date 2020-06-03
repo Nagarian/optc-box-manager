@@ -23,10 +23,10 @@ export default function MyUserBox ({
   onAddUnit,
   onShowDetail,
 }: UserBoxProps) {
-  const { userUnitFilters, unitSort } = useSearch(search)
+  const { userUnitFilters, userUnitSort } = useSearch(search)
   const filtered = userBox
     .filter(userUnitFilters)
-    .sort((uu1, uu2) => unitSort(uu1.unit, uu2.unit))
+    .sort(userUnitSort)
   const { slice, paginationProps, setPage } = usePagination(
     filtered.length,
     100,

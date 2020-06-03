@@ -83,7 +83,6 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
           onCancel={() => setShowSettings(false)}
           search={search}
           onSubmit={s => {
-            console.log(s)
             setSearch(s)
             setShowSettings(false)
           }}
