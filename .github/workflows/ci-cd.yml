@@ -1,4 +1,4 @@
-name: OPTC Box Manager CI/CD
+name: CI/CD
 
 on:
   push:

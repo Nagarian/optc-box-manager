@@ -1,5 +1,7 @@
 # OPTC Box Manager
 
+![OPTC Box Manager CI/CD](https://github.com/Nagarian/optc-box-manager/workflows/CI/CD/badge.svg?branch=master)
+
 This project exist in order to help you maintain your [One Piece Treasure Cruise](https://optc-ww.channel.or.jp/en/) box cleaned and tidy
 
 This is a [PWA app](https://web.dev/progressive-web-apps/) so don't hesitate to install it on your phone to keep within reach 😄
