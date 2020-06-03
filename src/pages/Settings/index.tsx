@@ -54,10 +54,10 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
           title="Are you really sure ?"
         />
       )}
-      <Button variant="danger" onClick={() => setShowResetWarning(true)}>
+      <Button variant="danger" my="1" onClick={() => setShowResetWarning(true)}>
         Reset
       </Button>
-      <Button onClick={exportFn} isLoading={isLoading}>
+      <Button my="1" onClick={exportFn} isLoading={isLoading}>
         Export
       </Button>
       <input
@@ -67,7 +67,11 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
         ref={importRef}
         onChange={importFn}
       />
-      <Button onClick={() => importRef.current?.click()} isLoading={isLoading}>
+      <Button
+        my="1"
+        onClick={() => importRef.current?.click()}
+        isLoading={isLoading}
+      >
         Import
       </Button>
     </Popup>
