@@ -23,6 +23,7 @@ export default function Detail ({
 }: DetailProps) {
   const [userUnit, setUserUnit] = useState<UserUnit>(original)
   const { unit } = original
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
 
   return (
     <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>
@@ -59,9 +60,20 @@ export default function Detail ({
         See on OPTC-DB
       </Button>
 
-      <Button variant="danger" my="1" onClick={() => onDelete(userUnit.id)}>
+      <Button variant="danger" my="1" onClick={() => setShowConfirmation(true)}>
         Supprimer
       </Button>
+
+      {showConfirmation && (
+        <Popup
+          title="Are you sure to delete it ?"
+          onValidate={() => {
+            setShowConfirmation(false)
+            onDelete(userUnit.id)
+          }}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
     </Popup>
   )
 }
