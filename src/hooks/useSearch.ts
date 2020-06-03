@@ -18,7 +18,12 @@ export const DefaultSearch: Search = {
       },
     },
   },
-  sorts: [],
+  sorts: [
+    { by: 'byType', order: 'asc' },
+    { by: 'byRarity', order: 'desc' },
+    { by: 'byFamily', order: 'asc' },
+    { by: 'byId', order: 'asc' },
+  ],
 }
 
 export function useSearch (search: Search = DefaultSearch) {

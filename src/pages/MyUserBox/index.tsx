@@ -32,7 +32,7 @@ export default function MyUserBox ({
     100,
   )
 
-  if (userBox.length === 0) {
+  if (filtered.length === 0) {
     return (
       <Box display="flex" alignItems="center" flexDirection="column">
         It's seem pretty lonely here, try adding some units !
