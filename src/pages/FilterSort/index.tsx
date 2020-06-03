@@ -78,7 +78,9 @@ export default function FilterSort ({
         />
       }
 
+      <hr/>
       <Box display="flex" justifyContent="space-evenly" padding="2">
+
         <Button
           onClick={() => setDisplayed('unit-filter')}
           fontSize="1"
