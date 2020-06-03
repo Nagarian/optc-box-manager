@@ -37,8 +37,15 @@ export default function SearchSortItem ({
 }) {
   return (
     <Panel>
-      <Text flex="1" fontSize="2">{label}</Text>
+      <Text flex="1" fontSize="2">
+        {label}
+      </Text>
       <Button
+        title={
+          criteria.order === 'desc'
+            ? 'Descending (click to reverse)'
+            : 'Ascending (click to reverse)'
+        }
         icon={criteria.order === 'desc' ? DescendingIcon : AscendingIcon}
         onClick={() =>
           onUpdate(criteria, {
@@ -47,7 +54,11 @@ export default function SearchSortItem ({
           })
         }
       />
-      <Button icon={CancelIcon} onClick={() => onDelete(criteria)} />
+      <Button
+        title="Remove"
+        icon={CancelIcon}
+        onClick={() => onDelete(criteria)}
+      />
     </Panel>
   )
 }
