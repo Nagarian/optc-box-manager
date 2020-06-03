@@ -15,6 +15,6 @@ const ParseStar = (star: UnitStar): number => {
 }
 
 const byRarity: UnitSort = (unit1, unit2) =>
-  ParseStar(unit2.stars) - ParseStar(unit1.stars)
+  ParseStar(unit1.stars) - ParseStar(unit2.stars)
 
 export default byRarity
