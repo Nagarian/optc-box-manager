@@ -35,7 +35,7 @@
     "@types/styled-system__css": "^5.0.9",
     "@types/styled-system__should-forward-prop": "^5.1.1",
     "@types/styled-system__theme-get": "^5.0.0",
-    "@types/uuid": "^7.0.3",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
