@@ -45,7 +45,7 @@ describe('UnitSort', () => {
         unitsMock()
           .sort(byRarity)
           .map(u => u.stars),
-      ).toStrictEqual(['6+', 6, 6, 5])
+      ).toStrictEqual([5, 6, 6, '6+'])
     })
 
     it('should order by type', () => {
