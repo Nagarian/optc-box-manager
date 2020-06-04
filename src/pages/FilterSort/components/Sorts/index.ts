@@ -1,9 +1,9 @@
 import { Sort, UnitSort, UserUnitSort } from 'models/search'
-import { byFamily, byId } from './ByCommon'
-import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './ByCottonCandy'
-import byRarity from './ByRarity'
-import { bySupportLvl } from './BySupport'
-import byType from './ByType'
+import { byFamily, byId } from './Units/ByCommon'
+import byRarity from './Units/ByRarity'
+import byType from './Units/ByType'
+import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './UserUnits/ByCottonCandy'
+import { bySupportLvl } from './UserUnits/BySupport'
 
 export const UnitSortTypeKeys = [
   'byType',

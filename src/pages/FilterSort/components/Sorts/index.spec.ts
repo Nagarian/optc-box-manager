@@ -1,6 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks'
 import { ExtendedUnit } from 'models/units'
-import { Sorts, useUnitSort } from '../../../../components/SearchPanel/UnitSort'
+import { byId } from './Units/ByCommon'
+import byRarity from './Units/ByRarity'
+import byType from './Units/ByType'
 
 const unitsMock = () => [
   {
@@ -34,23 +35,15 @@ describe('UnitSort', () => {
     it('should order by unit id', () => {
       expect(
         unitsMock()
-          .sort(Sorts.byId)
+          .sort(byId)
           .map(u => u.id),
       ).toStrictEqual([1, 2, 3, 4])
-    })
-
-    it('should order by unit id reverse', () => {
-      expect(
-        unitsMock()
-          .sort(Sorts.byIdReverse)
-          .map(u => u.id),
-      ).toStrictEqual([4, 3, 2, 1])
     })
 
     it('should order by rarity', () => {
       expect(
         unitsMock()
-          .sort(Sorts.byRarity)
+          .sort(byRarity)
           .map(u => u.stars),
       ).toStrictEqual(['6+', 6, 6, 5])
     })
@@ -58,7 +51,7 @@ describe('UnitSort', () => {
     it('should order by type', () => {
       expect(
         unitsMock()
-          .sort(Sorts.byType)
+          .sort(byType)
           .map(u => u.type),
       ).toStrictEqual(['STR', 'STR', 'DEX', 'QCK'])
     })
@@ -72,18 +65,9 @@ describe('UnitSort', () => {
             stars: '6+',
             name: 'Zoro/Mihawk',
           } as ExtendedUnit)
-          .sort(Sorts.byType)
+          .sort(byType)
           .map(u => u.type),
       ).toStrictEqual([['QCK', 'INT'], 'STR', 'STR', 'DEX', 'QCK'])
     })
-  })
-
-  it('should return sorts function', async () => {
-    const units = unitsMock()
-
-    const { result } = await renderHook(useUnitSort)
-    const subject = [...units].sort(result.current.sorts)
-
-    expect(subject).toStrictEqual([units[2], units[0], units[1], units[3]])
   })
 })
