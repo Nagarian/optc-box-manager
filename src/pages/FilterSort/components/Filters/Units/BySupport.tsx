@@ -1,7 +1,7 @@
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
-import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
+import { FilterContainerPanel } from '../FilterContainer'
 
 export interface BySupportCriteria extends SearchFilterCriteria {
   hasSupport: boolean
@@ -22,31 +22,25 @@ export function BySupportInput ({
   }
 
   return (
-    <FilterContainer
-      title="Support"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
-      <FilterContainerPanel>
-        <label>
-          <input
-            type="radio"
-            name="has-support"
-            checked={criteria?.hasSupport === true}
-            onChange={e => triggerChange(true)}
-          />
-          Has support ability
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="has-support"
-            checked={criteria?.hasSupport === false}
-            onChange={e => triggerChange(false)}
-          />
-          Hasn't support ability
-        </label>
-      </FilterContainerPanel>
-    </FilterContainer>
+    <FilterContainerPanel>
+      <label>
+        <input
+          type="radio"
+          name="has-support"
+          checked={criteria?.hasSupport === true}
+          onChange={e => triggerChange(true)}
+        />
+        Has support ability
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="has-support"
+          checked={criteria?.hasSupport === false}
+          onChange={e => triggerChange(false)}
+        />
+        Hasn't support ability
+      </label>
+    </FilterContainerPanel>
   )
 }

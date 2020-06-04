@@ -2,7 +2,6 @@ import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/sea
 import { ExtendedUnit, UnitSpecial } from 'models/units'
 import React from 'react'
 import { BooleanUnitFilterMapper } from 'services/filterHelper'
-import FilterContainer from '../FilterContainer'
 
 export interface ByRcvFinderCriteria extends SearchFilterCriteria {
   captainRcv?: boolean
@@ -36,11 +35,7 @@ export function ByRcvFinderInput ({
   onChange,
 }: SearchFilterCriteriaInputProps<ByRcvFinderCriteria>) {
   return (
-    <FilterContainer
-      title="Rcv Finder"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       <label>
         <input
           type="checkbox"
@@ -69,6 +64,6 @@ export function ByRcvFinderInput ({
         />
         Show RCV related special
       </label>
-    </FilterContainer>
+    </>
   )
 }

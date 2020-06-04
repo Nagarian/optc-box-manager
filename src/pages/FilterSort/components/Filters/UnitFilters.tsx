@@ -1,6 +1,7 @@
 import Box from 'components/Box'
 import { Title } from 'components/Title'
 import React from 'react'
+import FilterContainer from './FilterContainer'
 import { SearchFilterUnits, SearchFilterUnitsKeys, UnitFilterBuilder } from './Units'
 
 export type UnitFiltersProps = {
@@ -17,16 +18,27 @@ export default function UnitFilters ({
       {SearchFilterUnitsKeys.map(key => ({
         key,
         ...UnitFilterBuilder[key],
-      })).map(({ key, input: Input }) => (
-        <Input
-          criteria={unitFilter[key]}
-          onChange={value =>
+      })).map(({ key, title, input: Input }) => (
+        <FilterContainer
+          title={title}
+          onReset={() =>
             onChange({
               ...unitFilter,
-              [key]: value,
+              [key]: undefined,
             })
           }
-        />
+          disableReset={!unitFilter[key]}
+        >
+          <Input
+            criteria={unitFilter[key]}
+            onChange={value =>
+              onChange({
+                ...unitFilter,
+                [key]: value,
+              })
+            }
+          />
+        </FilterContainer>
       ))}
     </Box>
   )

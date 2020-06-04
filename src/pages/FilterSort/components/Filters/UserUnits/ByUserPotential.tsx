@@ -3,7 +3,7 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
+import { FilterContainerPanel } from '../FilterContainer'
 
 export const PotentialStateKeys = [
   'locked',
@@ -72,11 +72,7 @@ export function ByUserPotentialInput ({
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
   return (
-    <FilterContainer
-      title="Potential"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       {Potentials.map(potential => (
         <PotentialStateInput
           key={potential}
@@ -90,6 +86,6 @@ export function ByUserPotentialInput ({
           }
         />
       ))}
-    </FilterContainer>
+    </>
   )
 }

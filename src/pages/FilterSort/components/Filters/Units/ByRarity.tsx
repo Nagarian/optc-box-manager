@@ -3,7 +3,6 @@ import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
 
 export interface ByRarityCriteria {
   values: UnitStar[]
@@ -33,11 +32,7 @@ export function ByRarityInput ({
   }
 
   return (
-    <FilterContainer
-      title="Rarity"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       {Rarity.map(value => (
         <ImageInput
           key={value}
@@ -52,6 +47,6 @@ export function ByRarityInput ({
           </Text>
         </ImageInput>
       ))}
-    </FilterContainer>
+    </>
   )
 }

@@ -2,7 +2,7 @@ import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/sea
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import { BooleanUnitFilterMapper } from 'services/filterHelper'
-import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
+import { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria extends SearchFilterCriteria {
   globalOnly?: boolean
@@ -31,11 +31,7 @@ export function ByUnclassableInput ({
   onChange,
 }: SearchFilterCriteriaInputProps<ByUnclassableCriteria>) {
   return (
-    <FilterContainer
-      title="Common"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       <label>
         <input
           type="checkbox"
@@ -84,6 +80,6 @@ export function ByUnclassableInput ({
           unevolved + not super-evolved
         </label>
       </FilterContainerPanel>
-    </FilterContainer>
+    </>
   )
 }

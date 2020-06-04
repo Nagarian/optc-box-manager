@@ -2,7 +2,7 @@ import { CottonCandyIcon } from 'components/Icon'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
+import { FilterContainerPanel } from '../FilterContainer'
 
 export const CottonCandyStateKeys = ['none', 'ongoing', 'maxed'] as const
 export type CottonCandyState = typeof CottonCandyStateKeys[number]
@@ -69,11 +69,7 @@ export function ByUserCottonCandyInput ({
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserCottonCandyCriteria>) {
   return (
-    <FilterContainer
-      title="Cotton Candy"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       {CottonCandyTypeKeys.map(type => (
         <CottonCandyStateInput
           key={type}
@@ -87,6 +83,6 @@ export function ByUserCottonCandyInput ({
           }
         />
       ))}
-    </FilterContainer>
+    </>
   )
 }

@@ -3,7 +3,6 @@ import PotentialAbility from 'components/PotentialAbility'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
 
 export interface ByPotentialCriteria extends SearchFilterCriteria {
   values: PotentialKey[]
@@ -36,11 +35,7 @@ export function ByPotentialInput ({
   }
 
   return (
-    <FilterContainer
-      title="Potential"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       {Potentials.map(potential => (
         <ImageInput
           key={potential}
@@ -52,6 +47,6 @@ export function ByPotentialInput ({
           <PotentialAbility type={potential} size="3" />
         </ImageInput>
       ))}
-    </FilterContainer>
+    </>
   )
 }

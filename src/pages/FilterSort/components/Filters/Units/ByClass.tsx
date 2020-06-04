@@ -3,7 +3,6 @@ import ImageInput from 'components/forms/ImageInput'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
 import React from 'react'
-import FilterContainer from '../FilterContainer'
 
 export interface ByClassCriteria extends SearchFilterCriteria {
   values: UnitClass[]
@@ -42,11 +41,7 @@ export function ByClassInput ({
   }
 
   return (
-    <FilterContainer
-      title="Class"
-      onReset={() => onChange(undefined)}
-      disableReset={!criteria}
-    >
+    <>
       {UnitClasses.map(unitClass => (
         <ImageInput
           key={unitClass}
@@ -58,6 +53,6 @@ export function ByClassInput ({
           <UnitClassIcon type={unitClass} size="2" margin="2" />
         </ImageInput>
       ))}
-    </FilterContainer>
+    </>
   )
 }
