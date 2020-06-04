@@ -25,7 +25,7 @@ SubTitle.defaultProps = {
   textAlign: 'center',
 }
 
-export const Text = styled('span').withConfig(cleanStyledSystem)<TypoProps>(
+export const Text = styled('p').withConfig(cleanStyledSystem)<TypoProps>(
   space,
   typography,
   gridArea,

@@ -1,6 +1,7 @@
 import Button from 'components/Button'
 import Popup from 'components/Popup'
 import { MyUserBox } from 'models/userBox'
+import Credits from 'pages/Credits'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { exportAsJson } from 'services/share'
 
@@ -54,6 +55,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
           title="Are you really sure ?"
         />
       )}
+      <Credits />
       <Button variant="danger" my="1" onClick={() => setShowResetWarning(true)}>
         Reset
       </Button>

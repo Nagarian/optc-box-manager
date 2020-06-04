@@ -33,6 +33,7 @@ export default function Popup ({
     >
       <PopupContainer padding="2">
         {title && <Title>{title}</Title>}
+        {title && <hr />}
 
         <PopupPanel>{children}</PopupPanel>
 
