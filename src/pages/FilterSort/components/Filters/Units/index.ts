@@ -1,43 +1,72 @@
-import { UnitFilter, UnitFilterCriteria } from 'models/search'
-import { ByClassCriteria, ByClassFilter } from './ByClass'
-import { ByPotentialCriteria, ByPotentialFilter } from './ByPotential'
-import { ByRarityCriteria, ByRarityFilter } from './ByRarity'
-import { ByRcvFinderCriteria, ByRcvFinderFilter } from './ByRcvFinder'
-import { BySupportCriteria, BySupportFilter } from './BySupport'
-import { ByTypeCriteria, ByTypeFilter } from './ByType'
-import { ByUnclassableCriteria, ByUnclassableFilter } from './ByUnclassable'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
+import { FunctionComponent } from 'react'
+import { ByClassFilter, ByClassInput } from './ByClass'
+import { ByPotentialFilter, ByPotentialInput } from './ByPotential'
+import { ByRarityFilter, ByRarityInput } from './ByRarity'
+import { ByRcvFinderFilter, ByRcvFinderInput } from './ByRcvFinder'
+import { BySupportFilter, BySupportInput } from './BySupport'
+import { ByTypeFilter, ByTypeInput } from './ByType'
+import { ByUnclassableFilter, ByUnclassableInput } from './ByUnclassable'
+
+export const SearchFilterUnitsKeys = [
+  'byUnclassable',
+  'byType',
+  'byClass',
+  'byRarity',
+  'bySupport',
+  'byPotential',
+  'byRcvFinder',
+] as const
+
+export type SearchFilterUnitsType = typeof SearchFilterUnitsKeys[number]
 
 export type SearchFilterUnits = {
-  // [key: string]: UnitFilterCriteria
-  byRarity?: ByRarityCriteria
-  bySupport?: BySupportCriteria
-  byPotential?: ByPotentialCriteria
-  byClass?: ByClassCriteria
-  byType?: ByTypeCriteria
-  byUnclassable?: ByUnclassableCriteria
-  byRcvFinder?: ByRcvFinderCriteria
+  [key in SearchFilterUnitsType]?: SearchFilterCriteria
 }
 
-export function UnitFilterBuilder (
-  key: string,
-  criteria: UnitFilterCriteria,
-): UnitFilter {
-  switch (key) {
-    case 'byRarity':
-      return ByRarityFilter(criteria as ByRarityCriteria)
-    case 'bySupport':
-      return BySupportFilter(criteria as BySupportCriteria)
-    case 'byPotential':
-      return ByPotentialFilter(criteria as ByPotentialCriteria)
-    case 'byClass':
-      return ByClassFilter(criteria as ByClassCriteria)
-    case 'byType':
-      return ByTypeFilter(criteria as ByTypeCriteria)
-    case 'byUnclassable':
-      return ByUnclassableFilter(criteria as ByUnclassableCriteria)
-    case 'byRcvFinder':
-      return ByRcvFinderFilter(criteria as ByRcvFinderCriteria)
-    default:
-      throw new Error(`Invalid filter " ${key} "`)
+type Builder = (criteria: SearchFilterCriteria) => UnitFilter
+export const UnitFilterBuilder: {
+  [key in SearchFilterUnitsType]: {
+    title: string
+    builder: Builder
+    input: FunctionComponent<
+      SearchFilterCriteriaInputProps<SearchFilterCriteria>
+    >
   }
+} = {
+  byRarity: {
+    title: 'Rarity',
+    builder: ByRarityFilter,
+    input: ByRarityInput,
+  },
+  bySupport: {
+    title: 'Support',
+    builder: BySupportFilter,
+    input: BySupportInput,
+  },
+  byPotential: {
+    title: 'Potential ability',
+    builder: ByPotentialFilter,
+    input: ByPotentialInput,
+  },
+  byClass: {
+    title: 'Class',
+    builder: ByClassFilter,
+    input: ByClassInput,
+  },
+  byType: {
+    title: 'Type',
+    builder: ByTypeFilter,
+    input: ByTypeInput,
+  },
+  byUnclassable: {
+    title: 'Common',
+    builder: ByUnclassableFilter,
+    input: ByUnclassableInput,
+  },
+  byRcvFinder: {
+    title: 'RCV Finder',
+    builder: ByRcvFinderFilter,
+    input: ByRcvFinderInput,
+  },
 }

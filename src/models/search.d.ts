@@ -6,11 +6,16 @@ import { UserUnit } from './userBox'
 
 export type LogicalMode = 'AND' | 'OR'
 
-export interface UnitFilterCriteria {}
-export interface UserUnitFilterCriteria {}
+export type Filter<T> = (unit: T) => boolean
+export type UnitFilter = Filter<ExtendedUnit>
+export type UserUnitFilter = Filter<UserUnit>
 
-export type UnitFilter = (unit: ExtendedUnit) => boolean
-export type UserUnitFilter = (userUnit: UserUnit) => boolean
+export type SearchFilterCriteria = any
+
+export type SearchFilterCriteriaInputProps<T extends SearchFilterCriteria> = {
+  criteria?: T | undefined
+  onChange: (criteria?: T) => void
+}
 
 export type Sort<T> = (u1: T, u2: T) => number
 export type UnitSort = Sort<ExtendedUnit>
@@ -23,7 +28,7 @@ export type SearchSortCriteria = {
 
 export type Search = {
   filters: {
-    units?: SearchFilterUnits,
+    units?: SearchFilterUnits
     userUnits?: SearchFilterUserUnits
   }
   sorts: SearchSortCriteria[]

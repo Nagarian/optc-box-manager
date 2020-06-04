@@ -1,11 +1,11 @@
 import { UnitClassIcon } from 'components/Class'
 import ImageInput from 'components/forms/ImageInput'
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
 import React from 'react'
 import FilterContainer from '../FilterContainer'
 
-export interface ByClassCriteria extends UnitFilterCriteria {
+export interface ByClassCriteria extends SearchFilterCriteria {
   values: UnitClass[]
 }
 
@@ -22,24 +22,20 @@ export const ByClassFilter = (criteria: ByClassCriteria) => (
       : unit.class === crit,
   )
 
-export type ByClassInputProps = {
-  criteria?: ByClassCriteria
-  onChange: (criteria?: ByClassCriteria) => void
-}
-
 export function ByClassInput ({
-  criteria = { values: [] },
+  criteria,
   onChange,
-}: ByClassInputProps) {
+}: SearchFilterCriteriaInputProps<ByClassCriteria>) {
+  const values = criteria?.values! ?? []
   const triggerChange = (value: UnitClass, check: boolean) => {
-    const values = check
-      ? criteria.values.concat(value)
-      : criteria.values.filter(v => v !== value)
+    const newValues = check
+      ? values.concat(value)
+      : values.filter(v => v !== value)
 
     onChange(
-      values.length
+      newValues.length
         ? {
-          values,
+          values: newValues,
         }
         : undefined,
     )
@@ -49,14 +45,14 @@ export function ByClassInput ({
     <FilterContainer
       title="Class"
       onReset={() => onChange(undefined)}
-      disableReset={!criteria.values.length}
+      disableReset={!criteria}
     >
       {UnitClasses.map(unitClass => (
         <ImageInput
           key={unitClass}
           type="checkbox"
           name="unit-class"
-          checked={criteria.values.includes(unitClass)}
+          checked={values.includes(unitClass)}
           onChange={e => triggerChange(unitClass, e.target.checked)}
         >
           <UnitClassIcon type={unitClass} size="2" margin="2" />

@@ -1,10 +1,10 @@
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import { BooleanUnitFilterMapper } from 'services/filterHelper'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
-export interface ByUnclassableCriteria extends UnitFilterCriteria {
+export interface ByUnclassableCriteria extends SearchFilterCriteria {
   globalOnly?: boolean
   evolvedOnly?: boolean
   superEvolvedOnly?: boolean
@@ -26,15 +26,10 @@ export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
     [criteria.globalOnly, UnclassedFilters.globalOnly],
   )
 
-export type ByUnclassableInputProps = {
-  criteria?: ByUnclassableCriteria
-  onChange: (criteria?: ByUnclassableCriteria) => void
-}
-
 export function ByUnclassableInput ({
   criteria,
   onChange,
-}: ByUnclassableInputProps) {
+}: SearchFilterCriteriaInputProps<ByUnclassableCriteria>) {
   return (
     <FilterContainer
       title="Common"

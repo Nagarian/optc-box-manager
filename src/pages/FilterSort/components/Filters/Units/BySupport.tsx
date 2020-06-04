@@ -1,22 +1,20 @@
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 
-export interface BySupportCriteria extends UnitFilterCriteria {
+export interface BySupportCriteria extends SearchFilterCriteria {
   hasSupport: boolean
 }
 
 export const BySupportFilter = (criteria: BySupportCriteria) => (
   unit: ExtendedUnit,
-) => (unit.detail.support?.length > 0) === criteria.hasSupport
+) => (unit.detail.support?.length > 0) === (criteria.hasSupport ?? false)
 
-export type BySupportInputProps = {
-  criteria?: BySupportCriteria
-  onChange: (criteria?: BySupportCriteria) => void
-}
-
-export function BySupportInput ({ criteria, onChange }: BySupportInputProps) {
+export function BySupportInput ({
+  criteria,
+  onChange,
+}: SearchFilterCriteriaInputProps<BySupportCriteria>) {
   const triggerChange = (check: boolean) => {
     onChange({
       hasSupport: check,

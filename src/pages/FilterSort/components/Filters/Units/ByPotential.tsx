@@ -1,11 +1,11 @@
 import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 import React from 'react'
 import FilterContainer from '../FilterContainer'
 
-export interface ByPotentialCriteria extends UnitFilterCriteria {
+export interface ByPotentialCriteria extends SearchFilterCriteria {
   values: PotentialKey[]
 }
 
@@ -16,24 +16,20 @@ export const ByPotentialFilter = (criteria: ByPotentialCriteria) => (
     unit.detail.potential?.some(p => p.Name === crit),
   )
 
-export type ByPotentialInputProps = {
-  criteria?: ByPotentialCriteria
-  onChange: (criteria?: ByPotentialCriteria) => void
-}
-
 export function ByPotentialInput ({
-  criteria = { values: [] },
+  criteria,
   onChange,
-}: ByPotentialInputProps) {
+}: SearchFilterCriteriaInputProps<ByPotentialCriteria>) {
+  const values = criteria?.values ?? []
   const triggerChange = (value: PotentialKey, check: boolean) => {
-    const values = check
-      ? criteria.values.concat(value)
-      : criteria.values.filter(v => v !== value)
+    const newValues = check
+      ? values.concat(value)
+      : values.filter(v => v !== value)
 
     onChange(
-      values.length
+      newValues.length
         ? {
-          values,
+          values: newValues,
         }
         : undefined,
     )
@@ -43,14 +39,14 @@ export function ByPotentialInput ({
     <FilterContainer
       title="Potential"
       onReset={() => onChange(undefined)}
-      disableReset={!criteria.values.length}
+      disableReset={!criteria}
     >
       {Potentials.map(potential => (
         <ImageInput
           key={potential}
           type="checkbox"
           name="unit-potentials"
-          checked={criteria.values.includes(potential)}
+          checked={values.includes(potential)}
           onChange={e => triggerChange(potential, e.target.checked)}
         >
           <PotentialAbility type={potential} size="3" />

@@ -1,5 +1,5 @@
 import { CottonCandyIcon } from 'components/Icon'
-import { UserUnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
@@ -10,10 +10,9 @@ export type CottonCandyState = typeof CottonCandyStateKeys[number]
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
 export type CottonCandyType = typeof CottonCandyTypeKeys[number]
 
-export type ByUserCottonCandyCriteria = UserUnitFilterCriteria &
-  {
-    [type in CottonCandyType]?: CottonCandyState
-  }
+export type ByUserCottonCandyCriteria = SearchFilterCriteria & {
+  [type in CottonCandyType]?: CottonCandyState
+}
 
 const ccFilter = (value: number, state?: CottonCandyState) => {
   switch (state) {
@@ -34,11 +33,6 @@ export const ByUserCottonCandyFilter = (
   ccFilter(userUnit.cc.atk, criteria.atk) &&
   ccFilter(userUnit.cc.hp, criteria.hp) &&
   ccFilter(userUnit.cc.rcv, criteria.rcv)
-
-export type ByUserCottonCandyInputProps = {
-  criteria?: ByUserCottonCandyCriteria
-  onChange: (criteria?: ByUserCottonCandyCriteria) => void
-}
 
 type CottonCandyStateInputProps = {
   type: 'atk' | 'hp' | 'rcv'
@@ -73,7 +67,7 @@ function CottonCandyStateInput ({
 export function ByUserCottonCandyInput ({
   criteria,
   onChange,
-}: ByUserCottonCandyInputProps) {
+}: SearchFilterCriteriaInputProps<ByUserCottonCandyCriteria>) {
   return (
     <FilterContainer
       title="Cotton Candy"

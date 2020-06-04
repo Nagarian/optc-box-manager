@@ -1,5 +1,5 @@
 import { SpecialLvlIcon } from 'components/Icon'
-import { UserUnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
@@ -7,7 +7,7 @@ import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const
 export type UserSpecialState = typeof UserSpecialStateKeys[number]
 
-export type ByUserSpecialCriteria = UserUnitFilterCriteria & {
+export interface ByUserSpecialCriteria extends SearchFilterCriteria {
   state: UserSpecialState
 }
 
@@ -32,15 +32,10 @@ export const ByUserSpecialFilter = (criteria: ByUserSpecialCriteria) => (
   !!userUnit.special &&
   specialFilter(userUnit.special.lvl, userUnit.special.lvlMax, criteria.state)
 
-export type ByUserSpecialInputProps = {
-  criteria?: ByUserSpecialCriteria
-  onChange: (criteria?: ByUserSpecialCriteria) => void
-}
-
 export function ByUserSpecialInput ({
   criteria,
   onChange,
-}: ByUserSpecialInputProps) {
+}: SearchFilterCriteriaInputProps<ByUserSpecialCriteria>) {
   return (
     <FilterContainer
       title="Special"

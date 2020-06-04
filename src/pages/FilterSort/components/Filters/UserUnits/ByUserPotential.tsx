@@ -1,5 +1,5 @@
 import PotentialAbility from 'components/PotentialAbility'
-import { UserUnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
@@ -13,10 +13,9 @@ export const PotentialStateKeys = [
 ] as const
 export type PotentialState = typeof PotentialStateKeys[number]
 
-export type ByUserPotentialCriteria = UserUnitFilterCriteria &
-  {
-    [key in PotentialKey]?: PotentialState
-  }
+export type ByUserPotentialCriteria = {
+  [key in PotentialKey]?: PotentialState
+}
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
   switch (state) {
@@ -39,11 +38,6 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
       p => p.type === potentialKey && compareLvlToState(potentialState!, p.lvl),
     ),
   )
-
-export type ByUserPotentialInputProps = {
-  criteria?: ByUserPotentialCriteria
-  onChange: (criteria?: ByUserPotentialCriteria) => void
-}
 
 type PotentialStateInputProps = {
   potential: PotentialKey
@@ -76,7 +70,7 @@ function PotentialStateInput ({
 export function ByUserPotentialInput ({
   criteria,
   onChange,
-}: ByUserPotentialInputProps) {
+}: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
   return (
     <FilterContainer
       title="Potential"

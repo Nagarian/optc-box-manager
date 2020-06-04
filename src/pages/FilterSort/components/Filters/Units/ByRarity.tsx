@@ -1,11 +1,11 @@
 import ImageInput from 'components/forms/ImageInput'
 import { Text } from 'components/Title'
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
 import React from 'react'
 import FilterContainer from '../FilterContainer'
 
-export interface ByRarityCriteria extends UnitFilterCriteria {
+export interface ByRarityCriteria {
   values: UnitStar[]
 }
 
@@ -13,24 +13,20 @@ export const ByRarityFilter = (criteria: ByRarityCriteria) => (
   unit: ExtendedUnit,
 ) => criteria.values.includes(unit.stars)
 
-export type ByRarityInputProps = {
-  criteria?: ByRarityCriteria
-  onChange: (criteria?: ByRarityCriteria) => void
-}
-
 export function ByRarityInput ({
-  criteria = { values: [] },
+  criteria,
   onChange,
-}: ByRarityInputProps) {
+}: SearchFilterCriteriaInputProps<ByRarityCriteria>) {
+  const values = criteria?.values ?? []
   const triggerChange = (value: UnitStar, check: boolean) => {
-    const values = check
-      ? criteria.values.concat(value)
-      : criteria.values.filter(v => v !== value)
+    const newValues = check
+      ? values.concat(value)
+      : values.filter(v => v !== value)
 
     onChange(
-      values.length
+      newValues.length
         ? {
-          values,
+          values: newValues,
         }
         : undefined,
     )
@@ -40,14 +36,14 @@ export function ByRarityInput ({
     <FilterContainer
       title="Rarity"
       onReset={() => onChange(undefined)}
-      disableReset={!criteria.values.length}
+      disableReset={!criteria}
     >
       {Rarity.map(value => (
         <ImageInput
           key={value}
           type="checkbox"
           name="rarity-filter"
-          checked={criteria.values.includes(value)}
+          checked={values.includes(value)}
           onChange={e => triggerChange(value, e.target.checked)}
         >
           {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}

@@ -1,14 +1,7 @@
 import Box from 'components/Box'
 import { Title } from 'components/Title'
 import React from 'react'
-import { SearchFilterUnits } from './Units'
-import { ByClassInput } from './Units/ByClass'
-import { ByPotentialInput } from './Units/ByPotential'
-import { ByRarityInput } from './Units/ByRarity'
-import { ByRcvFinderInput } from './Units/ByRcvFinder'
-import { BySupportInput } from './Units/BySupport'
-import { ByTypeInput } from './Units/ByType'
-import { ByUnclassableInput } from './Units/ByUnclassable'
+import { SearchFilterUnits, SearchFilterUnitsKeys, UnitFilterBuilder } from './Units'
 
 export type UnitFiltersProps = {
   unitFilter: SearchFilterUnits
@@ -21,75 +14,20 @@ export default function UnitFilters ({
   return (
     <Box overflowY="auto">
       <Title>Units Filters</Title>
-      <ByUnclassableInput
-        criteria={unitFilter.byUnclassable}
-        onChange={byUnclassable =>
-          onChange({
-            ...unitFilter,
-            byUnclassable,
-          })
-        }
-      />
-
-      <ByTypeInput
-        criteria={unitFilter.byType}
-        onChange={byType =>
-          onChange({
-            ...unitFilter,
-            byType,
-          })
-        }
-      />
-
-      <ByClassInput
-        criteria={unitFilter.byClass}
-        onChange={byClass =>
-          onChange({
-            ...unitFilter,
-            byClass,
-          })
-        }
-      />
-
-      <ByRarityInput
-        criteria={unitFilter.byRarity}
-        onChange={byRarity =>
-          onChange({
-            ...unitFilter,
-            byRarity,
-          })
-        }
-      />
-
-      <BySupportInput
-        criteria={unitFilter.bySupport}
-        onChange={bySupport =>
-          onChange({
-            ...unitFilter,
-            bySupport,
-          })
-        }
-      />
-
-      <ByPotentialInput
-        criteria={unitFilter.byPotential}
-        onChange={byPotential =>
-          onChange({
-            ...unitFilter,
-            byPotential,
-          })
-        }
-      />
-
-      <ByRcvFinderInput
-        criteria={unitFilter.byRcvFinder}
-        onChange={byRcvFinder =>
-          onChange({
-            ...unitFilter,
-            byRcvFinder,
-          })
-        }
-      />
+      {SearchFilterUnitsKeys.map(key => ({
+        key,
+        ...UnitFilterBuilder[key],
+      })).map(({ key, input: Input }) => (
+        <Input
+          criteria={unitFilter[key]}
+          onChange={value =>
+            onChange({
+              ...unitFilter,
+              [key]: value,
+            })
+          }
+        />
+      ))}
     </Box>
   )
 }

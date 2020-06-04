@@ -1,11 +1,7 @@
 import Box from 'components/Box'
 import { Title } from 'components/Title'
 import React from 'react'
-import { SearchFilterUserUnits } from './UserUnits'
-import { ByUserCottonCandyInput } from './UserUnits/ByUserCottonCandy'
-import { ByUserPotentialInput } from './UserUnits/ByUserPotential'
-import { ByUserSpecialCriteria, ByUserSpecialInput } from './UserUnits/ByUserSpecial'
-import { ByUserSupportCriteria, ByUserSupportInput } from './UserUnits/ByUserSupport'
+import { SearchFilterUserUnits, SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from './UserUnits'
 
 export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits
@@ -18,42 +14,20 @@ export default function UserUnitFilters ({
   return (
     <Box overflowY="auto">
       <Title>My Box Filters</Title>
-      <ByUserSpecialInput
-        criteria={userUnitFilter.byUserSpecial as ByUserSpecialCriteria}
-        onChange={byUserSpecial =>
-          onChange({
-            ...userUnitFilter,
-            byUserSpecial,
-          })
-        }
-      />
-      <ByUserCottonCandyInput
-        criteria={userUnitFilter.byUserCottonCandy}
-        onChange={byUserCottonCandy =>
-          onChange({
-            ...userUnitFilter,
-            byUserCottonCandy,
-          })
-        }
-      />
-      <ByUserSupportInput
-        criteria={userUnitFilter.byUserSupport as ByUserSupportCriteria}
-        onChange={byUserSupport =>
-          onChange({
-            ...userUnitFilter,
-            byUserSupport,
-          })
-        }
-      />
-      <ByUserPotentialInput
-        criteria={userUnitFilter.byUserPotential}
-        onChange={byUserPotential =>
-          onChange({
-            ...userUnitFilter,
-            byUserPotential,
-          })
-        }
-      />
+      {SearchFilterUserUnitsKeys.map(key => ({
+        key,
+        ...UserUnitFilterBuilder[key],
+      })).map(({ key, input: Input }) => (
+        <Input
+          criteria={userUnitFilter[key]}
+          onChange={value =>
+            onChange({
+              ...userUnitFilter,
+              [key]: value,
+            })
+          }
+        />
+      ))}
     </Box>
   )
 }

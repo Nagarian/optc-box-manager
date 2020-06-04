@@ -1,10 +1,10 @@
-import { UnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitSpecial } from 'models/units'
 import React from 'react'
 import { BooleanUnitFilterMapper } from 'services/filterHelper'
 import FilterContainer from '../FilterContainer'
 
-export interface ByRcvFinderCriteria extends UnitFilterCriteria {
+export interface ByRcvFinderCriteria extends SearchFilterCriteria {
   captainRcv?: boolean
   specialRcv?: boolean
 }
@@ -31,15 +31,10 @@ export const ByRcvFinderFilter = (criteria: ByRcvFinderCriteria) =>
     ],
   )
 
-export type ByRcvFinderInputProps = {
-  criteria?: ByRcvFinderCriteria
-  onChange: (criteria?: ByRcvFinderCriteria) => void
-}
-
 export function ByRcvFinderInput ({
   criteria,
   onChange,
-}: ByRcvFinderInputProps) {
+}: SearchFilterCriteriaInputProps<ByRcvFinderCriteria>) {
   return (
     <FilterContainer
       title="Rcv Finder"

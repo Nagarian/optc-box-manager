@@ -1,33 +1,51 @@
-import { UserUnitFilter, UserUnitFilterCriteria } from 'models/search'
-import { ByUserCottonCandyCriteria, ByUserCottonCandyFilter } from './ByUserCottonCandy'
-import { ByUserPotentialCriteria, ByUserPotentialFilter } from './ByUserPotential'
-import { ByUserSpecialCriteria, ByUserSpecialFilter } from './ByUserSpecial'
-import { ByUserSupportCriteria, ByUserSupportFilter } from './ByUserSupport'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps, UserUnitFilter } from 'models/search'
+import { FunctionComponent } from 'react'
+import { ByUserCottonCandyFilter, ByUserCottonCandyInput } from './ByUserCottonCandy'
+import { ByUserPotentialFilter, ByUserPotentialInput } from './ByUserPotential'
+import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
+import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
 
-export type SearchFilterUserUnitsKeys =
-  | 'byUserPotential'
-  | 'byUserCottonCandy'
-  | 'byUserSupport'
-  | 'byUserSpecial'
+export const SearchFilterUserUnitsKeys = [
+  'byUserSpecial',
+  'byUserCottonCandy',
+  'byUserSupport',
+  'byUserPotential',
+] as const
+
+export type SearchFilterUserUnitsType = typeof SearchFilterUserUnitsKeys[number]
 
 export type SearchFilterUserUnits = {
-  [key in SearchFilterUserUnitsKeys]?: UserUnitFilterCriteria
+  [key in SearchFilterUserUnitsType]?: SearchFilterCriteria
 }
 
-export function UserUnitFilterBuilder (
-  key: SearchFilterUserUnitsKeys,
-  criteria: UserUnitFilterCriteria,
-): UserUnitFilter {
-  switch (key) {
-    case 'byUserPotential':
-      return ByUserPotentialFilter(criteria as ByUserPotentialCriteria)
-    case 'byUserCottonCandy':
-      return ByUserCottonCandyFilter(criteria as ByUserCottonCandyCriteria)
-    case 'byUserSupport':
-      return ByUserSupportFilter(criteria as ByUserSupportCriteria)
-    case 'byUserSpecial':
-      return ByUserSpecialFilter(criteria as ByUserSpecialCriteria)
-    default:
-      throw new Error(`Invalid filter " ${key} "`)
+type Builder = (criteria: SearchFilterCriteria) => UserUnitFilter
+export const UserUnitFilterBuilder: {
+  [key in SearchFilterUserUnitsType]: {
+    title: string
+    builder: Builder
+    input: FunctionComponent<
+      SearchFilterCriteriaInputProps<SearchFilterCriteria>
+    >
   }
+} = {
+  byUserPotential: {
+    title: 'Potential ability',
+    builder: ByUserPotentialFilter,
+    input: ByUserPotentialInput,
+  },
+  byUserCottonCandy: {
+    title: 'Cotton Candy',
+    builder: ByUserCottonCandyFilter,
+    input: ByUserCottonCandyInput,
+  },
+  byUserSupport: {
+    title: 'Support',
+    builder: ByUserSupportFilter,
+    input: ByUserSupportInput,
+  },
+  byUserSpecial: {
+    title: 'Special',
+    builder: ByUserSpecialFilter,
+    input: ByUserSpecialInput,
+  },
 }

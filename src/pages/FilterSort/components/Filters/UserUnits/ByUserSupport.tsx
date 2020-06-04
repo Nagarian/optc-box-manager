@@ -1,5 +1,5 @@
 import { SupportIcon } from 'components/Icon'
-import { UserUnitFilterCriteria } from 'models/search'
+import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import FilterContainer, { FilterContainerPanel } from '../FilterContainer'
@@ -12,7 +12,7 @@ export const SupportStateKeys = [
 ] as const
 export type SupportState = typeof SupportStateKeys[number]
 
-export type ByUserSupportCriteria = UserUnitFilterCriteria & {
+export interface ByUserSupportCriteria extends SearchFilterCriteria {
   state: SupportState
 }
 
@@ -34,15 +34,10 @@ export const ByUserSupportFilter = (criteria: ByUserSupportCriteria) => (
 ) =>
   !!userUnit?.support && compareLvlToState(criteria.state, userUnit.support.lvl)
 
-export type ByUserSupportInputProps = {
-  criteria?: ByUserSupportCriteria
-  onChange: (criteria?: ByUserSupportCriteria) => void
-}
-
 export function ByUserSupportInput ({
   criteria,
   onChange,
-}: ByUserSupportInputProps) {
+}: SearchFilterCriteriaInputProps<ByUserSupportCriteria>) {
   return (
     <FilterContainer
       title="Support"
