@@ -12,8 +12,8 @@ type SpecialLvlEditProps = {
 }
 
 function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
-  return Array.isArray(special)
-    ? [
+  if (Array.isArray(special)) {
+    return [
       <ul>
         {special.map(({ description }, i) => (
           <li key={i}>
@@ -23,7 +23,26 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
         ))}
       </ul>,
     ]
-    : [special]
+  }
+
+  if (typeof special === 'object') {
+    return [
+      <ul>
+        {Object.keys(special)
+          .filter(key => typeof special[key] === 'string')
+          .map((key, i) => (
+            <li key={i}>
+              <strong>{key}: </strong>
+              {special[key]}
+            </li>
+          ))}
+      </ul>,
+    ]
+  }
+
+  if (typeof special === 'string') return [special]
+
+  return []
 }
 
 export default function SpecialLvlEdit ({

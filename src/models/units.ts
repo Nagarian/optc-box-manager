@@ -97,6 +97,7 @@ export type UnitSpecial =
       cooldown: UnitCooldown
       description: string
     }[]
+  | { [key: string]: any } // luffy/law + robin 767
 
 export type UnitDetail = {
   captain: string
