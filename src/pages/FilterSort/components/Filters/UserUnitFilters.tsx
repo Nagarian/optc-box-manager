@@ -20,6 +20,7 @@ export default function UserUnitFilters ({
         ...UserUnitFilterBuilder[key],
       })).map(({ key, title, input: Input }) => (
         <FilterContainer
+          key={key}
           title={title}
           onReset={() =>
             onChange({
