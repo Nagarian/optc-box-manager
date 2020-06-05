@@ -3,6 +3,7 @@ import React, { InputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`
+  -moz-appearance: initial;
   width: 0;
   height: 0;
 

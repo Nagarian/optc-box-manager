@@ -3,15 +3,12 @@ import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 
 const track = css<RangeInputProps>`
-  width: 100%;
   height: ${themeGet('sizes.0')};
-  margin:
-    calc(${themeGet('sizes.0')} * 1.5)
-    calc(${themeGet('sizes.0')} * 1.5);
   cursor: pointer;
   background-color: ${themeGet('colors.grey')};
   ${p => p.range}
   border-radius: ${themeGet('sizes.2')};
+  box-sizing: border-box;
 `
 
 const thumb = css<RangeInputProps>`
@@ -20,10 +17,11 @@ const thumb = css<RangeInputProps>`
   height: ${themeGet('sizes.0')};
   width: ${themeGet('sizes.0')};
   transform: scale(4);
+  border: none;
+  ${p => p.range}
 
   // as image
   background: ${p => p.thumbImage && `url(${p.thumbImage}) center / contain no-repeat`};
-
   // as svg mask
   background-color: ${p => p.thumbSvg && 'currentColor'};
   mask: ${p => p.thumbSvg && `url(${p.thumbSvg})`};
@@ -45,6 +43,9 @@ const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
   width: 100%;
   background-color: transparent;
   ${space}
+  padding:
+    calc(${themeGet('sizes.0')} * 1.5)
+    calc(${themeGet('sizes.0')} * 1.5);
 
   ::-webkit-slider-runnable-track {
     ${track}
