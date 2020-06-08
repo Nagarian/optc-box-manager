@@ -10,7 +10,7 @@ function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     id: uuid(),
     unit,
     potentials:
-      unit.detail?.potential?.map(potential => ({
+      unit.detail.potential?.map(potential => ({
         type: potential.Name,
         lvl: 0,
       })) ?? [],
@@ -19,7 +19,7 @@ function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
     },
     support:
-      unit.detail?.support?.length > 0
+      unit.detail.support?.length > 0
         ? {
           lvl: 0,
         }

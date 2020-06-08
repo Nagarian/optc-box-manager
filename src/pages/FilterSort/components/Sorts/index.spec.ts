@@ -1,34 +1,8 @@
+import { unitsMock } from 'mocks/UnitMock'
 import { ExtendedUnit } from 'models/units'
 import { byId } from './Units/ByCommon'
 import byRarity from './Units/ByRarity'
 import byType from './Units/ByType'
-
-const unitsMock = () => [
-  {
-    id: 3,
-    type: 'STR',
-    stars: 5,
-    name: 'Luffy',
-  } as ExtendedUnit,
-  {
-    id: 2,
-    type: 'DEX',
-    stars: 6,
-    name: 'Zoro',
-  } as ExtendedUnit,
-  {
-    id: 1,
-    type: 'STR',
-    stars: 6,
-    name: 'Ace',
-  } as ExtendedUnit,
-  {
-    id: 4,
-    type: 'QCK',
-    stars: '6+',
-    name: 'Sanji',
-  } as ExtendedUnit,
-]
 
 describe('UnitSort', () => {
   describe('Sorts functions', () => {

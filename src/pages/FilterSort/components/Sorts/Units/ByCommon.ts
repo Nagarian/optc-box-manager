@@ -6,4 +6,4 @@ export const byFamily: UnitSort = (unit1, unit2) =>
 export const byId: UnitSort = (unit1, unit2) => unit1.id - unit2.id
 
 export const byLBLvlMax: UnitSort = (unit1, unit2) =>
-  (unit1.detail.limit?.length ?? 0) - (unit2.detail.limit?.length ?? 0)
+  (unit1.detail.limit?.length ?? -1) - (unit2.detail.limit?.length ?? -1)

@@ -83,7 +83,7 @@ export const DBUnit = {
         },
         evolution: Evolutions[unit.number + 1],
         cooldown: Cooldowns[unit.number],
-        detail: Details[unit.number + 1],
+        detail: Details[unit.number + 1] ?? {},
         flags: Flags[unit.number + 1] ?? {},
         family: {
           name: Families[unit.number],
