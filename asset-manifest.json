@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.js": "./static/js/main.933c7828.chunk.js",
-    "main.js.map": "./static/js/main.933c7828.chunk.js.map",
+    "main.js": "./static/js/main.f365bfec.chunk.js",
+    "main.js.map": "./static/js/main.f365bfec.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.8401ea94.js",
     "runtime-main.js.map": "./static/js/runtime-main.8401ea94.js.map",
-    "static/js/2.40be17d5.chunk.js": "./static/js/2.40be17d5.chunk.js",
-    "static/js/2.40be17d5.chunk.js.map": "./static/js/2.40be17d5.chunk.js.map",
+    "static/js/2.656ebd33.chunk.js": "./static/js/2.656ebd33.chunk.js",
+    "static/js/2.656ebd33.chunk.js.map": "./static/js/2.656ebd33.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.d49a6e3f7865cd4cea4b67a742a5e2ae.js": "./precache-manifest.d49a6e3f7865cd4cea4b67a742a5e2ae.js",
+    "precache-manifest.788a1658a0fba312364437a991f48d39.js": "./precache-manifest.788a1658a0fba312364437a991f48d39.js",
     "service-worker.js": "./service-worker.js",
-    "static/js/2.40be17d5.chunk.js.LICENSE.txt": "./static/js/2.40be17d5.chunk.js.LICENSE.txt",
+    "static/js/2.656ebd33.chunk.js.LICENSE.txt": "./static/js/2.656ebd33.chunk.js.LICENSE.txt",
     "static/media/add.b88b42ef.svg": "./static/media/add.b88b42ef.svg",
     "static/media/arrow.85dd0daa.svg": "./static/media/arrow.85dd0daa.svg",
     "static/media/ascending.4ab227c3.svg": "./static/media/ascending.4ab227c3.svg",
-    "static/media/cancel.8541147d.svg": "./static/media/cancel.8541147d.svg",
+    "static/media/cancel.d8b1c11c.svg": "./static/media/cancel.d8b1c11c.svg",
+    "static/media/close.8541147d.svg": "./static/media/close.8541147d.svg",
     "static/media/confirm.70f9dcea.svg": "./static/media/confirm.70f9dcea.svg",
     "static/media/cottoncandy.svg": "./static/media/cottoncandy.9445e950.svg",
     "static/media/descending.0ef05bba.svg": "./static/media/descending.0ef05bba.svg",
+    "static/media/edit.970bc55b.svg": "./static/media/edit.970bc55b.svg",
     "static/media/filtersort.svg": "./static/media/filtersort.6ffc624d.svg",
     "static/media/settings.svg": "./static/media/settings.ee934294.svg",
     "static/media/special.png": "./static/media/special.b66e3fc3.png",
@@ -25,7 +27,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.8401ea94.js",
-    "static/js/2.40be17d5.chunk.js",
-    "static/js/main.933c7828.chunk.js"
+    "static/js/2.656ebd33.chunk.js",
+    "static/js/main.f365bfec.chunk.js"
   ]
 }
