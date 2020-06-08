@@ -1,5 +1,5 @@
 import { ExtendedUnit } from 'models/units'
-import { MyUserBox, UserBox, UserUnit } from 'models/userBox'
+import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
@@ -51,6 +51,34 @@ const replacer = (key: string, value: any) => {
   return (value as ExtendedUnit).id
 }
 
+function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
+  const updated = {
+    ...userUnit,
+  }
+
+  if (edit.isRainbow && updated.potentials.length > 0) {
+    updated.potentials = updated.potentials.map(p => ({ ...p, lvl: 5 }))
+  }
+
+  if (edit.supportLvl && updated.support) {
+    updated.support.lvl = edit.supportLvl
+  }
+
+  if (edit.cottonCandies) {
+    if (edit.cottonCandies.atk) {
+      updated.cc.atk = edit.cottonCandies.atk
+    }
+    if (edit.cottonCandies.hp) {
+      updated.cc.hp = edit.cottonCandies.hp
+    }
+    if (edit.cottonCandies.rcv) {
+      updated.cc.rcv = edit.cottonCandies.rcv
+    }
+  }
+
+  return updated
+}
+
 export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
   const [userBox, setUserBox] = useState<UserBox>([])
 
@@ -79,6 +107,13 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
 
       const updated = [...userBox]
       updated.splice(index, 1, userUnit)
+      setUserBox(updated)
+    },
+    bulkUpdate: (userUnits: UserUnit[], edit: UserUnitBulkEdit) => {
+      const updated = userBox.map(uu =>
+        userUnits.some(uuu => uuu.id === uu.id) ? applyEdit(uu, edit) : uu,
+      )
+
       setUserBox(updated)
     },
     remove: (id: string) => {

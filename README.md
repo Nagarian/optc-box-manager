@@ -29,7 +29,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 - [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/speical lvl progression)
 - [ ] Sort by Potential lvl
-- [ ] Bulk update
+- [x] Bulk update
 - [ ] Evolve unit
 - [ ] Rework DB schema
 - [ ] Sync with nakama network

@@ -4,25 +4,16 @@ import CottonCandyInput from 'components/forms/CottonCandyInput'
 import SupportInput from 'components/forms/SupportInput'
 import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
+import { UserUnitBulkEdit } from 'models/userBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
 import React, { ReactNode, useState } from 'react'
 
-export type BulkEdit = {
-  isRainbow?: boolean
-  supportLvl?: number
-  cottonCandies?: {
-    atk?: number
-    hp?: number
-    rcv?: number
-  }
-}
-
 type BulkEditProps = {
   onClose: () => void
-  onNextStep: (editValue: BulkEdit) => void
+  onNextStep: (editValue: UserUnitBulkEdit) => void
 }
 export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
-  const [edit, setEdit] = useState<BulkEdit>()
+  const [edit, setEdit] = useState<UserUnitBulkEdit>()
 
   return (
     <Popup
@@ -51,7 +42,7 @@ export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
           <label>
             <input
               type="checkbox"
-              checked={edit?.isRainbow}
+              checked={edit?.isRainbow ?? false}
               onChange={e =>
                 setEdit({
                   ...edit,

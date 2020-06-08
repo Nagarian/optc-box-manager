@@ -35,7 +35,18 @@ export type MyUserBox = {
   userBox: UserBox
   add: (...units: ExtendedUnit[]) => void
   update: (userUnit: UserUnit) => void
+  bulkUpdate: (userUnits : UserUnit[], edit: UserUnitBulkEdit) => void
   remove: (id: string) => void
   reset: () => void
   importDB: (json: string) => void
+}
+
+export type UserUnitBulkEdit = {
+  isRainbow?: boolean
+  supportLvl?: number
+  cottonCandies?: {
+    atk?: number
+    hp?: number
+    rcv?: number
+  }
 }
