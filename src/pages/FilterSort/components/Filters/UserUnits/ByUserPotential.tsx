@@ -3,6 +3,7 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
+import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const PotentialStateKeys = [
@@ -14,7 +15,10 @@ export const PotentialStateKeys = [
 export type PotentialState = typeof PotentialStateKeys[number]
 
 export type ByUserPotentialCriteria = {
-  [key in PotentialKey]?: PotentialState
+  with?: {
+    [key in PotentialKey]?: PotentialState
+  }
+  isRainbow?: boolean
 }
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
@@ -30,13 +34,23 @@ const compareLvlToState = (state: PotentialState, lvl: number) => {
   }
 }
 
-export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
-  userUnit: UserUnit,
-) =>
-  Object.entries(criteria).some(([potentialKey, potentialState]) =>
-    userUnit.potentials.some(
-      p => p.type === potentialKey && compareLvlToState(potentialState!, p.lvl),
-    ),
+export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) =>
+  BooleanFilterMapper(
+    [
+      criteria.with,
+      (userUnit: UserUnit) =>
+        Object.entries(criteria.with ?? {}).some(([potentialKey, potentialState]) =>
+          userUnit.potentials.some(
+            p =>
+              p.type === potentialKey &&
+              compareLvlToState(potentialState!, p.lvl),
+          ),
+        ),
+    ],
+    [
+      criteria.isRainbow,
+      (userUnit: UserUnit) => userUnit.potentials.length > 0 && userUnit.potentials.every(p => p.lvl === 5),
+    ],
   )
 
 type PotentialStateInputProps = {
@@ -73,15 +87,30 @@ export function ByUserPotentialInput ({
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
   return (
     <>
+      <label>
+        <input
+          type="checkbox"
+          name="uu-israinbow"
+          checked={criteria?.isRainbow ?? false}
+          onChange={e => onChange({
+            ...criteria,
+            isRainbow: e.target.checked,
+          })}
+        />
+          is Rainbow
+      </label>
       {Potentials.map(potential => (
         <PotentialStateInput
           key={potential}
           potential={potential}
-          state={criteria?.[potential]}
+          state={criteria?.with?.[potential]}
           onChange={state =>
             onChange({
               ...criteria,
-              [potential]: state,
+              with: {
+                ...criteria?.with,
+                [potential]: state,
+              },
             })
           }
         />

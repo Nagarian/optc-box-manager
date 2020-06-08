@@ -1,12 +1,13 @@
-import { UnitFilter } from 'models/search'
-import { ExtendedUnit } from 'models/units'
+import { Filter } from 'models/search'
 
-export function BooleanUnitFilterMapper (...args: [boolean | undefined, UnitFilter][]) {
+export function BooleanFilterMapper<T> (
+  ...args: [boolean | object | undefined, Filter<T>][]
+) {
   const filters = args
-    .filter(([include, filter]) => !!include)
+    .filter(([include, filter]) => Boolean(include))
     .map(([, filter]) => filter)
 
   return filters.length === 0
-    ? (unit: ExtendedUnit) => true
-    : (unit: ExtendedUnit) => !filters.some(fn => !fn(unit))
+    ? (unit: T) => true
+    : (unit: T) => !filters.some(fn => !fn(unit))
 }

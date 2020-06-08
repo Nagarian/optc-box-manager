@@ -1,7 +1,7 @@
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitSpecial } from 'models/units'
 import React from 'react'
-import { BooleanUnitFilterMapper } from 'services/filterHelper'
+import { BooleanFilterMapper } from 'services/filterHelper'
 
 export interface ByRcvFinderCriteria extends SearchFilterCriteria {
   captainRcv?: boolean
@@ -22,7 +22,7 @@ const SpecialRcvFinder = (special: UnitSpecial) => {
 }
 
 export const ByRcvFinderFilter = (criteria: ByRcvFinderCriteria) =>
-  BooleanUnitFilterMapper(
+  BooleanFilterMapper(
     [
       criteria.captainRcv,
       (unit: ExtendedUnit) => RcvRegex.test(unit.detail.captain),

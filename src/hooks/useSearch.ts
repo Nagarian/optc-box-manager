@@ -60,10 +60,10 @@ export function useSearch (search: Search = DefaultSearch) {
 
   return {
     search,
-    unitFilters: (unit: ExtendedUnit) => !unitFilters.some(f => !f(unit)),
+    unitFilters: (unit: ExtendedUnit) => unitFilters.every(f => f(unit)),
     userUnitFilters: (userUnit: UserUnit) =>
-      !unitFilters.some(f => !f(userUnit.unit)) &&
-      !userUnitFilters.some(f => !f(userUnit)),
+      unitFilters.every(f => f(userUnit.unit)) &&
+      userUnitFilters.every(f => f(userUnit)),
     unitSort: (unit1: ExtendedUnit, unit2: ExtendedUnit) => {
       for (const sort of unitSorters) {
         const result = sort(unit1, unit2)

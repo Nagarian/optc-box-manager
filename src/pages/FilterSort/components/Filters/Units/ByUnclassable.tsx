@@ -1,7 +1,7 @@
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
-import { BooleanUnitFilterMapper } from 'services/filterHelper'
+import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria extends SearchFilterCriteria {
@@ -20,7 +20,7 @@ const UnclassedFilters = {
 }
 
 export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
-  BooleanUnitFilterMapper(
+  BooleanFilterMapper(
     [criteria.evolvedOnly, UnclassedFilters.hasEvolved],
     [criteria.superEvolvedOnly, UnclassedFilters.hasSuperEvolved],
     [criteria.globalOnly, UnclassedFilters.globalOnly],
