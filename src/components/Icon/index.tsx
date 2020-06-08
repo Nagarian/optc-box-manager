@@ -9,6 +9,7 @@ import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import { ReactComponent as Descending } from './descending.svg'
+import { ReactComponent as Edit } from './edit.svg'
 import FilterSortSvg, { ReactComponent as FilterSort } from './filtersort.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
@@ -36,17 +37,18 @@ export type Icon = StyledComponent<
 export { CottonCandySvg, SettingsSvg, SupportSvg, SpecialLvl, FilterSortSvg }
 
 export const AddIcon: Icon = BaseSvg(Add)
-export const SettingsIcon: Icon = BaseSvg(Settings)
-export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
-export const SupportIcon: Icon = BaseSvg(Support)
-export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
-export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const AscendingIcon: Icon = BaseSvg(Ascending)
 export const CancelIcon: Icon = BaseSvg(Cancel)
 export const CloseIcon: Icon = BaseSvg(Close)
 export const ConfirmIcon: Icon = BaseSvg(Confirm)
-export const AscendingIcon: Icon = BaseSvg(Ascending)
+export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const DescendingIcon: Icon = BaseSvg(Descending)
+export const EditIcon: Icon = BaseSvg(Edit)
+export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const LoaderIcon: Icon = BaseSvg(TailSpin)
+export const SettingsIcon: Icon = BaseSvg(Settings)
+export const SupportIcon: Icon = BaseSvg(Support)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,
