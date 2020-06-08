@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import { CancelIcon, ConfirmIcon } from 'components/Icon'
+import { CancelIcon, CloseIcon, ConfirmIcon } from 'components/Icon'
 import { Title } from 'components/Title'
 import React, { ReactNode } from 'react'
 import { SpaceProps } from 'styled-system'
@@ -64,7 +64,7 @@ export default function Popup ({
             <Button
               variant="primary"
               onClick={onClose}
-              icon={CancelIcon}
+              icon={CloseIcon}
               title="Close"
             />
           )}

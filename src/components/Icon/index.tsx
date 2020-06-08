@@ -5,6 +5,7 @@ import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
 import { ReactComponent as Ascending } from './ascending.svg'
 import { ReactComponent as Cancel } from './cancel.svg'
+import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import { ReactComponent as Descending } from './descending.svg'
@@ -42,6 +43,7 @@ export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const CancelIcon: Icon = BaseSvg(Cancel)
+export const CloseIcon: Icon = BaseSvg(Close)
 export const ConfirmIcon: Icon = BaseSvg(Confirm)
 export const AscendingIcon: Icon = BaseSvg(Ascending)
 export const DescendingIcon: Icon = BaseSvg(Descending)
