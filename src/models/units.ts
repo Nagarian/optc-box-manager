@@ -109,7 +109,7 @@ export type UnitDetail = {
   }
   sailorNotes: string
   specialName: string
-  limit: LimitBreak[]
+  limit?: LimitBreak[]
   potential?: UnitPotential[]
   potentialNotes: string
   support: UnitSupport[]

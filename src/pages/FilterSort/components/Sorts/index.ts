@@ -1,5 +1,5 @@
 import { Sort, UnitSort, UserUnitSort } from 'models/search'
-import { byFamily, byId } from './Units/ByCommon'
+import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
 import byRarity from './Units/ByRarity'
 import byType from './Units/ByType'
 import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './UserUnits/ByCottonCandy'
@@ -10,6 +10,7 @@ export const UnitSortTypeKeys = [
   'byRarity',
   'byFamily',
   'byId',
+  'byLBLvlMax',
 ] as const
 export const UserUnitSortTypeKeys = [
   'byCottonCandy',
@@ -73,6 +74,11 @@ export const SearchSortBuilder: {
     label: 'Support',
     type: 'userUnit',
     fn: bySupportLvl,
+  },
+  byLBLvlMax: {
+    label: 'LB Lvl Max',
+    type: 'unit',
+    fn: byLBLvlMax,
   },
 }
 
