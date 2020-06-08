@@ -34,19 +34,36 @@ export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
           onReset={() =>
             setEdit({
               ...edit,
-              isRainbow: undefined,
+              limitBreakState: undefined,
             })
           }
-          disableReset={!edit?.isRainbow}
+          disableReset={!edit?.limitBreakState}
         >
           <label>
             <input
-              type="checkbox"
-              checked={edit?.isRainbow ?? false}
+              name="lb-state"
+              type="radio"
+              checked={edit?.limitBreakState === 'max'}
               onChange={e =>
+                e.target.checked &&
                 setEdit({
                   ...edit,
-                  isRainbow: e.target.checked,
+                  limitBreakState: 'max',
+                })
+              }
+            />
+            Is Limit Break maxed
+          </label>
+          <label>
+            <input
+              name="lb-state"
+              type="radio"
+              checked={edit?.limitBreakState === 'rainbow'}
+              onChange={e =>
+                e.target.checked &&
+                setEdit({
+                  ...edit,
+                  limitBreakState: 'rainbow',
                 })
               }
             />

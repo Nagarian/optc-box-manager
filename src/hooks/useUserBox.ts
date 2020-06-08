@@ -56,8 +56,11 @@ function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
     ...userUnit,
   }
 
-  if (edit.isRainbow && updated.potentials.length > 0) {
-    updated.potentials = updated.potentials.map(p => ({ ...p, lvl: 5 }))
+  if (edit.limitBreakState && updated.potentials.length > 0) {
+    updated.potentials = updated.potentials.map(p => ({
+      ...p,
+      lvl: edit.limitBreakState === 'rainbow' ? 5 : 1,
+    }))
   }
 
   if (edit.supportLvl && updated.support) {

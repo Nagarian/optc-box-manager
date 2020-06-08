@@ -42,7 +42,7 @@ export type MyUserBox = {
 }
 
 export type UserUnitBulkEdit = {
-  isRainbow?: boolean
+  limitBreakState?: 'max' | 'rainbow'
   supportLvl?: number
   cottonCandies?: {
     atk?: number
