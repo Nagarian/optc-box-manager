@@ -1,12 +1,13 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { AddIcon, FilterSortIcon, SettingsIcon } from 'components/Icon'
+import { AddIcon, EditIcon, FilterSortIcon, SettingsIcon } from 'components/Icon'
 import { useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import Add from 'pages/Add'
+import BulkEdit from 'pages/BulkEdit'
 import Detail from 'pages/Detail'
 import FilterSort from 'pages/FilterSort'
 import MyUserBox from 'pages/MyUserBox'
@@ -29,6 +30,7 @@ function App () {
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<UserUnit>()
+  const [showBulkEdit, setShowBulkEdit] = useState<boolean>(false)
   const { search, setSearch } = useSavedSearch()
 
   const myUserBox = useUserBox(unitDatabase)
@@ -95,6 +97,13 @@ function App () {
         />
       )}
 
+      {showBulkEdit && (
+        <BulkEdit
+          onClose={() => setShowBulkEdit(false)}
+          onNextStep={() => setShowBulkEdit(false)}
+        />
+      )}
+
       <Box
         display="grid"
         gridAutoFlow="column"
@@ -113,6 +122,13 @@ function App () {
           icon={AddIcon}
           title="Add new units"
         />
+        {userBox.length > 0 && (
+          <Button
+            onClick={() => setShowBulkEdit(true)}
+            icon={EditIcon}
+            title="Bulk edit"
+          />
+        )}
         <Button
           onClick={() => setShowSettings(true)}
           icon={SettingsIcon}

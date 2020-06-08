@@ -40,6 +40,15 @@ export default function Popup ({
         <hr />
 
         <PopupActionPanel>
+          {onClose && (
+            <Button
+              variant="primary"
+              onClick={onClose}
+              icon={CloseIcon}
+              title="Close"
+            />
+          )}
+
           {onCancel && (
             <Button
               variant="secondary"
@@ -57,15 +66,6 @@ export default function Popup ({
               onClick={onValidate}
               icon={ConfirmIcon}
               title="Confirm"
-            />
-          )}
-
-          {onClose && (
-            <Button
-              variant="primary"
-              onClick={onClose}
-              icon={CloseIcon}
-              title="Close"
             />
           )}
         </PopupActionPanel>
