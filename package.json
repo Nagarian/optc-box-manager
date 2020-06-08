@@ -14,7 +14,7 @@
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "@testing-library/jest-dom": "^5.9.0",
-    "@testing-library/react": "^10.2.0",
+    "@testing-library/react": "^10.2.1",
     "@testing-library/user-event": "^11.2.0",
     "@types/jest": "^25.2.3",
     "@types/node": "^14.0.11",
