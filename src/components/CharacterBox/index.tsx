@@ -31,7 +31,7 @@ const rainbowCss = css`
     border: 0.7rem solid;
     border-image-slice: 1;
     border-image-source: ${themeGet('colors.specific.rainbow')};
-    opacity: 0.7;
+    opacity: 0.9;
   }
 `
 
