@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "./static/js/main.5ae3fb5d.chunk.js",
-    "main.js.map": "./static/js/main.5ae3fb5d.chunk.js.map",
+    "main.js": "./static/js/main.c42bd5af.chunk.js",
+    "main.js.map": "./static/js/main.c42bd5af.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.8401ea94.js",
     "runtime-main.js.map": "./static/js/runtime-main.8401ea94.js.map",
-    "static/js/2.3c5bcef5.chunk.js": "./static/js/2.3c5bcef5.chunk.js",
-    "static/js/2.3c5bcef5.chunk.js.map": "./static/js/2.3c5bcef5.chunk.js.map",
+    "static/js/2.bc6a8afe.chunk.js": "./static/js/2.bc6a8afe.chunk.js",
+    "static/js/2.bc6a8afe.chunk.js.map": "./static/js/2.bc6a8afe.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.336ae5fe75857751dcd49ffae8a3a4aa.js": "./precache-manifest.336ae5fe75857751dcd49ffae8a3a4aa.js",
+    "precache-manifest.055a89608348983e4d3cc5ecc1dfa75e.js": "./precache-manifest.055a89608348983e4d3cc5ecc1dfa75e.js",
     "service-worker.js": "./service-worker.js",
-    "static/js/2.3c5bcef5.chunk.js.LICENSE.txt": "./static/js/2.3c5bcef5.chunk.js.LICENSE.txt",
+    "static/js/2.bc6a8afe.chunk.js.LICENSE.txt": "./static/js/2.bc6a8afe.chunk.js.LICENSE.txt",
     "static/media/add.b88b42ef.svg": "./static/media/add.b88b42ef.svg",
     "static/media/arrow.85dd0daa.svg": "./static/media/arrow.85dd0daa.svg",
     "static/media/ascending.4ab227c3.svg": "./static/media/ascending.4ab227c3.svg",
@@ -18,7 +18,7 @@
     "static/media/confirm.70f9dcea.svg": "./static/media/confirm.70f9dcea.svg",
     "static/media/cottoncandy.svg": "./static/media/cottoncandy.9445e950.svg",
     "static/media/descending.0ef05bba.svg": "./static/media/descending.0ef05bba.svg",
-    "static/media/edit.970bc55b.svg": "./static/media/edit.970bc55b.svg",
+    "static/media/edit.3c642845.svg": "./static/media/edit.3c642845.svg",
     "static/media/filtersort.svg": "./static/media/filtersort.6ffc624d.svg",
     "static/media/settings.svg": "./static/media/settings.ee934294.svg",
     "static/media/special.png": "./static/media/special.b66e3fc3.png",
@@ -27,7 +27,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.8401ea94.js",
-    "static/js/2.3c5bcef5.chunk.js",
-    "static/js/main.5ae3fb5d.chunk.js"
+    "static/js/2.bc6a8afe.chunk.js",
+    "static/js/main.c42bd5af.chunk.js"
   ]
 }
