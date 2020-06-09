@@ -27,7 +27,7 @@ export default function MyUserBox ({
   const filtered = userBox
     .filter(userUnitFilters)
     .sort(userUnitSort)
-  const { slice, paginationProps, setPage } = usePagination(
+  const { slice, paginationProps, setPage, pageScrollRef } = usePagination(
     filtered.length,
     100,
   )
@@ -43,7 +43,7 @@ export default function MyUserBox ({
 
   return (
     <>
-      <ResultList>
+      <ResultList ref={pageScrollRef}>
         {filtered.slice(...slice).map(userUnit => (
           <CharacterBox
             key={userUnit.id}

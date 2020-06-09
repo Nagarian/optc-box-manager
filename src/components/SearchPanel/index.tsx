@@ -4,7 +4,7 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 
@@ -31,17 +31,9 @@ export default function SearchPanel ({
   onUnitClick,
   ...rest
 }: SearchPanelProps & SpaceProps & FlexProps) {
-  const pageScrollRef = useRef<HTMLDivElement>(null)
   const { unitFilters, unitSort } = useSearch(search)
   const filtered = units.filter(unitFilters).sort(unitSort)
-  const { slice, paginationProps, setPage } = usePagination(filtered.length, 100)
-
-  const pageDep = paginationProps.current
-  useEffect(() => {
-    if (pageScrollRef.current) {
-      pageScrollRef.current.scrollTo(0, 0)
-    }
-  }, [pageDep])
+  const { slice, paginationProps, setPage, pageScrollRef } = usePagination(filtered.length, 100)
 
   return (
     <>
