@@ -118,8 +118,8 @@ export type UnitDetail = {
 export type UnitCooldown = [number, number]
 
 export type UnitEvolution = {
-  evolution: number
-  evolvers: any[]
+  evolution: number | number[]
+  evolvers: any[] | any[][]
 }
 
 export type UnitImages = {

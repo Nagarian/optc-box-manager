@@ -81,6 +81,7 @@ function App () {
           onDelete={deleteUnit}
           onValidate={updateUnit}
           userUnit={showDetail}
+          units={unitDatabase}
         />
       )}
 

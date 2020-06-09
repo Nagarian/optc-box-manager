@@ -30,7 +30,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/speical lvl progression)
 - [ ] Sort by Potential lvl
 - [x] Bulk update
-- [ ] Evolve unit
+- [x] Evolve unit
 - [ ] Rework DB schema
 - [ ] Sync with nakama network
 - [ ] Sync with OPTC-DB log feature

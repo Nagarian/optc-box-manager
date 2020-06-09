@@ -1,7 +1,12 @@
+import Box from 'components/Box'
 import Button from 'components/Button'
+import CharacterBox from 'components/CharacterBox'
+import ExpansionPanel from 'components/ExpansionPanel'
 import Popup from 'components/Popup'
+import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React, { useState } from 'react'
+import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import PotentialEdit from './components/PotentialEdit'
 import RecapBox from './components/RecapBox'
@@ -10,6 +15,7 @@ import SupportEdit from './components/SupportEdit'
 
 type DetailProps = {
   userUnit: UserUnit
+  units: ExtendedUnit[]
   onCancel: () => void
   onValidate: (updated: UserUnit) => void
   onDelete: (id: string) => void
@@ -18,12 +24,20 @@ type DetailProps = {
 export default function Detail ({
   onCancel,
   onValidate,
+  units,
   userUnit: original,
   onDelete,
 }: DetailProps) {
   const [userUnit, setUserUnit] = useState<UserUnit>(original)
-  const { unit } = original
+  const { unit } = userUnit
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+
+  const evolutions = (!unit.evolution?.evolution
+    ? []
+    : Array.isArray(unit.evolution.evolution)
+      ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
+      : [units.find(u => u.id === unit.evolution!.evolution)]
+  ).filter(Boolean) as ExtendedUnit[]
 
   return (
     <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>
@@ -52,6 +66,20 @@ export default function Detail ({
         details={unit.detail.potential ?? []}
         onChange={potentials => setUserUnit({ ...userUnit, potentials })}
       />
+
+      {!!evolutions.length && (
+        <ExpansionPanel title="Evolution">
+          <Box display="flex" justifyContent="space-evenly">
+            {evolutions.map(evolveUnit => (
+              <CharacterBox
+                key={evolveUnit.id}
+                unit={evolveUnit}
+                onClick={() => setUserUnit(Evolve(userUnit, evolveUnit))}
+              />
+            ))}
+          </Box>
+        </ExpansionPanel>
+      )}
 
       <Button
         href={`https://optc-db.github.io/characters/#/view/${unit.id}`}

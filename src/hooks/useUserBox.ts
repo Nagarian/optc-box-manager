@@ -1,36 +1,9 @@
 import { ExtendedUnit } from 'models/units'
 import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
-import { v4 as uuid } from 'uuid'
+import { UserUnitFactory } from 'services/userUnits'
 
 const userBoxKey = 'userBox'
-
-function UserUnitFactory (unit: ExtendedUnit): UserUnit {
-  return {
-    id: uuid(),
-    unit,
-    potentials:
-      unit.detail.potential?.map(potential => ({
-        type: potential.Name,
-        lvl: 0,
-      })) ?? [],
-    special: unit.cooldown && {
-      lvl: 1,
-      lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
-    },
-    support:
-      unit.detail.support?.length > 0
-        ? {
-          lvl: 0,
-        }
-        : undefined,
-    cc: {
-      hp: 0,
-      atk: 0,
-      rcv: 0,
-    },
-  }
-}
 
 const reviver = (units: ExtendedUnit[] = []) =>
   units.length === 0
