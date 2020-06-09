@@ -7,6 +7,7 @@ import { SubTitle } from 'components/Title'
 import { useSavedSearch } from 'hooks/useSearch'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
+import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
 import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -44,7 +45,7 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
     <Popup
       title="Select your new units"
       onCancel={onCancel}
-      onValidate={() => onSubmit(selectedUnits)}
+      onValidate={() => onSubmit([...selectedUnits].sort(byId))}
       customAction={
         <Button
           onClick={() => setShowSettings(true)}
