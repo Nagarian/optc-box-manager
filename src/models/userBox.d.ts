@@ -1,4 +1,4 @@
-import { PotentialKey } from './units'
+import { ExtendedUnit, PotentialKey } from './units'
 
 export type UserUnitSpecial = {
   lvl: number

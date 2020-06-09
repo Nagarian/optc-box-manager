@@ -66,7 +66,7 @@ export default function CharacterBox ({
   onClick,
   ...rest
 }: CharacterBoxProps & CharacterBoxStyledProps) {
-  const unit : ExtendedUnit = userUnit?.unit ?? u
+  const unit : ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
 
   return (
