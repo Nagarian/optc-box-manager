@@ -6,6 +6,11 @@ import { SearchFilterUserUnitsType, UserUnitFilterBuilder } from 'pages/FilterSo
 import { DescendingSort, SearchSortBuilder, UnitSort2UserUnitSort } from 'pages/FilterSort/components/Sorts'
 import { useEffect, useState } from 'react'
 
+export const EmptySearch: Search = {
+  filters: {},
+  sorts: [],
+}
+
 export const DefaultSearch: Search = {
   filters: {
     units: {
@@ -24,6 +29,26 @@ export const DefaultSearch: Search = {
     { by: 'byFamily', order: 'asc' },
     { by: 'byId', order: 'asc' },
   ],
+}
+
+export function mergeSearch (search: Search, search2: Search): Search {
+  return {
+    ...search,
+    ...search2,
+    filters: {
+      ...search.filters,
+      ...search2.filters,
+      units: {
+        ...search.filters.units,
+        ...search2.filters.units,
+      },
+      userUnits: {
+        ...search.filters.userUnits,
+        ...search2.filters.userUnits,
+      },
+    },
+    sorts: search2.sorts?.length ? search2.sorts : search.sorts,
+  }
 }
 
 export function useSearch (search: Search = DefaultSearch) {

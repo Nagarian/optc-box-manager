@@ -4,29 +4,85 @@ import CottonCandyInput from 'components/forms/CottonCandyInput'
 import SupportInput from 'components/forms/SupportInput'
 import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
-import { UserUnitBulkEdit } from 'models/userBox'
+import { DefaultSearch } from 'hooks/useSearch'
+import { Search, SearchSortCriteria } from 'models/search'
+import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
+import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { ReactNode, useState } from 'react'
+import BulkEditSelect from './components/BulkEditSelect'
 
 type BulkEditProps = {
-  onClose: () => void
-  onNextStep: (editValue: UserUnitBulkEdit) => void
+  userUnits: UserUnit[]
+  onCancel: () => void
+  onSubmit: (userUnits: UserUnit[], editValue: UserUnitBulkEdit) => void
 }
-export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
+export default function BulkEdit ({
+  userUnits,
+  onCancel,
+  onSubmit,
+}: BulkEditProps) {
   const [edit, setEdit] = useState<UserUnitBulkEdit>()
+  const [showStep2, setShowStep2] = useState<boolean>()
+
+  const computeSearch = () : Search => {
+    let uuf: SearchFilterUserUnits = {}
+    const uus: SearchSortCriteria[] = []
+    if (edit?.supportLvl) {
+      uuf = {
+        ...uuf,
+        byUserSupport: {
+          state: 'unmaxed',
+        },
+      }
+    }
+
+    if (edit?.limitBreakState) {
+      uuf = {
+        ...uuf,
+        byUserPotential: {
+          lbstate: 'locked',
+        },
+      }
+      uus.push({
+        by: 'byLBLvlMax',
+        order: 'desc',
+      })
+    }
+
+    if (edit?.cottonCandies) {
+      uuf = {
+        ...uuf,
+        byUserCottonCandy: {
+          atk: (edit.cottonCandies.atk ?? 0) > 0 ? 'unmaxed' : undefined,
+          hp: (edit.cottonCandies.hp ?? 0) > 0 ? 'unmaxed' : undefined,
+          rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
+        },
+      }
+    }
+
+    return {
+      filters: {
+        userUnits: {
+          ...uuf,
+        },
+      },
+      sorts: [...uus, ...DefaultSearch.sorts],
+    }
+  }
 
   return (
     <Popup
-      onClose={onClose}
+      onClose={onCancel}
       customAction={
         <Button
           disabled={!edit}
-          onClick={() => onNextStep(edit!)}
+          onClick={() => setShowStep2(true)}
           icon={ArrowIcon}
           title="Next step"
         />
       }
-      title="Bulk Edit"
+      title="Bulk Edit - Step 1"
     >
       <Box display="flex" flexDirection="column">
         <FilterContainer
@@ -155,6 +211,15 @@ export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
           </BulkEditContainer>
         </FilterContainer>
       </Box>
+
+      {showStep2 && (
+        <BulkEditSelect
+          relatedSearch={computeSearch()}
+          userUnits={userUnits}
+          onCancel={() => setShowStep2(false)}
+          onSubmit={uu => onSubmit(uu, edit!)}
+        />
+      )}
     </Popup>
   )
 }

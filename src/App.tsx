@@ -31,7 +31,6 @@ function App () {
   const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<UserUnit>()
   const [showBulkEdit, setShowBulkEdit] = useState<boolean>(false)
-  const [showApplyBulkEdit, setShowApplyBulkEdit] = useState<UserUnitBulkEdit>()
   const { search, setSearch } = useSavedSearch()
 
   const myUserBox = useUserBox(unitDatabase)
@@ -52,16 +51,9 @@ function App () {
     setShowDetail(undefined)
   }
 
-  const editUnits = (units: ExtendedUnit[]) => {
-    if (!showApplyBulkEdit) {
-      return
-    }
-
-    bulkUpdate(
-      userBox.filter(uu => units.some(u => u.id === uu.unit.id)),
-      showApplyBulkEdit,
-    )
-    setShowApplyBulkEdit(undefined)
+  const editUnits = (userUnits: UserUnit[], edit: UserUnitBulkEdit) => {
+    bulkUpdate(userUnits, edit)
+    setShowBulkEdit(false)
   }
 
   return (
@@ -112,20 +104,8 @@ function App () {
 
       {showBulkEdit && (
         <BulkEdit
-          onClose={() => setShowBulkEdit(false)}
-          onNextStep={edit => {
-            setShowBulkEdit(false)
-            setShowApplyBulkEdit(edit)
-          }}
-        />
-      )}
-
-      {showApplyBulkEdit && (
-        <Add
-          units={unitDatabase.filter(unit =>
-            userBox.some(uu => uu.unit.id === unit.id),
-          )}
-          onCancel={() => setShowApplyBulkEdit(undefined)}
+          userUnits={userBox}
+          onCancel={() => setShowBulkEdit(false)}
           onSubmit={editUnits}
         />
       )}
