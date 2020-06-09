@@ -2,6 +2,7 @@ import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import styled from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
+import { BounceIn, FadeIn } from 'styles/animation'
 
 export const PopupBackground = styled.div<SpaceProps>`
   min-width: ${themeGet('sizes.minimalRequired')};
@@ -16,6 +17,7 @@ export const PopupBackground = styled.div<SpaceProps>`
   display: grid;
   align-content: center;
   justify-items: center;
+  animation: 200ms ${FadeIn};
 `
 
 export const PopupContainer = styled(Box)<SpaceProps>`
@@ -29,6 +31,7 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   border-radius: .5rem;
   ${space}
   box-shadow: ${themeGet('shadows.normal')};
+  animation: 250ms ${BounceIn};
 `
 
 export const PopupPanel = styled(Box)<SpaceProps>`
