@@ -4,7 +4,7 @@ import { UserUnit } from 'models/userBox'
 import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
 
-export const CottonCandyStateKeys = ['none', 'ongoing', 'maxed'] as const
+export const CottonCandyStateKeys = ['none', 'unmaxed', 'maxed'] as const
 export type CottonCandyState = typeof CottonCandyStateKeys[number]
 
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
@@ -18,11 +18,11 @@ const ccFilter = (value: number, state?: CottonCandyState) => {
   switch (state) {
     case 'none':
       return value === 0
-    case 'ongoing':
-      return value > 0 && value < 100
+    case 'unmaxed':
+      return value < 100
     case 'maxed':
       return value === 100
-    case undefined:
+    default:
       return true
   }
 }

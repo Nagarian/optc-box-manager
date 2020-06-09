@@ -7,7 +7,7 @@ import { FilterContainerPanel } from '../FilterContainer'
 export const SupportStateKeys = [
   'locked',
   'unlocked',
-  'ongoing',
+  'unmaxed',
   'maxed',
 ] as const
 export type SupportState = typeof SupportStateKeys[number]
@@ -22,10 +22,12 @@ const compareLvlToState = (state: SupportState, lvl: number) => {
       return lvl === 0
     case 'unlocked':
       return lvl > 0
-    case 'ongoing':
-      return lvl > 0 && lvl < 5
+    case 'unmaxed':
+      return lvl < 5
     case 'maxed':
       return lvl === 5
+    default:
+      return true
   }
 }
 
