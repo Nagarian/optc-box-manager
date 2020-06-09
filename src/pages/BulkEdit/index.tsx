@@ -79,7 +79,7 @@ export default function BulkEdit ({ onClose, onNextStep }: BulkEditProps) {
               supportLvl: undefined,
             })
           }
-          disableReset={Number.isNaN(Number(edit?.supportLvl))}
+          disableReset={!edit?.supportLvl}
         >
           <BulkEditContainer value={edit?.supportLvl}>
             <SupportInput
@@ -169,7 +169,7 @@ function BulkEditContainer ({
   return (
     <Box display="flex" alignItems="center">
       {children}
-      {value ?? 'as is'}
+      {value ?? 0}
     </Box>
   )
 }
