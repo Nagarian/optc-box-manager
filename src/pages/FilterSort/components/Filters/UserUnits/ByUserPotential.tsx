@@ -1,4 +1,5 @@
 import PotentialAbility from 'components/PotentialAbility'
+import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
@@ -18,7 +19,7 @@ export type ByUserPotentialCriteria = {
   with?: {
     [key in PotentialKey]?: PotentialState
   }
-  isRainbow?: boolean
+  lbstate?: 'locked' | 'lbmax' | 'rainbow'
 }
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
@@ -39,7 +40,9 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) =>
     [
       criteria.with,
       (userUnit: UserUnit) =>
-        Object.entries(criteria.with ?? {}).some(([potentialKey, potentialState]) =>
+        Object.entries(
+          criteria.with ?? {},
+        ).some(([potentialKey, potentialState]) =>
           userUnit.potentials.some(
             p =>
               p.type === potentialKey &&
@@ -48,8 +51,22 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) =>
         ),
     ],
     [
-      criteria.isRainbow,
-      (userUnit: UserUnit) => userUnit.potentials.length > 0 && userUnit.potentials.every(p => p.lvl === 5),
+      criteria.lbstate === 'locked',
+      (userUnit: UserUnit) =>
+        userUnit.potentials.length > 0 &&
+        userUnit.potentials.every(p => compareLvlToState('locked', p.lvl)),
+    ],
+    [
+      criteria.lbstate === 'lbmax',
+      (userUnit: UserUnit) =>
+        userUnit.potentials.length > 0 &&
+        userUnit.potentials.every(p => compareLvlToState('ongoing', p.lvl)),
+    ],
+    [
+      criteria.lbstate === 'rainbow',
+      (userUnit: UserUnit) =>
+        userUnit.potentials.length > 0 &&
+        userUnit.potentials.every(p => compareLvlToState('maxed', p.lvl)),
     ],
   )
 
@@ -87,18 +104,51 @@ export function ByUserPotentialInput ({
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
   return (
     <>
-      <label>
-        <input
-          type="checkbox"
-          name="uu-israinbow"
-          checked={criteria?.isRainbow ?? false}
-          onChange={e => onChange({
-            ...criteria,
-            isRainbow: e.target.checked,
-          })}
-        />
-          is Rainbow
-      </label>
+      <FilterContainerPanel>
+        <Text>Limit Break State</Text>
+        <label>
+          <input
+            type="radio"
+            name="uu-lbstate"
+            checked={criteria?.lbstate === 'locked' ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                lbstate: 'locked',
+              })
+            }
+          />
+          locked
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="uu-lbstate"
+            checked={criteria?.lbstate === 'lbmax' ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                lbstate: 'lbmax',
+              })
+            }
+          />
+          limit break max
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="uu-lbstate"
+            checked={criteria?.lbstate === 'rainbow' ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                lbstate: 'rainbow',
+              })
+            }
+          />
+          rainbow
+        </label>
+      </FilterContainerPanel>
       {Potentials.map(potential => (
         <PotentialStateInput
           key={potential}

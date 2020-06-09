@@ -1,7 +1,7 @@
 import { Filter } from 'models/search'
 
 export function BooleanFilterMapper<T> (
-  ...args: [boolean | object | undefined, Filter<T>][]
+  ...args: [boolean | unknown | undefined, Filter<T>][]
 ) {
   const filters = args
     .filter(([include, filter]) => Boolean(include))
