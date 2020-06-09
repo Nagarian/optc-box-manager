@@ -119,11 +119,6 @@ function App () {
         boxShadow="none"
       >
         <Button
-          onClick={() => setShowFilterSort(true)}
-          icon={FilterSortIcon}
-          title="Filter/Sort"
-        />
-        <Button
           onClick={() => setShowAddUnit(true)}
           icon={AddIcon}
           title="Add new units"
@@ -135,6 +130,11 @@ function App () {
             title="Bulk edit"
           />
         )}
+        <Button
+          onClick={() => setShowFilterSort(true)}
+          icon={FilterSortIcon}
+          title="Filter/Sort"
+        />
         <Button
           onClick={() => setShowSettings(true)}
           icon={SettingsIcon}
