@@ -41,7 +41,7 @@ export const SearchSortBuilder: {
     fn: byRarity,
   },
   byFamily: {
-    label: 'Perso',
+    label: 'Character',
     type: 'unit',
     fn: byFamily,
   },
