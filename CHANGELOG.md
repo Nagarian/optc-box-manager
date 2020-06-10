@@ -1,3 +1,13 @@
+# [0.3.0](https://github.com/Nagarian/optc-box-manager/compare/v0.2.2...v0.3.0) (2020-06-10)
+
+
+### Features
+
+* **filter:** add filter by name or ID ([69a850d](https://github.com/Nagarian/optc-box-manager/commit/69a850d5466e634bed9876617f1a48e1d80344cc))
+* add SearchIcon ([2072b8e](https://github.com/Nagarian/optc-box-manager/commit/2072b8e8d5bd6833db1065938a1ffa7e254058c2))
+
+
+
 ## [0.2.2](https://github.com/Nagarian/optc-box-manager/compare/v0.2.1...v0.2.2) (2020-06-10)
 
 
