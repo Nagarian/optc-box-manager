@@ -2,14 +2,16 @@ import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { AddIcon, EditIcon, FilterSortIcon, SettingsIcon } from 'components/Icon'
-import { useSavedSearch } from 'hooks/useSearch'
+import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import Add from 'pages/Add'
 import BulkEdit from 'pages/BulkEdit'
 import Detail from 'pages/Detail'
 import FilterSort from 'pages/FilterSort'
+import { BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
 import React, { useMemo, useState } from 'react'
@@ -18,7 +20,7 @@ import styled from 'styled-components'
 
 const AppBlock = styled.div`
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   height: 100vh;
   min-width: ${themeGet('sizes.minimalRequired')};
   position: relative;
@@ -58,6 +60,16 @@ function App () {
 
   return (
     <AppBlock>
+      <BySearchBoxInput
+        criteria={search?.filters.units?.bySearchBox}
+        onChange={criteria =>
+          setSearch(
+            mergeSearch(search, {
+              filters: { units: { bySearchBox: criteria } },
+            } as Search),
+          )
+        }
+      />
       <MyUserBox
         userBox={userBox}
         search={search}

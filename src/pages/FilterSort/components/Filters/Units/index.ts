@@ -4,6 +4,7 @@ import { ByClassFilter, ByClassInput } from './ByClass'
 import { ByPotentialFilter, ByPotentialInput } from './ByPotential'
 import { ByRarityFilter, ByRarityInput } from './ByRarity'
 import { ByRcvFinderFilter, ByRcvFinderInput } from './ByRcvFinder'
+import { BySearchBoxFilter, BySearchBoxInput } from './BySearchBox'
 import { BySupportFilter, BySupportInput } from './BySupport'
 import { ByTypeFilter, ByTypeInput } from './ByType'
 import { ByUnclassableFilter, ByUnclassableInput } from './ByUnclassable'
@@ -16,6 +17,7 @@ export const SearchFilterUnitsKeys = [
   'bySupport',
   'byPotential',
   'byRcvFinder',
+  'bySearchBox',
 ] as const
 
 export type SearchFilterUnitsType = typeof SearchFilterUnitsKeys[number]
@@ -68,5 +70,10 @@ export const UnitFilterBuilder: {
     title: 'RCV Finder',
     builder: ByRcvFinderFilter,
     input: ByRcvFinderInput,
+  },
+  bySearchBox: {
+    title: 'Search',
+    builder: BySearchBoxFilter,
+    input: BySearchBoxInput,
   },
 }

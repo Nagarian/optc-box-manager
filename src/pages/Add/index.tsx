@@ -4,9 +4,11 @@ import { FilterSortIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
-import { useSavedSearch } from 'hooks/useSearch'
+import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
+import { BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
 import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
 import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
@@ -54,6 +56,17 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
         />
       }
     >
+
+      <BySearchBoxInput
+        criteria={search?.filters.units?.bySearchBox}
+        onChange={criteria =>
+          setSearch(
+            mergeSearch(search, {
+              filters: { units: { bySearchBox: criteria } },
+            } as Search),
+          )
+        }
+      />
       <SearchPanel
         search={search}
         units={units.filter(u => !selectedUnits.some(su => su.id === u.id))}

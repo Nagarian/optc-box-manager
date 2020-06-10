@@ -72,7 +72,6 @@ input[type='week'] {
 /* Make webkit render the search input like a normal text field */
 input[type='search'] {
   -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
 }
 
 /* Turn off the recent search for webkit. It adds about 15px padding on the left */
