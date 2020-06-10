@@ -1,4 +1,8 @@
-# 0.2.0 (2020-06-09)
+## [0.2.1](https://github.com/Nagarian/optc-box-manager/compare/v0.2.0...v0.2.1) (2020-06-10)
+
+
+
+# [0.2.0](https://github.com/Nagarian/optc-box-manager/compare/3a4d5c6f82a4e16e7f9479086830cb983b6e69f2...v0.2.0) (2020-06-09)
 
 
 ### Bug Fixes
