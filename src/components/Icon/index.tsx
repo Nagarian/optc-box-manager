@@ -11,6 +11,7 @@ import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Edit } from './edit.svg'
 import FilterSortSvg, { ReactComponent as FilterSort } from './filtersort.svg'
+import { ReactComponent as Search } from './search.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
@@ -49,6 +50,7 @@ export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const SettingsIcon: Icon = BaseSvg(Settings)
 export const SupportIcon: Icon = BaseSvg(Support)
+export const SearchIcon: Icon = BaseSvg(Search)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,
