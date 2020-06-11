@@ -81,13 +81,13 @@ const specificColors = {
   )`,
 }
 
-type FontSizes = number[] & {
-  body?: number
-  title?: number
-  subtitle?: number
+type FontSizes = string[] & {
+  body?: string
+  title?: string
+  subtitle?: string
 }
 
-const fontSizes: FontSizes = [12, 14, 16, 20, 24, 32]
+const fontSizes: FontSizes = ['1.2rem', '1.4rem', '1.6rem', '2rem', '2.4rem', '3.2rem']
 fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]

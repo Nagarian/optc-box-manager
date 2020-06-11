@@ -12,6 +12,7 @@ export const Title = styled('h1').withConfig(cleanStyledSystem)<TypoProps>(
 Title.defaultProps = {
   fontSize: '4',
   textAlign: 'center',
+  my: '2',
 }
 
 export const SubTitle = styled('h2').withConfig(cleanStyledSystem)<TypoProps>(

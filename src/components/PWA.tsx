@@ -1,6 +1,8 @@
+import Changelog from 'components/Changelog'
 import React, { useEffect } from 'react'
 import * as serviceWorker from 'serviceWorker'
 import Popup from './Popup'
+import { Text, Title } from './Title'
 
 export default function PWA () {
   const [showReload, setShowReload] = React.useState(false)
@@ -33,7 +35,14 @@ export default function PWA () {
       onValidate={reloadPage}
       onCancel={() => setShowReload(false)}
     >
-      Do you want to load it now ?<br />
+      <Text>Do you want to load it now ?</Text>
+      {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+      <Text m="1">
+        If there is Breaking changes, you might take caution and make an export before loading it 😉
+      </Text>
+      <hr />
+      <Title>Changelog</Title>
+      <Changelog onlyUnseen />
     </Popup>
   )
 }

@@ -4,6 +4,7 @@ import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { exportAsJson } from 'services/share'
+import Changelog from 'components/Changelog'
 
 type SettingsProps = {
   onClose: () => void
@@ -16,6 +17,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [successMessage, setSuccessMessage] = useState<string>()
   const [showResetWarning, setShowResetWarning] = useState<boolean>(false)
+  const [showChangelog, setShowChangelog] = useState<boolean>(false)
 
   const importRef = useRef<HTMLInputElement>(null)
 
@@ -55,7 +57,19 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
           title="Are you really sure ?"
         />
       )}
+
       <Credits />
+
+      <Button my="1" onClick={() => setShowChangelog(true)}>
+        Changelog
+      </Button>
+
+      {showChangelog && (
+        <Popup onClose={() => setShowChangelog(false)} title="Changelog">
+          <Changelog />
+        </Popup>
+      )}
+
       <Button variant="danger" my="1" onClick={() => setShowResetWarning(true)}>
         Reset
       </Button>

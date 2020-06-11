@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from 'styled-components'
-import { color, size, SizeProps, space, SpaceProps } from 'styled-system'
-import { clean } from 'styles'
+import { color, size, SizeProps, space, SpaceProps, compose } from 'styled-system'
+import { clean, PlaceProps, place } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
 import { ReactComponent as Ascending } from './ascending.svg'
@@ -17,21 +17,21 @@ import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
 
+type StyledIconProps = SpaceProps & SizeProps & PlaceProps
+
 const BaseSvg = (
   svg: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & { title?: string }
   >,
-) => styled(svg).withConfig(clean('color', 'fill'))<SpaceProps & SizeProps>`
-  ${space}
-  ${size}
-  ${color}
+) => styled(svg).withConfig(clean('color', 'fill'))<StyledIconProps>`
+  ${compose(space, size, color, place)}
   fill: currentColor;
 `
 
 export type Icon = StyledComponent<
   React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>,
   any,
-  SpaceProps & SizeProps,
+  StyledIconProps,
   never
 >
 
