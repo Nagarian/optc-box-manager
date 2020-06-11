@@ -35,4 +35,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Sync with nakama network
 - [ ] Sync with OPTC-DB log feature
 - [x] Search literral
-- [ ] Filter Drop Island
+- [x] Filter Drop Island
