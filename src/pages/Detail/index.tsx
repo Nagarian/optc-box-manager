@@ -89,7 +89,7 @@ export default function Detail ({
       </Button>
 
       <Button variant="danger" my="1" onClick={() => setShowConfirmation(true)}>
-        Supprimer
+        Delete
       </Button>
 
       {showConfirmation && (
