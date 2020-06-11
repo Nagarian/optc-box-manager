@@ -16,5 +16,5 @@ updates:
       interval: 'daily'
       time: "08:00"
       timezone: "Europe/Paris"
-    commit-message:
-      prefix: "optc-db"
+    # commit-message:
+    #   prefix: "optc-db"
