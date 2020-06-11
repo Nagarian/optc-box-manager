@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/Nagarian/optc-box-manager/compare/v0.3.0...v0.4.0) (2020-06-11)
+
+
+### Features
+
+* **filter:** add Drop Island filter (Fortnight) ([98fb316](https://github.com/Nagarian/optc-box-manager/commit/98fb316cbffb6708ee2fe763920a6fc27549edd6))
+
+
+
 # [0.3.0](https://github.com/Nagarian/optc-box-manager/compare/v0.2.2...v0.3.0) (2020-06-10)
 
 
