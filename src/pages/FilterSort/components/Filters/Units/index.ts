@@ -1,6 +1,7 @@
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
 import { FunctionComponent } from 'react'
 import { ByClassFilter, ByClassInput } from './ByClass'
+import { ByDropFilter, ByDropInput } from './ByDrop'
 import { ByPotentialFilter, ByPotentialInput } from './ByPotential'
 import { ByRarityFilter, ByRarityInput } from './ByRarity'
 import { ByRcvFinderFilter, ByRcvFinderInput } from './ByRcvFinder'
@@ -18,6 +19,7 @@ export const SearchFilterUnitsKeys = [
   'byPotential',
   'byRcvFinder',
   'bySearchBox',
+  'byDrop',
 ] as const
 
 export type SearchFilterUnitsType = typeof SearchFilterUnitsKeys[number]
@@ -75,5 +77,10 @@ export const UnitFilterBuilder: {
     title: 'Search',
     builder: BySearchBoxFilter,
     input: BySearchBoxInput,
+  },
+  byDrop: {
+    title: 'Drop Island',
+    builder: ByDropFilter,
+    input: ByDropInput,
   },
 }
