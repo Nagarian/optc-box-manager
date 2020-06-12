@@ -27,7 +27,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Backlog
 
-- [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/speical lvl progression)
+- [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/special lvl progression)
 - [ ] Sort by Potential lvl
 - [x] Bulk update
 - [x] Evolve unit
@@ -36,3 +36,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Sync with OPTC-DB log feature
 - [x] Search literral
 - [x] Filter Drop Island
+- [ ] Farming categorie filter (coliseum/fn/TM/Kizuna)
+- [ ] Cotton Candy +200 filter
+- [ ] Key limit break (unlock, filter)
+- [ ] BUG : RCV Finder, captain filter issue
+- [ ] Clear button on search
