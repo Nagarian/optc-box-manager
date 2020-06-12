@@ -2,6 +2,7 @@ import { themeGet } from '@styled-system/theme-get'
 import Image from 'components/Image'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
+import { SearchDisplayerBuilder } from 'pages/FilterSort/components/Displayers'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps } from 'styled-system'
@@ -70,6 +71,7 @@ export default function CharacterBox ({
   const unit: ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
 
+  const InfoDisplayer = SearchDisplayerBuilder.specialLvl.displayer
   return (
     <Btn
       {...rest}
@@ -90,11 +92,7 @@ export default function CharacterBox ({
         size="4"
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
-      {/* <DetailedCottonCandyDisplayer cc={userUnit?.cc} /> */}
-      {/* <SpecialLevelDisplayer special={userUnit?.special} /> */}
-      {/* <SupportDisplayer support={userUnit?.support} /> */}
-      {/* <PotentialsDisplayer potentials={userUnit?.potentials} /> */}
-      {/* <PotentialDisplayer potentials={userUnit?.potentials} type="Pinch Healing" /> */}
+      {userUnit && <InfoDisplayer userUnit={userUnit} />}
     </Btn>
   )
 }

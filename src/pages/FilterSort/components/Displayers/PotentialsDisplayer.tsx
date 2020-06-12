@@ -1,19 +1,18 @@
 import Box from 'components/Box'
+import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { PotentialKey, Potentials } from 'models/units'
-import { UserUnitPotentialAbility } from 'models/userBox'
 import React from 'react'
-import InfoDisplayer from './InfoDisplayer'
+import { SearchDisplayerProps } from '.'
 
-type PotentialsDisplayerProps = {
-  potentials?: UserUnitPotentialAbility[]
-}
 export default function PotentialsDisplayer ({
-  potentials,
-}: PotentialsDisplayerProps) {
-  if (!potentials || !Potentials.length) return null
+  userUnit: {
+    potentials,
+  },
+}: SearchDisplayerProps) {
+  if (!Potentials.length) return null
 
   return (
     <>
@@ -34,12 +33,18 @@ export default function PotentialsDisplayer ({
   )
 }
 
-export function PotentialDisplayer ({
-  potentials,
-  type,
-}: PotentialsDisplayerProps & { type: PotentialKey }) {
-  if (!potentials) return null
-  const userPotential = potentials.find(p => p.type === type)
+export type SpecificPotentialDisplayerOption = {
+  type: PotentialKey
+}
+
+export function SpecificPotentialDisplayer ({
+  userUnit: {
+    potentials,
+  },
+  options,
+}: SearchDisplayerProps<SpecificPotentialDisplayerOption>) {
+  if (!potentials || !options?.type) return null
+  const userPotential = potentials.find(p => p.type === options.type)
   if (!userPotential) return null
 
   return (

@@ -1,15 +1,14 @@
+import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import { SpecialLvlIcon } from 'components/Icon'
 import Progression from 'components/Progression'
-import { UserUnitSpecial } from 'models/userBox'
 import React from 'react'
-import InfoDisplayer from './InfoDisplayer'
+import { SearchDisplayerProps } from '.'
 
-type SpecialLevelDisplayerProps = {
-  special?: UserUnitSpecial
-}
 export default function SpecialLevelDisplayer ({
-  special,
-}: SpecialLevelDisplayerProps) {
+  userUnit: {
+    special,
+  },
+}: SearchDisplayerProps) {
   if (!special) return null
 
   return (

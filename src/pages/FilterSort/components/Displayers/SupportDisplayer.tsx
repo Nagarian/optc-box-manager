@@ -1,15 +1,14 @@
 import { SupportIcon } from 'components/Icon'
 import Progression from 'components/Progression'
-import { UserUnitSupport } from 'models/userBox'
 import React from 'react'
-import InfoDisplayer from './InfoDisplayer'
+import { SearchDisplayerProps } from '.'
+import InfoDisplayer from '../../../../components/CharacterBox/components/InfoDisplayer'
 
-type SupportDisplayerProps = {
-  support?: UserUnitSupport
-}
 export default function SupportDisplayer ({
-  support,
-}: SupportDisplayerProps) {
+  userUnit: {
+    support,
+  },
+}: SearchDisplayerProps) {
   if (!support || support.lvl === 0) return null
 
   return (
