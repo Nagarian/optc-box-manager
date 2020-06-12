@@ -1,3 +1,13 @@
+# [0.6.0](https://github.com/Nagarian/optc-box-manager/compare/v0.5.0...v0.6.0) (2020-06-12)
+
+
+### Features
+
+* **box:** add CharacterBox displayers ([6e6b8e7](https://github.com/Nagarian/optc-box-manager/commit/6e6b8e7d0a200b68e2419ae23cec5eda4bebb7f8))
+* **box:** display cc label ([41cbb92](https://github.com/Nagarian/optc-box-manager/commit/41cbb9226def018cba809a9ecc331ae167a61cd1))
+
+
+
 # [0.5.0](https://github.com/Nagarian/optc-box-manager/compare/v0.4.0...v0.5.0) (2020-06-11)
 
 
