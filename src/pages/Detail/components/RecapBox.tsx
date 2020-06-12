@@ -2,13 +2,13 @@ import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
 import { CottonCandyIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
 import PotentialAbility from 'components/PotentialAbility'
+import Progression, { Max } from 'components/Progression'
 import { SubTitle, Title } from 'components/Title'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
-import { Max } from '.'
 
 const Container = styled(Box)`
   display: grid;
@@ -53,11 +53,7 @@ export default function RecapBox ({
         {special && (
           <Element>
             <SpecialLvlIcon size="2" title="Special Level" />
-            {special.lvl === special.lvlMax ? (
-              <Max />
-            ) : (
-              `${special.lvl}/${special.lvlMax}`
-            )}
+            <Progression value={special.lvl} max={special.lvlMax} />
           </Element>
         )}
 
@@ -77,7 +73,7 @@ export default function RecapBox ({
             {potentials.map(({ type, lvl }, i) => (
               <Element key={i}>
                 <PotentialAbility size="2" type={type} />
-                {lvl === 5 ? <Max /> : `${lvl}/${5}`}
+                <Progression value={lvl} max={5} />
               </Element>
             ))}
           </Element>

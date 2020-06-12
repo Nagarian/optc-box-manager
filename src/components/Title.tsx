@@ -1,13 +1,32 @@
 import styled from 'styled-components'
-import { color, flex, FlexProps, gridArea, GridAreaProps, space, SpaceProps, typography, TypographyProps } from 'styled-system'
+import {
+  color,
+  flex,
+  FlexProps,
+  gridArea,
+  GridAreaProps,
+  space,
+  SpaceProps,
+  typography,
+  TypographyProps,
+  width,
+  WidthProps,
+  compose,
+  ColorProps,
+} from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
-export type TypoProps = SpaceProps & TypographyProps & GridAreaProps & FlexProps
+export type TypoProps = SpaceProps &
+  TypographyProps &
+  GridAreaProps &
+  FlexProps &
+  WidthProps &
+  ColorProps
+
+const typoStyled = compose(space, typography, gridArea, color, flex, width)
 
 export const Title = styled('h1').withConfig(cleanStyledSystem)<TypoProps>(
-  space,
-  typography,
-  gridArea,
+  typoStyled,
 )
 Title.defaultProps = {
   fontSize: '4',
@@ -16,10 +35,7 @@ Title.defaultProps = {
 }
 
 export const SubTitle = styled('h2').withConfig(cleanStyledSystem)<TypoProps>(
-  space,
-  typography,
-  gridArea,
-  color,
+  typoStyled,
 )
 SubTitle.defaultProps = {
   fontSize: '3',
@@ -27,9 +43,5 @@ SubTitle.defaultProps = {
 }
 
 export const Text = styled('p').withConfig(cleanStyledSystem)<TypoProps>(
-  space,
-  typography,
-  gridArea,
-  color,
-  flex,
+  typoStyled,
 )

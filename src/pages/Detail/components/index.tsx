@@ -1,29 +1,7 @@
 import Box from 'components/Box'
+import Progression from 'components/Progression'
 import { SubTitle } from 'components/Title'
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { color, ColorProps, width, WidthProps } from 'styled-system'
-
-export const Max = styled.span<WidthProps & ColorProps>`
-  text-transform: uppercase;
-  font-weight: bold;
-  ${color};
-  ${width};
-`
-Max.defaultProps = {
-  color: 'primaryText',
-  children: 'Max',
-}
-
-function Progression ({ value, max }: { value: number; max: number }) {
-  return value === max ? (
-    <Max width="5ch" />
-  ) : (
-    <Max width="5ch" color="text">
-      {value} / {max}
-    </Max>
-  )
-}
 
 type InputLabelProps = {
   value: number
@@ -44,7 +22,7 @@ export function InputLabel ({
     <Box display="flex" flexDirection="column">
       <Box my="2">
         <SubTitle fontSize="1" marginBottom="2">
-          {name} (<Progression value={value} max={max} />)
+          {name} (<Progression value={value} max={max} variant="spaced" />)
         </SubTitle>
 
         {descriptions && (
