@@ -6,6 +6,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
+import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
 
@@ -66,7 +67,7 @@ export default function CharacterBox ({
   onClick,
   ...rest
 }: CharacterBoxProps & CharacterBoxStyledProps) {
-  const unit : ExtendedUnit = userUnit?.unit ?? u!
+  const unit: ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
 
   return (
@@ -76,8 +77,9 @@ export default function CharacterBox ({
         support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
       }
       rainbow={
-        (userUnit?.potentials.length ?? 0) > 0 &&
-        !userUnit?.potentials.some(p => p.lvl < 5)
+        !!userUnit &&
+        userUnit.potentials.length > 0 &&
+        userUnit.potentials.every(p => p.lvl === 5)
       }
       onClick={() => onClick?.(unit)}
     >
@@ -87,6 +89,7 @@ export default function CharacterBox ({
         title={unit.name}
         size="4"
       />
+      <CottonCandyDisplayer cc={userUnit?.cc} />
     </Btn>
   )
 }
