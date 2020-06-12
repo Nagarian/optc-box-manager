@@ -52,7 +52,7 @@ export default function RecapBox ({
       <Box gridArea="info">
         {special && (
           <Element>
-            <SpecialLvlIcon size="2" title="Special Level" />
+            <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
           </Element>
         )}
@@ -81,7 +81,7 @@ export default function RecapBox ({
 
         {support && (
           <Element>
-            <SupportIcon size="2" color="specific.support" title="Support"/>
+            <SupportIcon size="2" />
             {support.lvl === 5 ? (
               <Max />
             ) : support.lvl === 0 ? (

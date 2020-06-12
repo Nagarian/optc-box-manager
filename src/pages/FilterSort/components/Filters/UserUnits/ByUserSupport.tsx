@@ -42,7 +42,7 @@ export function ByUserSupportInput ({
 }: SearchFilterCriteriaInputProps<ByUserSupportCriteria>) {
   return (
     <FilterContainerPanel>
-      <SupportIcon color="specific.support" size="2" title="Support" />
+      <SupportIcon size="2" />
         Support level
       {SupportStateKeys.map(stateKey => (
         <label key={stateKey}>

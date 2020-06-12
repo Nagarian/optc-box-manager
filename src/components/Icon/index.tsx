@@ -50,6 +50,10 @@ export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const SettingsIcon: Icon = BaseSvg(Settings)
 export const SupportIcon: Icon = BaseSvg(Support)
+SupportIcon.defaultProps = {
+  color: 'specific.support',
+  title: 'Support',
+}
 export const SearchIcon: Icon = BaseSvg(Search)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
@@ -59,3 +63,6 @@ export const SpecialLvlIcon = styled.img.attrs(() => ({
   ${space}
   ${size}
 `
+SpecialLvlIcon.defaultProps = {
+  title: 'Special Level',
+}
