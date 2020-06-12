@@ -90,6 +90,11 @@ export default function CharacterBox ({
         size="4"
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
+      {/* <DetailedCottonCandyDisplayer cc={userUnit?.cc} /> */}
+      {/* <SpecialLevelDisplayer special={userUnit?.special} /> */}
+      {/* <SupportDisplayer support={userUnit?.support} /> */}
+      {/* <PotentialsDisplayer potentials={userUnit?.potentials} /> */}
+      {/* <PotentialDisplayer potentials={userUnit?.potentials} type="Pinch Healing" /> */}
     </Btn>
   )
 }

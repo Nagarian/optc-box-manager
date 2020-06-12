@@ -55,6 +55,7 @@ export function PotentialAbilityToImage (type: PotentialKey) {
 type PotentialAbilityProps = SpaceProps &
   SizeProps & {
     type: PotentialKey
+    hideChrome?: boolean
   }
 
 const Container = styled('div').withConfig(cleanStyledSystem)<SizeProps>`
@@ -73,13 +74,14 @@ const Container = styled('div').withConfig(cleanStyledSystem)<SizeProps>`
 export default function PotentialAbility ({
   type,
   size = 3,
+  hideChrome,
   ...rest
 }: PotentialAbilityProps) {
   const src = PotentialAbilityToImage(type)
   return (
     <Container size={size} {...rest}>
-      <Image src={ImageFrame} />
-      {src && <Image src={src} margin="20%" title={type} />}
+      {!hideChrome && <Image src={ImageFrame} />}
+      {src && <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} />}
     </Container>
   )
 }
