@@ -27,7 +27,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Backlog
 
-- [ ] Display + choose info displayed on MyUserBox list (cc/potential progression/special lvl progression)
+- [x] Display + choose info displayed on MyUserBox list (cc/potential progression/special lvl progression)
 - [ ] Sort by Potential lvl
 - [x] Bulk update
 - [x] Evolve unit
@@ -41,3 +41,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Key limit break (unlock, filter)
 - [ ] BUG : RCV Finder, captain filter issue
 - [ ] Clear button on search
+- [ ] Description highlighter (format `[STR]`, `[DEX]`, ...)
