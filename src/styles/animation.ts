@@ -27,3 +27,14 @@ export const FadeIn = keyframes`
     opacity: 1;
   }
 `
+
+export const SlideInRight = keyframes`
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+`

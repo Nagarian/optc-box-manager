@@ -1,10 +1,16 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import Button from 'components/Button'
+import { CloseIcon } from 'components/Icon'
+import {
+  SearchFilterCriteria,
+  SearchFilterCriteriaInputProps,
+} from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
+import { SlideInRight } from 'styles/animation'
 
 export interface BySearchBoxCriteria extends SearchFilterCriteria {
   value: string
@@ -33,7 +39,7 @@ export function BySearchBoxInput ({
   }
 
   return (
-    <Box display="flex" flexDirection="column" m="2" {...rest}>
+    <Box display="grid" m="2" gridTemplateColumns="1fr auto" {...rest}>
       <Input
         type="search"
         name="search-box"
@@ -41,7 +47,17 @@ export function BySearchBoxInput ({
         onChange={e => triggerChange(e.target.value)}
         placeholder="Character name or ID"
         {...rest}
+        height="1"
       />
+      {criteria?.value && (
+        <ClearButton
+          icon={CloseIcon}
+          title="Clear Search"
+          onClick={() => triggerChange()}
+          size={0}
+          marginLeft={1}
+        />
+      )}
     </Box>
   )
 }
@@ -56,4 +72,8 @@ const Input = styled.input<SpaceProps>`
   :focus {
     border-color: ${themeGet('colors.primary')};
   }
+`
+
+const ClearButton = styled(Button)`
+  animation: ${SlideInRight} 250ms;
 `

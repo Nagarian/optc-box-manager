@@ -14,6 +14,7 @@ import {
   SpaceProps,
   typography,
   variant,
+  SizeProps,
 } from 'styled-system'
 import { cleanStyledSystem, place, PlaceProps } from 'styles'
 import { Icon, LoaderIcon } from './Icon'
@@ -37,6 +38,7 @@ type StyledButtonProps = SpaceProps &
   ColorProps &
   BorderProps &
   FontSizeProps &
+  SizeProps &
   FontWeightProps & {
     variant: 'primary' | 'secondary' | 'link' | 'danger'
     href?: string
@@ -53,6 +55,7 @@ export default function Button ({
   variant,
   isLoading,
   href,
+  size = 1,
   ...rest
 }: ButtonProps) {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
@@ -65,8 +68,8 @@ export default function Button ({
       {...rest}
       {...defaultPaddingFix}
     >
-      {isLoading && <LoaderIcon size={1} marginRight={children ? 2 : 0} />}
-      {Icon && <Icon size={1} marginRight={children ? 2 : 0} />}
+      {isLoading && <LoaderIcon size={size} marginRight={children ? 2 : 0} />}
+      {Icon && <Icon size={size} marginRight={children ? 2 : 0} />}
       {children}
     </Btn>
   )

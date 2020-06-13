@@ -40,5 +40,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Cotton Candy +200 filter
 - [ ] Key limit break (unlock, filter)
 - [ ] BUG : RCV Finder, captain filter issue
-- [ ] Clear button on search
+- [x] Clear button on search
 - [ ] Description highlighter (format `[STR]`, `[DEX]`, ...)
