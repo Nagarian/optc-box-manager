@@ -2,7 +2,10 @@ import { themeGet } from '@styled-system/theme-get'
 import Image from 'components/Image'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import { SearchDisplayerBuilder } from 'pages/FilterSort/components/Displayers'
+import {
+  SearchDisplayerBuilder,
+  SearchDisplayerCriteria,
+} from 'pages/FilterSort/components/Displayers'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps } from 'styled-system'
@@ -15,6 +18,7 @@ type CharacterBoxProps = {
   unit?: ExtendedUnit
   userUnit?: UserUnit
   onClick?: (unit: ExtendedUnit) => void
+  displayer?: SearchDisplayerCriteria
 }
 
 type BtnProps = {
@@ -66,12 +70,14 @@ export default function CharacterBox ({
   unit: u,
   userUnit,
   onClick,
+  displayer,
   ...rest
 }: CharacterBoxProps & CharacterBoxStyledProps) {
   const unit: ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
 
-  const InfoDisplayer = SearchDisplayerBuilder.specialLvl.displayer
+  const InfoDisplayer =
+    displayer && SearchDisplayerBuilder[displayer.type].displayer
   return (
     <Btn
       {...rest}
@@ -92,7 +98,9 @@ export default function CharacterBox ({
         size="4"
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
-      {userUnit && <InfoDisplayer userUnit={userUnit} />}
+      {userUnit && InfoDisplayer && (
+        <InfoDisplayer userUnit={userUnit} options={displayer?.options} />
+      )}
     </Btn>
   )
 }

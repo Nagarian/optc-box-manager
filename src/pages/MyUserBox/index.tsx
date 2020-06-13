@@ -50,6 +50,7 @@ export default function MyUserBox ({
           <CharacterBox
             key={userUnit.id}
             userUnit={userUnit}
+            displayer={search?.displayer}
             onClick={() => onShowDetail(userUnit)}
           />
         ))}

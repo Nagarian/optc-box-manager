@@ -1,3 +1,4 @@
+import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
 import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import { SearchSortType } from 'pages/FilterSort/components/Sorts'
@@ -32,4 +33,5 @@ export type Search = {
     userUnits?: SearchFilterUserUnits
   }
   sorts: SearchSortCriteria[]
+  displayer?: SearchDisplayerCriteria
 }

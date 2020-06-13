@@ -5,11 +5,13 @@ import { Search, SearchSortCriteria } from 'models/search'
 import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { useState } from 'react'
+import { SearchDisplayerCriteria } from './components/Displayers'
+import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
 import Sort from './components/Sorts/Sort'
 
-type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort'
+type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
 type FilterSortProps = {
   onCancel: () => void
@@ -29,8 +31,9 @@ export default function FilterSort ({
   const [userUnitFilter, setUserUnitFilter] = useState<SearchFilterUserUnits>(
     search.filters.userUnits || {},
   )
-  const [sorts, setSorts] = useState<SearchSortCriteria[]>(
-    search.sorts || [],
+  const [sorts, setSorts] = useState<SearchSortCriteria[]>(search.sorts || [])
+  const [displayer, setDisplayer] = useState<SearchDisplayerCriteria>(
+    search.displayer,
   )
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
@@ -44,6 +47,7 @@ export default function FilterSort ({
             userUnits: userUnitFilter,
           },
           sorts,
+          displayer,
         })
       }
       customAction={
@@ -70,17 +74,16 @@ export default function FilterSort ({
         />
       )}
 
-      {displayed === 'sort' &&
-        <Sort
-          searchSort={sorts}
-          unitOnly={unitOnly}
-          onChange={setSorts}
-        />
-      }
+      {displayed === 'sort' && (
+        <Sort searchSort={sorts} unitOnly={unitOnly} onChange={setSorts} />
+      )}
 
-      <hr/>
+      {displayed === 'displayer' && (
+        <Displayer searchDisplayer={displayer} onChange={setDisplayer} />
+      )}
+
+      <hr />
       <Box display="flex" justifyContent="space-evenly" padding="2">
-
         <Button
           onClick={() => setDisplayed('unit-filter')}
           fontSize="1"
@@ -106,6 +109,16 @@ export default function FilterSort ({
         >
           Sort
         </Button>
+
+        {!unitOnly && (
+          <Button
+            onClick={() => setDisplayed('displayer')}
+            fontSize="1"
+            disabled={displayed === 'displayer'}
+          >
+            Info displayed
+          </Button>
+        )}
       </Box>
     </Popup>
   )

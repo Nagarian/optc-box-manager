@@ -5,7 +5,8 @@ import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { PotentialKey, Potentials } from 'models/units'
 import React from 'react'
-import { SearchDisplayerProps } from '.'
+import { SearchDisplayerProps, SearchDisplayerInputProps } from '.'
+import ImageInput from 'components/forms/ImageInput'
 
 export default function PotentialsDisplayer ({
   userUnit: {
@@ -52,5 +53,28 @@ export function SpecificPotentialDisplayer ({
       <PotentialAbility size="1" type={userPotential.type} hideChrome />
       <Progression value={userPotential.lvl} max={5} color="white" />
     </InfoDisplayer>
+  )
+}
+
+export function SpecificPotentialDisplayerInput ({
+  options,
+  onChange,
+}: SearchDisplayerInputProps<SpecificPotentialDisplayerOption>) {
+  return (
+    <Box display="flex" flexWrap="wrap">
+      {Potentials.map(potential => (
+        <ImageInput
+          key={potential}
+          type="radio"
+          name="potentials-displayer"
+          checked={options?.type === potential ?? false}
+          onChange={e => onChange({
+            type: potential,
+          })}
+        >
+          <PotentialAbility type={potential} size="3" />
+        </ImageInput>
+      ))}
+    </Box>
   )
 }
