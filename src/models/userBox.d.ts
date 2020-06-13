@@ -39,6 +39,7 @@ export type MyUserBox = {
   remove: (id: string) => void
   reset: () => void
   importDB: (json: string) => void
+  exportDB: () => Promise<void>
 }
 
 export type UserUnitBulkEdit = {

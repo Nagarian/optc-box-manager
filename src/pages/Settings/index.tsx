@@ -3,7 +3,6 @@ import Popup from 'components/Popup'
 import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
 import React, { ChangeEvent, useRef, useState } from 'react'
-import { exportAsJson } from 'services/share'
 import Changelog from 'components/Changelog'
 
 type SettingsProps = {
@@ -12,7 +11,7 @@ type SettingsProps = {
 }
 
 export default function Settings ({ onClose, myUserBox }: SettingsProps) {
-  const { reset, userBox, importDB } = myUserBox
+  const { reset, importDB, exportDB } = myUserBox
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [successMessage, setSuccessMessage] = useState<string>()
@@ -23,7 +22,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
 
   const exportFn = async () => {
     setIsLoading(true)
-    await exportAsJson(userBox, 'optc-my-box')
+    await exportDB()
     setIsLoading(false)
     setSuccessMessage('Your Box has been exported successfully !')
   }

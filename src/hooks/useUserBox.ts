@@ -2,6 +2,7 @@ import { ExtendedUnit } from 'models/units'
 import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
 import { UserUnitFactory } from 'services/userUnits'
+import { exportAsJson } from 'services/share'
 
 const userBoxKey = 'userBox'
 
@@ -106,6 +107,10 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
       }
 
       setUserBox(db as UserBox)
+    },
+    exportDB: async () => {
+      const payload = JSON.stringify(userBox, replacer)
+      await exportAsJson(payload, 'optc-my-box')
     },
   }
 }
