@@ -1,5 +1,5 @@
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
-import { ExtendedUnit, UnitSpecial } from 'models/units'
+import { ExtendedUnit, UnitSpecial, UnitCaptain } from 'models/units'
 import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 
@@ -9,6 +9,21 @@ export interface ByRcvFinderCriteria extends SearchFilterCriteria {
 }
 
 const RcvRegex = /( rcv|rcv )/i
+
+const CaptainRcvFinder = (captain: UnitCaptain) => {
+  if (typeof captain === 'string') {
+    return RcvRegex.test(captain)
+  }
+
+  if (typeof captain === 'object') {
+    const keys = Object.keys(captain)
+    const lastKey = keys[keys.length - 1]
+    const captainDetail = captain[lastKey as keyof UnitCaptain]
+    return RcvRegex.test(captainDetail)
+  }
+
+  return false
+}
 
 const SpecialRcvFinder = (special: UnitSpecial) => {
   if (Array.isArray(special)) {
@@ -25,7 +40,7 @@ export const ByRcvFinderFilter = (criteria: ByRcvFinderCriteria) =>
   BooleanFilterMapper(
     [
       criteria.captainRcv,
-      (unit: ExtendedUnit) => RcvRegex.test(unit.detail.captain),
+      (unit: ExtendedUnit) => CaptainRcvFinder(unit.detail.captain),
     ],
     [
       criteria.specialRcv,

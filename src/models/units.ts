@@ -99,8 +99,22 @@ export type UnitSpecial =
     }[]
   | { [key: string]: any } // luffy/law + robin 767
 
+export type UnitCaptain = string | undefined | {
+  character1: string
+  character2: string
+  combined: string
+} | {
+  base: string
+  level1: string
+  level2: string
+  level3: string
+  level4: string
+  level5: string
+  level6: string
+}
+
 export type UnitDetail = {
-  captain: string
+  captain: UnitCaptain
   special: UnitSpecial
   sailor: {
     base: string
