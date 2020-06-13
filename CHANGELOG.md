@@ -1,3 +1,13 @@
+# [0.7.0](https://github.com/Nagarian/optc-box-manager/compare/v0.6.0...v0.7.0) (2020-06-13)
+
+
+### Features
+
+* add Search clear button ([625c9a9](https://github.com/Nagarian/optc-box-manager/commit/625c9a92db7d60ff1fd2cc0c0a9cdcfcd5d3d555))
+* **displayer:** add Displayer chooser ([63a9c77](https://github.com/Nagarian/optc-box-manager/commit/63a9c77318d10c6f161b7cb0f8600aa669805a51))
+
+
+
 # [0.6.0](https://github.com/Nagarian/optc-box-manager/compare/v0.5.0...v0.6.0) (2020-06-12)
 
 
