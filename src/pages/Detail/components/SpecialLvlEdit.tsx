@@ -4,6 +4,7 @@ import { UnitDetail, UnitSpecial } from 'models/units'
 import { UserUnitSpecial } from 'models/userBox'
 import React, { ReactNode } from 'react'
 import { InputLabel } from '.'
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 
 type SpecialLvlEditProps = {
   special?: UserUnitSpecial
@@ -18,7 +19,7 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
         {special.map(({ description }, i) => (
           <li key={i}>
             <strong>Stage {i + 1}: </strong>
-            {description}
+            <DescriptionHighlighter value={description} />
           </li>
         ))}
       </ul>,
@@ -33,7 +34,7 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
           .map((key, i) => (
             <li key={i}>
               <strong>{key}: </strong>
-              {special[key]}
+              <DescriptionHighlighter value={special[key]} />
             </li>
           ))}
       </ul>,

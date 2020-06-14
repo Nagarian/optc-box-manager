@@ -2,6 +2,7 @@ import Box from 'components/Box'
 import Progression from 'components/Progression'
 import { SubTitle } from 'components/Title'
 import React, { ReactNode } from 'react'
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 
 type InputLabelProps = {
   value: number
@@ -22,20 +23,30 @@ export function InputLabel ({
     <Box display="flex" flexDirection="column">
       <Box my="2">
         <SubTitle fontSize="1" marginBottom="2">
-          {name} (<Progression value={value} max={max} variant="spaced" />)
+          {typeof name === 'string'
+            ? <DescriptionHighlighter value={name} />
+            : name
+          }
+          {' '}(<Progression value={value} max={max} variant="spaced" />)
         </SubTitle>
 
         {descriptions && (
           <div>
             {descriptions.length > 1 && <strong>max: </strong>}
-            {descriptions[descriptions.length - 1]}
+            {typeof descriptions[descriptions.length - 1] === 'string'
+              ? <DescriptionHighlighter value={descriptions[descriptions.length - 1] as string} />
+              : descriptions[descriptions.length - 1]
+            }
           </div>
         )}
 
         {descriptions && descriptions.length > 1 && value > 0 && value < max && (
           <div>
             <strong>Level {value}: </strong>
-            {descriptions[value]}
+            {typeof descriptions[value] === 'string'
+              ? <DescriptionHighlighter value={descriptions[value] as string} />
+              : descriptions[value]
+            }
           </div>
         )}
       </Box>

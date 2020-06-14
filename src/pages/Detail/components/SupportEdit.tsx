@@ -4,6 +4,7 @@ import { UnitSupport } from 'models/units'
 import { UserUnitSupport } from 'models/userBox'
 import React from 'react'
 import { InputLabel } from '.'
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 
 type SupportEditProps = {
   detail?: UnitSupport
@@ -30,7 +31,7 @@ export default function SupportEdit ({
         name={
           <>
             <strong>For: </strong>
-            {Characters}
+            <DescriptionHighlighter value={Characters} />
           </>
         }
         descriptions={description}
