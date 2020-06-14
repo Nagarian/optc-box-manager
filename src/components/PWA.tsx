@@ -36,10 +36,6 @@ export default function PWA () {
       onCancel={() => setShowReload(false)}
     >
       <Text>Do you want to load it now ?</Text>
-      {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-      <Text m="1">
-        If there is Breaking changes, you might take caution and make an export before loading it 😉
-      </Text>
       <hr />
       <Title>Changelog</Title>
       <Changelog onlyUnseen />

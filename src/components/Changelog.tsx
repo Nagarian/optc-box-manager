@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import { LoaderIcon } from 'components/Icon'
-import { SubTitle, Title } from 'components/Title'
+import { SubTitle, Title, Text } from 'components/Title'
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
@@ -54,6 +54,10 @@ export default function Changelog ({
     fetcher()
   }, [])
 
+  if (releases.length === 0) {
+    return <LoaderIcon size={5} placeSelf="center" m="3" />
+  }
+
   const displayed = onlyUnseen
     ? releases.slice(
       0,
@@ -62,13 +66,24 @@ export default function Changelog ({
     : releases
 
   if (displayed.length === 0) {
-    return releases.length === 0 ? (
-      <LoaderIcon size={5} placeSelf="center" m="3" />
-    ) : null
+    return (
+      <Text m="1">
+        OPTC-DB must have been updated and this update used it now !
+      </Text>
+    )
   }
 
   return (
     <>
+      {onlyUnseen &&
+        displayed.some(release => /BREAKING CHANGE/i.test(release.body)) && (
+        // eslint-disable-next-line jsx-a11y/accessible-emoji
+        <Text m="1">
+            There is Breaking changes, you should take caution and make an
+            export (from Settings) before loading this update 😉
+        </Text>
+      )}
+
       {displayed.map(release => (
         <div key={release.id}>
           <Title>
