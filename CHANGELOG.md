@@ -1,3 +1,21 @@
+# [0.8.0](https://github.com/Nagarian/optc-box-manager/compare/v0.7.0...v0.8.0) (2020-06-14)
+
+
+### Bug Fixes
+
+* issue with latest seen changelog ([3548c95](https://github.com/Nagarian/optc-box-manager/commit/3548c95962517e1815eb920bd08a331a4e1b0f0f))
+* lighten exported DB ([024201e](https://github.com/Nagarian/optc-box-manager/commit/024201e541d444c1a34f4b5742050458d10feaba))
+* RCV Captain Finder issue ([648be46](https://github.com/Nagarian/optc-box-manager/commit/648be4623a012921c61b39e51f5e6f66bef447dd))
+
+
+### Features
+
+* **detail:** add Orb Highlighter ([a7d89fc](https://github.com/Nagarian/optc-box-manager/commit/a7d89fcc2e22f10db5265773a870a7474ad95182))
+* **filter:** add Cotton Candy +200 state filter ([5ce8793](https://github.com/Nagarian/optc-box-manager/commit/5ce87935e1cc695b3a022015f8808ebecedc5888))
+* improve Changelog popin on update ([254918a](https://github.com/Nagarian/optc-box-manager/commit/254918a7e22da89ea69e0f06526de18630b5518b))
+
+
+
 # [0.7.0](https://github.com/Nagarian/optc-box-manager/compare/v0.6.0...v0.7.0) (2020-06-13)
 
 
