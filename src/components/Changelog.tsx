@@ -54,12 +54,6 @@ export default function Changelog ({
     fetcher()
   }, [])
 
-  useEffect(() => {
-    if (releases.length > 0) {
-      setLatestSeen(releases[0].id)
-    }
-  }, [releases, setLatestSeen])
-
   const displayed = onlyUnseen
     ? releases.slice(
       0,
