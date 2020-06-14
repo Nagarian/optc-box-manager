@@ -37,8 +37,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [x] Search literral
 - [x] Filter Drop Island
 - [ ] Farming categorie filter (coliseum/fn/TM/Kizuna)
-- [ ] Cotton Candy +200 filter
+- [x] Cotton Candy +200 filter
 - [ ] Key limit break (unlock, filter)
 - [x] BUG : RCV Finder, captain filter issue
 - [x] Clear button on search
-- [ ] Description highlighter (format `[STR]`, `[DEX]`, ...)
+- [x] Description highlighter (format `[STR]`, `[DEX]`, ...)
