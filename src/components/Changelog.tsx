@@ -68,7 +68,7 @@ export default function Changelog ({
   if (displayed.length === 0) {
     return (
       <Text m="1">
-        OPTC-DB must have been updated and this update used it now !
+        OPTC-DB must have been updated (new unit and/or unit fix) and this update will apply it !
       </Text>
     )
   }
