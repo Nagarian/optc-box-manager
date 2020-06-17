@@ -56,6 +56,7 @@ export default function FilterSort ({
             setUnitFilter({})
             setUserUnitFilter({})
             setSorts([])
+            setDisplayer(undefined)
           }}
           variant="danger"
         >
