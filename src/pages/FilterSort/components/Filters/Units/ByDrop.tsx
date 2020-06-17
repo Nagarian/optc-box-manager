@@ -6,19 +6,32 @@ import {
   SearchFilterCriteria,
   SearchFilterCriteriaInputProps,
 } from 'models/search'
-import { ExtendedUnit } from 'models/units'
+import { ExtendedUnit, ExtendedDropKeys, ExtendedDrop } from 'models/units'
 import React, { useEffect, useState } from 'react'
 import { FortnightDrops } from 'services/drops'
 import { EventDrop } from 'models/drops'
+import { BooleanFilterMapper } from 'services/filterHelper'
 
 export interface ByDropCriteria extends SearchFilterCriteria {
-  eventId: string
-  unitIds: number[]
+  dropLocations?: ExtendedDrop[]
+  fn?: {
+    eventId: string
+    unitIds: number[]
+  }
 }
 
-export const ByDropFilter = (criteria: ByDropCriteria) => (
-  unit: ExtendedUnit,
-) => criteria.unitIds.includes(unit.id)
+export const ByDropFilter = (criteria: ByDropCriteria) =>
+  BooleanFilterMapper(
+    [
+      criteria.fn?.unitIds?.length,
+      (unit: ExtendedUnit) => criteria.fn!.unitIds.includes(unit.id),
+    ],
+    [
+      criteria.dropLocations?.length,
+      (unit: ExtendedUnit) =>
+        criteria.dropLocations!.includes(unit.dropLocation),
+    ],
+  )
 
 export function ByDropInput ({
   criteria,
@@ -26,12 +39,45 @@ export function ByDropInput ({
 }: SearchFilterCriteriaInputProps<ByDropCriteria>) {
   const [selected, setSelected] = useState<EventDrop>()
 
+  const dropLocations = criteria?.dropLocations ?? []
+  const triggerCategoryChange = (
+    dropLocation: ExtendedDrop,
+    check: boolean,
+  ) => {
+    const newValues = check
+      ? dropLocations.concat(dropLocation)
+      : dropLocations.filter(v => v !== dropLocation)
+
+    onChange({
+      ...criteria,
+      dropLocations: newValues,
+    })
+  }
+
   useEffect(() => {
-    setSelected(criteria && FortnightDrops.find(fn => fn.id === criteria.eventId))
-  }, [criteria])
+    setSelected(
+      criteria?.fn?.eventId
+        ? FortnightDrops.find(fn => fn.id === criteria!.fn!.eventId)
+        : undefined,
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [criteria?.fn])
 
   return (
     <Box>
+      <SubTitle fontSize="2">Drop Location</SubTitle>
+      {ExtendedDropKeys.map(dropKey => (
+        <label key={dropKey}>
+          <input
+            type="checkbox"
+            name="unit-dropLocation"
+            checked={criteria?.dropLocations?.includes(dropKey) ?? false}
+            onChange={e => triggerCategoryChange(dropKey, e.target.checked)}
+          />
+          {dropKey}
+        </label>
+      ))}
+
       <SubTitle fontSize="2">Fortnight</SubTitle>
       <Box display="flex" overflowX="auto">
         {FortnightDrops.map((dropEvent, i) => (
@@ -42,8 +88,11 @@ export function ByDropInput ({
             checked={dropEvent === selected}
             onChange={() =>
               onChange({
-                eventId: dropEvent.id,
-                unitIds: dropEvent.manual.concat(dropEvent.units),
+                ...criteria,
+                fn: {
+                  eventId: dropEvent.id,
+                  unitIds: dropEvent.manual.concat(dropEvent.units),
+                },
               })
             }
           >
@@ -57,9 +106,7 @@ export function ByDropInput ({
         ))}
       </Box>
 
-      {selected &&
-        <Text>{selected.name}</Text>
-      }
+      {selected && <Text>{selected.name}</Text>}
     </Box>
   )
 }

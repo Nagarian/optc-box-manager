@@ -16,7 +16,18 @@ import {
   UnitEvolution,
   UnitFamily,
   UnitFlags,
+  ExtendedDrop,
 } from 'models/units'
+import {
+  FortnightDrops,
+  StoryDrops,
+  AmbushDrops,
+  ColiseumDrops,
+  KizunaClashDrops,
+  RaidDrops,
+  TreasureMapDrops,
+} from './drops'
+import { EventDropLight } from 'models/drops'
 
 const Utils = () => (window as any).Utils
 const Units = () => (window as any).units as BaseUnit[]
@@ -50,6 +61,54 @@ const getFamilyId = (families: UnitFamily[], unitId: number) => {
   return families.findIndex(u => u === family) + 1
 }
 
+const getDropLocation = (
+  id: number,
+  flags: UnitFlags,
+  evolution: UnitEvolution,
+): ExtendedDrop => {
+  if (Object.keys(flags).some(key => key.includes('rr'))) {
+    return 'rarerecruit'
+  }
+
+  const baseForm = Utils().searchBaseForms(id)
+
+  const condition = (event: EventDropLight) =>
+    event.includes(id) || event.includes(baseForm)
+
+  if (condition(StoryDrops)) {
+    return 'story'
+  }
+
+  if (FortnightDrops.some(fn => fn.units.includes(id))) {
+    return 'fortnight'
+  }
+
+  if (condition(ColiseumDrops)) {
+    return 'coliseum'
+  }
+
+  if (condition(TreasureMapDrops)) {
+    return 'treasuremap'
+  }
+
+  if (condition(KizunaClashDrops)) {
+    return 'kizunaclash'
+  }
+
+  // we put raid and ambush last because they often includes some units from other game mode
+  // IE: ambush shanks
+  if (condition(RaidDrops)) {
+    return 'raid'
+  }
+
+  if (condition(AmbushDrops)) {
+    return 'ambush'
+  }
+
+  // ambiguous units like thus given on login, or on specific events
+  return 'special'
+}
+
 export const DBUnit = {
   getUnitThumbnail: getImage(Utils().getThumbnailUrl),
 
@@ -74,21 +133,27 @@ export const DBUnit = {
           !unit.name.includes('Dual Unit'),
       )
       .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
-      .map<ExtendedUnit>(unit => ({
-        ...unit,
-        id: unit.number + 1,
-        images: {
-          thumbnail: DBUnit.getUnitThumbnail(unit.number + 1),
-          full: DBUnit.getUnitFullPicture(unit.number + 1),
-        },
-        evolution: Evolutions[unit.number + 1],
-        cooldown: Cooldowns[unit.number],
-        detail: Details[unit.number + 1] ?? {},
-        flags: Flags[unit.number + 1] ?? {},
-        family: {
-          name: Families[unit.number],
-          id: getFamilyId(Families, unit.number),
-        },
-      }))
+      .map<ExtendedUnit>(unit => {
+        const id = unit.number + 1
+        const flags = Flags[id] ?? {}
+        const evolution = Evolutions[id]
+        return {
+          ...unit,
+          id,
+          images: {
+            thumbnail: DBUnit.getUnitThumbnail(id),
+            full: DBUnit.getUnitFullPicture(id),
+          },
+          evolution,
+          cooldown: Cooldowns[unit.number],
+          detail: Details[id] ?? {},
+          flags,
+          family: {
+            name: Families[unit.number],
+            id: getFamilyId(Families, unit.number),
+          },
+          dropLocation: getDropLocation(id, flags, evolution),
+        }
+      })
   },
 }

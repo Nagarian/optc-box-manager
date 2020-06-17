@@ -32,4 +32,53 @@ module.exports = {
       units: fnUnits.filter(id => id > 0),
     }
   }).reverse(),
+  TM: window.drops['Treasure Map'].map(tm => tm.thumb),
+  Ambush: dropMapper('Ambush'),
+  KK: dropMapper(
+    'Kizuna Clash',
+    'Round 1',
+    'Round 2',
+    'Round 3',
+    'Round 4',
+    'Round 5',
+    'Round 6',
+  ),
+  Raid: dropMapper('Raid', 'Master', 'Expert', 'Ultimate'),
+  Coliseum: dropMapper('Coliseum', 'Chaos', 'Underground', 'Exebition'),
+  Story: dropMapper(
+    'Story Island',
+    'Completion Units',
+    ...[...Array(100).keys()].map(i => i.toString().padStart(2, '0')),
+  ),
+}
+
+function distinct (value, index, self) {
+  return self.indexOf(value) === index
+}
+
+function dropMapper (dropKey, ...subKey) {
+  return window.drops[dropKey]
+    .reduce(
+      (all, quest) => [
+        ...all,
+        quest.thumb,
+        ...(quest['All Difficulties'] ?? []),
+        ...subKey.reduce(
+          (allsub, sub) => [...allsub, ...(quest[sub] ?? [])],
+          [],
+        ),
+      ],
+      [],
+    )
+    .filter(Boolean)
+    .filter(
+      id =>
+        id > 0 && // remove books
+        !!window.units[id - 1] && // remove skull and other tricks
+        !(
+          ['Evolver', 'Booster'].includes(window.units[id - 1][2]) ||
+          ['Evolver', 'Booster'].includes(window.units[id - 1].class)
+        ), // remove evolver and booster
+    )
+    .filter(distinct)
 }

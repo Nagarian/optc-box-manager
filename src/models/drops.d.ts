@@ -5,3 +5,5 @@ export type EventDrop = {
   units: number[]
   manual: number[]
 }
+
+export type EventDropLight = number[]

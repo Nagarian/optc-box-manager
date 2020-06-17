@@ -181,6 +181,19 @@ export type ExtendedUnitFamily = {
   id: number
 }
 
+export const ExtendedDropKeys = [
+  'rarerecruit',
+  'fortnight',
+  'raid',
+  'coliseum',
+  'ambush',
+  'kizunaclash',
+  'treasuremap',
+  'story',
+  'special',
+] as const
+export type ExtendedDrop = typeof ExtendedDropKeys[number]
+
 export type ExtendedUnit = BaseUnit & {
   /** OPTC-DB real ID (used in url) */
   id: number
@@ -190,4 +203,5 @@ export type ExtendedUnit = BaseUnit & {
   detail: UnitDetail
   flags: UnitFlags
   family: ExtendedUnitFamily
+  dropLocation: ExtendedDrop
 }
