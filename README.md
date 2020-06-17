@@ -38,7 +38,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [x] Filter Drop Island
 - [ ] Farming categorie filter (coliseum/fn/TM/Kizuna)
 - [x] Cotton Candy +200 filter
-- [ ] Key limit break (unlock, filter)
+- [ ] add Limit Break full support
+  - [ ] Key limit break (unlock, filter)
 - [x] BUG : RCV Finder, captain filter issue
 - [x] Clear button on search
 - [x] Description highlighter (format `[STR]`, `[DEX]`, ...)
+- [ ] Update UserUnit when viewing its detail or a big update on startup
+- [ ] Save & load user custom search
