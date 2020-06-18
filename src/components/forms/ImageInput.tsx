@@ -6,6 +6,8 @@ const Input = styled.input`
   -moz-appearance: initial;
   width: 0;
   height: 0;
+  position: absolute;
+  left: -9999px;
 
   + * {
     transition: filter 150ms;
