@@ -37,6 +37,13 @@ export default function FilterSort ({
   )
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
+  const buttonStyle = {
+    fontSize: '1',
+    px: '2',
+    py: '1',
+    mx: '1',
+  }
+
   return (
     <Popup
       onCancel={onCancel}
@@ -63,6 +70,7 @@ export default function FilterSort ({
           Clear all
         </Button>
       }
+      title={displayerTitle(displayed)}
     >
       {displayed === 'unit-filter' && (
         <UnitFilters unitFilter={unitFilter} onChange={setUnitFilter} />
@@ -87,7 +95,7 @@ export default function FilterSort ({
       <Box display="flex" justifyContent="space-evenly" padding="2">
         <Button
           onClick={() => setDisplayed('unit-filter')}
-          fontSize="1"
+          {...buttonStyle}
           disabled={displayed === 'unit-filter'}
         >
           Unit Filter
@@ -96,7 +104,7 @@ export default function FilterSort ({
         {!unitOnly && (
           <Button
             onClick={() => setDisplayed('userunit-filter')}
-            fontSize="1"
+            {...buttonStyle}
             disabled={displayed === 'userunit-filter'}
           >
             My Box Filter
@@ -105,7 +113,7 @@ export default function FilterSort ({
 
         <Button
           onClick={() => setDisplayed('sort')}
-          fontSize="1"
+          {...buttonStyle}
           disabled={displayed === 'sort'}
         >
           Sort
@@ -114,7 +122,7 @@ export default function FilterSort ({
         {!unitOnly && (
           <Button
             onClick={() => setDisplayed('displayer')}
-            fontSize="1"
+            {...buttonStyle}
             disabled={displayed === 'displayer'}
           >
             Info displayed
@@ -123,4 +131,19 @@ export default function FilterSort ({
       </Box>
     </Popup>
   )
+}
+
+function displayerTitle (panel: DisplayedPanel) {
+  switch (panel) {
+    case 'displayer':
+      return 'Info Displayed'
+    case 'unit-filter':
+      return 'Units Filters'
+    case 'userunit-filter':
+      return 'My Box Filters'
+    case 'sort':
+      return 'Sort'
+    default:
+      return undefined
+  }
 }

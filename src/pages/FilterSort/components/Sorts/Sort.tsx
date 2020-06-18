@@ -28,7 +28,7 @@ export default function Sort ({
   )
 
   return (
-    <Box minHeight="60vh" display="flex">
+    <Box minHeight="0" display="flex">
       <Box display="flex" flexDirection="column" overflowY="auto">
         <Button
           onClick={() =>
@@ -54,7 +54,7 @@ export default function Sort ({
           fontSize="1"
           margin="1"
         >
-          " Newest "
+          "Newest"
         </Button>
 
         <hr />

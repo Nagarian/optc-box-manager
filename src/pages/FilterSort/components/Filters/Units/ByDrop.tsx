@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react'
 import { FortnightDrops } from 'services/drops'
 import { EventDrop } from 'models/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import styled from 'styled-components'
 
 export interface ByDropCriteria extends SearchFilterCriteria {
   dropLocations?: ExtendedDrop[]
@@ -66,17 +67,19 @@ export function ByDropInput ({
   return (
     <Box>
       <SubTitle fontSize="2">Drop Location</SubTitle>
-      {ExtendedDropKeys.map(dropKey => (
-        <label key={dropKey}>
-          <input
-            type="checkbox"
-            name="unit-dropLocation"
-            checked={criteria?.dropLocations?.includes(dropKey) ?? false}
-            onChange={e => triggerCategoryChange(dropKey, e.target.checked)}
-          />
-          {dropKey}
-        </label>
-      ))}
+      <LabelDisplayer>
+        {ExtendedDropKeys.map(dropKey => (
+          <label key={dropKey}>
+            <input
+              type="checkbox"
+              name="unit-dropLocation"
+              checked={criteria?.dropLocations?.includes(dropKey) ?? false}
+              onChange={e => triggerCategoryChange(dropKey, e.target.checked)}
+            />
+            {dropKey}
+          </label>
+        ))}
+      </LabelDisplayer>
 
       <SubTitle fontSize="2">Fortnight</SubTitle>
       <Box display="flex" overflowX="auto">
@@ -110,3 +113,12 @@ export function ByDropInput ({
     </Box>
   )
 }
+
+const LabelDisplayer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  > label {
+    padding: 0.5rem 0;
+  }
+`

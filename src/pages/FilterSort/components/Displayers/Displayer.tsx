@@ -1,5 +1,4 @@
 import Box from 'components/Box'
-import { Title } from 'components/Title'
 import React from 'react'
 import {
   SearchDisplayerBuilder,
@@ -19,9 +18,7 @@ export default function Displayer ({
     searchDisplayer && SearchDisplayerBuilder[searchDisplayer.type].input
 
   return (
-    <Box display="flex" flexDirection="column">
-      <Title>Info Displayed</Title>
-      <hr />
+    <Box display="flex" flexDirection="column" minHeight="50vh">
       <label>
         <input
           type="radio"

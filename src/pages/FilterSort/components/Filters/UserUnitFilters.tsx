@@ -1,5 +1,4 @@
 import Box from 'components/Box'
-import { Title } from 'components/Title'
 import React from 'react'
 import FilterContainer from './FilterContainer'
 import { SearchFilterUserUnits, SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from './UserUnits'
@@ -14,7 +13,6 @@ export default function UserUnitFilters ({
 }: UserUnitFiltersProps) {
   return (
     <Box overflowY="auto">
-      <Title>My Box Filters</Title>
       {SearchFilterUserUnitsKeys.map(key => ({
         key,
         ...UserUnitFilterBuilder[key],
