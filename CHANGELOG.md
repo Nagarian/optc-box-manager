@@ -1,3 +1,18 @@
+# [0.10.0](https://github.com/Nagarian/optc-box-manager/compare/v0.9.1...v0.10.0) (2020-06-18)
+
+
+### Bug Fixes
+
+* try fixing safari popup issue ([533aea3](https://github.com/Nagarian/optc-box-manager/commit/533aea3343beabc9aa92951f38ca75b09ce65bb5))
+* **detail:** description detail on slider ([8757ac1](https://github.com/Nagarian/optc-box-manager/commit/8757ac1969ae36ea79e06b247f43425197cf6c14))
+
+
+### Features
+
+* **filter:** extract title to uniformize ([dbfcc33](https://github.com/Nagarian/optc-box-manager/commit/dbfcc3309f24119f010706c282c5df65c78803fd))
+
+
+
 ## [0.9.1](https://github.com/Nagarian/optc-box-manager/compare/v0.9.0...v0.9.1) (2020-06-18)
 
 
@@ -72,15 +87,6 @@
 ### Features
 
 * add changelog popin ([30333bb](https://github.com/Nagarian/optc-box-manager/commit/30333bb8bdfddc20eff7207468f574acb7925f2b))
-
-
-
-# [0.4.0](https://github.com/Nagarian/optc-box-manager/compare/v0.3.0...v0.4.0) (2020-06-11)
-
-
-### Features
-
-* **filter:** add Drop Island filter (Fortnight) ([98fb316](https://github.com/Nagarian/optc-box-manager/commit/98fb316cbffb6708ee2fe763920a6fc27549edd6))
 
 
 
