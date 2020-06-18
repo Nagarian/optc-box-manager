@@ -1,3 +1,13 @@
+## [0.9.1](https://github.com/Nagarian/optc-box-manager/compare/v0.9.0...v0.9.1) (2020-06-18)
+
+
+### Bug Fixes
+
+* **filter:** css issue with checkbox on safari ([4eb9fd4](https://github.com/Nagarian/optc-box-manager/commit/4eb9fd41327a9950b36c137ceda07f3120e07e21))
+* **filter:** issue with Drop Location and evolution ([b02f1ee](https://github.com/Nagarian/optc-box-manager/commit/b02f1ee24874f9ee2d569277a03bbae2c59eb30e))
+
+
+
 # [0.9.0](https://github.com/Nagarian/optc-box-manager/compare/v0.8.0...v0.9.0) (2020-06-17)
 
 
@@ -71,16 +81,6 @@
 ### Features
 
 * **filter:** add Drop Island filter (Fortnight) ([98fb316](https://github.com/Nagarian/optc-box-manager/commit/98fb316cbffb6708ee2fe763920a6fc27549edd6))
-
-
-
-# [0.3.0](https://github.com/Nagarian/optc-box-manager/compare/v0.2.0...v0.3.0) (2020-06-10)
-
-
-### Features
-
-* **filter:** add filter by name or ID ([69a850d](https://github.com/Nagarian/optc-box-manager/commit/69a850d5466e634bed9876617f1a48e1d80344cc))
-* add SearchIcon ([2072b8e](https://github.com/Nagarian/optc-box-manager/commit/2072b8e8d5bd6833db1065938a1ffa7e254058c2))
 
 
 
