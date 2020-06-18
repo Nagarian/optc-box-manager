@@ -5,6 +5,7 @@ import { system } from 'styled-system'
 import { FontCss } from './font'
 import { FormsCss } from './forms'
 import { ResetCss } from './reset'
+import { css } from 'styled-components'
 
 export default function DefaultStyles () {
   return (
@@ -45,3 +46,11 @@ export const place = system({
   placeContent: true,
   placeSelf: true,
 })
+
+export const SafariSpecific = (cssRule: any) => css`
+  @media not all and (min-resolution:.001dpcm) {
+    @media {
+      ${cssRule}
+    }
+  }
+`

@@ -1,8 +1,9 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 import { BounceIn, FadeIn } from 'styles/animation'
+import { SafariSpecific } from 'styles'
 
 export const PopupBackground = styled.div<SpaceProps>`
   min-width: ${themeGet('sizes.minimalRequired')};
@@ -18,6 +19,10 @@ export const PopupBackground = styled.div<SpaceProps>`
   align-content: center;
   justify-items: center;
   animation: 200ms ${FadeIn};
+
+  ${SafariSpecific(css`
+    display: flex;
+  `)}
 `
 
 export const PopupContainer = styled(Box)<SpaceProps>`
