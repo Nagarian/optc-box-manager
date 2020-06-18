@@ -44,8 +44,8 @@ export function InputLabel ({
           <div>
             <strong>Level {value}: </strong>
             {typeof descriptions[value] === 'string'
-              ? <DescriptionHighlighter value={descriptions[value] as string} />
-              : descriptions[value]
+              ? <DescriptionHighlighter value={descriptions[value - 1] as string} />
+              : descriptions[value - 1]
             }
           </div>
         )}
