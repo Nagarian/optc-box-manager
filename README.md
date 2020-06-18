@@ -36,7 +36,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - [ ] Sync with OPTC-DB log feature
 - [x] Search literral
 - [x] Filter Drop Island
-- [ ] Farming categorie filter (coliseum/fn/TM/Kizuna)
+- [x] Farming categorie filter (coliseum/fn/TM/Kizuna)
 - [x] Cotton Candy +200 filter
 - [ ] add Limit Break full support
   - [ ] Key limit break (unlock, filter)

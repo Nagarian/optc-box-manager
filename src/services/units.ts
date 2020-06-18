@@ -28,6 +28,7 @@ import {
   TreasureMapDrops,
 } from './drops'
 import { EventDropLight } from 'models/drops'
+import { evolutionMap, EvolutionMapHash } from './evolution'
 
 const Utils = () => (window as any).Utils
 const Units = () => (window as any).units as BaseUnit[]
@@ -64,22 +65,28 @@ const getFamilyId = (families: UnitFamily[], unitId: number) => {
 const getDropLocation = (
   id: number,
   flags: UnitFlags,
-  evolution: UnitEvolution,
+  evolutions: EvolutionMapHash,
 ): ExtendedDrop => {
   if (Object.keys(flags).some(key => key.includes('rr'))) {
     return 'rarerecruit'
   }
 
-  const baseForm = Utils().searchBaseForms(id)
+  const evolve = evolutions[id] ?? []
 
   const condition = (event: EventDropLight) =>
-    event.includes(id) || event.includes(baseForm)
+    event.includes(id) || event.some(eventId => evolve.includes(eventId))
 
   if (condition(StoryDrops)) {
     return 'story'
   }
 
-  if (FortnightDrops.some(fn => fn.units.includes(id))) {
+  if (
+    FortnightDrops.some(
+      fn =>
+        fn.units.includes(id) ||
+        evolve.some(evolveId => fn.units.includes(evolveId)),
+    )
+  ) {
     return 'fortnight'
   }
 
@@ -120,11 +127,13 @@ export const DBUnit = {
     }
 
     const Details = (window as any).details as UnitDetail[]
-    const Evolutions = (window as any).evolutions as UnitEvolution[]
+    const Evolutions = (window as any).evolutions as {
+      [id: number]: UnitEvolution
+    }
     const Cooldowns = (window as any).cooldowns as UnitCooldown[]
     const Flags = (window as any).flags as UnitFlags[]
     const Families = (window as any).families as UnitFamily[]
-
+    const EvolutionMap = evolutionMap()
     return Units()
       .filter(
         unit =>
@@ -136,7 +145,7 @@ export const DBUnit = {
       .map<ExtendedUnit>(unit => {
         const id = unit.number + 1
         const flags = Flags[id] ?? {}
-        const evolution = Evolutions[id]
+
         return {
           ...unit,
           id,
@@ -144,7 +153,7 @@ export const DBUnit = {
             thumbnail: DBUnit.getUnitThumbnail(id),
             full: DBUnit.getUnitFullPicture(id),
           },
-          evolution,
+          evolution: Evolutions[id],
           cooldown: Cooldowns[unit.number],
           detail: Details[id] ?? {},
           flags,
@@ -152,7 +161,7 @@ export const DBUnit = {
             name: Families[unit.number],
             id: getFamilyId(Families, unit.number),
           },
-          dropLocation: getDropLocation(id, flags, evolution),
+          dropLocation: getDropLocation(id, flags, EvolutionMap),
         }
       })
   },
