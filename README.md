@@ -27,21 +27,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Backlog
 
-- [x] Display + choose info displayed on MyUserBox list (cc/potential progression/special lvl progression)
-- [ ] Sort by Potential lvl
-- [x] Bulk update
-- [x] Evolve unit
 - [ ] Rework DB schema
 - [ ] Sync with nakama network
 - [ ] Sync with OPTC-DB log feature
-- [x] Search literral
-- [x] Filter Drop Island
-- [x] Farming categorie filter (coliseum/fn/TM/Kizuna)
-- [x] Cotton Candy +200 filter
-- [ ] add Limit Break full support
-  - [ ] Key limit break (unlock, filter)
-- [x] BUG : RCV Finder, captain filter issue
-- [x] Clear button on search
-- [x] Description highlighter (format `[STR]`, `[DEX]`, ...)
-- [ ] Update UserUnit when viewing its detail or a big update on startup
-- [ ] Save & load user custom search
