@@ -1,5 +1,5 @@
 import { ExtendedUnit } from 'models/units'
-import { UserUnit, UserUnitSpecial } from 'models/userBox'
+import { UserUnit, UserUnitSpecial, UserUnitBulkEdit } from 'models/userBox'
 import { v4 as uuid } from 'uuid'
 
 export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
@@ -75,4 +75,35 @@ function computeSpecialReset (
         ? evolved.special.lvlMax
         : base.special.lvl,
   }
+}
+
+export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
+  const updated = {
+    ...userUnit,
+  }
+
+  if (edit.limitBreakState && updated.potentials.length > 0) {
+    updated.potentials = updated.potentials.map(p => ({
+      ...p,
+      lvl: edit.limitBreakState === 'rainbow' ? 5 : 1,
+    }))
+  }
+
+  if (edit.supportLvl && updated.support) {
+    updated.support.lvl = edit.supportLvl
+  }
+
+  if (edit.cottonCandies) {
+    if (edit.cottonCandies.atk) {
+      updated.cc.atk = edit.cottonCandies.atk
+    }
+    if (edit.cottonCandies.hp) {
+      updated.cc.hp = edit.cottonCandies.hp
+    }
+    if (edit.cottonCandies.rcv) {
+      updated.cc.rcv = edit.cottonCandies.rcv
+    }
+  }
+
+  return updated
 }

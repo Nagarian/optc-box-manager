@@ -1,7 +1,7 @@
 import { ExtendedUnit } from 'models/units'
 import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
-import { UserUnitFactory } from 'services/userUnits'
+import { UserUnitFactory, applyEdit } from 'services/userUnits'
 import { exportAsJson } from 'services/share'
 
 const userBoxKey = 'userBox'
@@ -23,37 +23,6 @@ const replacer = (key: string, value: any) => {
   if (key !== 'unit') return value
   if (typeof value === 'number') return value
   return (value as ExtendedUnit).id
-}
-
-function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
-  const updated = {
-    ...userUnit,
-  }
-
-  if (edit.limitBreakState && updated.potentials.length > 0) {
-    updated.potentials = updated.potentials.map(p => ({
-      ...p,
-      lvl: edit.limitBreakState === 'rainbow' ? 5 : 1,
-    }))
-  }
-
-  if (edit.supportLvl && updated.support) {
-    updated.support.lvl = edit.supportLvl
-  }
-
-  if (edit.cottonCandies) {
-    if (edit.cottonCandies.atk) {
-      updated.cc.atk = edit.cottonCandies.atk
-    }
-    if (edit.cottonCandies.hp) {
-      updated.cc.hp = edit.cottonCandies.hp
-    }
-    if (edit.cottonCandies.rcv) {
-      updated.cc.rcv = edit.cottonCandies.rcv
-    }
-  }
-
-  return updated
 }
 
 export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
