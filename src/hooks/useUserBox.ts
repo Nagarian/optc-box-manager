@@ -1,7 +1,7 @@
 import { ExtendedUnit } from 'models/units'
 import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
-import { UserUnitFactory, applyEdit } from 'services/userUnits'
+import { UserUnitFactory, applyEdit, resync } from 'services/userUnits'
 import { exportAsJson } from 'services/share'
 
 const userBoxKey = 'userBox'
@@ -31,7 +31,12 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
   useEffect(() => {
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      setUserBox(JSON.parse(json, reviver(units)))
+      let userBox : UserBox = JSON.parse(json, reviver(units))
+      if (units.length) {
+        userBox = userBox.map(resync)
+      }
+
+      setUserBox(userBox)
     }
   }, [units])
 

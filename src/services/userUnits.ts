@@ -107,3 +107,40 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
 
   return updated
 }
+
+export function resync (userUnit: UserUnit) {
+  const updated = { ...userUnit }
+  const compare = UserUnitFactory(userUnit.unit)
+  let isUpdated = false
+
+  if (userUnit.special?.lvlMax !== compare.special?.lvlMax && compare.special) {
+    updated.special = {
+      ...compare.special,
+      lvl: Math.min(userUnit.special?.lvl ?? compare.special.lvl, compare.special.lvlMax),
+    }
+
+    isUpdated = true
+  }
+
+  if (!userUnit.support && !!compare.support) {
+    updated.support = compare.support
+    isUpdated = true
+  }
+
+  if (!arrayEqual(userUnit.potentials, compare.potentials)) {
+    updated.potentials = compare.potentials.map(({ type, lvl }) => ({
+      type,
+      lvl: userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl,
+    }))
+    isUpdated = true
+  }
+
+  return isUpdated ? updated : userUnit
+}
+
+function arrayEqual<T> (array1: T[], array2: T[]) {
+  return (
+    array1.length === array2.length &&
+    array1.every((value, index) => value === array2[index])
+  )
+}
