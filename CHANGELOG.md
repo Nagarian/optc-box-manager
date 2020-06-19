@@ -1,3 +1,12 @@
+## [0.10.1](https://github.com/Nagarian/optc-box-manager/compare/v0.10.0...v0.10.1) (2020-06-19)
+
+
+### Bug Fixes
+
+* add resync of UserUnit on startup ([0ea7768](https://github.com/Nagarian/optc-box-manager/commit/0ea7768f7d15e61bc49714c61c246a1900060575))
+
+
+
 # [0.10.0](https://github.com/Nagarian/optc-box-manager/compare/v0.9.1...v0.10.0) (2020-06-18)
 
 
@@ -73,20 +82,6 @@
 
 * **box:** add CharacterBox displayers ([6e6b8e7](https://github.com/Nagarian/optc-box-manager/commit/6e6b8e7d0a200b68e2419ae23cec5eda4bebb7f8))
 * **box:** display cc label ([41cbb92](https://github.com/Nagarian/optc-box-manager/commit/41cbb9226def018cba809a9ecc331ae167a61cd1))
-
-
-
-# [0.5.0](https://github.com/Nagarian/optc-box-manager/compare/v0.4.0...v0.5.0) (2020-06-11)
-
-
-### Bug Fixes
-
-* **detail:** typo of delete button ([a918c9f](https://github.com/Nagarian/optc-box-manager/commit/a918c9f2e84872419002c9ec1f5e03f15aa4fab9))
-
-
-### Features
-
-* add changelog popin ([30333bb](https://github.com/Nagarian/optc-box-manager/commit/30333bb8bdfddc20eff7207468f574acb7925f2b))
 
 
 
