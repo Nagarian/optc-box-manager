@@ -34,7 +34,7 @@ const Orb = styled('span')
   }))
   .withConfig(clean('value'))<OrbProps>`
   display: inline-block;
-  background-color: ${p => themeGet(`colors.orb.${p.children}`)};
+  background: ${p => themeGet(`colors.orb.${p.children}`)};
   color: ${themeGet('colors.white')};
   border-radius: 1em;
   padding: .1em .5em;
