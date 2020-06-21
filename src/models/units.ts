@@ -203,5 +203,5 @@ export type ExtendedUnit = BaseUnit & {
   detail: UnitDetail
   flags: UnitFlags
   family: ExtendedUnitFamily
-  dropLocation: ExtendedDrop
+  dropLocations: ExtendedDrop[]
 }

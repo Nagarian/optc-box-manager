@@ -62,13 +62,13 @@ const getFamilyId = (families: UnitFamily[], unitId: number) => {
   return families.findIndex(u => u === family) + 1
 }
 
-const getDropLocation = (
+const getDropLocations = (
   id: number,
   flags: UnitFlags,
   evolutions: EvolutionMapHash,
-): ExtendedDrop => {
+): ExtendedDrop[] => {
   if (Object.keys(flags).some(key => key.includes('rr'))) {
-    return 'rarerecruit'
+    return ['rarerecruit']
   }
 
   const evolve = evolutions[id] ?? []
@@ -76,8 +76,10 @@ const getDropLocation = (
   const condition = (event: EventDropLight) =>
     event.includes(id) || event.some(eventId => evolve.includes(eventId))
 
+  const result : ExtendedDrop[] = []
+
   if (condition(StoryDrops)) {
-    return 'story'
+    result.push('story')
   }
 
   if (
@@ -87,33 +89,37 @@ const getDropLocation = (
         evolve.some(evolveId => fn.units.includes(evolveId)),
     )
   ) {
-    return 'fortnight'
+    result.push('fortnight')
   }
 
   if (condition(ColiseumDrops)) {
-    return 'coliseum'
+    result.push('coliseum')
   }
 
   if (condition(TreasureMapDrops)) {
-    return 'treasuremap'
+    result.push('treasuremap')
   }
 
   if (condition(KizunaClashDrops)) {
-    return 'kizunaclash'
+    result.push('kizunaclash')
   }
 
   // we put raid and ambush last because they often includes some units from other game mode
   // IE: ambush shanks
   if (condition(RaidDrops)) {
-    return 'raid'
+    result.push('raid')
   }
 
   if (condition(AmbushDrops)) {
-    return 'ambush'
+    result.push('ambush')
   }
 
-  // ambiguous units like thus given on login, or on specific events
-  return 'special'
+  if (!result.length) {
+    // ambiguous units like thus given on login, or on specific events
+    result.push('special')
+  }
+
+  return result
 }
 
 export const DBUnit = {
@@ -161,7 +167,7 @@ export const DBUnit = {
             name: Families[unit.number],
             id: getFamilyId(Families, unit.number),
           },
-          dropLocation: getDropLocation(id, flags, EvolutionMap),
+          dropLocations: getDropLocations(id, flags, EvolutionMap),
         }
       })
   },

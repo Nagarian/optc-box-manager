@@ -30,7 +30,7 @@ export const ByDropFilter = (criteria: ByDropCriteria) =>
     [
       criteria.dropLocations?.length,
       (unit: ExtendedUnit) =>
-        criteria.dropLocations!.includes(unit.dropLocation),
+        criteria.dropLocations!.some(dl => unit.dropLocations.includes(dl)),
     ],
   )
 
