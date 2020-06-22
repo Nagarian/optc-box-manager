@@ -11,21 +11,25 @@ const ExpandButton = styled(Button).attrs(() => ({
 }))<{ isOpen: boolean }>`
   ${ArrowIcon} {
     transform: rotate(0deg);
-    transition: all .25s ease;
+    transition: all 0.25s ease;
     ${p => p.isOpen && 'transform: rotate(90deg);'}
   }
+  flex: 0 0 auto;
 `
 
 const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
+  will-change: max-height;
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
-  overflow: ${p => !p.isOpen && 'hidden'};
+  /* overflow: ${p => !p.isOpen && 'hidden'}; */
+  overflow: hidden;
   transition: max-height .25s ease;
   margin-bottom: ${p => p.isOpen && themeGet('space.2')};
 
   display: flex;
   flex-direction: column;
   place-items: stretch;
+  flex: 0 0 auto;
 `
 
 function ExpandedPanel ({
@@ -39,7 +43,14 @@ function ExpandedPanel ({
   const boxRef = useRef<HTMLElement>(null)
   return (
     <Panel
-      innerHeight={boxRef.current?.scrollHeight}
+      innerHeight={
+        boxRef.current
+          ? Array.from(boxRef.current.children).reduce(
+            (acc, el) => acc + el.scrollHeight,
+            0,
+          )
+          : undefined
+      }
       isOpen={isOpen}
       ref={boxRef as any}
       {...rest}
@@ -61,11 +72,7 @@ export default function ExpansionPanel ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <>
-      <ExpandButton
-        isOpen={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
-        my="1"
-      >
+      <ExpandButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} my="1">
         {title}
       </ExpandButton>
       <ExpandedPanel isOpen={isOpen}>{children}</ExpandedPanel>
