@@ -73,8 +73,8 @@ export const Potentials = [
   '[STR] Damage Reduction',
   '[DEX] Damage Reduction',
   '[QCK] Damage Reduction',
-  '[INT] Damage Reduction',
   '[PSY] Damage Reduction',
+  '[INT] Damage Reduction',
   'Cooldown Reduction',
   'Double Special Activation',
 ] as const
