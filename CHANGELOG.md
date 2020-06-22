@@ -1,3 +1,20 @@
+## [0.10.2](https://github.com/Nagarian/optc-box-manager/compare/v0.10.1...v0.10.2) (2020-06-22)
+
+
+### Bug Fixes
+
+* add iOS icon ([873d7eb](https://github.com/Nagarian/optc-box-manager/commit/873d7ebe9c026942c57fa837eb4fa6ea18c22528))
+* **detail:** issue with ExpansionPanel's height ([1cf047a](https://github.com/Nagarian/optc-box-manager/commit/1cf047a137c64417b817c9af788eed0b4d1c7913))
+* [#27](https://github.com/Nagarian/optc-box-manager/issues/27) safari/ios issue with grid and flexbox ([a937e7e](https://github.com/Nagarian/optc-box-manager/commit/a937e7eac1fad13a8dd0996e5a35468775389f06))
+* **box:** rainbow issue with unit key locked ([b039b9c](https://github.com/Nagarian/optc-box-manager/commit/b039b9c3fb8c57b0df519e4e5ad2eb53ca4ec840))
+* **detail:** Rainbow orb issue into description ([7dd9b15](https://github.com/Nagarian/optc-box-manager/commit/7dd9b15e04a8871b8fc504789ef2702dc2eb46c6))
+* **edit:** [#28](https://github.com/Nagarian/optc-box-manager/issues/28) issue with key locked potentials ability ([008e722](https://github.com/Nagarian/optc-box-manager/commit/008e722c69bfff180cf91bdd7a8305b698e19fa4))
+* **filter:** issue with dropLocation ([ab847e2](https://github.com/Nagarian/optc-box-manager/commit/ab847e220af76182038230638923311badf1c6f9))
+* **filter:** lb state issue with unit key locked ([b1144b1](https://github.com/Nagarian/optc-box-manager/commit/b1144b1ed76b46be6370afe0b35185ed72c7b93d))
+* **filter:** order of Potential color shield ([d400e1b](https://github.com/Nagarian/optc-box-manager/commit/d400e1b7cc8ad580db77dc08fae9b5604f005f0e))
+
+
+
 ## [0.10.1](https://github.com/Nagarian/optc-box-manager/compare/v0.10.0...v0.10.1) (2020-06-19)
 
 
@@ -72,16 +89,6 @@
 
 * add Search clear button ([625c9a9](https://github.com/Nagarian/optc-box-manager/commit/625c9a92db7d60ff1fd2cc0c0a9cdcfcd5d3d555))
 * **displayer:** add Displayer chooser ([63a9c77](https://github.com/Nagarian/optc-box-manager/commit/63a9c77318d10c6f161b7cb0f8600aa669805a51))
-
-
-
-# [0.6.0](https://github.com/Nagarian/optc-box-manager/compare/v0.5.0...v0.6.0) (2020-06-12)
-
-
-### Features
-
-* **box:** add CharacterBox displayers ([6e6b8e7](https://github.com/Nagarian/optc-box-manager/commit/6e6b8e7d0a200b68e2419ae23cec5eda4bebb7f8))
-* **box:** display cc label ([41cbb92](https://github.com/Nagarian/optc-box-manager/commit/41cbb9226def018cba809a9ecc331ae167a61cd1))
 
 
 
