@@ -6,7 +6,7 @@ import React from 'react'
 import { InputLabel } from '.'
 
 function Wrapper ({
-  potential: { type, lvl },
+  potential: { type, lvl, keyState },
   detail: { description, Name },
   onChange,
 }: {
@@ -29,6 +29,7 @@ function Wrapper ({
           onChange({
             lvl: Number(e.target.value),
             type: type,
+            keyState: keyState && (Number(e.target.value) > 0 ? 'unlocked' : 'locked'),
           })
         }
       />

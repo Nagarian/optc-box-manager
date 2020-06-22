@@ -1,5 +1,12 @@
-import { ExtendedUnit } from 'models/units'
-import { UserUnit, UserUnitSpecial, UserUnitBulkEdit } from 'models/userBox'
+import { ExtendedUnit, PotentialKey, LimitBreak } from 'models/units'
+import {
+  UserUnit,
+  UserUnitSpecial,
+  UserUnitBulkEdit,
+  UserUnitPotentialAbilityKeyState,
+  UserUnitBulkEditLimitBreakState,
+  UserUnitPotentialAbility,
+} from 'models/userBox'
 import { v4 as uuid } from 'uuid'
 
 export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
@@ -10,6 +17,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       unit.detail.potential?.map(potential => ({
         type: potential.Name,
         lvl: 0,
+        keyState: getPotentialState(potential.Name, 0, unit.detail.limit),
       })) ?? [],
     special: unit.cooldown && {
       lvl: 1,
@@ -85,7 +93,7 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
   if (edit.limitBreakState && updated.potentials.length > 0) {
     updated.potentials = updated.potentials.map(p => ({
       ...p,
-      lvl: edit.limitBreakState === 'rainbow' ? 5 : 1,
+      lvl: editLimitBreak(p, edit.limitBreakState),
     }))
   }
 
@@ -108,6 +116,24 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
   return updated
 }
 
+function editLimitBreak (
+  userPotential: UserUnitPotentialAbility,
+  state?: UserUnitBulkEditLimitBreakState,
+): number {
+  switch (state) {
+    case 'max':
+      return userPotential.keyState ? 0 : 1
+    case 'rainbow':
+      return userPotential.keyState ? 0 : 5
+    case 'max+':
+      return 1
+    case 'rainbow+':
+      return 5
+    default:
+      return userPotential.lvl
+  }
+}
+
 export function resync (userUnit: UserUnit) {
   const updated = { ...userUnit }
   const compare = UserUnitFactory(userUnit.unit)
@@ -116,7 +142,10 @@ export function resync (userUnit: UserUnit) {
   if (userUnit.special?.lvlMax !== compare.special?.lvlMax && compare.special) {
     updated.special = {
       ...compare.special,
-      lvl: Math.min(userUnit.special?.lvl ?? compare.special.lvl, compare.special.lvlMax),
+      lvl: Math.min(
+        userUnit.special?.lvl ?? compare.special.lvl,
+        compare.special.lvlMax,
+      ),
     }
 
     isUpdated = true
@@ -128,10 +157,14 @@ export function resync (userUnit: UserUnit) {
   }
 
   if (!arrayEqual(userUnit.potentials, compare.potentials)) {
-    updated.potentials = compare.potentials.map(({ type, lvl }) => ({
-      type,
-      lvl: userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl,
-    }))
+    updated.potentials = compare.potentials.map(({ type, lvl }) => {
+      const updatedLvl = userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl
+      return ({
+        type,
+        lvl: updatedLvl,
+        keyState: getPotentialState(type, updatedLvl, userUnit.unit.detail.limit),
+      })
+    })
     isUpdated = true
   }
 
@@ -143,4 +176,30 @@ function arrayEqual<T> (array1: T[], array2: T[]) {
     array1.length === array2.length &&
     array1.every((value, index) => value === array2[index])
   )
+}
+
+const getPotentialState = (
+  key: PotentialKey,
+  lvl: number,
+  limitBreak: LimitBreak[] = [],
+): UserUnitPotentialAbilityKeyState => {
+  const lbIndex = limitBreak.findIndex(lb => lb.description.includes(key))
+
+  if (lbIndex === -1) {
+    return undefined
+  }
+
+  const keyIndex = limitBreak.findIndex(
+    lb => lb.description === 'LOCKED WITH KEY',
+  )
+
+  if (keyIndex === -1) {
+    return undefined
+  }
+
+  if (lbIndex < keyIndex) {
+    return undefined
+  }
+
+  return lvl === 0 ? 'locked' : 'unlocked'
 }

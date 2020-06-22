@@ -6,7 +6,12 @@ import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { DefaultSearch } from 'hooks/useSearch'
 import { Search, SearchSortCriteria } from 'models/search'
-import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
+import {
+  UserUnit,
+  UserUnitBulkEdit,
+  UserUnitBulkEditLimitBreakState,
+  UserUnitBulkEditLimitBreakStateKeys,
+} from 'models/userBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { ReactNode, useState } from 'react'
@@ -25,7 +30,7 @@ export default function BulkEdit ({
   const [edit, setEdit] = useState<UserUnitBulkEdit>()
   const [showStep2, setShowStep2] = useState<boolean>()
 
-  const computeSearch = () : Search => {
+  const computeSearch = (): Search => {
     let uuf: SearchFilterUserUnits = {}
     const uus: SearchSortCriteria[] = []
     if (edit?.supportLvl) {
@@ -95,36 +100,20 @@ export default function BulkEdit ({
           }
           disableReset={!edit?.limitBreakState}
         >
-          <label>
-            <input
-              name="lb-state"
-              type="radio"
-              checked={edit?.limitBreakState === 'max'}
-              onChange={e =>
-                e.target.checked &&
+          {UserUnitBulkEditLimitBreakStateKeys.map(lbState => (
+            <LbStateEdit
+              key={lbState}
+              state={lbState}
+              label={lbStateToLabel(lbState)}
+              currentValue={edit?.limitBreakState}
+              onChange={state =>
                 setEdit({
                   ...edit,
-                  limitBreakState: 'max',
+                  limitBreakState: state,
                 })
               }
             />
-            Is Limit Break maxed
-          </label>
-          <label>
-            <input
-              name="lb-state"
-              type="radio"
-              checked={edit?.limitBreakState === 'rainbow'}
-              onChange={e =>
-                e.target.checked &&
-                setEdit({
-                  ...edit,
-                  limitBreakState: 'rainbow',
-                })
-              }
-            />
-            Is rainbow
-          </label>
+          ))}
         </FilterContainer>
 
         <FilterContainer
@@ -237,4 +226,43 @@ function BulkEditContainer ({
       {value ?? 0}
     </Box>
   )
+}
+
+function LbStateEdit ({
+  state,
+  currentValue,
+  onChange,
+  label,
+}: {
+  state: UserUnitBulkEditLimitBreakState
+  currentValue: UserUnitBulkEditLimitBreakState | undefined
+  onChange: (state: UserUnitBulkEditLimitBreakState) => void
+  label: string
+}) {
+  return (
+    <label>
+      <input
+        name={`lb-state-${state}`}
+        type="radio"
+        checked={currentValue === state ?? false}
+        onChange={e => e.target.checked && onChange(state)}
+      />
+      {label}
+    </label>
+  )
+}
+
+function lbStateToLabel (lbState: UserUnitBulkEditLimitBreakState) {
+  switch (lbState) {
+    case 'max':
+      return 'Is Limit Break maxed'
+    case 'rainbow':
+      return 'Is Rainbow'
+    case 'max+':
+      return 'Is Limit Break key unlocked'
+    case 'rainbow+':
+      return 'Is Rainbow + (key unlocked and max+)'
+    default:
+      return ''
+  }
 }

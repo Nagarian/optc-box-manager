@@ -8,7 +8,10 @@ export type UserUnitSpecial = {
 export type UserUnitPotentialAbility = {
   type: PotentialKey
   lvl: number
+  keyState?: UserUnitPotentialAbilityKeyState
 }
+
+export type UserUnitPotentialAbilityKeyState = undefined | 'locked' | 'unlocked'
 
 export type UserUnitSupport = {
   lvl: number
@@ -43,7 +46,7 @@ export type MyUserBox = {
 }
 
 export type UserUnitBulkEdit = {
-  limitBreakState?: 'max' | 'rainbow'
+  limitBreakState?: UserUnitBulkEditLimitBreakState
   supportLvl?: number
   cottonCandies?: {
     atk?: number
@@ -51,3 +54,6 @@ export type UserUnitBulkEdit = {
     rcv?: number
   }
 }
+
+export const UserUnitBulkEditLimitBreakStateKeys = ['max', 'rainbow', 'max+', 'rainbow+'] as const
+export type UserUnitBulkEditLimitBreakState = typeof UserUnitBulkEditLimitBreakStateKeys[number]
