@@ -60,13 +60,13 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) =>
       criteria.lbstate === 'lbmax',
       (userUnit: UserUnit) =>
         userUnit.potentials.length > 0 &&
-        userUnit.potentials.every(p => compareLvlToState('ongoing', p.lvl)),
+        userUnit.potentials.filter(p => !p.keyState).every(p => compareLvlToState('ongoing', p.lvl)),
     ],
     [
       criteria.lbstate === 'rainbow',
       (userUnit: UserUnit) =>
         userUnit.potentials.length > 0 &&
-        userUnit.potentials.every(p => compareLvlToState('maxed', p.lvl)),
+        userUnit.potentials.filter(p => !p.keyState).every(p => compareLvlToState('maxed', p.lvl)),
     ],
   )
 
