@@ -87,7 +87,7 @@ export default function CharacterBox ({
       rainbow={
         !!userUnit &&
         userUnit.potentials.length > 0 &&
-        userUnit.potentials.every(p => p.lvl === 5)
+        userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
       }
       onClick={() => onClick?.(unit)}
     >
