@@ -5,6 +5,7 @@ import Button from './Button'
 const Container = styled.div`
   display: flex;
   overflow-x: auto;
+  flex: 0 0 auto;
 `
 
 type PaginationProps = {

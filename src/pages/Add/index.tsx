@@ -73,7 +73,6 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
         onUnitClick={u => toggle(u, !selectedUnits.includes(u))}
         my="2"
         mx={[0, 2]}
-        flex="1"
       />
 
       {selectedUnits.length > 0 && (

@@ -29,12 +29,14 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   background-color: ${themeGet('colors.background')};
   width: 100%;
   max-width: 80rem;
+  max-height: 100%;
+  margin: auto;
+  ${space}
   display: flex;
   flex-direction: column;
   place-items: stretch;
   overflow: hidden;
   border-radius: .5rem;
-  ${space}
   box-shadow: ${themeGet('shadows.normal')};
   animation: 250ms ${BounceIn};
 `

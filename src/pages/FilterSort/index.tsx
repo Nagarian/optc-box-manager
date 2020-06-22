@@ -92,7 +92,7 @@ export default function FilterSort ({
       )}
 
       <hr />
-      <Box display="flex" justifyContent="space-evenly" padding="2">
+      <Box display="flex" justifyContent="space-evenly" padding="2" flex="0 0 auto">
         <Button
           onClick={() => setDisplayed('unit-filter')}
           {...buttonStyle}
