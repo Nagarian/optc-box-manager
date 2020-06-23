@@ -9,6 +9,7 @@ import { BySearchBoxFilter, BySearchBoxInput } from './BySearchBox'
 import { BySupportFilter, BySupportInput } from './BySupport'
 import { ByTypeFilter, ByTypeInput } from './ByType'
 import { ByUnclassableFilter, ByUnclassableInput } from './ByUnclassable'
+import { ByLimitBreakFilter, ByLimitBreakInput } from './ByLimitBreak'
 
 export const SearchFilterUnitsKeys = [
   'byUnclassable',
@@ -16,6 +17,7 @@ export const SearchFilterUnitsKeys = [
   'byClass',
   'byRarity',
   'bySupport',
+  'byLimitBreak',
   'byPotential',
   'byRcvFinder',
   'bySearchBox',
@@ -82,5 +84,10 @@ export const UnitFilterBuilder: {
     title: 'Drop Island',
     builder: ByDropFilter,
     input: ByDropInput,
+  },
+  byLimitBreak: {
+    title: 'Limit Break',
+    builder: ByLimitBreakFilter,
+    input: ByLimitBreakInput,
   },
 }
