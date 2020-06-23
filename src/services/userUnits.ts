@@ -6,6 +6,7 @@ import {
   UserUnitPotentialAbilityKeyState,
   UserUnitBulkEditLimitBreakState,
   UserUnitPotentialAbility,
+  UserUnitLimitBreak,
 } from 'models/userBox'
 import { v4 as uuid } from 'uuid'
 
@@ -19,6 +20,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
         lvl: 0,
         keyState: getPotentialState(potential.Name, 0, unit.detail.limit),
       })) ?? [],
+    limitBreak: UserUnitLimitBreakFactory(unit.detail.limit),
     special: unit.cooldown && {
       lvl: 1,
       lvlMax: unit.cooldown ? unit.cooldown[0] - unit.cooldown[1] + 1 : 1,
@@ -34,6 +36,24 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       atk: 0,
       rcv: 0,
     },
+  }
+}
+
+const UserUnitLimitBreakFactory = (
+  limitBreak?: LimitBreak[],
+): UserUnitLimitBreak | undefined => {
+  if (!limitBreak?.length) {
+    return undefined
+  }
+
+  const keyIndex = limitBreak.findIndex(
+    lb => lb.description === 'LOCKED WITH KEY',
+  )
+
+  return {
+    lvl: 0,
+    lvlMax: keyIndex === -1 ? limitBreak.length : keyIndex,
+    keyLvlMax: keyIndex === -1 ? undefined : limitBreak.length,
   }
 }
 
@@ -54,6 +74,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
       ...p,
       lvl: userUnit.potentials.find(pp => pp.type === p.type)?.lvl ?? p.lvl,
     })),
+    limitBreak: userUnit.limitBreak ?? template.limitBreak,
   }
 }
 
@@ -91,10 +112,14 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
   }
 
   if (edit.limitBreakState && updated.potentials.length > 0) {
-    updated.potentials = updated.potentials.map(p => ({
-      ...p,
-      lvl: editLimitBreak(p, edit.limitBreakState),
-    }))
+    updated.potentials = updated.potentials.map(p =>
+      editPotential(p, edit.limitBreakState),
+    )
+
+    updated.limitBreak = {
+      ...updated.limitBreak!,
+      lvl: editLimitBreak(updated.limitBreak!, edit.limitBreakState),
+    }
   }
 
   if (edit.supportLvl && updated.support) {
@@ -116,21 +141,51 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
   return updated
 }
 
-function editLimitBreak (
+function editPotential (
   userPotential: UserUnitPotentialAbility,
+  state?: UserUnitBulkEditLimitBreakState,
+): UserUnitPotentialAbility {
+  switch (state) {
+    case 'max':
+      return {
+        ...userPotential,
+        lvl: userPotential.keyState ? 0 : 1,
+      }
+    case 'rainbow':
+      return {
+        ...userPotential,
+        lvl: userPotential.keyState ? 0 : 5,
+      }
+    case 'max+':
+      return {
+        ...userPotential,
+        lvl: 1,
+        keyState: 'unlocked',
+      }
+    case 'rainbow+':
+      return {
+        ...userPotential,
+        lvl: 5,
+        keyState: 'unlocked',
+      }
+    default:
+      return userPotential
+  }
+}
+
+function editLimitBreak (
+  limitBreak: UserUnitLimitBreak,
   state?: UserUnitBulkEditLimitBreakState,
 ): number {
   switch (state) {
     case 'max':
-      return userPotential.keyState ? 0 : 1
     case 'rainbow':
-      return userPotential.keyState ? 0 : 5
+      return limitBreak.lvlMax
     case 'max+':
-      return 1
     case 'rainbow+':
-      return 5
+      return limitBreak.keyLvlMax ?? limitBreak.lvlMax
     default:
-      return userPotential.lvl
+      return limitBreak.lvl
   }
 }
 
@@ -158,13 +213,32 @@ export function resync (userUnit: UserUnit) {
 
   if (!arrayEqual(userUnit.potentials, compare.potentials)) {
     updated.potentials = compare.potentials.map(({ type, lvl }) => {
-      const updatedLvl = userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl
-      return ({
+      const updatedLvl =
+        userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl
+      return {
         type,
         lvl: updatedLvl,
-        keyState: getPotentialState(type, updatedLvl, userUnit.unit.detail.limit),
-      })
+        keyState: getPotentialState(
+          type,
+          updatedLvl,
+          userUnit.unit.detail.limit,
+        ),
+      }
     })
+    isUpdated = true
+  }
+
+  if (
+    userUnit.limitBreak?.keyLvlMax !== compare.limitBreak?.keyLvlMax ||
+    userUnit.limitBreak?.lvlMax !== compare.limitBreak?.lvlMax
+  ) {
+    updated.limitBreak = {
+      ...compare.limitBreak!,
+      lvl:
+        userUnit.limitBreak?.lvl ??
+        getLimitBreakLevel(updated.potentials, userUnit.unit.detail.limit),
+    }
+
     isUpdated = true
   }
 
@@ -202,4 +276,21 @@ const getPotentialState = (
   }
 
   return lvl === 0 ? 'locked' : 'unlocked'
+}
+
+const getLimitBreakLevel = (
+  potentials: UserUnitPotentialAbility[],
+  limitBreak: LimitBreak[] | undefined = [],
+) => {
+  if (!potentials.length || potentials.every(p => p.lvl === 0)) {
+    return 0
+  }
+
+  const lastPotentialAcquired = potentials.filter(p => p.lvl > 0).slice(-1)[0]
+    .type
+
+  return (
+    limitBreak.findIndex(lb => lb.description.includes(lastPotentialAcquired)) +
+    1
+  )
 }

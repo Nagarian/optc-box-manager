@@ -23,10 +23,17 @@ export type UserUnitCottonCandy = {
   atk: number
 }
 
+export type UserUnitLimitBreak = {
+  lvl: number
+  lvlMax: number
+  keyLvlMax?: number
+}
+
 export type UserUnit = {
   id: string
   unit: ExtendedUnit
   special?: UserUnitSpecial
+  limitBreak?: UserUnitLimitBreak
   potentials: UserUnitPotentialAbility[]
   support?: UserUnitSupport
   cc: UserUnitCottonCandy
