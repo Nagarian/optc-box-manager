@@ -11,6 +11,7 @@ import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
+import LimitBreakDisplayer from './components/LimitBreakDisplayer'
 import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
 
@@ -101,6 +102,8 @@ export default function CharacterBox ({
       {userUnit && InfoDisplayer && (
         <InfoDisplayer userUnit={userUnit} options={displayer?.options} />
       )}
+
+      <LimitBreakDisplayer limitBreak={userUnit?.limitBreak} />
     </Btn>
   )
 }
