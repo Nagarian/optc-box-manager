@@ -24,10 +24,10 @@ type CharacterBoxProps = {
 
 type BtnProps = {
   support?: string
-  rainbow: boolean
+  rainbow?: string
 }
 
-const rainbowCss = css`
+const rainbowCss = css<BtnProps>`
   &:before {
     content: '';
     position: absolute;
@@ -37,7 +37,7 @@ const rainbowCss = css`
     bottom: 0;
     border: 0.7rem solid;
     border-image-slice: 1;
-    border-image-source: ${themeGet('colors.specific.rainbow')};
+    border-image-source: ${p => themeGet(`colors.specific.${p.rainbow}`)};
     opacity: 0.9;
   }
 `
@@ -85,11 +85,7 @@ export default function CharacterBox ({
       support={
         support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
       }
-      rainbow={
-        !!userUnit &&
-        userUnit.potentials.length > 0 &&
-        userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
-      }
+      rainbow={getRainbowState(userUnit)}
       onClick={() => onClick?.(unit)}
     >
       <Image
@@ -106,4 +102,27 @@ export default function CharacterBox ({
       <LimitBreakDisplayer limitBreak={userUnit?.limitBreak} />
     </Btn>
   )
+}
+
+function getRainbowState (userUnit?: UserUnit) {
+  if (!userUnit || !userUnit.potentials.length || !userUnit.limitBreak) {
+    return undefined
+  }
+
+  if (
+    userUnit.limitBreak.keyLvlMax &&
+    userUnit.limitBreak.lvl === userUnit.limitBreak.keyLvlMax &&
+    userUnit.potentials.every(p => p.lvl === 5)
+  ) {
+    return 'rainbowPlus'
+  }
+
+  if (
+    userUnit.limitBreak.lvl >= userUnit.limitBreak.lvlMax &&
+    userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
+  ) {
+    return 'rainbow'
+  }
+
+  return undefined
 }
