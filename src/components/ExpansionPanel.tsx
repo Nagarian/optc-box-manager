@@ -19,10 +19,8 @@ const ExpandButton = styled(Button).attrs(() => ({
 
 const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
-  will-change: max-height;
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
-  /* overflow: ${p => !p.isOpen && 'hidden'}; */
-  overflow: hidden;
+  overflow: ${p => !p.isOpen && 'hidden'};
   transition: max-height .25s ease;
   margin-bottom: ${p => p.isOpen && themeGet('space.2')};
 
