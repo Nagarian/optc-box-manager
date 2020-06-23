@@ -45,8 +45,8 @@ export default function BulkEdit ({
     if (edit?.limitBreakState) {
       uuf = {
         ...uuf,
-        byUserPotential: {
-          lbstate: 'locked',
+        byUserLimitBreak: {
+          lbState: edit.limitBreakState.includes('+') ? 'maxed' : 'locked',
         },
       }
       uus.push({
