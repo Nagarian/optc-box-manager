@@ -1,10 +1,8 @@
 import PotentialAbility from 'components/PotentialAbility'
-import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
-import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const PotentialStateKeys = [
@@ -16,10 +14,7 @@ export const PotentialStateKeys = [
 export type PotentialState = typeof PotentialStateKeys[number]
 
 export type ByUserPotentialCriteria = {
-  with?: {
-    [key in PotentialKey]?: PotentialState
-  }
-  lbstate?: 'locked' | 'lbmax' | 'rainbow'
+  [key in PotentialKey]?: PotentialState
 }
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
@@ -35,39 +30,13 @@ const compareLvlToState = (state: PotentialState, lvl: number) => {
   }
 }
 
-export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) =>
-  BooleanFilterMapper(
-    [
-      criteria.with,
-      (userUnit: UserUnit) =>
-        Object.entries(
-          criteria.with ?? {},
-        ).some(([potentialKey, potentialState]) =>
-          userUnit.potentials.some(
-            p =>
-              p.type === potentialKey &&
-              compareLvlToState(potentialState!, p.lvl),
-          ),
-        ),
-    ],
-    [
-      criteria.lbstate === 'locked',
-      (userUnit: UserUnit) =>
-        userUnit.potentials.length > 0 &&
-        userUnit.potentials.every(p => compareLvlToState('locked', p.lvl)),
-    ],
-    [
-      criteria.lbstate === 'lbmax',
-      (userUnit: UserUnit) =>
-        userUnit.potentials.length > 0 &&
-        userUnit.potentials.filter(p => !p.keyState).every(p => compareLvlToState('ongoing', p.lvl)),
-    ],
-    [
-      criteria.lbstate === 'rainbow',
-      (userUnit: UserUnit) =>
-        userUnit.potentials.length > 0 &&
-        userUnit.potentials.filter(p => !p.keyState).every(p => compareLvlToState('maxed', p.lvl)),
-    ],
+export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
+  userUnit: UserUnit,
+) =>
+  Object.entries(criteria).some(([potentialKey, potentialState]) =>
+    userUnit.potentials.some(
+      p => p.type === potentialKey && compareLvlToState(potentialState!, p.lvl),
+    ),
   )
 
 type PotentialStateInputProps = {
@@ -104,63 +73,15 @@ export function ByUserPotentialInput ({
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
   return (
     <>
-      <FilterContainerPanel>
-        <Text>Limit Break State</Text>
-        <label>
-          <input
-            type="radio"
-            name="uu-lbstate"
-            checked={criteria?.lbstate === 'locked' ?? false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                lbstate: 'locked',
-              })
-            }
-          />
-          locked
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="uu-lbstate"
-            checked={criteria?.lbstate === 'lbmax' ?? false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                lbstate: 'lbmax',
-              })
-            }
-          />
-          limit break max
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="uu-lbstate"
-            checked={criteria?.lbstate === 'rainbow' ?? false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                lbstate: 'rainbow',
-              })
-            }
-          />
-          rainbow
-        </label>
-      </FilterContainerPanel>
       {Potentials.map(potential => (
         <PotentialStateInput
           key={potential}
           potential={potential}
-          state={criteria?.with?.[potential]}
+          state={criteria?.[potential]}
           onChange={state =>
             onChange({
               ...criteria,
-              with: {
-                ...criteria?.with,
-                [potential]: state,
-              },
+              [potential]: state,
             })
           }
         />

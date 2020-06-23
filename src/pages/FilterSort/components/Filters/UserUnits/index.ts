@@ -4,11 +4,13 @@ import { ByUserCottonCandyFilter, ByUserCottonCandyInput } from './ByUserCottonC
 import { ByUserPotentialFilter, ByUserPotentialInput } from './ByUserPotential'
 import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
 import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
+import { ByUserLimitBreakFilter, ByUserLimitBreakInput } from './ByUserLimitBreak'
 
 export const SearchFilterUserUnitsKeys = [
   'byUserSpecial',
   'byUserCottonCandy',
   'byUserSupport',
+  'byUserLimitBreak',
   'byUserPotential',
 ] as const
 
@@ -47,5 +49,10 @@ export const UserUnitFilterBuilder: {
     title: 'Special',
     builder: ByUserSpecialFilter,
     input: ByUserSpecialInput,
+  },
+  byUserLimitBreak: {
+    title: 'Limit Break',
+    builder: ByUserLimitBreakFilter,
+    input: ByUserLimitBreakInput,
   },
 }
