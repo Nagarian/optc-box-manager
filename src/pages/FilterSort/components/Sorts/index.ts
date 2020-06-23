@@ -4,6 +4,7 @@ import byRarity from './Units/ByRarity'
 import byType from './Units/ByType'
 import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './UserUnits/ByCottonCandy'
 import { bySupportLvl } from './UserUnits/BySupport'
+import { byLimitBreakLevel, byLimitBreakLevelGameLike } from './UserUnits/ByLimitBreak'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -18,6 +19,8 @@ export const UserUnitSortTypeKeys = [
   'byCCHp',
   'byCCRcv',
   'bySupportLvl',
+  'byLBLvlGameLike',
+  'byLimitBreakLvl',
 ] as const
 export type SearchSortType =
   | typeof UnitSortTypeKeys[number]
@@ -79,6 +82,16 @@ export const SearchSortBuilder: {
     label: 'LB Lvl Max',
     type: 'unit',
     fn: byLBLvlMax,
+  },
+  byLimitBreakLvl: {
+    label: 'LB Lvl',
+    type: 'userUnit',
+    fn: byLimitBreakLevel,
+  },
+  byLBLvlGameLike: {
+    label: 'LB Lvl (Game-like)',
+    type: 'userUnit',
+    fn: byLimitBreakLevelGameLike,
   },
 }
 
