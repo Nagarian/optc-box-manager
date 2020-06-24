@@ -58,11 +58,11 @@ export default function RecapBox ({
         )}
 
         <Element>
-          <CottonCandyIcon size="2" color="specific.ccAtk" title="Cotton Candy ATK" />
-          {atk === 100 ? <Max /> : '+' + atk}
-
           <CottonCandyIcon size="2" color="specific.ccHp" title="Cotton Candy HP" />
           {hp === 100 ? <Max /> : '+' + hp}
+
+          <CottonCandyIcon size="2" color="specific.ccAtk" title="Cotton Candy ATK" />
+          {atk === 100 ? <Max /> : '+' + atk}
 
           <CottonCandyIcon size="2" color="specific.ccRcv" title="Cotton Candy RCV" />
           {rcv === 100 ? <Max /> : '+' + rcv}

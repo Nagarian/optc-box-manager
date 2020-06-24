@@ -39,14 +39,14 @@ export default function CottonCandyEdit ({
   return (
     <ExpansionPanel title="Cotton Candies">
       <Wrapper
-        type="atk"
-        value={cc.atk}
-        onChange={v => onChange({ ...cc, atk: v })}
-      />
-      <Wrapper
         type="hp"
         value={cc.hp}
         onChange={v => onChange({ ...cc, hp: v })}
+      />
+      <Wrapper
+        type="atk"
+        value={cc.atk}
+        onChange={v => onChange({ ...cc, atk: v })}
       />
       <Wrapper
         type="rcv"
