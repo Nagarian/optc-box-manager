@@ -18,6 +18,8 @@ import ImageSkill11 from './images/potentialskill_icon_s_011.png'
 import ImageSkill12 from './images/potentialskill_icon_s_012.png'
 import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
+import ImageSkill15 from './images/potentialskill_icon_s_015.png'
+import ImageSkill16 from './images/potentialskill_icon_s_016.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -47,6 +49,10 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill13
     case '[INT] Damage Reduction':
       return ImageSkill14
+    case 'Reduce Sailor Despair duration':
+      return ImageSkill15
+    case 'Reduce Ship Bind duration':
+      return ImageSkill16
     default:
       return undefined
   }
@@ -81,7 +87,9 @@ export default function PotentialAbility ({
   return (
     <Container size={size} {...rest}>
       {!hideChrome && <Image src={ImageFrame} />}
-      {src && <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} />}
+      {src && (
+        <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} />
+      )}
     </Container>
   )
 }
