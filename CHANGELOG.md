@@ -1,3 +1,34 @@
+# [1.0.0](https://github.com/Nagarian/optc-box-manager/compare/v0.10.2...v1.0.0) (2020-06-25)
+
+
+### Bug Fixes
+
+* **detail:** overflow hidding ([6e204fe](https://github.com/Nagarian/optc-box-manager/commit/6e204fe8288a474417665a7962e33f59ade96351))
+
+
+### Features
+
+* **detail:** add Limit Break editor ([b226cc4](https://github.com/Nagarian/optc-box-manager/commit/b226cc41c4cbee1b9e26e4352ff2f8ae033af687)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **detail:** reverse atk and hp cc order ([f917689](https://github.com/Nagarian/optc-box-manager/commit/f917689088f51973330648fc19e82bc30c192dc9))
+* **edit:** change default filter value of Bulk Edit ([dac06a4](https://github.com/Nagarian/optc-box-manager/commit/dac06a4b41ef722addbb7b78acf08c4024757ff7)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **filter:** add limit break keyed finder ([8881a3b](https://github.com/Nagarian/optc-box-manager/commit/8881a3b395fed162a49bb8d420b266b731b27773))
+* add icons for missing potentials ([cf06d66](https://github.com/Nagarian/optc-box-manager/commit/cf06d66422887f13ec33924b6524bb6c82e4dfe6))
+* **box:** add Limit Break level displayer ([e091c00](https://github.com/Nagarian/optc-box-manager/commit/e091c00d7b55296772c3c6c8d7df0ff4aca5a815)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **box:** add unit rainbow+ glow ([c9add61](https://github.com/Nagarian/optc-box-manager/commit/c9add612102bbccc405c1a40071ce03abf200604)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **filter:** add Limit Break unit Filter ([85367a3](https://github.com/Nagarian/optc-box-manager/commit/85367a3e1088ad6f9ad7d963816cc3e066930bc9)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **filter:** add User (key) Limit Break filters ([cd6e502](https://github.com/Nagarian/optc-box-manager/commit/cd6e5020caaa46f566c2bea09659104fa6881358)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* **sort:** add sort by Limit Break Level ([7a76e3d](https://github.com/Nagarian/optc-box-manager/commit/7a76e3de90d1636172b36e28a90ca284af711da4)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+* add limit break feature ([c907a23](https://github.com/Nagarian/optc-box-manager/commit/c907a2364bd3c8b24c96767a389f263b36cd59b1)), closes [#25](https://github.com/Nagarian/optc-box-manager/issues/25)
+
+
+### BREAKING CHANGES
+
+* The default value for already added units are
+pre-computed from your current progression around potentials abilities.
+Also, some unit's limit break could be inaccurate
+
+
+
 ## [0.10.2](https://github.com/Nagarian/optc-box-manager/compare/v0.10.1...v0.10.2) (2020-06-22)
 
 
@@ -79,16 +110,6 @@
 * **detail:** add Orb Highlighter ([a7d89fc](https://github.com/Nagarian/optc-box-manager/commit/a7d89fcc2e22f10db5265773a870a7474ad95182))
 * **filter:** add Cotton Candy +200 state filter ([5ce8793](https://github.com/Nagarian/optc-box-manager/commit/5ce87935e1cc695b3a022015f8808ebecedc5888))
 * improve Changelog popin on update ([254918a](https://github.com/Nagarian/optc-box-manager/commit/254918a7e22da89ea69e0f06526de18630b5518b))
-
-
-
-# [0.7.0](https://github.com/Nagarian/optc-box-manager/compare/v0.6.0...v0.7.0) (2020-06-13)
-
-
-### Features
-
-* add Search clear button ([625c9a9](https://github.com/Nagarian/optc-box-manager/commit/625c9a92db7d60ff1fd2cc0c0a9cdcfcd5d3d555))
-* **displayer:** add Displayer chooser ([63a9c77](https://github.com/Nagarian/optc-box-manager/commit/63a9c77318d10c6f161b7cb0f8600aa669805a51))
 
 
 
