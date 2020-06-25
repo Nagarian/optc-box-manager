@@ -9,7 +9,7 @@ type InputLabelProps = {
   max: number
   name: ReactNode
   descriptions?: string[] | ReactNode[]
-  children: ReactNode
+  children?: ReactNode
 }
 
 export function InputLabel ({

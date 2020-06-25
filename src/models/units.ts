@@ -115,14 +115,22 @@ export type UnitCaptain = string | undefined | {
   level6: string
 }
 
+export type UnitSailor = string | undefined | {
+  base: string
+  level1?: string
+  level2?: string
+} | {
+  character1: string
+  character2: string
+  combined: string
+  level1?: string
+  level2?: string
+}
+
 export type UnitDetail = {
   captain: UnitCaptain
   special: UnitSpecial
-  sailor: {
-    base: string
-    level1: string
-    level2: string
-  }
+  sailor: UnitSailor
   sailorNotes: string
   specialName: string
   limit?: LimitBreak[]

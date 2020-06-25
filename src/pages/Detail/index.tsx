@@ -12,6 +12,7 @@ import PotentialEdit from './components/PotentialEdit'
 import RecapBox from './components/RecapBox'
 import SpecialLvlEdit from './components/SpecialLvlEdit'
 import SupportEdit from './components/SupportEdit'
+import LimitBreakEdit from './components/LimitBreakEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -59,6 +60,12 @@ export default function Detail ({
         support={userUnit.support}
         detail={unit.detail.support?.[0]}
         onChange={support => setUserUnit({ ...userUnit, support })}
+      />
+
+      <LimitBreakEdit
+        limitBreak={userUnit.limitBreak}
+        detail={unit.detail}
+        onChange={limitBreak => setUserUnit({ ...userUnit, limitBreak })}
       />
 
       <PotentialEdit
