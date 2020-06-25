@@ -20,15 +20,7 @@ import KeyImg from './images/key.png'
 import PotentialImg from './images/potential.png'
 import SailorImg from './images/sailor.png'
 import SocketImg from './images/socket.png'
-
-type LbType =
-  | 'stat'
-  | 'key'
-  | 'socket'
-  | 'potential'
-  | 'sailor'
-  | 'cooldown'
-  | 'captain'
+import { getLimitType, LimitBreakType } from 'services/limit'
 
 type LimitBreakEditProps = {
   limitBreak?: UserUnitLimitBreak
@@ -144,39 +136,13 @@ export default function LimitBreakEdit ({
   )
 }
 
-function getLbTypes (limitBreak: LimitBreak[]): { type: LbType; at: number }[] {
+function getLbTypes (limitBreak: LimitBreak[]): { type: LimitBreakType; at: number }[] {
   return limitBreak
-    .map(({ description }) => {
-      if (description === 'LOCKED WITH KEY') {
-        return 'key'
-      }
-
-      if (description === 'Acquire 1 additional Socket slot') {
-        return 'socket'
-      }
-
-      if (description.startsWith('Acquire Potential')) {
-        return 'potential'
-      }
-
-      if (description.startsWith('Acquire new Captain Ability')) {
-        return 'captain'
-      }
-
-      if (description.startsWith('Acquire Sailor Ability')) {
-        return 'sailor'
-      }
-
-      if (description.startsWith('Reduce base Special Cooldown')) {
-        return 'cooldown'
-      }
-
-      return 'stat'
-    })
+    .map(getLimitType)
     .map((type, i) => ({ type, at: i + 1 }))
 }
 
-function typeToImage (lbType: LbType) {
+function typeToImage (lbType: LimitBreakType) {
   switch (lbType) {
     case 'potential':
       return PotentialImg
