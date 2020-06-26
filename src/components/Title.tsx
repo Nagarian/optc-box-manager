@@ -13,6 +13,10 @@ import {
   WidthProps,
   compose,
   ColorProps,
+  display,
+  DisplayProps,
+  flexbox,
+  FlexboxProps,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
@@ -21,9 +25,11 @@ export type TypoProps = SpaceProps &
   GridAreaProps &
   FlexProps &
   WidthProps &
-  ColorProps
+  ColorProps &
+  DisplayProps &
+  FlexboxProps
 
-const typoStyled = compose(space, typography, gridArea, color, flex, width)
+const typoStyled = compose(space, typography, gridArea, color, flex, width, display, flexbox)
 
 export const Title = styled('h1').withConfig(cleanStyledSystem)<TypoProps>(
   typoStyled,

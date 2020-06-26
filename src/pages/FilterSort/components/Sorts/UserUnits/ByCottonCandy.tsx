@@ -31,6 +31,8 @@ export const bySpecificCottonCandy: SearchSortWithOptionFunction<SpecificCottonC
   }
 }
 
+export const bySpecificCottonCandyLabel = (option: SpecificCottonCandySortOption) => option.cc
+
 export type SpecificCottonCandySortOption = {
   cc: CottonCandyType
 }

@@ -7,10 +7,11 @@ import {
   SettingsIcon,
 } from 'components/Icon'
 import { Text } from 'components/Title'
-import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
-import React, { useState, FunctionComponent } from 'react'
+import { SearchSortCriteria } from 'models/search'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Popup from 'components/Popup'
+import { SearchSortBuilderProps } from '..'
 
 const Panel = styled.div`
   display: flex;
@@ -29,8 +30,7 @@ const Panel = styled.div`
 
 export type SearchSortItemProps<T = undefined> = {
   criteria: SearchSortCriteria<T>
-  label: string
-  optionInput?: FunctionComponent<SearchSortInputProps>
+  sortBuilder: SearchSortBuilderProps<T>
   onUpdate: (
     oldCriteria: SearchSortCriteria,
     newCriteria: SearchSortCriteria,
@@ -40,8 +40,7 @@ export type SearchSortItemProps<T = undefined> = {
 
 export default function SearchSortItem ({
   criteria,
-  label,
-  optionInput: OptionComponent,
+  sortBuilder: { label, optionInput: OptionComponent, optionedLabel },
   onUpdate,
   onDelete,
 }: SearchSortItemProps) {
@@ -49,41 +48,50 @@ export default function SearchSortItem ({
   const [options, setOptions] = useState<any>(criteria.options)
 
   return (
-    <Panel>
-      <Text flex="1" fontSize="2">
-        {label}
-      </Text>
+    <>
+      <Panel>
+        <Text flex="1" fontSize="2" display="inline-flex" alignItems="center">
+          {label}
+          {options && optionedLabel && (
+            <>
+              {' - '}
+              {optionedLabel(options)}
+            </>
+          )}
+        </Text>
 
-      {OptionComponent && (
+        {OptionComponent && (
+          <Button
+            title="Setting"
+            icon={SettingsIcon}
+            onClick={() => setShowSetting(true)}
+          />
+        )}
+
         <Button
-          title="Setting"
-          icon={SettingsIcon}
-          onClick={() => setShowSetting(true)}
+          title={
+            criteria.order === 'desc'
+              ? 'Descending (click to reverse)'
+              : 'Ascending (click to reverse)'
+          }
+          icon={criteria.order === 'desc' ? DescendingIcon : AscendingIcon}
+          onClick={() =>
+            onUpdate(criteria, {
+              by: criteria.by,
+              order: criteria.order === 'asc' ? 'desc' : 'asc',
+            })
+          }
         />
-      )}
-
-      <Button
-        title={
-          criteria.order === 'desc'
-            ? 'Descending (click to reverse)'
-            : 'Ascending (click to reverse)'
-        }
-        icon={criteria.order === 'desc' ? DescendingIcon : AscendingIcon}
-        onClick={() =>
-          onUpdate(criteria, {
-            by: criteria.by,
-            order: criteria.order === 'asc' ? 'desc' : 'asc',
-          })
-        }
-      />
-      <Button
-        title="Remove"
-        icon={CancelIcon}
-        onClick={() => onDelete(criteria)}
-      />
+        <Button
+          title="Remove"
+          icon={CancelIcon}
+          onClick={() => onDelete(criteria)}
+        />
+      </Panel>
 
       {OptionComponent && showSetting && (
         <Popup
+          title="Sort Options"
           onCancel={() => setShowSetting(false)}
           onValidate={() => {
             onUpdate(criteria, {
@@ -114,6 +122,6 @@ export default function SearchSortItem ({
           />
         </Popup>
       )}
-    </Panel>
+    </>
   )
 }

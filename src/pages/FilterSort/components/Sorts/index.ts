@@ -12,6 +12,7 @@ import {
   byCottonCandy,
   bySpecificCottonCandy,
   SpecificCottonCandySortInput,
+  bySpecificCottonCandyLabel,
 } from './UserUnits/ByCottonCandy'
 import { bySupportLvl } from './UserUnits/BySupport'
 import {
@@ -22,8 +23,9 @@ import {
   byPotentialLvl,
   bySpecificPotentialLvl,
   SpecificPotentialSortInput,
+  bySpecificPotentialLabel,
 } from './UserUnits/ByPotential'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, ReactNode } from 'react'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -43,14 +45,17 @@ export type SearchSortType =
   | typeof UnitSortTypeKeys[number]
   | typeof UserUnitSortTypeKeys[number]
 
+export type SearchSortBuilderProps<T = any> = {
+  label: string
+  type: 'unit' | 'userUnit'
+  fn: UnitSort | UserUnitSort
+  optionInput?: FunctionComponent<SearchSortInputProps<T>>
+  optionedFn?: SearchSortWithOptionFunction<T>
+  optionedLabel?: <T>(option: T) => ReactNode
+}
+
 export const SearchSortBuilder: {
-  [key in SearchSortType]: {
-    label: string
-    type: 'unit' | 'userUnit'
-    fn: UnitSort | UserUnitSort
-    optionInput?: FunctionComponent<SearchSortInputProps>
-    optionedFn?: SearchSortWithOptionFunction
-  }
+  [key in SearchSortType]: SearchSortBuilderProps
 } = {
   byType: {
     label: 'Type',
@@ -76,8 +81,9 @@ export const SearchSortBuilder: {
     label: 'Cotton Candy',
     type: 'userUnit',
     fn: byCottonCandy,
-    optionedFn: bySpecificCottonCandy as any,
-    optionInput: SpecificCottonCandySortInput as any,
+    optionedFn: bySpecificCottonCandy,
+    optionInput: SpecificCottonCandySortInput,
+    optionedLabel: bySpecificCottonCandyLabel as any,
   },
   bySupportLvl: {
     label: 'Support',
@@ -103,8 +109,9 @@ export const SearchSortBuilder: {
     label: 'Potentials Lvl',
     type: 'userUnit',
     fn: byPotentialLvl,
-    optionedFn: bySpecificPotentialLvl as any,
-    optionInput: SpecificPotentialSortInput as any,
+    optionedFn: bySpecificPotentialLvl,
+    optionInput: SpecificPotentialSortInput,
+    optionedLabel: bySpecificPotentialLabel as any,
   },
 }
 

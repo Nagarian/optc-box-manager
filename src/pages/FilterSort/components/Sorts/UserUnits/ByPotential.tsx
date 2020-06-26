@@ -19,6 +19,10 @@ export const bySpecificPotentialLvl: SearchSortWithOptionFunction<SpecificPotent
   (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ?? -1) -
   (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ?? -1)
 
+export const bySpecificPotentialLabel = (
+  option: SpecificPotentialSortOption,
+) => <PotentialAbility type={option.type} size="2" />
+
 export type SpecificPotentialSortOption = {
   type: PotentialKey
 }
