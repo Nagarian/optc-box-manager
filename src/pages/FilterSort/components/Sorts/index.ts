@@ -1,11 +1,28 @@
-import { Sort, UnitSort, UserUnitSort, SearchSortInputProps, SearchSortWithOptionFunction } from 'models/search'
+import {
+  Sort,
+  UnitSort,
+  UserUnitSort,
+  SearchSortInputProps,
+  SearchSortWithOptionFunction,
+} from 'models/search'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
 import byRarity from './Units/ByRarity'
 import byType from './Units/ByType'
-import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './UserUnits/ByCottonCandy'
+import {
+  byCottonCandy,
+  bySpecificCottonCandy,
+  SpecificCottonCandySortInput,
+} from './UserUnits/ByCottonCandy'
 import { bySupportLvl } from './UserUnits/BySupport'
-import { byLimitBreakLevel, byLimitBreakLevelGameLike } from './UserUnits/ByLimitBreak'
-import { byPotentialLvl, bySpecificPotentialLvl, SpecificPotentialSortInput } from './UserUnits/ByPotential'
+import {
+  byLimitBreakLevel,
+  byLimitBreakLevelGameLike,
+} from './UserUnits/ByLimitBreak'
+import {
+  byPotentialLvl,
+  bySpecificPotentialLvl,
+  SpecificPotentialSortInput,
+} from './UserUnits/ByPotential'
 import { FunctionComponent } from 'react'
 
 export const UnitSortTypeKeys = [
@@ -17,9 +34,6 @@ export const UnitSortTypeKeys = [
 ] as const
 export const UserUnitSortTypeKeys = [
   'byCottonCandy',
-  'byCCAtk',
-  'byCCHp',
-  'byCCRcv',
   'bySupportLvl',
   'byLBLvlGameLike',
   'byLimitBreakLvl',
@@ -62,21 +76,8 @@ export const SearchSortBuilder: {
     label: 'Cotton Candy',
     type: 'userUnit',
     fn: byCottonCandy,
-  },
-  byCCAtk: {
-    label: 'CC - ATK',
-    type: 'userUnit',
-    fn: byCCAtk,
-  },
-  byCCHp: {
-    label: 'CC - HP',
-    type: 'userUnit',
-    fn: byCCHp,
-  },
-  byCCRcv: {
-    label: 'CC - RCV',
-    type: 'userUnit',
-    fn: byCCRcv,
+    optionedFn: bySpecificCottonCandy as any,
+    optionInput: SpecificCottonCandySortInput as any,
   },
   bySupportLvl: {
     label: 'Support',

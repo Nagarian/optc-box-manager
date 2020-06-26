@@ -3,15 +3,12 @@ import {
   SearchFilterCriteria,
   SearchFilterCriteriaInputProps,
 } from 'models/search'
-import { UserUnit } from 'models/userBox'
+import { UserUnit, CottonCandyType, CottonCandyTypeKeys } from 'models/userBox'
 import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const CottonCandyStateKeys = ['none', 'unmaxed', 'maxed'] as const
 export type CottonCandyState = typeof CottonCandyStateKeys[number]
-
-export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
-export type CottonCandyType = typeof CottonCandyTypeKeys[number]
 
 export type ByUserCottonCandyCriteria = SearchFilterCriteria & {
   all: CottonCandyState

@@ -17,6 +17,9 @@ export type UserUnitSupport = {
   lvl: number
 }
 
+export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
+export type CottonCandyType = typeof CottonCandyTypeKeys[number]
+
 export type UserUnitCottonCandy = {
   hp: number
   rcv: number
