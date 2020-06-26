@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 import { clean } from 'styles'
+import ReactMarkdown from 'react-markdown'
 
 export type DescriptionHighlighterProps = {
   value?: string
@@ -11,28 +12,32 @@ export default function DescriptionHighlighter ({
 }: DescriptionHighlighterProps) {
   if (!value) return null
 
-  const parts = value.split(/(\[[A-Z]*\])/g)
+  const parts = value.replace(
+    /(\[[A-Z]*\])/g,
+    match => `${match}(${match.substr(1, match.length - 2)})`,
+  )
 
   return (
-    <>
-      {parts.map((part, i) =>
-        part.startsWith('[')
-          ? <Orb key={i} value={part} />
-          : <Fragment key={i}>{part}</Fragment>,
-      )}
-    </>
+    <ReactMarkdown
+      source={parts}
+      escapeHtml={false}
+      renderers={{
+        paragraph: FakeParagraph,
+        link: Orb,
+      }}
+    />
   )
 }
 
 type OrbProps = {
-  value: string
+  href: string
 }
 
 const Orb = styled('span')
-  .attrs<OrbProps>(({ value }) => ({
-    children: value.replace(/\[|\]/g, ''),
+  .attrs<OrbProps>(({ href }) => ({
+    children: href.replace(/\[|\]/g, ''),
   }))
-  .withConfig(clean('value'))<OrbProps>`
+  .withConfig(clean('href'))<OrbProps>`
   display: inline-block;
   background: ${p => themeGet(`colors.orb.${p.children}`)};
   color: ${themeGet('colors.white')};
@@ -40,3 +45,5 @@ const Orb = styled('span')
   padding: .1em .5em;
   font-weight: bold;
 `
+
+const FakeParagraph = styled.span``
