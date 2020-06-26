@@ -1,10 +1,16 @@
 import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
-import { AscendingIcon, CancelIcon, DescendingIcon } from 'components/Icon'
+import {
+  AscendingIcon,
+  CancelIcon,
+  DescendingIcon,
+  SettingsIcon,
+} from 'components/Icon'
 import { Text } from 'components/Title'
-import { SearchSortCriteria } from 'models/search'
-import React from 'react'
+import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
+import React, { useState, FunctionComponent } from 'react'
 import styled from 'styled-components'
+import Popup from 'components/Popup'
 
 const Panel = styled.div`
   display: flex;
@@ -21,25 +27,41 @@ const Panel = styled.div`
   }
 `
 
-export default function SearchSortItem ({
-  criteria,
-  label,
-  onUpdate,
-  onDelete,
-}: {
-  criteria: SearchSortCriteria
+export type SearchSortItemProps<T = undefined> = {
+  criteria: SearchSortCriteria<T>
   label: string
+  optionInput?: FunctionComponent<SearchSortInputProps>
   onUpdate: (
     oldCriteria: SearchSortCriteria,
     newCriteria: SearchSortCriteria,
   ) => void
   onDelete: (criteria: SearchSortCriteria) => void
-}) {
+}
+
+export default function SearchSortItem ({
+  criteria,
+  label,
+  optionInput: OptionComponent,
+  onUpdate,
+  onDelete,
+}: SearchSortItemProps) {
+  const [showSetting, setShowSetting] = useState<boolean>(false)
+  const [options, setOptions] = useState<any>(criteria.options)
+
   return (
     <Panel>
       <Text flex="1" fontSize="2">
         {label}
       </Text>
+
+      {OptionComponent && (
+        <Button
+          title="Setting"
+          icon={SettingsIcon}
+          onClick={() => setShowSetting(true)}
+        />
+      )}
+
       <Button
         title={
           criteria.order === 'desc'
@@ -59,6 +81,39 @@ export default function SearchSortItem ({
         icon={CancelIcon}
         onClick={() => onDelete(criteria)}
       />
+
+      {OptionComponent && showSetting && (
+        <Popup
+          onCancel={() => setShowSetting(false)}
+          onValidate={() => {
+            onUpdate(criteria, {
+              ...criteria,
+              options,
+            })
+            setShowSetting(false)
+          }}
+          customAction={
+            <Button
+              onClick={() => {
+                setOptions(undefined)
+                onUpdate(criteria, {
+                  ...criteria,
+                  options: undefined,
+                })
+                setShowSetting(false)
+              }}
+              variant="danger"
+            >
+              Clear
+            </Button>
+          }
+        >
+          <OptionComponent
+            options={options}
+            onChange={options => setOptions(options)}
+          />
+        </Popup>
+      )}
     </Panel>
   )
 }

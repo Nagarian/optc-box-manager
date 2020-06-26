@@ -79,6 +79,7 @@ export default function Sort ({
               key={i}
               criteria={criteria}
               label={SearchSortBuilder[criteria.by].label}
+              optionInput={SearchSortBuilder[criteria.by].optionInput}
               onUpdate={(oldCriteria, newCriteria) =>
                 onChange(
                   searchSort.map(ss => (ss !== oldCriteria ? ss : newCriteria)),

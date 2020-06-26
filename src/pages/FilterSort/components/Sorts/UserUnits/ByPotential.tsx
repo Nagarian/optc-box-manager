@@ -1,0 +1,49 @@
+import React from 'react'
+import {
+  UserUnitSort,
+  SearchSortWithOptionFunction,
+  SearchSortInputProps,
+} from 'models/search'
+import { PotentialKey, Potentials } from 'models/units'
+import Box from 'components/Box'
+import ImageInput from 'components/forms/ImageInput'
+import PotentialAbility from 'components/PotentialAbility'
+
+export const byPotentialLvl: UserUnitSort = (userUnit1, userUnit2) =>
+  userUnit1.potentials.reduce((acc, current) => acc + current.lvl, 0) -
+  userUnit2.potentials.reduce((acc, current) => acc + current.lvl, 0)
+
+export const bySpecificPotentialLvl: SearchSortWithOptionFunction<SpecificPotentialSortOption> = (
+  option,
+): UserUnitSort => (userUnit1, userUnit2) =>
+  (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ?? -1) -
+  (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ?? -1)
+
+export type SpecificPotentialSortOption = {
+  type: PotentialKey
+}
+
+export function SpecificPotentialSortInput ({
+  options,
+  onChange,
+}: SearchSortInputProps<SpecificPotentialSortOption>) {
+  return (
+    <Box display="flex" flexWrap="wrap">
+      {Potentials.map(potential => (
+        <ImageInput
+          key={potential}
+          type="radio"
+          name="potentials-sort"
+          checked={options?.type === potential ?? false}
+          onChange={e =>
+            onChange({
+              type: potential,
+            })
+          }
+        >
+          <PotentialAbility type={potential} size="3" />
+        </ImageInput>
+      ))}
+    </Box>
+  )
+}

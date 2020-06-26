@@ -1,10 +1,12 @@
-import { Sort, UnitSort, UserUnitSort } from 'models/search'
+import { Sort, UnitSort, UserUnitSort, SearchSortInputProps, SearchSortWithOptionFunction } from 'models/search'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
 import byRarity from './Units/ByRarity'
 import byType from './Units/ByType'
 import { byCCAtk, byCCHp, byCCRcv, byCottonCandy } from './UserUnits/ByCottonCandy'
 import { bySupportLvl } from './UserUnits/BySupport'
 import { byLimitBreakLevel, byLimitBreakLevelGameLike } from './UserUnits/ByLimitBreak'
+import { byPotentialLvl, bySpecificPotentialLvl, SpecificPotentialSortInput } from './UserUnits/ByPotential'
+import { FunctionComponent } from 'react'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -21,6 +23,7 @@ export const UserUnitSortTypeKeys = [
   'bySupportLvl',
   'byLBLvlGameLike',
   'byLimitBreakLvl',
+  'byPotentialProgression',
 ] as const
 export type SearchSortType =
   | typeof UnitSortTypeKeys[number]
@@ -31,6 +34,8 @@ export const SearchSortBuilder: {
     label: string
     type: 'unit' | 'userUnit'
     fn: UnitSort | UserUnitSort
+    optionInput?: FunctionComponent<SearchSortInputProps>
+    optionedFn?: SearchSortWithOptionFunction
   }
 } = {
   byType: {
@@ -92,6 +97,13 @@ export const SearchSortBuilder: {
     label: 'LB Lvl (Game-like)',
     type: 'userUnit',
     fn: byLimitBreakLevelGameLike,
+  },
+  byPotentialProgression: {
+    label: 'Potentials Lvl',
+    type: 'userUnit',
+    fn: byPotentialLvl,
+    optionedFn: bySpecificPotentialLvl as any,
+    optionInput: SpecificPotentialSortInput as any,
   },
 }
 

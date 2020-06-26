@@ -1,9 +1,19 @@
 import { Search, UnitSort, UserUnitSort } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import { SearchFilterUnitsType, UnitFilterBuilder } from 'pages/FilterSort/components/Filters/Units'
-import { SearchFilterUserUnitsType, UserUnitFilterBuilder } from 'pages/FilterSort/components/Filters/UserUnits'
-import { DescendingSort, SearchSortBuilder, UnitSort2UserUnitSort } from 'pages/FilterSort/components/Sorts'
+import {
+  SearchFilterUnitsType,
+  UnitFilterBuilder,
+} from 'pages/FilterSort/components/Filters/Units'
+import {
+  SearchFilterUserUnitsType,
+  UserUnitFilterBuilder,
+} from 'pages/FilterSort/components/Filters/UserUnits'
+import {
+  DescendingSort,
+  SearchSortBuilder,
+  UnitSort2UserUnitSort,
+} from 'pages/FilterSort/components/Sorts'
 import { useEffect, useState } from 'react'
 
 export const EmptySearch: Search = {
@@ -66,20 +76,28 @@ export function useSearch (search: Search = DefaultSearch) {
 
   const unitSorters: UnitSort[] = search.sorts
     .filter(({ by }) => SearchSortBuilder[by].type === 'unit')
-    .map<UnitSort>(({ by, order }) =>
-      order === 'desc'
-        ? DescendingSort(SearchSortBuilder[by].fn as UnitSort)
-        : (SearchSortBuilder[by].fn as UnitSort),
-    )
+    .map<UnitSort>(({ by, order, options }) => {
+      const fn =
+        (options && SearchSortBuilder[by].optionedFn?.(options)) ??
+        SearchSortBuilder[by].fn
+
+      return order === 'desc'
+        ? DescendingSort(fn as UnitSort)
+        : (fn as UnitSort)
+    })
 
   const userUnitSorters: UserUnitSort[] = search.sorts.map<UserUnitSort>(
-    ({ by, order }) => {
+    ({ by, order, options }) => {
       const builder = SearchSortBuilder[by]
-      const fn: UserUnitSort =
+      const fn =
+        (options && SearchSortBuilder[by].optionedFn?.(options)) ??
+        SearchSortBuilder[by].fn
+
+      const uufn: UserUnitSort =
         builder.type === 'unit'
-          ? UnitSort2UserUnitSort(builder.fn as UnitSort)
-          : (builder.fn as UserUnitSort)
-      return order === 'desc' ? DescendingSort(fn) : fn
+          ? UnitSort2UserUnitSort(fn as UnitSort)
+          : (fn as UserUnitSort)
+      return order === 'desc' ? DescendingSort(uufn) : uufn
     },
   )
 
