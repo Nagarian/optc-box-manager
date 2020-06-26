@@ -14,7 +14,7 @@ const UnclassedFilters = {
   hasSuperEvolved: (unit: ExtendedUnit) => !unit.evolution,
   hasEvolved: (unit: ExtendedUnit) =>
     (!unit.evolution ||
-      unit.evolution.evolvers[0].startsWith?.('skull') ||
+      unit.evolution.evolvers[0]?.startsWith?.('skull') ||
       false) as boolean,
   globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
 }
