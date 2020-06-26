@@ -74,10 +74,14 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
       setUserBox([])
     },
     importDB: (json: string) => {
-      const db = JSON.parse(json, reviver(units))
+      let db = JSON.parse(json, reviver(units))
       if (!Array.isArray(db)) {
         // TODO: make more check
         throw new Error('invalid JSON file')
+      }
+
+      if (db.length) {
+        db = db.map(resync)
       }
 
       setUserBox(db as UserBox)
