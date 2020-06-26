@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/Nagarian/optc-box-manager/compare/v1.0.0...v1.1.0) (2020-06-26)
+
+
+### Bug Fixes
+
+* **detail:** issue with HTML's based description ([7f069b3](https://github.com/Nagarian/optc-box-manager/commit/7f069b33a729b91f1cdb392bdc2e6cf178db8b8f))
+* **filter:** issue with unit which miss some informations ([55ee3c8](https://github.com/Nagarian/optc-box-manager/commit/55ee3c856b2e9238c8f9e1889607f435eabd576d))
+* **import:** resync UserUnit on import ([3d36e68](https://github.com/Nagarian/optc-box-manager/commit/3d36e68bfe7179359a66855b9b17ef7429905364))
+
+
+### Features
+
+* **sort:** add descriptive label for sort options ([d017b3c](https://github.com/Nagarian/optc-box-manager/commit/d017b3c324c2fe6c9b964424419dd79546fa6f66))
+* **sort:** add sort by potentials (resolve: [#30](https://github.com/Nagarian/optc-box-manager/issues/30)) ([a610665](https://github.com/Nagarian/optc-box-manager/commit/a61066576e19168fdceb90af018b8bf28711f6ec))
+* **sort:** rework cotton candy sorting (as potentials) ([9332830](https://github.com/Nagarian/optc-box-manager/commit/9332830e2c24dec514977702b47895d62a8bf540))
+
+
+
 # [1.0.0](https://github.com/Nagarian/optc-box-manager/compare/v0.10.2...v1.0.0) (2020-06-25)
 
 
@@ -92,24 +110,6 @@ Also, some unit's limit break could be inaccurate
 ### Features
 
 * **filter:** add DropLocation filter ([f1c6ad0](https://github.com/Nagarian/optc-box-manager/commit/f1c6ad00866846b8d3da59f55946aade1ae669ce))
-
-
-
-# [0.8.0](https://github.com/Nagarian/optc-box-manager/compare/v0.7.0...v0.8.0) (2020-06-14)
-
-
-### Bug Fixes
-
-* issue with latest seen changelog ([3548c95](https://github.com/Nagarian/optc-box-manager/commit/3548c95962517e1815eb920bd08a331a4e1b0f0f))
-* lighten exported DB ([024201e](https://github.com/Nagarian/optc-box-manager/commit/024201e541d444c1a34f4b5742050458d10feaba))
-* RCV Captain Finder issue ([648be46](https://github.com/Nagarian/optc-box-manager/commit/648be4623a012921c61b39e51f5e6f66bef447dd))
-
-
-### Features
-
-* **detail:** add Orb Highlighter ([a7d89fc](https://github.com/Nagarian/optc-box-manager/commit/a7d89fcc2e22f10db5265773a870a7474ad95182))
-* **filter:** add Cotton Candy +200 state filter ([5ce8793](https://github.com/Nagarian/optc-box-manager/commit/5ce87935e1cc695b3a022015f8808ebecedc5888))
-* improve Changelog popin on update ([254918a](https://github.com/Nagarian/optc-box-manager/commit/254918a7e22da89ea69e0f06526de18630b5518b))
 
 
 
