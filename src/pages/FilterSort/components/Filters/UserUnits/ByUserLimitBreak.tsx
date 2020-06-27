@@ -10,16 +10,22 @@ export const LimitBreakStateKeys = [
   'unlocked',
   'unmaxed',
   'maxed',
-  'rainbow',
 ] as const
 export type LimitBreakState = typeof LimitBreakStateKeys[number]
+
+export const RainbowStateKeys = ['to rainbow', 'rainbow'] as const
+export type RainbowState = typeof RainbowStateKeys[number]
 
 export type ByUserLimitBreakCriteria = {
   lbState?: LimitBreakState
   keyLbState?: LimitBreakState
+  rainbowState?: RainbowState
 }
 
-function lbStateToCriteria (userUnit: UserUnit, state: LimitBreakState): boolean {
+function lbStateToCriteria (
+  userUnit: UserUnit,
+  state: LimitBreakState,
+): boolean {
   if (!userUnit.limitBreak) {
     return false
   }
@@ -35,17 +41,15 @@ function lbStateToCriteria (userUnit: UserUnit, state: LimitBreakState): boolean
       return lvl < lvlMax
     case 'maxed':
       return lvl >= lvlMax
-    case 'rainbow':
-      return (
-        lvl >= lvlMax &&
-        userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
-      )
     default:
       return false
   }
 }
 
-function keyLbStateToCriteria (userUnit: UserUnit, state: LimitBreakState): boolean {
+function keyLbStateToCriteria (
+  userUnit: UserUnit,
+  state: LimitBreakState,
+): boolean {
   if (!userUnit.limitBreak || !userUnit.limitBreak.keyLvlMax) {
     return false
   }
@@ -63,14 +67,31 @@ function keyLbStateToCriteria (userUnit: UserUnit, state: LimitBreakState): bool
       return unlocked && lvl < keyLvlMax
     case 'maxed':
       return lvl === keyLvlMax
-    case 'rainbow':
-      return (
-        lvl === keyLvlMax &&
-        userUnit.potentials.every(p => p.lvl === 5)
-      )
     default:
       return false
   }
+}
+
+function isRainbowCriteria (userUnit: UserUnit) {
+  if (!userUnit.limitBreak) {
+    return false
+  }
+
+  const { lvl, lvlMax, keyLvlMax } = userUnit.limitBreak
+
+  if (lvl < lvlMax) {
+    return false
+  }
+
+  const potentialsMaxed = userUnit.potentials
+    .filter(p => !p.keyState)
+    .every(p => p.lvl === 5)
+  if (lvl >= lvlMax && potentialsMaxed) {
+    return true
+  }
+
+  const allPotentialMaxed = userUnit.potentials.every(p => p.lvl === 5)
+  return lvl === keyLvlMax && allPotentialMaxed
 }
 
 export const ByUserLimitBreakFilter = (criteria: ByUserLimitBreakCriteria) =>
@@ -79,7 +100,28 @@ export const ByUserLimitBreakFilter = (criteria: ByUserLimitBreakCriteria) =>
       criteria.lbState,
       (userUnit: UserUnit) => lbStateToCriteria(userUnit, criteria.lbState!),
     ],
-    [criteria.keyLbState, (userUnit: UserUnit) => keyLbStateToCriteria(userUnit, criteria.keyLbState!)],
+    [
+      criteria.keyLbState,
+      (userUnit: UserUnit) =>
+        keyLbStateToCriteria(userUnit, criteria.keyLbState!),
+    ],
+    [
+      criteria.rainbowState,
+      (userUnit: UserUnit) => {
+        if (!userUnit.limitBreak) {
+          return false
+        }
+
+        switch (criteria.rainbowState!) {
+          case 'rainbow':
+            return isRainbowCriteria(userUnit)
+          case 'to rainbow':
+            return !isRainbowCriteria(userUnit)
+          default:
+            return false
+        }
+      },
+    ],
   )
 
 export function ByUserLimitBreakInput ({
@@ -120,6 +162,26 @@ export function ByUserLimitBreakInput ({
                 onChange({
                   ...criteria,
                   keyLbState: state,
+                })
+              }
+            />
+            {state}
+          </label>
+        ))}
+      </FilterContainerPanel>
+
+      <FilterContainerPanel marginY="3">
+        <Text>Rainbow</Text>
+        {RainbowStateKeys.map(state => (
+          <label>
+            <input
+              type="radio"
+              name="uu-lb-rainbow"
+              checked={criteria?.rainbowState === state ?? false}
+              onChange={e =>
+                onChange({
+                  ...criteria,
+                  rainbowState: state,
                 })
               }
             />
