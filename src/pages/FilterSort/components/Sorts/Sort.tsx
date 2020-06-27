@@ -5,6 +5,7 @@ import { SearchSortCriteria } from 'models/search'
 import React from 'react'
 import { SearchSortBuilder, UnitSortTypeKeys, UserUnitSortTypeKeys } from '.'
 import SearchSortItem from './components/SearchSortItem'
+import styled from 'styled-components'
 
 export type SortProps = {
   unitOnly: boolean
@@ -29,7 +30,7 @@ export default function Sort ({
 
   return (
     <Box minHeight="0" display="flex">
-      <Box display="flex" flexDirection="column" overflowY="auto">
+      <Panel>
         <Button
           onClick={() =>
             onChange(
@@ -70,7 +71,7 @@ export default function Sort ({
             )}
           </>
         )}
-      </Box>
+      </Panel>
 
       <Box display="flex" flexDirection="column" flex="1">
         <Box display="flex" flexDirection="column" overflowY="auto" flex="1">
@@ -101,3 +102,14 @@ export default function Sort ({
     </Box>
   )
 }
+
+const Panel = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-width: 10rem;
+
+  > button {
+    flex: 0 0 auto;
+  }
+`
