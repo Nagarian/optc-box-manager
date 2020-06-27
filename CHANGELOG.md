@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/Nagarian/optc-box-manager/compare/v1.1.0...v1.2.0) (2020-06-27)
+
+
+### Bug Fixes
+
+* **sort:** improve sort panel for iOS ([65bf413](https://github.com/Nagarian/optc-box-manager/commit/65bf41315714bea1ee111f6f8d33de08493806e9))
+* improve popup spacing on landscape ([5f7b76d](https://github.com/Nagarian/optc-box-manager/commit/5f7b76dfa86126e22387a12865b9d0de5212be7d))
+
+
+### Features
+
+* **filter:** rework rainbow filter ([35b2a33](https://github.com/Nagarian/optc-box-manager/commit/35b2a338f4c109843d89dc84a9edee8b1f93e9cc))
+
+
+
 # [1.1.0](https://github.com/Nagarian/optc-box-manager/compare/v1.0.0...v1.1.0) (2020-06-26)
 
 
@@ -95,21 +110,6 @@ Also, some unit's limit break could be inaccurate
 
 * **filter:** css issue with checkbox on safari ([4eb9fd4](https://github.com/Nagarian/optc-box-manager/commit/4eb9fd41327a9950b36c137ceda07f3120e07e21))
 * **filter:** issue with Drop Location and evolution ([b02f1ee](https://github.com/Nagarian/optc-box-manager/commit/b02f1ee24874f9ee2d569277a03bbae2c59eb30e))
-
-
-
-# [0.9.0](https://github.com/Nagarian/optc-box-manager/compare/v0.8.0...v0.9.0) (2020-06-17)
-
-
-### Bug Fixes
-
-* **filter:** "Clear all" button and displayer ([a2d602b](https://github.com/Nagarian/optc-box-manager/commit/a2d602b902332836848236e823ab6043d82ad175))
-* reword update message ([92b1ad8](https://github.com/Nagarian/optc-box-manager/commit/92b1ad8b845242d595efb5aaed437db54efcf3fa))
-
-
-### Features
-
-* **filter:** add DropLocation filter ([f1c6ad0](https://github.com/Nagarian/optc-box-manager/commit/f1c6ad00866846b8d3da59f55946aade1ae669ce))
 
 
 
