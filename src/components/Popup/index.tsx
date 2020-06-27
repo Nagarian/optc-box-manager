@@ -75,6 +75,6 @@ export default function Popup ({
 }
 
 Popup.defaultProps = {
-  px: [3, 5],
-  py: [3, 5],
+  px: [3, 3, 5],
+  py: [3, 3, 5],
 }
