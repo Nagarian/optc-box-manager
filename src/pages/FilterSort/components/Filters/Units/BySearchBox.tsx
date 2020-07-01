@@ -5,8 +5,8 @@ import { CloseIcon } from 'components/Icon'
 import {
   SearchFilterCriteria,
   SearchFilterCriteriaInputProps,
+  UnitFilter,
 } from 'models/search'
-import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
@@ -16,11 +16,24 @@ export interface BySearchBoxCriteria extends SearchFilterCriteria {
   value: string
 }
 
-export const BySearchBoxFilter = (criteria: BySearchBoxCriteria) => (
-  unit: ExtendedUnit,
-) =>
-  unit.name.toLowerCase().includes(criteria.value.toLowerCase()) ||
-  unit.id.toString().startsWith(criteria.value)
+export const BySearchBoxFilter = (
+  criteria: BySearchBoxCriteria,
+): UnitFilter => {
+  const searchValue = criteria.value.toLowerCase()
+
+  if (searchValue.includes(',')) {
+    const ids = searchValue
+      .split(',')
+      .map(v => parseInt(v))
+      .filter(v => !isNaN(v))
+
+    return unit => ids.includes(unit.id)
+  }
+
+  return unit =>
+    unit.name.toLowerCase().includes(searchValue) ||
+    unit.id.toString().startsWith(searchValue)
+}
 
 export function BySearchBoxInput ({
   criteria,
@@ -28,7 +41,7 @@ export function BySearchBoxInput ({
   ...rest
 }: SearchFilterCriteriaInputProps<BySearchBoxCriteria> & SpaceProps) {
   const triggerChange = (value?: string) => {
-    const cleaned = (value ?? '').trim()
+    const cleaned = value ?? ''
     const payload = cleaned
       ? {
         value: cleaned,
@@ -45,7 +58,8 @@ export function BySearchBoxInput ({
         name="search-box"
         value={criteria?.value ?? ''}
         onChange={e => triggerChange(e.target.value)}
-        placeholder="Character name or ID"
+        onFocus={e => e.target.select()}
+        placeholder="Character name or ID,ID,ID"
         {...rest}
         height="1"
       />
