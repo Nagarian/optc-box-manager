@@ -10,6 +10,8 @@ import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
 import Sort from './components/Sorts/Sort'
+import { SaveSearchIcon } from 'components/Icon'
+import SaveSearch from 'pages/SaveSearch'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
@@ -37,6 +39,17 @@ export default function FilterSort ({
   )
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
+  const [showSaveSearch, setShowSaveSearch] = useState<boolean>(false)
+
+  const computeNewSearch = () => ({
+    filters: {
+      units: unitFilter,
+      userUnits: userUnitFilter,
+    },
+    sorts,
+    displayer,
+  })
+
   const buttonStyle = {
     fontSize: '1',
     px: '2',
@@ -47,28 +60,27 @@ export default function FilterSort ({
   return (
     <Popup
       onCancel={onCancel}
-      onValidate={() =>
-        onSubmit({
-          filters: {
-            units: unitFilter,
-            userUnits: userUnitFilter,
-          },
-          sorts,
-          displayer,
-        })
-      }
+      onValidate={() => onSubmit(computeNewSearch())}
       customAction={
-        <Button
-          onClick={() => {
-            setUnitFilter({})
-            setUserUnitFilter({})
-            setSorts([])
-            setDisplayer(undefined)
-          }}
-          variant="danger"
-        >
-          Clear all
-        </Button>
+        <>
+          <Button
+            onClick={() => {
+              setUnitFilter({})
+              setUserUnitFilter({})
+              setSorts([])
+              setDisplayer(undefined)
+            }}
+            variant="danger"
+          >
+            Clear all
+          </Button>
+
+          <Button
+            onClick={() => setShowSaveSearch(true)}
+            icon={SaveSearchIcon}
+            title="Save/Load search"
+          />
+        </>
       }
       title={displayerTitle(displayed)}
     >
@@ -92,7 +104,12 @@ export default function FilterSort ({
       )}
 
       <hr />
-      <Box display="flex" justifyContent="space-evenly" padding="2" flex="0 0 auto">
+      <Box
+        display="flex"
+        justifyContent="space-evenly"
+        padding="2"
+        flex="0 0 auto"
+      >
         <Button
           onClick={() => setDisplayed('unit-filter')}
           {...buttonStyle}
@@ -129,6 +146,19 @@ export default function FilterSort ({
           </Button>
         )}
       </Box>
+      {showSaveSearch && (
+        <SaveSearch
+          onClose={() => setShowSaveSearch(false)}
+          search={computeNewSearch()}
+          onSearchSelected={search => {
+            setUnitFilter(search.filters.units || {})
+            setUserUnitFilter(search.filters.userUnits || {})
+            setSorts(search.sorts)
+            setDisplayer(search.displayer)
+            setShowSaveSearch(false)
+          }}
+        />
+      )}
     </Popup>
   )
 }

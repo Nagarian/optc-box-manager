@@ -15,6 +15,7 @@ import { ReactComponent as Search } from './search.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
+import { ReactComponent as SaveSearch } from './savesearch.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
 
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps
@@ -55,6 +56,7 @@ SupportIcon.defaultProps = {
   title: 'Support',
 }
 export const SearchIcon: Icon = BaseSvg(Search)
+export const SaveSearchIcon: Icon = BaseSvg(SaveSearch)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,
