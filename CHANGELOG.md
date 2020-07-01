@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/Nagarian/optc-box-manager/compare/v1.2.0...v1.3.0) (2020-07-01)
+
+
+### Features
+
+* **filter:** improve search box ([49e1cd1](https://github.com/Nagarian/optc-box-manager/commit/49e1cd1a995659a53be2be0ac0aebd3f373a7a18)), closes [#39](https://github.com/Nagarian/optc-box-manager/issues/39)
+* **search:** add custom search saving features ([86d67ec](https://github.com/Nagarian/optc-box-manager/commit/86d67ecf4285e53a9ee11a06bafc75d3d7fea91c)), closes [#26](https://github.com/Nagarian/optc-box-manager/issues/26)
+
+
+
 # [1.2.0](https://github.com/Nagarian/optc-box-manager/compare/v1.1.0...v1.2.0) (2020-06-27)
 
 
@@ -100,16 +110,6 @@ Also, some unit's limit break could be inaccurate
 ### Features
 
 * **filter:** extract title to uniformize ([dbfcc33](https://github.com/Nagarian/optc-box-manager/commit/dbfcc3309f24119f010706c282c5df65c78803fd))
-
-
-
-## [0.9.1](https://github.com/Nagarian/optc-box-manager/compare/v0.9.0...v0.9.1) (2020-06-18)
-
-
-### Bug Fixes
-
-* **filter:** css issue with checkbox on safari ([4eb9fd4](https://github.com/Nagarian/optc-box-manager/commit/4eb9fd41327a9950b36c137ceda07f3120e07e21))
-* **filter:** issue with Drop Location and evolution ([b02f1ee](https://github.com/Nagarian/optc-box-manager/commit/b02f1ee24874f9ee2d569277a03bbae2c59eb30e))
 
 
 
