@@ -9,7 +9,6 @@ type CottonCandyInputProps = {
 
 const CottonCandyInput = styled(RangeInput).attrs(p => ({
   min: 0,
-  max: 100,
   thumbSvg: CottonCandySvg,
   range: variant({
     variants: {
@@ -26,5 +25,9 @@ const CottonCandyInput = styled(RangeInput).attrs(p => ({
   })(p),
 }))<CottonCandyInputProps>`
 `
+
+CottonCandyInput.defaultProps = {
+  max: 100,
+}
 
 export default CottonCandyInput

@@ -16,6 +16,7 @@ import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { ReactNode, useState } from 'react'
 import BulkEditSelect from './components/BulkEditSelect'
+import { useUserSettings } from 'hooks/useUserSettings'
 
 type BulkEditProps = {
   userUnits: UserUnit[]
@@ -29,7 +30,7 @@ export default function BulkEdit ({
 }: BulkEditProps) {
   const [edit, setEdit] = useState<UserUnitBulkEdit>()
   const [showStep2, setShowStep2] = useState<boolean>()
-
+  const { ccLimit } = useUserSettings()
   const computeSearch = (): Search => {
     let uuf: SearchFilterUserUnits = {}
     const uus: SearchSortCriteria[] = []
@@ -155,6 +156,7 @@ export default function BulkEdit ({
               name="cc-atk"
               variant="atk"
               value={edit?.cottonCandies?.atk ?? 0}
+              max={ccLimit}
               onChange={e =>
                 setEdit({
                   ...edit,
@@ -171,6 +173,7 @@ export default function BulkEdit ({
               name="cc-hp"
               variant="hp"
               value={edit?.cottonCandies?.hp ?? 0}
+              max={ccLimit}
               onChange={e =>
                 setEdit({
                   ...edit,
@@ -187,6 +190,7 @@ export default function BulkEdit ({
               name="cc-rcv"
               variant="rcv"
               value={edit?.cottonCandies?.rcv ?? 0}
+              max={ccLimit}
               onChange={e =>
                 setEdit({
                   ...edit,
