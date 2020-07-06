@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/Nagarian/optc-box-manager/compare/v1.3.0...v1.4.0) (2020-07-06)
+
+
+### Features
+
+* **settings:** add option to allow +200 on Cotton Candy ([2f7e229](https://github.com/Nagarian/optc-box-manager/commit/2f7e229861c944f5931436e2aa3bffa042682e63))
+
+
+
 # [1.3.0](https://github.com/Nagarian/optc-box-manager/compare/v1.2.0...v1.3.0) (2020-07-01)
 
 
@@ -95,21 +104,6 @@ Also, some unit's limit break could be inaccurate
 ### Bug Fixes
 
 * add resync of UserUnit on startup ([0ea7768](https://github.com/Nagarian/optc-box-manager/commit/0ea7768f7d15e61bc49714c61c246a1900060575))
-
-
-
-# [0.10.0](https://github.com/Nagarian/optc-box-manager/compare/v0.9.1...v0.10.0) (2020-06-18)
-
-
-### Bug Fixes
-
-* try fixing safari popup issue ([533aea3](https://github.com/Nagarian/optc-box-manager/commit/533aea3343beabc9aa92951f38ca75b09ce65bb5))
-* **detail:** description detail on slider ([8757ac1](https://github.com/Nagarian/optc-box-manager/commit/8757ac1969ae36ea79e06b247f43425197cf6c14))
-
-
-### Features
-
-* **filter:** extract title to uniformize ([dbfcc33](https://github.com/Nagarian/optc-box-manager/commit/dbfcc3309f24119f010706c282c5df65c78803fd))
 
 
 
