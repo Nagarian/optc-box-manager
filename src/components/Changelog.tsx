@@ -93,7 +93,7 @@ export default function Changelog ({
             key={release.id}
             source={release.body}
             linkTarget="_blank"
-            renderers={{ heading: SubTitle, listItem: ListItem }}
+            renderers={{ heading: SubTitle, listItem: ListItem, image: Img }}
           />
         </div>
       ))}
@@ -106,4 +106,10 @@ const ListItem = styled.li`
     content: '🏴‍☠️ ';
     font-size: ${themeGet('fontSizes.2')};
   }
+`
+
+const Img = styled.img`
+  max-width: 100%;
+  display: block;
+  margin: 1rem auto;
 `
