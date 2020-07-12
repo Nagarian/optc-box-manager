@@ -26,21 +26,22 @@ const AppBlock = styled.div`
   position: relative;
 `
 
+type DisplayedPanel = 'add' | 'settings' | 'filters' | 'bulkedit'
+
 function App () {
   const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
-  const [showAddUnit, setShowAddUnit] = useState<boolean>(false)
-  const [showSettings, setShowSettings] = useState<boolean>(false)
-  const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
+  const [displayedPanel, setDisplayedPanel] = useState<DisplayedPanel>()
   const [showDetail, setShowDetail] = useState<UserUnit>()
-  const [showBulkEdit, setShowBulkEdit] = useState<boolean>(false)
   const { search, setSearch } = useSavedSearch()
 
   const myUserBox = useUserBox(unitDatabase)
   const { userBox, add, update, bulkUpdate, remove } = myUserBox
 
+  const closePanel = () => setDisplayedPanel(undefined)
+
   const addSelectedUnits = (units: ExtendedUnit[]) => {
     add(...units)
-    setShowAddUnit(false)
+    closePanel()
   }
 
   const updateUnit = (unit: UserUnit) => {
@@ -55,7 +56,7 @@ function App () {
 
   const editUnits = (userUnits: UserUnit[], edit: UserUnitBulkEdit) => {
     bulkUpdate(userUnits, edit)
-    setShowBulkEdit(false)
+    closePanel()
   }
 
   return (
@@ -73,16 +74,16 @@ function App () {
       <MyUserBox
         userBox={userBox}
         search={search}
-        onAddUnit={() => setShowAddUnit(true)}
+        onAddUnit={() => setDisplayedPanel('add')}
         onShowDetail={userUnit => setShowDetail(userUnit)}
       />
 
-      {showAddUnit && (
+      {displayedPanel === 'add' && (
         <Add
           units={unitDatabase.filter(
             unit => !userBox.some(uu => uu.unit.id === unit.id),
           )}
-          onCancel={() => setShowAddUnit(false)}
+          onCancel={closePanel}
           onSubmit={addSelectedUnits}
         />
       )}
@@ -97,28 +98,28 @@ function App () {
         />
       )}
 
-      {showSettings && (
+      {displayedPanel === 'settings' && (
         <Settings
-          onClose={() => setShowSettings(false)}
+          onClose={closePanel}
           myUserBox={myUserBox}
         />
       )}
 
-      {showFilterSort && (
+      {displayedPanel === 'filters' && (
         <FilterSort
-          onCancel={() => setShowFilterSort(false)}
+          onCancel={closePanel}
           onSubmit={search => {
             setSearch(search)
-            setShowFilterSort(false)
+            closePanel()
           }}
           search={search}
         />
       )}
 
-      {showBulkEdit && (
+      {displayedPanel === 'bulkedit' && (
         <BulkEdit
           userUnits={userBox}
-          onCancel={() => setShowBulkEdit(false)}
+          onCancel={closePanel}
           onSubmit={editUnits}
         />
       )}
@@ -132,24 +133,24 @@ function App () {
         boxShadow="none"
       >
         <Button
-          onClick={() => setShowAddUnit(true)}
+          onClick={() => setDisplayedPanel('add')}
           icon={AddIcon}
           title="Add new units"
         />
         {userBox.length > 0 && (
           <Button
-            onClick={() => setShowBulkEdit(true)}
+            onClick={() => setDisplayedPanel('bulkedit')}
             icon={EditIcon}
             title="Bulk edit"
           />
         )}
         <Button
-          onClick={() => setShowFilterSort(true)}
+          onClick={() => setDisplayedPanel('filters')}
           icon={FilterSortIcon}
           title="Filter/Sort"
         />
         <Button
-          onClick={() => setShowSettings(true)}
+          onClick={() => setDisplayedPanel('settings')}
           icon={SettingsIcon}
           title="Settings"
         />
