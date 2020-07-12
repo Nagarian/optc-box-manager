@@ -9,6 +9,10 @@ This is a [PWA app](https://web.dev/progressive-web-apps/) also you can install 
 
 It is hosted on github pages [at this adress](https://nagarian.github.com/optc-box-manager/), although you can just download it and run a local copy
 
+For a more detailed explanation of how this app works, you can also check out this video:
+
+[![OPTC Box Manager - How To ... ?](https://img.youtube.com/vi/N9NX-BYk5bI/maxresdefault.jpg)](https://youtu.be/N9NX-BYk5bI)
+
 ## Installation
 
 To install the PWA to your phone/computer
