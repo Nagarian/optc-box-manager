@@ -13,8 +13,8 @@ export default function DescriptionHighlighter ({
   if (!value) return null
 
   const parts = value.replace(
-    /(\[[A-Z]*\])/g,
-    match => `${match}(${match.substr(1, match.length - 2)})`,
+    /(\[[A-Z]*\])/gi,
+    match => `${match.toUpperCase()}(${match.substr(1, match.length - 2).toUpperCase()})`,
   )
 
   return (
@@ -39,7 +39,7 @@ const Orb = styled('span')
   }))
   .withConfig(clean('href'))<OrbProps>`
   display: inline-block;
-  background: ${p => themeGet(`colors.orb.${p.children}`)};
+  background: ${p => themeGet(`colors.orb.${p.children}`)(p) ?? 'grey'};
   color: ${themeGet('colors.white')};
   border-radius: 1em;
   padding: .1em .5em;
