@@ -32,7 +32,7 @@ export default function SaveSearch ({
   }
 
   return (
-    <Popup title="Search collections" onClose={onClose}>
+    <Popup title="Search collections" onClose={onClose} minHeightRequired>
       <SubTitle>Save your current search</SubTitle>
       <Box display="flex">
         <Input
@@ -49,12 +49,7 @@ export default function SaveSearch ({
       <Hr marginY="3" />
       <SubTitle marginBottom="2">Load your saved searches</SubTitle>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        overflowY="auto"
-        minHeight="30vh"
-      >
+      <Box display="flex" flexDirection="column" overflowY="auto">
         {searches.map(s => (
           <Panel>
             <Text flex="1">{s.name}</Text>

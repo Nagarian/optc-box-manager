@@ -10,6 +10,7 @@ type PopupProps = {
   onClose?: () => void
   onCancel?: () => void
   onValidate?: () => void
+  minHeightRequired?: boolean
   children?: ReactNode
   customAction?: ReactNode
 }
@@ -21,6 +22,7 @@ export default function Popup ({
   onValidate,
   children,
   customAction,
+  minHeightRequired,
   ...rest
 }: PopupProps & SpaceProps) {
   return (
@@ -35,7 +37,7 @@ export default function Popup ({
         {title && <Title>{title}</Title>}
         {title && <hr />}
 
-        <PopupPanel>{children}</PopupPanel>
+        <PopupPanel autosize={!minHeightRequired}>{children}</PopupPanel>
 
         <hr />
 

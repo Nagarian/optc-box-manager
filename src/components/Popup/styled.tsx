@@ -41,11 +41,12 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   animation: 250ms ${BounceIn};
 `
 
-export const PopupPanel = styled(Box)<SpaceProps>`
+export const PopupPanel = styled(Box)<SpaceProps & { autosize?: boolean }>`
   display: flex;
   flex-direction: column;
   place-items: stretch;
   overflow-y: auto;
+  ${p => !p.autosize && 'min-height: 60vh;'}
   ${space}
 `
 
