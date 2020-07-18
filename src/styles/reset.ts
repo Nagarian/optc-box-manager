@@ -75,8 +75,11 @@ a {
 }
 
 hr {
-  border: .7px solid ${themeGet('colors.greys.1')};
   width: 100%;
+  height: 0.2rem;
+  background: #808080;
+  border-radius: .7rem;
+  border: none;
 }
 
 ::-webkit-scrollbar {
