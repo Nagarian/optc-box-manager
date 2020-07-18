@@ -43,7 +43,7 @@ export default function Detail ({
   return (
     <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>
       {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
-      <RecapBox unit={unit} userUnit={userUnit} marginBottom="3" />
+      <RecapBox userUnit={userUnit} marginBottom="3" />
 
       <SpecialLvlEdit
         special={userUnit.special}

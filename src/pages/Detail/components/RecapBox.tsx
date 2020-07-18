@@ -4,7 +4,6 @@ import { CottonCandyIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression, { Max } from 'components/Progression'
 import { SubTitle, Title } from 'components/Title'
-import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
@@ -25,14 +24,13 @@ const Element = styled.div`
 `
 
 export default function RecapBox ({
-  unit,
   userUnit,
   ...rest
 }: {
-  unit: ExtendedUnit
   userUnit: UserUnit
 } & SpaceProps) {
   const {
+    unit,
     potentials,
     special,
     support,
