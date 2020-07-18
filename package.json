@@ -20,7 +20,7 @@
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
     "styled-system": "^5.1.5",
-    "typescript": "^3.9.6",
+    "typescript": "^3.9.7",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
