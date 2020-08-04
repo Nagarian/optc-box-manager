@@ -8,7 +8,7 @@ import {
 } from 'pages/FilterSort/components/Displayers'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { gridArea, GridAreaProps } from 'styled-system'
+import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
@@ -54,7 +54,7 @@ const supportCss = css<BtnProps>`
   }
 `
 
-export type CharacterBoxStyledProps = GridAreaProps & PlaceProps
+export type CharacterBoxStyledProps = GridAreaProps & PlaceProps & SizeProps
 
 const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
   padding: 0;
@@ -72,6 +72,7 @@ export default function CharacterBox ({
   userUnit,
   onClick,
   displayer,
+  size = '4',
   ...rest
 }: CharacterBoxProps & CharacterBoxStyledProps) {
   const unit: ExtendedUnit = userUnit?.unit ?? u!
@@ -92,7 +93,7 @@ export default function CharacterBox ({
         src={unit.images.thumbnail}
         alt={unit.name}
         title={unit.name}
-        size="4"
+        size={size}
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
       {userUnit && InfoDisplayer && (
