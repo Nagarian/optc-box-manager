@@ -1,7 +1,13 @@
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { AddIcon, EditIcon, FilterSortIcon, SettingsIcon } from 'components/Icon'
+import {
+  AddIcon,
+  EditIcon,
+  FilterSortIcon,
+  SettingsIcon,
+  SugoPullIcon,
+} from 'components/Icon'
 import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { Search } from 'models/search'
@@ -17,6 +23,7 @@ import Settings from 'pages/Settings'
 import React, { useMemo, useState } from 'react'
 import { DBUnit } from 'services/units'
 import styled from 'styled-components'
+import SugoCleaner from 'pages/SugoCleaner'
 
 const AppBlock = styled.div`
   display: grid;
@@ -26,7 +33,12 @@ const AppBlock = styled.div`
   position: relative;
 `
 
-type DisplayedPanel = 'add' | 'settings' | 'filters' | 'bulkedit'
+type DisplayedPanel =
+  | 'add'
+  | 'settings'
+  | 'filters'
+  | 'bulkedit'
+  | 'sugocleaner'
 
 function App () {
   const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
@@ -99,10 +111,7 @@ function App () {
       )}
 
       {displayedPanel === 'settings' && (
-        <Settings
-          onClose={closePanel}
-          myUserBox={myUserBox}
-        />
+        <Settings onClose={closePanel} myUserBox={myUserBox} />
       )}
 
       {displayedPanel === 'filters' && (
@@ -124,11 +133,21 @@ function App () {
         />
       )}
 
+      {displayedPanel === 'sugocleaner' && (
+        <SugoCleaner
+          userBox={userBox}
+          units={unitDatabase}
+          onClose={closePanel}
+          onUpdateUnit={updateUnit}
+          onAddUnit={add}
+        />
+      )}
+
       <Box
         display="grid"
         gridAutoFlow="column"
         justifyContent="center"
-        gridGap="4"
+        gridGap="3"
         py="2"
         boxShadow="none"
       >
@@ -148,6 +167,11 @@ function App () {
           onClick={() => setDisplayedPanel('filters')}
           icon={FilterSortIcon}
           title="Filter/Sort"
+        />
+        <Button
+          onClick={() => setDisplayedPanel('sugocleaner')}
+          icon={SugoPullIcon}
+          title="Sugo Cleaner"
         />
         <Button
           onClick={() => setDisplayedPanel('settings')}

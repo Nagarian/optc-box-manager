@@ -19,7 +19,7 @@ type DetailProps = {
   units: ExtendedUnit[]
   onCancel: () => void
   onValidate: (updated: UserUnit) => void
-  onDelete: (id: string) => void
+  onDelete?: (id: string) => void
 }
 
 export default function Detail ({
@@ -95,16 +95,22 @@ export default function Detail ({
         See on OPTC-DB
       </Button>
 
-      <Button variant="danger" my="1" onClick={() => setShowConfirmation(true)}>
-        Delete
-      </Button>
+      {!!onDelete && (
+        <Button
+          variant="danger"
+          my="1"
+          onClick={() => setShowConfirmation(true)}
+        >
+          Delete
+        </Button>
+      )}
 
       {showConfirmation && (
         <Popup
           title="Are you sure to delete it ?"
           onValidate={() => {
             setShowConfirmation(false)
-            onDelete(userUnit.id)
+            onDelete!(userUnit.id)
           }}
           onCancel={() => setShowConfirmation(false)}
         />

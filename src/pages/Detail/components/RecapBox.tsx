@@ -56,13 +56,25 @@ export default function RecapBox ({
         )}
 
         <Element>
-          <CottonCandyIcon size="2" color="specific.ccHp" title="Cotton Candy HP" />
+          <CottonCandyIcon
+            size="2"
+            color="specific.ccHp"
+            title="Cotton Candy HP"
+          />
           {hp === 100 ? <Max /> : '+' + hp}
 
-          <CottonCandyIcon size="2" color="specific.ccAtk" title="Cotton Candy ATK" />
+          <CottonCandyIcon
+            size="2"
+            color="specific.ccAtk"
+            title="Cotton Candy ATK"
+          />
           {atk === 100 ? <Max /> : '+' + atk}
 
-          <CottonCandyIcon size="2" color="specific.ccRcv" title="Cotton Candy RCV" />
+          <CottonCandyIcon
+            size="2"
+            color="specific.ccRcv"
+            title="Cotton Candy RCV"
+          />
           {rcv === 100 ? <Max /> : '+' + rcv}
         </Element>
 
@@ -91,5 +103,64 @@ export default function RecapBox ({
         )}
       </Box>
     </Container>
+  )
+}
+
+export function RecapBoxLight ({
+  userUnit,
+  onClick,
+  ...rest
+}: {
+  userUnit: UserUnit
+  onClick?: (unit: UserUnit) => void
+} & SpaceProps) {
+  const { unit, potentials, special, support } = userUnit
+
+  return (
+    <Box display="flex" {...rest}>
+      <CharacterBox
+        gridArea="icon"
+        unit={unit}
+        userUnit={userUnit}
+        onClick={() => onClick?.(userUnit)}
+      />
+      <Box
+        gridArea="info"
+        marginLeft="2"
+        flex="1"
+        onClick={() => onClick?.(userUnit)}
+      >
+        {special && (
+          <Element>
+            <SpecialLvlIcon size="2" />
+            <Progression value={special.lvl} max={special.lvlMax} />
+
+            {support && (
+              <Element>
+                <SupportIcon size="2" />
+                {support.lvl === 5 ? (
+                  <Max />
+                ) : support.lvl === 0 ? (
+                  'not unlocked'
+                ) : (
+                  `${support.lvl}/${5}`
+                )}
+              </Element>
+            )}
+          </Element>
+        )}
+
+        {potentials.length > 0 && (
+          <Element>
+            {potentials.map(({ type, lvl }, i) => (
+              <Element key={i}>
+                <PotentialAbility size="2" type={type} />
+                <Progression value={lvl} max={5} />
+              </Element>
+            ))}
+          </Element>
+        )}
+      </Box>
+    </Box>
   )
 }

@@ -14,12 +14,20 @@ import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
 type AddProps = {
+  saveKey?: string
   onCancel: () => void
   onSubmit: (selectUnits: ExtendedUnit[]) => void
   units: ExtendedUnit[]
+  allowDuplicatedUnit?: boolean
 }
 
-export default function Add ({ onCancel, onSubmit, units }: AddProps) {
+export default function Add ({
+  onCancel,
+  onSubmit,
+  units,
+  saveKey = 'addSettingSearch',
+  allowDuplicatedUnit = false,
+}: AddProps) {
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
   const selectedPanelRef = useRef<HTMLDivElement>(null)
 
@@ -41,7 +49,7 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
   }, [selectedUnits])
 
   const [showSettings, setShowSettings] = useState<boolean>(false)
-  const { search, setSearch } = useSavedSearch('addSettingSearch')
+  const { search, setSearch } = useSavedSearch(saveKey)
 
   return (
     <Popup
@@ -56,7 +64,6 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
         />
       }
     >
-
       <BySearchBoxInput
         criteria={search?.filters.units?.bySearchBox}
         onChange={criteria =>
@@ -69,8 +76,14 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
       />
       <SearchPanel
         search={search}
-        units={units.filter(u => !selectedUnits.some(su => su.id === u.id))}
-        onUnitClick={u => toggle(u, !selectedUnits.includes(u))}
+        units={
+          allowDuplicatedUnit
+            ? units
+            : units.filter(u => !selectedUnits.some(su => su.id === u.id))
+        }
+        onUnitClick={u =>
+          toggle(u, allowDuplicatedUnit ? true : !selectedUnits.includes(u))
+        }
         my="2"
         mx={[0, 2]}
       />
@@ -79,11 +92,13 @@ export default function Add ({ onCancel, onSubmit, units }: AddProps) {
         <>
           <SubTitle>Selected Units (click to remove it)</SubTitle>
           <SelectedList ref={selectedPanelRef}>
-            {selectedUnits.map(unit => (
+            {selectedUnits.map((unit, i) => (
               <CharacterBox
-                key={unit.id}
+                key={`${unit.id}-${i}`}
                 unit={unit}
-                onClick={() => toggle(unit, false)}
+                onClick={() =>
+                  setSelectedUnits(selectedUnits.filter((u, j) => j !== i))
+                }
               />
             ))}
           </SelectedList>
