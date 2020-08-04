@@ -168,6 +168,7 @@ export const DBUnit = {
             id: getFamilyId(Families, unit.number),
           },
           dropLocations: getDropLocations(id, flags, EvolutionMap),
+          evolutionMap: EvolutionMap[id] ?? [id],
         }
       })
   },

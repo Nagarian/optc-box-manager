@@ -214,4 +214,5 @@ export type ExtendedUnit = BaseUnit & {
   flags: UnitFlags
   family: ExtendedUnitFamily
   dropLocations: ExtendedDrop[]
+  evolutionMap: number[]
 }
