@@ -25,7 +25,7 @@ export default function FilterContainer ({
         justifyContent="space-between"
         marginBottom="2"
       >
-        <SubTitle>{title}</SubTitle>
+        <SubTitle textAlign="left">{title}</SubTitle>
         <Button
           onClick={onReset}
           disabled={disableReset}
