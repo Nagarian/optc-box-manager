@@ -4,6 +4,7 @@ import { clean, PlaceProps, place } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
 import { ReactComponent as Ascending } from './ascending.svg'
+import { ReactComponent as Belly } from './belly.svg'
 import { ReactComponent as Cancel } from './cancel.svg'
 import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
@@ -15,8 +16,11 @@ import { ReactComponent as Search } from './search.svg'
 import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
+import { ReactComponent as SkillBook } from './skillbook.svg'
+import { ReactComponent as SugoPull } from './sugopull.svg'
 import { ReactComponent as SaveSearch } from './savesearch.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
+import { ReactComponent as Treasure } from './treasure.svg'
 
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps
 
@@ -57,6 +61,10 @@ SupportIcon.defaultProps = {
 }
 export const SearchIcon: Icon = BaseSvg(Search)
 export const SaveSearchIcon: Icon = BaseSvg(SaveSearch)
+export const SugoPullIcon: Icon = BaseSvg(SugoPull)
+export const SkillBookIcon: Icon = BaseSvg(SkillBook)
+export const BellyIcon: Icon = BaseSvg(Belly)
+export const TreasureIcon: Icon = BaseSvg(Treasure)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,
