@@ -9,6 +9,7 @@ import { Text } from 'components/Title'
 import ExpansionPanel from 'components/ExpansionPanel'
 import { CottonCandyIcon } from 'components/Icon'
 import { useUserSettings } from 'hooks/useUserSettings'
+import { importAsJson } from 'services/share'
 
 type SettingsProps = {
   onClose: () => void
@@ -35,11 +36,11 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
 
   const importFn = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (!file || file.type !== 'application/json') {
+    if (!file) {
       return
     }
 
-    const json = await file.text()
+    const json = await importAsJson(file)
     importDB(json)
     setSuccessMessage('Your Box has been filled !')
   }

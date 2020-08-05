@@ -1,4 +1,4 @@
-export function exportAsJson (data: string, filename: string) : Promise<void> {
+export function exportAsJson (data: string, filename: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const file = new Blob([data], { type: 'application/json' })
 
@@ -13,5 +13,32 @@ export function exportAsJson (data: string, filename: string) : Promise<void> {
       window.URL.revokeObjectURL(url)
       resolve()
     }, 0)
+  })
+}
+
+export function importAsJson (file: File): Promise<string> {
+  if (!file || file.type !== 'application/json') {
+    return Promise.reject(new Error('not a json file'))
+  }
+
+  if (file.text) {
+    return file.text()
+  }
+
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = e => {
+      if (typeof e.target?.result === 'string') {
+        resolve(e.target.result)
+      }
+
+      reject(new Error('bad format file'))
+    }
+
+    reader.onerror = () => {
+      reject(new Error('an error occured while reading file'))
+    }
+
+    reader.readAsText(file)
   })
 }
