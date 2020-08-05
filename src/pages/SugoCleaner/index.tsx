@@ -6,7 +6,12 @@ import { ResultList } from 'components/SearchPanel'
 import useSugoCleaner, { SugoCleanerListType } from 'hooks/useSugoCleaner'
 import CharacterBox from 'components/CharacterBox'
 import Button from 'components/Button'
-import { AddIcon, SkillBookIcon, BellyIcon, TreasureIcon } from 'components/Icon'
+import {
+  AddIcon,
+  SkillBookIcon,
+  BellyIcon,
+  TreasureIcon,
+} from 'components/Icon'
 import Add from 'pages/Add'
 import { UserUnit } from 'models/userBox'
 import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
@@ -92,81 +97,83 @@ export default function SugoCleaner ({
 
       {!!openChooser && (
         <Popup onClose={() => setOpenChooser(undefined)}>
-          <Box display="flex" marginBottom="2" alignItems="center">
-            <CharacterBox unit={openChooser} />
-            <Title marginLeft="2">{openChooser.name}</Title>
+          <Box display="grid">
+            <Box display="flex" marginBottom="2" alignItems="center">
+              <CharacterBox unit={openChooser} />
+              <Title marginLeft="2">{openChooser.name}</Title>
+            </Box>
+
+            <hr />
+
+            {filteredUserUnit.length ? (
+              <>
+                <SubTitle>On which unit do you want to use it ?</SubTitle>
+                {filteredUserUnit.map(uu => (
+                  <RecapBoxLight
+                    key={uu.id}
+                    userUnit={uu}
+                    marginY="2"
+                    onClick={uu => setOpenDetail(uu)}
+                  />
+                ))}
+              </>
+            ) : (
+              <SubTitle>
+                You don't possess this unit, you should keep it !
+              </SubTitle>
+            )}
+            <hr />
+
+            <SubTitle>What to do with it ?</SubTitle>
+            <Button
+              {...commonPopupButton}
+              onClick={() => {
+                onAddUnit(openChooser)
+                currentList && remove(currentList, openChooser)
+                setOpenChooser(undefined)
+              }}
+              icon={TreasureIcon}
+            >
+              Keep it
+            </Button>
+
+            {currentList !== 'toSell' && (
+              <Button
+                {...commonPopupButton}
+                onClick={() => {
+                  currentList && move(currentList, 'toSell', openChooser)
+                  setOpenChooser(undefined)
+                }}
+                icon={BellyIcon}
+              >
+                To Sell
+              </Button>
+            )}
+
+            {filteredUserUnit.length > 0 && currentList !== 'toWaiting' && (
+              <Button
+                {...commonPopupButton}
+                onClick={() => {
+                  currentList && move(currentList, 'toWaiting', openChooser)
+                  setOpenChooser(undefined)
+                }}
+                icon={SkillBookIcon}
+              >
+                Waiting for skill up
+              </Button>
+            )}
+
+            <Button
+              {...commonPopupButton}
+              onClick={() => {
+                currentList && remove(currentList, openChooser)
+                setOpenChooser(undefined)
+              }}
+              variant="danger"
+            >
+              Dismiss (already used)
+            </Button>
           </Box>
-
-          <hr />
-
-          {filteredUserUnit.length ? (
-            <>
-              <SubTitle>On which unit do you want to use it ?</SubTitle>
-              {filteredUserUnit.map(uu => (
-                <RecapBoxLight
-                  key={uu.id}
-                  userUnit={uu}
-                  marginY="2"
-                  onClick={uu => setOpenDetail(uu)}
-                />
-              ))}
-            </>
-          ) : (
-            <SubTitle>
-              You don't possess this unit, you should keep it !
-            </SubTitle>
-          )}
-          <hr />
-
-          <SubTitle>What to do with it ?</SubTitle>
-          <Button
-            {...commonPopupButton}
-            onClick={() => {
-              onAddUnit(openChooser)
-              currentList && remove(currentList, openChooser)
-              setOpenChooser(undefined)
-            }}
-            icon={TreasureIcon}
-          >
-            Keep it
-          </Button>
-
-          {currentList !== 'toSell' && (
-            <Button
-              {...commonPopupButton}
-              onClick={() => {
-                currentList && move(currentList, 'toSell', openChooser)
-                setOpenChooser(undefined)
-              }}
-              icon={BellyIcon}
-            >
-              To Sell
-            </Button>
-          )}
-
-          {filteredUserUnit.length > 0 && currentList !== 'toWaiting' && (
-            <Button
-              {...commonPopupButton}
-              onClick={() => {
-                currentList && move(currentList, 'toWaiting', openChooser)
-                setOpenChooser(undefined)
-              }}
-              icon={SkillBookIcon}
-            >
-              Waiting for skill up
-            </Button>
-          )}
-
-          <Button
-            {...commonPopupButton}
-            onClick={() => {
-              currentList && remove(currentList, openChooser)
-              setOpenChooser(undefined)
-            }}
-            variant="danger"
-          >
-            Dismiss (already used)
-          </Button>
         </Popup>
       )}
 
