@@ -157,6 +157,7 @@ export default {
         backgroundColor: 'grey',
         color: 'greys.1',
       },
+      textDecoration: 'none',
     },
     secondary: {
       backgroundColor: 'secondary',

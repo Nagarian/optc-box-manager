@@ -76,6 +76,10 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
         </Popup>
       )}
 
+      <Button my="1" href="https://github.com/Nagarian/optc-box-manager/wiki">
+        Wiki
+      </Button>
+
       <Button variant="danger" my="1" onClick={() => setShowResetWarning(true)}>
         Reset
       </Button>
