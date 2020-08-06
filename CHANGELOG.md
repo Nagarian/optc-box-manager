@@ -1,3 +1,25 @@
+# [1.5.0](https://github.com/Nagarian/optc-box-manager/compare/v1.4.0...v1.5.0) (2020-08-06)
+
+
+### Bug Fixes
+
+* **changelog:** issue with images ([e67a922](https://github.com/Nagarian/optc-box-manager/commit/e67a9229bcb6575a430cdcdaa4a43595552b2fe4))
+* **css:** uniformize hr ([1fa180d](https://github.com/Nagarian/optc-box-manager/commit/1fa180de83241985b164274571d749bce49c5bb0))
+* **detail:** issue with NEO and EX display ([1957a47](https://github.com/Nagarian/optc-box-manager/commit/1957a4796330ab98615d30d4ce1525a94cca421b))
+* **filter:** issue with alignment of container ([de92571](https://github.com/Nagarian/optc-box-manager/commit/de92571db776d63e14af2de6b7d8b647abbaae0c))
+* **import:** issue on safari and iOS ([1545b54](https://github.com/Nagarian/optc-box-manager/commit/1545b54f215301607c413f1770af9f3b80d51449))
+* **sort:** issue with low screen width ([2fa490b](https://github.com/Nagarian/optc-box-manager/commit/2fa490b21bb2f5f38402c4bff621a37f0cbc4872))
+* **SugoCleaner:** display issue on Safari ([cbb9bbd](https://github.com/Nagarian/optc-box-manager/commit/cbb9bbda3ea8f24f468b4e99c37e5ded79812e03))
+
+
+### Features
+
+* add new icons ([b677733](https://github.com/Nagarian/optc-box-manager/commit/b677733dbe1c7bdb550b8f239bf8fb5acd406f87))
+* add SugoCleaner ([d2740fc](https://github.com/Nagarian/optc-box-manager/commit/d2740fc1364eae27a8d816c038960595f0d853ea))
+* add wiki link [#48](https://github.com/Nagarian/optc-box-manager/issues/48) ([c85de2d](https://github.com/Nagarian/optc-box-manager/commit/c85de2d755d61ee51dfa67e985f4db205816a708))
+
+
+
 # [1.4.0](https://github.com/Nagarian/optc-box-manager/compare/v1.3.0...v1.4.0) (2020-07-06)
 
 
@@ -95,15 +117,6 @@ Also, some unit's limit break could be inaccurate
 * **filter:** issue with dropLocation ([ab847e2](https://github.com/Nagarian/optc-box-manager/commit/ab847e220af76182038230638923311badf1c6f9))
 * **filter:** lb state issue with unit key locked ([b1144b1](https://github.com/Nagarian/optc-box-manager/commit/b1144b1ed76b46be6370afe0b35185ed72c7b93d))
 * **filter:** order of Potential color shield ([d400e1b](https://github.com/Nagarian/optc-box-manager/commit/d400e1b7cc8ad580db77dc08fae9b5604f005f0e))
-
-
-
-## [0.10.1](https://github.com/Nagarian/optc-box-manager/compare/v0.10.0...v0.10.1) (2020-06-19)
-
-
-### Bug Fixes
-
-* add resync of UserUnit on startup ([0ea7768](https://github.com/Nagarian/optc-box-manager/commit/0ea7768f7d15e61bc49714c61c246a1900060575))
 
 
 
