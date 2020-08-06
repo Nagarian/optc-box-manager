@@ -24,15 +24,15 @@ export const clean = (...propsToClean: string[]) => ({
 export const cleanStyledSystem = clean()
 
 export interface PlaceProps {
-  alignItems?: CSS.AlignItemsProperty,
-  alignContent?: CSS.AlignContentProperty,
-  alignSelf?: CSS.AlignSelfProperty,
-  justifyItems?: CSS.JustifyItemsProperty,
-  justifyContent?: CSS.JustifyContentProperty,
-  justifySelf?: CSS.JustifySelfProperty,
-  placeItems?: CSS.PlaceItemsProperty,
-  placeContent?: CSS.PlaceContentProperty,
-  placeSelf?: CSS.PlaceSelfProperty,
+  alignItems?: CSS.Property.AlignItems,
+  alignContent?: CSS.Property.AlignContent,
+  alignSelf?: CSS.Property.AlignSelf,
+  justifyItems?: CSS.Property.JustifyItems,
+  justifyContent?: CSS.Property.JustifyContent,
+  justifySelf?: CSS.Property.JustifySelf,
+  placeItems?: CSS.Property.PlaceItems,
+  placeContent?: CSS.Property.PlaceContent,
+  placeSelf?: CSS.Property.PlaceSelf,
 }
 
 export const place = system({
