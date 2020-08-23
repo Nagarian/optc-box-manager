@@ -4,7 +4,7 @@ import CharacterBox from 'components/CharacterBox'
 import ExpansionPanel from 'components/ExpansionPanel'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
-import { UserUnit } from 'models/userBox'
+import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
 import React, { useState } from 'react'
 import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
@@ -13,6 +13,7 @@ import RecapBox from './components/RecapBox'
 import SpecialLvlEdit from './components/SpecialLvlEdit'
 import SupportEdit from './components/SupportEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
+import { getLimitType } from 'services/limit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -40,6 +41,31 @@ export default function Detail ({
       : [units.find(u => u.id === unit.evolution!.evolution)]
   ).filter(Boolean) as ExtendedUnit[]
 
+  const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
+    const potentialUnlockedLength = unit.detail
+      .limit!.slice(0, limitBreak.lvl)
+      .map(lb => getLimitType(lb))
+      .filter(type => type === 'potential').length
+
+    const potentials = userUnit.potentials
+      .slice(0, potentialUnlockedLength)
+      .filter(p => p.lvl === 0).length
+      ? userUnit.potentials.map((p, i) =>
+        i < potentialUnlockedLength && p.lvl === 0
+          ? { ...p, lvl: 1 }
+          : i >= potentialUnlockedLength && p.lvl === 1
+            ? { ...p, lvl: 0 }
+            : p,
+      )
+      : userUnit.potentials
+
+    setUserUnit({
+      ...userUnit,
+      limitBreak,
+      potentials,
+    })
+  }
+
   return (
     <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>
       {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
@@ -65,7 +91,7 @@ export default function Detail ({
       <LimitBreakEdit
         limitBreak={userUnit.limitBreak}
         detail={unit.detail}
-        onChange={limitBreak => setUserUnit({ ...userUnit, limitBreak })}
+        onChange={onLimitBreakChange}
       />
 
       <PotentialEdit
