@@ -32,6 +32,32 @@ module.exports = {
       units: fnUnits.filter(id => id > 0),
     }
   }).reverse(),
+
+  BookQuests: window.drops.Fortnight.map(fn => {
+    const extracter = key => {
+      const fnUnits = fn[key]
+
+      if (!fnUnits) return null
+
+      return {
+        id: fn.dropID,
+        name: fn.name,
+        icon: getImage(window.Utils.getThumbnailUrl)(fn.thumb),
+        manual: fnUnits.filter(id => id < 0).map(id => 0 - id),
+        category: key.substring(0, 3),
+      }
+    }
+
+    return (
+      extracter('STR Manuals') ??
+      extracter('DEX Manuals') ??
+      extracter('QCK Manuals') ??
+      extracter('PSY Manuals') ??
+      extracter('INT Manuals') ??
+      null
+    )
+  }).filter(Boolean),
+
   TM: window.drops['Treasure Map'].map(tm => tm.thumb),
   Ambush: dropMapper('Ambush'),
   KK: dropMapper(

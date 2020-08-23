@@ -1,3 +1,5 @@
+import { UnitType } from './units'
+
 export type EventDrop = {
   id: string
   name: string
@@ -7,3 +9,7 @@ export type EventDrop = {
 }
 
 export type EventDropLight = number[]
+
+export type BookEventDrop = EventDrop & {
+  category: UnitType
+}

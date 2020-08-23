@@ -6,26 +6,33 @@ import {
   SearchFilterCriteria,
   SearchFilterCriteriaInputProps,
 } from 'models/search'
-import { ExtendedUnit, ExtendedDropKeys, ExtendedDrop } from 'models/units'
-import React, { useEffect, useState } from 'react'
-import { FortnightDrops } from 'services/drops'
-import { EventDrop } from 'models/drops'
+import {
+  ExtendedUnit,
+  ExtendedDropKeys,
+  ExtendedDrop,
+  UnitType,
+  UnitTypes,
+} from 'models/units'
+import React from 'react'
+import { BookQuestDrops } from 'services/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import styled from 'styled-components'
 
 export interface ByDropCriteria extends SearchFilterCriteria {
   dropLocations?: ExtendedDrop[]
-  fn?: {
-    eventId: string
-    unitIds: number[]
-  }
+  bookDrop?: BookDrop
+}
+
+export type BookDrop = {
+  eventIds: string[]
+  unitIds: number[]
 }
 
 export const ByDropFilter = (criteria: ByDropCriteria) =>
   BooleanFilterMapper(
     [
-      criteria.fn?.unitIds?.length,
-      (unit: ExtendedUnit) => criteria.fn!.unitIds.includes(unit.id),
+      criteria.bookDrop?.unitIds?.length,
+      (unit: ExtendedUnit) => criteria.bookDrop!.unitIds.includes(unit.id),
     ],
     [
       criteria.dropLocations?.length,
@@ -38,8 +45,6 @@ export function ByDropInput ({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByDropCriteria>) {
-  const [selected, setSelected] = useState<EventDrop>()
-
   const dropLocations = criteria?.dropLocations ?? []
   const triggerCategoryChange = (
     dropLocation: ExtendedDrop,
@@ -54,15 +59,6 @@ export function ByDropInput ({
       dropLocations: newValues,
     })
   }
-
-  useEffect(() => {
-    setSelected(
-      criteria?.fn?.eventId
-        ? FortnightDrops.find(fn => fn.id === criteria!.fn!.eventId)
-        : undefined,
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [criteria?.fn])
 
   return (
     <Box>
@@ -81,35 +77,25 @@ export function ByDropInput ({
         ))}
       </LabelDisplayer>
 
-      <SubTitle fontSize="2">Fortnight</SubTitle>
-      <Box display="flex" overflowX="auto">
-        {FortnightDrops.map((dropEvent, i) => (
-          <ImageInput
-            key={`${dropEvent.id}-${i}`}
-            type="radio"
-            name="fn-drops"
-            checked={dropEvent === selected}
-            onChange={() =>
-              onChange({
-                ...criteria,
-                fn: {
-                  eventId: dropEvent.id,
-                  unitIds: dropEvent.manual.concat(dropEvent.units),
-                },
-              })
-            }
-          >
-            <Image
-              src={dropEvent.icon}
-              alt={dropEvent.name}
-              title={dropEvent.name}
-              size="3"
-            />
-          </ImageInput>
-        ))}
-      </Box>
-
-      {selected && <Text>{selected.name}</Text>}
+      <SubTitle fontSize="2">Manuals Quests</SubTitle>
+      {UnitTypes.map(type => (
+        <ByBookQuest
+          key={type}
+          type={type}
+          onChange={selected =>
+            onChange({
+              ...criteria,
+              bookDrop: {
+                eventIds: selected,
+                unitIds: BookQuestDrops.filter(q =>
+                  selected.includes(q.id),
+                ).flatMap(q => q.manual),
+              },
+            })
+          }
+          selected={criteria?.bookDrop?.eventIds ?? []}
+        />
+      ))}
     </Box>
   )
 }
@@ -122,3 +108,47 @@ const LabelDisplayer = styled.div`
     padding: 0.5rem 0;
   }
 `
+
+function ByBookQuest ({
+  selected,
+  type,
+  onChange,
+}: {
+  type: UnitType
+  selected: string[]
+  onChange: (selected: string[]) => void
+}) {
+  return (
+    <>
+      <Text my="1">
+        {type} Manual Acquirement Quests
+      </Text>
+      <Box display="flex" overflowX="auto">
+        {BookQuestDrops.filter(quest => quest.category === type).map(
+          dropEvent => (
+            <ImageInput
+              key={dropEvent.id}
+              type="checkbox"
+              name="bookDrop"
+              checked={selected.includes(dropEvent.id)}
+              onChange={() =>
+                onChange(
+                  selected.includes(dropEvent.id)
+                    ? selected.filter(s => s !== dropEvent.id)
+                    : [...selected, dropEvent.id],
+                )
+              }
+            >
+              <Image
+                src={dropEvent.icon}
+                alt={dropEvent.name}
+                title={dropEvent.name}
+                size="3"
+              />
+            </ImageInput>
+          ),
+        )}
+      </Box>
+    </>
+  )
+}

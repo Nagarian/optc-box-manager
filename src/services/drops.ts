@@ -1,9 +1,14 @@
-import { EventDrop, EventDropLight } from 'models/drops'
+import { EventDrop, EventDropLight, BookEventDrop } from 'models/drops'
 import preval from 'preval.macro'
 
 export const FortnightDrops : EventDrop[] = preval`
   const { Fortnight } = require('../scripts/dropExtracter')
   module.exports = Fortnight
+`
+
+export const BookQuestDrops : BookEventDrop[] = preval`
+  const { BookQuests } = require('../scripts/dropExtracter')
+  module.exports = BookQuests
 `
 
 export const TreasureMapDrops : EventDropLight = preval`
