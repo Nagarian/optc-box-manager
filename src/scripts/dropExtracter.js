@@ -20,6 +20,57 @@ const getImage = func => id => {
   }
 }
 
+const RookieIcons = {
+  'Retrieve the Candy!': 1357,
+  'Sentomaru, Guard of the New World!': 1469,
+  "Perona's Peculiar Living Situation": 1891,
+  'Last Wish for Sanji': 1918,
+  'Red-Hair Pirates at the Harbor!': 2046,
+  'Comeback! "King of the Day" Duke Dogstorm': 2219,
+  'The Finest of Tea Parties! (Perorin!)': 2351,
+  'Catch the Big Person!': 1328,
+  'Smokey and the Captain!': 1397,
+  'Passionate Exile!': 1450,
+  'Mystery of the Seven Warlords, Trafalgar Law!!': 1581,
+  'Branded in Shackles': 1933,
+  "Commotion at Makino's Tavern?!": 2019,
+  'Escapees, Join the Fight!': 2692,
+  'Strong for your Happiness!': 1384,
+  'Intense Combat! Chin Jao Family!!': 1426,
+  'Cheer on Your Soul!': 1547,
+  'Revenge is Nigh! The New Fishman Pirates!': 1624,
+  'Fukaboshi and Neptune': 1725,
+  "The Beast's Return": 1965,
+  "Baby 5's Wedding Plans": 2165,
+  "Let's Go See The Cat Viper!": 2177,
+  'Forces of Rage: Amande and Bobbin': 2327,
+  'The Charming Tea House Owner': 2782,
+  'Rumbar Pirates!': 1203,
+  'World Pirates!': 1217,
+  "Donquixote Family's Children!": 1287,
+  'Find the Beloved Prince?!': 1332,
+  'Full Defense!': 1416,
+  'Bandits! The Dadan Family!!': 1520,
+  'Kingsbird Flying High': 1810,
+  "Let's Play in The Seducing Woods!": 2253,
+  'Rosy Melancholy': 2428,
+  'Dress Up for the Pirate Festival! Chic': 2526,
+  'Mermaid Under Siege': 1597,
+  'Brutal Fiend! Eustass Kid': 1690,
+  "Foxfire Kin'emon": 1774,
+  '800-Year-Old Kingdom in Danger': 1818,
+  "I'm Now Your Ideal Type! I Think": 1947,
+  'The Germa Bloodline Elements': 2056,
+  "Brûlée's Cauldron Party": 2127,
+  "The Genius Jester! Buggy's Festival!": 2277,
+  'Miracle Cherry Blossoms': 2491,
+  'Revenge of the Assassins! Galette': 2751,
+  'Holy Mother\'s Lover: Mother Caramel': 2377,
+  'The Finest of Art': 1649,
+  'Coliseum Executioner': 2144,
+  'Reunited in Wano! Straw Hat Pirates': 2802,
+}
+
 module.exports = {
   Fortnight: window.drops.Fortnight.map(fn => {
     const fnUnits = fn['All Difficulties'] ?? fn.Global ?? []
@@ -33,30 +84,30 @@ module.exports = {
     }
   }).reverse(),
 
-  BookQuests: window.drops.Fortnight.map(fn => {
-    const extracter = key => {
-      const fnUnits = fn[key]
+  BookQuests: window.drops['Rookie Mission']
+    .filter(group => group.name.startsWith('Manual Acquirement Quest'))
+    .flatMap(group => {
+      const category = /\(([A-Z]*)\)/i.exec(group.name)[1]
 
-      if (!fnUnits) return null
+      return Object.entries(group)
+        .filter(([key, value]) => Array.isArray(value))
+        .map(([key, value]) => {
+          const iconId = RookieIcons[key]
 
-      return {
-        id: fn.dropID,
-        name: fn.name,
-        icon: getImage(window.Utils.getThumbnailUrl)(fn.thumb),
-        manual: fnUnits.filter(id => id < 0).map(id => 0 - id),
-        category: key.substring(0, 3),
-      }
-    }
+          if (!iconId) {
+            return null
+          }
 
-    return (
-      extracter('STR Manuals') ??
-      extracter('DEX Manuals') ??
-      extracter('QCK Manuals') ??
-      extracter('PSY Manuals') ??
-      extracter('INT Manuals') ??
-      null
-    )
-  }).filter(Boolean),
+          return {
+            id: `${group.id}-${iconId}`,
+            name: key,
+            icon: getImage(window.Utils.getThumbnailUrl)(iconId),
+            manual: value.filter(id => id < 0).map(id => 0 - id),
+            category: category,
+          }
+        })
+    })
+    .filter(Boolean),
 
   TM: window.drops['Treasure Map'].map(tm => tm.thumb),
   Ambush: dropMapper('Ambush'),
