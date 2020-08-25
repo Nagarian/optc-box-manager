@@ -17,6 +17,8 @@ import {
   UnitFamily,
   UnitFlags,
   ExtendedDrop,
+  UnitPotential,
+  PotentialKey,
 } from 'models/units'
 import {
   FortnightDrops,
@@ -161,7 +163,7 @@ export const DBUnit = {
           },
           evolution: Evolutions[id],
           cooldown: Cooldowns[unit.number],
-          detail: Details[id] ?? {},
+          detail: fixupDetail(Details[id]),
           flags,
           family: {
             name: Families[unit.number],
@@ -172,4 +174,23 @@ export const DBUnit = {
         }
       })
   },
+}
+
+function fixupDetail (detail: UnitDetail): UnitDetail {
+  if (!detail) return {} as UnitDetail
+
+  if (detail.potential?.length) {
+    const renamedPotentials : { [key: string]: PotentialKey } = {
+      'Enrage/Increase Damage Taken reduction': 'Enrage',
+    }
+
+    if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
+      detail.potential = detail.potential.map(p => ({
+        ...p,
+        Name: renamedPotentials[p.Name] ?? p.Name,
+      }) as UnitPotential)
+    }
+  }
+
+  return detail
 }
