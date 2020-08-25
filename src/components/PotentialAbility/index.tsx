@@ -20,6 +20,7 @@ import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
 import ImageSkill15 from './images/potentialskill_icon_s_015.png'
 import ImageSkill16 from './images/potentialskill_icon_s_016.png'
+import NoIcon from './images/panel_limitbreak_001.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -54,7 +55,7 @@ export function PotentialAbilityToImage (type: PotentialKey) {
     case 'Reduce Ship Bind duration':
       return ImageSkill16
     default:
-      return undefined
+      return NoIcon
   }
 }
 
