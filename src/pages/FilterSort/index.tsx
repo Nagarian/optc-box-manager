@@ -34,9 +34,9 @@ export default function FilterSort ({
     search.filters.userUnits || {},
   )
   const [sorts, setSorts] = useState<SearchSortCriteria[]>(search.sorts || [])
-  const [displayer, setDisplayer] = useState<SearchDisplayerCriteria>(
-    search.displayer,
-  )
+  const [displayer, setDisplayer] = useState<
+    SearchDisplayerCriteria | undefined
+  >(search.displayer)
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
   const [showSaveSearch, setShowSaveSearch] = useState<boolean>(false)

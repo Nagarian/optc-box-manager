@@ -30,7 +30,7 @@ const Panel = styled.div`
   }
 `
 
-export type SearchSortItemProps<T = undefined> = {
+export type SearchSortItemProps<T = unknown | undefined> = {
   criteria: SearchSortCriteria<T>
   sortBuilder: SearchSortBuilderProps<T>
   onUpdate: (

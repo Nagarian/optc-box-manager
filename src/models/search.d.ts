@@ -22,7 +22,7 @@ export type Sort<T> = (u1: T, u2: T) => number
 export type UnitSort = Sort<ExtendedUnit>
 export type UserUnitSort = Sort<UserUnit>
 
-export type SearchSortCriteria<T = undefined> = {
+export type SearchSortCriteria<T = unknown | undefined> = {
   by: SearchSortType
   order: 'asc' | 'desc'
   options?: T
@@ -33,7 +33,9 @@ export type SearchSortInputProps<T = undefined> = {
   onChange: (options?: T) => void
 }
 
-export type SearchSortWithOptionFunction<T = undefined> = (options: T) => UnitSort | UserUnitSort
+export type SearchSortWithOptionFunction<T = undefined> = (
+  options: T,
+) => UnitSort | UserUnitSort
 
 export type Search = {
   filters: {

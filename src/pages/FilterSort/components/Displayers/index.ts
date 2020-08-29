@@ -17,29 +17,29 @@ export const UserUnitDisplayerTypeKeys = [
 ] as const
 export type SearchDisplayerType = typeof UserUnitDisplayerTypeKeys[number]
 
-export type SearchDisplayerCriteria<T = undefined> =
-  | undefined
-  | {
-      type: SearchDisplayerType
-      options?: T
-    }
+export interface SearchDisplayerCriteria<T = unknown | undefined> {
+  type: SearchDisplayerType
+  options?: T
+}
 
-export type SearchDisplayerProps<T = undefined> = {
+export type SearchDisplayerProps<T = unknown | undefined> = {
   userUnit: UserUnit
   options?: T
 }
 
-export type SearchDisplayerInputProps<T = undefined> = {
+export type SearchDisplayerInputProps<T = unknown | undefined> = {
   options?: T
   onChange: (options?: T) => void
 }
 
+type SearchDisplayerBuilderType<T> = {
+  label: string
+  displayer: FunctionComponent<SearchDisplayerProps<T>>
+  input?: FunctionComponent<SearchDisplayerInputProps<T>>
+}
+
 export const SearchDisplayerBuilder: {
-  [key in SearchDisplayerType]: {
-    label: string
-    displayer: FunctionComponent<SearchDisplayerProps>
-    input?: FunctionComponent<SearchDisplayerInputProps>
-  }
+  [key in SearchDisplayerType]: SearchDisplayerBuilderType<any>
 } = {
   cottonCandy: {
     label: 'Cotton Candy',
@@ -56,7 +56,7 @@ export const SearchDisplayerBuilder: {
   potential: {
     label: 'Specific Potential',
     displayer: SpecificPotentialDisplayer,
-    input: SpecificPotentialDisplayerInput as any,
+    input: SpecificPotentialDisplayerInput,
   },
   potentials: {
     label: 'Potentials',
