@@ -3,7 +3,9 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
+import ImageInput from 'components/forms/ImageInput'
 import { FilterContainerPanel } from '../FilterContainer'
+import { Text } from 'components/Title'
 
 export const PotentialStateKeys = [
   'locked',
@@ -39,52 +41,50 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
     ),
   )
 
-type PotentialStateInputProps = {
-  potential: PotentialKey
-  state?: PotentialState
-  onChange: (state: PotentialState) => void
-}
-function PotentialStateInput ({
-  potential,
-  state,
-  onChange,
-}: PotentialStateInputProps) {
-  return (
-    <FilterContainerPanel>
-      <PotentialAbility type={potential} />
-      {PotentialStateKeys.map(stateKey => (
-        <label key={stateKey}>
-          <input
-            type="radio"
-            name={`userunit-potentials-${potential}`}
-            checked={state === stateKey}
-            onChange={e => onChange(stateKey)}
-          />
-          {stateKey}
-        </label>
-      ))}
-    </FilterContainerPanel>
-  )
-}
-
 export function ByUserPotentialInput ({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
+  const selectedPotential =
+    criteria && (Object.keys(criteria)[0] as PotentialKey | undefined)
+  const selectedState =
+    criteria && selectedPotential && criteria[selectedPotential]
+
   return (
     <>
+      <FilterContainerPanel marginBottom="2">
+        <Text>State</Text>
+        {PotentialStateKeys.map(stateKey => (
+          <label key={stateKey}>
+            <input
+              type="radio"
+              name="userunit-potential-state-chooser"
+              checked={selectedState === stateKey}
+              onChange={e =>
+                onChange({
+                  [selectedPotential ?? 'Enrage']: stateKey,
+                })
+              }
+            />
+            {stateKey}
+          </label>
+        ))}
+      </FilterContainerPanel>
+
       {Potentials.map(potential => (
-        <PotentialStateInput
+        <ImageInput
           key={potential}
-          potential={potential}
-          state={criteria?.[potential]}
-          onChange={state =>
+          type="radio"
+          name="userunit-potential-chooser"
+          checked={selectedPotential === potential}
+          onChange={e =>
             onChange({
-              ...criteria,
-              [potential]: state,
+              [potential]: selectedState ?? 'ongoing',
             })
           }
-        />
+        >
+          <PotentialAbility type={potential} size="3" />
+        </ImageInput>
       ))}
     </>
   )
