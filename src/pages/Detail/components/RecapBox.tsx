@@ -3,17 +3,18 @@ import CharacterBox from 'components/CharacterBox'
 import { CottonCandyIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression, { Max } from 'components/Progression'
-import { SubTitle, Title } from 'components/Title'
+import { SubTitle, Title, Text } from 'components/Title'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
+import { UnitClassIcon } from 'components/Class'
+import { UnitClass, ExtendedUnit } from 'models/units'
 
 const Container = styled(Box)`
   display: grid;
   grid-template-areas:
     'title title'
-    'num info'
     'icon info';
   place-items: center;
 `
@@ -40,13 +41,21 @@ export default function RecapBox ({
   return (
     <Container {...rest}>
       <Title gridArea="title">{unit.name}</Title>
-      <SubTitle gridArea="num">N°{unit.id}</SubTitle>
-      <CharacterBox
+      <Box
         gridArea="icon"
         alignSelf="start"
-        unit={unit}
-        userUnit={userUnit}
-      />
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <SubTitle>N°{unit.id}</SubTitle>
+        <CharacterBox unit={unit} userUnit={userUnit} />
+        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+        <Text margin="1" textAlign="center">
+          {unit.stars}⭐ - {unit.dropLocations.join(', ')}
+        </Text>
+        <UnitClassesDisplayer unit={unit} />
+      </Box>
       <Box gridArea="info">
         {special && (
           <Element>
@@ -103,6 +112,47 @@ export default function RecapBox ({
         )}
       </Box>
     </Container>
+  )
+}
+
+function UnitClassesDisplayer ({
+  unit: { class: classes },
+}: {
+  unit: ExtendedUnit
+}) {
+  if (!classes) {
+    return null
+  }
+
+  if (typeof classes === 'string') {
+    return <UnitClassIcon type={classes} size="1" margin="1" />
+  }
+
+  if (classes.length < 3) {
+    return (
+      <Box display="flex">
+        {(classes as UnitClass[]).map(c => (
+          <UnitClassIcon key={c} type={c} size="1" margin="1" />
+        ))}
+      </Box>
+    )
+  }
+
+  return (
+    <Box display="flex">
+      {(classes as UnitClass[][]).map((c, i) => (
+        <Box display="flex" flexDirection="column" marginLeft={i + 1 === classes.length ? 1 : 0}>
+          {c.map(subClasses => (
+            <UnitClassIcon
+              key={subClasses}
+              type={subClasses}
+              size="1"
+              margin="0.2rem"
+            />
+          ))}
+        </Box>
+      ))}
+    </Box>
   )
 }
 
