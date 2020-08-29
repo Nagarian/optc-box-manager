@@ -12,6 +12,7 @@ import UserUnitFilters from './components/Filters/UserUnitFilters'
 import Sort from './components/Sorts/Sort'
 import { SaveSearchIcon } from 'components/Icon'
 import SaveSearch from 'pages/SaveSearch'
+import { useSyncer } from './components/Syncer'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
@@ -48,6 +49,22 @@ export default function FilterSort ({
     },
     sorts,
     displayer,
+  })
+
+  useSyncer(userUnitFilter, sorts, displayer, sync => {
+    if (!sync.some(Boolean)) {
+      return
+    }
+
+    const [newSorting, newDisplayer] = sync
+
+    if (newSorting) {
+      setSorts(newSorting)
+    }
+
+    if (newDisplayer) {
+      setDisplayer(newDisplayer)
+    }
   })
 
   const buttonStyle = {
