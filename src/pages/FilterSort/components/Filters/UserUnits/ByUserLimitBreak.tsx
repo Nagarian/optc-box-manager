@@ -173,7 +173,7 @@ export function ByUserLimitBreakInput ({
       <FilterContainerPanel marginY="3">
         <Text>Rainbow</Text>
         {RainbowStateKeys.map(state => (
-          <label>
+          <label key={state}>
             <input
               type="radio"
               name="uu-lb-rainbow"
