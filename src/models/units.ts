@@ -79,6 +79,7 @@ export const Potentials = [
   'Double Special Activation',
   'Reduce Ship Bind duration',
   'Reduce Sailor Despair duration',
+  'Nutrition/Hunger reduction',
 ] as const
 
 export type PotentialKey = typeof Potentials[number]
