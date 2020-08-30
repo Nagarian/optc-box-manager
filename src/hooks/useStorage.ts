@@ -1,15 +1,25 @@
-import { useState, useEffect } from 'react'
+import {
+  useState,
+  useEffect,
+  useReducer,
+  Dispatch,
+  DispatchWithoutAction,
+  SetStateAction,
+} from 'react'
 
-export function useStorage<T> (key: string = 'search', defaultValue: T) {
-  const state = useState<T>(defaultValue)
-  const [value, setValue] = state
+export function useStorage<T> (
+  key: string = 'search',
+  defaultValue: T,
+): [T, Dispatch<SetStateAction<T>>, DispatchWithoutAction] {
+  const [trigger, forceUpdate] = useReducer(x => x + 1, 0)
+  const [value, setValue] = useState<T>(defaultValue)
 
   useEffect(() => {
     const json = localStorage.getItem(key)
     if (json) {
       setValue(JSON.parse(json))
     }
-  }, [key, setValue])
+  }, [key, setValue, trigger])
 
   useEffect(() => {
     if (value) {
@@ -17,5 +27,5 @@ export function useStorage<T> (key: string = 'search', defaultValue: T) {
     }
   }, [key, value])
 
-  return state
+  return [value, setValue, forceUpdate]
 }

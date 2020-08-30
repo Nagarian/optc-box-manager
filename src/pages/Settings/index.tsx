@@ -110,6 +110,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
               type="radio"
               onChange={() =>
                 setUserSetting({
+                  ...userSetting,
                   is200cc: false,
                 })
               }
@@ -123,6 +124,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
               type="radio"
               onChange={() =>
                 setUserSetting({
+                  ...userSetting,
                   is200cc: true,
                 })
               }

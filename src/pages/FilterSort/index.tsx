@@ -10,9 +10,11 @@ import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
 import Sort from './components/Sorts/Sort'
-import { SaveSearchIcon } from 'components/Icon'
+import { SaveSearchIcon, ResetIcon, ClearIcon } from 'components/Icon'
 import SaveSearch from 'pages/SaveSearch'
 import { useSyncer } from './components/Syncer'
+import { useStoredSearches } from 'hooks/useStoredSearches'
+import { EmptySearch } from 'hooks/useSearch'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
@@ -51,6 +53,15 @@ export default function FilterSort ({
     displayer,
   })
 
+  const applySearch = (search: Search) => {
+    setUnitFilter(search.filters.units || {})
+    setUserUnitFilter(search.filters.userUnits || {})
+    setSorts(search.sorts)
+    setDisplayer(search.displayer)
+  }
+
+  const { reseter, searches, forceUpdate } = useStoredSearches()
+
   useSyncer(userUnitFilter, sorts, displayer, sync => {
     if (!sync.some(Boolean)) {
       return
@@ -81,16 +92,27 @@ export default function FilterSort ({
       customAction={
         <>
           <Button
-            onClick={() => {
-              setUnitFilter({})
-              setUserUnitFilter({})
-              setSorts([])
-              setDisplayer(undefined)
-            }}
+            onClick={() => applySearch(EmptySearch)}
             variant="danger"
-          >
-            Clear all
-          </Button>
+            icon={ClearIcon}
+            title="Clear all"
+          />
+
+          {reseter && (
+            <Button
+              onClick={() => {
+                const resetSearch = searches.find(x => x.id === reseter.id)
+                if (!resetSearch) {
+                  return
+                }
+
+                applySearch(resetSearch.search)
+              }}
+              variant="danger"
+              icon={ResetIcon}
+              title={`Reset to ${reseter.name}`}
+            />
+          )}
 
           <Button
             onClick={() => setShowSaveSearch(true)}
@@ -165,14 +187,15 @@ export default function FilterSort ({
       </Box>
       {showSaveSearch && (
         <SaveSearch
-          onClose={() => setShowSaveSearch(false)}
+          onClose={() => {
+            setShowSaveSearch(false)
+            forceUpdate()
+          }}
           search={computeNewSearch()}
           onSearchSelected={search => {
-            setUnitFilter(search.filters.units || {})
-            setUserUnitFilter(search.filters.userUnits || {})
-            setSorts(search.sorts)
-            setDisplayer(search.displayer)
+            applySearch(search)
             setShowSaveSearch(false)
+            forceUpdate()
           }}
         />
       )}

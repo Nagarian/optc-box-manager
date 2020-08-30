@@ -175,6 +175,9 @@ export default {
       backgroundColor: 'red',
       color: 'white',
       borderColor: 'red',
+      '&:hover:enabled': {
+        filter: 'opacity(0.5)',
+      },
     },
   },
 }

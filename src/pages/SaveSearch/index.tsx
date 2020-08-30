@@ -5,7 +5,13 @@ import { useStoredSearches } from 'hooks/useStoredSearches'
 import { SubTitle, Text } from 'components/Title'
 import Button from 'components/Button'
 import Box from 'components/Box'
-import { ConfirmIcon, SaveSearchIcon, CancelIcon } from 'components/Icon'
+import {
+  ConfirmIcon,
+  SaveSearchIcon,
+  CancelIcon,
+  ResetApplyIcon,
+  ResetRemoveIcon,
+} from 'components/Icon'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 import { space, SpaceProps } from 'styled-system'
@@ -20,14 +26,11 @@ export default function SaveSearch ({
   onClose,
   onSearchSelected,
 }: SaveSearchProps) {
-  const { searches, add, remove } = useStoredSearches('userSearches')
+  const { searches, add, remove, setAsReseter, reseter } = useStoredSearches()
   const [searchName, setSearchName] = useState<string>('')
 
   const onNameValidation = () => {
-    add({
-      name: searchName,
-      search: search,
-    })
+    add(searchName, search)
     setSearchName('')
   }
 
@@ -51,12 +54,24 @@ export default function SaveSearch ({
 
       <Box display="flex" flexDirection="column" overflowY="auto">
         {searches.map(s => (
-          <Panel>
+          <Panel key={s.id}>
             <Text flex="1">{s.name}</Text>
+            <Button
+              icon={s.id === reseter?.id ? ResetRemoveIcon : ResetApplyIcon}
+              title={
+                s.id === reseter?.id
+                  ? 'Remove from Custom Reset'
+                  : 'Set as Custom Reset'
+              }
+              onClick={() =>
+                setAsReseter(s.id === reseter?.id ? undefined : s)
+              }
+            />
             <Button
               icon={CancelIcon}
               title="Delete"
               onClick={() => remove(s)}
+              disabled={s.id === reseter?.id}
             />
             <Button
               icon={SaveSearchIcon}
