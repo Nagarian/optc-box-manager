@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/Nagarian/optc-box-manager/compare/v1.6.1...v1.7.0) (2020-08-31)
+
+
+### Features
+
+* **detail:** display Classes, Rarity and Category informations ([683b652](https://github.com/Nagarian/optc-box-manager/commit/683b65268782d2b8dc51297d175c45eeee448337)), closes [#82](https://github.com/Nagarian/optc-box-manager/issues/82)
+* **filter:** add basic sync between UserFilters, Sort and Displayer ([b9128b3](https://github.com/Nagarian/optc-box-manager/commit/b9128b3b5f6236e8887d2b9eaf4a054df4eb2e9a)), closes [#44](https://github.com/Nagarian/optc-box-manager/issues/44)
+* **filter:** rework design of User Potentials filter ([06ebd7b](https://github.com/Nagarian/optc-box-manager/commit/06ebd7bff82df3d0bfea097e9853e9045cefce95))
+* **search:** add configurable reset button ([a312da9](https://github.com/Nagarian/optc-box-manager/commit/a312da928c3b144ac51aa0070ea598701571c363)), closes [#70](https://github.com/Nagarian/optc-box-manager/issues/70)
+* add support for 'Nutrition/Hunger reduction' potentials ([894e694](https://github.com/Nagarian/optc-box-manager/commit/894e69422cd0e89956fbbc0102cde724cdd4d79c))
+
+
+
 ## [1.6.1](https://github.com/Nagarian/optc-box-manager/compare/v1.6.0...v1.6.1) (2020-08-27)
 
 
@@ -73,24 +86,6 @@
 ### Features
 
 * **filter:** rework rainbow filter ([35b2a33](https://github.com/Nagarian/optc-box-manager/commit/35b2a338f4c109843d89dc84a9edee8b1f93e9cc))
-
-
-
-# [1.1.0](https://github.com/Nagarian/optc-box-manager/compare/v1.0.0...v1.1.0) (2020-06-26)
-
-
-### Bug Fixes
-
-* **detail:** issue with HTML's based description ([7f069b3](https://github.com/Nagarian/optc-box-manager/commit/7f069b33a729b91f1cdb392bdc2e6cf178db8b8f))
-* **filter:** issue with unit which miss some informations ([55ee3c8](https://github.com/Nagarian/optc-box-manager/commit/55ee3c856b2e9238c8f9e1889607f435eabd576d))
-* **import:** resync UserUnit on import ([3d36e68](https://github.com/Nagarian/optc-box-manager/commit/3d36e68bfe7179359a66855b9b17ef7429905364))
-
-
-### Features
-
-* **sort:** add descriptive label for sort options ([d017b3c](https://github.com/Nagarian/optc-box-manager/commit/d017b3c324c2fe6c9b964424419dd79546fa6f66))
-* **sort:** add sort by potentials (resolve: [#30](https://github.com/Nagarian/optc-box-manager/issues/30)) ([a610665](https://github.com/Nagarian/optc-box-manager/commit/a61066576e19168fdceb90af018b8bf28711f6ec))
-* **sort:** rework cotton candy sorting (as potentials) ([9332830](https://github.com/Nagarian/optc-box-manager/commit/9332830e2c24dec514977702b47895d62a8bf540))
 
 
 
