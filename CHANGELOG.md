@@ -1,3 +1,12 @@
+## [1.7.1](https://github.com/Nagarian/optc-box-manager/compare/v1.7.0...v1.7.1) (2020-09-12)
+
+
+### Bug Fixes
+
+* issue with horizontal scrollbar with a height too large ([8712a29](https://github.com/Nagarian/optc-box-manager/commit/8712a296222af9ba23884276732323040bf73904))
+
+
+
 # [1.7.0](https://github.com/Nagarian/optc-box-manager/compare/v1.6.1...v1.7.0) (2020-08-31)
 
 
@@ -71,21 +80,6 @@
 
 * **filter:** improve search box ([49e1cd1](https://github.com/Nagarian/optc-box-manager/commit/49e1cd1a995659a53be2be0ac0aebd3f373a7a18)), closes [#39](https://github.com/Nagarian/optc-box-manager/issues/39)
 * **search:** add custom search saving features ([86d67ec](https://github.com/Nagarian/optc-box-manager/commit/86d67ecf4285e53a9ee11a06bafc75d3d7fea91c)), closes [#26](https://github.com/Nagarian/optc-box-manager/issues/26)
-
-
-
-# [1.2.0](https://github.com/Nagarian/optc-box-manager/compare/v1.1.0...v1.2.0) (2020-06-27)
-
-
-### Bug Fixes
-
-* **sort:** improve sort panel for iOS ([65bf413](https://github.com/Nagarian/optc-box-manager/commit/65bf41315714bea1ee111f6f8d33de08493806e9))
-* improve popup spacing on landscape ([5f7b76d](https://github.com/Nagarian/optc-box-manager/commit/5f7b76dfa86126e22387a12865b9d0de5212be7d))
-
-
-### Features
-
-* **filter:** rework rainbow filter ([35b2a33](https://github.com/Nagarian/optc-box-manager/commit/35b2a338f4c109843d89dc84a9edee8b1f93e9cc))
 
 
 
