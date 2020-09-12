@@ -1,3 +1,12 @@
+## [1.7.2](https://github.com/Nagarian/optc-box-manager/compare/v1.7.1...v1.7.2) (2020-09-12)
+
+
+### Bug Fixes
+
+* **detail:** issue with nutrition/hunger potential ([4b765b9](https://github.com/Nagarian/optc-box-manager/commit/4b765b9b90b59e6f5e20fa29ed808d1ac6797bdc))
+
+
+
 ## [1.7.1](https://github.com/Nagarian/optc-box-manager/compare/v1.7.0...v1.7.1) (2020-09-12)
 
 
@@ -70,16 +79,6 @@
 ### Features
 
 * **settings:** add option to allow +200 on Cotton Candy ([2f7e229](https://github.com/Nagarian/optc-box-manager/commit/2f7e229861c944f5931436e2aa3bffa042682e63))
-
-
-
-# [1.3.0](https://github.com/Nagarian/optc-box-manager/compare/v1.2.0...v1.3.0) (2020-07-01)
-
-
-### Features
-
-* **filter:** improve search box ([49e1cd1](https://github.com/Nagarian/optc-box-manager/commit/49e1cd1a995659a53be2be0ac0aebd3f373a7a18)), closes [#39](https://github.com/Nagarian/optc-box-manager/issues/39)
-* **search:** add custom search saving features ([86d67ec](https://github.com/Nagarian/optc-box-manager/commit/86d67ecf4285e53a9ee11a06bafc75d3d7fea91c)), closes [#26](https://github.com/Nagarian/optc-box-manager/issues/26)
 
 
 
