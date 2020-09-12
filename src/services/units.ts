@@ -183,6 +183,7 @@ function fixupDetail (detail: UnitDetail): UnitDetail {
     const renamedPotentials : { [key: string]: PotentialKey } = {
       'Enrage/Increase Damage Taken reduction': 'Enrage',
       'Enrage/Reduce Increase Damage Taken duration': 'Enrage',
+      'Nutrition/Reduce Hunger duration': 'Nutrition/Hunger reduction',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
