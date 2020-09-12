@@ -84,6 +84,7 @@ hr {
 
 ::-webkit-scrollbar {
   width: 1.2rem;
+  height: 1.2rem;
   cursor: pointer;
 }
 
