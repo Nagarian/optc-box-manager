@@ -87,12 +87,12 @@ export default function CharacterBox ({
         support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
       }
       rainbow={getRainbowState(userUnit)}
+      title={`${unit.id} - ${unit.name}`}
       onClick={() => onClick?.(unit)}
     >
       <Image
         src={unit.images.thumbnail}
         alt={unit.name}
-        title={unit.name}
         size={size}
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
