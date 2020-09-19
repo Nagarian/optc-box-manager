@@ -28,6 +28,7 @@ import {
   KizunaClashDrops,
   RaidDrops,
   TreasureMapDrops,
+  PirateFestivalDrops,
 } from './drops'
 import { EventDropLight } from 'models/drops'
 import { evolutionMap, EvolutionMapHash } from './evolution'
@@ -78,7 +79,7 @@ const getDropLocations = (
   const condition = (event: EventDropLight) =>
     event.includes(id) || event.some(eventId => evolve.includes(eventId))
 
-  const result : ExtendedDrop[] = []
+  const result: ExtendedDrop[] = []
 
   if (condition(StoryDrops)) {
     result.push('story')
@@ -104,6 +105,10 @@ const getDropLocations = (
 
   if (condition(KizunaClashDrops)) {
     result.push('kizunaclash')
+  }
+
+  if (condition(PirateFestivalDrops)) {
+    result.push('piratefest')
   }
 
   // we put raid and ambush last because they often includes some units from other game mode
@@ -180,7 +185,7 @@ function fixupDetail (detail: UnitDetail): UnitDetail {
   if (!detail) return {} as UnitDetail
 
   if (detail.potential?.length) {
-    const renamedPotentials : { [key: string]: PotentialKey } = {
+    const renamedPotentials: { [key: string]: PotentialKey } = {
       'Enrage/Increase Damage Taken reduction': 'Enrage',
       'Enrage/Reduce Increase Damage Taken duration': 'Enrage',
       'Nutrition/Reduce Hunger duration': 'Nutrition/Hunger reduction',

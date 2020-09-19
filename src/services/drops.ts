@@ -26,6 +26,11 @@ export const KizunaClashDrops : EventDropLight = preval`
   module.exports = KK
 `
 
+export const PirateFestivalDrops : EventDropLight = preval`
+  const { PF } = require('../scripts/dropExtracter')
+  module.exports = PF
+`
+
 export const RaidDrops : EventDropLight = preval`
   const { Raid } = require('../scripts/dropExtracter')
   module.exports = Raid
