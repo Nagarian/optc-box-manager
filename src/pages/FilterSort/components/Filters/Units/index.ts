@@ -10,11 +10,13 @@ import { BySupportFilter, BySupportInput } from './BySupport'
 import { ByTypeFilter, ByTypeInput } from './ByType'
 import { ByUnclassableFilter, ByUnclassableInput } from './ByUnclassable'
 import { ByLimitBreakFilter, ByLimitBreakInput } from './ByLimitBreak'
+import { ByPirateFestStyleFilter, ByPirateFestStyleInput } from './ByPirateFestStyle'
 
 export const SearchFilterUnitsKeys = [
   'byUnclassable',
   'byType',
   'byClass',
+  'byPirateFest',
   'byRarity',
   'bySupport',
   'byLimitBreak',
@@ -89,5 +91,10 @@ export const UnitFilterBuilder: {
     title: 'Limit Break',
     builder: ByLimitBreakFilter,
     input: ByLimitBreakInput,
+  },
+  byPirateFest: {
+    title: 'Pirate Festival Style',
+    builder: ByPirateFestStyleFilter,
+    input: ByPirateFestStyleInput,
   },
 }

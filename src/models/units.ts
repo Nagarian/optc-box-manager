@@ -16,6 +16,16 @@ export type UnitClass = typeof UnitClasses[number] | 'Evolver' | 'Booster'
 export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
 export type UnitStar = typeof Rarity[number]
 
+export const UnitPirateFestStyles = [
+  'Attacker',
+  'Defender',
+  'Healer',
+  'Obstructer',
+  'Supporter',
+  // 'Obstructor',
+] as const
+export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
+
 export type BaseUnit = {
   name: string
   type: UnitType | [UnitType, UnitType]
@@ -54,6 +64,9 @@ export type BaseUnit = {
     rcv: number[]
     sailors: number[]
     captains: number[]
+  }
+  pirateFest: {
+    class?: UnitPirateFestStyle
   }
   incomplete: boolean
   preview: boolean
@@ -94,12 +107,21 @@ export type UnitSupport = {
   description: string[]
 }
 
+export type UnitFestAbility = {
+  description: string
+}
+
+export type UnitFestSpecial = {
+  description: string
+  cooldown: number
+}
+
 export type UnitSpecial =
   | string
   | {
-      cooldown: UnitCooldown
-      description: string
-    }[]
+    cooldown: UnitCooldown
+    description: string
+  }[]
   | { [key: string]: any } // luffy/law + robin 767
 
 export type UnitCaptain = string | undefined | {
@@ -138,6 +160,8 @@ export type UnitDetail = {
   potential?: UnitPotential[]
   potentialNotes: string
   support: UnitSupport[]
+  festAbility: UnitFestAbility[]
+  festSpecial: UnitFestSpecial[]
 }
 
 export type UnitCooldown = [number, number]
