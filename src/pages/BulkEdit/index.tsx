@@ -156,7 +156,7 @@ export default function BulkEdit ({
               name="cc-atk"
               variant="atk"
               value={edit?.cottonCandies?.atk ?? 0}
-              max={ccLimit}
+              max={ccLimit.atk}
               onChange={e =>
                 setEdit({
                   ...edit,
@@ -173,7 +173,7 @@ export default function BulkEdit ({
               name="cc-hp"
               variant="hp"
               value={edit?.cottonCandies?.hp ?? 0}
-              max={ccLimit}
+              max={ccLimit.hp}
               onChange={e =>
                 setEdit({
                   ...edit,
@@ -190,7 +190,7 @@ export default function BulkEdit ({
               name="cc-rcv"
               variant="rcv"
               value={edit?.cottonCandies?.rcv ?? 0}
-              max={ccLimit}
+              max={ccLimit.rcv}
               onChange={e =>
                 setEdit({
                   ...edit,

@@ -5,10 +5,11 @@ import RangeInput from './RangeInput'
 
 type CottonCandyInputProps = {
   variant: 'atk' | 'rcv' | 'hp'
+  min: number
 }
 
 const CottonCandyInput = styled(RangeInput).attrs(p => ({
-  min: 0,
+  min: p.min ?? 0,
   thumbSvg: CottonCandySvg,
   range: variant({
     variants: {

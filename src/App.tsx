@@ -5,6 +5,7 @@ import {
   AddIcon,
   EditIcon,
   FilterSortIcon,
+  GatherIslandIcon,
   SettingsIcon,
   SugoPullIcon,
 } from 'components/Icon'
@@ -24,6 +25,7 @@ import React, { useMemo, useState } from 'react'
 import { DBUnit } from 'services/units'
 import styled from 'styled-components'
 import SugoCleaner from 'pages/SugoCleaner'
+import GatherIsland from 'pages/GatherIsland'
 
 const AppBlock = styled.div`
   display: grid;
@@ -39,6 +41,7 @@ type DisplayedPanel =
   | 'filters'
   | 'bulkedit'
   | 'sugocleaner'
+  | 'gatherIsland'
 
 function App () {
   const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
@@ -143,6 +146,10 @@ function App () {
         />
       )}
 
+      {displayedPanel === 'gatherIsland' && (
+        <GatherIsland onClose={closePanel} />
+      )}
+
       <Box
         display="grid"
         gridAutoFlow="column"
@@ -177,6 +184,11 @@ function App () {
           onClick={() => setDisplayedPanel('settings')}
           icon={SettingsIcon}
           title="Settings"
+        />
+        <Button
+          onClick={() => setDisplayedPanel('gatherIsland')}
+          icon={GatherIslandIcon}
+          title="Gather Island"
         />
       </Box>
     </AppBlock>

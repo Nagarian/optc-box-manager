@@ -60,7 +60,7 @@ export default function FilterSort ({
     setDisplayer(search.displayer)
   }
 
-  const { reseter, searches, forceUpdate } = useStoredSearches()
+  const { reseter, searches } = useStoredSearches()
 
   useSyncer(userUnitFilter, sorts, displayer, sync => {
     if (!sync.some(Boolean)) {
@@ -187,15 +187,11 @@ export default function FilterSort ({
       </Box>
       {showSaveSearch && (
         <SaveSearch
-          onClose={() => {
-            setShowSaveSearch(false)
-            forceUpdate()
-          }}
+          onClose={() => setShowSaveSearch(false)}
           search={computeNewSearch()}
           onSearchSelected={search => {
             applySearch(search)
             setShowSaveSearch(false)
-            forceUpdate()
           }}
         />
       )}

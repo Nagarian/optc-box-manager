@@ -25,6 +25,7 @@ import { ReactComponent as SugoPull } from './sugopull.svg'
 import { ReactComponent as SaveSearch } from './savesearch.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
 import { ReactComponent as Treasure } from './treasure.svg'
+import { ReactComponent as GatherIsland } from './gather-island.svg'
 
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps
 
@@ -73,6 +74,7 @@ export const SugoPullIcon: Icon = BaseSvg(SugoPull)
 export const SkillBookIcon: Icon = BaseSvg(SkillBook)
 export const BellyIcon: Icon = BaseSvg(Belly)
 export const TreasureIcon: Icon = BaseSvg(Treasure)
+export const GatherIslandIcon: Icon = BaseSvg(GatherIsland)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,

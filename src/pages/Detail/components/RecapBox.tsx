@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
 import { UnitClassIcon } from 'components/Class'
 import { UnitClass, ExtendedUnit } from 'models/units'
+import { useUserSettings } from 'hooks/useUserSettings'
 
 const Container = styled(Box)`
   display: grid;
@@ -37,6 +38,8 @@ export default function RecapBox ({
     support,
     cc: { atk, hp, rcv },
   } = userUnit
+
+  const { ccLimit } = useUserSettings()
 
   return (
     <Container {...rest}>
@@ -70,21 +73,21 @@ export default function RecapBox ({
             color="specific.ccHp"
             title="Cotton Candy HP"
           />
-          {hp === 100 ? <Max /> : '+' + hp}
+          {hp === ccLimit.hp ? <Max /> : '+' + hp}
 
           <CottonCandyIcon
             size="2"
             color="specific.ccAtk"
             title="Cotton Candy ATK"
           />
-          {atk === 100 ? <Max /> : '+' + atk}
+          {atk === ccLimit.atk ? <Max /> : '+' + atk}
 
           <CottonCandyIcon
             size="2"
             color="specific.ccRcv"
             title="Cotton Candy RCV"
           />
-          {rcv === 100 ? <Max /> : '+' + rcv}
+          {rcv === ccLimit.rcv ? <Max /> : '+' + rcv}
         </Element>
 
         {potentials.length > 0 && (
@@ -106,7 +109,7 @@ export default function RecapBox ({
             ) : support.lvl === 0 ? (
               'not unlocked'
             ) : (
-              `${support.lvl}/${5}`
+                  `${support.lvl}/${5}`
             )}
           </Element>
         )}
@@ -193,7 +196,7 @@ export function RecapBoxLight ({
                 ) : support.lvl === 0 ? (
                   'not unlocked'
                 ) : (
-                  `${support.lvl}/${5}`
+                      `${support.lvl}/${5}`
                 )}
               </Element>
             )}

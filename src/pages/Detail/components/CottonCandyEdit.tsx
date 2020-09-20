@@ -1,11 +1,9 @@
 import ExpansionPanel from 'components/ExpansionPanel'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
-import { UserUnitCottonCandy } from 'models/userBox'
+import { CottonCandyType, UserUnitCottonCandy } from 'models/userBox'
 import React from 'react'
 import { InputLabel } from '.'
 import { useUserSettings } from 'hooks/useUserSettings'
-
-type CottonCandyType = 'atk' | 'rcv' | 'hp'
 
 function Wrapper ({
   type,
@@ -47,19 +45,19 @@ export default function CottonCandyEdit ({
         type="hp"
         value={cc.hp}
         onChange={v => onChange({ ...cc, hp: v })}
-        max={ccLimit}
+        max={ccLimit.hp}
       />
       <Wrapper
         type="atk"
         value={cc.atk}
         onChange={v => onChange({ ...cc, atk: v })}
-        max={ccLimit}
+        max={ccLimit.atk}
       />
       <Wrapper
         type="rcv"
         value={cc.rcv}
         onChange={v => onChange({ ...cc, rcv: v })}
-        max={ccLimit}
+        max={ccLimit.rcv}
       />
     </ExpansionPanel>
   )

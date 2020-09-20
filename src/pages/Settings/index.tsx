@@ -4,11 +4,6 @@ import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import Changelog from 'components/Changelog'
-import { FilterContainerPanel } from 'pages/FilterSort/components/Filters/FilterContainer'
-import { Text } from 'components/Title'
-import ExpansionPanel from 'components/ExpansionPanel'
-import { CottonCandyIcon } from 'components/Icon'
-import { useUserSettings } from 'hooks/useUserSettings'
 import { importAsJson } from 'services/share'
 
 type SettingsProps = {
@@ -23,7 +18,6 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
   const [successMessage, setSuccessMessage] = useState<string>()
   const [showResetWarning, setShowResetWarning] = useState<boolean>(false)
   const [showChangelog, setShowChangelog] = useState<boolean>(false)
-  const { userSetting, setUserSetting } = useUserSettings()
 
   const importRef = useRef<HTMLInputElement>(null)
 
@@ -100,40 +94,6 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
       >
         Import
       </Button>
-      <ExpansionPanel title="Beta feature">
-        <FilterContainerPanel marginY="1">
-          <Text>Cotton Candy max lvl</Text>
-          <label>
-            <input
-              name="maxx-cc-lvl"
-              checked={userSetting.is200cc === false}
-              type="radio"
-              onChange={() =>
-                setUserSetting({
-                  ...userSetting,
-                  is200cc: false,
-                })
-              }
-            />
-            +100
-          </label>
-          <label>
-            <input
-              name="maxx-cc-lvl"
-              checked={userSetting.is200cc === true}
-              type="radio"
-              onChange={() =>
-                setUserSetting({
-                  ...userSetting,
-                  is200cc: true,
-                })
-              }
-            />
-            +200
-          </label>
-          <CottonCandyIcon size="1" />
-        </FilterContainerPanel>
-      </ExpansionPanel>
     </Popup>
   )
 }

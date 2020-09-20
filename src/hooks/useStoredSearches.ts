@@ -10,7 +10,7 @@ export type SavedSearch = {
 }
 
 export function useStoredSearches () {
-  const { userSetting, setUserSetting, forceUpdate } = useUserSettings()
+  const { userSetting, setUserSetting } = useUserSettings()
 
   const searches = userSetting.userSearches ?? []
   const setSearches = (searches: SavedSearch[]) =>
@@ -60,6 +60,5 @@ export function useStoredSearches () {
     reseter: userSetting.resetSearchId
       ? searches.find(x => x.id === userSetting.resetSearchId)
       : undefined,
-    forceUpdate,
   }
 }
