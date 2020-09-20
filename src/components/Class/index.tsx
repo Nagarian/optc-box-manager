@@ -40,6 +40,7 @@ export type UnitClassIconProps = SpaceProps &
 
 export const UnitClassIcon = styled.img.attrs<{ type: UnitClass }>(p => ({
   src: ClassToImage(p.type),
+  title: p.type,
 }))<UnitClassIconProps>`
   object-fit: contain;
   ${space}
