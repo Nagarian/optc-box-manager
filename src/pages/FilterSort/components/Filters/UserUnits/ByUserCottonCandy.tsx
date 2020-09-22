@@ -1,10 +1,12 @@
 import { CottonCandyIcon } from 'components/Icon'
+import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import {
   SearchFilterCriteria,
   SearchFilterCriteriaInputProps,
 } from 'models/search'
 import { UserUnit, CottonCandyType, CottonCandyTypeKeys } from 'models/userBox'
 import React from 'react'
+import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const CottonCandyStateKeys = ['none', 'unmaxed', 'maxed'] as const
@@ -32,27 +34,43 @@ const ccFilter = (value: number, state?: CottonCandyState, max = 100) => {
 
 export const ByUserCottonCandyFilter = (
   { all, by = {} }: ByUserCottonCandyCriteria,
-) => ({ cc: { atk, hp, rcv } }: UserUnit) =>
-  ccFilter(atk, by.atk) &&
-  ccFilter(hp, by.hp) &&
-  ccFilter(rcv, by.rcv) &&
-  ccFilter(atk + hp + rcv, all, 200)
+  { ccLimit }: UserSettingEnhanced,
+) => BooleanFilterMapper<UserUnit>(
+  [
+    all,
+    ({ cc: { atk, hp, rcv } }) => ccFilter(atk + hp + rcv, all, ccLimit.all),
+  ],
+  [
+    by.hp,
+    ({ cc: { hp } }) => ccFilter(hp, by.hp, ccLimit.hp),
+  ],
+  [
+    by.atk,
+    ({ cc: { atk } }) => ccFilter(atk, by.atk, ccLimit.atk),
+  ],
+  [
+    by.rcv,
+    ({ cc: { rcv } }) => ccFilter(rcv, by.rcv, ccLimit.rcv),
+  ],
+)
 
 type CottonCandyStateInputProps = {
   type: 'atk' | 'hp' | 'rcv'
   state?: CottonCandyState
+  currentMax: number
   onChange: (state: CottonCandyState) => void
 }
 function CottonCandyStateInput ({
   type,
   state,
+  currentMax,
   onChange,
 }: CottonCandyStateInputProps) {
   const color = 'specific.cc' + type[0].toUpperCase() + type.slice(1)
   return (
     <FilterContainerPanel>
       <CottonCandyIcon color={color} size={2} title={type} />
-      {type.toUpperCase()}
+      {type.toUpperCase()} + {currentMax}
       {CottonCandyStateKeys.map(stateKey => (
         <label key={stateKey}>
           <input
@@ -72,11 +90,12 @@ export function ByUserCottonCandyInput ({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserCottonCandyCriteria>) {
+  const { ccLimit } = useUserSettings()
   return (
     <>
       <FilterContainerPanel>
         <CottonCandyIcon size={2} title="All" />
-        All +200
+        All +{ccLimit.all}
         {CottonCandyStateKeys.map(stateKey => (
           <label key={stateKey}>
             <input
@@ -97,6 +116,7 @@ export function ByUserCottonCandyInput ({
           key={type}
           type={type}
           state={criteria?.by?.[type]}
+          currentMax={ccLimit[type]}
           onChange={state =>
             onChange({
               ...criteria,

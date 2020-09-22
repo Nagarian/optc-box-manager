@@ -5,6 +5,7 @@ import { ByUserPotentialFilter, ByUserPotentialInput } from './ByUserPotential'
 import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
 import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
 import { ByUserLimitBreakFilter, ByUserLimitBreakInput } from './ByUserLimitBreak'
+import { UserSettingEnhanced } from 'hooks/useUserSettings'
 
 export const SearchFilterUserUnitsKeys = [
   'byUserSpecial',
@@ -20,7 +21,7 @@ export type SearchFilterUserUnits = {
   [key in SearchFilterUserUnitsType]?: SearchFilterCriteria
 }
 
-type Builder = (criteria: SearchFilterCriteria) => UserUnitFilter
+type Builder = (criteria: SearchFilterCriteria, userSetting: UserSettingEnhanced) => UserUnitFilter
 export const UserUnitFilterBuilder: {
   [key in SearchFilterUserUnitsType]: {
     title: string

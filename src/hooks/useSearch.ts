@@ -15,6 +15,7 @@ import {
   UnitSort2UserUnitSort,
 } from 'pages/FilterSort/components/Sorts'
 import { useEffect, useState } from 'react'
+import { useUserSettings } from './useUserSettings'
 
 export const EmptySearch: Search = {
   filters: {},
@@ -62,6 +63,8 @@ export function mergeSearch (search: Search, search2: Search): Search {
 }
 
 export function useSearch (search: Search = DefaultSearch) {
+  const userSettings = useUserSettings()
+
   const unitFilters = Object.entries(search.filters.units || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) =>
@@ -71,7 +74,7 @@ export function useSearch (search: Search = DefaultSearch) {
   const userUnitFilters = Object.entries(search.filters.userUnits || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) =>
-      UserUnitFilterBuilder[key as SearchFilterUserUnitsType].builder(criteria),
+      UserUnitFilterBuilder[key as SearchFilterUserUnitsType].builder(criteria, userSettings),
     )
 
   const unitSorters: UnitSort[] = search.sorts
