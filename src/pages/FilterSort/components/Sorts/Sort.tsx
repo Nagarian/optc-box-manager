@@ -108,6 +108,7 @@ const Panel = styled.div`
   flex-direction: column;
   overflow-y: auto;
   min-width: 10rem;
+  max-width: 40%;
 
   > button {
     flex: 0 0 auto;

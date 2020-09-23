@@ -26,6 +26,8 @@ import {
   bySpecificPotentialLabel,
 } from './UserUnits/ByPotential'
 import { FunctionComponent, ReactNode } from 'react'
+import byFestStyle from './Units/ByPirateFest'
+import { byPirateFestAbility, byPirateFestSpecial } from './UserUnits/ByPirateFest'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -33,6 +35,7 @@ export const UnitSortTypeKeys = [
   'byFamily',
   'byId',
   'byLBLvlMax',
+  'byFestStyle',
 ] as const
 export const UserUnitSortTypeKeys = [
   'byCottonCandy',
@@ -40,6 +43,8 @@ export const UserUnitSortTypeKeys = [
   'byLBLvlGameLike',
   'byLimitBreakLvl',
   'byPotentialProgression',
+  'byPirateFestSpecial',
+  'byPirateFestAbility',
 ] as const
 export type SearchSortType =
   | typeof UnitSortTypeKeys[number]
@@ -77,6 +82,11 @@ export const SearchSortBuilder: {
     type: 'unit',
     fn: byId,
   },
+  byFestStyle: {
+    label: 'PF Style',
+    type: 'unit',
+    fn: byFestStyle,
+  },
   byCottonCandy: {
     label: 'Cotton Candy',
     type: 'userUnit',
@@ -112,6 +122,16 @@ export const SearchSortBuilder: {
     optionedFn: bySpecificPotentialLvl,
     optionInput: SpecificPotentialSortInput,
     optionedLabel: bySpecificPotentialLabel as any,
+  },
+  byPirateFestSpecial: {
+    label: 'PF Special Lvl',
+    type: 'userUnit',
+    fn: byPirateFestSpecial,
+  },
+  byPirateFestAbility: {
+    label: 'PF Ability Lvl',
+    type: 'userUnit',
+    fn: byPirateFestAbility,
   },
 }
 
