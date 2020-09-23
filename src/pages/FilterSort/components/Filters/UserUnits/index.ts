@@ -6,11 +6,13 @@ import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
 import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
 import { ByUserLimitBreakFilter, ByUserLimitBreakInput } from './ByUserLimitBreak'
 import { UserSettingEnhanced } from 'hooks/useUserSettings'
+import { ByUserPirateFestFilter, ByUserPirateFestInput } from './ByUserPirateFest'
 
 export const SearchFilterUserUnitsKeys = [
   'byUserSpecial',
   'byUserCottonCandy',
   'byUserSupport',
+  'byUserPirateFest',
   'byUserLimitBreak',
   'byUserPotential',
 ] as const
@@ -55,5 +57,10 @@ export const UserUnitFilterBuilder: {
     title: 'Limit Break',
     builder: ByUserLimitBreakFilter,
     input: ByUserLimitBreakInput,
+  },
+  byUserPirateFest: {
+    title: 'Pirate Fest',
+    builder: ByUserPirateFestFilter,
+    input: ByUserPirateFestInput,
   },
 }
