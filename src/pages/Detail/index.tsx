@@ -14,6 +14,7 @@ import SpecialLvlEdit from './components/SpecialLvlEdit'
 import SupportEdit from './components/SupportEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import { getLimitType } from 'services/limit'
+import PirateFestEdit from './components/PirateFestEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -98,6 +99,12 @@ export default function Detail ({
         potentials={userUnit.potentials}
         details={unit.detail.potential ?? []}
         onChange={potentials => setUserUnit({ ...userUnit, potentials })}
+      />
+
+      <PirateFestEdit
+        detail={unit.detail}
+        pirateFest={userUnit.pirateFest}
+        onChange={pirateFest => setUserUnit({ ...userUnit, pirateFest })}
       />
 
       {!!evolutions.length && (

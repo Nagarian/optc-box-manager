@@ -32,6 +32,11 @@ export type UserUnitLimitBreak = {
   keyLvlMax?: number
 }
 
+export type UserUnitPirateFest = {
+  abilityLvl: number
+  specialLvl: number
+}
+
 export type UserUnit = {
   id: string
   unit: ExtendedUnit
@@ -40,6 +45,7 @@ export type UserUnit = {
   potentials: UserUnitPotentialAbility[]
   support?: UserUnitSupport
   cc: UserUnitCottonCandy
+  pirateFest?: UserUnitPirateFest
 }
 
 export type UserBox = UserUnit[]

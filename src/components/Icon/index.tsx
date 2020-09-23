@@ -12,12 +12,13 @@ import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Edit } from './edit.svg'
-import FilterSortSvg, { ReactComponent as FilterSort } from './filtersort.svg'
+import { ReactComponent as FilterSort } from './filtersort.svg'
+import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
 import { ReactComponent as Reset } from './reset.svg'
 import { ReactComponent as ResetApply } from './reset-apply.svg'
 import { ReactComponent as ResetRemove } from './reset-remove.svg'
 import { ReactComponent as Search } from './search.svg'
-import SettingsSvg, { ReactComponent as Settings } from './settings.svg'
+import { ReactComponent as Settings } from './settings.svg'
 import SpecialLvl from './special.png'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
 import { ReactComponent as SkillBook } from './skillbook.svg'
@@ -45,7 +46,7 @@ export type Icon = StyledComponent<
   never
 >
 
-export { CottonCandySvg, SettingsSvg, SupportSvg, SpecialLvl, FilterSortSvg }
+export { CottonCandySvg, SupportSvg, SpecialLvl, PirateFestSvg }
 
 export const AddIcon: Icon = BaseSvg(Add)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
@@ -58,6 +59,10 @@ export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const DescendingIcon: Icon = BaseSvg(Descending)
 export const EditIcon: Icon = BaseSvg(Edit)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const PirateFestIcon: Icon = BaseSvg(PirateFest)
+PirateFestIcon.defaultProps = {
+  color: 'primaryText',
+}
 export const ResetIcon: Icon = BaseSvg(Reset)
 export const ResetApplyIcon: Icon = BaseSvg(ResetApply)
 export const ResetRemoveIcon: Icon = BaseSvg(ResetRemove)

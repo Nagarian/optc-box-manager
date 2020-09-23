@@ -1,6 +1,6 @@
 import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
-import { CottonCandyIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
+import { CottonCandyIcon, PirateFestIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression, { Max } from 'components/Progression'
 import { SubTitle, Title, Text } from 'components/Title'
@@ -11,6 +11,7 @@ import { SpaceProps } from 'styled-system'
 import { UnitClassIcon } from 'components/Class'
 import { UnitClass, ExtendedUnit } from 'models/units'
 import { useUserSettings } from 'hooks/useUserSettings'
+import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 
 const Container = styled(Box)`
   display: grid;
@@ -36,6 +37,7 @@ export default function RecapBox ({
     potentials,
     special,
     support,
+    pirateFest,
     cc: { atk, hp, rcv },
   } = userUnit
 
@@ -57,13 +59,31 @@ export default function RecapBox ({
         <Text margin="1" textAlign="center">
           {unit.stars}⭐ - {unit.dropLocations.join(', ')}
         </Text>
-        <UnitClassesDisplayer unit={unit} />
+        <Box display="flex" alignItems="center">
+          <UnitClassesDisplayer unit={unit} />
+          {unit.pirateFest.class &&
+            <PirateFestStyleIcon type={unit.pirateFest.class} size="1" margin="2" />
+          }
+        </Box>
       </Box>
       <Box gridArea="info">
         {special && (
           <Element>
             <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
+
+            {support && (
+              <Element>
+                <SupportIcon size="2" />
+                {support.lvl === 5 ? (
+                  <Max />
+                ) : support.lvl === 0 ? (
+                  'not unlocked'
+                ) : (
+                  `${support.lvl}/${5}`
+                )}
+              </Element>
+            )}
           </Element>
         )}
 
@@ -101,18 +121,21 @@ export default function RecapBox ({
           </Element>
         )}
 
-        {support && (
+        {pirateFest && (
           <Element>
-            <SupportIcon size="2" />
-            {support.lvl === 5 ? (
-              <Max />
-            ) : support.lvl === 0 ? (
-              'not unlocked'
-            ) : (
-                  `${support.lvl}/${5}`
-            )}
+            <PirateFestIcon
+              size="2"
+              title="Pirate Fest Special"
+            />
+            <Progression value={pirateFest.specialLvl} max={10} />
+            <PirateFestIcon
+              size="2"
+              title="Pirate Fest Ability"
+            />
+            <Progression value={pirateFest.abilityLvl} max={5} />
           </Element>
         )}
+
       </Box>
     </Container>
   )

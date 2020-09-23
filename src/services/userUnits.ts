@@ -36,6 +36,12 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       atk: 0,
       rcv: 0,
     },
+    pirateFest: unit.detail.festAbility && unit.detail.festSpecial
+      ? {
+        abilityLvl: 1,
+        specialLvl: 1,
+      }
+      : undefined,
   }
 }
 
@@ -75,6 +81,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
       lvl: userUnit.potentials.find(pp => pp.type === p.type)?.lvl ?? p.lvl,
     })),
     limitBreak: userUnit.limitBreak ?? template.limitBreak,
+    pirateFest: userUnit.pirateFest ?? template.pirateFest,
   }
 }
 
@@ -237,6 +244,21 @@ export function resync (userUnit: UserUnit) {
       lvl:
         userUnit.limitBreak?.lvl ??
         getLimitBreakLevel(updated.potentials, userUnit.unit.detail.limit),
+    }
+
+    isUpdated = true
+  }
+
+  if (!userUnit.pirateFest && compare.pirateFest) {
+    updated.pirateFest = compare.pirateFest
+    isUpdated = true
+  }
+
+  if ((userUnit.pirateFest?.abilityLvl ?? 0) < (compare.pirateFest?.abilityLvl ?? 0) ||
+    (userUnit.pirateFest?.specialLvl ?? 0) < (compare.pirateFest?.specialLvl ?? 0)) {
+    updated.pirateFest = {
+      abilityLvl: Math.max(updated.pirateFest?.abilityLvl ?? 0, compare.pirateFest?.abilityLvl ?? 0),
+      specialLvl: Math.max(updated.pirateFest?.specialLvl ?? 0, compare.pirateFest?.specialLvl ?? 0),
     }
 
     isUpdated = true
