@@ -1,6 +1,7 @@
 import { UserUnit } from 'models/userBox'
 import { FunctionComponent } from 'react'
 import { DetailedCottonCandyDisplayer } from './DetailedCottonCandyDisplayer'
+import PirateFestDisplayer, { PirateFestDisplayerInput } from './PirateFestDisplayer'
 import PotentialsDisplayer, {
   SpecificPotentialDisplayer,
   SpecificPotentialDisplayerInput,
@@ -14,6 +15,7 @@ export const UserUnitDisplayerTypeKeys = [
   'support',
   'potentials',
   'potential',
+  'pirateFest',
 ] as const
 export type SearchDisplayerType = typeof UserUnitDisplayerTypeKeys[number]
 
@@ -61,5 +63,10 @@ export const SearchDisplayerBuilder: {
   potentials: {
     label: 'Potentials',
     displayer: PotentialsDisplayer,
+  },
+  pirateFest: {
+    label: 'Pirate Festival',
+    displayer: PirateFestDisplayer,
+    input: PirateFestDisplayerInput,
   },
 }
