@@ -7,6 +7,7 @@ import { syncSupport } from './syncSupport'
 import { syncSpecialLevel } from './syncSpecialLevel'
 import { syncLimitBreak } from './syncLimitBreak'
 import { syncCottonCandy } from './syncCottonCandy'
+import { syncPirateFest } from './syncPirateFest'
 
 export type SyncerResult = [
   SearchSortCriteria[] | undefined,
@@ -49,4 +50,9 @@ export function useSyncer (
     syncApplier(syncCottonCandy(filters, sorts, displayer))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.byUserCottonCandy])
+
+  useEffect(() => {
+    syncApplier(syncPirateFest(filters, sorts, displayer))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.byUserPirateFest])
 }

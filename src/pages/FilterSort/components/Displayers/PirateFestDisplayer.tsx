@@ -8,7 +8,7 @@ import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
 
 const PirateFestDisplayerOptionTypes = ['both', 'special', 'ability'] as const
-type PirateFestDisplayerOptionType = typeof PirateFestDisplayerOptionTypes[number]
+export type PirateFestDisplayerOptionType = typeof PirateFestDisplayerOptionTypes[number]
 
 export type PirateFestDisplayerOption = {
   type: PirateFestDisplayerOptionType
