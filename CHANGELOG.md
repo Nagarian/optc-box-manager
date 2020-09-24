@@ -1,3 +1,21 @@
+# [1.8.0](https://github.com/Nagarian/optc-box-manager/compare/v1.7.2...v1.8.0) (2020-09-24)
+
+
+### Features
+
+* **box:** add id to units title (when you hover it with a mouse) ([4e5b628](https://github.com/Nagarian/optc-box-manager/commit/4e5b628c0e05c7b76e1efc2e5e9d8a6ff09d8022))
+* **detail:** add PirateFest Special & Ability edition ([036f02f](https://github.com/Nagarian/optc-box-manager/commit/036f02f8aad34069a423c0697596aa60c45c574c))
+* **displayer:** add PirateFest displayer ([6732670](https://github.com/Nagarian/optc-box-manager/commit/6732670272309f9c80ce6f090178f930d9d7a2eb))
+* **filter:** add Pirate Fest Style filter ([1e629a6](https://github.com/Nagarian/optc-box-manager/commit/1e629a64434a2f34ac5dc7670f22575aca17074f))
+* **filter:** add Pirate Festival drop filter ([3bf99d4](https://github.com/Nagarian/optc-box-manager/commit/3bf99d4cb77cf7f552357720b5a2d05be9107747)), closes [#49](https://github.com/Nagarian/optc-box-manager/issues/49)
+* **filter:** add PirateFest Special & Ability Level filter ([14e31ce](https://github.com/Nagarian/optc-box-manager/commit/14e31ce467b778a9fc99bc84b126d1fd828bac29))
+* **filter:** add PirateFest syncer ([e31dadc](https://github.com/Nagarian/optc-box-manager/commit/e31dadce482f4ba9b1ccda7da2ffd7aa6c0fd725))
+* **filter:** improve unit Classes images ([f6152c7](https://github.com/Nagarian/optc-box-manager/commit/f6152c7c039fb10ce6e41321579e3fce748c7243))
+* **filter:** rework Cotton Candy filter for update 10.0 ([25f5008](https://github.com/Nagarian/optc-box-manager/commit/25f500822a8936aaff383563eff5445851668749))
+* **sort:** add PirateFest sorting ([0acdeca](https://github.com/Nagarian/optc-box-manager/commit/0acdeca09b5e701b9cc73f542415a0dc3d2712f9))
+
+
+
 ## [1.7.2](https://github.com/Nagarian/optc-box-manager/compare/v1.7.1...v1.7.2) (2020-09-12)
 
 
@@ -70,15 +88,6 @@
 * add new icons ([b677733](https://github.com/Nagarian/optc-box-manager/commit/b677733dbe1c7bdb550b8f239bf8fb5acd406f87))
 * add SugoCleaner ([d2740fc](https://github.com/Nagarian/optc-box-manager/commit/d2740fc1364eae27a8d816c038960595f0d853ea))
 * add wiki link [#48](https://github.com/Nagarian/optc-box-manager/issues/48) ([c85de2d](https://github.com/Nagarian/optc-box-manager/commit/c85de2d755d61ee51dfa67e985f4db205816a708))
-
-
-
-# [1.4.0](https://github.com/Nagarian/optc-box-manager/compare/v1.3.0...v1.4.0) (2020-07-06)
-
-
-### Features
-
-* **settings:** add option to allow +200 on Cotton Candy ([2f7e229](https://github.com/Nagarian/optc-box-manager/commit/2f7e229861c944f5931436e2aa3bffa042682e63))
 
 
 
