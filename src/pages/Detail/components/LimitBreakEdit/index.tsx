@@ -9,7 +9,7 @@ import {
   UnitSailor,
 } from 'models/units'
 import { UserUnitLimitBreak } from 'models/userBox'
-import Slider, { Marks } from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import React, { ReactNode } from 'react'
 import theme from 'styles/theme'
@@ -74,7 +74,7 @@ export default function LimitBreakEdit ({
     )
 
     return acc
-  }, {} as Marks)
+  }, {} as any)
 
   return (
     <ExpansionPanel title="Limit Break">
