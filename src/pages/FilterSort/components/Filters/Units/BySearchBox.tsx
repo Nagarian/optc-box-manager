@@ -79,7 +79,7 @@ export function BySearchBoxInput ({
 const Input = styled.input<SpaceProps>`
   padding: ${themeGet('space.1')};
   font-size: ${themeGet('fontSizes.1')};
-  border-bottom: solid ${themeGet('colors.grey')} thin;
+  border-bottom: solid ${themeGet('colors.grey')} ${themeGet('borderWidths.thin')};
   border-radius: 0;
   transition: border-color 250ms;
 

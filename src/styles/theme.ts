@@ -127,6 +127,11 @@ export default {
   },
   fontSizes,
   fontWeights,
+  borderWidths: {
+    thin: '0.1rem',
+    medium: '0.2rem',
+    thick: '0.3rem',
+  },
   space,
   sizes,
 
