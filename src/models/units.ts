@@ -17,12 +17,11 @@ export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
 export type UnitStar = typeof Rarity[number]
 
 export const UnitPirateFestStyles = [
-  'Attacker',
-  'Defender',
-  'Healer',
-  'Obstructer',
-  'Supporter',
-  // 'Obstructor',
+  'ATK',
+  'DEF',
+  'RCV',
+  'DBF',
+  'SPT',
 ] as const
 export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
 

@@ -19,6 +19,7 @@ import {
   ExtendedDrop,
   UnitPotential,
   PotentialKey,
+  UnitPirateFestStyle,
 } from 'models/units'
 import {
   FortnightDrops,
@@ -174,6 +175,9 @@ export const DBUnit = {
             name: Families[unit.number],
             id: getFamilyId(Families, unit.number),
           },
+          pirateFest: {
+            class: fixupPirateFestStyle(unit.pirateFest.class),
+          },
           dropLocations: getDropLocations(id, flags, EvolutionMap),
           evolutionMap: EvolutionMap[id] ?? [id],
         }
@@ -200,4 +204,16 @@ function fixupDetail (detail: UnitDetail): UnitDetail {
   }
 
   return detail
+}
+
+function fixupPirateFestStyle (pirateFestStyle: UnitPirateFestStyle | undefined) {
+  if (!pirateFestStyle) {
+    return undefined
+  }
+
+  const renamed : { [key: string]: UnitPirateFestStyle } = {
+    Obstructer: 'DBF',
+  }
+
+  return renamed[pirateFestStyle] ?? pirateFestStyle
 }

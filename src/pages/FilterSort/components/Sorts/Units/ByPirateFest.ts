@@ -3,15 +3,15 @@ import { UnitPirateFestStyle } from 'models/units'
 
 const ParseFestStyle = (type: UnitPirateFestStyle | undefined): number => {
   switch (type) {
-    case 'Attacker':
+    case 'ATK':
       return 1
-    case 'Defender':
+    case 'DEF':
       return 2
-    case 'Healer':
+    case 'RCV':
       return 3
-    case 'Obstructer':
+    case 'DBF':
       return 4
-    case 'Supporter':
+    case 'SPT':
       return 5
     default:
       return 6

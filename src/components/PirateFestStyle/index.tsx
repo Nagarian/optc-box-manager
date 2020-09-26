@@ -9,15 +9,15 @@ import Supporter from './images/Supporter.png'
 
 export function UnitPirateFestStyleToImage (type: UnitPirateFestStyle) {
   switch (type) {
-    case 'Attacker':
+    case 'ATK':
       return Attacker
-    case 'Defender':
+    case 'DEF':
       return Defender
-    case 'Healer':
+    case 'RCV':
       return Healer
-    case 'Obstructer':
+    case 'DBF':
       return Obstructer
-    case 'Supporter':
+    case 'SPT':
       return Supporter
     default:
       return undefined

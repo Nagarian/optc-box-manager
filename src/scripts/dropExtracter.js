@@ -120,7 +120,7 @@ module.exports = {
     'Round 5',
     'Round 6',
   ),
-  PF: dropMapper('Pirate Festival'),
+  PF: dropMapper('Pirate Rumble'),
   Raid: dropMapper('Raid', 'Master', 'Expert', 'Ultimate'),
   Coliseum: dropMapper('Coliseum', 'Chaos', 'Underground', 'Exebition'),
   Story: dropMapper(
