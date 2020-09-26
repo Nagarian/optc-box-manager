@@ -167,13 +167,13 @@ function editPotential (
       return {
         ...userPotential,
         lvl: 1,
-        keyState: 'unlocked',
+        keyState: userPotential.keyState ? 'unlocked' : undefined,
       }
     case 'rainbow+':
       return {
         ...userPotential,
         lvl: 5,
-        keyState: 'unlocked',
+        keyState: userPotential.keyState ? 'unlocked' : undefined,
       }
     default:
       return userPotential
