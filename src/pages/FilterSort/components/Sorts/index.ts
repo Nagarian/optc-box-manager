@@ -45,6 +45,7 @@ export const UserUnitSortTypeKeys = [
   'byPotentialProgression',
   'byPirateFestSpecial',
   'byPirateFestAbility',
+  'byAddedToBox',
 ] as const
 export type SearchSortType =
   | typeof UnitSortTypeKeys[number]
@@ -132,6 +133,11 @@ export const SearchSortBuilder: {
     label: 'PF Ability Lvl',
     type: 'userUnit',
     fn: byPirateFestAbility,
+  },
+  byAddedToBox: {
+    label: 'Added to box',
+    type: 'userUnit',
+    fn: () => 1,
   },
 }
 

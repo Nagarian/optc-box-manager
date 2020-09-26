@@ -26,6 +26,7 @@ import { DBUnit } from 'services/units'
 import styled from 'styled-components'
 import SugoCleaner from 'pages/SugoCleaner'
 import GatherIsland from 'pages/GatherIsland'
+import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
 
 const AppBlock = styled.div`
   display: grid;
@@ -55,7 +56,7 @@ function App () {
   const closePanel = () => setDisplayedPanel(undefined)
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
-    add(...units)
+    add(...units.sort(byId))
     closePanel()
   }
 
