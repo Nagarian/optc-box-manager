@@ -80,7 +80,7 @@ export default function RecapBox ({
                 ) : support.lvl === 0 ? (
                   'not unlocked'
                 ) : (
-                  `${support.lvl}/${5}`
+                      `${support.lvl}/${5}`
                 )}
               </Element>
             )}
@@ -167,7 +167,7 @@ function UnitClassesDisplayer ({
   return (
     <Box display="flex">
       {(classes as UnitClass[][]).map((c, i) => (
-        <Box display="flex" flexDirection="column" marginLeft={i + 1 === classes.length ? 1 : 0}>
+        <Box key={i} display="flex" flexDirection="column" marginLeft={i + 1 === classes.length ? 1 : 0}>
           {c.map(subClasses => (
             <UnitClassIcon
               key={subClasses}
