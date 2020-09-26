@@ -31,16 +31,19 @@ export default function CottonCandyLimitEdit () {
     <Box marginY="1">
       <CottonCandyLimitInput
         type="rcv"
+        name="Monument of Healing"
         value={rcv}
         onChange={v => handleChange('rcv', v)}
       />
       <CottonCandyLimitInput
         type="hp"
+        name="Monument of Endurance"
         value={hp}
         onChange={v => handleChange('hp', v)}
       />
       <CottonCandyLimitInput
         type="atk"
+        name="Monument of Ferocity"
         value={atk}
         onChange={v => handleChange('atk', v)}
       />
@@ -49,13 +52,15 @@ export default function CottonCandyLimitEdit () {
 }
 
 type CottonCandyLimitInputProps = {
-  value: number,
-  type: CottonCandyType,
+  value: number
+  name: string
+  type: CottonCandyType
   onChange: (value: number) => void
 }
 function CottonCandyLimitInput ({
   value,
   type,
+  name,
   onChange,
 }: CottonCandyLimitInputProps) {
   const hashValue = cottonCandyLimitMarksHash.indexOf(value) + 1
@@ -64,7 +69,7 @@ function CottonCandyLimitInput ({
     <InputLabel
       value={hashValue}
       max={cottonCandyLimitMarksHash.length}
-      name={`${type.toUpperCase()} Stone`}
+      name={name}
       descriptions={cottonCandyLimitMarksHash.map(v =>
         `Upgrade the max capacity of Cotton Candy ${type.toUpperCase()} to ${100 + v}`,
       )}
