@@ -19,6 +19,7 @@ const Panel = styled.div`
   padding: ${themeGet('space.1')};
   flex-wrap: wrap;
   justify-content: flex-end;
+  flex: 0 0 auto;
 
   :nth-child(odd) {
     background-color: ${themeGet('colors.primary')};
