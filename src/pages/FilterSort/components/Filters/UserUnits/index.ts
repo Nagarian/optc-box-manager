@@ -59,7 +59,7 @@ export const UserUnitFilterBuilder: {
     input: ByUserLimitBreakInput,
   },
   byUserPirateFest: {
-    title: 'Pirate Fest',
+    title: 'Pirate Rumble',
     builder: ByUserPirateFestFilter,
     input: ByUserPirateFestInput,
   },

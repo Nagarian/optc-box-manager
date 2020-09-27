@@ -125,12 +125,12 @@ export default function RecapBox ({
           <Element>
             <PirateFestIcon
               size="2"
-              title="Pirate Fest Special"
+              title="Pirate Rumble Special"
             />
             <Progression value={pirateFest.specialLvl} max={10} />
             <PirateFestIcon
               size="2"
-              title="Pirate Fest Ability"
+              title="Pirate Rumble Ability"
             />
             <Progression value={pirateFest.abilityLvl} max={5} />
           </Element>

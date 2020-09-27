@@ -65,7 +65,7 @@ export const SearchDisplayerBuilder: {
     displayer: PotentialsDisplayer,
   },
   pirateFest: {
-    label: 'Pirate Festival',
+    label: 'Pirate Rumble',
     displayer: PirateFestDisplayer,
     input: PirateFestDisplayerInput,
   },

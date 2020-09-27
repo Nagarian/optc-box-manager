@@ -28,18 +28,18 @@ export default function PirateFestEdit ({
   const { festAbility, festSpecial } = detail!
 
   return (
-    <ExpansionPanel title="Pirate Fest">
+    <ExpansionPanel title="Pirate Rumble">
       {(!festAbility || !festSpecial) &&
         <Text fontStyle="italic" color="red">
-          Please take caution, at this time the database lacks of Pirate Fest unit description,
-          so the unit could or could not have Pirate Fest-related Ability/Special.
+          Please take caution, at this time the database lacks of Pirate Rumble unit description,
+          so the unit could or could not have Pirate Rumble-related Ability/Special.
           Nonetheless, we allow you to edit this statistic even if it was not present on the game.
         </Text>
       }
       <InputLabel
         value={specialLvl}
         max={10}
-        name="Pirate Fest Special"
+        name="Pirate Rumble Special"
         descriptions={
           festSpecial?.map(a => `**(${a.cooldown} seconds)** ${a.description}`) ??
           new Array(10).fill('Not available, please take caution')
@@ -61,7 +61,7 @@ export default function PirateFestEdit ({
       <InputLabel
         value={abilityLvl}
         max={5}
-        name="Pirate Fest Ability"
+        name="Pirate Rumble Ability"
         descriptions={festAbility?.map(a => a.description) ?? new Array(5).fill('Not available, please take caution')}
       >
         <PirateFestInput

@@ -87,7 +87,7 @@ export const SearchSortBuilder: {
     fn: byId,
   },
   byFestStyle: {
-    label: 'PF Style',
+    label: 'PR Style',
     type: 'unit',
     fn: byFestStyle,
   },
@@ -128,12 +128,12 @@ export const SearchSortBuilder: {
     optionedLabel: bySpecificPotentialLabel as any,
   },
   byPirateFestSpecial: {
-    label: 'PF Special Lvl',
+    label: 'PR Special Lvl',
     type: 'userUnit',
     fn: byPirateFestSpecial,
   },
   byPirateFestAbility: {
-    label: 'PF Ability Lvl',
+    label: 'PR Ability Lvl',
     type: 'userUnit',
     fn: byPirateFestAbility,
   },

@@ -49,7 +49,7 @@ export function ByUserPirateFestInput ({
   return (
     <>
       <FilterContainerPanel>
-        <PirateFestIcon size="2" title="Pirate Fest Special" />
+        <PirateFestIcon size="2" title="Pirate Rumble Special" />
         Special
         {UserPirateFestStateKeys.map(stateKey => (
           <label key={stateKey}>
@@ -69,7 +69,7 @@ export function ByUserPirateFestInput ({
         ))}
       </FilterContainerPanel>
       <FilterContainerPanel>
-        <PirateFestIcon size="2" title="Pirate Fest Ability" />
+        <PirateFestIcon size="2" title="Pirate Rumble Ability" />
         Ability
         {UserPirateFestStateKeys.map(stateKey => (
           <label key={stateKey}>

@@ -93,7 +93,7 @@ export const UnitFilterBuilder: {
     input: ByLimitBreakInput,
   },
   byPirateFest: {
-    title: 'Pirate Festival Style',
+    title: 'Pirate Rumble Style',
     builder: ByPirateFestStyleFilter,
     input: ByPirateFestStyleInput,
   },
