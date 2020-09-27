@@ -15,6 +15,7 @@ import SupportEdit from './components/SupportEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import { getLimitType } from 'services/limit'
 import PirateFestEdit from './components/PirateFestEdit'
+import { DeleteIcon, OpenInDBIcon } from 'components/Icon'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -68,9 +69,29 @@ export default function Detail ({
   }
 
   return (
-    <Popup onCancel={onCancel} onValidate={() => onValidate(userUnit)}>
-      {/* <ImageFull src={unit.images.full} alt={unit.name} display={['none', 'inline-block']}/> */}
-      <RecapBox userUnit={userUnit} marginBottom="3" />
+    <Popup
+      onCancel={onCancel}
+      onValidate={() => onValidate(userUnit)}
+      customAction={
+        <>
+          {!!onDelete && (
+            <Button
+              variant="danger"
+              onClick={() => setShowConfirmation(true)}
+              icon={DeleteIcon}
+              title="Delete"
+            />
+          )}
+          <Button
+            href={`https://optc-db.github.io/characters/#/view/${unit.id}`}
+            variant="secondary"
+            icon={OpenInDBIcon}
+            title="See on OPTC-DB"
+          />
+        </>
+      }>
+
+      < RecapBox userUnit={userUnit} marginBottom="3" />
 
       <SpecialLvlEdit
         special={userUnit.special}
@@ -119,23 +140,6 @@ export default function Detail ({
             ))}
           </Box>
         </ExpansionPanel>
-      )}
-
-      <Button
-        href={`https://optc-db.github.io/characters/#/view/${unit.id}`}
-        variant="link"
-      >
-        See on OPTC-DB
-      </Button>
-
-      {!!onDelete && (
-        <Button
-          variant="danger"
-          my="1"
-          onClick={() => setShowConfirmation(true)}
-        >
-          Delete
-        </Button>
       )}
 
       {showConfirmation && (

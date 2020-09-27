@@ -1,5 +1,5 @@
 import { themeGet } from '@styled-system/theme-get'
-import React, { ReactNode, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Box, { BoxProps } from './Box'
 import Button from './Button'
@@ -8,7 +8,7 @@ import { ArrowIcon } from './Icon'
 const ExpandButton = styled(Button).attrs(() => ({
   icon: ArrowIcon,
   placeContent: 'start',
-}))<{ isOpen: boolean }>`
+})) <{ isOpen: boolean }>`
   ${ArrowIcon} {
     transform: rotate(0deg);
     transition: all 0.25s ease;
@@ -17,7 +17,7 @@ const ExpandButton = styled(Button).attrs(() => ({
   flex: 0 0 auto;
 `
 
-const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
+const Panel = styled(Box) <{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
   overflow: ${p => !p.isOpen && 'hidden'};
@@ -39,6 +39,13 @@ function ExpandedPanel ({
   children: ReactNode
 } & BoxProps) {
   const boxRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (isOpen && boxRef.current) {
+      boxRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [isOpen])
+
   return (
     <Panel
       innerHeight={
