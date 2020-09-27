@@ -8,9 +8,9 @@ import Box from 'components/Box'
 import {
   ConfirmIcon,
   SaveSearchIcon,
-  CancelIcon,
   ResetApplyIcon,
   ResetRemoveIcon,
+  DeleteIcon,
 } from 'components/Icon'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
@@ -68,7 +68,7 @@ export default function SaveSearch ({
               }
             />
             <Button
-              icon={CancelIcon}
+              icon={DeleteIcon}
               title="Delete"
               onClick={() => remove(s)}
               disabled={s.id === reseter?.id}

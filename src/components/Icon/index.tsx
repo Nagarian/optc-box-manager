@@ -10,6 +10,7 @@ import { ReactComponent as Clear } from './clear.svg'
 import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
+import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
@@ -56,6 +57,7 @@ export const ClearIcon: Icon = BaseSvg(Clear)
 export const CloseIcon: Icon = BaseSvg(Close)
 export const ConfirmIcon: Icon = BaseSvg(Confirm)
 export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
+export const DeleteIcon: Icon = BaseSvg(Delete)
 export const DescendingIcon: Icon = BaseSvg(Descending)
 export const EditIcon: Icon = BaseSvg(Edit)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)

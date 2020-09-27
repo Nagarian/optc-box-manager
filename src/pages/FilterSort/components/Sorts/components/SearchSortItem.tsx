@@ -2,7 +2,7 @@ import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
 import {
   AscendingIcon,
-  CancelIcon,
+  ClearIcon,
   DescendingIcon,
   SettingsIcon,
 } from 'components/Icon'
@@ -86,7 +86,7 @@ export default function SearchSortItem ({
         />
         <Button
           title="Remove"
-          icon={CancelIcon}
+          icon={ClearIcon}
           onClick={() => onDelete(criteria)}
         />
       </Panel>

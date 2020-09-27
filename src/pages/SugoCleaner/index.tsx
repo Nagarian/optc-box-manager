@@ -11,6 +11,7 @@ import {
   SkillBookIcon,
   BellyIcon,
   TreasureIcon,
+  DeleteIcon,
 } from 'components/Icon'
 import Add from 'pages/Add'
 import { UserUnit } from 'models/userBox'
@@ -170,6 +171,7 @@ export default function SugoCleaner ({
                 setOpenChooser(undefined)
               }}
               variant="danger"
+              icon={DeleteIcon}
             >
               Dismiss (already used)
             </Button>
