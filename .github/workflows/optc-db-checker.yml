@@ -6,7 +6,7 @@ on:
       - origin/dependabot/submodules/src/optcdb-*
 
 jobs:
-  build-test-deploy:
+  build-test-check-db:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
