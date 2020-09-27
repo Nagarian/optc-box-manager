@@ -6,7 +6,7 @@ import {
   SearchSortWithOptionFunction,
 } from 'models/search'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
-import byRarity from './Units/ByRarity'
+import { byRarity, byRarityLabel, byRaritySimple, RaritySortOptionInput } from './Units/ByRarity'
 import byType from './Units/ByType'
 import {
   byCottonCandy,
@@ -71,7 +71,10 @@ export const SearchSortBuilder: {
   byRarity: {
     label: 'Rarity',
     type: 'unit',
-    fn: byRarity,
+    fn: byRaritySimple,
+    optionedFn: byRarity,
+    optionedLabel: byRarityLabel as any,
+    optionInput: RaritySortOptionInput,
   },
   byFamily: {
     label: 'Character',
