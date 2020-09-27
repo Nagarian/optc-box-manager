@@ -1,3 +1,25 @@
+# [1.9.0](https://github.com/Nagarian/optc-box-manager/compare/v1.8.0...v1.9.0) (2020-09-27)
+
+
+### Bug Fixes
+
+* **search:** iOS sorter display issue ([77f4680](https://github.com/Nagarian/optc-box-manager/commit/77f46801c545d0730c0a48c5b91c729a967eca8f))
+* rename Pirate Festival to Pirate Rumble ([a5ceb5a](https://github.com/Nagarian/optc-box-manager/commit/a5ceb5af3c135c72340339e7c48e124ccb5f4b6a))
+* uniformisation of border widths ([3573230](https://github.com/Nagarian/optc-box-manager/commit/35732302935de1928a302af7255d136649c42b8c))
+* **bulk edit:** issue when bulk editing LB+ and declared as Rainbow ([0d3825e](https://github.com/Nagarian/optc-box-manager/commit/0d3825e8606741f39c28c87fe9c04b491c0b4ada)), closes [#87](https://github.com/Nagarian/optc-box-manager/issues/87)
+* **gather island:** rename stone to monument ([c24c0ef](https://github.com/Nagarian/optc-box-manager/commit/c24c0efdffa10c0222446a94497364bbe4501889))
+* renaming of Pirate Fest style on OPTC-DB ([1bab14a](https://github.com/Nagarian/optc-box-manager/commit/1bab14ad13ee1f29579e42f3a5fd2b64357862e9))
+
+
+### Features
+
+* **detail:** move Delete and Open in DB into the popup action ([f64fd8b](https://github.com/Nagarian/optc-box-manager/commit/f64fd8bdf21b6c2ea54b1e4d893bad6a9c43253f))
+* **sort:** add option to Rarity filter to allow treat super-evolved and evolved as equal (⭐+ = ⭐) ([89e8a75](https://github.com/Nagarian/optc-box-manager/commit/89e8a7594ccda6b50e3d28d5c808fd483634e331))
+* add delete icon ([b167008](https://github.com/Nagarian/optc-box-manager/commit/b16700863f7b931322065d4362e80fdb1ad70188))
+* **sorter:** add "Added to Box" sorter ([91f644a](https://github.com/Nagarian/optc-box-manager/commit/91f644ad47319980a8a6e13018cb6c8826dc7994))
+
+
+
 # [1.8.0](https://github.com/Nagarian/optc-box-manager/compare/v1.7.2...v1.8.0) (2020-09-24)
 
 
@@ -66,28 +88,6 @@
 * **detail:** add sync between LimitBreak lvl and Potential Abilities unlock ([b52da65](https://github.com/Nagarian/optc-box-manager/commit/b52da652e08aa373327b480129bb825e0a2bb6f1)), closes [#71](https://github.com/Nagarian/optc-box-manager/issues/71)
 * **filter:** add Support Finder filter ([4710ba0](https://github.com/Nagarian/optc-box-manager/commit/4710ba07072531d257fe79670a365b0ed3e76347)), closes [#69](https://github.com/Nagarian/optc-box-manager/issues/69)
 * **filter:** replace Fortnight with Manuals Quests ([ecefa33](https://github.com/Nagarian/optc-box-manager/commit/ecefa3355f7e36fdad680e534728c996af0b0ff4))
-
-
-
-# [1.5.0](https://github.com/Nagarian/optc-box-manager/compare/v1.4.0...v1.5.0) (2020-08-06)
-
-
-### Bug Fixes
-
-* **changelog:** issue with images ([e67a922](https://github.com/Nagarian/optc-box-manager/commit/e67a9229bcb6575a430cdcdaa4a43595552b2fe4))
-* **css:** uniformize hr ([1fa180d](https://github.com/Nagarian/optc-box-manager/commit/1fa180de83241985b164274571d749bce49c5bb0))
-* **detail:** issue with NEO and EX display ([1957a47](https://github.com/Nagarian/optc-box-manager/commit/1957a4796330ab98615d30d4ce1525a94cca421b))
-* **filter:** issue with alignment of container ([de92571](https://github.com/Nagarian/optc-box-manager/commit/de92571db776d63e14af2de6b7d8b647abbaae0c))
-* **import:** issue on safari and iOS ([1545b54](https://github.com/Nagarian/optc-box-manager/commit/1545b54f215301607c413f1770af9f3b80d51449))
-* **sort:** issue with low screen width ([2fa490b](https://github.com/Nagarian/optc-box-manager/commit/2fa490b21bb2f5f38402c4bff621a37f0cbc4872))
-* **SugoCleaner:** display issue on Safari ([cbb9bbd](https://github.com/Nagarian/optc-box-manager/commit/cbb9bbda3ea8f24f468b4e99c37e5ded79812e03))
-
-
-### Features
-
-* add new icons ([b677733](https://github.com/Nagarian/optc-box-manager/commit/b677733dbe1c7bdb550b8f239bf8fb5acd406f87))
-* add SugoCleaner ([d2740fc](https://github.com/Nagarian/optc-box-manager/commit/d2740fc1364eae27a8d816c038960595f0d853ea))
-* add wiki link [#48](https://github.com/Nagarian/optc-box-manager/issues/48) ([c85de2d](https://github.com/Nagarian/optc-box-manager/commit/c85de2d755d61ee51dfa67e985f4db205816a708))
 
 
 
