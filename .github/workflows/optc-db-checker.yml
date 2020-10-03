@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: CI
+      - name: Restore package & run test
         run: |
           npm ci
           npm test
