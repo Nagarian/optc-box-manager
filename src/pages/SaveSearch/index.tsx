@@ -2,19 +2,16 @@ import Popup from 'components/Popup'
 import React, { useState } from 'react'
 import { Search } from 'models/search'
 import { useStoredSearches } from 'hooks/useStoredSearches'
-import { SubTitle, Text } from 'components/Title'
+import { SubTitle } from 'components/Title'
 import Button from 'components/Button'
 import Box from 'components/Box'
 import {
   ConfirmIcon,
-  SaveSearchIcon,
-  ResetApplyIcon,
-  ResetRemoveIcon,
-  DeleteIcon,
 } from 'components/Icon'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 import { space, SpaceProps } from 'styled-system'
+import { SearchCollectionItem } from './components/SearchCollectionItem'
 
 export type SaveSearchProps = {
   search: Search
@@ -54,31 +51,14 @@ export default function SaveSearch ({
 
       <Box display="flex" flexDirection="column" overflowY="auto">
         {searches.map(s => (
-          <Panel key={s.id}>
-            <Text flex="1">{s.name}</Text>
-            <Button
-              icon={s.id === reseter?.id ? ResetRemoveIcon : ResetApplyIcon}
-              title={
-                s.id === reseter?.id
-                  ? 'Remove from Custom Reset'
-                  : 'Set as Custom Reset'
-              }
-              onClick={() =>
-                setAsReseter(s.id === reseter?.id ? undefined : s)
-              }
-            />
-            <Button
-              icon={DeleteIcon}
-              title="Delete"
-              onClick={() => remove(s)}
-              disabled={s.id === reseter?.id}
-            />
-            <Button
-              icon={SaveSearchIcon}
-              title="Apply"
-              onClick={() => onSearchSelected(s.search)}
-            />
-          </Panel>
+          <SearchCollectionItem
+            key={s.id}
+            search={s}
+            applySearch={s => onSearchSelected(s.search)}
+            isCurrentReseter={s.id === reseter?.id}
+            remove={remove}
+            setAsReseter={setAsReseter}
+          />
         ))}
       </Box>
     </Popup>
@@ -96,21 +76,6 @@ const Input = styled.input`
 
   :focus {
     border-color: ${themeGet('colors.primary')};
-  }
-`
-
-const Panel = styled.div`
-  display: flex;
-  align-items: center;
-  padding: ${themeGet('space.1')};
-
-  :nth-child(odd) {
-    background-color: ${themeGet('colors.primary')};
-    color: ${themeGet('colors.primaryText')};
-  }
-
-  > * {
-    margin: ${themeGet('space.1')};
   }
 `
 
