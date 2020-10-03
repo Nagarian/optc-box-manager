@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SavedSearch } from 'hooks/useStoredSearches'
 import { Text } from 'components/Title'
 import Button from 'components/Button'
@@ -10,6 +10,7 @@ import {
 } from 'components/Icon'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
+import Popup from 'components/Popup'
 
 type SearchCollectionItemProps = {
   search: SavedSearch
@@ -25,32 +26,47 @@ export function SearchCollectionItem ({
   applySearch,
   remove,
 }: SearchCollectionItemProps) {
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   return (
-    <Panel>
-      <Text flex="1">{search.name}</Text>
-      <Button
-        icon={isCurrentReseter ? ResetRemoveIcon : ResetApplyIcon}
-        title={
-          isCurrentReseter
-            ? 'Remove from Custom Reset'
-            : 'Set as Custom Reset'
-        }
-        onClick={() =>
-          setAsReseter(isCurrentReseter ? undefined : search)
-        }
-      />
-      <Button
-        icon={DeleteIcon}
-        title="Delete"
-        onClick={() => remove(search)}
-        disabled={isCurrentReseter}
-      />
-      <Button
-        icon={SaveSearchIcon}
-        title="Apply"
-        onClick={() => applySearch(search)}
-      />
-    </Panel>
+    <>
+      <Panel>
+        <Text flex="1">{search.name}</Text>
+
+        <Button
+          icon={DeleteIcon}
+          title="Delete"
+          onClick={() => setShowConfirmation(true)}
+          disabled={isCurrentReseter}
+        />
+        <Button
+          icon={isCurrentReseter ? ResetRemoveIcon : ResetApplyIcon}
+          title={
+            isCurrentReseter
+              ? 'Remove from Custom Reset'
+              : 'Set as Custom Reset'
+          }
+          onClick={() =>
+            setAsReseter(isCurrentReseter ? undefined : search)
+          }
+        />
+        <Button
+          icon={SaveSearchIcon}
+          title="Apply"
+          onClick={() => applySearch(search)}
+        />
+      </Panel>
+
+      {showConfirmation && (
+        <Popup
+          title={`Are you sure to delete your Saved Search "${search.name}" ?`}
+          onValidate={() => {
+            setShowConfirmation(false)
+            remove(search)
+          }}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
+    </>
   )
 }
 
