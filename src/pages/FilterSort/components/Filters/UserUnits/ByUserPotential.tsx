@@ -6,6 +6,7 @@ import React from 'react'
 import ImageInput from 'components/forms/ImageInput'
 import { FilterContainerPanel } from '../FilterContainer'
 import { Text } from 'components/Title'
+import ChoiceInput from 'components/forms/ChoiceInput'
 
 export const PotentialStateKeys = [
   'locked',
@@ -55,19 +56,18 @@ export function ByUserPotentialInput ({
       <FilterContainerPanel marginBottom="2">
         <Text>State</Text>
         {PotentialStateKeys.map(stateKey => (
-          <label key={stateKey}>
-            <input
-              type="radio"
-              name="userunit-potential-state-chooser"
-              checked={selectedState === stateKey}
-              onChange={e =>
-                onChange({
-                  [selectedPotential ?? 'Enrage']: stateKey,
-                })
-              }
-            />
+          <ChoiceInput key={stateKey}
+            type="radio"
+            name="userunit-potential-state-chooser"
+            checked={selectedState === stateKey}
+            onChange={e =>
+              onChange({
+                [selectedPotential ?? 'Enrage']: stateKey,
+              })
+            }
+          >
             {stateKey}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
 

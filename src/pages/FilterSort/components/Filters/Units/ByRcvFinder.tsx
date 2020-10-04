@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitSpecial, UnitCaptain } from 'models/units'
 import React from 'react'
@@ -54,34 +55,32 @@ export function ByRcvFinderInput ({
 }: SearchFilterCriteriaInputProps<ByRcvFinderCriteria>) {
   return (
     <>
-      <label>
-        <input
-          type="checkbox"
-          name="captainRcv"
-          checked={criteria?.captainRcv === true}
-          onChange={e =>
-            onChange({
-              ...criteria,
-              captainRcv: e.target.checked,
-            })
-          }
-        />
+      <ChoiceInput
+        type="checkbox"
+        name="captainRcv"
+        checked={criteria?.captainRcv === true}
+        onChange={e =>
+          onChange({
+            ...criteria,
+            captainRcv: e.target.checked,
+          })
+        }
+      >
         Show RCV related captain
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="specialRcv"
-          checked={criteria?.specialRcv === true}
-          onChange={e =>
-            onChange({
-              ...criteria,
-              specialRcv: e.target.checked,
-            })
-          }
-        />
+      </ChoiceInput>
+      <ChoiceInput
+        type="checkbox"
+        name="specialRcv"
+        checked={criteria?.specialRcv === true}
+        onChange={e =>
+          onChange({
+            ...criteria,
+            specialRcv: e.target.checked,
+          })
+        }
+      >
         Show RCV related special
-      </label>
+      </ChoiceInput>
     </>
   )
 }

@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
@@ -32,53 +33,50 @@ export function ByUnclassableInput ({
 }: SearchFilterCriteriaInputProps<ByUnclassableCriteria>) {
   return (
     <>
-      <label>
-        <input
-          type="checkbox"
-          name="global-only"
-          checked={criteria?.globalOnly ?? false}
-          onChange={e =>
-            onChange({
-              ...criteria,
-              globalOnly: e.target.checked,
-            })
-          }
-        />
+      <ChoiceInput
+        type="checkbox"
+        name="global-only"
+        checked={criteria?.globalOnly ?? false}
+        onChange={e =>
+          onChange({
+            ...criteria,
+            globalOnly: e.target.checked,
+          })
+        }
+      >
         Show global only
-      </label>
+      </ChoiceInput>
 
       <FilterContainerPanel marginTop="2">
         Hide
-        <label>
-          <input
-            type="radio"
-            name="evolved-only"
-            checked={criteria?.evolvedOnly ?? false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                superEvolvedOnly: !e.target.checked,
-                evolvedOnly: e.target.checked,
-              })
-            }
-          />
+        <ChoiceInput
+          type="radio"
+          name="evolved-only"
+          checked={criteria?.evolvedOnly ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              superEvolvedOnly: !e.target.checked,
+              evolvedOnly: e.target.checked,
+            })
+          }
+        >
           unevolved
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="evolved-only"
-            checked={criteria?.superEvolvedOnly ?? false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                superEvolvedOnly: e.target.checked,
-                evolvedOnly: !e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="evolved-only"
+          checked={criteria?.superEvolvedOnly ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              superEvolvedOnly: e.target.checked,
+              evolvedOnly: !e.target.checked,
+            })
+          }
+        >
           unevolved + not super-evolved
-        </label>
+        </ChoiceInput>
       </FilterContainerPanel>
     </>
   )

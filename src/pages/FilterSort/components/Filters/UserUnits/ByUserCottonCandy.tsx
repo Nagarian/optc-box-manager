@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { CottonCandyIcon } from 'components/Icon'
 import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import {
@@ -72,15 +73,14 @@ function CottonCandyStateInput ({
       <CottonCandyIcon color={color} size={2} title={type} />
       {type.toUpperCase()} + {currentMax}
       {CottonCandyStateKeys.map(stateKey => (
-        <label key={stateKey}>
-          <input
-            type="radio"
-            name={`userunit-cc-${type}`}
-            checked={state === stateKey ?? false}
-            onChange={e => onChange(stateKey)}
-          />
+        <ChoiceInput key={stateKey}
+          type="radio"
+          name={`userunit-cc-${type}`}
+          checked={state === stateKey ?? false}
+          onChange={e => onChange(stateKey)}
+        >
           {stateKey}
-        </label>
+        </ChoiceInput>
       ))}
     </FilterContainerPanel>
   )
@@ -97,18 +97,17 @@ export function ByUserCottonCandyInput ({
         <CottonCandyIcon size={2} title="All" />
         All +{ccLimit.all}
         {CottonCandyStateKeys.map(stateKey => (
-          <label key={stateKey}>
-            <input
-              type="radio"
-              name="userunit-cc-all"
-              checked={criteria?.all === stateKey ?? false}
-              onChange={e => onChange({
-                ...criteria,
-                all: stateKey,
-              })}
-            />
+          <ChoiceInput key={stateKey}
+            type="radio"
+            name="userunit-cc-all"
+            checked={criteria?.all === stateKey ?? false}
+            onChange={e => onChange({
+              ...criteria,
+              all: stateKey,
+            })}
+          >
             {stateKey}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
       {CottonCandyTypeKeys.map(type => (

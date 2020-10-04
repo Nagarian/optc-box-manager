@@ -9,6 +9,7 @@ import Box from 'components/Box'
 import { getLimitType } from 'services/limit'
 import { SubTitle } from 'components/Title'
 import { FilterContainerPanel } from '../FilterContainer'
+import ChoiceInput from 'components/forms/ChoiceInput'
 
 export interface ByLimitBreakCriteria extends SearchFilterCriteria {
   hasLimitBreak?: boolean
@@ -94,109 +95,102 @@ export function ByLimitBreakInput ({
         gridAutoFlow="column"
         gridGap="2"
       >
-        <label>
-          <input
-            type="radio"
-            name="has-lb"
-            checked={criteria?.hasLimitBreak === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasLimitBreak: true,
-              })
-            }
-          />
+        <ChoiceInput
+          type="radio"
+          name="has-lb"
+          checked={criteria?.hasLimitBreak === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasLimitBreak: true,
+            })
+          }
+        >
           Has limit break
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="has-lb"
-            checked={criteria?.hasLimitBreak === false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasLimitBreak: false,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="has-lb"
+          checked={criteria?.hasLimitBreak === false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasLimitBreak: false,
+            })
+          }
+        >
           Hasn't limit break
-        </label>
+        </ChoiceInput>
 
-        <label>
-          <input
-            type="radio"
-            name="has-lb-key"
-            checked={criteria?.hasKeyLimitBreak === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasKeyLimitBreak: true,
-              })
-            }
-          />
+        <ChoiceInput
+          type="radio"
+          name="has-lb-key"
+          checked={criteria?.hasKeyLimitBreak === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasKeyLimitBreak: true,
+            })
+          }
+        >
           Has limit break key extension
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="has-lb-key"
-            checked={criteria?.hasKeyLimitBreak === false}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasKeyLimitBreak: false,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="has-lb-key"
+          checked={criteria?.hasKeyLimitBreak === false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasKeyLimitBreak: false,
+            })
+          }
+        >
           Hasn't limit break key extension
-        </label>
+        </ChoiceInput>
       </Box>
 
       <SubTitle fontSize="2" my="2">Key extension Finder</SubTitle>
       <FilterContainerPanel>
-        <label>
-          <input
-            type="checkbox"
-            name="has-lb-key-cooldown"
-            checked={criteria?.hasCooldownExtension === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasCooldownExtension: e.target.checked,
-              })
-            }
-          />
+        <ChoiceInput
+          type="checkbox"
+          name="has-lb-key-cooldown"
+          checked={criteria?.hasCooldownExtension === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasCooldownExtension: e.target.checked,
+            })
+          }
+        >
           Has cooldown reduction
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="has-lb-key-captain"
-            checked={criteria?.hasCaptainReductionExtension === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasCaptainReductionExtension: e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="has-lb-key-captain"
+          checked={criteria?.hasCaptainReductionExtension === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasCaptainReductionExtension: e.target.checked,
+            })
+          }
+        >
           Has captain amelioration
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="has-lb-key-potential"
-            checked={criteria?.hasPotentialExtension === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasPotentialExtension: e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="has-lb-key-potential"
+          checked={criteria?.hasPotentialExtension === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasPotentialExtension: e.target.checked,
+            })
+          }
+        >
           Has another potential
-        </label>
+        </ChoiceInput>
       </FilterContainerPanel>
     </>
   )

@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { PirateFestIcon } from 'components/Icon'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
@@ -52,40 +53,38 @@ export function ByUserPirateFestInput ({
         <PirateFestIcon size="2" title="Pirate Rumble Special" />
         Special
         {UserPirateFestStateKeys.map(stateKey => (
-          <label key={stateKey}>
-            <input
-              type="radio"
-              name="userunit-festSpecial"
-              checked={criteria?.specialLvlState === stateKey}
-              onChange={e =>
-                onChange({
-                  ...criteria,
-                  specialLvlState: stateKey,
-                })
-              }
-            />
+          <ChoiceInput key={stateKey}
+            type="radio"
+            name="userunit-festSpecial"
+            checked={criteria?.specialLvlState === stateKey}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                specialLvlState: stateKey,
+              })
+            }
+          >
             {stateKey}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
       <FilterContainerPanel>
         <PirateFestIcon size="2" title="Pirate Rumble Ability" />
         Ability
         {UserPirateFestStateKeys.map(stateKey => (
-          <label key={stateKey}>
-            <input
-              type="radio"
-              name="userunit-festAbility"
-              checked={criteria?.abilityLvlState === stateKey}
-              onChange={e =>
-                onChange({
-                  ...criteria,
-                  abilityLvlState: stateKey,
-                })
-              }
-            />
+          <ChoiceInput key={stateKey}
+            type="radio"
+            name="userunit-festAbility"
+            checked={criteria?.abilityLvlState === stateKey}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                abilityLvlState: stateKey,
+              })
+            }
+          >
             {stateKey}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
     </>

@@ -8,6 +8,7 @@ import { FilterContainerPanel } from '../FilterContainer'
 import { SubTitle } from 'components/Title'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import Box from 'components/Box'
+import ChoiceInput from 'components/forms/ChoiceInput'
 
 export interface BySupportCriteria extends SearchFilterCriteria {
   hasSupport?: boolean
@@ -79,89 +80,83 @@ export function BySupportInput ({
   return (
     <Box>
       <FilterContainerPanel>
-        <label>
-          <input
-            type="radio"
-            name="has-support"
-            checked={criteria?.hasSupport === true}
-            onChange={e => triggerChange(true)}
-          />
+        <ChoiceInput
+          type="radio"
+          name="has-support"
+          checked={criteria?.hasSupport === true}
+          onChange={e => triggerChange(true)}
+        >
           Has support ability
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="has-support"
-            checked={criteria?.hasSupport === false}
-            onChange={e => triggerChange(false)}
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="has-support"
+          checked={criteria?.hasSupport === false}
+          onChange={e => triggerChange(false)}
+        >
           Hasn't support ability
-        </label>
+        </ChoiceInput>
       </FilterContainerPanel>
 
       <SubTitle fontSize="2" my="2">
         Specific Support Finder
       </SubTitle>
       <FilterContainerPanel>
-        <label>
-          <input
-            type="checkbox"
-            name="hasAtkSupport"
-            checked={criteria?.hasAtkSupport === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasAtkSupport: e.target.checked,
-              })
-            }
-          />
+        <ChoiceInput
+          type="checkbox"
+          name="hasAtkSupport"
+          checked={criteria?.hasAtkSupport === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasAtkSupport: e.target.checked,
+            })
+          }
+        >
           ATK
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="hasHpSupport"
-            checked={criteria?.hasHpSupport === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasHpSupport: e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="hasHpSupport"
+          checked={criteria?.hasHpSupport === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasHpSupport: e.target.checked,
+            })
+          }
+        >
           HP
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="hasRcvSupport"
-            checked={criteria?.hasRcvSupport === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasRcvSupport: e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="hasRcvSupport"
+          checked={criteria?.hasRcvSupport === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasRcvSupport: e.target.checked,
+            })
+          }
+        >
           RCV
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="hasRcvSupport"
-            checked={criteria?.hasOtherSupport === true}
-            onChange={e =>
-              onChange({
-                ...criteria,
-                hasAtkSupport: undefined,
-                hasHpSupport: undefined,
-                hasRcvSupport: undefined,
-                hasOtherSupport: e.target.checked,
-              })
-            }
-          />
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="hasRcvSupport"
+          checked={criteria?.hasOtherSupport === true}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasAtkSupport: undefined,
+              hasHpSupport: undefined,
+              hasRcvSupport: undefined,
+              hasOtherSupport: e.target.checked,
+            })
+          }
+        >
           Other
-        </label>
+        </ChoiceInput>
       </FilterContainerPanel>
     </Box>
   )

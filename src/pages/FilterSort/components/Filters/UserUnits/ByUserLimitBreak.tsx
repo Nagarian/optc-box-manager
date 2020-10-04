@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
@@ -133,60 +134,57 @@ export function ByUserLimitBreakInput ({
       <FilterContainerPanel marginY="2">
         <Text>Limit Break</Text>
         {LimitBreakStateKeys.map(state => (
-          <label key={state}>
-            <input
-              type="radio"
-              name="uu-lbstate"
-              checked={criteria?.lbState === state ?? false}
-              onChange={e =>
-                onChange({
-                  ...criteria,
-                  lbState: state,
-                })
-              }
-            />
+          <ChoiceInput key={state}
+            type="radio"
+            name="uu-lbstate"
+            checked={criteria?.lbState === state ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                lbState: state,
+              })
+            }
+          >
             {state}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
 
       <FilterContainerPanel marginY="2">
         <Text>Keyed Limit Break</Text>
         {LimitBreakStateKeys.map(state => (
-          <label key={state}>
-            <input
-              type="radio"
-              name="uu-keyLbState"
-              checked={criteria?.keyLbState === state ?? false}
-              onChange={e =>
-                onChange({
-                  ...criteria,
-                  keyLbState: state,
-                })
-              }
-            />
+          <ChoiceInput key={state}
+            type="radio"
+            name="uu-keyLbState"
+            checked={criteria?.keyLbState === state ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                keyLbState: state,
+              })
+            }
+          >
             {state}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
 
       <FilterContainerPanel marginY="3">
         <Text>Rainbow</Text>
         {RainbowStateKeys.map(state => (
-          <label key={state}>
-            <input
-              type="radio"
-              name="uu-lb-rainbow"
-              checked={criteria?.rainbowState === state ?? false}
-              onChange={e =>
-                onChange({
-                  ...criteria,
-                  rainbowState: state,
-                })
-              }
-            />
+          <ChoiceInput key={state}
+            type="radio"
+            name="uu-lb-rainbow"
+            checked={criteria?.rainbowState === state ?? false}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                rainbowState: state,
+              })
+            }
+          >
             {state}
-          </label>
+          </ChoiceInput>
         ))}
       </FilterContainerPanel>
     </>

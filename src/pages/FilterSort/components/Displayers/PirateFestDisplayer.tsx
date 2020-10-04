@@ -1,5 +1,6 @@
 import Box from 'components/Box'
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { PirateFestIcon } from 'components/Icon'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
@@ -73,17 +74,16 @@ export function PirateFestDisplayerInput ({
   return (
     <FilterContainerPanel margin="4">
       {PirateFestDisplayerOptionTypes.map(stateKey => (
-        <label key={stateKey}>
-          <input
-            type="radio"
-            name="displayer-fest"
-            checked={options?.type === stateKey ?? false}
-            onChange={e => onChange({
-              type: stateKey,
-            })}
-          />
+        <ChoiceInput key={stateKey}
+          type="radio"
+          name="displayer-fest"
+          checked={options?.type === stateKey ?? false}
+          onChange={e => onChange({
+            type: stateKey,
+          })}
+        >
           {stateKey}
-        </label>
+        </ChoiceInput>
       ))}
     </FilterContainerPanel>
   )

@@ -1,4 +1,5 @@
 import Box from 'components/Box'
+import ChoiceInput from 'components/forms/ChoiceInput'
 import ImageInput from 'components/forms/ImageInput'
 import Image from 'components/Image'
 import { SubTitle, Text } from 'components/Title'
@@ -65,15 +66,15 @@ export function ByDropInput ({
       <SubTitle fontSize="2">Drop Location</SubTitle>
       <LabelDisplayer>
         {ExtendedDropKeys.map(dropKey => (
-          <label key={dropKey}>
-            <input
-              type="checkbox"
-              name="unit-dropLocation"
-              checked={criteria?.dropLocations?.includes(dropKey) ?? false}
-              onChange={e => triggerCategoryChange(dropKey, e.target.checked)}
-            />
+          <ChoiceInput
+            key={dropKey}
+            type="checkbox"
+            name="unit-dropLocation"
+            checked={criteria?.dropLocations?.includes(dropKey) ?? false}
+            onChange={e => triggerCategoryChange(dropKey, e.target.checked)}
+          >
             {dropKey}
-          </label>
+          </ChoiceInput>
         ))}
       </LabelDisplayer>
 

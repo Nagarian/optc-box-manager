@@ -1,3 +1,4 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
 import { SupportIcon } from 'components/Icon'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
@@ -45,19 +46,18 @@ export function ByUserSupportInput ({
       <SupportIcon size="2" />
         Support level
       {SupportStateKeys.map(stateKey => (
-        <label key={stateKey}>
-          <input
-            type="radio"
-            name="userunit-support"
-            checked={criteria?.state === stateKey}
-            onChange={e =>
-              onChange({
-                state: stateKey,
-              })
-            }
-          />
+        <ChoiceInput key={stateKey}
+          type="radio"
+          name="userunit-support"
+          checked={criteria?.state === stateKey}
+          onChange={e =>
+            onChange({
+              state: stateKey,
+            })
+          }
+        >
           {stateKey}
-        </label>
+        </ChoiceInput>
       ))}
     </FilterContainerPanel>
   )

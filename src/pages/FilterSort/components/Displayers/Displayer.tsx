@@ -1,4 +1,5 @@
 import Box from 'components/Box'
+import ChoiceInput from 'components/forms/ChoiceInput'
 import React from 'react'
 import {
   SearchDisplayerBuilder,
@@ -18,30 +19,28 @@ export default function Displayer ({
     searchDisplayer && SearchDisplayerBuilder[searchDisplayer.type].input
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="50vh">
-      <label>
-        <input
-          type="radio"
-          checked={!searchDisplayer}
-          name="displayer-type"
-          onChange={() => onChange(undefined)}
-        />
+    <Box display="flex" flexDirection="column" minHeight="50vh" alignContent="flex-start">
+      <ChoiceInput
+        type="radio"
+        checked={!searchDisplayer}
+        name="displayer-type"
+        onChange={() => onChange(undefined)}
+      >
         None
-      </label>
+      </ChoiceInput>
       {UserUnitDisplayerTypeKeys.map(displayerType => (
-        <label key={displayerType}>
-          <input
-            type="radio"
-            checked={searchDisplayer?.type === displayerType ?? false}
-            name="displayer-type"
-            onChange={() =>
-              onChange({
-                type: displayerType,
-              })
-            }
-          />
+        <ChoiceInput key={displayerType}
+          type="radio"
+          checked={searchDisplayer?.type === displayerType ?? false}
+          name="displayer-type"
+          onChange={() =>
+            onChange({
+              type: displayerType,
+            })
+          }
+        >
           {SearchDisplayerBuilder[displayerType].label}
-        </label>
+        </ChoiceInput>
       ))}
       {OptionComponent && searchDisplayer && (
         <OptionComponent
