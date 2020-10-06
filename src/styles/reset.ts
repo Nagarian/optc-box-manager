@@ -30,14 +30,14 @@ footer, header, hgroup, menu, nav, section, main {
 
 html {
   box-sizing: border-box;
-  overscroll-behavior-y: contain;
+  overscroll-behavior: none;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
-  overscroll-behavior-y: contain;
+  overscroll-behavior: none;
   line-height: normal;
   min-width: ${themeGet('breakpoints.minimalRequired')};
   background-color: ${themeGet('colors.background')};
