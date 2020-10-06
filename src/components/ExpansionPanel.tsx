@@ -1,4 +1,5 @@
 import { themeGet } from '@styled-system/theme-get'
+import useMeasure from 'hooks/useMeasure'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Box, { BoxProps } from './Box'
@@ -8,7 +9,7 @@ import { ArrowIcon } from './Icon'
 const ExpandButton = styled(Button).attrs(() => ({
   icon: ArrowIcon,
   placeContent: 'start',
-})) <{ isOpen: boolean }>`
+}))<{ isOpen: boolean }>`
   ${ArrowIcon} {
     transform: rotate(0deg);
     transition: all 0.25s ease;
@@ -17,11 +18,11 @@ const ExpandButton = styled(Button).attrs(() => ({
   flex: 0 0 auto;
 `
 
-const Panel = styled(Box) <{ isOpen: boolean; innerHeight?: number }>`
+const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
   max-height: ${p => p.isOpen && p.innerHeight + 'px'};
   overflow: ${p => !p.isOpen && 'hidden'};
-  transition: max-height .25s ease;
+  transition: max-height 0.25s ease;
   margin-bottom: ${p => p.isOpen && themeGet('space.2')};
 
   display: flex;
@@ -38,8 +39,9 @@ function ExpandedPanel ({
   isOpen: boolean
   children: ReactNode
 } & BoxProps) {
-  const boxRef = useRef<HTMLElement>(null)
+  const [bind, { height }] = useMeasure()
 
+  const boxRef = useRef<HTMLElement>(null)
   useEffect(() => {
     if (isOpen && boxRef.current) {
       boxRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -47,20 +49,8 @@ function ExpandedPanel ({
   }, [isOpen])
 
   return (
-    <Panel
-      innerHeight={
-        boxRef.current
-          ? Array.from(boxRef.current.children).reduce(
-            (acc, el) => acc + el.scrollHeight,
-            0,
-          )
-          : undefined
-      }
-      isOpen={isOpen}
-      ref={boxRef as any}
-      {...rest}
-    >
-      {children}
+    <Panel innerHeight={height} isOpen={isOpen} ref={boxRef as any} {...rest}>
+      <div ref={bind as any}>{children}</div>
     </Panel>
   )
 }
