@@ -19,19 +19,6 @@ import {
 import { cleanStyledSystem, place, PlaceProps } from 'styles'
 import { Icon, LoaderIcon } from './Icon'
 
-const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
-  compose(space, color, border, typography, gridArea, place),
-  variant({
-    scale: 'buttons',
-    variants: {
-      primary: {},
-    },
-  }),
-  css`
-    display: flex;
-  `,
-)
-
 type StyledButtonProps = SpaceProps &
   GridAreaProps &
   PlaceProps &
@@ -69,7 +56,7 @@ export default function Button ({
       {...defaultPaddingFix}
     >
       {isLoading && <LoaderIcon size={size} marginRight={children ? 2 : 0} />}
-      {Icon && <Icon size={size} marginRight={children ? 2 : 0} />}
+      {Icon && <Icon size={size} marginRight={children ? 2 : 0} color="currentColor" />}
       {children}
     </Btn>
   )
@@ -87,3 +74,16 @@ Button.defaultProps = {
   placeItems: 'center',
   placeContent: 'center',
 }
+
+const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
+  compose(space, color, border, typography, gridArea, place),
+  variant({
+    scale: 'buttons',
+    variants: {
+      primary: {},
+    },
+  }),
+  css`
+    display: flex;
+  `,
+)

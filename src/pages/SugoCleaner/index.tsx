@@ -12,6 +12,8 @@ import {
   BellyIcon,
   TreasureIcon,
   DeleteIcon,
+  SupportIcon,
+  LimitBreakIcon,
 } from 'components/Icon'
 import Add from 'pages/Add'
 import { UserUnit } from 'models/userBox'
@@ -19,6 +21,8 @@ import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
 import { SubTitle, Title } from 'components/Title'
 import Detail from 'pages/Detail'
 import Box from 'components/Box'
+import { ByUserSpecialFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSpecial'
+import { ByUserSupportFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSupport'
 
 export type SugoCleanerProps = {
   units: ExtendedUnit[]
@@ -38,6 +42,8 @@ export default function SugoCleaner ({
     toClean,
     toSell,
     toWaiting,
+    toWaitingForLB,
+    toWaitingForSupport,
     addTo,
     move,
     remove,
@@ -69,18 +75,32 @@ export default function SugoCleaner ({
         action={action('toClean')}
         onClearAll={() => removeAll('toClean')}
         onAdd={() => setOpenAdd(true)}
+        showOnEmpty
       />
       <SugoCleanerList
-        title="To Sell"
+        title="To sell"
         list={toSell}
         onClearAll={() => removeAll('toSell')}
         action={action('toSell')}
+        showOnEmpty
       />
       <SugoCleanerList
-        title="Waiting for Skill up event"
+        title="Wait for skill-up event"
         list={toWaiting}
         onClearAll={() => removeAll('toWaiting')}
         action={action('toWaiting')}
+      />
+      <SugoCleanerList
+        title="Wait for LB materials"
+        list={toWaitingForLB}
+        onClearAll={() => removeAll('toWaitingForLB')}
+        action={action('toWaitingForLB')}
+      />
+      <SugoCleanerList
+        title="Wait for support release"
+        list={toWaitingForSupport}
+        onClearAll={() => removeAll('toWaitingForSupport')}
+        action={action('toWaitingForSupport')}
       />
 
       {openAdd && (
@@ -151,7 +171,8 @@ export default function SugoCleaner ({
               </Button>
             )}
 
-            {filteredUserUnit.length > 0 && currentList !== 'toWaiting' && (
+            {filteredUserUnit.some(WaitForSpecialEvent) &&
+              currentList !== 'toWaiting' && (
               <Button
                 {...commonPopupButton}
                 onClick={() => {
@@ -160,7 +181,37 @@ export default function SugoCleaner ({
                 }}
                 icon={SkillBookIcon}
               >
-                Waiting for skill up
+                  Wait for skill-up event
+              </Button>
+            )}
+
+            {filteredUserUnit.some(WaitForLBMaterials) &&
+              currentList !== 'toWaitingForLB' && (
+              <Button
+                {...commonPopupButton}
+                onClick={() => {
+                  currentList &&
+                      move(currentList, 'toWaitingForLB', openChooser)
+                  setOpenChooser(undefined)
+                }}
+                icon={LimitBreakIcon}
+              >
+                  Wait for LB materials
+              </Button>
+            )}
+
+            {filteredUserUnit.some(WaitForSupport) &&
+              currentList !== 'toWaitingForSupport' && (
+              <Button
+                {...commonPopupButton}
+                onClick={() => {
+                  currentList &&
+                      move(currentList, 'toWaitingForSupport', openChooser)
+                  setOpenChooser(undefined)
+                }}
+                icon={SupportIcon}
+              >
+                  Wait for support release
               </Button>
             )}
 
@@ -200,6 +251,7 @@ function SugoCleanerList ({
   title,
   list,
   action,
+  showOnEmpty = false,
   onAdd,
   onClearAll,
 }: {
@@ -209,7 +261,12 @@ function SugoCleanerList ({
   actionLabel?: string
   onAdd?: () => void
   onClearAll: () => void
+  showOnEmpty?: boolean
 }) {
+  if (!list.length && !showOnEmpty) {
+    return null
+  }
+
   return (
     <FilterContainer
       title={title}
@@ -239,3 +296,7 @@ function SugoCleanerList ({
     </FilterContainer>
   )
 }
+
+const WaitForSpecialEvent = ByUserSpecialFilter({ state: 'ongoing' })
+const WaitForSupport = ByUserSupportFilter({ state: 'locked' })
+const WaitForLBMaterials = (uu: UserUnit) => uu.potentials.some(p => p.lvl === 0)

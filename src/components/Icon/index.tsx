@@ -14,6 +14,7 @@ import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
+import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
 import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
@@ -64,6 +65,7 @@ export const DeleteIcon: Icon = BaseSvg(Delete)
 export const DescendingIcon: Icon = BaseSvg(Descending)
 export const EditIcon: Icon = BaseSvg(Edit)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const LimitBreakIcon: Icon = BaseSvg(LimitBreak)
 export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
 export const PirateFestIcon: Icon = BaseSvg(PirateFest)
 PirateFestIcon.defaultProps = {

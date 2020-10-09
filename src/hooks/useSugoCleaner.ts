@@ -1,7 +1,13 @@
 import { useStorage } from './useStorage'
 import { ExtendedUnit } from 'models/units'
 
-export const SugoCleanerList = ['toClean', 'toSell', 'toWaiting'] as const
+export const SugoCleanerList = [
+  'toClean',
+  'toSell',
+  'toWaiting',
+  'toWaitingForLB',
+  'toWaitingForSupport',
+] as const
 export type SugoCleanerListType = typeof SugoCleanerList[number]
 
 export type SugoCleaner = {
@@ -12,6 +18,8 @@ const defaultSugoCleaner: SugoCleaner = {
   toClean: [],
   toSell: [],
   toWaiting: [],
+  toWaitingForLB: [],
+  toWaitingForSupport: [],
 }
 
 export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
@@ -20,7 +28,13 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
     defaultSugoCleaner,
   )
 
-  const { toClean, toSell, toWaiting } = sugoCleaner
+  const {
+    toClean = [],
+    toSell = [],
+    toWaiting = [],
+    toWaitingForLB = [],
+    toWaitingForSupport = [],
+  } = sugoCleaner
 
   return {
     toClean: toClean
@@ -32,6 +46,14 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
       .filter(Boolean) as ExtendedUnit[],
 
     toWaiting: toWaiting
+      .map(id => unitDB.find(u => u.id === id))
+      .filter(Boolean) as ExtendedUnit[],
+
+    toWaitingForLB: toWaitingForLB
+      .map(id => unitDB.find(u => u.id === id))
+      .filter(Boolean) as ExtendedUnit[],
+
+    toWaitingForSupport: toWaitingForSupport
       .map(id => unitDB.find(u => u.id === id))
       .filter(Boolean) as ExtendedUnit[],
 
@@ -59,7 +81,7 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
           (id, i, a) =>
             !idsToMove.includes(id) || a.findIndex(el => el === id) !== i,
         ),
-        [to]: [...sugoCleaner[to], ...idsToMove],
+        [to]: [...(sugoCleaner[to] ?? []), ...idsToMove],
       })
     },
 
