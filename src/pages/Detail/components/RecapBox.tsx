@@ -3,6 +3,7 @@ import CharacterBox from 'components/CharacterBox'
 import {
   CottonCandyIcon,
   PirateFestAbilityIcon,
+  PirateFestIcon,
   PirateFestSpecialIcon,
   SpecialLvlIcon,
   SupportIcon,
@@ -100,12 +101,12 @@ export default function RecapBox ({
           </Element>
         )}
 
-            {support && (
+        {support && (
           <Element gridRow="1">
-                <SupportIcon size="2" />
+            <SupportIcon size="2" />
             <Progression value={support.lvl} max={5} />
-              </Element>
-            )}
+          </Element>
+        )}
 
         <Element gridRow="2">
           <CottonCandyIcon
@@ -137,21 +138,21 @@ export default function RecapBox ({
         {potentials.length > 0 &&
           potentials.map(({ type, lvl }, i) => (
             <Element key={i} gridRow="3">
-                <PotentialAbility size="2" type={type} />
-                <Progression value={lvl} max={5} />
-              </Element>
-            ))}
+              <PotentialAbility size="2" type={type} />
+              <Progression value={lvl} max={5} />
+            </Element>
+          ))}
 
         {pirateFest && (
           <>
             <Element gridRow="4">
-            <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
-            <Progression value={pirateFest.specialLvl} max={10} />
+              <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
+              <Progression value={pirateFest.specialLvl} max={10} />
             </Element>
             <Element gridRow="4">
-            <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
-            <Progression value={pirateFest.abilityLvl} max={5} />
-          </Element>
+              <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
+              <Progression value={pirateFest.abilityLvl} max={5} />
+            </Element>
           </>
         )}
       </Box>
@@ -213,7 +214,7 @@ export function RecapBoxLight ({
   userUnit: UserUnit
   onClick?: (unit: UserUnit) => void
 } & SpaceProps) {
-  const { unit, potentials, special, support } = userUnit
+  const { unit, potentials, special, support, pirateFest } = userUnit
 
   return (
     <Box display="flex" {...rest}>
@@ -222,43 +223,46 @@ export function RecapBoxLight ({
         unit={unit}
         userUnit={userUnit}
         onClick={() => onClick?.(userUnit)}
+        placeSelf="center"
       />
       <Box
         gridArea="info"
         marginLeft="2"
-        flex="1"
+        display="grid"
         onClick={() => onClick?.(userUnit)}
       >
         {special && (
-          <Element>
+          <Element gridRow="1">
             <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
-
-            {support && (
-              <Element>
-                <SupportIcon size="2" />
-                {support.lvl === 5 ? (
-                  <Max />
-                ) : support.lvl === 0 ? (
-                  'not unlocked'
-                ) : (
-                  `${support.lvl}/${5}`
-                )}
-              </Element>
-            )}
           </Element>
         )}
 
-        {potentials.length > 0 && (
-          <Element>
-            {potentials.map(({ type, lvl }, i) => (
-              <Element key={i}>
-                <PotentialAbility size="2" type={type} />
-                <Progression value={lvl} max={5} />
-              </Element>
-            ))}
+        {support && (
+          <Element gridRow="1">
+            <SupportIcon size="2" />
+            <Progression value={support.lvl} max={5} />
           </Element>
         )}
+
+        {pirateFest?.specialLvl && (
+          <Element gridRow="1">
+            <PirateFestIcon size="2" />
+
+            <Box display="flex" flexDirection="column">
+              <Progression value={pirateFest.specialLvl} max={10} />
+              <Progression value={pirateFest.abilityLvl} max={5} />
+            </Box>
+          </Element>
+        )}
+
+        {potentials.length > 0 &&
+          potentials.map(({ type, lvl }, i) => (
+            <Element key={i} gridRow="2">
+              <PotentialAbility size="2" type={type} />
+              <Progression value={lvl} max={5} />
+            </Element>
+          ))}
       </Box>
     </Box>
   )
