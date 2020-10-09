@@ -1,3 +1,22 @@
+# [1.10.0](https://github.com/Nagarian/optc-box-manager/compare/v1.9.0...v1.10.0) (2020-10-09)
+
+
+### Bug Fixes
+
+* issue with slider and browser with "sliding to go back" ([8157b24](https://github.com/Nagarian/optc-box-manager/commit/8157b2473c84fa8914f7a28ef0cda1a3a638668e))
+* **detail:** issue with ExpansionPanel and content displayed ([f72d569](https://github.com/Nagarian/optc-box-manager/commit/f72d56900e7a3181c42fd6b14d7c8f9aa44d5c83))
+
+
+### Features
+
+* **detail:** improve Recap Box display ([3c059f6](https://github.com/Nagarian/optc-box-manager/commit/3c059f621238f52696772d79d2c07eb019368045))
+* **search:** add confirmation before deletion of saved search ([2ee959d](https://github.com/Nagarian/optc-box-manager/commit/2ee959d92f868a08febdf768e206b57cd0f8ed38))
+* **SugoCleaner:** improve "waiting for" list ([54c3f78](https://github.com/Nagarian/optc-box-manager/commit/54c3f78f89fdbfdd2a4b77ab1ae352f42751ba39)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
+* **SugoCleaner:** show PirateFest info into Recap Box ([b907513](https://github.com/Nagarian/optc-box-manager/commit/b90751391ab9bd168ada9e0cf0bcf60423aeb365)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
+* rework Pirate Rumble icons ([8ad7abb](https://github.com/Nagarian/optc-box-manager/commit/8ad7abb4d1a038dd603991baaf4f656173972e75))
+
+
+
 # [1.9.0](https://github.com/Nagarian/optc-box-manager/compare/v1.8.0...v1.9.0) (2020-09-27)
 
 
@@ -77,17 +96,6 @@
 * **detail:** issue with Enrage Potential renaming (temporary fix) ([a7e7ea0](https://github.com/Nagarian/optc-box-manager/commit/a7e7ea0c3d30202601ca5d51b8d5c846ab74f337))
 * **detail:** issue with recent Potential icons (vivi) ([dc757b8](https://github.com/Nagarian/optc-box-manager/commit/dc757b81be8783ea3fcb615ee10d90c73e4ba431))
 * **filter:** issues with Manuel Acquirement Quests ([25e42dc](https://github.com/Nagarian/optc-box-manager/commit/25e42dcd468bf771d1855c0fc3f49bce4debc76d))
-
-
-
-# [1.6.0](https://github.com/Nagarian/optc-box-manager/compare/v1.5.0...v1.6.0) (2020-08-23)
-
-
-### Features
-
-* **detail:** add sync between LimitBreak lvl and Potential Abilities unlock ([b52da65](https://github.com/Nagarian/optc-box-manager/commit/b52da652e08aa373327b480129bb825e0a2bb6f1)), closes [#71](https://github.com/Nagarian/optc-box-manager/issues/71)
-* **filter:** add Support Finder filter ([4710ba0](https://github.com/Nagarian/optc-box-manager/commit/4710ba07072531d257fe79670a365b0ed3e76347)), closes [#69](https://github.com/Nagarian/optc-box-manager/issues/69)
-* **filter:** replace Fortnight with Manuals Quests ([ecefa33](https://github.com/Nagarian/optc-box-manager/commit/ecefa3355f7e36fdad680e534728c996af0b0ff4))
 
 
 
