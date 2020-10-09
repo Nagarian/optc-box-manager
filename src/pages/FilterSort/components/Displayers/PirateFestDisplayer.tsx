@@ -1,7 +1,7 @@
 import Box from 'components/Box'
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { PirateFestIcon } from 'components/Icon'
+import { PirateFestAbilityIcon, PirateFestSpecialIcon } from 'components/Icon'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import React from 'react'
@@ -31,7 +31,7 @@ export default function PirateFestDisplayer ({
           display="flex"
           flexDirection="column"
         >
-          <PirateFestIcon size="1" />
+          <PirateFestSpecialIcon size="1" />
           <Text color="white">{pirateFest.specialLvl}</Text>
         </Box>
         <Box
@@ -39,7 +39,7 @@ export default function PirateFestDisplayer ({
           display="flex"
           flexDirection="column"
         >
-          <PirateFestIcon size="1" />
+          <PirateFestAbilityIcon size="1" />
           <Text color="white">{pirateFest.abilityLvl}</Text>
         </Box>
       </InfoDisplayer>
@@ -49,7 +49,7 @@ export default function PirateFestDisplayer ({
   if (options.type === 'ability' && pirateFest.abilityLvl) {
     return (
       <InfoDisplayer anchorX="middle" anchorY="bottom">
-        <PirateFestIcon size="1" />
+        <PirateFestAbilityIcon size="1" />
         <Progression value={pirateFest.abilityLvl} max={5} color="white" />
       </InfoDisplayer>
     )
@@ -58,7 +58,7 @@ export default function PirateFestDisplayer ({
   if (options.type === 'special' && pirateFest.specialLvl) {
     return (
       <InfoDisplayer anchorX="middle" anchorY="bottom">
-        <PirateFestIcon size="1" />
+        <PirateFestSpecialIcon size="1" />
         <Progression value={pirateFest.specialLvl} max={10} color="white" />
       </InfoDisplayer>
     )

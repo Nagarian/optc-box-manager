@@ -1,5 +1,5 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { PirateFestIcon } from 'components/Icon'
+import { PirateFestAbilityIcon, PirateFestSpecialIcon } from 'components/Icon'
 import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
@@ -50,8 +50,8 @@ export function ByUserPirateFestInput ({
   return (
     <>
       <FilterContainerPanel>
-        <PirateFestIcon size="2" title="Pirate Rumble Special" />
-        Special
+        <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
+        Special level
         {UserPirateFestStateKeys.map(stateKey => (
           <ChoiceInput key={stateKey}
             type="radio"
@@ -69,8 +69,8 @@ export function ByUserPirateFestInput ({
         ))}
       </FilterContainerPanel>
       <FilterContainerPanel>
-        <PirateFestIcon size="2" title="Pirate Rumble Ability" />
-        Ability
+        <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
+        Ability level
         {UserPirateFestStateKeys.map(stateKey => (
           <ChoiceInput key={stateKey}
             type="radio"

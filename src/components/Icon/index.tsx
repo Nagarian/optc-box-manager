@@ -16,6 +16,8 @@ import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
+import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
+import { ReactComponent as PirateFestSpecial } from './piratefest-special.svg'
 import { ReactComponent as Reset } from './reset.svg'
 import { ReactComponent as ResetApply } from './reset-apply.svg'
 import { ReactComponent as ResetRemove } from './reset-remove.svg'
@@ -65,6 +67,14 @@ export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
 export const PirateFestIcon: Icon = BaseSvg(PirateFest)
 PirateFestIcon.defaultProps = {
+  color: 'primaryText',
+}
+export const PirateFestAbilityIcon: Icon = BaseSvg(PirateFestAbility)
+PirateFestAbilityIcon.defaultProps = {
+  color: 'primaryText',
+}
+export const PirateFestSpecialIcon: Icon = BaseSvg(PirateFestSpecial)
+PirateFestSpecialIcon.defaultProps = {
   color: 'primaryText',
 }
 export const ResetIcon: Icon = BaseSvg(Reset)

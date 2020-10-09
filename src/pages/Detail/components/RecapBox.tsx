@@ -1,6 +1,12 @@
 import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
-import { CottonCandyIcon, PirateFestIcon, SpecialLvlIcon, SupportIcon } from 'components/Icon'
+import {
+  CottonCandyIcon,
+  PirateFestAbilityIcon,
+  PirateFestSpecialIcon,
+  SpecialLvlIcon,
+  SupportIcon,
+} from 'components/Icon'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression, { Max } from 'components/Progression'
 import { SubTitle, Title, Text } from 'components/Title'
@@ -61,9 +67,13 @@ export default function RecapBox ({
         </Text>
         <Box display="flex" alignItems="center">
           <UnitClassesDisplayer unit={unit} />
-          {unit.pirateFest.class &&
-            <PirateFestStyleIcon type={unit.pirateFest.class} size="1" margin="2" />
-          }
+          {unit.pirateFest.class && (
+            <PirateFestStyleIcon
+              type={unit.pirateFest.class}
+              size="1"
+              margin="2"
+            />
+          )}
         </Box>
       </Box>
       <Box gridArea="info">
@@ -80,7 +90,7 @@ export default function RecapBox ({
                 ) : support.lvl === 0 ? (
                   'not unlocked'
                 ) : (
-                      `${support.lvl}/${5}`
+                  `${support.lvl}/${5}`
                 )}
               </Element>
             )}
@@ -123,19 +133,12 @@ export default function RecapBox ({
 
         {pirateFest && (
           <Element>
-            <PirateFestIcon
-              size="2"
-              title="Pirate Rumble Special"
-            />
+            <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
             <Progression value={pirateFest.specialLvl} max={10} />
-            <PirateFestIcon
-              size="2"
-              title="Pirate Rumble Ability"
-            />
+            <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
             <Progression value={pirateFest.abilityLvl} max={5} />
           </Element>
         )}
-
       </Box>
     </Container>
   )
@@ -167,7 +170,12 @@ function UnitClassesDisplayer ({
   return (
     <Box display="flex">
       {(classes as UnitClass[][]).map((c, i) => (
-        <Box key={i} display="flex" flexDirection="column" marginLeft={i + 1 === classes.length ? 1 : 0}>
+        <Box
+          key={i}
+          display="flex"
+          flexDirection="column"
+          marginLeft={i + 1 === classes.length ? 1 : 0}
+        >
           {c.map(subClasses => (
             <UnitClassIcon
               key={subClasses}
@@ -219,7 +227,7 @@ export function RecapBoxLight ({
                 ) : support.lvl === 0 ? (
                   'not unlocked'
                 ) : (
-                      `${support.lvl}/${5}`
+                  `${support.lvl}/${5}`
                 )}
               </Element>
             )}
