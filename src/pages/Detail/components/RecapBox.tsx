@@ -13,11 +13,18 @@ import { SubTitle, Title, Text } from 'components/Title'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
-import { SpaceProps } from 'styled-system'
+import {
+  gridColumn,
+  GridColumnProps,
+  gridRow,
+  GridRowProps,
+  SpaceProps,
+} from 'styled-system'
 import { UnitClassIcon } from 'components/Class'
 import { UnitClass, ExtendedUnit } from 'models/units'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
+import { themeGet } from '@styled-system/theme-get'
 
 const Container = styled(Box)`
   display: grid;
@@ -27,9 +34,12 @@ const Container = styled(Box)`
   place-items: center;
 `
 
-const Element = styled.div`
+const Element = styled.div<GridRowProps & GridColumnProps>`
   display: flex;
   align-items: center;
+  margin: ${themeGet('space.0')};
+  ${gridRow}
+  ${gridColumn}
 `
 
 export default function RecapBox ({
@@ -76,42 +86,46 @@ export default function RecapBox ({
           )}
         </Box>
       </Box>
-      <Box gridArea="info">
+
+      <Box
+        gridArea="info"
+        display="grid"
+        justifySelf="flex-start"
+        alignSelf="center"
+      >
         {special && (
-          <Element>
+          <Element gridRow="1">
             <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
-
-            {support && (
-              <Element>
-                <SupportIcon size="2" />
-                {support.lvl === 5 ? (
-                  <Max />
-                ) : support.lvl === 0 ? (
-                  'not unlocked'
-                ) : (
-                  `${support.lvl}/${5}`
-                )}
-              </Element>
-            )}
           </Element>
         )}
 
-        <Element>
+            {support && (
+          <Element gridRow="1">
+                <SupportIcon size="2" />
+            <Progression value={support.lvl} max={5} />
+              </Element>
+            )}
+
+        <Element gridRow="2">
           <CottonCandyIcon
             size="2"
             color="specific.ccHp"
             title="Cotton Candy HP"
           />
           {hp === ccLimit.hp ? <Max /> : '+' + hp}
+        </Element>
 
+        <Element gridRow="2">
           <CottonCandyIcon
             size="2"
             color="specific.ccAtk"
             title="Cotton Candy ATK"
           />
           {atk === ccLimit.atk ? <Max /> : '+' + atk}
+        </Element>
 
+        <Element gridRow="2">
           <CottonCandyIcon
             size="2"
             color="specific.ccRcv"
@@ -120,24 +134,25 @@ export default function RecapBox ({
           {rcv === ccLimit.rcv ? <Max /> : '+' + rcv}
         </Element>
 
-        {potentials.length > 0 && (
-          <Element>
-            {potentials.map(({ type, lvl }, i) => (
-              <Element key={i}>
+        {potentials.length > 0 &&
+          potentials.map(({ type, lvl }, i) => (
+            <Element key={i} gridRow="3">
                 <PotentialAbility size="2" type={type} />
                 <Progression value={lvl} max={5} />
               </Element>
             ))}
-          </Element>
-        )}
 
         {pirateFest && (
-          <Element>
+          <>
+            <Element gridRow="4">
             <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
             <Progression value={pirateFest.specialLvl} max={10} />
+            </Element>
+            <Element gridRow="4">
             <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
             <Progression value={pirateFest.abilityLvl} max={5} />
           </Element>
+          </>
         )}
       </Box>
     </Container>
