@@ -1,12 +1,29 @@
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps, UserUnitFilter } from 'models/search'
+import { UserSettingEnhanced } from 'hooks/useUserSettings'
+import {
+  SearchFilterCriteria,
+  SearchFilterCriteriaInputProps,
+  UserUnitFilter,
+} from 'models/search'
 import { FunctionComponent } from 'react'
-import { ByUserCottonCandyFilter, ByUserCottonCandyInput } from './ByUserCottonCandy'
+import {
+  ByUserCottonCandyFilter,
+  ByUserCottonCandyInput,
+} from './ByUserCottonCandy'
+import {
+  ByUserLimitBreakFilter,
+  ByUserLimitBreakInput,
+} from './ByUserLimitBreak'
+import {
+  ByUserPirateFestFilter,
+  ByUserPirateFestInput,
+} from './ByUserPirateFest'
 import { ByUserPotentialFilter, ByUserPotentialInput } from './ByUserPotential'
+import {
+  ByUserPowerSocketFilter,
+  ByUserPowerSocketInput,
+} from './ByUserPowerSocket'
 import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
 import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
-import { ByUserLimitBreakFilter, ByUserLimitBreakInput } from './ByUserLimitBreak'
-import { UserSettingEnhanced } from 'hooks/useUserSettings'
-import { ByUserPirateFestFilter, ByUserPirateFestInput } from './ByUserPirateFest'
 
 export const SearchFilterUserUnitsKeys = [
   'byUserSpecial',
@@ -15,6 +32,7 @@ export const SearchFilterUserUnitsKeys = [
   'byUserPirateFest',
   'byUserLimitBreak',
   'byUserPotential',
+  'byUserPowerSocket',
 ] as const
 
 export type SearchFilterUserUnitsType = typeof SearchFilterUserUnitsKeys[number]
@@ -23,7 +41,10 @@ export type SearchFilterUserUnits = {
   [key in SearchFilterUserUnitsType]?: SearchFilterCriteria
 }
 
-type Builder = (criteria: SearchFilterCriteria, userSetting: UserSettingEnhanced) => UserUnitFilter
+type Builder = (
+  criteria: SearchFilterCriteria,
+  userSetting: UserSettingEnhanced,
+) => UserUnitFilter
 export const UserUnitFilterBuilder: {
   [key in SearchFilterUserUnitsType]: {
     title: string
@@ -62,5 +83,10 @@ export const UserUnitFilterBuilder: {
     title: 'Pirate Rumble',
     builder: ByUserPirateFestFilter,
     input: ByUserPirateFestInput,
+  },
+  byUserPowerSocket: {
+    title: 'Power Sockets',
+    builder: ByUserPowerSocketFilter,
+    input: ByUserPowerSocketInput,
   },
 }
