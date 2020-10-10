@@ -1,4 +1,4 @@
-import { ExtendedUnit, PotentialKey } from './units'
+import { ExtendedUnit, PotentialKey, PowerSocketKey } from './units'
 
 export type UserUnitSpecial = {
   lvl: number
@@ -37,6 +37,11 @@ export type UserUnitPirateFest = {
   specialLvl: number
 }
 
+export type UserUnitPowerSocket = {
+  type?: PowerSocketKey
+  lvl: number
+}
+
 export type UserUnit = {
   id: string
   unit: ExtendedUnit
@@ -46,6 +51,7 @@ export type UserUnit = {
   support?: UserUnitSupport
   cc: UserUnitCottonCandy
   pirateFest?: UserUnitPirateFest
+  sockets: UserUnitPowerSocket[]
 }
 
 export type UserBox = UserUnit[]

@@ -15,7 +15,8 @@ import SupportEdit from './components/SupportEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import { getLimitType } from 'services/limit'
 import PirateFestEdit from './components/PirateFestEdit'
-import { DeleteIcon, EvolveIcon, OpenInDBIcon, SkillBookIcon } from 'components/Icon'
+import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
+import PowerSocketEdit from './components/PowerSocketEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -94,9 +95,11 @@ export default function Detail ({
       <RecapBox userUnit={userUnit} marginBottom="3" />
 
       <Box display="flex" flexWrap="wrap">
-        <ExpansionPanel title="Socket" icon={SkillBookIcon} >
-
-        </ExpansionPanel>
+        <PowerSocketEdit
+          powerSockets={userUnit.sockets}
+          unit={unit}
+          onChange={sockets => setUserUnit({ ...userUnit, sockets })}
+        />
 
         <SpecialLvlEdit
           special={userUnit.special}

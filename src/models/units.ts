@@ -96,6 +96,20 @@ export const Potentials = [
 
 export type PotentialKey = typeof Potentials[number]
 
+export const PowerSockets = [
+  'Damage Reduction',
+  'Charge Specials',
+  'Bind Resistance',
+  'Despair Resistance',
+  'Auto-Heal',
+  'RCV Boost',
+  'Slot Rate Boost',
+  'Poison Resistance',
+  'Map Damage Resistance',
+  'Resilience',
+] as const
+export type PowerSocketKey = typeof PowerSockets[number]
+
 export type UnitPotential = {
   Name: PotentialKey
   description: string[]

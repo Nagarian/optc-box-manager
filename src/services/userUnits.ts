@@ -36,12 +36,16 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       atk: 0,
       rcv: 0,
     },
-    pirateFest: unit.detail.festAbility && unit.detail.festSpecial
-      ? {
-        abilityLvl: 1,
-        specialLvl: 1,
-      }
-      : undefined,
+    pirateFest:
+      unit.detail.festAbility && unit.detail.festSpecial
+        ? {
+          abilityLvl: 1,
+          specialLvl: 1,
+        }
+        : undefined,
+    sockets: Array(
+      Math.max(unit.slots, unit.limitSlot, unit.limitexSlot),
+    ).fill({ type: undefined, lvl: 0 }),
   }
 }
 
@@ -82,6 +86,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
     })),
     limitBreak: userUnit.limitBreak ?? template.limitBreak,
     pirateFest: userUnit.pirateFest ?? template.pirateFest,
+    sockets: template.sockets.map((s, i) => userUnit.sockets[i] ?? s),
   }
 }
 
@@ -254,13 +259,28 @@ export function resync (userUnit: UserUnit) {
     isUpdated = true
   }
 
-  if ((userUnit.pirateFest?.abilityLvl ?? 0) < (compare.pirateFest?.abilityLvl ?? 0) ||
-    (userUnit.pirateFest?.specialLvl ?? 0) < (compare.pirateFest?.specialLvl ?? 0)) {
+  if (
+    (userUnit.pirateFest?.abilityLvl ?? 0) <
+      (compare.pirateFest?.abilityLvl ?? 0) ||
+    (userUnit.pirateFest?.specialLvl ?? 0) <
+      (compare.pirateFest?.specialLvl ?? 0)
+  ) {
     updated.pirateFest = {
-      abilityLvl: Math.max(updated.pirateFest?.abilityLvl ?? 0, compare.pirateFest?.abilityLvl ?? 0),
-      specialLvl: Math.max(updated.pirateFest?.specialLvl ?? 0, compare.pirateFest?.specialLvl ?? 0),
+      abilityLvl: Math.max(
+        updated.pirateFest?.abilityLvl ?? 0,
+        compare.pirateFest?.abilityLvl ?? 0,
+      ),
+      specialLvl: Math.max(
+        updated.pirateFest?.specialLvl ?? 0,
+        compare.pirateFest?.specialLvl ?? 0,
+      ),
     }
 
+    isUpdated = true
+  }
+
+  if (!userUnit.sockets || userUnit.sockets.length !== compare.sockets.length) {
+    updated.sockets = compare.sockets.map((s, i) => userUnit.sockets?.[i] ?? s)
     isUpdated = true
   }
 
