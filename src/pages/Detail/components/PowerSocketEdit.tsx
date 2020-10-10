@@ -39,23 +39,10 @@ export default function PowerSocketEdit ({
       icon={SkillBookIcon}
       disabled={!powerSockets.length}
     >
-      <Box display="flex" justifyContent="space-evenly">
-        {powerSockets.map(({ type, lvl }, i) => (
-          <Button
-            key={i}
-            variant="link"
-            onClick={() => setCurrentIndex(i)}
-            px="1"
-            py="1"
-            fontSize="1"
-          >
-            <Box display="flex" flexDirection="column">
-              <PowerSocket type={type} size="2" />
-              <Progression value={lvl} max={5} />
-            </Box>
-          </Button>
-        ))}
-      </Box>
+      <UserPowerSocketDispayer
+        powerSockets={powerSockets}
+        onClick={i => setCurrentIndex(i)}
+      />
 
       {currentIndex !== undefined && (
         <PowerSocketEditor
@@ -117,5 +104,34 @@ function PowerSocketEditor ({
         )}
       </Box>
     </InputLabel>
+  )
+}
+
+type UserPowerSocketDispayerProps = {
+  powerSockets: UserUnitPowerSocket[]
+  onClick?: (index: number) => void
+}
+export function UserPowerSocketDispayer ({
+  powerSockets,
+  onClick,
+}: UserPowerSocketDispayerProps) {
+  return (
+    <Box display="flex" justifyContent="space-evenly">
+      {powerSockets.map(({ type, lvl }, i) => (
+        <Button
+          key={i}
+          variant="link"
+          onClick={() => onClick?.(i)}
+          px="1"
+          py="1"
+          fontSize="1"
+        >
+          <Box display="flex" flexDirection="column">
+            <PowerSocket type={type} size="2" />
+            <Progression value={lvl} max={5} />
+          </Box>
+        </Button>
+      ))}
+    </Box>
   )
 }

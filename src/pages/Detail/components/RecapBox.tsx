@@ -1,5 +1,7 @@
+import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
+import { UnitClassIcon } from 'components/Class'
 import {
   CottonCandyIcon,
   PirateFestAbilityIcon,
@@ -8,24 +10,27 @@ import {
   SpecialLvlIcon,
   SupportIcon,
 } from 'components/Icon'
+import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import PotentialAbility from 'components/PotentialAbility'
+import PowerSocket from 'components/PowerSocket'
 import Progression, { Max } from 'components/Progression'
-import { SubTitle, Title, Text } from 'components/Title'
+import { SubTitle, Text, Title } from 'components/Title'
+import { useUserSettings } from 'hooks/useUserSettings'
+import { ExtendedUnit, UnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import styled from 'styled-components'
 import {
+  flexDirection,
+  FlexDirectionProps,
+  gridArea,
+  GridAreaProps,
   gridColumn,
   GridColumnProps,
   gridRow,
   GridRowProps,
   SpaceProps,
 } from 'styled-system'
-import { UnitClassIcon } from 'components/Class'
-import { UnitClass, ExtendedUnit } from 'models/units'
-import { useUserSettings } from 'hooks/useUserSettings'
-import { PirateFestStyleIcon } from 'components/PirateFestStyle'
-import { themeGet } from '@styled-system/theme-get'
 
 const Container = styled(Box)`
   display: grid;
@@ -35,13 +40,19 @@ const Container = styled(Box)`
   place-items: center;
 `
 
-const Element = styled.div<GridRowProps & GridColumnProps>`
+const Element = styled.div<GridRowProps & GridColumnProps & GridAreaProps & FlexDirectionProps>`
   display: flex;
-  align-items: center;
-  margin: ${themeGet('space.0')};
+  ${flexDirection}
+  place-items: center;
+  text-align: center;
+  margin: ${themeGet('space.1')};
   ${gridRow}
   ${gridColumn}
+  ${gridArea}
 `
+Element.defaultProps = {
+  flexDirection: 'column',
+}
 
 export default function RecapBox ({
   userUnit,
@@ -55,6 +66,7 @@ export default function RecapBox ({
     special,
     support,
     pirateFest,
+    sockets,
     cc: { atk, hp, rcv },
   } = userUnit
 
@@ -65,7 +77,7 @@ export default function RecapBox ({
       <Title gridArea="title">{unit.name}</Title>
       <Box
         gridArea="icon"
-        alignSelf="start"
+        // alignSelf="start"
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -91,25 +103,30 @@ export default function RecapBox ({
       <Box
         gridArea="info"
         display="grid"
-        gridTemplateColumns="repeat(3, 1fr)"
+        gridTemplateColumns="repeat(5, 1fr)"
         justifySelf="flex-start"
         alignSelf="center"
+        gridTemplateAreas={`
+          "spe cch cca ccr sup"
+          "po1 po2 po3 pfs pfa"
+          "so1 so2 so3 so4 so5"
+        `}
       >
         {special && (
-          <Element gridRow="1">
+          <Element gridArea="spe">
             <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
           </Element>
         )}
 
         {support && (
-          <Element gridRow="1">
+          <Element gridArea="sup">
             <SupportIcon size="2" />
             <Progression value={support.lvl} max={5} />
           </Element>
         )}
 
-        <Element gridRow="2">
+        <Element gridArea="cch">
           <CottonCandyIcon
             size="2"
             color="specific.ccHp"
@@ -118,7 +135,7 @@ export default function RecapBox ({
           {hp === ccLimit.hp ? <Max /> : '+' + hp}
         </Element>
 
-        <Element gridRow="2">
+        <Element gridArea="cca">
           <CottonCandyIcon
             size="2"
             color="specific.ccAtk"
@@ -127,7 +144,7 @@ export default function RecapBox ({
           {atk === ccLimit.atk ? <Max /> : '+' + atk}
         </Element>
 
-        <Element gridRow="2">
+        <Element gridArea="ccr">
           <CottonCandyIcon
             size="2"
             color="specific.ccRcv"
@@ -138,7 +155,7 @@ export default function RecapBox ({
 
         {potentials.length > 0 &&
           potentials.map(({ type, lvl }, i) => (
-            <Element key={i} gridRow="3">
+            <Element key={i} gridArea={`po${i + 1}`}>
               <PotentialAbility size="2" type={type} />
               <Progression value={lvl} max={5} />
             </Element>
@@ -146,16 +163,24 @@ export default function RecapBox ({
 
         {pirateFest && (
           <>
-            <Element gridRow="4">
+            <Element gridArea="pfs">
               <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
               <Progression value={pirateFest.specialLvl} max={10} />
             </Element>
-            <Element gridRow="4">
+            <Element gridArea="pfa">
               <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
               <Progression value={pirateFest.abilityLvl} max={5} />
             </Element>
           </>
         )}
+
+        {sockets.length > 0 &&
+          sockets.map(({ type, lvl }, i) => (
+            <Element gridArea={`so${i + 1}}`}>
+              <PowerSocket type={type} size="2" />
+              <Progression value={lvl} max={5} />
+            </Element>
+          ))}
       </Box>
     </Container>
   )
@@ -233,21 +258,21 @@ export function RecapBoxLight ({
         onClick={() => onClick?.(userUnit)}
       >
         {special && (
-          <Element gridRow="1">
+          <Element gridRow="1" flexDirection="row">
             <SpecialLvlIcon size="2" />
             <Progression value={special.lvl} max={special.lvlMax} />
           </Element>
         )}
 
         {support && (
-          <Element gridRow="1">
+          <Element gridRow="1" flexDirection="row">
             <SupportIcon size="2" />
             <Progression value={support.lvl} max={5} />
           </Element>
         )}
 
         {pirateFest?.specialLvl && (
-          <Element gridRow="1">
+          <Element gridRow="1" flexDirection="row">
             <PirateFestBothIcon size="2" />
 
             <Box display="flex" flexDirection="column">
@@ -259,7 +284,7 @@ export function RecapBoxLight ({
 
         {potentials.length > 0 &&
           potentials.map(({ type, lvl }, i) => (
-            <Element key={i} gridRow="2">
+            <Element key={i} gridRow="2" flexDirection="row">
               <PotentialAbility size="2" type={type} />
               <Progression value={lvl} max={5} />
             </Element>
