@@ -19,6 +19,7 @@ import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
 import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
+import { ReactComponent as PirateFestBoth } from './piratefest-both.svg'
 import { ReactComponent as PirateFestSpecial } from './piratefest-special.svg'
 import { ReactComponent as Potential } from './potential.svg'
 import { ReactComponent as Reset } from './reset.svg'
@@ -76,6 +77,10 @@ PirateFestIcon.defaultProps = {
 }
 export const PirateFestAbilityIcon: Icon = BaseSvg(PirateFestAbility)
 PirateFestAbilityIcon.defaultProps = {
+  color: 'primaryText',
+}
+export const PirateFestBothIcon: Icon = BaseSvg(PirateFestBoth)
+PirateFestBothIcon.defaultProps = {
   color: 'primaryText',
 }
 export const PirateFestSpecialIcon: Icon = BaseSvg(PirateFestSpecial)

@@ -3,7 +3,7 @@ import CharacterBox from 'components/CharacterBox'
 import {
   CottonCandyIcon,
   PirateFestAbilityIcon,
-  PirateFestIcon,
+  PirateFestBothIcon,
   PirateFestSpecialIcon,
   SpecialLvlIcon,
   SupportIcon,
@@ -91,6 +91,7 @@ export default function RecapBox ({
       <Box
         gridArea="info"
         display="grid"
+        gridTemplateColumns="repeat(3, 1fr)"
         justifySelf="flex-start"
         alignSelf="center"
       >
@@ -247,7 +248,7 @@ export function RecapBoxLight ({
 
         {pirateFest?.specialLvl && (
           <Element gridRow="1">
-            <PirateFestIcon size="2" />
+            <PirateFestBothIcon size="2" />
 
             <Box display="flex" flexDirection="column">
               <Progression value={pirateFest.specialLvl} max={10} />
