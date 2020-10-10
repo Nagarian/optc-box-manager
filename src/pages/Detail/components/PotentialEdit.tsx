@@ -1,5 +1,6 @@
 import ExpansionPanel from 'components/ExpansionPanel'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
+import { PotentialIcon } from 'components/Icon'
 import { UnitPotential } from 'models/units'
 import { UserUnitPotentialAbility } from 'models/userBox'
 import React from 'react'
@@ -15,12 +16,7 @@ function Wrapper ({
   onChange: (potential: UserUnitPotentialAbility) => void
 }) {
   return (
-    <InputLabel
-      value={lvl}
-      max={5}
-      name={Name}
-      descriptions={description}
-    >
+    <InputLabel value={lvl} max={5} name={Name} descriptions={description}>
       <PotentialAbilityInput
         name={type}
         value={lvl}
@@ -29,7 +25,8 @@ function Wrapper ({
           onChange({
             lvl: Number(e.target.value),
             type: type,
-            keyState: keyState && (Number(e.target.value) > 0 ? 'unlocked' : 'locked'),
+            keyState:
+              keyState && (Number(e.target.value) > 0 ? 'unlocked' : 'locked'),
           })
         }
       />
@@ -53,7 +50,7 @@ export default function PotentialEdit ({
   }
 
   return (
-    <ExpansionPanel title="Potential Abilities">
+    <ExpansionPanel title="Potentials" icon={PotentialIcon}>
       {potentials.map(potential => (
         <Wrapper
           key={potential.type}

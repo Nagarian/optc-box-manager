@@ -5,6 +5,7 @@ import React from 'react'
 import { InputLabel } from '.'
 import PirateFestInput from 'components/forms/PirateFestInput'
 import { Text } from 'components/Title'
+import { PirateFestIcon } from 'components/Icon'
 
 type PirateFestEditProps = {
   detail?: UnitDetail
@@ -28,7 +29,7 @@ export default function PirateFestEdit ({
   const { festAbility, festSpecial } = detail!
 
   return (
-    <ExpansionPanel title="Pirate Rumble">
+    <ExpansionPanel title="Pirate Rumble" icon={PirateFestIcon}>
       {(!festAbility || !festSpecial) &&
         <Text fontStyle="italic" color="red">
           Please take caution, at this time the database lacks of Pirate Rumble unit description,

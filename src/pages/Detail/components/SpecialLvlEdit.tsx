@@ -5,6 +5,7 @@ import { UserUnitSpecial } from 'models/userBox'
 import React, { ReactNode } from 'react'
 import { InputLabel } from '.'
 import DescriptionHighlighter from 'components/DescriptionHighlighter'
+import { SpecialLvlIcon } from 'components/Icon'
 
 type SpecialLvlEditProps = {
   special?: UserUnitSpecial
@@ -56,7 +57,7 @@ export default function SpecialLvlEdit ({
   const { lvl, lvlMax } = special
 
   return (
-    <ExpansionPanel title="Special">
+    <ExpansionPanel title="Special" icon={SpecialLvlIcon}>
       <InputLabel
         value={lvl}
         max={lvlMax}

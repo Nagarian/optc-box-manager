@@ -21,6 +21,7 @@ import PotentialImg from './images/potential.png'
 import SailorImg from './images/sailor.png'
 import SocketImg from './images/socket.png'
 import { getLimitType, LimitBreakType } from 'services/limit'
+import { LimitBreakIcon } from 'components/Icon'
 
 type LimitBreakEditProps = {
   limitBreak?: UserUnitLimitBreak
@@ -77,7 +78,7 @@ export default function LimitBreakEdit ({
   }, {} as any)
 
   return (
-    <ExpansionPanel title="Limit Break">
+    <ExpansionPanel title="Limit Break" icon={LimitBreakIcon}>
       <InputLabel
         value={lvl}
         max={keyLvlMax ?? lvlMax}

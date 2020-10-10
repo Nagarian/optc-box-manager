@@ -5,6 +5,7 @@ import { UserUnitSupport } from 'models/userBox'
 import React from 'react'
 import { InputLabel } from '.'
 import DescriptionHighlighter from 'components/DescriptionHighlighter'
+import { SupportIcon } from 'components/Icon'
 
 type SupportEditProps = {
   detail?: UnitSupport
@@ -17,16 +18,14 @@ export default function SupportEdit ({
   detail,
   onChange,
 }: SupportEditProps) {
-  if (!support) return null
+  const { lvl } = support || {}
 
-  const { lvl } = support!
-
-  const { Characters, description } = detail!
+  const { Characters, description } = detail || {}
 
   return (
-    <ExpansionPanel title="Support">
+    <ExpansionPanel title="Support" disabled={!support} icon={SupportIcon}>
       <InputLabel
-        value={lvl}
+        value={lvl!}
         max={5}
         name={
           <>

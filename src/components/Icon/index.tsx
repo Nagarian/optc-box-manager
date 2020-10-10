@@ -13,12 +13,14 @@ import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg
 import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Edit } from './edit.svg'
+import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
 import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
 import { ReactComponent as PirateFestSpecial } from './piratefest-special.svg'
+import { ReactComponent as Potential } from './potential.svg'
 import { ReactComponent as Reset } from './reset.svg'
 import { ReactComponent as ResetApply } from './reset-apply.svg'
 import { ReactComponent as ResetRemove } from './reset-remove.svg'
@@ -64,6 +66,7 @@ export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const DeleteIcon: Icon = BaseSvg(Delete)
 export const DescendingIcon: Icon = BaseSvg(Descending)
 export const EditIcon: Icon = BaseSvg(Edit)
+export const EvolveIcon: Icon = BaseSvg(Evolve)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const LimitBreakIcon: Icon = BaseSvg(LimitBreak)
 export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
@@ -79,6 +82,7 @@ export const PirateFestSpecialIcon: Icon = BaseSvg(PirateFestSpecial)
 PirateFestSpecialIcon.defaultProps = {
   color: 'primaryText',
 }
+export const PotentialIcon: Icon = BaseSvg(Potential)
 export const ResetIcon: Icon = BaseSvg(Reset)
 export const ResetApplyIcon: Icon = BaseSvg(ResetApply)
 export const ResetRemoveIcon: Icon = BaseSvg(ResetRemove)
@@ -103,7 +107,7 @@ export const SpecialLvlIcon = styled.img.attrs(() => ({
   object-fit: contain;
   ${space}
   ${size}
-`
+` as Icon
 SpecialLvlIcon.defaultProps = {
   title: 'Special Level',
 }

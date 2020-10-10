@@ -15,7 +15,7 @@ import SupportEdit from './components/SupportEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import { getLimitType } from 'services/limit'
 import PirateFestEdit from './components/PirateFestEdit'
-import { DeleteIcon, OpenInDBIcon } from 'components/Icon'
+import { DeleteIcon, EvolveIcon, OpenInDBIcon, SkillBookIcon } from 'components/Icon'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -89,58 +89,64 @@ export default function Detail ({
             title="See on OPTC-DB"
           />
         </>
-      }>
+      }
+    >
+      <RecapBox userUnit={userUnit} marginBottom="3" />
 
-      < RecapBox userUnit={userUnit} marginBottom="3" />
+      <Box display="flex" flexWrap="wrap">
+        <ExpansionPanel title="Socket" icon={SkillBookIcon} >
 
-      <SpecialLvlEdit
-        special={userUnit.special}
-        detail={unit.detail}
-        onChange={special => setUserUnit({ ...userUnit, special })}
-      />
-
-      <CottonCandyEdit
-        cc={userUnit.cc}
-        onChange={cc => setUserUnit({ ...userUnit, cc })}
-      />
-
-      <SupportEdit
-        support={userUnit.support}
-        detail={unit.detail.support?.[0]}
-        onChange={support => setUserUnit({ ...userUnit, support })}
-      />
-
-      <LimitBreakEdit
-        limitBreak={userUnit.limitBreak}
-        detail={unit.detail}
-        onChange={onLimitBreakChange}
-      />
-
-      <PotentialEdit
-        potentials={userUnit.potentials}
-        details={unit.detail.potential ?? []}
-        onChange={potentials => setUserUnit({ ...userUnit, potentials })}
-      />
-
-      <PirateFestEdit
-        detail={unit.detail}
-        pirateFest={userUnit.pirateFest}
-        onChange={pirateFest => setUserUnit({ ...userUnit, pirateFest })}
-      />
-
-      {!!evolutions.length && (
-        <ExpansionPanel title="Evolution">
-          <Box display="flex" justifyContent="space-evenly">
-            {evolutions.map(evolveUnit => (
-              <CharacterBox
-                key={evolveUnit.id}
-                unit={evolveUnit}
-                onClick={() => setUserUnit(Evolve(userUnit, evolveUnit))}
-              />
-            ))}
-          </Box>
         </ExpansionPanel>
-      )}
+
+        <SpecialLvlEdit
+          special={userUnit.special}
+          detail={unit.detail}
+          onChange={special => setUserUnit({ ...userUnit, special })}
+        />
+
+        <CottonCandyEdit
+          cc={userUnit.cc}
+          onChange={cc => setUserUnit({ ...userUnit, cc })}
+        />
+
+        <SupportEdit
+          support={userUnit.support}
+          detail={unit.detail.support?.[0]}
+          onChange={support => setUserUnit({ ...userUnit, support })}
+        />
+
+        <LimitBreakEdit
+          limitBreak={userUnit.limitBreak}
+          detail={unit.detail}
+          onChange={onLimitBreakChange}
+        />
+
+        <PotentialEdit
+          potentials={userUnit.potentials}
+          details={unit.detail.potential ?? []}
+          onChange={potentials => setUserUnit({ ...userUnit, potentials })}
+        />
+
+        <PirateFestEdit
+          detail={unit.detail}
+          pirateFest={userUnit.pirateFest}
+          onChange={pirateFest => setUserUnit({ ...userUnit, pirateFest })}
+        />
+
+        {!!evolutions.length && (
+          <ExpansionPanel title="Evolution" icon={EvolveIcon}>
+            <Box display="flex" justifyContent="space-evenly">
+              {evolutions.map(evolveUnit => (
+                <CharacterBox
+                  key={evolveUnit.id}
+                  unit={evolveUnit}
+                  onClick={() => setUserUnit(Evolve(userUnit, evolveUnit))}
+                />
+              ))}
+            </Box>
+          </ExpansionPanel>
+        )}
+      </Box>
 
       {showConfirmation && (
         <Popup
