@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "./static/js/main.f26e59c8.chunk.js",
-    "main.js.map": "./static/js/main.f26e59c8.chunk.js.map",
+    "main.js": "./static/js/main.cc3cd81a.chunk.js",
+    "main.js.map": "./static/js/main.cc3cd81a.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.46654ad6.js",
     "runtime-main.js.map": "./static/js/runtime-main.46654ad6.js.map",
     "static/css/2.ed590494.chunk.css": "./static/css/2.ed590494.chunk.css",
-    "static/js/2.efb1c047.chunk.js": "./static/js/2.efb1c047.chunk.js",
-    "static/js/2.efb1c047.chunk.js.map": "./static/js/2.efb1c047.chunk.js.map",
+    "static/js/2.95c326da.chunk.js": "./static/js/2.95c326da.chunk.js",
+    "static/js/2.95c326da.chunk.js.map": "./static/js/2.95c326da.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.a72c6544e38cfa216b368b4c6dff9c32.js": "./precache-manifest.a72c6544e38cfa216b368b4c6dff9c32.js",
+    "precache-manifest.da81448859d793a546eec492bf39a43c.js": "./precache-manifest.da81448859d793a546eec492bf39a43c.js",
     "service-worker.js": "./service-worker.js",
     "static/css/2.ed590494.chunk.css.map": "./static/css/2.ed590494.chunk.css.map",
-    "static/js/2.efb1c047.chunk.js.LICENSE.txt": "./static/js/2.efb1c047.chunk.js.LICENSE.txt",
+    "static/js/2.95c326da.chunk.js.LICENSE.txt": "./static/js/2.95c326da.chunk.js.LICENSE.txt",
     "static/media/Attacker.png": "./static/media/Attacker.18960ef9.png",
     "static/media/Defender.png": "./static/media/Defender.45610bd4.png",
     "static/media/Healer.png": "./static/media/Healer.a46d3dc2.png",
@@ -31,6 +31,7 @@
     "static/media/descending.0ef05bba.svg": "./static/media/descending.0ef05bba.svg",
     "static/media/driven.png": "./static/media/driven.797bfb2d.png",
     "static/media/edit.3c642845.svg": "./static/media/edit.3c642845.svg",
+    "static/media/evolve.20ca837b.svg": "./static/media/evolve.20ca837b.svg",
     "static/media/fighter.png": "./static/media/fighter.7065e9a0.png",
     "static/media/filtersort.6ffc624d.svg": "./static/media/filtersort.6ffc624d.svg",
     "static/media/free_spirit.png": "./static/media/free_spirit.0453557f.png",
@@ -40,8 +41,10 @@
     "static/media/open-in-db.b20c2600.svg": "./static/media/open-in-db.b20c2600.svg",
     "static/media/panel_limitbreak_001.png": "./static/media/panel_limitbreak_001.78cdbf19.png",
     "static/media/piratefest-ability.18a818f1.svg": "./static/media/piratefest-ability.18a818f1.svg",
+    "static/media/piratefest-both.a2e17574.svg": "./static/media/piratefest-both.a2e17574.svg",
     "static/media/piratefest-special.318b5cf0.svg": "./static/media/piratefest-special.318b5cf0.svg",
     "static/media/piratefest.svg": "./static/media/piratefest.443f0630.svg",
+    "static/media/potential.df0c4bf1.svg": "./static/media/potential.df0c4bf1.svg",
     "static/media/potentialskill_icon_s_020.png": "./static/media/potentialskill_icon_s_020.921c4e29.png",
     "static/media/powerhouse.png": "./static/media/powerhouse.2213840d.png",
     "static/media/reset-apply.441ac1b0.svg": "./static/media/reset-apply.441ac1b0.svg",
@@ -63,7 +66,7 @@
   "entrypoints": [
     "static/js/runtime-main.46654ad6.js",
     "static/css/2.ed590494.chunk.css",
-    "static/js/2.efb1c047.chunk.js",
-    "static/js/main.f26e59c8.chunk.js"
+    "static/js/2.95c326da.chunk.js",
+    "static/js/main.cc3cd81a.chunk.js"
   ]
 }
