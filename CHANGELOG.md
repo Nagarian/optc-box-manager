@@ -1,3 +1,18 @@
+# [1.11.0](https://github.com/Nagarian/optc-box-manager/compare/v1.10.0...v1.11.0) (2020-10-11)
+
+
+### Features
+
+* add "Export For" Popup to export your box with format compatible to Nakama Network and OPTC-DB Log feature ([82ea766](https://github.com/Nagarian/optc-box-manager/commit/82ea76670944c34672aa902e615cb1ed777b265f)), closes [#46](https://github.com/Nagarian/optc-box-manager/issues/46)
+* add Dark Mode theme ([4dbd059](https://github.com/Nagarian/optc-box-manager/commit/4dbd0594dd9bc1681b455fde5d162fb112eea99b))
+* **detail:** add tracking of Power Socket ([99cfd3c](https://github.com/Nagarian/optc-box-manager/commit/99cfd3cf5fef2c0cab4eb13dbff5f5e432686d19)), closes [#102](https://github.com/Nagarian/optc-box-manager/issues/102)
+* **detail:** rework general layout of the popup ([4e15b6c](https://github.com/Nagarian/optc-box-manager/commit/4e15b6cbaf59f91df001119b8724c25bfbf801f4))
+* **detail:** show Power socket into Recap Box ([fd15654](https://github.com/Nagarian/optc-box-manager/commit/fd15654989dd8374b781a6181db29e7d4979167c))
+* **filter:** add User Power Socket filter ([9c48fc5](https://github.com/Nagarian/optc-box-manager/commit/9c48fc5a0d84d5bb85fcb13337427fdfdb968028))
+* improve Pirate Rumble icons ([a4735c4](https://github.com/Nagarian/optc-box-manager/commit/a4735c4ee96604590f2c7984a1571ffbd052f905))
+
+
+
 # [1.10.0](https://github.com/Nagarian/optc-box-manager/compare/v1.9.0...v1.10.0) (2020-10-09)
 
 
@@ -85,17 +100,6 @@
 * **filter:** rework design of User Potentials filter ([06ebd7b](https://github.com/Nagarian/optc-box-manager/commit/06ebd7bff82df3d0bfea097e9853e9045cefce95))
 * **search:** add configurable reset button ([a312da9](https://github.com/Nagarian/optc-box-manager/commit/a312da928c3b144ac51aa0070ea598701571c363)), closes [#70](https://github.com/Nagarian/optc-box-manager/issues/70)
 * add support for 'Nutrition/Hunger reduction' potentials ([894e694](https://github.com/Nagarian/optc-box-manager/commit/894e69422cd0e89956fbbc0102cde724cdd4d79c))
-
-
-
-## [1.6.1](https://github.com/Nagarian/optc-box-manager/compare/v1.6.0...v1.6.1) (2020-08-27)
-
-
-### Bug Fixes
-
-* **detail:** issue with Enrage Potential renaming (temporary fix) ([a7e7ea0](https://github.com/Nagarian/optc-box-manager/commit/a7e7ea0c3d30202601ca5d51b8d5c846ab74f337))
-* **detail:** issue with recent Potential icons (vivi) ([dc757b8](https://github.com/Nagarian/optc-box-manager/commit/dc757b81be8783ea3fcb615ee10d90c73e4ba431))
-* **filter:** issues with Manuel Acquirement Quests ([25e42dc](https://github.com/Nagarian/optc-box-manager/commit/25e42dcd468bf771d1855c0fc3f49bce4debc76d))
 
 
 
