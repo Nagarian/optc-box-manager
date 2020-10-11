@@ -1,6 +1,8 @@
-import React, { createContext, useContext, ReactNode } from 'react'
+import React, { createContext, ReactNode, useContext } from 'react'
 import { useStorage } from './useStorage'
 import { SavedSearch } from './useStoredSearches'
+
+export type ThemeMode = 'auto' | 'light' | 'dark'
 
 export type UserSetting = {
   cottonCandiesMaximumLevel: {
@@ -10,6 +12,7 @@ export type UserSetting = {
   }
   userSearches: SavedSearch[]
   resetSearchId?: string
+  themeMode: ThemeMode
 }
 
 const defaultUserSettings: UserSetting = {
@@ -19,6 +22,7 @@ const defaultUserSettings: UserSetting = {
     hp: 0,
     rcv: 0,
   },
+  themeMode: 'auto',
 }
 
 export type UserSettingEnhanced = {
@@ -40,6 +44,13 @@ function migration (value: any) : UserSetting {
       ...defaultUserSettings,
       ...value,
       is200cc: undefined,
+    }
+  }
+
+  if (!value.themeMode) {
+    return {
+      ...defaultUserSettings,
+      ...value,
     }
   }
 

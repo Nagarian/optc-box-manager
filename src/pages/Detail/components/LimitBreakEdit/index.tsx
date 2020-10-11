@@ -1,5 +1,6 @@
 import DescriptionHighlighter from 'components/DescriptionHighlighter'
 import ExpansionPanel from 'components/ExpansionPanel'
+import { LimitBreakIcon } from 'components/Icon'
 import Image from 'components/Image'
 import { Text } from 'components/Title'
 import {
@@ -12,7 +13,8 @@ import { UserUnitLimitBreak } from 'models/userBox'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import React, { ReactNode } from 'react'
-import theme from 'styles/theme'
+import { getLimitType, LimitBreakType } from 'services/limit'
+import { useTheme } from 'styled-components'
 import { InputLabel } from '..'
 import CaptainImg from './images/captain.png'
 import CooldownImg from './images/cooldown.png'
@@ -20,8 +22,6 @@ import KeyImg from './images/key.png'
 import PotentialImg from './images/potential.png'
 import SailorImg from './images/sailor.png'
 import SocketImg from './images/socket.png'
-import { getLimitType, LimitBreakType } from 'services/limit'
-import { LimitBreakIcon } from 'components/Icon'
 
 type LimitBreakEditProps = {
   limitBreak?: UserUnitLimitBreak
@@ -34,6 +34,8 @@ export default function LimitBreakEdit ({
   detail,
   onChange,
 }: LimitBreakEditProps) {
+  const theme = useTheme() as any
+
   if (!limitBreak || !detail.limit?.length) return null
 
   const { lvl, lvlMax, keyLvlMax } = limitBreak

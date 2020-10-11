@@ -12,7 +12,7 @@ export const PopupBackground = styled.div<SpaceProps>`
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: ${themeGet('colors.popupBackground')}B3;
   z-index: 1;
   ${space}
   display: grid;

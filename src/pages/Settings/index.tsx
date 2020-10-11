@@ -1,9 +1,13 @@
 import Button from 'components/Button'
+import Changelog from 'components/Changelog'
+import ExpansionPanel from 'components/ExpansionPanel'
+import ChoiceInput from 'components/forms/ChoiceInput'
+import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
+import { useThemeMode } from 'hooks/useThemeMode'
 import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
 import React, { ChangeEvent, useRef, useState } from 'react'
-import Changelog from 'components/Changelog'
 import { importAsJson } from 'services/share'
 
 type SettingsProps = {
@@ -18,6 +22,7 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
   const [successMessage, setSuccessMessage] = useState<string>()
   const [showResetWarning, setShowResetWarning] = useState<boolean>(false)
   const [showChangelog, setShowChangelog] = useState<boolean>(false)
+  const { themeMode, setThemeMode } = useThemeMode()
 
   const importRef = useRef<HTMLInputElement>(null)
 
@@ -94,6 +99,34 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
       >
         Import
       </Button>
+
+      <ExpansionPanel title="Theme" icon={ArrowIcon}>
+        <ChoiceInput
+          type="radio"
+          name="themeMode"
+          checked={themeMode === 'auto'}
+          onChange={e => setThemeMode('auto')}
+        >
+          Auto (defined by system)
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="themeMode"
+          checked={themeMode === 'light'}
+          onChange={e => setThemeMode('light')}
+        >
+          Light ☀
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="themeMode"
+          checked={themeMode === 'dark'}
+          onChange={e => setThemeMode('dark')}
+        >
+          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+          Dark 🌙
+        </ChoiceInput>
+      </ExpansionPanel>
     </Popup>
   )
 }

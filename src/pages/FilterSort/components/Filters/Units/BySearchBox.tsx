@@ -82,9 +82,17 @@ const Input = styled.input<SpaceProps>`
   border-bottom: solid ${themeGet('colors.grey')} ${themeGet('borderWidths.thin')};
   border-radius: 0;
   transition: border-color 250ms;
+  color: ${themeGet('colors.text')};
 
   :focus {
     border-color: ${themeGet('colors.primary')};
+  }
+
+  ::-webkit-search-decoration,
+  ::-webkit-search-cancel-button,
+  ::-webkit-search-results-button,
+  ::-webkit-search-results-decoration {
+    -webkit-appearance: none;
   }
 `
 

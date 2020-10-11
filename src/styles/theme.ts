@@ -1,6 +1,6 @@
 const baseColors = {
   black: '#323232',
-  white: '#FFF',
+  white: '#FFFFFF',
   grey: '#BFBFBF',
   greys: ['#CCCCCC', '#808080', '#8C8C8C', '#666666'],
 
@@ -113,12 +113,13 @@ sizes.minimalRequired = '320px'
 
 const breakpoints: any = ['768px', '970px', '1024px']
 
-export default {
+export const lightTheme = {
   colors: {
     ...baseColors,
     primary: baseColors.brown,
     secondary: baseColors.white,
     background: baseColors.white,
+    popupBackground: baseColors.black,
     text: baseColors.black,
     primaryText: baseColors.orange,
     secondaryText: baseColors.orange,
@@ -184,5 +185,17 @@ export default {
         filter: 'opacity(0.5)',
       },
     },
+  },
+}
+
+export const darkTheme = {
+  ...lightTheme,
+  colors: {
+    ...lightTheme.colors,
+    white: '#FAFAFA',
+    secondary: baseColors.black,
+    background: baseColors.black,
+    popupBackground: '#CDCDCD',
+    text: '#FAFAFA',
   },
 }

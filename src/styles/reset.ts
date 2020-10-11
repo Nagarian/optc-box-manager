@@ -71,13 +71,13 @@ table {
 }
 
 a {
-  color: ${themeGet('colors.primary')};
+  color: ${themeGet('colors.secondaryText')};
 }
 
 hr {
   width: 100%;
   height: 0.2rem;
-  background: #808080;
+  background: ${themeGet('colors.greys.1')};
   border-radius: .7rem;
   border: none;
 }
@@ -97,10 +97,10 @@ hr {
   background-clip: padding-box;
 
   border-radius: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: ${themeGet('colors.popupBackground')}26;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: ${themeGet('colors.popupBackground')}4D;
   }
 }
 

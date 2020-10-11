@@ -18,7 +18,7 @@ export default function FilterContainer ({
   onReset,
 }: FilterContainerProps) {
   return (
-    <Box padding="2" borderTop="solid" borderWidth="thin" borderTopColor="primary">
+    <Box padding="2" borderTop="solid" borderWidth="thin" borderTopColor="text">
       <Box
         display="flex"
         alignItems="center"
