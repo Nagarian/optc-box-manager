@@ -1,9 +1,8 @@
-import { themeGet } from '@styled-system/theme-get'
 import { LoaderIcon } from 'components/Icon'
-import { SubTitle, Title, Text } from 'components/Title'
+import { Text, Title } from 'components/Title'
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import styled from 'styled-components'
+import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
 type GithubLightRelease = {
   id: number
@@ -93,23 +92,10 @@ export default function Changelog ({
             key={release.id}
             source={release.body}
             linkTarget="_blank"
-            renderers={{ heading: SubTitle, listItem: ListItem, image: Img }}
+            renderers={ReactMarkdownRenderers}
           />
         </div>
       ))}
     </>
   )
 }
-
-const ListItem = styled.li`
-  ::before {
-    content: '🏴‍☠️ ';
-    font-size: ${themeGet('fontSizes.2')};
-  }
-`
-
-const Img = styled.img`
-  max-width: 100%;
-  display: block;
-  margin: 1rem auto;
-`

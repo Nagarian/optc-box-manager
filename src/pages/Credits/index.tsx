@@ -1,8 +1,8 @@
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import { SubTitle, Text } from 'components/Title'
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
 export default function Credits () {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -15,12 +15,7 @@ export default function Credits () {
     <Popup onClose={() => setIsOpen(false)} title="Credits">
       <ReactMarkdown
         source={creditText}
-        renderers={{
-          heading: p => <SubTitle {...p} m="2" />,
-          paragraph: p => <Text {...p} m="1" />,
-          // eslint-disable-next-line jsx-a11y/anchor-has-content
-          link: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-        }}
+        renderers={ReactMarkdownRenderers}
       />
     </Popup>
   )
