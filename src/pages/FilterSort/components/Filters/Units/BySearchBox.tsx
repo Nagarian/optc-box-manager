@@ -1,6 +1,6 @@
-import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
+import { TextInput } from 'components/forms/TextInput'
 import { CloseIcon } from 'components/Icon'
 import {
   SearchFilterCriteria,
@@ -53,7 +53,7 @@ export function BySearchBoxInput ({
 
   return (
     <Box display="grid" m="2" gridTemplateColumns="1fr auto" {...rest}>
-      <Input
+      <TextInput
         type="search"
         name="search-box"
         value={criteria?.value ?? ''}
@@ -75,26 +75,6 @@ export function BySearchBoxInput ({
     </Box>
   )
 }
-
-const Input = styled.input<SpaceProps>`
-  padding: ${themeGet('space.1')};
-  font-size: ${themeGet('fontSizes.1')};
-  border-bottom: solid ${themeGet('colors.grey')} ${themeGet('borderWidths.thin')};
-  border-radius: 0;
-  transition: border-color 250ms;
-  color: ${themeGet('colors.text')};
-
-  :focus {
-    border-color: ${themeGet('colors.primary')};
-  }
-
-  ::-webkit-search-decoration,
-  ::-webkit-search-cancel-button,
-  ::-webkit-search-results-button,
-  ::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
-`
 
 const ClearButton = styled(Button)`
   animation: ${SlideInRight} 250ms;

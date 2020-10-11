@@ -7,6 +7,7 @@ import Popup from 'components/Popup'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
+import ExportFor from 'pages/ExportFor'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { importAsJson } from 'services/share'
 
@@ -99,6 +100,8 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
       >
         Import
       </Button>
+
+      <ExportFor myUserBox={myUserBox} />
 
       <ExpansionPanel title="Theme" icon={ArrowIcon}>
         <ChoiceInput
