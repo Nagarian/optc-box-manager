@@ -59,15 +59,16 @@ export default function Changelog ({
 
   const displayed = onlyUnseen
     ? releases.slice(
-      0,
-      latestSeen && releases.findIndex(r => r.id === latestSeen),
-    )
+        0,
+        latestSeen && releases.findIndex(r => r.id === latestSeen),
+      )
     : releases
 
   if (displayed.length === 0) {
     return (
       <Text m="1">
-        OPTC-DB must have been updated (new unit and/or unit fix) and this update will apply it !
+        OPTC-DB must have been updated (new unit and/or unit fix) and this
+        update will apply it !
       </Text>
     )
   }
@@ -76,7 +77,7 @@ export default function Changelog ({
     <>
       {onlyUnseen &&
         displayed.some(release => /BREAKING CHANGE/i.test(release.body)) && (
-        // eslint-disable-next-line jsx-a11y/accessible-emoji
+      // eslint-disable-next-line jsx-a11y/accessible-emoji
         <Text m="1">
             There is Breaking changes, you should take caution and make an
             export (from Settings) before loading this update 😉

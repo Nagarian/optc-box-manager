@@ -2,6 +2,15 @@ import { themeGet } from '@styled-system/theme-get'
 import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 
+type RangeInputProps = {
+  thumbImage?: string
+  thumbSvg?: string
+  range?: {
+    color?: any
+    backgroundColor?: any
+  }
+}
+
 const track = css<RangeInputProps>`
   height: ${themeGet('sizes.0')};
   cursor: pointer;
@@ -26,15 +35,6 @@ const thumb = css<RangeInputProps>`
   background-color: ${p => p.thumbSvg && 'currentColor'};
   mask: ${p => p.thumbSvg && `url(${p.thumbSvg})`};
 `
-
-type RangeInputProps = {
-  thumbImage?: string
-  thumbSvg?: string
-  range?: {
-    color?: any
-    backgroundColor?: any
-  }
-}
 
 const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
   SpaceProps & RangeInputProps

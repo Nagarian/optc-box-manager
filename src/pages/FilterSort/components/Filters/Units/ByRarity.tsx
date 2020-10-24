@@ -25,8 +25,8 @@ export function ByRarityInput ({
     onChange(
       newValues.length
         ? {
-          values: newValues,
-        }
+            values: newValues,
+          }
         : undefined,
     )
   }

@@ -1,15 +1,15 @@
 import Changelog from 'components/Changelog'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as serviceWorker from 'serviceWorker'
 import Popup from './Popup'
 import { Text, Title } from './Title'
 
 export default function PWA () {
-  const [showReload, setShowReload] = React.useState(false)
+  const [showReload, setShowReload] = useState(false)
   const [
     waitingWorker,
     setWaitingWorker,
-  ] = React.useState<ServiceWorker | null>()
+  ] = useState<ServiceWorker | null>()
 
   const onSWUpdate = (registration: ServiceWorkerRegistration) => {
     setShowReload(true)

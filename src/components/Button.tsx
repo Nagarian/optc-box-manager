@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import {
   border,
@@ -34,7 +34,7 @@ type StyledButtonProps = SpaceProps &
 type ButtonProps = StyledButtonProps & {
   icon?: Icon
   isLoading?: boolean
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 export default function Button ({
   icon: Icon,

@@ -126,6 +126,7 @@ export default function SugoCleaner ({
 
             <hr />
 
+            {/* eslint-disable-next-line multiline-ternary */}
             {filteredUserUnit.length ? (
               <>
                 <SubTitle>On which unit do you want to use it ?</SubTitle>
@@ -299,4 +300,5 @@ function SugoCleanerList ({
 
 const WaitForSpecialEvent = ByUserSpecialFilter({ state: 'ongoing' })
 const WaitForSupport = ByUserSupportFilter({ state: 'locked' })
-const WaitForLBMaterials = (uu: UserUnit) => uu.potentials.some(p => p.lvl === 0)
+const WaitForLBMaterials = (uu: UserUnit) =>
+  uu.potentials.some(p => p.lvl === 0)

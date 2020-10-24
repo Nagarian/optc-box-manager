@@ -3,12 +3,7 @@ import ExpansionPanel from 'components/ExpansionPanel'
 import { LimitBreakIcon } from 'components/Icon'
 import Image from 'components/Image'
 import { Text } from 'components/Title'
-import {
-  LimitBreak,
-  UnitCaptain,
-  UnitDetail,
-  UnitSailor,
-} from 'models/units'
+import { LimitBreak, UnitCaptain, UnitDetail, UnitSailor } from 'models/units'
 import { UserUnitLimitBreak } from 'models/userBox'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
@@ -66,12 +61,12 @@ export default function LimitBreakEdit ({
           ['potential', 'sailor', 'socket'].includes(type)
             ? '-7rem'
             : ['key', 'captain'].includes(type)
-              ? '1rem'
-              : ['cooldown'].includes(type)
-                ? types.filter(t => t.type !== 'stat').length > 10
-                  ? '5rem'
-                  : '1rem'
-                : undefined
+                ? '1rem'
+                : ['cooldown'].includes(type)
+                    ? types.filter(t => t.type !== 'stat').length > 10
+                        ? '5rem'
+                        : '1rem'
+                    : undefined
         }
       />
     )
@@ -139,10 +134,10 @@ export default function LimitBreakEdit ({
   )
 }
 
-function getLbTypes (limitBreak: LimitBreak[]): { type: LimitBreakType; at: number }[] {
-  return limitBreak
-    .map(getLimitType)
-    .map((type, i) => ({ type, at: i + 1 }))
+function getLbTypes (
+  limitBreak: LimitBreak[],
+): { type: LimitBreakType; at: number }[] {
+  return limitBreak.map(getLimitType).map((type, i) => ({ type, at: i + 1 }))
 }
 
 function typeToImage (lbType: LimitBreakType) {

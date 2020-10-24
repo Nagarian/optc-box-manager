@@ -1,7 +1,7 @@
 import PWA from 'components/PWA'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { UserSettingsProvider } from 'hooks/useUserSettings'
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider } from 'styled-components'
 import App from './App'
@@ -9,11 +9,11 @@ import DefaultStyles from './styles'
 import { darkTheme, lightTheme } from './styles/theme'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <UserSettingsProvider>
       <AppWrapper />
     </UserSettingsProvider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 )
 

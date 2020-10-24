@@ -30,8 +30,8 @@ export function ByTypeInput ({
     onChange(
       newValues.length
         ? {
-          values: newValues,
-        }
+            values: newValues,
+          }
         : undefined,
     )
   }

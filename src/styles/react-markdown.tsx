@@ -23,7 +23,7 @@ export const ReactMarkdownRenderers: { [nodeType: string]: ElementType } = {
   paragraph: p => <Text {...p} m="1" />,
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   link: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-  listItem: p => { console.log(p); return <ListItem {...p} /> },
+  listItem: p => { return <ListItem {...p} /> },
   // listItem: ListItem,
   image: Img,
 }

@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useContext } from 'react'
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+} from 'react'
 import { useStorage } from './useStorage'
 import { SavedSearch } from './useStoredSearches'
 
@@ -26,19 +32,21 @@ const defaultUserSettings: UserSetting = {
 }
 
 export type UserSettingEnhanced = {
-  userSetting: UserSetting,
-  setUserSetting: React.Dispatch<React.SetStateAction<UserSetting>>,
+  userSetting: UserSetting
+  setUserSetting: Dispatch<SetStateAction<UserSetting>>
   ccLimit: {
-    all: number,
-    atk: number,
-    hp: number,
-    rcv: number,
-  },
+    all: number
+    atk: number
+    hp: number
+    rcv: number
+  }
 }
 
-export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>({ })
+export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
+  {},
+)
 
-function migration (value: any) : UserSetting {
+function migration (value: any): UserSetting {
   if (value.is200cc !== undefined) {
     return {
       ...defaultUserSettings,
@@ -57,12 +65,16 @@ function migration (value: any) : UserSetting {
   return value
 }
 
-export function UserSettingsProvider ({
-  children,
-}: { children: ReactNode }) {
-  const [userSetting, setUserSetting] = useStorage<UserSetting>('userSetting', defaultUserSettings, migration)
+export function UserSettingsProvider ({ children }: { children: ReactNode }) {
+  const [userSetting, setUserSetting] = useStorage<UserSetting>(
+    'userSetting',
+    defaultUserSettings,
+    migration,
+  )
 
-  const { atk, hp, rcv } = userSetting.cottonCandiesMaximumLevel ?? defaultUserSettings.cottonCandiesMaximumLevel
+  const { atk, hp, rcv } =
+    userSetting.cottonCandiesMaximumLevel ??
+    defaultUserSettings.cottonCandiesMaximumLevel
 
   const UserSettingValue = {
     userSetting: {
@@ -79,7 +91,7 @@ export function UserSettingsProvider ({
   }
 
   return (
-    <UserSettingsContext.Provider value={UserSettingValue} >
+    <UserSettingsContext.Provider value={UserSettingValue}>
       {children}
     </UserSettingsContext.Provider>
   )

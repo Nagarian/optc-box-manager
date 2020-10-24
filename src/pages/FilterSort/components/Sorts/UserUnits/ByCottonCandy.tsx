@@ -16,6 +16,10 @@ const ccSum = ({ atk, hp, rcv }: UserUnitCottonCandy) => atk + hp + rcv
 export const byCottonCandy: UserUnitSort = (userUnit1, userUnit2) =>
   ccSum(userUnit1.cc) - ccSum(userUnit2.cc)
 
+export type SpecificCottonCandySortOption = {
+  cc: CottonCandyType
+}
+
 export const bySpecificCottonCandy: SearchSortWithOptionFunction<SpecificCottonCandySortOption> = (
   option,
 ): UserUnitSort => {
@@ -31,11 +35,9 @@ export const bySpecificCottonCandy: SearchSortWithOptionFunction<SpecificCottonC
   }
 }
 
-export const bySpecificCottonCandyLabel = (option: SpecificCottonCandySortOption) => option.cc
-
-export type SpecificCottonCandySortOption = {
-  cc: CottonCandyType
-}
+export const bySpecificCottonCandyLabel = (
+  option: SpecificCottonCandySortOption,
+) => option.cc
 
 export function SpecificCottonCandySortInput ({
   options,

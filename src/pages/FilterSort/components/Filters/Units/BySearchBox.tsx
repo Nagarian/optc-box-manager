@@ -40,8 +40,8 @@ export function BySearchBoxInput ({
     const cleaned = value ?? ''
     const payload = cleaned
       ? {
-        value: cleaned,
-      }
+          value: cleaned,
+        }
       : undefined
 
     onChange(payload)

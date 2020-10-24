@@ -13,6 +13,10 @@ export const byPotentialLvl: UserUnitSort = (userUnit1, userUnit2) =>
   userUnit1.potentials.reduce((acc, current) => acc + current.lvl, 0) -
   userUnit2.potentials.reduce((acc, current) => acc + current.lvl, 0)
 
+export type SpecificPotentialSortOption = {
+  type: PotentialKey
+}
+
 export const bySpecificPotentialLvl: SearchSortWithOptionFunction<SpecificPotentialSortOption> = (
   option,
 ): UserUnitSort => (userUnit1, userUnit2) =>
@@ -22,10 +26,6 @@ export const bySpecificPotentialLvl: SearchSortWithOptionFunction<SpecificPotent
 export const bySpecificPotentialLabel = (
   option: SpecificPotentialSortOption,
 ) => <PotentialAbility type={option.type} size="2" />
-
-export type SpecificPotentialSortOption = {
-  type: PotentialKey
-}
 
 export function SpecificPotentialSortInput ({
   options,

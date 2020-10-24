@@ -4,6 +4,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { compose, fontSize, FontSizeProps, size, SizeProps, space, SpaceProps } from 'styled-system'
 
+export type TypeProps = SizeProps & FontSizeProps & SpaceProps & {
+  value: UnitType
+}
+
 const Container = styled.div<TypeProps>`
   background-color: ${p => themeGet('colors.orb.' + p.value)};
   border-radius: 50%;
@@ -14,9 +18,6 @@ const Container = styled.div<TypeProps>`
   ${compose(size, fontSize, space)}
 `
 
-export type TypeProps = SizeProps & FontSizeProps & SpaceProps & {
-  value: UnitType
-}
 export default function Type ({ value, ...rest }: TypeProps) {
   return (
     <Container value={value} {...rest}>

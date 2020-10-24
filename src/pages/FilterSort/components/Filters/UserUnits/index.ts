@@ -38,14 +38,14 @@ type Builder<T = unknown | undefined> = (
   userSetting: UserSettingEnhanced,
 ) => UserUnitFilter
 
-type UserUnitFilterBuilder<T> = {
+type UserUnitFilterBuilderType<T> = {
   title: string
   builder: Builder<T>
   input: FunctionComponent<SearchFilterCriteriaInputProps<T>>
 }
 
 export const UserUnitFilterBuilder: {
-  [key in SearchFilterUserUnitsType]: UserUnitFilterBuilder<any>
+  [key in SearchFilterUserUnitsType]: UserUnitFilterBuilderType<any>
 } = {
   byUserPotential: {
     title: 'Potential ability',

@@ -28,8 +28,8 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     support:
       unit.detail.support?.length > 0
         ? {
-          lvl: 0,
-        }
+            lvl: 0,
+          }
         : undefined,
     cc: {
       hp: 0,
@@ -39,9 +39,9 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     pirateFest:
       unit.detail.festAbility && unit.detail.festSpecial
         ? {
-          abilityLvl: 1,
-          specialLvl: 1,
-        }
+            abilityLvl: 1,
+            specialLvl: 1,
+          }
         : undefined,
     sockets: Array(
       Math.max(unit.slots, unit.limitSlot, unit.limitexSlot),

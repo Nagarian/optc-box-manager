@@ -16,14 +16,14 @@ import { BookQuestDrops } from 'services/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import styled from 'styled-components'
 
-export interface ByDropCriteria {
-  dropLocations?: ExtendedDrop[]
-  bookDrop?: BookDrop
-}
-
 export type BookDrop = {
   eventIds: string[]
   unitIds: number[]
+}
+
+export interface ByDropCriteria {
+  dropLocations?: ExtendedDrop[]
+  bookDrop?: BookDrop
 }
 
 export const ByDropFilter = (criteria: ByDropCriteria) =>

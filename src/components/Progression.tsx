@@ -1,11 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  color,
-  ColorProps,
-  width,
-  WidthProps,
-} from 'styled-system'
+import { color, ColorProps, width, WidthProps } from 'styled-system'
 import { Text } from './Title'
 
 export const Max = styled.span<WidthProps & ColorProps>`
@@ -30,9 +25,11 @@ export default function Progression ({
   variant = 'normal',
   color = 'text',
 }: ProgressionProps) {
-  return value === max ? (
-    <Max width="5ch" />
-  ) : (
+  if (value === max) {
+    return <Max width="5ch" />
+  }
+
+  return (
     <Text
       as="span"
       width="5ch"

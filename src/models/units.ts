@@ -129,6 +129,8 @@ export type UnitFestSpecial = {
   cooldown: number
 }
 
+export type UnitCooldown = [number, number]
+
 export type UnitSpecial =
   | string
   | {
@@ -176,8 +178,6 @@ export type UnitDetail = {
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]
 }
-
-export type UnitCooldown = [number, number]
 
 export type UnitEvolution = {
   evolution: number | number[]

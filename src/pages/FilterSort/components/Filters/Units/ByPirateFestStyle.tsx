@@ -1,16 +1,21 @@
-import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import ImageInput from 'components/forms/ImageInput'
+import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import { SearchFilterCriteriaInputProps } from 'models/search'
-import { ExtendedUnit, UnitPirateFestStyle, UnitPirateFestStyles } from 'models/units'
+import {
+  ExtendedUnit,
+  UnitPirateFestStyle,
+  UnitPirateFestStyles,
+} from 'models/units'
 import React from 'react'
 
 export interface ByPirateFestStyleCriteria {
   values: UnitPirateFestStyle[]
 }
 
-export const ByPirateFestStyleFilter = (criteria: ByPirateFestStyleCriteria) => (
-  unit: ExtendedUnit,
-) => criteria.values.some(crit => unit.pirateFest.class === crit)
+export const ByPirateFestStyleFilter = (
+  criteria: ByPirateFestStyleCriteria,
+) => (unit: ExtendedUnit) =>
+  criteria.values.some(crit => unit.pirateFest.class === crit)
 
 export function ByPirateFestStyleInput ({
   criteria,
@@ -25,8 +30,8 @@ export function ByPirateFestStyleInput ({
     onChange(
       newValues.length
         ? {
-          values: newValues,
-        }
+            values: newValues,
+          }
         : undefined,
     )
   }

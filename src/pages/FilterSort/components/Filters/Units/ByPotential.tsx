@@ -28,8 +28,8 @@ export function ByPotentialInput ({
     onChange(
       newValues.length
         ? {
-          values: newValues,
-        }
+            values: newValues,
+          }
         : undefined,
     )
   }

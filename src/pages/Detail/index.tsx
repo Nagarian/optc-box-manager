@@ -2,21 +2,21 @@ import Box from 'components/Box'
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
 import ExpansionPanel from 'components/ExpansionPanel'
+import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
 import React, { useState } from 'react'
+import { getLimitType } from 'services/limit'
 import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
+import LimitBreakEdit from './components/LimitBreakEdit'
+import PirateFestEdit from './components/PirateFestEdit'
 import PotentialEdit from './components/PotentialEdit'
+import PowerSocketEdit from './components/PowerSocketEdit'
 import RecapBox from './components/RecapBox'
 import SpecialLvlEdit from './components/SpecialLvlEdit'
 import SupportEdit from './components/SupportEdit'
-import LimitBreakEdit from './components/LimitBreakEdit'
-import { getLimitType } from 'services/limit'
-import PirateFestEdit from './components/PirateFestEdit'
-import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
-import PowerSocketEdit from './components/PowerSocketEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -54,12 +54,12 @@ export default function Detail ({
       .slice(0, potentialUnlockedLength)
       .filter(p => p.lvl === 0).length
       ? userUnit.potentials.map((p, i) =>
-        i < potentialUnlockedLength && p.lvl === 0
-          ? { ...p, lvl: 1 }
-          : i >= potentialUnlockedLength && p.lvl === 1
-            ? { ...p, lvl: 0 }
-            : p,
-      )
+          i < potentialUnlockedLength && p.lvl === 0
+            ? { ...p, lvl: 1 }
+            : i >= potentialUnlockedLength && p.lvl === 1
+              ? { ...p, lvl: 0 }
+              : p,
+        )
       : userUnit.potentials
 
     setUserUnit({

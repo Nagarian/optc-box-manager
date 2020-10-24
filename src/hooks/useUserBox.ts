@@ -15,15 +15,15 @@ const reviver = (units: ExtendedUnit[] = []) =>
   units.length === 0
     ? undefined
     : (key: string, value: any) => {
-      if (key !== 'unit') return value
+        if (key !== 'unit') return value
 
-      if (typeof value === 'number') {
-        const searchValue = fixupMigrationIdChanged[value] || value
-        return units.find(x => x.id === searchValue)
+        if (typeof value === 'number') {
+          const searchValue = fixupMigrationIdChanged[value] || value
+          return units.find(x => x.id === searchValue)
+        }
+
+        return value
       }
-
-      return value
-    }
 
 const replacer = (key: string, value: any) => {
   if (key !== 'unit') return value
@@ -37,7 +37,7 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
   useEffect(() => {
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      let userBox : UserBox = JSON.parse(json, reviver(units))
+      let userBox: UserBox = JSON.parse(json, reviver(units))
       if (units.length) {
         userBox = userBox.map(resync)
       }
