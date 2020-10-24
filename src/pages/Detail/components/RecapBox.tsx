@@ -176,7 +176,7 @@ export default function RecapBox ({
 
         {sockets.length > 0 &&
           sockets.map(({ type, lvl }, i) => (
-            <Element gridArea={`so${i + 1}}`}>
+            <Element key={i} gridArea={`so${i + 1}}`}>
               <PowerSocket type={type} size="2" />
               <Progression value={lvl} max={5} />
             </Element>
