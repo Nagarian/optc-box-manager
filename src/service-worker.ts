@@ -77,4 +77,15 @@ self.addEventListener('message', (event) => {
   }
 })
 
+const imagesRoutes = [
+  'https://optc-db.github.io',
+  'https://onepiece-treasurecruise.com',
+]
+
 // Any other custom service worker logic can go here.
+registerRoute(
+  ({ url, request }) => imagesRoutes.includes(url.origin) && request.destination === 'image',
+  new StaleWhileRevalidate({
+    cacheName: 'characters_images',
+  }),
+)
