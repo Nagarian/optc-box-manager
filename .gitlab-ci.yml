@@ -4,6 +4,7 @@ pages:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
   - npm ci
+  - npm run extract-optcdb
   - npm run test
   - npm run build
   - rm -r public && mv build public

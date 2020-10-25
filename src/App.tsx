@@ -6,9 +6,12 @@ import {
   EditIcon,
   FilterSortIcon,
   GatherIslandIcon,
+  LogoIcon,
   SettingsIcon,
   SugoPullIcon,
 } from 'components/Icon'
+import { SubTitle, Title } from 'components/Title'
+import { useOptcDb } from 'hooks/useOptcDb'
 import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
@@ -17,15 +20,17 @@ import Add from 'pages/Add'
 import BulkEdit from 'pages/BulkEdit'
 import Detail from 'pages/Detail'
 import FilterSort from 'pages/FilterSort'
-import { BySearchBoxCriteria, BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import {
+  BySearchBoxCriteria,
+  BySearchBoxInput,
+} from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
+import GatherIsland from 'pages/GatherIsland'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
-import { useMemo, useState } from 'react'
-import { DBUnit } from 'services/units'
-import styled from 'styled-components'
 import SugoCleaner from 'pages/SugoCleaner'
-import GatherIsland from 'pages/GatherIsland'
-import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
+import { useState } from 'react'
+import styled from 'styled-components'
 
 const AppBlock = styled.div`
   display: grid;
@@ -44,13 +49,39 @@ type DisplayedPanel =
   | 'gatherIsland'
 
 function App () {
-  const unitDatabase = useMemo(() => DBUnit.getAllUnits(), [])
+  const { db: unitDatabase } = useOptcDb()
   const [displayedPanel, setDisplayedPanel] = useState<DisplayedPanel>()
   const [showDetail, setShowDetail] = useState<UserUnit>()
   const { search, setSearch } = useSavedSearch()
 
-  const myUserBox = useUserBox(unitDatabase)
-  const { userBox, add, update, bulkUpdate, remove } = myUserBox
+  const myUserBox = useUserBox()
+  const {
+    userBox,
+    add,
+    update,
+    bulkUpdate,
+    remove,
+    isLoading,
+    loadingStatus,
+  } = myUserBox
+
+  if (isLoading) {
+    return (
+      <AppBlock>
+        <Box
+          display="grid"
+          placeItems="center"
+          placeContent="center"
+          height="inherit"
+          bg="primary"
+        >
+          <LogoIcon size={5} m="3" />
+          <Title color="primaryText">OPTC Box Manager</Title>
+          <SubTitle color="primaryText">{loadingStatus}</SubTitle>
+        </Box>
+      </AppBlock>
+    )
+  }
 
   const closePanel = () => setDisplayedPanel(undefined)
 

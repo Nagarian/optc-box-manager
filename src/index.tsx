@@ -1,4 +1,5 @@
 import PWA from 'components/PWA'
+import { OptcDbProvider } from 'hooks/useOptcDb'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { UserSettingsProvider } from 'hooks/useUserSettings'
 import { StrictMode } from 'react'
@@ -11,7 +12,9 @@ import { darkTheme, lightTheme } from './styles/theme'
 ReactDOM.render(
   <StrictMode>
     <UserSettingsProvider>
-      <AppWrapper />
+      <OptcDbProvider>
+        <AppWrapper />
+      </OptcDbProvider>
     </UserSettingsProvider>
   </StrictMode>,
   document.getElementById('root'),

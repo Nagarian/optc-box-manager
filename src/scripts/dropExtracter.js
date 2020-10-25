@@ -1,25 +1,6 @@
-/* eslint-disable no-global-assign */
-/* eslint-disable no-native-reassign */
-window = {}
-require('../optcdb/common/data/units')
-require('../optcdb/common/js/utils')
-require('../optcdb/common/data/drops')
+// @ts-check
 
-const noImage =
-  'https://onepiece-treasurecruise.com/wp-content/themes/onepiece-treasurecruise/images/noimage.png'
-
-const getImage = func => id => {
-  try {
-    const imagePath = func(id)
-    return imagePath
-      ?.replace('../res', 'https://optc-db.github.io/res/')
-      .replace('http:', 'https:')
-  } catch (error) {
-    console.trace('Invalid unit :', id)
-    return noImage
-  }
-}
-
+/** @type { ({ [key: string]: number }) } */
 const RookieIcons = {
   'Retrieve the Candy!': 1357,
   'Sentomaru, Guard of the New World!': 1469,
@@ -71,22 +52,28 @@ const RookieIcons = {
   'Reunited in Wano! Straw Hat Pirates': 2802,
 }
 
-module.exports = {
-  Fortnight: window.drops.Fortnight.map(fn => {
+const { drops, units } = require('./DBLoader')
+const { getUnitThumbnail } = require('./image')
+
+/** @type { ({ [key: string]: import('models/drops').EventDrop[] }) } */
+const eventModules = {
+  Fortnight: drops.Fortnight.map(fn => {
     const fnUnits = fn['All Difficulties'] ?? fn.Global ?? []
 
     return {
       id: fn.dropID,
       name: fn.name,
-      icon: getImage(window.Utils.getThumbnailUrl)(fn.thumb),
+      icon: getUnitThumbnail(fn.thumb),
       manual: fnUnits.filter(id => id < 0).map(id => 0 - id),
       units: fnUnits.filter(id => id > 0),
     }
   }).reverse(),
 
-  BookQuests: window.drops['Rookie Mission']
+  // @ts-ignore
+  BookQuests: drops['Rookie Mission']
     .filter(group => group.name.startsWith('Manual Acquirement Quest'))
     .flatMap(group => {
+      // @ts-ignore
       const category = /\(([A-Z]*)\)/i.exec(group.name)[1]
 
       return Object.entries(group)
@@ -101,15 +88,18 @@ module.exports = {
           return {
             id: `${group.id}-${iconId}`,
             name: key,
-            icon: getImage(window.Utils.getThumbnailUrl)(iconId),
+            icon: getUnitThumbnail(iconId),
             manual: value.filter(id => id < 0).map(id => 0 - id),
             category: category,
           }
         })
     })
     .filter(Boolean),
+}
 
-  TM: window.drops['Treasure Map'].map(tm => tm.thumb),
+/** @type { ({ [key: string]: import('models/drops').EventDropLight }) } */
+const eventLightModules = {
+  TM: drops['Treasure Map'].map(tm => tm.thumb),
   Ambush: dropMapper('Ambush'),
   KK: dropMapper(
     'Kizuna Clash',
@@ -130,12 +120,19 @@ module.exports = {
   ),
 }
 
+// @ts-ignore
 function distinct (value, index, self) {
   return self.indexOf(value) === index
 }
 
-function dropMapper (dropKey, ...subKey) {
-  return window.drops[dropKey]
+/** @return import('models/drops').EventDropLight */
+function dropMapper (
+  /** @type string */ dropKey,
+  /** @type string[] */ ...subKey
+) {
+  /** @type number[] */
+  const init = []
+  return drops[dropKey]
     .reduce(
       (all, quest) => [
         ...all,
@@ -143,20 +140,91 @@ function dropMapper (dropKey, ...subKey) {
         ...(quest['All Difficulties'] ?? []),
         ...subKey.reduce(
           (allsub, sub) => [...allsub, ...(quest[sub] ?? [])],
-          [],
+          init,
         ),
       ],
-      [],
+      init,
     )
     .filter(Boolean)
     .filter(
-      id =>
+      (/** @type number */ id) =>
         id > 0 && // remove books
-        !!window.units[id - 1] && // remove skull and other tricks
+        !!units[id - 1] && // remove skull and other tricks
         !(
-          ['Evolver', 'Booster'].includes(window.units[id - 1][2]) ||
-          ['Evolver', 'Booster'].includes(window.units[id - 1].class)
+          ['Evolver', 'Booster'].includes(units[id - 1].toString())
         ), // remove evolver and booster
     )
     .filter(distinct)
+}
+
+/** @returns { import('models/units').ExtendedDrop[] } */
+function getDropLocations (
+  /** @type number */ id,
+  /** @type import('models/units').UnitFlags */ flags,
+  /** @type import('./evolution').EvolutionMapHash */ evolutions,
+) {
+  if (Object.keys(flags).some(key => key.includes('rr'))) {
+    return ['rarerecruit']
+  }
+
+  const evolve = evolutions[id] ?? []
+
+  const condition = (/** @type import('models/drops').EventDropLight */ event) =>
+    event.includes(id) || event.some(eventId => evolve.includes(eventId))
+
+  /** @type { import('models/units').ExtendedDrop[] } */
+  const result = []
+
+  if (condition(eventLightModules.Story)) {
+    result.push('story')
+  }
+
+  if (
+    eventModules.Fortnight.some(
+      fn =>
+        fn.units.includes(id) ||
+        evolve.some(evolveId => fn.units.includes(evolveId)),
+    )
+  ) {
+    result.push('fortnight')
+  }
+
+  if (condition(eventLightModules.Coliseum)) {
+    result.push('coliseum')
+  }
+
+  if (condition(eventLightModules.TM)) {
+    result.push('treasuremap')
+  }
+
+  if (condition(eventLightModules.KK)) {
+    result.push('kizunaclash')
+  }
+
+  if (condition(eventLightModules.PF)) {
+    result.push('piratefest')
+  }
+
+  // we put raid and ambush last because they often includes some units from other game mode
+  // IE: ambush shanks
+  if (condition(eventLightModules.Raid)) {
+    result.push('raid')
+  }
+
+  if (condition(eventLightModules.Ambush)) {
+    result.push('ambush')
+  }
+
+  if (!result.length) {
+    // ambiguous units like thus given on login, or on specific events
+    result.push('special')
+  }
+
+  return result
+}
+
+module.exports = {
+  ...eventLightModules,
+  ...eventModules,
+  getDropLocations,
 }

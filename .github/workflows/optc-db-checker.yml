@@ -28,4 +28,5 @@ jobs:
       - name: Restore package & run test
         run: |
           npm ci
+          npm run extract-optcdb
           npm test

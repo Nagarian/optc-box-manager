@@ -71,6 +71,8 @@ export type UserUnitBulkEdit = {
 
 export type MyUserBox = {
   userBox: UserBox
+  isLoading: boolean
+  loadingStatus: string
   add: (...units: ExtendedUnit[]) => void
   update: (userUnit: UserUnit) => void
   bulkUpdate: (userUnits : UserUnit[], edit: UserUnitBulkEdit) => void

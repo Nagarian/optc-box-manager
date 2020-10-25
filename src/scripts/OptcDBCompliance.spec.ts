@@ -1,8 +1,8 @@
-import { Potentials, UnitPirateFestStyles } from 'models/units'
-import { DBUnit } from './units'
+import { ExtendedUnit, Potentials, UnitPirateFestStyles } from 'models/units'
+import OptcDb from '../../public/db.json'
 
 describe('Database compliance ', () => {
-  const db = DBUnit.getAllUnits()
+  const db = OptcDb as ExtendedUnit[]
 
   describe('Global units ID', () => {
     const globalUnitMapping = {
@@ -51,20 +51,22 @@ describe('Database compliance ', () => {
   })
 
   it('Potentials should respect thus defined', () => {
-    const potentials = [...(new Set(db
-      .flatMap(unit => unit.detail.potential)
-      .filter(Boolean)
-      .map(p => p!.Name),
-    ))].sort()
+    const potentials = [
+      ...new Set(
+        db
+          .flatMap(unit => unit.detail.potential)
+          .filter(Boolean)
+          .map(p => p!.Name),
+      ),
+    ].sort()
 
     expect(potentials).toEqual([...Potentials].sort())
   })
 
   it('PirateFestStyle should respect thus defined', () => {
-    const pfStyles = [...(new Set(db
-      .map(unit => unit.pirateFest.class)
-      .filter(Boolean),
-    ))].sort()
+    const pfStyles = [
+      ...new Set(db.map(unit => unit.pirateFest.class).filter(Boolean)),
+    ].sort()
 
     expect(pfStyles).toEqual([...UnitPirateFestStyles].sort())
   })

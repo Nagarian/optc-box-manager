@@ -4,6 +4,8 @@
   "version": "1.12.1",
   "private": true,
   "scripts": {
+    "extract-optcdb": "node ./src/scripts/index.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,7 +53,8 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-standard": "^5.0.0",
     "preval.macro": "^5.0.0",
-    "react-test-renderer": "^17.0.1"
+    "react-test-renderer": "^17.0.1",
+    "source-map-explorer": "^2.5.1"
   },
   "browserslist": {
     "production": [

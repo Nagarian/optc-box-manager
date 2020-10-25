@@ -1,6 +1,13 @@
 import { FunctionComponent, SVGProps } from 'react'
 import styled, { StyledComponent } from 'styled-components'
-import { color, compose, size, SizeProps, space, SpaceProps } from 'styled-system'
+import {
+  color,
+  compose,
+  size,
+  SizeProps,
+  space,
+  SpaceProps,
+} from 'styled-system'
 import { clean, place, PlaceProps } from 'styles'
 import { ReactComponent as Add } from './add.svg'
 import { ReactComponent as Arrow } from './arrow.svg'
@@ -18,6 +25,7 @@ import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
+import Logo from './logo.png'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
 import { ReactComponent as PirateFestBoth } from './piratefest-both.svg'
@@ -40,9 +48,7 @@ import { ReactComponent as Treasure } from './treasure.svg'
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps
 
 const BaseSvg = (
-  svg: FunctionComponent<
-    SVGProps<SVGSVGElement> & { title?: string }
-  >,
+  svg: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>,
 ) => styled(svg).withConfig(clean('color', 'fill'))<StyledIconProps>`
   ${compose(space, size, color, place)}
   fill: currentColor;
@@ -117,3 +123,11 @@ export const SpecialLvlIcon = styled.img.attrs(() => ({
 SpecialLvlIcon.defaultProps = {
   title: 'Special Level',
 }
+
+export const LogoIcon = styled.img.attrs(() => ({
+  src: Logo,
+}))<SpaceProps & SizeProps>`
+  object-fit: contain;
+  ${space}
+  ${size}
+` as Icon

@@ -1,8 +1,9 @@
 import { ExtendedUnit } from 'models/units'
 import { MyUserBox, UserBox, UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { useEffect, useState } from 'react'
-import { UserUnitFactory, applyEdit, resync } from 'services/userUnits'
 import { exportAsJson } from 'services/share'
+import { applyEdit, resync, UserUnitFactory } from 'services/userUnits'
+import { useOptcDb } from './useOptcDb'
 
 const userBoxKey = 'userBox'
 
@@ -31,29 +32,39 @@ const replacer = (key: string, value: any) => {
   return (value as ExtendedUnit).id
 }
 
-export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
+export default function useUserBox (): MyUserBox {
+  const { db, isLoaded: dbLoaded } = useOptcDb()
   const [userBox, setUserBox] = useState<UserBox>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
+    if (!dbLoaded) {
+      return
+    }
+
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      let userBox: UserBox = JSON.parse(json, reviver(units))
-      if (units.length) {
+      let userBox: UserBox = JSON.parse(json, reviver(db))
+      if (db.length) {
         userBox = userBox.map(resync)
       }
 
       setUserBox(userBox)
     }
-  }, [units])
+
+    setIsLoading(false)
+  }, [db, dbLoaded])
 
   useEffect(() => {
-    if (userBox) {
+    if (userBox && userBox.length) {
       localStorage.setItem(userBoxKey, JSON.stringify(userBox, replacer))
     }
   }, [userBox])
 
   return {
     userBox,
+    isLoading,
+    loadingStatus: !dbLoaded ? 'Database Loading' : 'Box Syncing',
     add: (...units: ExtendedUnit[]) => {
       const userUnits = units.map(UserUnitFactory)
       setUserBox(userBox.concat(userUnits))
@@ -78,19 +89,20 @@ export default function useUserBox (units: ExtendedUnit[]): MyUserBox {
     },
     reset: () => {
       setUserBox([])
+      localStorage.setItem(userBoxKey, '[]')
     },
     importDB: (json: string) => {
-      let db = JSON.parse(json, reviver(units))
-      if (!Array.isArray(db)) {
+      let importedDb = JSON.parse(json, reviver(db))
+      if (!Array.isArray(importedDb)) {
         // TODO: make more check
         throw new Error('invalid JSON file')
       }
 
-      if (db.length) {
-        db = db.map(resync)
+      if (importedDb.length) {
+        importedDb = importedDb.map(resync)
       }
 
-      setUserBox(db as UserBox)
+      setUserBox(importedDb as UserBox)
     },
     exportDB: async () => {
       const payload = JSON.stringify(userBox, replacer)
