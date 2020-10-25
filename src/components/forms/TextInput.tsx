@@ -1,14 +1,16 @@
 import { themeGet } from '@styled-system/theme-get'
 import styled from 'styled-components'
-import { SpaceProps } from 'styled-system'
+import { SpaceProps, FlexProps, flex, space } from 'styled-system'
 
-export const TextInput = styled.input<SpaceProps>`
+export const TextInput = styled.input<SpaceProps & FlexProps>`
   padding: ${themeGet('space.1')};
   font-size: ${themeGet('fontSizes.1')};
   border-bottom: solid ${themeGet('colors.grey')} ${themeGet('borderWidths.thin')};
   border-radius: 0;
   transition: border-color 250ms;
   color: ${themeGet('colors.text')};
+  ${flex}
+  ${space}
 
   :focus {
     border-color: ${themeGet('colors.secondaryText')};
