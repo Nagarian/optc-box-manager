@@ -20,7 +20,7 @@ export default function ExportFor ({ myUserBox: { userBox } }: ExportForProps) {
     return <Button onClick={() => setIsOpen(true)}>Export For</Button>
   }
 
-  const payload = userBox.map(u => u.unit.id).join(',')
+  const payload = userBox.map(u => u.unit.dbId).join(',')
 
   return (
     <Popup onClose={() => setIsOpen(false)} title="Export For">

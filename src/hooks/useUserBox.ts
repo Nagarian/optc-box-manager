@@ -20,7 +20,8 @@ const reviver = (units: ExtendedUnit[] = []) =>
 
         if (typeof value === 'number') {
           const searchValue = fixupMigrationIdChanged[value] || value
-          return units.find(x => x.id === searchValue)
+          return units.find(x => x.id === searchValue) ??
+            units.find(x => x.dbId === searchValue)
         }
 
         return value

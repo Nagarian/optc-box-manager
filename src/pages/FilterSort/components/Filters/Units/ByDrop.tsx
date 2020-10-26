@@ -29,7 +29,7 @@ export const ByDropFilter = (criteria: ByDropCriteria) =>
   BooleanFilterMapper(
     [
       criteria.bookDrop?.unitIds?.length,
-      (unit: ExtendedUnit) => criteria.bookDrop!.unitIds.includes(unit.id),
+      (unit: ExtendedUnit) => criteria.bookDrop!.unitIds.includes(unit.dbId),
     ],
     [
       criteria.dropLocations?.length,

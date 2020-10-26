@@ -244,8 +244,8 @@ export const ExtendedDropKeys = [
 export type ExtendedDrop = typeof ExtendedDropKeys[number]
 
 export type ExtendedUnit = BaseUnit & {
-  /** OPTC-DB real ID (used in url) */
   id: number
+  dbId: number
   images: UnitImages
   evolution?: UnitEvolution
   cooldown: UnitCooldown
