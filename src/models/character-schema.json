@@ -1,0 +1,1684 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "definitions": {
+        "LBPathType": {
+            "enum": [
+                "atk",
+                "captain",
+                "cooldown",
+                "hp",
+                "key",
+                "potential",
+                "rcv",
+                "sailor",
+                "slot"
+            ],
+            "type": "string"
+        },
+        "PirateFestStyle": {
+            "enum": [
+                "ATK",
+                "DBF",
+                "DEF",
+                "RCV",
+                "SPT"
+            ],
+            "type": "string"
+        },
+        "Potential": {
+            "enum": [
+                "Barrier Penetration",
+                "Cooldown Reduction",
+                "Critical Hit",
+                "Double Special Activation",
+                "Enrage",
+                "Nutrition/Hunger reduction",
+                "Pinch Healing",
+                "Reduce No Healing duration",
+                "Reduce Sailor Despair duration",
+                "Reduce Ship Bind duration",
+                "Reduce Slot Bind duration",
+                "[DEX] Damage Reduction",
+                "[INT] Damage Reduction",
+                "[PSY] Damage Reduction",
+                "[QCK] Damage Reduction",
+                "[STR] Damage Reduction"
+            ],
+            "type": "string"
+        },
+        "Type": {
+            "enum": [
+                "DEX",
+                "DUAL",
+                "INT",
+                "PSY",
+                "QCK",
+                "STR",
+                "VS"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "aliases": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "captain": {
+            "additionalProperties": false,
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "levels": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ],
+            "type": "object"
+        },
+        "characters": {
+            "anyOf": [
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "character1": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "captain": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "levels": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                },
+                                "class": {
+                                    "items": {
+                                        "enum": [
+                                            "Booster",
+                                            "Cerebral",
+                                            "Driven",
+                                            "Evolver",
+                                            "Fighter",
+                                            "Free Spirit",
+                                            "Powerhouse",
+                                            "Shooter",
+                                            "Slasher",
+                                            "Striker"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "frenchName": {
+                                    "type": "string"
+                                },
+                                "images": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "full": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail1": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail2": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "japanName": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "sailor": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "unlockedAt": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "description"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "special": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "cooldown": {
+                                            "type": "number"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "maxLevel": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "stages": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "name"
+                                    ],
+                                    "type": "object"
+                                },
+                                "stats": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "combo": {
+                                            "type": "number"
+                                        },
+                                        "growth": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "atk": {
+                                                    "type": "number"
+                                                },
+                                                "hp": {
+                                                    "type": "number"
+                                                },
+                                                "rcv": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "atk",
+                                                "hp",
+                                                "rcv"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "maxATK": {
+                                            "type": "number"
+                                        },
+                                        "maxHP": {
+                                            "type": "number"
+                                        },
+                                        "maxRCV": {
+                                            "type": "number"
+                                        },
+                                        "minATK": {
+                                            "type": "number"
+                                        },
+                                        "minHP": {
+                                            "type": "number"
+                                        },
+                                        "minRCV": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "combo",
+                                        "growth",
+                                        "maxATK",
+                                        "maxHP",
+                                        "maxRCV",
+                                        "minATK",
+                                        "minHP",
+                                        "minRCV"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/Type"
+                                }
+                            },
+                            "required": [
+                                "class",
+                                "images",
+                                "name",
+                                "stats",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        "character2": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "captain": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "levels": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                },
+                                "class": {
+                                    "items": {
+                                        "enum": [
+                                            "Booster",
+                                            "Cerebral",
+                                            "Driven",
+                                            "Evolver",
+                                            "Fighter",
+                                            "Free Spirit",
+                                            "Powerhouse",
+                                            "Shooter",
+                                            "Slasher",
+                                            "Striker"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "frenchName": {
+                                    "type": "string"
+                                },
+                                "images": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "full": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail1": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail2": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "japanName": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "sailor": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "unlockedAt": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "description"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "special": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "cooldown": {
+                                            "type": "number"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "maxLevel": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "stages": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "name"
+                                    ],
+                                    "type": "object"
+                                },
+                                "stats": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "combo": {
+                                            "type": "number"
+                                        },
+                                        "growth": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "atk": {
+                                                    "type": "number"
+                                                },
+                                                "hp": {
+                                                    "type": "number"
+                                                },
+                                                "rcv": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "atk",
+                                                "hp",
+                                                "rcv"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "maxATK": {
+                                            "type": "number"
+                                        },
+                                        "maxHP": {
+                                            "type": "number"
+                                        },
+                                        "maxRCV": {
+                                            "type": "number"
+                                        },
+                                        "minATK": {
+                                            "type": "number"
+                                        },
+                                        "minHP": {
+                                            "type": "number"
+                                        },
+                                        "minRCV": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "combo",
+                                        "growth",
+                                        "maxATK",
+                                        "maxHP",
+                                        "maxRCV",
+                                        "minATK",
+                                        "minHP",
+                                        "minRCV"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/Type"
+                                }
+                            },
+                            "required": [
+                                "class",
+                                "images",
+                                "name",
+                                "stats",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        "swap": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "character1",
+                        "character2",
+                        "swap"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "character1": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "captain": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "levels": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                },
+                                "class": {
+                                    "items": {
+                                        "enum": [
+                                            "Booster",
+                                            "Cerebral",
+                                            "Driven",
+                                            "Evolver",
+                                            "Fighter",
+                                            "Free Spirit",
+                                            "Powerhouse",
+                                            "Shooter",
+                                            "Slasher",
+                                            "Striker"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "frenchName": {
+                                    "type": "string"
+                                },
+                                "images": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "full": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail1": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail2": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "japanName": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "pirateFest": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "ability": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "behaviorPattern": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "class": {
+                                            "$ref": "#/definitions/PirateFestStyle"
+                                        },
+                                        "resistance": {
+                                            "type": "string"
+                                        },
+                                        "special": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "stats": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "DEF": {
+                                                    "type": "number"
+                                                },
+                                                "SPD": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "DEF",
+                                                "SPD"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "targetPriority": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "ability",
+                                        "behaviorPattern",
+                                        "class",
+                                        "special",
+                                        "stats",
+                                        "targetPriority"
+                                    ],
+                                    "type": "object"
+                                },
+                                "sailor": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "unlockedAt": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "description"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "special": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "cooldown": {
+                                            "type": "number"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "maxLevel": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "stages": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "name"
+                                    ],
+                                    "type": "object"
+                                },
+                                "stats": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "combo": {
+                                            "type": "number"
+                                        },
+                                        "growth": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "atk": {
+                                                    "type": "number"
+                                                },
+                                                "hp": {
+                                                    "type": "number"
+                                                },
+                                                "rcv": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "atk",
+                                                "hp",
+                                                "rcv"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "maxATK": {
+                                            "type": "number"
+                                        },
+                                        "maxHP": {
+                                            "type": "number"
+                                        },
+                                        "maxRCV": {
+                                            "type": "number"
+                                        },
+                                        "minATK": {
+                                            "type": "number"
+                                        },
+                                        "minHP": {
+                                            "type": "number"
+                                        },
+                                        "minRCV": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "combo",
+                                        "growth",
+                                        "maxATK",
+                                        "maxHP",
+                                        "maxRCV",
+                                        "minATK",
+                                        "minHP",
+                                        "minRCV"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/Type"
+                                },
+                                "versus": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "class",
+                                "images",
+                                "name",
+                                "stats",
+                                "type",
+                                "versus"
+                            ],
+                            "type": "object"
+                        },
+                        "character2": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "captain": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "levels": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                },
+                                "class": {
+                                    "items": {
+                                        "enum": [
+                                            "Booster",
+                                            "Cerebral",
+                                            "Driven",
+                                            "Evolver",
+                                            "Fighter",
+                                            "Free Spirit",
+                                            "Powerhouse",
+                                            "Shooter",
+                                            "Slasher",
+                                            "Striker"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "frenchName": {
+                                    "type": "string"
+                                },
+                                "images": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "full": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail1": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail2": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "japanName": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "pirateFest": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "ability": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "behaviorPattern": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "class": {
+                                            "$ref": "#/definitions/PirateFestStyle"
+                                        },
+                                        "resistance": {
+                                            "type": "string"
+                                        },
+                                        "special": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "stats": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "DEF": {
+                                                    "type": "number"
+                                                },
+                                                "SPD": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "DEF",
+                                                "SPD"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "targetPriority": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "ability",
+                                        "behaviorPattern",
+                                        "class",
+                                        "special",
+                                        "stats",
+                                        "targetPriority"
+                                    ],
+                                    "type": "object"
+                                },
+                                "sailor": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "unlockedAt": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "description"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "special": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "cooldown": {
+                                            "type": "number"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "maxLevel": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "stages": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "cooldown": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "cooldown",
+                                                    "description"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "name"
+                                    ],
+                                    "type": "object"
+                                },
+                                "stats": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "combo": {
+                                            "type": "number"
+                                        },
+                                        "growth": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "atk": {
+                                                    "type": "number"
+                                                },
+                                                "hp": {
+                                                    "type": "number"
+                                                },
+                                                "rcv": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "atk",
+                                                "hp",
+                                                "rcv"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "maxATK": {
+                                            "type": "number"
+                                        },
+                                        "maxHP": {
+                                            "type": "number"
+                                        },
+                                        "maxRCV": {
+                                            "type": "number"
+                                        },
+                                        "minATK": {
+                                            "type": "number"
+                                        },
+                                        "minHP": {
+                                            "type": "number"
+                                        },
+                                        "minRCV": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "combo",
+                                        "growth",
+                                        "maxATK",
+                                        "maxHP",
+                                        "maxRCV",
+                                        "minATK",
+                                        "minHP",
+                                        "minRCV"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/Type"
+                                },
+                                "versus": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "class",
+                                "images",
+                                "name",
+                                "stats",
+                                "type",
+                                "versus"
+                            ],
+                            "type": "object"
+                        },
+                        "criteria": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "character1",
+                        "character2",
+                        "criteria"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "class": {
+            "items": {
+                "enum": [
+                    "Booster",
+                    "Cerebral",
+                    "Driven",
+                    "Evolver",
+                    "Fighter",
+                    "Free Spirit",
+                    "Powerhouse",
+                    "Shooter",
+                    "Slasher",
+                    "Striker"
+                ],
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "cost": {
+            "type": "number"
+        },
+        "dbId": {
+            "type": "number"
+        },
+        "dropLocation": {
+            "items": {
+                "enum": [
+                    "ambush",
+                    "arena",
+                    "coliseum",
+                    "fortnight",
+                    "kizunaclash",
+                    "piratefest",
+                    "raid",
+                    "rarerecruit",
+                    "special",
+                    "story",
+                    "treasuremap"
+                ],
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "evolution": {
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "evolvers": {
+                        "items": {
+                            "type": [
+                                "string",
+                                "number"
+                            ]
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "evolvers",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "evolutionMap": {
+            "items": {
+                "type": "number"
+            },
+            "type": "array"
+        },
+        "family": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "familyId": {
+            "type": "number"
+        },
+        "flags": {
+            "items": {
+                "enum": [
+                    "global-only",
+                    "japan-only",
+                    "kclrr",
+                    "lrr",
+                    "pflrr",
+                    "rr",
+                    "shop",
+                    "special",
+                    "tmlrr",
+                    "tmshop"
+                ],
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "frenchName": {
+            "type": "string"
+        },
+        "id": {
+            "type": "number"
+        },
+        "images": {
+            "additionalProperties": false,
+            "properties": {
+                "full": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "thumbnail1": {
+                    "type": "string"
+                },
+                "thumbnail2": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "japanName": {
+            "type": "string"
+        },
+        "limitBreak": {
+            "additionalProperties": false,
+            "properties": {
+                "path": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "type": {
+                                "$ref": "#/definitions/LBPathType"
+                            },
+                            "value": {
+                                "type": [
+                                    "string",
+                                    "number"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "type"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "potentials": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "levels": {
+                                "items": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "reduction": {
+                                            "type": "number"
+                                        },
+                                        "threshold": {
+                                            "type": "number"
+                                        },
+                                        "value": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "type": {
+                                "$ref": "#/definitions/Potential"
+                            }
+                        },
+                        "required": [
+                            "levels",
+                            "type"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "path",
+                "potentials"
+            ],
+            "type": "object"
+        },
+        "links": {
+            "additionalProperties": false,
+            "properties": {
+                "gamewithId": {
+                    "type": "number"
+                },
+                "officialJapan": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "maxExp": {
+            "type": "number"
+        },
+        "maxLevel": {
+            "type": "number"
+        },
+        "name": {
+            "type": "string"
+        },
+        "pirateFest": {
+            "additionalProperties": false,
+            "properties": {
+                "ability": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "behaviorPattern": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "class": {
+                    "$ref": "#/definitions/PirateFestStyle"
+                },
+                "resistance": {
+                    "type": "string"
+                },
+                "special": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "cooldown": {
+                                "type": "number"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "cooldown",
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "stats": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "DEF": {
+                            "type": "number"
+                        },
+                        "SPD": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "DEF",
+                        "SPD"
+                    ],
+                    "type": "object"
+                },
+                "targetPriority": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ability",
+                "behaviorPattern",
+                "class",
+                "special",
+                "stats",
+                "targetPriority"
+            ],
+            "type": "object"
+        },
+        "rarity": {
+            "enum": [
+                1,
+                2,
+                3,
+                4,
+                "4+",
+                5,
+                "5+",
+                6,
+                "6+"
+            ]
+        },
+        "sailor": {
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "unlockedAt": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "description"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "slots": {
+            "type": "number"
+        },
+        "special": {
+            "additionalProperties": false,
+            "properties": {
+                "cooldown": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "maxLevel": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "stages": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "cooldown": {
+                                "type": "number"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "cooldown",
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "description",
+                "name"
+            ],
+            "type": "object"
+        },
+        "stats": {
+            "additionalProperties": false,
+            "properties": {
+                "combo": {
+                    "type": "number"
+                },
+                "growth": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "atk": {
+                            "type": "number"
+                        },
+                        "hp": {
+                            "type": "number"
+                        },
+                        "rcv": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "atk",
+                        "hp",
+                        "rcv"
+                    ],
+                    "type": "object"
+                },
+                "maxATK": {
+                    "type": "number"
+                },
+                "maxHP": {
+                    "type": "number"
+                },
+                "maxRCV": {
+                    "type": "number"
+                },
+                "minATK": {
+                    "type": "number"
+                },
+                "minHP": {
+                    "type": "number"
+                },
+                "minRCV": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "combo",
+                "growth",
+                "maxATK",
+                "maxHP",
+                "maxRCV",
+                "minATK",
+                "minHP",
+                "minRCV"
+            ],
+            "type": "object"
+        },
+        "superType": {
+            "additionalProperties": false,
+            "properties": {
+                "criteria": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "criteria",
+                "description"
+            ],
+            "type": "object"
+        },
+        "support": {
+            "additionalProperties": false,
+            "properties": {
+                "criteria": {
+                    "type": "string"
+                },
+                "levels": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            },
+                            "reduction": {
+                                "type": "number"
+                            },
+                            "value": {
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "items": {
+                        "enum": [
+                            "atk",
+                            "def-dex",
+                            "def-int",
+                            "def-psy",
+                            "def-qck",
+                            "def-str",
+                            "hp",
+                            "other",
+                            "rcv"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "criteria",
+                "levels",
+                "type"
+            ],
+            "type": "object"
+        },
+        "type": {
+            "$ref": "#/definitions/Type"
+        }
+    },
+    "required": [
+        "aliases",
+        "class",
+        "cost",
+        "dbId",
+        "dropLocation",
+        "evolutionMap",
+        "flags",
+        "id",
+        "images",
+        "links",
+        "name",
+        "rarity",
+        "slots",
+        "stats",
+        "type"
+    ],
+    "type": "object"
+}
+

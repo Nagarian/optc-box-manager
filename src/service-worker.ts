@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate } from 'workbox-strategies'
+import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies'
 
 // eslint-disable-next-line no-undef
 declare const self: ServiceWorkerGlobalScope
@@ -81,6 +81,14 @@ const imagesRoutes = [
   'https://optc-db.github.io',
   'https://onepiece-treasurecruise.com',
 ]
+
+registerRoute(
+  /\/db-\w+\.json/i,
+  // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new NetworkFirst({
+    cacheName: 'db_data',
+  }),
+)
 
 // Any other custom service worker logic can go here.
 registerRoute(

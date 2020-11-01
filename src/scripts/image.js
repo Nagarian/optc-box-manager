@@ -24,7 +24,7 @@ const getImage = (
 }
 
 async function downloadCharacters (
-  /** @type { import('models/units').ExtendedUnit[] } */ DBUnits,
+  /** @type { import('models/old-units').ExtendedUnit[] } */ DBUnits,
 ) {
   const { createWriteStream } = require('fs')
   const http = require('https')

@@ -29,8 +29,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Backlog
+### Schema validation
 
-- [ ] Rework DB schema
-- [ ] Sync with nakama network
-- [ ] Sync with OPTC-DB log feature
+To generate schema validator we need to be outside of this npm project because typescript is messed-up with the config define in the project
+
+```bash
+cd ..
+# for the old format
+npx ts-json-schema-generator --path './optc-box-manager/src/models/old-units.ts' --type 'ExtendedUnit' -o './optc-box-manager/src/models/old-character-schema.json'
+# for the new format
+npx typescript-json-schema -o './optc-box-manager/src/models/character-schema.json' './optc-box-manager/src/models/character.ts' 'ExtendedCharacter' --required --noExtraProps --validationKeywords --strictNullChecks
+```
+
+### HTTPS mode
+
+Follow <https://stackoverflow.com/questions/35127383/npm-http-server-with-ssl>
+
+```bash
+npm run build
+npx http-server ./build -S
+```

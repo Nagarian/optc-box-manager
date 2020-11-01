@@ -67,8 +67,8 @@ const globalOnly = {
   5064: 3381, // Law/Chopper
   5065: 3382, // MOTNS
   5066: 3383, // Makino
-  5067: 3384, // Akainu v3
-  5068: 3385,
+  5067: 3156, // Akainu v3
+  5068: 3157,
 }
 
 const globalOnlyWrongId = Object.entries(globalOnly)

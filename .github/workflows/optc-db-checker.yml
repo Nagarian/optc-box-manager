@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dependabot/submodules/src/optcdb-*
+      - feature/*
 
 jobs:
   build-test-check-db:
@@ -30,3 +31,12 @@ jobs:
           npm ci
           npm run extract-optcdb
           npm test
+
+      - name: Extract validation errors
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: extract-optc-db-error
+          path: |
+            public/errors-old.json
+            public/errors-new.json

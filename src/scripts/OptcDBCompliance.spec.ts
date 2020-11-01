@@ -1,5 +1,5 @@
 import { ExtendedUnit, Potentials, UnitPirateFestStyles } from 'models/units'
-import OptcDb from '../../public/db.json'
+import OptcDb from '../../public/db-old.json'
 
 describe('Database compliance ', () => {
   const db = OptcDb as ExtendedUnit[]
@@ -45,7 +45,7 @@ describe('Database compliance ', () => {
         const selectedUnit = db.find(unit => unit.name === name)
 
         expect(selectedUnit).toBeDefined()
-        expect(selectedUnit!.id).toEqual(id)
+        expect(selectedUnit!.dbId).toEqual(id)
       }),
     )
   })
@@ -65,7 +65,12 @@ describe('Database compliance ', () => {
 
   it('PirateFestStyle should respect thus defined', () => {
     const pfStyles = [
-      ...new Set(db.map(unit => unit.pirateFest.class).filter(Boolean)),
+      ...new Set(
+        db
+        .filter(unit => ![3134, 3135].includes(unit.dbId)) // we remove VS unit
+        .map(unit => unit.pirateFest.class)
+        .filter(Boolean)
+      ),
     ].sort()
 
     expect(pfStyles).toEqual([...UnitPirateFestStyles].sort())

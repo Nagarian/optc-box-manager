@@ -1,20 +1,23 @@
 // @ts-check
 const {
+  aliases,
   evolutions,
   units,
   details,
   cooldowns,
   flags,
   families,
+  gamewith,
 } = require('./DBLoader')
 const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupPirateFestStyle, fixupVersusUnit } = require('./fixup')
+const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb } = require('./glo-jap-remapper')
+const dualMap = require('../models/optcdb-dual-units.json')
 
 const getFamilyId = (
-  /** @type import('models/units').UnitFamily[] */ families,
+  /** @type import('models/old-units').UnitFamily[] */ families,
   /** @type number */ unitId,
 ) => {
   const family = families[unitId]
@@ -30,7 +33,7 @@ const getFamilyId = (
   return families.findIndex(u => u === family) + 1
 }
 
-/** @returns { import('models/units').ExtendedUnit[] } */
+/** @returns { import('models/old-units').ExtendedUnit[] } */
 function DBFactory () {
   const Details = details
   const Evolutions = evolutions
@@ -40,13 +43,8 @@ function DBFactory () {
   const EvolutionMap = evolutionMap()
 
   let db = units
-    .filter(
-      unit =>
-        unit.name &&
-        !unit.name.includes('Limit Break') &&
-        !unit.name.includes('Dual Unit'),
-    )
-    .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
+    .filter(unit => unit.name)
+    // .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
     .map(unit => {
       const dbId = unit.number + 1
       const flags = Flags[dbId] ?? {}
@@ -67,14 +65,27 @@ function DBFactory () {
           name: Families[unit.number],
           id: getFamilyId(Families, unit.number),
         },
-        pirateFest: {
-          class: fixupPirateFestStyle(unit.pirateFest.class),
-        },
+        pirateFest: unit.pirateFest,
         dropLocations: getDropLocations(dbId, flags, EvolutionMap),
         evolutionMap: EvolutionMap[dbId] ?? [dbId],
+        aliases: aliases[dbId],
+        gamewith: gamewith[unit.number] ?? undefined,
       }
     })
-    .map(fixupVersusUnit)
+    // .map(fixupVersusUnit)
+    .map(fixupDualVersusMapping)
+    .map(fixupSpecificIssue)
+
+  for (const [id, name] of dualMap) {
+    const unit = db.find(u => u.dbId === id)
+    if (!unit) throw new Error(`unit ${id} ${name} can't be find`)
+    if (unit.name !== name) throw new Error(`unit ${unit.dbId} "${unit.name}" has not the right name which should be "${name}"`)
+  }
+
+  db = db.filter(unit =>
+    !unit.name.includes('Dual Unit') &&
+    !unit.name.includes('VS Unit'),
+  )
 
   db = db.concat(db
     .filter(u => !!globalOnlyMissingInDb[u.id])

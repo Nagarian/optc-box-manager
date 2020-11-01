@@ -1,0 +1,989 @@
+{
+  "$ref": "#/definitions/ExtendedUnit",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExtendedDrop": {
+      "enum": [
+        "rarerecruit",
+        "story",
+        "fortnight",
+        "raid",
+        "coliseum",
+        "ambush",
+        "treasuremap",
+        "kizunaclash",
+        "piratefest",
+        "special"
+      ],
+      "type": "string"
+    },
+    "ExtendedUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "class": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UnitClass"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/UnitClass"
+              },
+              "type": "array"
+            },
+            {
+              "items": [
+                {
+                  "items": {
+                    "$ref": "#/definitions/UnitClass"
+                  },
+                  "type": "array"
+                },
+                {
+                  "items": {
+                    "$ref": "#/definitions/UnitClass"
+                  },
+                  "type": "array"
+                },
+                {
+                  "items": {
+                    "$ref": "#/definitions/UnitClass"
+                  },
+                  "type": "array"
+                }
+              ],
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            }
+          ]
+        },
+        "combo": {
+          "type": "number"
+        },
+        "cooldown": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UnitCooldown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost": {
+          "type": "number"
+        },
+        "dbId": {
+          "type": "number"
+        },
+        "detail": {
+          "$ref": "#/definitions/UnitDetail"
+        },
+        "dropLocations": {
+          "items": {
+            "$ref": "#/definitions/ExtendedDrop"
+          },
+          "type": "array"
+        },
+        "dualCharacters": {
+          "items": {
+            "$ref": "#/definitions/ExtendedUnit"
+          },
+          "type": "array"
+        },
+        "evolution": {
+          "$ref": "#/definitions/UnitEvolution"
+        },
+        "evolutionMap": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "family": {
+          "$ref": "#/definitions/ExtendedUnitFamily"
+        },
+        "flags": {
+          "$ref": "#/definitions/UnitFlags"
+        },
+        "gamewith": {
+          "type": "number"
+        },
+        "growth": {
+          "additionalProperties": false,
+          "properties": {
+            "atk": {
+              "type": "number"
+            },
+            "hp": {
+              "type": "number"
+            },
+            "rcv": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "hp",
+            "atk",
+            "rcv"
+          ],
+          "type": "object"
+        },
+        "id": {
+          "type": "number"
+        },
+        "images": {
+          "$ref": "#/definitions/UnitImages"
+        },
+        "incomplete": {
+          "type": "boolean"
+        },
+        "limitATK": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitCD": {
+          "type": "number"
+        },
+        "limitHP": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitRCV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitSlot": {
+          "type": "number"
+        },
+        "limitStats": {
+          "additionalProperties": false,
+          "properties": {
+            "atk": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "captains": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "hp": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "rcv": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "sailors": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "hp",
+            "atk",
+            "rcv",
+            "sailors",
+            "captains"
+          ],
+          "type": "object"
+        },
+        "limitexATK": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitexCD": {
+          "type": "number"
+        },
+        "limitexHP": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitexRCV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "limitexSlot": {
+          "type": "number"
+        },
+        "maxATK": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maxEXP": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maxHP": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maxLevel": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maxRCV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minATK": {
+          "type": "number"
+        },
+        "minHP": {
+          "type": "number"
+        },
+        "minRCV": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number"
+        },
+        "pirateFest": {
+          "additionalProperties": false,
+          "properties": {
+            "DEF": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "SPD": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "class": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/UnitPirateFestStyle"
+                },
+                {
+                  "const": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "maxCP": {
+              "type": "null"
+            },
+            "minCP": {
+              "type": "null"
+            }
+          },
+          "type": "object"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "slots": {
+          "type": "number"
+        },
+        "stars": {
+          "$ref": "#/definitions/UnitStar"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UnitType"
+            },
+            {
+              "items": [
+                {
+                  "$ref": "#/definitions/UnitType"
+                },
+                {
+                  "$ref": "#/definitions/UnitType"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "class",
+        "combo",
+        "cost",
+        "dbId",
+        "detail",
+        "dropLocations",
+        "evolutionMap",
+        "family",
+        "flags",
+        "growth",
+        "id",
+        "images",
+        "limitATK",
+        "limitCD",
+        "limitHP",
+        "limitRCV",
+        "limitSlot",
+        "limitStats",
+        "limitexATK",
+        "limitexCD",
+        "limitexHP",
+        "limitexRCV",
+        "limitexSlot",
+        "maxATK",
+        "maxEXP",
+        "maxHP",
+        "maxLevel",
+        "maxRCV",
+        "minATK",
+        "minHP",
+        "minRCV",
+        "name",
+        "number",
+        "pirateFest",
+        "slots",
+        "stars",
+        "type"
+      ],
+      "type": "object"
+    },
+    "ExtendedUnitFamily": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "$ref": "#/definitions/UnitFamily"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "LimitBreak": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "PotentialKey": {
+      "enum": [
+        "Enrage",
+        "Critical Hit",
+        "Reduce Slot Bind duration",
+        "Reduce No Healing duration",
+        "Pinch Healing",
+        "Barrier Penetration",
+        "[STR] Damage Reduction",
+        "[DEX] Damage Reduction",
+        "[QCK] Damage Reduction",
+        "[PSY] Damage Reduction",
+        "[INT] Damage Reduction",
+        "Cooldown Reduction",
+        "Double Special Activation",
+        "Reduce Ship Bind duration",
+        "Reduce Sailor Despair duration",
+        "Nutrition/Hunger reduction"
+      ],
+      "type": "string"
+    },
+    "UnitClass": {
+      "enum": [
+        "Fighter",
+        "Shooter",
+        "Slasher",
+        "Striker",
+        "Free Spirit",
+        "Cerebral",
+        "Powerhouse",
+        "Driven",
+        "Evolver",
+        "Booster"
+      ],
+      "type": "string"
+    },
+    "UnitCooldown": {
+      "items": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "UnitDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "VSCondition": {
+          "type": "string"
+        },
+        "VSSpecial": {
+          "additionalProperties": false,
+          "properties": {
+            "character1": {
+              "type": "string"
+            },
+            "character2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "character1",
+            "character2"
+          ],
+          "type": "object"
+        },
+        "captain": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "character1": {
+                  "type": "string"
+                },
+                "character2": {
+                  "type": "string"
+                },
+                "combined": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "character1",
+                "character2",
+                "combined"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "base": {
+                  "type": "string"
+                },
+                "level1": {
+                  "type": "string"
+                },
+                "level2": {
+                  "type": "string"
+                },
+                "level3": {
+                  "type": "string"
+                },
+                "level4": {
+                  "type": "string"
+                },
+                "level5": {
+                  "type": "string"
+                },
+                "level6": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "base",
+                "level1"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "captainNotes": {
+          "type": "string"
+        },
+        "festAbility": {
+          "items": {
+            "$ref": "#/definitions/UnitFestAbility"
+          },
+          "type": "array"
+        },
+        "festAttackPattern": {
+          "items": {
+            "$ref": "#/definitions/UnitFestAbility"
+          },
+          "type": "array"
+        },
+        "festAttackTarget": {
+          "type": "string"
+        },
+        "festResilience": {
+          "type": "string"
+        },
+        "festResistance": {
+          "type": "string"
+        },
+        "festSpecial": {
+          "items": {
+            "$ref": "#/definitions/UnitFestSpecial"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "items": {
+            "$ref": "#/definitions/LimitBreak"
+          },
+          "type": "array"
+        },
+        "limitNotes": {
+          "type": "string"
+        },
+        "potential": {
+          "items": {
+            "$ref": "#/definitions/UnitPotential"
+          },
+          "type": "array"
+        },
+        "potentialNotes": {
+          "type": "string"
+        },
+        "sailor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "base": {
+                  "type": "string"
+                },
+                "base2": {
+                  "type": "string"
+                },
+                "level1": {
+                  "type": "string"
+                },
+                "level2": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "character1": {
+                  "type": "string"
+                },
+                "character2": {
+                  "type": "string"
+                },
+                "combined": {
+                  "type": "string"
+                },
+                "level1": {
+                  "type": "string"
+                },
+                "level2": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "character1",
+                "character2",
+                "combined"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "sailorNotes": {
+          "type": "string"
+        },
+        "special": {
+          "$ref": "#/definitions/UnitSpecial"
+        },
+        "specialName": {
+          "type": "string"
+        },
+        "specialNotes": {
+          "type": "string"
+        },
+        "superSpecial": {
+          "type": "string"
+        },
+        "superSpecialCriteria": {
+          "type": "string"
+        },
+        "superSpecialNotes": {
+          "type": "string"
+        },
+        "support": {
+          "items": {
+            "$ref": "#/definitions/UnitSupport"
+          },
+          "type": "array"
+        },
+        "supportNotes": {
+          "type": "string"
+        },
+        "swap": {
+          "type": "string"
+        },
+        "swapNotes": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UnitEvolution": {
+      "additionalProperties": false,
+      "properties": {
+        "evolution": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "evolvers": {
+          "anyOf": [
+            {
+              "items": {
+              },
+              "type": "array"
+            },
+            {
+              "items": {
+                "items": {
+                },
+                "type": "array"
+              },
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evolution",
+        "evolvers"
+      ],
+      "type": "object"
+    },
+    "UnitFamily": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "UnitFestAbility": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "type": "object"
+    },
+    "UnitFestSpecial": {
+      "additionalProperties": false,
+      "properties": {
+        "cooldown": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "cooldown"
+      ],
+      "type": "object"
+    },
+    "UnitFlags": {
+      "additionalProperties": false,
+      "properties": {
+        "fnonly": {
+          "const": 1,
+          "description": "Fortnight only",
+          "type": "number"
+        },
+        "global": {
+          "const": 1,
+          "description": "global available",
+          "type": "number"
+        },
+        "kclrr": {
+          "const": 1,
+          "description": "Kizuna rare recruit",
+          "type": "number"
+        },
+        "lrr": {
+          "const": 1,
+          "description": "limiter rare recruit",
+          "type": "number"
+        },
+        "pflrr": {
+          "const": 1,
+          "description": "Pirate Festival rare recruit",
+          "type": "number"
+        },
+        "promo": {
+          "const": 1,
+          "description": "???",
+          "type": "number"
+        },
+        "raid": {
+          "const": 1,
+          "description": "Raid only",
+          "type": "number"
+        },
+        "rr": {
+          "const": 1,
+          "description": "Rare recruit pools (include all other rr)",
+          "type": "number"
+        },
+        "rro": {
+          "const": 1,
+          "description": "rare recruit",
+          "type": "number"
+        },
+        "shop": {
+          "const": 1,
+          "description": "Rayleigh shop",
+          "type": "number"
+        },
+        "special": {
+          "const": 1,
+          "description": "Special characters (gifted mostly)",
+          "type": "number"
+        },
+        "tmlrr": {
+          "const": 1,
+          "description": "TM rare recruit",
+          "type": "number"
+        },
+        "tmshop": {
+          "const": 1,
+          "description": "TM trade port",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "UnitImages": {
+      "additionalProperties": false,
+      "properties": {
+        "full": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "thumbnail",
+        "full"
+      ],
+      "type": "object"
+    },
+    "UnitPirateFestStyle": {
+      "enum": [
+        "ATK",
+        "DEF",
+        "RCV",
+        "DBF",
+        "SPT"
+      ],
+      "type": "string"
+    },
+    "UnitPotential": {
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/PotentialKey"
+        },
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "description"
+      ],
+      "type": "object"
+    },
+    "UnitSpecial": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cooldown": {
+                "$ref": "#/definitions/UnitCooldown"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "cooldown",
+              "description"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "character1": {
+              "type": "string"
+            },
+            "character2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "character1",
+            "character2"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "global": {
+              "type": "string"
+            },
+            "japan": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "global",
+            "japan"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "UnitStar": {
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        "4+",
+        5,
+        "5+",
+        6,
+        "6+"
+      ],
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "UnitSupport": {
+      "additionalProperties": false,
+      "properties": {
+        "Characters": {
+          "type": "string"
+        },
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "Characters",
+        "description"
+      ],
+      "type": "object"
+    },
+    "UnitType": {
+      "enum": [
+        "STR",
+        "DEX",
+        "QCK",
+        "PSY",
+        "INT"
+      ],
+      "type": "string"
+    }
+  }
+}

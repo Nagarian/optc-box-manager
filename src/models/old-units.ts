@@ -16,13 +16,7 @@ export type UnitClass = typeof UnitClasses[number] | 'Evolver' | 'Booster'
 export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
 export type UnitStar = typeof Rarity[number]
 
-export const UnitPirateFestStyles = [
-  'ATK',
-  'DEF',
-  'RCV',
-  'DBF',
-  'SPT',
-] as const
+export const UnitPirateFestStyles = ['ATK', 'DEF', 'RCV', 'DBF', 'SPT'] as const
 export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
 
 export type BaseUnit = {
@@ -33,22 +27,22 @@ export type BaseUnit = {
   cost: number
   combo: number
   slots: number
-  maxLevel: number
-  maxEXP: number
+  maxLevel: number | null
+  maxEXP: number | null
   minHP: number
   minATK: number
   minRCV: number
-  maxHP: number
-  maxATK: number
-  maxRCV: number
-  limitHP: number
-  limitATK: number
-  limitRCV: number
+  maxHP: number | null
+  maxATK: number | null
+  maxRCV: number | null
+  limitHP: number | null
+  limitATK: number | null
+  limitRCV: number | null
   limitSlot: number
   limitCD: number
-  limitexHP: number
-  limitexATK: number
-  limitexRCV: number
+  limitexHP: number | null
+  limitexATK: number | null
+  limitexRCV: number | null
   limitexSlot: number
   limitexCD: number
   growth: {
@@ -65,12 +59,14 @@ export type BaseUnit = {
     captains: number[]
   }
   pirateFest: {
-    class?: UnitPirateFestStyle
-    DEF: number
-    SPD: number
+    class?: UnitPirateFestStyle | ''
+    DEF?: number | null
+    SPD?: number | null
+    minCP?: null
+    maxCP?: null
   }
-  incomplete: boolean
-  preview: boolean
+  incomplete?: boolean
+  preview?: boolean
 }
 
 export type LimitBreak = {
@@ -136,49 +132,83 @@ export type UnitCooldown = [number, number]
 export type UnitSpecial =
   | string
   | {
-    cooldown: UnitCooldown
-    description: string
-  }[]
-  | { [key: string]: any } // luffy/law + robin 767
+      cooldown: UnitCooldown
+      description: string
+    }[]
+  | {
+      character1: string
+      character2: string
+    }
+  | {
+      global: string
+      japan: string
+    }
 
-export type UnitCaptain = string | undefined | {
-  character1: string
-  character2: string
-  combined: string
-} | {
-  base: string
-  level1: string
-  level2: string
-  level3: string
-  level4: string
-  level5: string
-  level6: string
-}
+export type UnitCaptain =
+  | string
+  | undefined
+  | {
+      character1: string
+      character2: string
+      combined: string
+    }
+  | {
+      base: string
+      level1: string
+      level2?: string
+      level3?: string
+      level4?: string
+      level5?: string
+      level6?: string
+    }
 
-export type UnitSailor = string | undefined | {
-  base: string
-  level1?: string
-  level2?: string
-} | {
-  character1: string
-  character2: string
-  combined: string
-  level1?: string
-  level2?: string
-}
+export type UnitSailor =
+  | string
+  | undefined
+  | {
+      base?: string
+      base2?: string
+      level1?: string
+      level2?: string
+    }
+  | {
+      character1: string
+      character2: string
+      combined: string
+      level1?: string
+      level2?: string
+    }
 
 export type UnitDetail = {
   captain: UnitCaptain
-  special: UnitSpecial
-  sailor: UnitSailor
-  sailorNotes: string
-  specialName: string
+  captainNotes?: string
+  special?: UnitSpecial
+  specialNotes?: string
+  sailor?: UnitSailor
+  sailorNotes?: string
+  specialName?: string
   limit?: LimitBreak[]
+  limitNotes?: string
   potential?: UnitPotential[]
-  potentialNotes: string
-  support: UnitSupport[]
-  festAbility: UnitFestAbility[]
-  festSpecial: UnitFestSpecial[]
+  potentialNotes?: string
+  support?: UnitSupport[]
+  supportNotes?: string
+  festAbility?: UnitFestAbility[]
+  festSpecial?: UnitFestSpecial[]
+  festAttackPattern?: UnitFestAbility[]
+  festAttackTarget?: string
+  festResistance?: string
+  festResilience?: string
+  swap?: string
+  swapNotes?: string
+  superSpecial?: string
+  superSpecialNotes?: string
+  superSpecialCriteria?: string
+  VSCondition?: string
+  VSSpecial?: {
+    character1: string
+    character2: string
+  }
 }
 
 export type UnitEvolution = {
@@ -227,7 +257,7 @@ export type UnitFlags = {
 export type UnitFamily = string | null | string[]
 
 export type ExtendedUnitFamily = {
-  name: UnitFamily
+  name?: UnitFamily
   id: number
 }
 
@@ -250,10 +280,19 @@ export type ExtendedUnit = BaseUnit & {
   dbId: number
   images: UnitImages
   evolution?: UnitEvolution
-  cooldown: UnitCooldown
+  cooldown?: UnitCooldown | null
   detail: UnitDetail
   flags: UnitFlags
   family: ExtendedUnitFamily
   dropLocations: ExtendedDrop[]
   evolutionMap: number[]
+  dualCharacters?: ExtendedUnit[]
+  gamewith?: number
+  aliases?: string[]
+  // [
+  //   char1: ExtendedUnit,
+  //   char2: ExtendedUnit,
+  //   dual1?: ExtendedUnit,
+  //   dual2?: ExtendedUnit,
+  // ]
 }

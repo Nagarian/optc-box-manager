@@ -46,6 +46,7 @@
     "@types/styled-system__theme-get": "^5.0.1",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "ajv": "^7.0.2",
     "eslint-config-standard": "^16.0.2",
     "eslint-config-standard-react": "^11.0.1",
     "eslint-plugin-node": "^11.1.0",

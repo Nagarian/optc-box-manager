@@ -13,18 +13,18 @@ const defaultOptcDb = {
 
 const OptcDbContext = createContext<OptcDb>(defaultOptcDb)
 
-export const OptcDbProvider : FC = ({ children }) => {
+export const OptcDbProvider: FC = ({ children }) => {
   const [optcDbValue, setOptcDbValue] = useState<OptcDb>(defaultOptcDb)
 
   useEffect(() => {
     let cancelled = false
 
     const load = async () => {
-      const response = await fetch('db.json')
+      const response = await fetch('db-old.json')
       const db: ExtendedUnit[] = await response.json()
       if (!cancelled) {
         setOptcDbValue({
-          db,
+          db: db.filter(u => u.class !== 'Booster' && u.class !== 'Evolver'),
           isLoaded: true,
         })
       }
