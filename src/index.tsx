@@ -2,6 +2,7 @@ import PWA from 'components/PWA'
 import { OptcDbProvider } from 'hooks/useOptcDb'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { UserSettingsProvider } from 'hooks/useUserSettings'
+import DevMode from 'pages/DevMode'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider } from 'styled-components'
@@ -26,7 +27,9 @@ function AppWrapper () {
   return (
     <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
       <DefaultStyles />
-      <App />
+      <DevMode>
+        <App />
+      </DevMode>
       <PWA />
     </ThemeProvider>
   )
