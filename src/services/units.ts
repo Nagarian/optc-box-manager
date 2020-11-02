@@ -182,6 +182,7 @@ export const DBUnit = {
           evolutionMap: EvolutionMap[id] ?? [id],
         }
       })
+      .map(fixupVersusUnit)
   },
 }
 
@@ -196,24 +197,76 @@ function fixupDetail (detail: UnitDetail): UnitDetail {
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
-      detail.potential = detail.potential.map(p => ({
-        ...p,
-        Name: renamedPotentials[p.Name] ?? p.Name,
-      }) as UnitPotential)
+      detail.potential = detail.potential.map(
+        p =>
+          ({
+            ...p,
+            Name: renamedPotentials[p.Name] ?? p.Name,
+          } as UnitPotential),
+      )
     }
   }
 
   return detail
 }
 
-function fixupPirateFestStyle (pirateFestStyle: UnitPirateFestStyle | undefined) {
+function fixupPirateFestStyle (
+  pirateFestStyle: UnitPirateFestStyle | undefined,
+) {
   if (!pirateFestStyle) {
     return undefined
   }
 
-  const renamed : { [key: string]: UnitPirateFestStyle } = {
+  const renamed: { [key: string]: UnitPirateFestStyle } = {
     Obstructer: 'DBF',
   }
 
   return renamed[pirateFestStyle] ?? pirateFestStyle
+}
+
+function fixupVersusUnit (unit: ExtendedUnit): ExtendedUnit {
+  if (![3134, 3135].includes(unit.id)) {
+    return unit
+  }
+
+  const untyped = unit as any
+  const format = (obj: any) =>
+    `**Kaido:** ${obj.character1}<br/>**Big Mom:** ${obj.character2}`
+
+  return {
+    ...unit,
+    class: [[], ...untyped.class],
+    pirateFest: {
+      class: untyped.pirateFest.class[0],
+    },
+    detail: {
+      ...untyped.detail,
+      captain: {
+        ...untyped.detail.captain,
+        combined: format(untyped.detail.captain),
+      },
+      special: format(untyped.detail.special),
+      sailor: {
+        ...untyped.detail.sailor,
+        combined: untyped.detail.sailor.character1,
+      },
+      festAbility: untyped.detail.festAbility.character1.map(
+        (desc: any, i: number) => ({
+          description: format({
+            character1: desc.description,
+            character2: untyped.detail.festAbility.character2[i].description,
+          }),
+        }),
+      ),
+      festSpecial: untyped.detail.festSpecial.character1.map(
+        (desc: any, i: number) => ({
+          description: format({
+            character1: desc.description,
+            character2: untyped.detail.festSpecial.character2[i].description,
+          }),
+          cooldown: `${desc.cooldown} / ${untyped.detail.festSpecial.character2[i].cooldown}` as any,
+        }),
+      ),
+    },
+  }
 }
