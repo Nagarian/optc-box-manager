@@ -153,7 +153,8 @@ export const DBUnit = {
         unit =>
           unit.name &&
           !unit.name.includes('Limit Break') &&
-          !unit.name.includes('Dual Unit'),
+          !unit.name.includes('Dual Unit') &&
+          !unit.name.includes('VS Unit'),
       )
       .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
       .map<ExtendedUnit>(unit => {
