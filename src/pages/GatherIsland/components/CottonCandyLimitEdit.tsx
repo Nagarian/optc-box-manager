@@ -30,12 +30,6 @@ export default function CottonCandyLimitEdit () {
   return (
     <Box marginY="1">
       <CottonCandyLimitInput
-        type="rcv"
-        name="Monument of Healing"
-        value={rcv}
-        onChange={v => handleChange('rcv', v)}
-      />
-      <CottonCandyLimitInput
         type="hp"
         name="Monument of Endurance"
         value={hp}
@@ -46,6 +40,12 @@ export default function CottonCandyLimitEdit () {
         name="Monument of Ferocity"
         value={atk}
         onChange={v => handleChange('atk', v)}
+      />
+      <CottonCandyLimitInput
+        type="rcv"
+        name="Monument of Healing"
+        value={rcv}
+        onChange={v => handleChange('rcv', v)}
       />
     </Box>
   )
