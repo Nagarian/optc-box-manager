@@ -1,7 +1,4 @@
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
@@ -10,7 +7,7 @@ import { BooleanFilterMapper } from 'services/filterHelper'
 import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
 
-export interface BySupportCriteria extends SearchFilterCriteria {
+export interface BySupportCriteria {
   hasSupport?: boolean
   hasAtkSupport?: boolean
   hasHpSupport?: boolean

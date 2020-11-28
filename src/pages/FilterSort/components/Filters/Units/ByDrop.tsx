@@ -3,10 +3,7 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import ImageInput from 'components/forms/ImageInput'
 import Image from 'components/Image'
 import { SubTitle, Text } from 'components/Title'
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import {
   ExtendedUnit,
   ExtendedDropKeys,
@@ -19,7 +16,7 @@ import { BookQuestDrops } from 'services/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import styled from 'styled-components'
 
-export interface ByDropCriteria extends SearchFilterCriteria {
+export interface ByDropCriteria {
   dropLocations?: ExtendedDrop[]
   bookDrop?: BookDrop
 }
@@ -121,9 +118,7 @@ function ByBookQuest ({
 }) {
   return (
     <>
-      <Text my="1">
-        {type} Manual Acquirement Quests
-      </Text>
+      <Text my="1">{type} Manual Acquirement Quests</Text>
       <Box display="flex" overflowX="auto">
         {BookQuestDrops.filter(quest => quest.category === type).map(
           dropEvent => (

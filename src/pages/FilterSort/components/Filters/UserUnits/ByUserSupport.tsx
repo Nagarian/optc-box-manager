@@ -1,6 +1,6 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { SupportIcon } from 'components/Icon'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
@@ -13,7 +13,7 @@ export const SupportStateKeys = [
 ] as const
 export type SupportState = typeof SupportStateKeys[number]
 
-export interface ByUserSupportCriteria extends SearchFilterCriteria {
+export interface ByUserSupportCriteria {
   state: SupportState
 }
 

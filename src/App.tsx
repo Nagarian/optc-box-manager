@@ -11,14 +11,13 @@ import {
 } from 'components/Icon'
 import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
-import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import Add from 'pages/Add'
 import BulkEdit from 'pages/BulkEdit'
 import Detail from 'pages/Detail'
 import FilterSort from 'pages/FilterSort'
-import { BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import { BySearchBoxCriteria, BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
 import React, { useMemo, useState } from 'react'
@@ -78,12 +77,12 @@ function App () {
   return (
     <AppBlock>
       <BySearchBoxInput
-        criteria={search?.filters.units?.bySearchBox}
+        criteria={search?.filters.units?.bySearchBox as BySearchBoxCriteria}
         onChange={criteria =>
           setSearch(
             mergeSearch(search, {
               filters: { units: { bySearchBox: criteria } },
-            } as Search),
+            } as any),
           )
         }
       />

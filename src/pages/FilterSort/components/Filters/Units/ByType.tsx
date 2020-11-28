@@ -1,10 +1,10 @@
 import ImageInput from 'components/forms/ImageInput'
 import Type from 'components/Type'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitType, UnitTypes } from 'models/units'
 import React from 'react'
 
-export interface ByTypeCriteria extends SearchFilterCriteria {
+export interface ByTypeCriteria {
   values: UnitType[]
 }
 

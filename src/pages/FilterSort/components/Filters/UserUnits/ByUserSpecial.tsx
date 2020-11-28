@@ -1,6 +1,6 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { SpecialLvlIcon } from 'components/Icon'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
@@ -8,7 +8,7 @@ import { FilterContainerPanel } from '../FilterContainer'
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const
 export type UserSpecialState = typeof UserSpecialStateKeys[number]
 
-export interface ByUserSpecialCriteria extends SearchFilterCriteria {
+export interface ByUserSpecialCriteria {
   state: UserSpecialState
 }
 

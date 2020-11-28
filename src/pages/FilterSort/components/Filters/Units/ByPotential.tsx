@@ -1,10 +1,10 @@
 import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 import React from 'react'
 
-export interface ByPotentialCriteria extends SearchFilterCriteria {
+export interface ByPotentialCriteria {
   values: PotentialKey[]
 }
 

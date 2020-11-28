@@ -1,4 +1,4 @@
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
+import { SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
 import { FunctionComponent } from 'react'
 import { ByClassFilter, ByClassInput } from './ByClass'
 import { ByDropFilter, ByDropInput } from './ByDrop'
@@ -28,19 +28,16 @@ export const SearchFilterUnitsKeys = [
 
 export type SearchFilterUnitsType = typeof SearchFilterUnitsKeys[number]
 
-export type SearchFilterUnits = {
-  [key in SearchFilterUnitsType]?: SearchFilterCriteria
+type Builder<T = unknown | undefined> = (criteria: T) => UnitFilter
+
+type UnitFilterBuilderType<T = unknown | undefined> = {
+  title: string
+  builder: Builder<T>
+  input: FunctionComponent<SearchFilterCriteriaInputProps<T>>
 }
 
-type Builder = (criteria: SearchFilterCriteria) => UnitFilter
 export const UnitFilterBuilder: {
-  [key in SearchFilterUnitsType]: {
-    title: string
-    builder: Builder
-    input: FunctionComponent<
-      SearchFilterCriteriaInputProps<SearchFilterCriteria>
-    >
-  }
+  [key in SearchFilterUnitsType]: UnitFilterBuilderType<any>
 } = {
   byRarity: {
     title: 'Rarity',

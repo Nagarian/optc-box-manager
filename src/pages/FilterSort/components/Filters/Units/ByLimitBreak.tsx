@@ -1,7 +1,4 @@
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
@@ -11,7 +8,7 @@ import { SubTitle } from 'components/Title'
 import { FilterContainerPanel } from '../FilterContainer'
 import ChoiceInput from 'components/forms/ChoiceInput'
 
-export interface ByLimitBreakCriteria extends SearchFilterCriteria {
+export interface ByLimitBreakCriteria {
   hasLimitBreak?: boolean
   hasKeyLimitBreak?: boolean
   hasCooldownExtension?: boolean
@@ -150,7 +147,9 @@ export function ByLimitBreakInput ({
         </ChoiceInput>
       </Box>
 
-      <SubTitle fontSize="2" my="2">Key extension Finder</SubTitle>
+      <SubTitle fontSize="2" my="2">
+        Key extension Finder
+      </SubTitle>
       <FilterContainerPanel>
         <ChoiceInput
           type="checkbox"

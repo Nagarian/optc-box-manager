@@ -1,7 +1,8 @@
 import Box from 'components/Box'
+import { SearchFilterUserUnits } from 'models/search'
 import React from 'react'
 import FilterContainer from './FilterContainer'
-import { SearchFilterUserUnits, SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from './UserUnits'
+import { SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from './UserUnits'
 
 export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits

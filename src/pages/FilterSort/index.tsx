@@ -1,9 +1,12 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import { Search, SearchSortCriteria } from 'models/search'
-import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
-import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
+import {
+  Search,
+  SearchSortCriteria,
+  SearchFilterUnits,
+  SearchFilterUserUnits,
+} from 'models/search'
 import React, { useState } from 'react'
 import { SearchDisplayerCriteria } from './components/Displayers'
 import Displayer from './components/Displayers/Displayer'

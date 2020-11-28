@@ -1,6 +1,6 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { PirateFestAbilityIcon, PirateFestSpecialIcon } from 'components/Icon'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
@@ -9,7 +9,7 @@ import { FilterContainerPanel } from '../FilterContainer'
 export const UserPirateFestStateKeys = ['ongoing', 'maxed'] as const
 export type UserPirateFestState = typeof UserPirateFestStateKeys[number]
 
-export interface ByUserPirateFestCriteria extends SearchFilterCriteria {
+export interface ByUserPirateFestCriteria {
   specialLvlState?: UserPirateFestState
   abilityLvlState?: UserPirateFestState
 }

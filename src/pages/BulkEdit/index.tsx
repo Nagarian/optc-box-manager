@@ -5,7 +5,11 @@ import SupportInput from 'components/forms/SupportInput'
 import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { DefaultSearch } from 'hooks/useSearch'
-import { Search, SearchSortCriteria } from 'models/search'
+import {
+  Search,
+  SearchFilterUserUnits,
+  SearchSortCriteria,
+} from 'models/search'
 import {
   UserUnit,
   UserUnitBulkEdit,
@@ -13,7 +17,6 @@ import {
   UserUnitBulkEditLimitBreakStateKeys,
 } from 'models/userBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
-import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import React, { ReactNode, useState } from 'react'
 import BulkEditSelect from './components/BulkEditSelect'
 import { useUserSettings } from 'hooks/useUserSettings'

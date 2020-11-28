@@ -5,10 +5,9 @@ import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
 import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
-import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
-import { BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import { BySearchBoxCriteria, BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
 import React, { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -64,12 +63,12 @@ export default function Add ({
       }
     >
       <BySearchBoxInput
-        criteria={search?.filters.units?.bySearchBox}
+        criteria={search?.filters.units?.bySearchBox as BySearchBoxCriteria}
         onChange={criteria =>
           setSearch(
             mergeSearch(search, {
               filters: { units: { bySearchBox: criteria } },
-            } as Search),
+            } as any),
           )
         }
       />

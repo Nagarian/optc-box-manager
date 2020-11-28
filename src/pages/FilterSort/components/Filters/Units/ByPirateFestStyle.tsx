@@ -1,10 +1,10 @@
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import ImageInput from 'components/forms/ImageInput'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitPirateFestStyle, UnitPirateFestStyles } from 'models/units'
 import React from 'react'
 
-export interface ByPirateFestStyleCriteria extends SearchFilterCriteria {
+export interface ByPirateFestStyleCriteria {
   values: UnitPirateFestStyle[]
 }
 

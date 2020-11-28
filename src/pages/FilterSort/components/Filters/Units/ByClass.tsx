@@ -1,10 +1,10 @@
 import { UnitClassIcon } from 'components/Class'
 import ImageInput from 'components/forms/ImageInput'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
 import React from 'react'
 
-export interface ByClassCriteria extends SearchFilterCriteria {
+export interface ByClassCriteria {
   values: UnitClass[]
 }
 

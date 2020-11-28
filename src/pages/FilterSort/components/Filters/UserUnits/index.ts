@@ -1,9 +1,5 @@
 import { UserSettingEnhanced } from 'hooks/useUserSettings'
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-  UserUnitFilter,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps, UserUnitFilter } from 'models/search'
 import { FunctionComponent } from 'react'
 import {
   ByUserCottonCandyFilter,
@@ -37,22 +33,19 @@ export const SearchFilterUserUnitsKeys = [
 
 export type SearchFilterUserUnitsType = typeof SearchFilterUserUnitsKeys[number]
 
-export type SearchFilterUserUnits = {
-  [key in SearchFilterUserUnitsType]?: SearchFilterCriteria
-}
-
-type Builder = (
-  criteria: SearchFilterCriteria,
+type Builder<T = unknown | undefined> = (
+  criteria: T,
   userSetting: UserSettingEnhanced,
 ) => UserUnitFilter
+
+type UserUnitFilterBuilder<T> = {
+  title: string
+  builder: Builder<T>
+  input: FunctionComponent<SearchFilterCriteriaInputProps<T>>
+}
+
 export const UserUnitFilterBuilder: {
-  [key in SearchFilterUserUnitsType]: {
-    title: string
-    builder: Builder
-    input: FunctionComponent<
-      SearchFilterCriteriaInputProps<SearchFilterCriteria>
-    >
-  }
+  [key in SearchFilterUserUnitsType]: UserUnitFilterBuilder<any>
 } = {
   byUserPotential: {
     title: 'Potential ability',

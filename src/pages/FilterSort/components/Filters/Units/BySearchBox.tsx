@@ -2,17 +2,13 @@ import Box from 'components/Box'
 import Button from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import { CloseIcon } from 'components/Icon'
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-  UnitFilter,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
 import React from 'react'
 import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
 import { SlideInRight } from 'styles/animation'
 
-export interface BySearchBoxCriteria extends SearchFilterCriteria {
+export interface BySearchBoxCriteria {
   value: string
 }
 

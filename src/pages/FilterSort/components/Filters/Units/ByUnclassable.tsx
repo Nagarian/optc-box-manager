@@ -1,11 +1,11 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { SearchFilterCriteria, SearchFilterCriteriaInputProps } from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
-export interface ByUnclassableCriteria extends SearchFilterCriteria {
+export interface ByUnclassableCriteria {
   globalOnly?: boolean
   evolvedOnly?: boolean
   superEvolvedOnly?: boolean

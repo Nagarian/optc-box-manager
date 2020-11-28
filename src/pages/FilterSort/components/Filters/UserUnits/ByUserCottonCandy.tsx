@@ -1,10 +1,7 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { CottonCandyIcon } from 'components/Icon'
 import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
-import {
-  SearchFilterCriteria,
-  SearchFilterCriteriaInputProps,
-} from 'models/search'
+import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit, CottonCandyType, CottonCandyTypeKeys } from 'models/userBox'
 import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
@@ -13,8 +10,8 @@ import { FilterContainerPanel } from '../FilterContainer'
 export const CottonCandyStateKeys = ['none', 'unmaxed', 'maxed'] as const
 export type CottonCandyState = typeof CottonCandyStateKeys[number]
 
-export type ByUserCottonCandyCriteria = SearchFilterCriteria & {
-  all: CottonCandyState
+export type ByUserCottonCandyCriteria = {
+  all?: CottonCandyState
   by?: {
     [type in CottonCandyType]?: CottonCandyState
   }
@@ -36,24 +33,16 @@ const ccFilter = (value: number, state?: CottonCandyState, max = 100) => {
 export const ByUserCottonCandyFilter = (
   { all, by = {} }: ByUserCottonCandyCriteria,
   { ccLimit }: UserSettingEnhanced,
-) => BooleanFilterMapper<UserUnit>(
-  [
-    all,
-    ({ cc: { atk, hp, rcv } }) => ccFilter(atk + hp + rcv, all, ccLimit.all),
-  ],
-  [
-    by.hp,
-    ({ cc: { hp } }) => ccFilter(hp, by.hp, ccLimit.hp),
-  ],
-  [
-    by.atk,
-    ({ cc: { atk } }) => ccFilter(atk, by.atk, ccLimit.atk),
-  ],
-  [
-    by.rcv,
-    ({ cc: { rcv } }) => ccFilter(rcv, by.rcv, ccLimit.rcv),
-  ],
-)
+) =>
+  BooleanFilterMapper<UserUnit>(
+    [
+      all,
+      ({ cc: { atk, hp, rcv } }) => ccFilter(atk + hp + rcv, all, ccLimit.all),
+    ],
+    [by.hp, ({ cc: { hp } }) => ccFilter(hp, by.hp, ccLimit.hp)],
+    [by.atk, ({ cc: { atk } }) => ccFilter(atk, by.atk, ccLimit.atk)],
+    [by.rcv, ({ cc: { rcv } }) => ccFilter(rcv, by.rcv, ccLimit.rcv)],
+  )
 
 type CottonCandyStateInputProps = {
   type: 'atk' | 'hp' | 'rcv'
@@ -73,7 +62,8 @@ function CottonCandyStateInput ({
       <CottonCandyIcon color={color} size={2} title={type} />
       {type.toUpperCase()} + {currentMax}
       {CottonCandyStateKeys.map(stateKey => (
-        <ChoiceInput key={stateKey}
+        <ChoiceInput
+          key={stateKey}
           type="radio"
           name={`userunit-cc-${type}`}
           checked={state === stateKey ?? false}
@@ -97,14 +87,17 @@ export function ByUserCottonCandyInput ({
         <CottonCandyIcon size={2} title="All" />
         All +{ccLimit.all}
         {CottonCandyStateKeys.map(stateKey => (
-          <ChoiceInput key={stateKey}
+          <ChoiceInput
+            key={stateKey}
             type="radio"
             name="userunit-cc-all"
             checked={criteria?.all === stateKey ?? false}
-            onChange={e => onChange({
-              ...criteria,
-              all: stateKey,
-            })}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                all: stateKey,
+              })
+            }
           >
             {stateKey}
           </ChoiceInput>
