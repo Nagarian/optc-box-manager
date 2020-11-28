@@ -1,3 +1,21 @@
+# [1.12.0](https://github.com/Nagarian/optc-box-manager/compare/v1.11.0...v1.12.0) (2020-11-28)
+
+
+### Bug Fixes
+
+* **displayer:** uniformisation of cotton candy display order (HP/ATK/RCV instead of ATK/HP/RCV) ([9737475](https://github.com/Nagarian/optc-box-manager/commit/97374754f036a6c428fd317932ae53c5f3658e3c))
+* **gather island:** uniformisation of cotton candy display order (HP/ATK/RCV instead of RCV/HP/ATK) ([2ba5370](https://github.com/Nagarian/optc-box-manager/commit/2ba537043f565954d9032b41f0734660488546d7))
+* **search:** dark theme issue with Save Search box ([b50f1ee](https://github.com/Nagarian/optc-box-manager/commit/b50f1ee0f0532a9e3cb43ff2b35fcf86f93361e0))
+* **units:** Akainu GloFirst has changed id 3385 -> 3157 following their release in Japan version ([b80fe0d](https://github.com/Nagarian/optc-box-manager/commit/b80fe0d6a65d6316426697294bdbdb8812ee7766))
+
+
+### Features
+
+* **detail:** add diff highlighter to show the difference between two levels of support, potentials or captain ability ([a929e5c](https://github.com/Nagarian/optc-box-manager/commit/a929e5c2c0622475c5d0ff74efdd8a87e80bba0e))
+* **syncer:** improve CottonCandy syncer ([9ffa72a](https://github.com/Nagarian/optc-box-manager/commit/9ffa72a2a5e717bfaa47a6641c08fc49f381cb67))
+
+
+
 # [1.11.0](https://github.com/Nagarian/optc-box-manager/compare/v1.10.0...v1.11.0) (2020-10-11)
 
 
@@ -87,19 +105,6 @@
 ### Bug Fixes
 
 * issue with horizontal scrollbar with a height too large ([8712a29](https://github.com/Nagarian/optc-box-manager/commit/8712a296222af9ba23884276732323040bf73904))
-
-
-
-# [1.7.0](https://github.com/Nagarian/optc-box-manager/compare/v1.6.1...v1.7.0) (2020-08-31)
-
-
-### Features
-
-* **detail:** display Classes, Rarity and Category informations ([683b652](https://github.com/Nagarian/optc-box-manager/commit/683b65268782d2b8dc51297d175c45eeee448337)), closes [#82](https://github.com/Nagarian/optc-box-manager/issues/82)
-* **filter:** add basic sync between UserFilters, Sort and Displayer ([b9128b3](https://github.com/Nagarian/optc-box-manager/commit/b9128b3b5f6236e8887d2b9eaf4a054df4eb2e9a)), closes [#44](https://github.com/Nagarian/optc-box-manager/issues/44)
-* **filter:** rework design of User Potentials filter ([06ebd7b](https://github.com/Nagarian/optc-box-manager/commit/06ebd7bff82df3d0bfea097e9853e9045cefce95))
-* **search:** add configurable reset button ([a312da9](https://github.com/Nagarian/optc-box-manager/commit/a312da928c3b144ac51aa0070ea598701571c363)), closes [#70](https://github.com/Nagarian/optc-box-manager/issues/70)
-* add support for 'Nutrition/Hunger reduction' potentials ([894e694](https://github.com/Nagarian/optc-box-manager/commit/894e69422cd0e89956fbbc0102cde724cdd4d79c))
 
 
 
