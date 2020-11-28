@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 import { clean } from 'styles'
 import ReactMarkdown from 'react-markdown'
 
 export type DescriptionHighlighterProps = {
-  value?: string
+  value?: ReactNode
 }
 export default function DescriptionHighlighter ({
   value,
 }: DescriptionHighlighterProps) {
   if (!value) return null
+
+  if (typeof value !== 'string') {
+    return <>{value}</>
+  }
 
   const parts = value.replace(
     /(\[[A-Z]*\])/gi,
