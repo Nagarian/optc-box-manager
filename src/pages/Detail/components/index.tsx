@@ -32,15 +32,27 @@ export function InputLabel ({
             {descriptions.length > 1 && <strong>max: </strong>}
             <DescriptionHighlighter
               value={descriptions[descriptions.length - 1]}
+              originalDiff={
+                typeof descriptions[descriptions.length - 2] === 'string' && (value === max || max === 2)
+                  ? descriptions[descriptions.length - 2] as string
+                  : undefined
+              }
             />
           </div>
         )}
 
         {descriptions && descriptions.length > 1 && value > 0 && value < max && (
-          <div>
+          <Box mt="2">
             <strong>Level {value}: </strong>
-            <DescriptionHighlighter value={descriptions[value - 1]} />
-          </div>
+            <DescriptionHighlighter
+              value={descriptions[value - 1]}
+              originalDiff={
+                typeof descriptions[value - 2] === 'string'
+                  ? descriptions[value - 2] as string
+                  : undefined
+              }
+            />
+          </Box>
         )}
       </Box>
       {children}

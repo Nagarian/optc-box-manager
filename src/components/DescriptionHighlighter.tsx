@@ -1,14 +1,17 @@
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
-import { clean } from 'styles'
+import { diffWords } from 'diff'
+import React, { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
+import styled from 'styled-components'
+import { clean } from 'styles'
 
 export type DescriptionHighlighterProps = {
   value?: ReactNode
+  originalDiff?: string
 }
 export default function DescriptionHighlighter ({
   value,
+  originalDiff,
 }: DescriptionHighlighterProps) {
   if (!value) return null
 
@@ -16,7 +19,16 @@ export default function DescriptionHighlighter ({
     return <>{value}</>
   }
 
-  const parts = value.replace(
+  let parts = value
+
+  if (originalDiff) {
+    const diffs = diffWords(originalDiff, value, { ignoreCase: true })
+    parts = diffs
+      .filter(x => !x.removed)
+      .reduce((concat, x) => concat + (x.added ? `*${x.value}*` : x.value), '')
+  }
+
+  parts = parts.replace(
     /(\[[A-Z]*\])/gi,
     match => `${match.toUpperCase()}(${match.substr(1, match.length - 2).toUpperCase()})`,
   )
@@ -25,10 +37,7 @@ export default function DescriptionHighlighter ({
     <ReactMarkdown
       source={parts}
       escapeHtml={false}
-      renderers={{
-        paragraph: FakeParagraph,
-        link: Orb,
-      }}
+      renderers={renderers}
     />
   )
 }
@@ -51,3 +60,15 @@ const Orb = styled('span')
 `
 
 const FakeParagraph = styled.span``
+
+const DiffHiglighter = styled.em`
+  font-style: normal;
+  font-weight: bold;
+  color: ${themeGet('colors.green')}
+`
+
+const renderers = {
+  paragraph: FakeParagraph,
+  link: Orb,
+  emphasis: DiffHiglighter,
+}
