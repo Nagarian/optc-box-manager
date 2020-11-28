@@ -6,6 +6,11 @@ import { exportAsJson } from 'services/share'
 
 const userBoxKey = 'userBox'
 
+const fixupMigrationIdChanged : { [key: number]: number } = {
+  3384: 3156,
+  3385: 3157,
+}
+
 const reviver = (units: ExtendedUnit[] = []) =>
   units.length === 0
     ? undefined
@@ -13,7 +18,8 @@ const reviver = (units: ExtendedUnit[] = []) =>
       if (key !== 'unit') return value
 
       if (typeof value === 'number') {
-        return units.find(x => x.id === value)
+        const searchValue = fixupMigrationIdChanged[value] || value
+        return units.find(x => x.id === searchValue)
       }
 
       return value

@@ -38,8 +38,6 @@ describe('Database compliance ', () => {
       'Law & Chopper, Dynamic Doctor Duo': 3381,
       'Local Sea Monster, Man-Eating Monster': 3382,
       'Makino, Proprietor of a Relaxed Tavern': 3383,
-      'Akainu, Uncompromised Determination and Justice': 3384,
-      'Sakazuki, Uncompromised Determination and Justice': 3385,
     }
 
     Object.entries(globalUnitMapping).map(([name, id]) =>
