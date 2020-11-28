@@ -5,11 +5,7 @@ import { SearchDisplayerProps } from '.'
 
 export function DetailedCottonCandyDisplayer ({
   userUnit: {
-    cc: {
-      atk,
-      hp,
-      rcv,
-    },
+    cc: { atk, hp, rcv },
   },
 }: SearchDisplayerProps) {
   const sum = atk + hp + rcv
@@ -17,18 +13,18 @@ export function DetailedCottonCandyDisplayer ({
 
   return (
     <InfoDisplayer anchorX="middle" anchorY="bottom">
-      {atk > 0 && (
-        <Text as="span" color="specific.ccAtk">
-          {atk}
-        </Text>
-      )}
-      {Boolean((atk && hp) || (atk && rcv)) && <Separator />}
       {hp > 0 && (
         <Text as="span" color="specific.ccHp">
           {hp}
         </Text>
       )}
-      {Boolean(hp && rcv) && <Separator />}
+      {hp > 0 && atk > 0 && <Separator />}
+      {atk > 0 && (
+        <Text as="span" color="specific.ccAtk">
+          {atk}
+        </Text>
+      )}
+      {((atk > 0 && rcv > 0) || (hp > 0 && rcv > 0)) && <Separator />}
       {rcv > 0 && (
         <Text as="span" color="specific.ccRcv">
           {rcv}
@@ -38,4 +34,8 @@ export function DetailedCottonCandyDisplayer ({
   )
 }
 
-const Separator = () => <Text as="span" color="white">/</Text>
+const Separator = () => (
+  <Text as="span" color="white">
+    /
+  </Text>
+)
