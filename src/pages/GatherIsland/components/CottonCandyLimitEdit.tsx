@@ -1,4 +1,3 @@
-import React from 'react'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyType } from 'models/userBox'
 import { InputLabel } from 'pages/Detail/components'

@@ -5,7 +5,7 @@ import { ConfirmIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { MyUserBox } from 'models/userBox'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 

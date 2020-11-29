@@ -1,7 +1,6 @@
 import ExpansionPanel from 'components/ExpansionPanel'
 import { UnitDetail } from 'models/units'
 import { UserUnitPirateFest } from 'models/userBox'
-import React from 'react'
 import { InputLabel } from '.'
 import PirateFestInput from 'components/forms/PirateFestInput'
 import { Text } from 'components/Title'

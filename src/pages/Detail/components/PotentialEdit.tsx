@@ -3,7 +3,6 @@ import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
 import { PotentialIcon } from 'components/Icon'
 import { UnitPotential } from 'models/units'
 import { UserUnitPotentialAbility } from 'models/userBox'
-import React from 'react'
 import { InputLabel } from '.'
 
 function Wrapper ({

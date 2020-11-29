@@ -17,7 +17,7 @@ import {
   UserUnitBulkEditLimitBreakStateKeys,
 } from 'models/userBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import BulkEditSelect from './components/BulkEditSelect'
 import { useUserSettings } from 'hooks/useUserSettings'
 

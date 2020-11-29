@@ -8,7 +8,7 @@ import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
 import { BySearchBoxCriteria, BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
 type AddProps = {

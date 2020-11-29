@@ -6,7 +6,6 @@ import {
   UnitPirateFestStyle,
   UnitPirateFestStyles,
 } from 'models/units'
-import React from 'react'
 
 export interface ByPirateFestStyleCriteria {
   values: UnitPirateFestStyle[]

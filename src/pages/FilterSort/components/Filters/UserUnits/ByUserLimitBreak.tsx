@@ -2,7 +2,6 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
-import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 

@@ -18,7 +18,6 @@ import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, UnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import React from 'react'
 import styled from 'styled-components'
 import {
   flexDirection,

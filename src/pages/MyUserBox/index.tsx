@@ -8,7 +8,6 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { UserBox, UserUnit } from 'models/userBox'
-import React from 'react'
 import { FlexProps, SpaceProps } from 'styled-system'
 
 type UserBoxProps = {

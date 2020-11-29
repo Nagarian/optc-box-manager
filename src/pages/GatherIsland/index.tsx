@@ -1,6 +1,5 @@
 import Popup from 'components/Popup'
 import CottonCandyLimitEdit from './components/CottonCandyLimitEdit'
-import React from 'react'
 
 type GatherIslandProps = {
   onClose: () => void

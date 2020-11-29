@@ -2,7 +2,6 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SpecialLvlIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
-import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const

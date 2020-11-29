@@ -5,7 +5,6 @@ import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PowerSocketKey, PowerSockets } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 

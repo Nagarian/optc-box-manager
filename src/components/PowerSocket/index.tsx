@@ -1,6 +1,5 @@
 import Image from 'components/Image'
 import { PowerSocketKey } from 'models/units'
-import React from 'react'
 import styled from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'

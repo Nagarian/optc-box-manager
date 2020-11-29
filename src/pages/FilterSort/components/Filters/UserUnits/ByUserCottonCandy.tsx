@@ -3,7 +3,6 @@ import { CottonCandyIcon } from 'components/Icon'
 import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit, CottonCandyType, CottonCandyTypeKeys } from 'models/userBox'
-import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 

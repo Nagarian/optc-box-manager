@@ -1,6 +1,6 @@
 import { LoaderIcon } from 'components/Icon'
 import { Text, Title } from 'components/Title'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
@@ -77,11 +77,11 @@ export default function Changelog ({
     <>
       {onlyUnseen &&
         displayed.some(release => /BREAKING CHANGE/i.test(release.body)) && (
-      // eslint-disable-next-line jsx-a11y/accessible-emoji
-        <Text m="1">
+          // eslint-disable-next-line jsx-a11y/accessible-emoji
+          <Text m="1">
             There is Breaking changes, you should take caution and make an
             export (from Settings) before loading this update 😉
-        </Text>
+          </Text>
       )}
 
       {displayed.map(release => (

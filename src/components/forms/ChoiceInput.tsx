@@ -1,4 +1,3 @@
-import React from 'react'
 import { ImageInputProps } from './ImageInput'
 import styled from 'styled-components'
 

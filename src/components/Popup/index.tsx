@@ -1,7 +1,7 @@
 import Button from 'components/Button'
 import { CancelIcon, CloseIcon, ConfirmIcon } from 'components/Icon'
 import { Title } from 'components/Title'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { SpaceProps } from 'styled-system'
 import { PopupActionPanel, PopupBackground, PopupContainer, PopupPanel } from './styled'
 

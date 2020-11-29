@@ -1,5 +1,5 @@
 import { themeGet } from '@styled-system/theme-get'
-import React, { InputHTMLAttributes, ReactNode } from 'react'
+import { InputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`

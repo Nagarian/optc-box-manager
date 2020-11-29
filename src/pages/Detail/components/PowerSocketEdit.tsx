@@ -8,7 +8,7 @@ import PowerSocket from 'components/PowerSocket'
 import Progression from 'components/Progression'
 import { ExtendedUnit, PowerSockets } from 'models/units'
 import { UserUnitPowerSocket } from 'models/userBox'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { InputLabel } from '.'
 
 type PowerSocketEditProps = {

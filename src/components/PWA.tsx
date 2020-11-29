@@ -1,5 +1,5 @@
 import Changelog from 'components/Changelog'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as serviceWorker from 'serviceWorker'
 import Popup from './Popup'
 import { Text, Title } from './Title'

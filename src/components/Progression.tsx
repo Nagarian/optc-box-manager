@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { color, ColorProps, width, WidthProps } from 'styled-system'
 import { Text } from './Title'

@@ -4,7 +4,6 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { PirateFestAbilityIcon, PirateFestSpecialIcon } from 'components/Icon'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
-import React from 'react'
 import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
 

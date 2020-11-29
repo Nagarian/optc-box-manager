@@ -2,7 +2,6 @@ import ImageInput from 'components/forms/ImageInput'
 import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
-import React from 'react'
 
 export interface ByRarityCriteria {
   values: UnitStar[]

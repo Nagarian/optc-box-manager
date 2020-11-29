@@ -1,7 +1,7 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { SubTitle } from 'components/Title'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 type FilterContainerProps = {

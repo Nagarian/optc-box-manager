@@ -1,4 +1,3 @@
-import React from 'react'
 import { SearchSortInputProps, SearchSortWithOptionFunction, UnitSort } from 'models/search'
 import { UnitStar } from 'models/units'
 import Box from 'components/Box'

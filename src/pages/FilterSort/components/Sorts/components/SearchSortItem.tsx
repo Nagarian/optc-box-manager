@@ -9,7 +9,7 @@ import {
 import Popup from 'components/Popup'
 import { Text } from 'components/Title'
 import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
-import React, { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
 import { SearchSortBuilderProps } from '..'
 

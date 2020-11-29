@@ -1,5 +1,4 @@
 import { UserUnitLimitBreak } from 'models/userBox'
-import React from 'react'
 import styled from 'styled-components'
 import { color, ColorProps } from 'styled-system'
 import LimitBreak from '../images/limitbreak.png'

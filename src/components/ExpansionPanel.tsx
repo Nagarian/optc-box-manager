@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import useMeasure from 'hooks/useMeasure'
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { GridProps } from 'styled-system'
 import Box, { BoxProps } from './Box'

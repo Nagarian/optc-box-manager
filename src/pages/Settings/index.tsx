@@ -8,7 +8,7 @@ import { useThemeMode } from 'hooks/useThemeMode'
 import { MyUserBox } from 'models/userBox'
 import Credits from 'pages/Credits'
 import ExportFor from 'pages/ExportFor'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { importAsJson } from 'services/share'
 
 type SettingsProps = {

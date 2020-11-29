@@ -1,6 +1,5 @@
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import React from 'react'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import Box from 'components/Box'
 import { getLimitType } from 'services/limit'

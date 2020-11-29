@@ -6,7 +6,6 @@ import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,
 } from 'pages/FilterSort/components/Displayers'
-import React from 'react'
 import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'

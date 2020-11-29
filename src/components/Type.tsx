@@ -1,6 +1,5 @@
 import { themeGet } from '@styled-system/theme-get'
 import { UnitType } from 'models/units'
-import React from 'react'
 import styled from 'styled-components'
 import { compose, fontSize, FontSizeProps, size, SizeProps, space, SpaceProps } from 'styled-system'
 

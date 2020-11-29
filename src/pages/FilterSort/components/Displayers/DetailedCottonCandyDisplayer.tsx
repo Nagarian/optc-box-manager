@@ -1,6 +1,5 @@
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import { Text } from 'components/Title'
-import React from 'react'
 import { SearchDisplayerProps } from '.'
 
 export function DetailedCottonCandyDisplayer ({

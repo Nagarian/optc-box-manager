@@ -1,6 +1,5 @@
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import React from 'react'
 import { FilterContainerPanel } from '../FilterContainer'
 import { SubTitle } from 'components/Title'
 import { BooleanFilterMapper } from 'services/filterHelper'

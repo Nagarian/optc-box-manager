@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
-import React, { ElementType } from 'react'
+import { ElementType } from 'react'
 import styled from 'styled-components'
 
 const ListItem = styled.li<{ ordered: boolean }>`

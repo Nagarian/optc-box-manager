@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'

@@ -1,7 +1,6 @@
 import ExpansionPanel from 'components/ExpansionPanel'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import { CottonCandyType, UserUnitCottonCandy } from 'models/userBox'
-import React from 'react'
 import { InputLabel } from '.'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyIcon } from 'components/Icon'

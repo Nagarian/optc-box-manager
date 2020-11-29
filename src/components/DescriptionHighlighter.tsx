@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import { clean } from 'styles'

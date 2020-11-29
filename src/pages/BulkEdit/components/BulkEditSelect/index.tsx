@@ -8,7 +8,7 @@ import { Search } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import FilterSort from 'pages/FilterSort'
 import MyUserBox from 'pages/MyUserBox'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
 type BulkEditSelectProps = {

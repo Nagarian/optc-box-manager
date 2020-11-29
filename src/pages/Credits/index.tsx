@@ -1,6 +1,6 @@
 import Button from 'components/Button'
 import Popup from 'components/Popup'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 

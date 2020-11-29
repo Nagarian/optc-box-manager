@@ -1,7 +1,7 @@
 import Box from 'components/Box'
 import Progression from 'components/Progression'
 import { SubTitle } from 'components/Title'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import DescriptionHighlighter from 'components/DescriptionHighlighter'
 
 type InputLabelProps = {

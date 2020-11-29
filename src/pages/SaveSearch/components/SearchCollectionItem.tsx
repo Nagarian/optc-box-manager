@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SavedSearch } from 'hooks/useStoredSearches'
 import { Text } from 'components/Title'
 import Button from 'components/Button'

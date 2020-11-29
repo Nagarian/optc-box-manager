@@ -7,7 +7,7 @@ import {
   SearchFilterUnits,
   SearchFilterUserUnits,
 } from 'models/search'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SearchDisplayerCriteria } from './components/Displayers'
 import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'

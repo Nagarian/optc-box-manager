@@ -1,6 +1,5 @@
 import Box from 'components/Box'
 import { SearchFilterUnits } from 'models/search'
-import React from 'react'
 import FilterContainer from './FilterContainer'
 import { SearchFilterUnitsKeys, UnitFilterBuilder } from './Units'
 

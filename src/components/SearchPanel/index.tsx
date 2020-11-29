@@ -4,7 +4,6 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import React from 'react'
 import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 

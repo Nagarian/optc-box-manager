@@ -1,7 +1,6 @@
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import { SpecialLvlIcon } from 'components/Icon'
 import Progression from 'components/Progression'
-import React from 'react'
 import { SearchDisplayerProps } from '.'
 
 export default function SpecialLevelDisplayer ({

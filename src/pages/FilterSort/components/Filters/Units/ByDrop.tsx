@@ -11,7 +11,6 @@ import {
   UnitType,
   UnitTypes,
 } from 'models/units'
-import React from 'react'
 import { BookQuestDrops } from 'services/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import styled from 'styled-components'

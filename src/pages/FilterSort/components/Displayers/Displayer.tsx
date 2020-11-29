@@ -1,6 +1,5 @@
 import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
-import React from 'react'
 import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,

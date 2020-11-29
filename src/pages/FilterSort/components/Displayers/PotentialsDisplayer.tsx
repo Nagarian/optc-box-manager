@@ -4,7 +4,6 @@ import PotentialAbility from 'components/PotentialAbility'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { PotentialKey, Potentials } from 'models/units'
-import React from 'react'
 import { SearchDisplayerProps, SearchDisplayerInputProps } from '.'
 import ImageInput from 'components/forms/ImageInput'
 

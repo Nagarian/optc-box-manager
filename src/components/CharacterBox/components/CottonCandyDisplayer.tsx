@@ -1,5 +1,4 @@
 import { UserUnitCottonCandy } from 'models/userBox'
-import React from 'react'
 import InfoDisplayer from './InfoDisplayer'
 
 export type CottonCandyDisplayerProps = {
