@@ -52,11 +52,31 @@ export function syncCottonCandySort (
     ]
   }
 
-  if (sorts.find(s => s.by === 'byCottonCandy')) {
+  const ccSorters = sorts.filter(s => s.by === 'byCottonCandy')
+
+  if (!ccSorters.length) {
+    return undefined
+  }
+
+  if (ccSorters.length === 1) {
     return sorts.map(s =>
-      s.by === 'byCottonCandy' ? { ...s, options: ccType && { cc: ccType } } : s,
+      s === ccSorters[0] ? { ...s, options: ccType && { cc: ccType } } : s,
     )
   }
 
-  return undefined
+  const optioned = ccSorters.filter(s => s.options)
+
+  if (optioned.length < ccSorters.length && !ccType) {
+    return undefined
+  }
+
+  if (optioned.find(s => (s.options as any)?.cc === ccType)) {
+    return undefined
+  }
+
+  return sorts.map(s =>
+    s === (optioned[0] ?? ccSorters[0])
+      ? { ...s, options: ccType && { cc: ccType } }
+      : s,
+  )
 }
