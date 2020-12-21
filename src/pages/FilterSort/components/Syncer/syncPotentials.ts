@@ -56,13 +56,31 @@ export function syncPotentialSort (
     ]
   }
 
-  if (sorts.find(s => s.by === 'byPotentialProgression')) {
+  const potentialSorters = sorts.filter(s => s.by === 'byPotentialProgression')
+
+  if (!potentialSorters.length) {
+    return undefined
+  }
+
+  if (potentialSorters.length === 1) {
     return sorts.map(s =>
-      s.by === 'byPotentialProgression'
-        ? { ...s, options: { type: potential } }
-        : s,
+      s === potentialSorters[0] ? { ...s, options: potential && { type: potential } } : s,
     )
   }
 
-  return undefined
+  const optioned = potentialSorters.filter(s => s.options)
+
+  if (optioned.length < potentialSorters.length && !potentialSorters) {
+    return undefined
+  }
+
+  if (optioned.find(s => (s.options as any)?.type === potential)) {
+    return undefined
+  }
+
+  return sorts.map(s =>
+    s === (optioned[0] ?? potentialSorters[0])
+      ? { ...s, options: potential && { type: potential } }
+      : s,
+  )
 }
