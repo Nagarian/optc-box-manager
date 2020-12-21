@@ -33,6 +33,9 @@ export default function PowerSocketEdit ({
     onChange(arr)
   }
 
+  const defaultSocketLvl =
+    powerSockets[0]?.lvl >= 1 && powerSockets[0]?.lvl < 5 ? 1 : 5
+
   return (
     <ExpansionPanel
       title="Power Sockets"
@@ -46,6 +49,7 @@ export default function PowerSocketEdit ({
 
       {currentIndex !== undefined && (
         <PowerSocketEditor
+          defaultSocketLvl={defaultSocketLvl}
           userUnitSocket={powerSockets[currentIndex]}
           onChange={changeHandler}
         />
@@ -55,11 +59,13 @@ export default function PowerSocketEdit ({
 }
 
 type PowerSocketEditorProps = {
+  defaultSocketLvl: number
   userUnitSocket: UserUnitPowerSocket
   onChange: (uu: UserUnitPowerSocket) => void
 }
 
 function PowerSocketEditor ({
+  defaultSocketLvl,
   userUnitSocket: { type, lvl },
   onChange,
 }: PowerSocketEditorProps) {
@@ -76,7 +82,9 @@ function PowerSocketEditor ({
             type="radio"
             name="uu-socket-type"
             checked={type === powerSocketType}
-            onChange={() => onChange({ lvl: lvl || 5, type: powerSocketType })}
+            onChange={() =>
+              onChange({ lvl: lvl || defaultSocketLvl, type: powerSocketType })
+            }
           >
             <PowerSocket
               type={powerSocketType}
