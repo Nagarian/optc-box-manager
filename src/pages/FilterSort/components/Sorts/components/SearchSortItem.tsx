@@ -6,11 +6,11 @@ import {
   DescendingIcon,
   SettingsIcon,
 } from 'components/Icon'
-import { Text } from 'components/Title'
-import { SearchSortCriteria } from 'models/search'
-import React, { useState } from 'react'
-import styled from 'styled-components'
 import Popup from 'components/Popup'
+import { Text } from 'components/Title'
+import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
+import React, { FunctionComponent, useState } from 'react'
+import styled from 'styled-components'
 import { SearchSortBuilderProps } from '..'
 
 const Panel = styled.div`
@@ -43,13 +43,12 @@ export type SearchSortItemProps<T = unknown | undefined> = {
 
 export default function SearchSortItem ({
   criteria,
-  sortBuilder: { label, optionInput: OptionComponent, optionedLabel },
+  sortBuilder: { label, optionInput, optionedLabel },
   onUpdate,
   onDelete,
 }: SearchSortItemProps) {
   const [showSetting, setShowSetting] = useState<boolean>(false)
-  const [options, setOptions] = useState<any>(criteria.options)
-
+  const { options } = criteria
   return (
     <>
       <Panel>
@@ -63,7 +62,7 @@ export default function SearchSortItem ({
           )}
         </Text>
 
-        {OptionComponent && (
+        {optionInput && (
           <Button
             title="Setting"
             icon={SettingsIcon}
@@ -92,39 +91,51 @@ export default function SearchSortItem ({
         />
       </Panel>
 
-      {OptionComponent && showSetting && (
-        <Popup
-          title="Sort Options"
+      {optionInput && showSetting && (
+        <OptionPopup
           onCancel={() => setShowSetting(false)}
-          onValidate={() => {
+          options={criteria.options}
+          optionInput={optionInput}
+          onValidate={options => {
             onUpdate(criteria, {
               ...criteria,
               options,
             })
             setShowSetting(false)
           }}
-          customAction={
-            <Button
-              onClick={() => {
-                setOptions(undefined)
-                onUpdate(criteria, {
-                  ...criteria,
-                  options: undefined,
-                })
-                setShowSetting(false)
-              }}
-              variant="danger"
-            >
-              Clear
-            </Button>
-          }
-        >
-          <OptionComponent
-            options={options}
-            onChange={options => setOptions(options)}
-          />
-        </Popup>
+        />
       )}
     </>
+  )
+}
+
+type OptionPopupProps = {
+  options: any
+  optionInput: FunctionComponent<SearchSortInputProps<any>>
+  onCancel: () => void
+  onValidate: (options?: any) => void
+}
+
+function OptionPopup ({
+  onCancel,
+  onValidate,
+  options,
+  optionInput: OptionComponent,
+}: OptionPopupProps) {
+  const [opts, setOptions] = useState<any>(options)
+
+  return (
+    <Popup
+      title="Sort Options"
+      onCancel={onCancel}
+      onValidate={() => onValidate(opts)}
+      customAction={
+        <Button onClick={() => onValidate(undefined)} variant="danger">
+          Clear
+        </Button>
+      }
+    >
+      <OptionComponent options={opts} onChange={o => setOptions(o)} />
+    </Popup>
   )
 }
