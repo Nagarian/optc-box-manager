@@ -1,3 +1,15 @@
+## [1.12.1](https://github.com/Nagarian/optc-box-manager/compare/v1.12.0...v1.12.1) (2020-12-24)
+
+
+### Bug Fixes
+
+* **detail:** default value of Power Socket is now based around the value of the first one. ([b89bc86](https://github.com/Nagarian/optc-box-manager/commit/b89bc86b19658351370af0792c06384c97f3c074))
+* **sorter:** display issue when deleting a sorter ([f36b23c](https://github.com/Nagarian/optc-box-manager/commit/f36b23c80539181df677fc6e2165cf95363f132f))
+* **syncer:** issue with multiple sorters of cotton candy. Now only one sorter will be updated when changing of CC type filter ([ab39852](https://github.com/Nagarian/optc-box-manager/commit/ab398529af9ed7f736d1cc7f1b3e8d7274651101))
+* **syncer:** issue with multiple sorters of potentials. Now only one sorter will be updated when changing of Potential type filter ([c76e41b](https://github.com/Nagarian/optc-box-manager/commit/c76e41b687ed2225533155a80879084a37e393aa))
+
+
+
 # [1.12.0](https://github.com/Nagarian/optc-box-manager/compare/v1.11.0...v1.12.0) (2020-11-28)
 
 
@@ -96,15 +108,6 @@
 ### Bug Fixes
 
 * **detail:** issue with nutrition/hunger potential ([4b765b9](https://github.com/Nagarian/optc-box-manager/commit/4b765b9b90b59e6f5e20fa29ed808d1ac6797bdc))
-
-
-
-## [1.7.1](https://github.com/Nagarian/optc-box-manager/compare/v1.7.0...v1.7.1) (2020-09-12)
-
-
-### Bug Fixes
-
-* issue with horizontal scrollbar with a height too large ([8712a29](https://github.com/Nagarian/optc-box-manager/commit/8712a296222af9ba23884276732323040bf73904))
 
 
 
