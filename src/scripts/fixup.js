@@ -206,6 +206,25 @@ function fixupDualVersusMapping (
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
+function fixupImages (
+  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("models/old-units").ExtendedUnit[] */ units,
+) {
+  if (unit.id < 5001 || unit.id > 5008) {
+    return unit
+  }
+
+  return {
+    ...unit,
+    images: {
+      ...unit.images,
+      thumbnail: `characters/${unit.id}.png`,
+    },
+  }
+}
+
+/** @return { import("models/old-units").ExtendedUnit } */
 function fixupSpecificIssue (
   /** @type import("models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
@@ -246,6 +265,7 @@ module.exports = {
   fixupDetail,
   fixupVersusUnit,
   fixupDualVersusMapping,
+  fixupImages,
   fixupSpecificIssue,
   removeProp,
 }

@@ -12,7 +12,7 @@ const {
 const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue } = require('./fixup')
+const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb } = require('./glo-jap-remapper')
 const dualMap = require('../models/optcdb-dual-units.json')
 
@@ -89,7 +89,8 @@ function DBFactory () {
 
   db = db.concat(db
     .filter(u => !!globalOnlyMissingInDb[u.id])
-    .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] })),
+    .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] }))
+    .map(fixupImages),
   )
   db.sort((u1, u2) => u1.id - u2.id)
   return db
