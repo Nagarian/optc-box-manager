@@ -1,5 +1,7 @@
 // @ts-check
 
+const { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } = require('./glo-jap-remapper')
+
 /**
  * @typedef { ({ [key: string]: import("models/old-units").PotentialKey })} PotentialRenamedHash
  * @typedef { ({ [key: string]: import("models/old-units").UnitPirateFestStyle })} PirateFestRenamedHash
@@ -225,6 +227,44 @@ function fixupImages (
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
+function fixupEvolution (
+  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("models/old-units").ExtendedUnit[] */ units,
+) {
+  if (unit.id < 5001) {
+    return unit
+  }
+
+  return {
+    ...unit,
+    evolutionMap: unit.evolutionMap.map(id => globalOnlyReverseMap[id] ?? id),
+    evolution: unit.evolution && {
+      ...unit.evolution,
+      evolution: Array.isArray(unit.evolution.evolution)
+        ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
+        : globalOnlyReverseMap[unit.evolution.evolution],
+    },
+  }
+}
+
+/** @return { import("models/old-units").ExtendedUnit } */
+function fixupFlags (
+  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("models/old-units").ExtendedUnit[] */ units,
+) {
+  return {
+    ...unit,
+    flags: {
+      ...unit.flags,
+      gloOnly: globalOnly[unit.id] ? 1 : undefined,
+      japOnly: globalOnlyMissingInDb[unit.id] ? 1 : undefined,
+    },
+  }
+}
+
+/** @return { import("models/old-units").ExtendedUnit } */
 function fixupSpecificIssue (
   /** @type import("models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
@@ -266,6 +306,8 @@ module.exports = {
   fixupVersusUnit,
   fixupDualVersusMapping,
   fixupImages,
+  fixupEvolution,
+  fixupFlags,
   fixupSpecificIssue,
   removeProp,
 }

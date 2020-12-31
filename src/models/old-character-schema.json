@@ -773,9 +773,18 @@
           "description": "Fortnight only",
           "type": "number"
         },
+        "gloOnly": {
+          "const": 1,
+          "description": "manually added",
+          "type": "number"
+        },
         "global": {
           "const": 1,
           "description": "global available",
+          "type": "number"
+        },
+        "japOnly": {
+          "const": 1,
           "type": "number"
         },
         "kclrr": {

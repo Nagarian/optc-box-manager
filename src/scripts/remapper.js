@@ -128,20 +128,15 @@ function computeFlags (
           case 'rro':
           case 'rarerecruit':
             return 'rr'
+          case 'gloOnly':
+            return 'global-only'
+          case 'japOnly':
+            return 'japan-only'
           default:
             return f
         }
       }).filter(f => Flags.includes(f)) ?? [],
   )]
-
-  if (unit.id >= 5001) {
-    flags.push('global-only')
-  } else if (
-    Object.keys(globalOnlyMissingInDb).includes(unit.id.toString()) ||
-    unit.incomplete
-  ) {
-    flags.push('japan-only')
-  }
 
   return flags
 }

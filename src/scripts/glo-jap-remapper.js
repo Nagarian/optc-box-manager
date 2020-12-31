@@ -1,3 +1,4 @@
+/** @type { ({ [key: number]: number }) } */
 const globalOnly = {
   // 1120: 577, // Luffy // different image
   // 1121: 578,
@@ -71,18 +72,28 @@ const globalOnly = {
   5068: 3157,
 }
 
+/** @type { ({ [key: number]: number }) } */
+const globalOnlyReverseMap = Object.entries(globalOnly)
+  .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+
+/** @type { ({ [key: number]: number }) } */
 const globalOnlyWrongId = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId >= 3333)
   .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
+/** @type { ({ [key: number]: number }) } */
 const globalOnlyMissingInDb = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId < 3333)
   .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
+/** @type { ({ [key: number]: number }) } */
+const gloToJapConverter = Object.entries(globalOnly)
+  .reduce((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 3333 ? null : japId }), {})
+
 module.exports = {
   globalOnly,
-  /** @type { ({ [key: number]: number })} */
+  globalOnlyReverseMap,
   globalOnlyWrongId,
-  /** @type { ({ [key: number]: number })} */
   globalOnlyMissingInDb,
+  gloToJapConverter,
 }

@@ -222,6 +222,10 @@ export type UnitFlags = {
   promo: 1 | undefined
   /** Special characters (gifted mostly) */
   special: 1 | undefined
+
+  /** manually added */
+  gloOnly: 1 | undefined
+  japOnly: 1 | undefined
 }
 
 export type UnitFamily = string | null | string[]

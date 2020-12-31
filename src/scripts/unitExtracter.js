@@ -12,8 +12,8 @@ const {
 const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages } = require('./fixup')
-const { globalOnlyWrongId, globalOnlyMissingInDb } = require('./glo-jap-remapper')
+const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
+const { globalOnlyWrongId, globalOnlyMissingInDb, globalOnly } = require('./glo-jap-remapper')
 const dualMap = require('../models/optcdb-dual-units.json')
 
 const getFamilyId = (
@@ -47,11 +47,12 @@ function DBFactory () {
     // .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
     .map(unit => {
       const dbId = unit.number + 1
+      const gameId = globalOnlyWrongId[dbId] ?? dbId
       const flags = Flags[dbId] ?? {}
 
       return {
         ...unit,
-        id: globalOnlyWrongId[dbId] ?? dbId,
+        id: gameId,
         dbId,
         images: {
           thumbnail: getUnitThumbnail(dbId),
@@ -89,9 +90,14 @@ function DBFactory () {
 
   db = db.concat(db
     .filter(u => !!globalOnlyMissingInDb[u.id])
-    .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] }))
-    .map(fixupImages),
+    .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] })),
   )
+
+  db = db
+    .map(fixupImages)
+    .map(fixupEvolution)
+    .map(fixupFlags)
+
   db.sort((u1, u2) => u1.id - u2.id)
   return db
 }
