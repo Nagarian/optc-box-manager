@@ -3,11 +3,11 @@ import { ByUnclassableFilter } from './ByUnclassable'
 
 describe('ByUnclassable', () => {
   it('should return global unit', () => {
-    const filter = ByUnclassableFilter({ globalOnly: true })
+    const filter = ByUnclassableFilter({ exclude: { japanOnly: true } })
 
     expect(
       filter({
-        flags: { global: 1 },
+        flags: { gloOnly: 1 },
       } as ExtendedUnit),
     ).toBe(true)
   })
@@ -23,11 +23,11 @@ describe('ByUnclassable', () => {
   })
 
   it('should fail when one condition is not meet', () => {
-    const filter = ByUnclassableFilter({ globalOnly: true, evolvedOnly: true })
+    const filter = ByUnclassableFilter({ exclude: { japanOnly: true }, evolvedOnly: true })
 
     expect(
       filter({
-        flags: {},
+        flags: { japOnly: 1 },
       } as ExtendedUnit),
     ).toBe(false)
   })

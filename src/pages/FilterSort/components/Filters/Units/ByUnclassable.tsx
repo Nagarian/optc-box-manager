@@ -5,7 +5,10 @@ import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria {
-  globalOnly?: boolean
+  exclude?: {
+    globalOnly?: boolean
+    japanOnly?: boolean
+  }
   evolvedOnly?: boolean
   superEvolvedOnly?: boolean
 }
@@ -16,14 +19,14 @@ const UnclassedFilters = {
     (!unit.evolution ||
       unit.evolution.evolvers[0]?.startsWith?.('skull') ||
       false) as boolean,
-  globalOnly: (unit: ExtendedUnit) => !!unit.flags?.global,
 }
 
 export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
   BooleanFilterMapper(
     [criteria.evolvedOnly, UnclassedFilters.hasEvolved],
     [criteria.superEvolvedOnly, UnclassedFilters.hasSuperEvolved],
-    [criteria.globalOnly, UnclassedFilters.globalOnly],
+    [criteria.exclude?.globalOnly, unit => !unit.flags?.gloOnly],
+    [criteria.exclude?.japanOnly, unit => !unit.flags?.japOnly],
   )
 
 export function ByUnclassableInput ({
@@ -32,22 +35,44 @@ export function ByUnclassableInput ({
 }: SearchFilterCriteriaInputProps<ByUnclassableCriteria>) {
   return (
     <>
-      <ChoiceInput
-        type="checkbox"
-        name="global-only"
-        checked={criteria?.globalOnly ?? false}
-        onChange={e =>
-          onChange({
-            ...criteria,
-            globalOnly: e.target.checked,
-          })
-        }
-      >
-        Show global only
-      </ChoiceInput>
+      <FilterContainerPanel marginTop="2">
+        Exclude
+        <ChoiceInput
+          type="checkbox"
+          name="global-only"
+          checked={criteria?.exclude?.globalOnly ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              exclude: {
+                ...criteria?.exclude,
+                globalOnly: e.target.checked,
+              },
+            })
+          }
+        >
+          Global Only
+        </ChoiceInput>
+        <ChoiceInput
+          type="checkbox"
+          name="japan-only"
+          checked={criteria?.exclude?.japanOnly ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              exclude: {
+                ...criteria?.exclude,
+                japanOnly: e.target.checked,
+              },
+            })
+          }
+        >
+          Japan Only
+        </ChoiceInput>
+      </FilterContainerPanel>
 
       <FilterContainerPanel marginTop="2">
-        Hide
+        Exclude
         <ChoiceInput
           type="radio"
           name="evolved-only"
