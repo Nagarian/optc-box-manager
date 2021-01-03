@@ -1,3 +1,32 @@
+# [2.0.0](https://github.com/Nagarian/optc-box-manager/compare/v1.12.1...v2.0.0) (2021-01-03)
+
+
+### Bug Fixes
+
+* **db:** issue with id modification and evolutionMap ([640b1ff](https://github.com/Nagarian/optc-box-manager/commit/640b1ff75fc6d203a3b6e562025711791fc9c91d))
+* units database discrepancy with in-game ids ([dfb0128](https://github.com/Nagarian/optc-box-manager/commit/dfb01289253f8d89d2a7d267f7e26193226220ef))
+
+
+### Features
+
+* **bulk-edit:** add Global-Japan Id Converter ([def4749](https://github.com/Nagarian/optc-box-manager/commit/def47495a7f5b150929ca140dd8bc8bc4c7d5175))
+* change default Search value of Sugo Cleaner and Add Screen for new users ([2a0292b](https://github.com/Nagarian/optc-box-manager/commit/2a0292b0697a691f94bbec3b45a64c34a429840f))
+* **db:** add real image of characters 5001-5008 ([a616366](https://github.com/Nagarian/optc-box-manager/commit/a616366d39f85ebb3c7e34b035bb03ef9edbe07b))
+* **filter:** rework game version filter ([b2edbb8](https://github.com/Nagarian/optc-box-manager/commit/b2edbb847de8c78f1d3a1aab16a31688e482d92b))
+* add characters images caching strategy ([d625035](https://github.com/Nagarian/optc-box-manager/commit/d62503532a46ac54269d73952a27b558dba0c88f))
+* rework OPTC-DB dependency + add loading screen on application start ([079ff4f](https://github.com/Nagarian/optc-box-manager/commit/079ff4fd1f53a86bedad48b8177223107da6d2f1))
+
+
+### BREAKING CHANGES
+
+* rework of the ids, we now use the in-game ids instead of the DB ones. Which mean:
+
+- all global-only units have their ids updated to match those of the game
+- Glo-first units which have been released later on Japan version are now displayed along-side their japan counter-side
+- ids in the OPTC-BM export format are not compatible with DB-ids anymore (they are those of the game) NB: this doesn't affect "Export For" feature
+
+
+
 ## [1.12.1](https://github.com/Nagarian/optc-box-manager/compare/v1.12.0...v1.12.1) (2020-12-24)
 
 
@@ -99,15 +128,6 @@
 * **filter:** improve unit Classes images ([f6152c7](https://github.com/Nagarian/optc-box-manager/commit/f6152c7c039fb10ce6e41321579e3fce748c7243))
 * **filter:** rework Cotton Candy filter for update 10.0 ([25f5008](https://github.com/Nagarian/optc-box-manager/commit/25f500822a8936aaff383563eff5445851668749))
 * **sort:** add PirateFest sorting ([0acdeca](https://github.com/Nagarian/optc-box-manager/commit/0acdeca09b5e701b9cc73f542415a0dc3d2712f9))
-
-
-
-## [1.7.2](https://github.com/Nagarian/optc-box-manager/compare/v1.7.1...v1.7.2) (2020-09-12)
-
-
-### Bug Fixes
-
-* **detail:** issue with nutrition/hunger potential ([4b765b9](https://github.com/Nagarian/optc-box-manager/commit/4b765b9b90b59e6f5e20fa29ed808d1ac6797bdc))
 
 
 
