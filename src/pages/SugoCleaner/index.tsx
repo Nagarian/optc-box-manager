@@ -1,28 +1,29 @@
-import { useState } from 'react'
-import Popup from 'components/Popup'
-import { ExtendedUnit } from 'models/units'
-import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
-import { ResultList } from 'components/SearchPanel'
-import useSugoCleaner, { SugoCleanerListType } from 'hooks/useSugoCleaner'
-import CharacterBox from 'components/CharacterBox'
+import Box from 'components/Box'
 import Button from 'components/Button'
+import CharacterBox from 'components/CharacterBox'
 import {
   AddIcon,
-  SkillBookIcon,
   BellyIcon,
-  TreasureIcon,
   DeleteIcon,
-  SupportIcon,
   LimitBreakIcon,
+  SkillBookIcon,
+  SupportIcon,
+  TreasureIcon,
 } from 'components/Icon'
-import Add from 'pages/Add'
-import { UserUnit } from 'models/userBox'
-import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
+import Popup from 'components/Popup'
+import { ResultList } from 'components/SearchPanel'
 import { SubTitle, Title } from 'components/Title'
+import { DefaultSugoCleanerSearch } from 'hooks/useSearch'
+import useSugoCleaner, { SugoCleanerListType } from 'hooks/useSugoCleaner'
+import { ExtendedUnit } from 'models/units'
+import { UserUnit } from 'models/userBox'
+import Add from 'pages/Add'
 import Detail from 'pages/Detail'
-import Box from 'components/Box'
+import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
+import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
 import { ByUserSpecialFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSpecial'
 import { ByUserSupportFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSupport'
+import { useState } from 'react'
 
 export type SugoCleanerProps = {
   units: ExtendedUnit[]
@@ -107,6 +108,7 @@ export default function SugoCleaner ({
         <Add
           saveKey="sugoCleanerAddSearch"
           allowDuplicatedUnit
+          defaultSearch={DefaultSugoCleanerSearch}
           onCancel={() => setOpenAdd(false)}
           onSubmit={units => {
             addTo('toClean', ...units)
@@ -174,46 +176,46 @@ export default function SugoCleaner ({
 
             {filteredUserUnit.some(WaitForSpecialEvent) &&
               currentList !== 'toWaiting' && (
-              <Button
-                {...commonPopupButton}
-                onClick={() => {
-                  currentList && move(currentList, 'toWaiting', openChooser)
-                  setOpenChooser(undefined)
-                }}
-                icon={SkillBookIcon}
-              >
+                <Button
+                  {...commonPopupButton}
+                  onClick={() => {
+                    currentList && move(currentList, 'toWaiting', openChooser)
+                    setOpenChooser(undefined)
+                  }}
+                  icon={SkillBookIcon}
+                >
                   Wait for skill-up event
-              </Button>
+                </Button>
             )}
 
             {filteredUserUnit.some(WaitForLBMaterials) &&
               currentList !== 'toWaitingForLB' && (
-              <Button
-                {...commonPopupButton}
-                onClick={() => {
-                  currentList &&
+                <Button
+                  {...commonPopupButton}
+                  onClick={() => {
+                    currentList &&
                       move(currentList, 'toWaitingForLB', openChooser)
-                  setOpenChooser(undefined)
-                }}
-                icon={LimitBreakIcon}
-              >
+                    setOpenChooser(undefined)
+                  }}
+                  icon={LimitBreakIcon}
+                >
                   Wait for LB materials
-              </Button>
+                </Button>
             )}
 
             {filteredUserUnit.some(WaitForSupport) &&
               currentList !== 'toWaitingForSupport' && (
-              <Button
-                {...commonPopupButton}
-                onClick={() => {
-                  currentList &&
+                <Button
+                  {...commonPopupButton}
+                  onClick={() => {
+                    currentList &&
                       move(currentList, 'toWaitingForSupport', openChooser)
-                  setOpenChooser(undefined)
-                }}
-                icon={SupportIcon}
-              >
+                    setOpenChooser(undefined)
+                  }}
+                  icon={SupportIcon}
+                >
                   Wait for support release
-              </Button>
+                </Button>
             )}
 
             <Button

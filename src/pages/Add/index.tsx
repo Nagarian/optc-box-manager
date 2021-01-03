@@ -4,15 +4,20 @@ import { FilterSortIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
-import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
+import { DefaultSearch, mergeSearch, useSavedSearch } from 'hooks/useSearch'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import FilterSort from 'pages/FilterSort'
-import { BySearchBoxCriteria, BySearchBoxInput } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import {
+  BySearchBoxCriteria,
+  BySearchBoxInput,
+} from 'pages/FilterSort/components/Filters/Units/BySearchBox'
 import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
 type AddProps = {
   saveKey?: string
+  defaultSearch?: Search
   onCancel: () => void
   onSubmit: (selectUnits: ExtendedUnit[]) => void
   units: ExtendedUnit[]
@@ -24,6 +29,7 @@ export default function Add ({
   onSubmit,
   units,
   saveKey = 'addSettingSearch',
+  defaultSearch = DefaultSearch,
   allowDuplicatedUnit = false,
 }: AddProps) {
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
@@ -47,7 +53,7 @@ export default function Add ({
   }, [selectedUnits])
 
   const [showSettings, setShowSettings] = useState<boolean>(false)
-  const { search, setSearch } = useSavedSearch(saveKey)
+  const { search, setSearch } = useSavedSearch(saveKey, defaultSearch)
 
   return (
     <Popup

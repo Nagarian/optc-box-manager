@@ -12,7 +12,7 @@ import {
 } from 'components/Icon'
 import { SubTitle, Title } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
-import { mergeSearch, useSavedSearch } from 'hooks/useSearch'
+import { DefaultUserBoxSearch, mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
@@ -52,7 +52,7 @@ function App () {
   const { db: unitDatabase } = useOptcDb()
   const [displayedPanel, setDisplayedPanel] = useState<DisplayedPanel>()
   const [showDetail, setShowDetail] = useState<UserUnit>()
-  const { search, setSearch } = useSavedSearch()
+  const { search, setSearch } = useSavedSearch('search', DefaultUserBoxSearch)
 
   const myUserBox = useUserBox()
   const {

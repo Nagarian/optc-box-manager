@@ -41,6 +41,20 @@ export const DefaultSearch: Search = {
   ],
 }
 
+export const DefaultSugoCleanerSearch: Search = {
+  filters: {
+    units: { byDrop: { dropLocations: ['rarerecruit'] } },
+    userUnits: {},
+  },
+  sorts: [{ by: 'byId', order: 'desc' }],
+}
+
+export const DefaultUserBoxSearch: Search = {
+  filters: { units: {}, userUnits: {} },
+  sorts: [{ by: 'byAddedToBox', order: 'desc' }],
+  displayer: { type: 'specialLvl' },
+}
+
 export function mergeSearch (search: Search, search2: Search): Search {
   return {
     ...search,
@@ -73,7 +87,10 @@ export function useSearch (search: Search = DefaultSearch) {
   const userUnitFilters = Object.entries(search.filters.userUnits || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) =>
-      UserUnitFilterBuilder[key as SearchFilterUserUnitsType].builder(criteria, userSettings),
+      UserUnitFilterBuilder[key as SearchFilterUserUnitsType].builder(
+        criteria,
+        userSettings,
+      ),
     )
 
   const unitSorters: UnitSort[] = search.sorts
@@ -128,8 +145,11 @@ export function useSearch (search: Search = DefaultSearch) {
   }
 }
 
-export function useSavedSearch (savedSearchKey: string = 'search') {
-  const [search, setSearch] = useState<Search>(DefaultSearch)
+export function useSavedSearch (
+  savedSearchKey: string = 'search',
+  defaultSearch: Search = DefaultSearch,
+) {
+  const [search, setSearch] = useState<Search>(defaultSearch)
 
   useEffect(() => {
     const json = localStorage.getItem(savedSearchKey)

@@ -1,4 +1,6 @@
 import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
+import { SearchFilterUnitsType } from 'pages/FilterSort/components/Filters/Units'
+import { SearchFilterUserUnitsType } from 'pages/FilterSort/components/Filters/UserUnits'
 import { SearchSortType } from 'pages/FilterSort/components/Sorts'
 import { ExtendedUnit } from './units'
 import { UserUnit } from './userBox'
