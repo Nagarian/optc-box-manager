@@ -59,6 +59,9 @@ export type UserBox = UserUnit[]
 export const UserUnitBulkEditLimitBreakStateKeys = ['max', 'rainbow', 'max+', 'rainbow+'] as const
 export type UserUnitBulkEditLimitBreakState = typeof UserUnitBulkEditLimitBreakStateKeys[number]
 
+export const GameVersionIdConverterKeys = ['toJapan', 'toGlobal'] as const
+export type GameVersionIdConverter = typeof GameVersionIdConverterKeys[number]
+
 export type UserUnitBulkEdit = {
   limitBreakState?: UserUnitBulkEditLimitBreakState
   supportLvl?: number
@@ -67,6 +70,7 @@ export type UserUnitBulkEdit = {
     hp?: number
     rcv?: number
   }
+  idConverter?: GameVersionIdConverter
 }
 
 export type MyUserBox = {

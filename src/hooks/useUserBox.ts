@@ -80,7 +80,7 @@ export default function useUserBox (): MyUserBox {
     },
     bulkUpdate: (userUnits: UserUnit[], edit: UserUnitBulkEdit) => {
       const updated = userBox.map(uu =>
-        userUnits.some(uuu => uuu.id === uu.id) ? applyEdit(uu, edit) : uu,
+        userUnits.some(uuu => uuu.id === uu.id) ? applyEdit(uu, edit, db) : uu,
       )
 
       setUserBox(updated)

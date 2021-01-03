@@ -8,6 +8,10 @@ import {
   UserUnitPotentialAbility,
   UserUnitLimitBreak,
 } from 'models/userBox'
+import {
+  globalOnlyMissingInDb,
+  gloToJapConverter,
+} from 'scripts/glo-jap-remapper-proxy'
 import { v4 as uuid } from 'uuid'
 
 export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
@@ -118,7 +122,11 @@ function computeSpecialReset (
   }
 }
 
-export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
+export function applyEdit (
+  userUnit: UserUnit,
+  edit: UserUnitBulkEdit,
+  db: ExtendedUnit[],
+) {
   const updated = {
     ...userUnit,
   }
@@ -147,6 +155,27 @@ export function applyEdit (userUnit: UserUnit, edit: UserUnitBulkEdit) {
     }
     if (edit.cottonCandies.rcv) {
       updated.cc.rcv = edit.cottonCandies.rcv
+    }
+  }
+
+  if (
+    edit.idConverter === 'toGlobal' &&
+    globalOnlyMissingInDb[userUnit.unit.id]
+  ) {
+    const newUnit = db.find(
+      u => u.id === globalOnlyMissingInDb[userUnit.unit.id],
+    )
+
+    if (newUnit) {
+      updated.unit = newUnit
+    }
+  }
+
+  if (edit.idConverter === 'toJapan' && gloToJapConverter[userUnit.unit.id]) {
+    const newUnit = db.find(u => u.id === gloToJapConverter[userUnit.unit.id])
+
+    if (newUnit) {
+      updated.unit = newUnit
     }
   }
 

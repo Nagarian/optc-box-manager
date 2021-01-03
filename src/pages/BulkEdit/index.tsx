@@ -20,6 +20,8 @@ import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer
 import { ReactNode, useState } from 'react'
 import BulkEditSelect from './components/BulkEditSelect'
 import { useUserSettings } from 'hooks/useUserSettings'
+import ChoiceInput from 'components/forms/ChoiceInput'
+import { gloToJapConverter } from 'scripts/glo-jap-remapper-proxy'
 
 type BulkEditProps = {
   userUnits: UserUnit[]
@@ -34,51 +36,6 @@ export default function BulkEdit ({
   const [edit, setEdit] = useState<UserUnitBulkEdit>()
   const [showStep2, setShowStep2] = useState<boolean>()
   const { ccLimit } = useUserSettings()
-  const computeSearch = (): Search => {
-    let uuf: SearchFilterUserUnits = {}
-    const uus: SearchSortCriteria[] = []
-    if (edit?.supportLvl) {
-      uuf = {
-        ...uuf,
-        byUserSupport: {
-          state: 'unmaxed',
-        },
-      }
-    }
-
-    if (edit?.limitBreakState) {
-      uuf = {
-        ...uuf,
-        byUserLimitBreak: {
-          lbState: edit.limitBreakState.includes('+') ? 'maxed' : 'locked',
-        },
-      }
-      uus.push({
-        by: 'byLBLvlMax',
-        order: 'desc',
-      })
-    }
-
-    if (edit?.cottonCandies) {
-      uuf = {
-        ...uuf,
-        byUserCottonCandy: {
-          atk: (edit.cottonCandies.atk ?? 0) > 0 ? 'unmaxed' : undefined,
-          hp: (edit.cottonCandies.hp ?? 0) > 0 ? 'unmaxed' : undefined,
-          rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
-        },
-      }
-    }
-
-    return {
-      filters: {
-        userUnits: {
-          ...uuf,
-        },
-      },
-      sorts: [...uus, ...DefaultSearch.sorts],
-    }
-  }
 
   return (
     <Popup
@@ -206,11 +163,48 @@ export default function BulkEdit ({
             />
           </BulkEditContainer>
         </FilterContainer>
+
+        <FilterContainer
+          title="Global-Japan Id Converter"
+          onReset={() =>
+            setEdit({
+              ...edit,
+              idConverter: undefined,
+            })
+          }
+          disableReset={!edit?.idConverter}
+        >
+          <ChoiceInput
+            type="radio"
+            name="gameVersionIdConverter"
+            checked={edit?.idConverter === 'toGlobal'}
+            onChange={e =>
+              setEdit({
+                idConverter: 'toGlobal',
+              })
+            }
+          >
+            Japan to Global
+          </ChoiceInput>
+
+          <ChoiceInput
+            type="radio"
+            name="gameVersionIdConverter"
+            checked={edit?.idConverter === 'toJapan'}
+            onChange={e =>
+              setEdit({
+                idConverter: 'toJapan',
+              })
+            }
+          >
+            Global to Japan
+          </ChoiceInput>
+        </FilterContainer>
       </Box>
 
       {showStep2 && (
         <BulkEditSelect
-          relatedSearch={computeSearch()}
+          relatedSearch={computeSearch(edit!)}
           userUnits={userUnits}
           onCancel={() => setShowStep2(false)}
           onSubmit={uu => onSubmit(uu, edit!)}
@@ -271,5 +265,80 @@ function lbStateToLabel (lbState: UserUnitBulkEditLimitBreakState) {
       return 'Is Rainbow + (key unlocked and max+)'
     default:
       return ''
+  }
+}
+
+function computeSearch (edit: UserUnitBulkEdit): Search {
+  let uuf: SearchFilterUserUnits = {}
+  const uus: SearchSortCriteria[] = []
+  if (edit?.supportLvl) {
+    uuf = {
+      ...uuf,
+      byUserSupport: {
+        state: 'unmaxed',
+      },
+    }
+  }
+
+  if (edit?.limitBreakState) {
+    uuf = {
+      ...uuf,
+      byUserLimitBreak: {
+        lbState: edit.limitBreakState.includes('+') ? 'maxed' : 'locked',
+      },
+    }
+    uus.push({
+      by: 'byLBLvlMax',
+      order: 'desc',
+    })
+  }
+
+  if (edit?.cottonCandies) {
+    uuf = {
+      ...uuf,
+      byUserCottonCandy: {
+        atk: (edit.cottonCandies.atk ?? 0) > 0 ? 'unmaxed' : undefined,
+        hp: (edit.cottonCandies.hp ?? 0) > 0 ? 'unmaxed' : undefined,
+        rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
+      },
+    }
+  }
+
+  if (edit.idConverter === 'toGlobal') {
+    return {
+      filters: {
+        units: {
+          bySearchBox: {
+            value: Object.values(gloToJapConverter).filter(Boolean).join(','),
+          },
+        },
+      },
+      sorts: [{ by: 'byId', order: 'desc' }],
+    }
+  }
+
+  if (edit.idConverter === 'toJapan') {
+    return {
+      filters: {
+        units: {
+          bySearchBox: {
+            value: Object.entries(gloToJapConverter)
+              .filter(([glo, jap]) => !!jap)
+              .map(([glo, jap]) => Number.parseInt(glo))
+              .join(','),
+          },
+        },
+      },
+      sorts: [{ by: 'byId', order: 'desc' }],
+    }
+  }
+
+  return {
+    filters: {
+      userUnits: {
+        ...uuf,
+      },
+    },
+    sorts: [...uus, ...DefaultSearch.sorts],
   }
 }
