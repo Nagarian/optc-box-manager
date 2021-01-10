@@ -32,6 +32,7 @@ function process (validator, units, excludeVS, name) {
 
 const oldSchema = require('../models/old-character-schema.json')
 const newSchema = require('../models/character-schema.json')
+const { fixupVersusUnit } = require('./fixup')
 
 const ajv = new Ajv({
   allowUnionTypes: true,
@@ -42,7 +43,9 @@ const ajv = new Ajv({
 const oldValidator = ajv.compile(oldSchema)
 const newValidator = ajv.compile(newSchema)
 
-const oldErrors = process(oldValidator, DB, true, 'old')
+const DBFixed = DB.map(fixupVersusUnit)
+
+const oldErrors = process(oldValidator, DBFixed, true, 'old')
 
 const characters = DB.map(remapper)
 

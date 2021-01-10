@@ -73,7 +73,6 @@ function DBFactory () {
         gamewith: gamewith[unit.number] ?? undefined,
       }
     })
-    // .map(fixupVersusUnit)
     .map(fixupDualVersusMapping)
     .map(fixupSpecificIssue)
 
