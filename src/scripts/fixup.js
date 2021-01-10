@@ -287,6 +287,50 @@ function fixupSpecificIssue (
     }
   }
 
+  if (unit.evolutionMap?.includes(2784)) {
+    // Lucci 6+
+    if (unit.dbId === 1763) {
+      return {
+        ...unit,
+        evolutionMap: [...unit.evolutionMap, 5016],
+        evolution: {
+          evolution: [2784, 5016],
+          evolvers: [
+            ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
+            ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
+          ],
+        },
+      }
+    }
+
+    return {
+      ...unit,
+      evolutionMap: [...unit.evolutionMap, 5016],
+    }
+  }
+
+  if (unit.evolutionMap?.includes(2830)) {
+    // Robin 6+
+    if (unit.dbId === 1951) {
+      return {
+        ...unit,
+        evolutionMap: [...unit.evolutionMap, 5062],
+        evolution: {
+          evolution: [2830, 5062],
+          evolvers: [
+            ['skullPSY', 'skullINT', 99, 304, 267],
+            ['skullPSY', 'skullINT', 99, 304, 267],
+          ],
+        },
+      }
+    }
+
+    return {
+      ...unit,
+      evolutionMap: [...unit.evolutionMap, 5062],
+    }
+  }
+
   return unit
 }
 
