@@ -279,11 +279,12 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 3190) {
-    if (unit.detail.limit?.[0].description === 'Boosts base RCV by130') {
-      unit.detail.limit[0].description = 'Boosts base RCV by 130'
+  if (unit.id === 3224 || unit.id === 3225) {
+    if (unit.class[1] === 'Drivem') {
+      // @ts-ignore
+      unit.class[1] = 'Driven'
     } else {
-      console.warn('issue with unit 3190 has been fixed')
+      console.warn('issue with unit 3224/3225 has been fixed')
     }
   }
 
