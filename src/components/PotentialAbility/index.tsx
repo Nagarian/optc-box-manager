@@ -54,7 +54,7 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill15
     case 'Reduce Ship Bind duration':
       return ImageSkill16
-    case 'Nutrition/Hunger reduction':
+    case 'Nutrition/Reduce Hunger duration':
       return ImageSkill20
     default:
       return NoIcon

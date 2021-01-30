@@ -14,7 +14,7 @@ export const Potentials = [
   'Double Special Activation',
   'Reduce Ship Bind duration',
   'Reduce Sailor Despair duration',
-  'Nutrition/Hunger reduction',
+  'Nutrition/Reduce Hunger duration',
 ] as const
 export type Potential = typeof Potentials[number]
 
@@ -68,5 +68,5 @@ export const LBDescriptionPattern = {
   'Double Special Activation': 'Once per an adventure, reduce own Special Cooldown by {value} turns after the first time this special is used',
   'Reduce Ship Bind duration': 'Reduce Ship Bind duration by {value} turn',
   'Reduce Sailor Despair duration': 'Reduce own Sailor Despair duration by {value} turns',
-  'Nutrition/Hunger reduction': 'Boosts base ATK by {value} the turn after recovering {threshold} HP and reduces Hunger stack by {reduction} stacks',
+  'Nutrition/Reduce Hunger duration': 'Boosts base ATK by {value} the turn after recovering {threshold} HP and reduces Hunger stack by {reduction} stacks',
 }

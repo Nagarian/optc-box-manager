@@ -253,11 +253,19 @@ export function resync (userUnit: UserUnit) {
   }
 
   if (!arrayEqual(userUnit.potentials, compare.potentials)) {
+    const renamedPotentials: Record<string, PotentialKey> = {
+      'Nutrition/Hunger reduction': 'Nutrition/Reduce Hunger duration',
+    }
+
     updated.potentials = compare.potentials.map(({ type, lvl }) => {
       const updatedLvl =
-        userUnit.potentials.find(p => p.type === type)?.lvl ?? lvl
+        userUnit.potentials.find(
+          p =>
+            (renamedPotentials[p.type] ?? p.type) ===
+            (renamedPotentials[type] ?? type),
+        )?.lvl ?? lvl
       return {
-        type,
+        type: renamedPotentials[type] ?? type,
         lvl: updatedLvl,
         keyState: getPotentialState(
           type,
