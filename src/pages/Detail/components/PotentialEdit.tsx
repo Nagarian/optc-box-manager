@@ -1,7 +1,7 @@
 import ExpansionPanel from 'components/ExpansionPanel'
 import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
 import { PotentialIcon } from 'components/Icon'
-import { UnitPotential } from 'models/units'
+import { PotentialKey, UnitPotential } from 'models/units'
 import { UserUnitPotentialAbility } from 'models/userBox'
 import { InputLabel } from '.'
 
@@ -48,13 +48,17 @@ export default function PotentialEdit ({
     return null
   }
 
+  const renamedPotentials: Partial<Record<PotentialKey, string>> = {
+    'Nutrition/Reduce Hunger duration': 'Nutrition/Hunger reduction',
+  }
+
   return (
     <ExpansionPanel title="Potentials" icon={PotentialIcon}>
       {potentials.map(potential => (
         <Wrapper
           key={potential.type}
           potential={potential}
-          detail={details.find(d => d.Name === potential.type)!}
+          detail={details.find(d => d.Name === potential.type || d.Name === renamedPotentials[potential.type])!}
           onChange={potential =>
             onChange(
               potentials.map(p => (p.type === potential.type ? potential : p)),
