@@ -1,17 +1,17 @@
 export const Potentials = [
-  'Enrage', // Enrage/Reduce Increase Damage Taken duration
-  'Critical Hit',
   'Reduce Slot Bind duration',
   'Reduce No Healing duration',
-  'Pinch Healing',
   'Barrier Penetration',
+  'Pinch Healing',
+  'Enrage', // Enrage/Reduce Increase Damage Taken duration
+  'Critical Hit',
+  'Cooldown Reduction',
+  'Double Special Activation',
   '[STR] Damage Reduction',
   '[DEX] Damage Reduction',
   '[QCK] Damage Reduction',
   '[PSY] Damage Reduction',
   '[INT] Damage Reduction',
-  'Cooldown Reduction',
-  'Double Special Activation',
   'Reduce Ship Bind duration',
   'Reduce Sailor Despair duration',
   'Nutrition/Reduce Hunger duration',
