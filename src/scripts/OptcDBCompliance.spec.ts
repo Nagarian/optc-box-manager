@@ -1,4 +1,4 @@
-import { ExtendedUnit, Potentials, UnitPirateFestStyles } from 'models/units'
+import { ExtendedUnit } from 'models/units'
 import OptcDb from '../../public/db-old.json'
 
 describe('Database compliance ', () => {
@@ -48,31 +48,5 @@ describe('Database compliance ', () => {
         expect(selectedUnit!.dbId).toEqual(id)
       }),
     )
-  })
-
-  it('Potentials should respect thus defined', () => {
-    const potentials = [
-      ...new Set(
-        db
-          .flatMap(unit => unit.detail.potential)
-          .filter(Boolean)
-          .map(p => p!.Name),
-      ),
-    ].sort()
-
-    expect(potentials).toEqual([...Potentials].sort())
-  })
-
-  it('PirateFestStyle should respect thus defined', () => {
-    const pfStyles = [
-      ...new Set(
-        db
-        .filter(unit => ![3134, 3135].includes(unit.dbId)) // we remove VS unit
-        .map(unit => unit.pirateFest.class)
-        .filter(Boolean)
-      ),
-    ].sort()
-
-    expect(pfStyles).toEqual([...UnitPirateFestStyles].sort())
   })
 })
