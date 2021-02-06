@@ -279,15 +279,6 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 3224 || unit.id === 3225) {
-    if (unit.class[1] === 'Drivem') {
-      // @ts-ignore
-      unit.class[1] = 'Driven'
-    } else {
-      console.warn('issue with unit 3224/3225 has been fixed')
-    }
-  }
-
   if (unit.evolutionMap?.includes(2784)) {
     // Lucci 6+
     if (unit.dbId === 1763) {
