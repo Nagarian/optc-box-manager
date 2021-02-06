@@ -124,6 +124,10 @@ function computeFlags (
           case 'raid':
           case 'promo':
           case 'arena':
+          case 'limited RR':
+          case 'TM RR':
+          case 'Kizuna RR':
+          case 'Rumble RR':
             return ''
           case 'rro':
           case 'rarerecruit':
@@ -145,13 +149,12 @@ function computeFlags (
 function computeDropLocation (
   /** @type import("models/old-units").ExtendedUnit */ unit,
 ) {
-  const drops = unit.dropLocations
-
-  if (unit.id === 3145) {
-    drops.push('arena')
-  }
-
-  return drops
+  return unit.dropLocations.filter(x => [
+    'limited RR',
+    'TM RR',
+    'Kizuna RR',
+    'Rumble RR',
+  ].includes(x) === false)
 }
 
 /** @returns { import("models/character").Statistics } */

@@ -164,17 +164,33 @@ function getDropLocations (
   /** @type import('models/units').UnitFlags */ flags,
   /** @type import('./evolution').EvolutionMapHash */ evolutions,
 ) {
+  /** @type { import('models/units').ExtendedDrop[] } */
+  const result = []
+
+  if (flags.tmlrr) {
+    result.push('TM RR')
+  }
+
+  if (flags.kclrr) {
+    result.push('Kizuna RR')
+  }
+
+  if (flags.pflrr) {
+    result.push('Rumble RR')
+  }
+
+  if (flags.lrr && result.length === 0) {
+    result.push('limited RR')
+  }
+
   if (Object.keys(flags).some(key => key.includes('rr'))) {
-    return ['rarerecruit']
+    return ['rarerecruit', ...result]
   }
 
   const evolve = evolutions[id] ?? []
 
   const condition = (/** @type import('models/drops').EventDropLight */ event) =>
     event.includes(id) || event.some(eventId => evolve.includes(eventId))
-
-  /** @type { import('models/units').ExtendedDrop[] } */
-  const result = []
 
   if (condition(eventLightModules.Story)) {
     result.push('story')

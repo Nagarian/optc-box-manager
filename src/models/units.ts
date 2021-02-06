@@ -237,16 +237,24 @@ export type ExtendedUnitFamily = {
 
 export const ExtendedDropKeys = [
   'rarerecruit',
-  'story',
-  'fortnight',
-  'raid',
-  'coliseum',
-  'ambush',
+  'limited RR',
+  'special',
+
+  'TM RR',
+  'Kizuna RR',
+  'Rumble RR',
+
   'treasuremap',
   'kizunaclash',
   'piratefest',
+
+  'story',
+  'fortnight',
+  'ambush',
+
+  'raid',
+  'coliseum',
   'arena',
-  'special',
 ] as const
 export type ExtendedDrop = typeof ExtendedDropKeys[number]
 
