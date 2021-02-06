@@ -25,20 +25,28 @@ export default function DescriptionHighlighter ({
     const diffs = diffWords(originalDiff, value, { ignoreCase: true })
     parts = diffs
       .filter(x => !x.removed)
-      .reduce((concat, x) => concat + (x.added ? `*${x.value}*` : x.value), '')
+      .reduce(
+        (concat, x) =>
+          concat +
+          (x.added
+            ? (x.value.startsWith(' ') ? ' *' : '*') +
+              x.value.trim() +
+              (x.value.endsWith(' ') ? '* ' : '*')
+            : x.value),
+        '',
+      )
   }
 
   parts = parts.replace(
     /(\[[A-Z]*\])/gi,
-    match => `${match.toUpperCase()}(${match.substr(1, match.length - 2).toUpperCase()})`,
+    match =>
+      `${match.toUpperCase()}(${match
+        .substr(1, match.length - 2)
+        .toUpperCase()})`,
   )
 
   return (
-    <ReactMarkdown
-      source={parts}
-      escapeHtml={false}
-      renderers={renderers}
-    />
+    <ReactMarkdown source={parts} escapeHtml={false} renderers={renderers} />
   )
 }
 
@@ -64,7 +72,7 @@ const FakeParagraph = styled.span``
 const DiffHiglighter = styled.em`
   font-style: normal;
   font-weight: bold;
-  color: ${themeGet('colors.green')}
+  color: ${themeGet('colors.green')};
 `
 
 const renderers = {
