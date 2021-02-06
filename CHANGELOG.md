@@ -1,3 +1,21 @@
+# [2.1.0](https://github.com/Nagarian/optc-box-manager/compare/v2.0.0...v2.1.0) (2021-02-06)
+
+
+### Bug Fixes
+
+* **db:** renaming of Nutrition/Hunger reduction to Nutrition/Reduce Hunger duration ([0b87e5c](https://github.com/Nagarian/optc-box-manager/commit/0b87e5c0668aaa7baec913a88369b09fe44770dd))
+* **detail:** improve diff highlighting ([454d989](https://github.com/Nagarian/optc-box-manager/commit/454d9898dcea5107a9bb4d6fc7d67fcc830f9dbf))
+* **filters:** reorganize Potentials the same way as in the game ([1ed1744](https://github.com/Nagarian/optc-box-manager/commit/1ed1744ad0f44878320f06de60eed9a85b82c238))
+
+
+### Features
+
+* **detail:** add button to improve cotton candy editing ([520cdc9](https://github.com/Nagarian/optc-box-manager/commit/520cdc98e7e91e84892e5f20b3cc10d28a4b217e))
+* **filter:** add Arena Drop Location filter ([6dc5800](https://github.com/Nagarian/optc-box-manager/commit/6dc5800eea691bbf17e24a0c2851277dffc2ece1))
+* **filter:** add limited rarerecruit filters (TM/KK/PR) ([6fe4917](https://github.com/Nagarian/optc-box-manager/commit/6fe4917052fcbcf7fc8b5570f009e551082eb31b))
+
+
+
 # [2.0.0](https://github.com/Nagarian/optc-box-manager/compare/v1.12.1...v2.0.0) (2021-01-03)
 
 
@@ -110,24 +128,6 @@
 * **sort:** add option to Rarity filter to allow treat super-evolved and evolved as equal (⭐+ = ⭐) ([89e8a75](https://github.com/Nagarian/optc-box-manager/commit/89e8a7594ccda6b50e3d28d5c808fd483634e331))
 * add delete icon ([b167008](https://github.com/Nagarian/optc-box-manager/commit/b16700863f7b931322065d4362e80fdb1ad70188))
 * **sorter:** add "Added to Box" sorter ([91f644a](https://github.com/Nagarian/optc-box-manager/commit/91f644ad47319980a8a6e13018cb6c8826dc7994))
-
-
-
-# [1.8.0](https://github.com/Nagarian/optc-box-manager/compare/v1.7.2...v1.8.0) (2020-09-24)
-
-
-### Features
-
-* **box:** add id to units title (when you hover it with a mouse) ([4e5b628](https://github.com/Nagarian/optc-box-manager/commit/4e5b628c0e05c7b76e1efc2e5e9d8a6ff09d8022))
-* **detail:** add PirateFest Special & Ability edition ([036f02f](https://github.com/Nagarian/optc-box-manager/commit/036f02f8aad34069a423c0697596aa60c45c574c))
-* **displayer:** add PirateFest displayer ([6732670](https://github.com/Nagarian/optc-box-manager/commit/6732670272309f9c80ce6f090178f930d9d7a2eb))
-* **filter:** add Pirate Fest Style filter ([1e629a6](https://github.com/Nagarian/optc-box-manager/commit/1e629a64434a2f34ac5dc7670f22575aca17074f))
-* **filter:** add Pirate Festival drop filter ([3bf99d4](https://github.com/Nagarian/optc-box-manager/commit/3bf99d4cb77cf7f552357720b5a2d05be9107747)), closes [#49](https://github.com/Nagarian/optc-box-manager/issues/49)
-* **filter:** add PirateFest Special & Ability Level filter ([14e31ce](https://github.com/Nagarian/optc-box-manager/commit/14e31ce467b778a9fc99bc84b126d1fd828bac29))
-* **filter:** add PirateFest syncer ([e31dadc](https://github.com/Nagarian/optc-box-manager/commit/e31dadce482f4ba9b1ccda7da2ffd7aa6c0fd725))
-* **filter:** improve unit Classes images ([f6152c7](https://github.com/Nagarian/optc-box-manager/commit/f6152c7c039fb10ce6e41321579e3fce748c7243))
-* **filter:** rework Cotton Candy filter for update 10.0 ([25f5008](https://github.com/Nagarian/optc-box-manager/commit/25f500822a8936aaff383563eff5445851668749))
-* **sort:** add PirateFest sorting ([0acdeca](https://github.com/Nagarian/optc-box-manager/commit/0acdeca09b5e701b9cc73f542415a0dc3d2712f9))
 
 
 
