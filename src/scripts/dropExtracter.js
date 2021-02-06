@@ -101,6 +101,7 @@ const eventModules = {
 const eventLightModules = {
   TM: drops['Treasure Map'].map(tm => tm.thumb),
   Ambush: dropMapper('Ambush'),
+  Arena: dropMapper('Arena'),
   KK: dropMapper(
     'Kizuna Clash',
     'Round 1',
@@ -191,6 +192,10 @@ function getDropLocations (
 
   if (condition(eventLightModules.Coliseum)) {
     result.push('coliseum')
+  }
+
+  if (condition(eventLightModules.Arena)) {
+    result.push('arena')
   }
 
   if (condition(eventLightModules.TM)) {

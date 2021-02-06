@@ -13,6 +13,7 @@
         "treasuremap",
         "kizunaclash",
         "piratefest",
+        "arena",
         "special"
       ],
       "type": "string"
@@ -38,26 +39,12 @@
               "type": "array"
             },
             {
-              "items": [
-                {
-                  "items": {
-                    "$ref": "#/definitions/UnitClass"
-                  },
-                  "type": "array"
+              "items": {
+                "items": {
+                  "$ref": "#/definitions/UnitClass"
                 },
-                {
-                  "items": {
-                    "$ref": "#/definitions/UnitClass"
-                  },
-                  "type": "array"
-                },
-                {
-                  "items": {
-                    "$ref": "#/definitions/UnitClass"
-                  },
-                  "type": "array"
-                }
-              ],
+                "type": "array"
+              },
               "maxItems": 3,
               "minItems": 3,
               "type": "array"
@@ -331,14 +318,9 @@
               "$ref": "#/definitions/UnitType"
             },
             {
-              "items": [
-                {
-                  "$ref": "#/definitions/UnitType"
-                },
-                {
-                  "$ref": "#/definitions/UnitType"
-                }
-              ],
+              "items": {
+                "$ref": "#/definitions/UnitType"
+              },
               "maxItems": 2,
               "minItems": 2,
               "type": "array"
@@ -451,14 +433,9 @@
       "type": "string"
     },
     "UnitCooldown": {
-      "items": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "number"
-        }
-      ],
+      "items": {
+        "type": "number"
+      },
       "maxItems": 2,
       "minItems": 2,
       "type": "array"

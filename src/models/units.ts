@@ -245,6 +245,7 @@ export const ExtendedDropKeys = [
   'treasuremap',
   'kizunaclash',
   'piratefest',
+  'arena',
   'special',
 ] as const
 export type ExtendedDrop = typeof ExtendedDropKeys[number]
