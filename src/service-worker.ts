@@ -95,5 +95,12 @@ registerRoute(
   ({ url, request }) => imagesRoutes.includes(url.origin) && request.destination === 'image',
   new StaleWhileRevalidate({
     cacheName: 'characters_images',
+    plugins: [
+      new ExpirationPlugin({
+        purgeOnQuotaError: true,
+        // Only cache requests for a week
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
   }),
 )
