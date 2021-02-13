@@ -1,5 +1,6 @@
 import { useStorage } from './useStorage'
 import { ExtendedUnit } from 'models/units'
+import { exportAsJson } from 'services/share'
 
 export const SugoCleanerList = [
   'toClean',
@@ -101,6 +102,24 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
         ...sugoCleaner,
         [from]: [],
       })
+    },
+
+    reset: () => setSugoCleaner(defaultSugoCleaner),
+    import: (json: string) => {
+      const importedDb : SugoCleaner = JSON.parse(json)
+      // TODO: make safety check
+      if (!importedDb.toClean) {
+        throw new Error("That's not a valid Sugo Cleaner backup file")
+      }
+      setSugoCleaner?.(importedDb)
+    },
+    export: async () => {
+      if (!sugoCleaner) {
+        return
+      }
+
+      const payload = JSON.stringify(sugoCleaner)
+      await exportAsJson(payload, 'optc-bm-sugo-cleaner')
     },
   }
 }

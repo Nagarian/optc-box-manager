@@ -5,6 +5,7 @@ import {
   SetStateAction,
   useContext,
 } from 'react'
+import { exportAsJson } from 'services/share'
 import { useStorage } from './useStorage'
 import { SavedSearch } from './useStoredSearches'
 
@@ -40,6 +41,9 @@ export type UserSettingEnhanced = {
     hp: number
     rcv: number
   }
+  reset: () => void
+  import: (json: string) => void
+  export: () => Promise<void>
 }
 
 export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
@@ -98,6 +102,8 @@ export function UserSettingsProvider ({ children }: { children: ReactNode }) {
 }
 
 export function useUserSettings (): UserSettingEnhanced {
+  const context = useContext(UserSettingsContext)
+
   return {
     ccLimit: {
       all: 300,
@@ -107,6 +113,24 @@ export function useUserSettings (): UserSettingEnhanced {
     },
     setUserSetting: () => {},
     userSetting: defaultUserSettings,
-    ...useContext(UserSettingsContext),
+    ...context,
+
+    reset: () => context.setUserSetting?.(defaultUserSettings),
+    import: (json: string) => {
+      const importedDb : UserSetting = JSON.parse(json)
+      // TODO: make safety check
+      if (!importedDb.themeMode) {
+        throw new Error("That's not a valid Setting backup file")
+      }
+      context.setUserSetting?.(importedDb)
+    },
+    export: async () => {
+      if (!context.userSetting) {
+        return
+      }
+
+      const payload = JSON.stringify(context.userSetting)
+      await exportAsJson(payload, 'optc-bm-settings')
+    },
   }
 }

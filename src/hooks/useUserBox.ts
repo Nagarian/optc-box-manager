@@ -107,7 +107,7 @@ export default function useUserBox (): MyUserBox {
     },
     exportDB: async () => {
       const payload = JSON.stringify(userBox, replacer)
-      await exportAsJson(payload, 'optc-my-box')
+      await exportAsJson(payload, 'optc-bm')
     },
   }
 }

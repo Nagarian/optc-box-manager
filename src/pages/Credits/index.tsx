@@ -1,23 +1,9 @@
-import Button from 'components/Button'
-import Popup from 'components/Popup'
-import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
 export default function Credits () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  if (!isOpen) {
-    return <Button onClick={() => setIsOpen(true)}>Credits</Button>
-  }
-
   return (
-    <Popup onClose={() => setIsOpen(false)} title="Credits">
-      <ReactMarkdown
-        source={creditText}
-        renderers={ReactMarkdownRenderers}
-      />
-    </Popup>
+    <ReactMarkdown source={creditText} renderers={ReactMarkdownRenderers} />
   )
 }
 
@@ -25,6 +11,8 @@ const creditText = `
 Made with 💗 and ☕ by [u/nagarian_r](https://www.reddit.com/user/nagarian_r)
 
 Please report bugs and suggestions into [Github](https://github.com/Nagarian/optc-box-manager/issues)
+
+You can also join [our Discord server](https://discord.gg/rKBRT8HxeE) if your prefers
 
 All the information originates from [OPTC-DB](https://optc-db.github.io/)
 

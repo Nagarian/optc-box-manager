@@ -2,7 +2,6 @@ import Box from 'components/Box'
 import Button from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import { ConfirmIcon } from 'components/Icon'
-import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { MyUserBox } from 'models/userBox'
 import { useRef, useState } from 'react'
@@ -14,16 +13,10 @@ type ExportForProps = {
 }
 
 export default function ExportFor ({ myUserBox: { userBox } }: ExportForProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  if (!isOpen) {
-    return <Button onClick={() => setIsOpen(true)}>Export For</Button>
-  }
-
   const payload = userBox.map(u => u.unit.dbId).join(',')
 
   return (
-    <Popup onClose={() => setIsOpen(false)} title="Export For">
+    <>
       <CopyBlock
         title="Nakama Network"
         content={NakamaTutorial}
@@ -37,7 +30,7 @@ export default function ExportFor ({ myUserBox: { userBox } }: ExportForProps) {
         content={OPTCDBTutorial}
         payload={`[${payload}]`}
       />
-    </Popup>
+    </>
   )
 }
 
@@ -62,11 +55,7 @@ type CopyBlockProps = {
   content: string
   payload: string
 }
-function CopyBlock ({
-  title,
-  content,
-  payload,
-}: CopyBlockProps) {
+function CopyBlock ({ title, content, payload }: CopyBlockProps) {
   const ref = useRef<HTMLInputElement>()
   const [isCopied, setIsCopied] = useState<boolean>(false)
 
@@ -105,10 +94,7 @@ function CopyBlock ({
         />
       </Box>
 
-      <ReactMarkdown
-        source={content}
-        renderers={ReactMarkdownRenderers}
-      />
+      <ReactMarkdown source={content} renderers={ReactMarkdownRenderers} />
     </>
   )
 }
