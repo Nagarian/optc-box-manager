@@ -27,7 +27,7 @@ type StyledButtonProps = SpaceProps &
   FontSizeProps &
   SizeProps &
   FontWeightProps & {
-    variant: 'primary' | 'secondary' | 'link' | 'danger'
+    variant: 'primary' | 'secondary' | 'link' | 'danger' | 'discord'
     href?: string
   }
 

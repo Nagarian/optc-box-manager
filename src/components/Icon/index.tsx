@@ -20,12 +20,14 @@ import { ReactComponent as Confirm } from './confirm.svg'
 import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
 import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
+import { ReactComponent as Discord } from './discord.svg'
 import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import Logo from './logo.png'
+import { ReactComponent as NewsCoo } from './news-coo.svg'
 import { ReactComponent as OpenInDB } from './open-in-db.svg'
 import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
 import { ReactComponent as PirateFestBoth } from './piratefest-both.svg'
@@ -38,6 +40,7 @@ import { ReactComponent as Reset } from './reset.svg'
 import { ReactComponent as SaveSearch } from './savesearch.svg'
 import { ReactComponent as Search } from './search.svg'
 import { ReactComponent as Settings } from './settings.svg'
+import { ReactComponent as Share } from './share.svg'
 import { ReactComponent as SkillBook } from './skillbook.svg'
 import SpecialLvl from './special.png'
 import { ReactComponent as SugoPull } from './sugopull.svg'
@@ -73,11 +76,13 @@ export const ConfirmIcon: Icon = BaseSvg(Confirm)
 export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
 export const DeleteIcon: Icon = BaseSvg(Delete)
 export const DescendingIcon: Icon = BaseSvg(Descending)
+export const DiscordIcon: Icon = BaseSvg(Discord)
 export const EditIcon: Icon = BaseSvg(Edit)
 export const EvolveIcon: Icon = BaseSvg(Evolve)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
 export const LimitBreakIcon: Icon = BaseSvg(LimitBreak)
 export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
+export const NewsCooIcon: Icon = BaseSvg(NewsCoo)
 export const PirateFestIcon: Icon = BaseSvg(PirateFest)
 PirateFestIcon.defaultProps = {
   color: 'primaryText',
@@ -100,6 +105,7 @@ export const ResetApplyIcon: Icon = BaseSvg(ResetApply)
 export const ResetRemoveIcon: Icon = BaseSvg(ResetRemove)
 export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const SettingsIcon: Icon = BaseSvg(Settings)
+export const ShareIcon: Icon = BaseSvg(Share)
 export const SupportIcon: Icon = BaseSvg(Support)
 SupportIcon.defaultProps = {
   color: 'specific.support',
