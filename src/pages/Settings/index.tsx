@@ -1,9 +1,6 @@
 import Button from 'components/Button'
 import Changelog from 'components/Changelog'
-import ExpansionPanel from 'components/ExpansionPanel'
-import ChoiceInput from 'components/forms/ChoiceInput'
 import {
-  ArrowIcon,
   DiscordIcon,
   Icon,
   NewsCooIcon,
@@ -13,7 +10,6 @@ import {
   TreasureIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
-import { useThemeMode } from 'hooks/useThemeMode'
 import { MyUserBox } from 'models/userBox'
 import AppManagment from 'pages/AppManagement'
 import Credits from 'pages/Credits'
@@ -26,20 +22,14 @@ type SettingsProps = {
 }
 
 export default function Settings ({ onClose, myUserBox }: SettingsProps) {
-  const { themeMode, setThemeMode } = useThemeMode()
-
   return (
-    <Popup title="Settings" onClose={onClose}>
+    <Popup title="Extras" onClose={onClose}>
       <SettingAction title="Credits" icon={TreasureIcon}>
         <Credits />
       </SettingAction>
 
       <SettingAction title="Changelog" icon={NewsCooIcon}>
         <Changelog />
-      </SettingAction>
-
-      <SettingAction title="App Management" icon={SettingsIcon}>
-        <AppManagment myUserBox={myUserBox} />
       </SettingAction>
 
       <Button
@@ -63,33 +53,9 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
         <ExportFor myUserBox={myUserBox} />
       </SettingAction>
 
-      <ExpansionPanel title="Theme" icon={ArrowIcon}>
-        <ChoiceInput
-          type="radio"
-          name="themeMode"
-          checked={themeMode === 'auto'}
-          onChange={e => setThemeMode('auto')}
-        >
-          Auto (defined by system)
-        </ChoiceInput>
-        <ChoiceInput
-          type="radio"
-          name="themeMode"
-          checked={themeMode === 'light'}
-          onChange={e => setThemeMode('light')}
-        >
-          Light ☀
-        </ChoiceInput>
-        <ChoiceInput
-          type="radio"
-          name="themeMode"
-          checked={themeMode === 'dark'}
-          onChange={e => setThemeMode('dark')}
-        >
-          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-          Dark 🌙
-        </ChoiceInput>
-      </ExpansionPanel>
+      <SettingAction title="Settings" icon={SettingsIcon}>
+        <AppManagment myUserBox={myUserBox} />
+      </SettingAction>
     </Popup>
   )
 }

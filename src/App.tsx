@@ -214,7 +214,7 @@ function App () {
         <Button
           onClick={() => setDisplayedPanel('settings')}
           icon={SettingsIcon}
-          title="Settings"
+          title="Extras"
         />
         <Button
           onClick={() => setDisplayedPanel('gatherIsland')}
