@@ -77,10 +77,10 @@ self.addEventListener('message', (event) => {
   }
 })
 
-const imagesRoutes = [
-  'https://optc-db.github.io',
-  'https://onepiece-treasurecruise.com',
-]
+// const imagesRoutes = [
+//   'https://optc-db.github.io',
+//   'https://onepiece-treasurecruise.com',
+// ]
 
 registerRoute(
   /\/db-\w+\.json/i,
@@ -91,16 +91,17 @@ registerRoute(
 )
 
 // Any other custom service worker logic can go here.
-registerRoute(
-  ({ url, request }) => imagesRoutes.includes(url.origin) && request.destination === 'image',
-  new StaleWhileRevalidate({
-    cacheName: 'characters_images',
-    plugins: [
-      new ExpirationPlugin({
-        purgeOnQuotaError: true,
-        // Only cache requests for a week
-        maxAgeSeconds: 7 * 24 * 60 * 60,
-      }),
-    ],
-  }),
-)
+// registerRoute(
+//   ({ url, request }) => imagesRoutes.includes(url.origin) && request.destination === 'image',
+//   new StaleWhileRevalidate({
+//     cacheName: 'characters_images',
+//     plugins: [
+//       new ExpirationPlugin({
+//         purgeOnQuotaError: true,
+//         // Only cache requests for a week
+//         maxAgeSeconds: 7 * 24 * 60 * 60,
+//         maxEntries: 200,
+//       }),
+//     ],
+//   }),
+// )
