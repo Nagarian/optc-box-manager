@@ -622,11 +622,11 @@ function extractVersusUnit (
           ? base.pirateFest.class[2]
           : base.pirateFest.DEF[2],
       },
-      targetPriority: base.detail.festAttackTarget[charLitteral],
-      resistance: (base.detail.festResistance ?? base.detail.festResilience)[charLitteral],
-      ability: base.detail.festAbility[charLitteral] ?? [],
-      behaviorPattern: base.detail.festAttackPattern[charLitteral] ?? [],
-      special: base.detail.festSpecial[charLitteral] ?? [],
+      targetPriority: base.detail.festAttackTarget?.[charLitteral],
+      resistance: (base.detail.festResistance ?? base.detail.festResilience)?.[charLitteral],
+      ability: base.detail.festAbility?.[charLitteral] ?? [],
+      behaviorPattern: base.detail.festAttackPattern?.[charLitteral] ?? [],
+      special: base.detail.festSpecial?.[charLitteral] ?? [],
     },
     versus: {
       description: base.detail.VSSpecial[charLitteral],

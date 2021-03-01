@@ -42,7 +42,7 @@ function fixupVersusUnit (
 
   /** @type any */
   const untyped = unit
-  const format = (/** @type any */ obj) => `**Kaido:** ${obj.character1}<br/>**Big Mom:** ${obj.character2}`
+  const format = (/** @type any */ obj) => `**Character 1:** ${obj.character1}<br/>**Character 2:** ${obj.character2}`
 
   return {
     ...unit,
@@ -63,7 +63,7 @@ function fixupVersusUnit (
         ...untyped.detail.sailor,
         combined: untyped.detail.sailor.character1,
       },
-      festAbility: untyped.detail.festAbility.character1.map(
+      festAbility: untyped.detail.festAbility?.character1.map(
         (/** @type any */ desc, /** @type number */ i) => ({
           description: format({
             character1: desc.description,
@@ -71,7 +71,7 @@ function fixupVersusUnit (
           }),
         }),
       ),
-      festSpecial: untyped.detail.festSpecial.character1.map(
+      festSpecial: untyped.detail.festSpecial?.character1.map(
         (/** @type any */ desc, /** @type number */ i) => ({
           description: format({
             character1: desc.description,
@@ -186,6 +186,9 @@ const dualRemapping = {
 
   3203: [5299, 5300, 5301, 5302],
   3204: [5303, 5304, 5305, 5306],
+
+  3252: [5307, 5308],
+  3253: [5309, 5310],
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
@@ -276,6 +279,45 @@ function fixupSpecificIssue (
       unit.detail.limit[14].description = `Acquire Sailor Ability 2: ${unit.detail.sailor.level1}`
     } else {
       console.warn('issue with unit 1538 has been fixed')
+    }
+  }
+
+  /**
+   * @param {import("../models/old-units").ExtendedUnit} unit
+   * @param {string} name
+   * @returns {import("../models/old-units").ExtendedUnit}
+   */
+  // @ts-ignore
+  const copy = (unit, name) => ({
+    name: name,
+    class: unit.class,
+    detail: { ...unit.detail },
+    images: { ...unit.images }
+  })
+
+  if (unit.id === 3252) {
+    unit.cooldown = unit.cooldown?.length ? unit.cooldown : [18, 13]
+    unit.evolution = { evolution: 3253, evolvers: [] }
+    if (unit.dualCharacters?.length === 0) {
+      unit.dualCharacters = [
+        copy(unit, '[VS Unit] Ace, Flame and Magma'),
+        copy(unit, '[VS Unit] Akainu, Flame and Magma'),
+      ]
+    } else {
+      console.warn('issue with Ace vs Akainu fixed')
+    }
+  }
+
+  if (unit.id === 3253) {
+    unit.cooldown = unit.cooldown?.length ? unit.cooldown : [18, 13]
+
+    if (unit.dualCharacters?.length === 0) {
+      unit.dualCharacters = [
+        copy(unit, '[VS Unit] Ace, Explosive Collision'),
+        copy(unit, '[VS Unit] Akainu, Explosive Collision'),
+      ]
+    } else {
+      console.warn('issue with Ace vs Akainu fixed')
     }
   }
 
