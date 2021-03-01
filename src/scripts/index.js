@@ -8,7 +8,7 @@ const prettify = false
 function process (validator, units, excludeVS, name) {
   let errors = []
   for (const unit of units) {
-    if (excludeVS && [3134, 3135].includes(unit.id)) continue
+    if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria)) continue
 
     const isValid = validator(unit)
     if (!isValid) {
@@ -49,7 +49,7 @@ const oldErrors = process(oldValidator, DBFixed, true, 'old')
 
 const characters = DB.map(remapper)
 
-const newErrors = process(newValidator, characters, false, 'new')
+const newErrors = process(newValidator, characters, true, 'new')
 
 if (oldErrors.length || newErrors.length) {
   throw new Error('some validation errors occured')
