@@ -2,6 +2,7 @@
 const Flags = [
   'rr',
   'lrr',
+  'slrr',
   'tmlrr',
   'kclrr',
   'pflrr',
@@ -125,6 +126,7 @@ function computeFlags (
           case 'promo':
           case 'arena':
           case 'limited RR':
+          case 'support RR':
           case 'TM RR':
           case 'Kizuna RR':
           case 'Rumble RR':

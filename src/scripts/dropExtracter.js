@@ -183,6 +183,10 @@ function getDropLocations (
     result.push('limited RR')
   }
 
+  if (flags.slrr && result.length === 0) {
+    result.push('support RR')
+  }
+
   if (Object.keys(flags).some(key => key.includes('rr'))) {
     return ['rarerecruit', ...result]
   }
