@@ -1,3 +1,21 @@
+# [2.2.0](https://github.com/Nagarian/optc-box-manager/compare/v2.1.0...v2.2.0) (2021-03-07)
+
+
+### Bug Fixes
+
+* disable image caching until we found a decent solutions ([7ccbd38](https://github.com/Nagarian/optc-box-manager/commit/7ccbd38cdd088ded31d89de085fc5780a330eb0c))
+* issue with image caching which prevent whole application update (quota storage issue) ([de57cfb](https://github.com/Nagarian/optc-box-manager/commit/de57cfb57c6fd7c037c8ffeb0c72c4800b7b9f6f))
+
+
+### Features
+
+* **filter:** add support rarecruit filter ([62990a3](https://github.com/Nagarian/optc-box-manager/commit/62990a33e25f7972e22419084a36e2842a86738e))
+* **settings:** rework Settings layout + add App Management screen ([d53aac3](https://github.com/Nagarian/optc-box-manager/commit/d53aac36417c53f1c8c86f01985c70882d77e459))
+* **settings:** rework settings page + add Clear cache feature ([ebec55b](https://github.com/Nagarian/optc-box-manager/commit/ebec55b30d611be17427a3aa0e5e82a2a4e5cb75))
+* add Discord, Share and News-Coo icons ([c34957a](https://github.com/Nagarian/optc-box-manager/commit/c34957a20bd1e5421fcaf1cbc2c876e5d26950e2))
+
+
+
 # [2.1.0](https://github.com/Nagarian/optc-box-manager/compare/v2.0.0...v2.1.0) (2021-02-06)
 
 
@@ -106,28 +124,6 @@
 * **SugoCleaner:** improve "waiting for" list ([54c3f78](https://github.com/Nagarian/optc-box-manager/commit/54c3f78f89fdbfdd2a4b77ab1ae352f42751ba39)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
 * **SugoCleaner:** show PirateFest info into Recap Box ([b907513](https://github.com/Nagarian/optc-box-manager/commit/b90751391ab9bd168ada9e0cf0bcf60423aeb365)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
 * rework Pirate Rumble icons ([8ad7abb](https://github.com/Nagarian/optc-box-manager/commit/8ad7abb4d1a038dd603991baaf4f656173972e75))
-
-
-
-# [1.9.0](https://github.com/Nagarian/optc-box-manager/compare/v1.8.0...v1.9.0) (2020-09-27)
-
-
-### Bug Fixes
-
-* **search:** iOS sorter display issue ([77f4680](https://github.com/Nagarian/optc-box-manager/commit/77f46801c545d0730c0a48c5b91c729a967eca8f))
-* rename Pirate Festival to Pirate Rumble ([a5ceb5a](https://github.com/Nagarian/optc-box-manager/commit/a5ceb5af3c135c72340339e7c48e124ccb5f4b6a))
-* uniformisation of border widths ([3573230](https://github.com/Nagarian/optc-box-manager/commit/35732302935de1928a302af7255d136649c42b8c))
-* **bulk edit:** issue when bulk editing LB+ and declared as Rainbow ([0d3825e](https://github.com/Nagarian/optc-box-manager/commit/0d3825e8606741f39c28c87fe9c04b491c0b4ada)), closes [#87](https://github.com/Nagarian/optc-box-manager/issues/87)
-* **gather island:** rename stone to monument ([c24c0ef](https://github.com/Nagarian/optc-box-manager/commit/c24c0efdffa10c0222446a94497364bbe4501889))
-* renaming of Pirate Fest style on OPTC-DB ([1bab14a](https://github.com/Nagarian/optc-box-manager/commit/1bab14ad13ee1f29579e42f3a5fd2b64357862e9))
-
-
-### Features
-
-* **detail:** move Delete and Open in DB into the popup action ([f64fd8b](https://github.com/Nagarian/optc-box-manager/commit/f64fd8bdf21b6c2ea54b1e4d893bad6a9c43253f))
-* **sort:** add option to Rarity filter to allow treat super-evolved and evolved as equal (⭐+ = ⭐) ([89e8a75](https://github.com/Nagarian/optc-box-manager/commit/89e8a7594ccda6b50e3d28d5c808fd483634e331))
-* add delete icon ([b167008](https://github.com/Nagarian/optc-box-manager/commit/b16700863f7b931322065d4362e80fdb1ad70188))
-* **sorter:** add "Added to Box" sorter ([91f644a](https://github.com/Nagarian/optc-box-manager/commit/91f644ad47319980a8a6e13018cb6c8826dc7994))
 
 
 
