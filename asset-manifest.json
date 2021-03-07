@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "./static/js/main.b5e52147.chunk.js",
-    "main.js.map": "./static/js/main.b5e52147.chunk.js.map",
+    "main.js": "./static/js/main.8ecd1535.chunk.js",
+    "main.js.map": "./static/js/main.8ecd1535.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.5fa8313e.js",
     "runtime-main.js.map": "./static/js/runtime-main.5fa8313e.js.map",
     "static/css/2.7fe95f8e.chunk.css": "./static/css/2.7fe95f8e.chunk.css",
-    "static/js/2.2a0bafe6.chunk.js": "./static/js/2.2a0bafe6.chunk.js",
-    "static/js/2.2a0bafe6.chunk.js.map": "./static/js/2.2a0bafe6.chunk.js.map",
+    "static/js/2.61c9954a.chunk.js": "./static/js/2.61c9954a.chunk.js",
+    "static/js/2.61c9954a.chunk.js.map": "./static/js/2.61c9954a.chunk.js.map",
     "index.html": "./index.html",
     "service-worker.js": "./service-worker.js",
     "service-worker.js.map": "./service-worker.js.map",
     "static/css/2.7fe95f8e.chunk.css.map": "./static/css/2.7fe95f8e.chunk.css.map",
-    "static/js/2.2a0bafe6.chunk.js.LICENSE.txt": "./static/js/2.2a0bafe6.chunk.js.LICENSE.txt",
+    "static/js/2.61c9954a.chunk.js.LICENSE.txt": "./static/js/2.61c9954a.chunk.js.LICENSE.txt",
     "static/media/Attacker.72de5258.png": "./static/media/Attacker.72de5258.png",
     "static/media/Defender.fd88dbd4.png": "./static/media/Defender.fd88dbd4.png",
     "static/media/Healer.d836b1b8.png": "./static/media/Healer.d836b1b8.png",
@@ -29,6 +29,7 @@
     "static/media/cottoncandy.69b3653b.svg": "./static/media/cottoncandy.69b3653b.svg",
     "static/media/delete.5e5d8970.svg": "./static/media/delete.5e5d8970.svg",
     "static/media/descending.9cea1ab5.svg": "./static/media/descending.9cea1ab5.svg",
+    "static/media/discord.c2f448d9.svg": "./static/media/discord.c2f448d9.svg",
     "static/media/driven.bedcc10c.png": "./static/media/driven.bedcc10c.png",
     "static/media/edit.c7e34263.svg": "./static/media/edit.c7e34263.svg",
     "static/media/evolve.2f36b040.svg": "./static/media/evolve.2f36b040.svg",
@@ -38,6 +39,7 @@
     "static/media/gather-island.08806612.svg": "./static/media/gather-island.08806612.svg",
     "static/media/key.21ca9c49.png": "./static/media/key.21ca9c49.png",
     "static/media/limitbreak.1ecba7ed.svg": "./static/media/limitbreak.1ecba7ed.svg",
+    "static/media/news-coo.66cf1002.svg": "./static/media/news-coo.66cf1002.svg",
     "static/media/open-in-db.b6cb4dc9.svg": "./static/media/open-in-db.b6cb4dc9.svg",
     "static/media/panel_limitbreak_001.5b6e1f41.png": "./static/media/panel_limitbreak_001.5b6e1f41.png",
     "static/media/piratefest-ability.eb4c8151.svg": "./static/media/piratefest-ability.eb4c8151.svg",
@@ -53,6 +55,7 @@
     "static/media/savesearch.3d0c6aae.svg": "./static/media/savesearch.3d0c6aae.svg",
     "static/media/search.f89eb205.svg": "./static/media/search.f89eb205.svg",
     "static/media/settings.b15a1025.svg": "./static/media/settings.b15a1025.svg",
+    "static/media/share.49df8942.svg": "./static/media/share.49df8942.svg",
     "static/media/shooter.aa74d39e.png": "./static/media/shooter.aa74d39e.png",
     "static/media/skillbook.cfd08b80.svg": "./static/media/skillbook.cfd08b80.svg",
     "static/media/slasher.a1ea4208.png": "./static/media/slasher.a1ea4208.png",
@@ -66,7 +69,7 @@
   "entrypoints": [
     "static/js/runtime-main.5fa8313e.js",
     "static/css/2.7fe95f8e.chunk.css",
-    "static/js/2.2a0bafe6.chunk.js",
-    "static/js/main.b5e52147.chunk.js"
+    "static/js/2.61c9954a.chunk.js",
+    "static/js/main.8ecd1535.chunk.js"
   ]
 }
