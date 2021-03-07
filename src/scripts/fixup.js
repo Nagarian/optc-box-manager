@@ -296,31 +296,14 @@ function fixupSpecificIssue (
   })
 
   if (unit.id === 3252) {
-    unit.cooldown = unit.cooldown?.length ? unit.cooldown : [18, 13]
-    unit.evolution = { evolution: 3253, evolvers: [] }
-    if (unit.dualCharacters?.length === 0) {
-      unit.dualCharacters = [
-        copy(unit, '[VS Unit] Ace, Flame and Magma'),
-        copy(unit, '[VS Unit] Akainu, Flame and Magma'),
-      ]
-    } else {
+
+    if (!unit.evolution) {
+      unit.evolution = { evolution: 3253, evolvers: [] }
+    }
+    else {
       console.warn('issue with Ace vs Akainu fixed')
     }
   }
-
-  if (unit.id === 3253) {
-    unit.cooldown = unit.cooldown?.length ? unit.cooldown : [18, 13]
-
-    if (unit.dualCharacters?.length === 0) {
-      unit.dualCharacters = [
-        copy(unit, '[VS Unit] Ace, Explosive Collision'),
-        copy(unit, '[VS Unit] Akainu, Explosive Collision'),
-      ]
-    } else {
-      console.warn('issue with Ace vs Akainu fixed')
-    }
-  }
-
   if (unit.evolutionMap?.includes(2784)) {
     // Lucci 6+
     if (unit.dbId === 1763) {
