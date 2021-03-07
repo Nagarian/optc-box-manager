@@ -201,6 +201,8 @@ export type UnitFlags = {
   rro: 1 | undefined
   /** limiter rare recruit */
   lrr: 1 | undefined
+  /** Support limited rare recruit */
+  slrr: 1 | undefined
   /** TM rare recruit */
   tmlrr: 1 | undefined
   /** Kizuna rare recruit */
@@ -238,7 +240,7 @@ export type ExtendedUnitFamily = {
 export const ExtendedDropKeys = [
   'rarerecruit',
   'limited RR',
-  'special',
+  'support RR',
 
   'TM RR',
   'Kizuna RR',
@@ -255,6 +257,8 @@ export const ExtendedDropKeys = [
   'raid',
   'coliseum',
   'arena',
+
+  'special',
 ] as const
 export type ExtendedDrop = typeof ExtendedDropKeys[number]
 

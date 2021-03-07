@@ -179,12 +179,12 @@ function getDropLocations (
     result.push('Rumble RR')
   }
 
-  if (flags.lrr && result.length === 0) {
-    result.push('limited RR')
+  if (flags.slrr) {
+    result.push('support RR')
   }
 
-  if (flags.slrr && result.length === 0) {
-    result.push('support RR')
+  if (flags.lrr && result.length === 0) {
+    result.push('limited RR')
   }
 
   if (Object.keys(flags).some(key => key.includes('rr'))) {
