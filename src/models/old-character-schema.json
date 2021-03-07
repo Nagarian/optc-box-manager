@@ -808,6 +808,11 @@
           "description": "Rayleigh shop",
           "type": "number"
         },
+        "slrr": {
+          "const": 1,
+          "description": "Support limited rare recruit",
+          "type": "number"
+        },
         "special": {
           "const": 1,
           "description": "Special characters (gifted mostly)",

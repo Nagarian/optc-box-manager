@@ -38,6 +38,7 @@ export type PowerSocket = typeof PowerSockets[number]
 export const Flags = [
   'rr',
   'lrr',
+  'slrr',
   'tmlrr',
   'kclrr',
   'pflrr',
