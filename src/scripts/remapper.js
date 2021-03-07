@@ -153,6 +153,7 @@ function computeDropLocation (
 ) {
   return unit.dropLocations.filter(x => [
     'limited RR',
+    'support RR',
     'TM RR',
     'Kizuna RR',
     'Rumble RR',

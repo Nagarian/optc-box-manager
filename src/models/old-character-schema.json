@@ -6,7 +6,7 @@
       "enum": [
         "rarerecruit",
         "limited RR",
-        "special",
+        "support RR",
         "TM RR",
         "Kizuna RR",
         "Rumble RR",
@@ -18,7 +18,8 @@
         "ambush",
         "raid",
         "coliseum",
-        "arena"
+        "arena",
+        "special"
       ],
       "type": "string"
     },
