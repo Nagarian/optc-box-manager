@@ -765,6 +765,10 @@
           "description": "global available",
           "type": "number"
         },
+        "inkable": {
+          "const": 1,
+          "type": "number"
+        },
         "japOnly": {
           "const": 1,
           "type": "number"
