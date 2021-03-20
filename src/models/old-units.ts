@@ -255,6 +255,7 @@ export type UnitFlags = {
   /** Special characters (gifted mostly) */
   special: 1 | undefined
 
+  inkable: 1 | undefined
   /** manually added */
   gloOnly: 1 | undefined
   japOnly: 1 | undefined

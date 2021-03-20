@@ -13,6 +13,7 @@ const Flags = [
   'japan-only',
 
   'special',
+  'inkable',
 ]
 const { globalOnlyMissingInDb } = require('./glo-jap-remapper')
 
@@ -147,7 +148,7 @@ function computeFlags (
   return flags
 }
 
-/** @returns { import("models/character").Flag } */
+/** @returns { import("models/character").DropLocation } */
 function computeDropLocation (
   /** @type import("models/old-units").ExtendedUnit */ unit,
 ) {

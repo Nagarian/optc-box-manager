@@ -49,6 +49,7 @@ export const Flags = [
   'japan-only',
 
   'special',
+  'inkable',
 ] as const
 export type Flag = typeof Flags[number]
 
