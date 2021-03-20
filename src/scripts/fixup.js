@@ -295,15 +295,6 @@ function fixupSpecificIssue (
     images: { ...unit.images }
   })
 
-  if (unit.id === 3252) {
-
-    if (!unit.evolution) {
-      unit.evolution = { evolution: 3253, evolvers: [] }
-    }
-    else {
-      console.warn('issue with Ace vs Akainu fixed')
-    }
-  }
   if (unit.evolutionMap?.includes(2784)) {
     // Lucci 6+
     if (unit.dbId === 1763) {
