@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { getLimitType } from 'services/limit'
 import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
+import InkEdit from './components/InkEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import PirateFestEdit from './components/PirateFestEdit'
 import PotentialEdit from './components/PotentialEdit'
@@ -134,6 +135,11 @@ export default function Detail ({
           detail={unit.detail}
           pirateFest={userUnit.pirateFest}
           onChange={pirateFest => setUserUnit({ ...userUnit, pirateFest })}
+        />
+
+        <InkEdit
+          ink={userUnit.ink}
+          onChange={ink => setUserUnit({ ...userUnit, ink })}
         />
 
         {!!evolutions.length && (

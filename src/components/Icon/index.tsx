@@ -25,6 +25,7 @@ import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
+import InkSvg, { ReactComponent as Ink } from './ink.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import Logo from './logo.png'
 import { ReactComponent as NewsCoo } from './news-coo.svg'
@@ -64,11 +65,12 @@ export type Icon = StyledComponent<
   never
 >
 
-export { CottonCandySvg, SupportSvg, SpecialLvl, PirateFestSvg }
+export { CottonCandySvg, SupportSvg, SpecialLvl, PirateFestSvg, InkSvg }
 
 export const AddIcon: Icon = BaseSvg(Add)
 export const ArrowIcon: Icon = BaseSvg(Arrow)
 export const AscendingIcon: Icon = BaseSvg(Ascending)
+export const BellyIcon: Icon = BaseSvg(Belly)
 export const CancelIcon: Icon = BaseSvg(Cancel)
 export const ClearIcon: Icon = BaseSvg(Clear)
 export const CloseIcon: Icon = BaseSvg(Close)
@@ -80,9 +82,16 @@ export const DiscordIcon: Icon = BaseSvg(Discord)
 export const EditIcon: Icon = BaseSvg(Edit)
 export const EvolveIcon: Icon = BaseSvg(Evolve)
 export const FilterSortIcon: Icon = BaseSvg(FilterSort)
+export const GatherIslandIcon: Icon = BaseSvg(GatherIsland)
+export const InkIcon: Icon = BaseSvg(Ink)
+InkIcon.defaultProps = {
+  color: 'primaryText',
+  title: 'Support',
+}
 export const LimitBreakIcon: Icon = BaseSvg(LimitBreak)
-export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
+export const LoaderIcon: Icon = BaseSvg(TailSpin)
 export const NewsCooIcon: Icon = BaseSvg(NewsCoo)
+export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
 export const PirateFestIcon: Icon = BaseSvg(PirateFest)
 PirateFestIcon.defaultProps = {
   color: 'primaryText',
@@ -103,21 +112,18 @@ export const PotentialIcon: Icon = BaseSvg(Potential)
 export const ResetIcon: Icon = BaseSvg(Reset)
 export const ResetApplyIcon: Icon = BaseSvg(ResetApply)
 export const ResetRemoveIcon: Icon = BaseSvg(ResetRemove)
-export const LoaderIcon: Icon = BaseSvg(TailSpin)
+export const SaveSearchIcon: Icon = BaseSvg(SaveSearch)
 export const SettingsIcon: Icon = BaseSvg(Settings)
+export const SearchIcon: Icon = BaseSvg(Search)
 export const ShareIcon: Icon = BaseSvg(Share)
+export const SkillBookIcon: Icon = BaseSvg(SkillBook)
+export const SugoPullIcon: Icon = BaseSvg(SugoPull)
 export const SupportIcon: Icon = BaseSvg(Support)
 SupportIcon.defaultProps = {
   color: 'specific.support',
   title: 'Support',
 }
-export const SearchIcon: Icon = BaseSvg(Search)
-export const SaveSearchIcon: Icon = BaseSvg(SaveSearch)
-export const SugoPullIcon: Icon = BaseSvg(SugoPull)
-export const SkillBookIcon: Icon = BaseSvg(SkillBook)
-export const BellyIcon: Icon = BaseSvg(Belly)
 export const TreasureIcon: Icon = BaseSvg(Treasure)
-export const GatherIslandIcon: Icon = BaseSvg(GatherIsland)
 
 export const SpecialLvlIcon = styled.img.attrs(() => ({
   src: SpecialLvl,

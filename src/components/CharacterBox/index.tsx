@@ -13,6 +13,8 @@ import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
 import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
+import Ink from './images/ink.png'
+import InkMax from './images/inkmax.png'
 
 type CharacterBoxProps = {
   unit?: ExtendedUnit
@@ -23,6 +25,7 @@ type CharacterBoxProps = {
 
 type BtnProps = {
   support?: string
+  ink?: string
   rainbow?: string
 }
 
@@ -41,7 +44,16 @@ const rainbowCss = css<BtnProps>`
   }
 `
 
-const supportCss = css<BtnProps>`
+const computeBackground = ({ support, ink }: BtnProps) => {
+  const background : string[] = []
+
+  if (support) background.push(`url(${support}) center / contain no-repeat`)
+  if (ink) background.push(`url(${ink}) center / contain no-repeat`)
+
+  return background.join(',')
+}
+
+const afterCss = css<BtnProps>`
   &:after {
     content: '';
     position: absolute;
@@ -49,7 +61,7 @@ const supportCss = css<BtnProps>`
     left: 0;
     right: 0;
     bottom: 0;
-    background: url(${p => p.support}) center / contain no-repeat;
+    background: ${p => computeBackground(p)};
   }
 `
 
@@ -60,7 +72,7 @@ const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
   background-color: ${themeGet('primary')};
   position: relative;
   display: flex;
-  ${p => p.support && supportCss}
+  ${afterCss}
   ${p => p.rainbow && rainbowCss}
   ${gridArea}
   ${place}
@@ -76,6 +88,7 @@ export default function CharacterBox ({
 }: CharacterBoxProps & CharacterBoxStyledProps) {
   const unit: ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
+  const ink = userUnit?.ink?.lvl
 
   const InfoDisplayer =
     displayer && SearchDisplayerBuilder[displayer.type].displayer
@@ -84,6 +97,9 @@ export default function CharacterBox ({
       {...rest}
       support={
         support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
+      }
+      ink={
+        ink === 2 ? InkMax : (ink === 1 ? Ink : undefined)
       }
       rainbow={getRainbowState(userUnit)}
       title={`${unit.id} - ${unit.name}`}

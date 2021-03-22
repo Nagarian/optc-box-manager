@@ -17,6 +17,10 @@ export type UserUnitSupport = {
   lvl: number
 }
 
+export type UserUnitInk = {
+  lvl: number
+}
+
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
 export type CottonCandyType = typeof CottonCandyTypeKeys[number]
 
@@ -49,6 +53,7 @@ export type UserUnit = {
   limitBreak?: UserUnitLimitBreak
   potentials: UserUnitPotentialAbility[]
   support?: UserUnitSupport
+  ink?: UserUnitInk
   cc: UserUnitCottonCandy
   pirateFest?: UserUnitPirateFest
   sockets: UserUnitPowerSocket[]

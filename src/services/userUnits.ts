@@ -50,6 +50,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     sockets: Array(
       Math.max(unit.slots, unit.limitSlot, unit.limitexSlot),
     ).fill({ type: undefined, lvl: 0 }),
+    ink: unit.flags.inkable ? { lvl: 0 } : undefined,
   }
 }
 
@@ -91,6 +92,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
     limitBreak: userUnit.limitBreak ?? template.limitBreak,
     pirateFest: userUnit.pirateFest ?? template.pirateFest,
     sockets: template.sockets.map((s, i) => userUnit.sockets[i] ?? s),
+    ink: userUnit.ink ?? template.ink,
   }
 }
 
@@ -318,6 +320,11 @@ export function resync (userUnit: UserUnit) {
 
   if (!userUnit.sockets || userUnit.sockets.length !== compare.sockets.length) {
     updated.sockets = compare.sockets.map((s, i) => userUnit.sockets?.[i] ?? s)
+    isUpdated = true
+  }
+
+  if (!userUnit.ink && !!compare.ink) {
+    updated.ink = compare.ink
     isUpdated = true
   }
 
