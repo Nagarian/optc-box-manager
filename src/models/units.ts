@@ -1,4 +1,4 @@
-export const UnitTypes = ['STR', 'DEX', 'QCK', 'PSY', 'INT'] as const
+export const UnitTypes = ['STR', 'DEX', 'QCK', 'PSY', 'INT', 'DUAL', 'VS'] as const
 export type UnitType = typeof UnitTypes[number]
 
 export const UnitClasses = [
@@ -179,6 +179,7 @@ export type UnitDetail = {
   support: UnitSupport[]
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]
+  swap?: string
 }
 
 export type UnitEvolution = {
