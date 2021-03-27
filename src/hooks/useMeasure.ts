@@ -18,7 +18,7 @@ export default function useMeasure (): [RefObject<HTMLElement>, BoxMeasure] {
   })
 
   const [ro] = useState(
-    () => new ResizeObserver(([entry]) => set(entry.contentRect)),
+    () => new ResizeObserver(([entry]: ResizeObserverEntry[]) => set(entry.contentRect)),
   )
 
   useEffect(() => {
