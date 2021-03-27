@@ -1,3 +1,14 @@
+# [2.3.0](https://github.com/Nagarian/optc-box-manager/compare/v2.2.0...v2.3.0) (2021-03-27)
+
+
+### Features
+
+* **detail:** add Inkable tracker ([4d7e5a1](https://github.com/Nagarian/optc-box-manager/commit/4d7e5a155b8a979768f3ed81e2eb195fc9e8bdd5)), closes [#188](https://github.com/Nagarian/optc-box-manager/issues/188)
+* **filter:** add Dual and Versus Type filter ([1bce1a1](https://github.com/Nagarian/optc-box-manager/commit/1bce1a11ba0daa32587f1eaa84e992ce93e22a11))
+* **filter:** add filter and sorter for Ink characters ([e78c08c](https://github.com/Nagarian/optc-box-manager/commit/e78c08cb3a10da7e6e377dcbebbede9fab7de334))
+
+
+
 # [2.2.0](https://github.com/Nagarian/optc-box-manager/compare/v2.1.0...v2.2.0) (2021-03-07)
 
 
@@ -105,25 +116,6 @@
 * **detail:** show Power socket into Recap Box ([fd15654](https://github.com/Nagarian/optc-box-manager/commit/fd15654989dd8374b781a6181db29e7d4979167c))
 * **filter:** add User Power Socket filter ([9c48fc5](https://github.com/Nagarian/optc-box-manager/commit/9c48fc5a0d84d5bb85fcb13337427fdfdb968028))
 * improve Pirate Rumble icons ([a4735c4](https://github.com/Nagarian/optc-box-manager/commit/a4735c4ee96604590f2c7984a1571ffbd052f905))
-
-
-
-# [1.10.0](https://github.com/Nagarian/optc-box-manager/compare/v1.9.0...v1.10.0) (2020-10-09)
-
-
-### Bug Fixes
-
-* issue with slider and browser with "sliding to go back" ([8157b24](https://github.com/Nagarian/optc-box-manager/commit/8157b2473c84fa8914f7a28ef0cda1a3a638668e))
-* **detail:** issue with ExpansionPanel and content displayed ([f72d569](https://github.com/Nagarian/optc-box-manager/commit/f72d56900e7a3181c42fd6b14d7c8f9aa44d5c83))
-
-
-### Features
-
-* **detail:** improve Recap Box display ([3c059f6](https://github.com/Nagarian/optc-box-manager/commit/3c059f621238f52696772d79d2c07eb019368045))
-* **search:** add confirmation before deletion of saved search ([2ee959d](https://github.com/Nagarian/optc-box-manager/commit/2ee959d92f868a08febdf768e206b57cd0f8ed38))
-* **SugoCleaner:** improve "waiting for" list ([54c3f78](https://github.com/Nagarian/optc-box-manager/commit/54c3f78f89fdbfdd2a4b77ab1ae352f42751ba39)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
-* **SugoCleaner:** show PirateFest info into Recap Box ([b907513](https://github.com/Nagarian/optc-box-manager/commit/b90751391ab9bd168ada9e0cf0bcf60423aeb365)), closes [#108](https://github.com/Nagarian/optc-box-manager/issues/108)
-* rework Pirate Rumble icons ([8ad7abb](https://github.com/Nagarian/optc-box-manager/commit/8ad7abb4d1a038dd603991baaf4f656173972e75))
 
 
 
