@@ -5,6 +5,7 @@ import {
   ByUserCottonCandyFilter,
   ByUserCottonCandyInput,
 } from './ByUserCottonCandy'
+import { ByUserInkFilter, ByUserInkInput } from './ByUserInk'
 import {
   ByUserLimitBreakFilter,
   ByUserLimitBreakInput,
@@ -28,6 +29,7 @@ export const SearchFilterUserUnitsKeys = [
   'byUserPirateFest',
   'byUserLimitBreak',
   'byUserPotential',
+  'byUserInk',
   'byUserPowerSocket',
 ] as const
 
@@ -81,5 +83,10 @@ export const UserUnitFilterBuilder: {
     title: 'Power Sockets',
     builder: ByUserPowerSocketFilter,
     input: ByUserPowerSocketInput,
+  },
+  byUserInk: {
+    title: 'Ink Effects',
+    builder: ByUserInkFilter,
+    input: ByUserInkInput,
   },
 }

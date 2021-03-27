@@ -6,7 +6,12 @@ import {
   SearchSortWithOptionFunction,
 } from 'models/search'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
-import { byRarity, byRarityLabel, byRaritySimple, RaritySortOptionInput } from './Units/ByRarity'
+import {
+  byRarity,
+  byRarityLabel,
+  byRaritySimple,
+  RaritySortOptionInput,
+} from './Units/ByRarity'
 import byType from './Units/ByType'
 import {
   byCottonCandy,
@@ -27,7 +32,11 @@ import {
 } from './UserUnits/ByPotential'
 import { FunctionComponent, ReactNode } from 'react'
 import byFestStyle from './Units/ByPirateFest'
-import { byPirateFestAbility, byPirateFestSpecial } from './UserUnits/ByPirateFest'
+import {
+  byPirateFestAbility,
+  byPirateFestSpecial,
+} from './UserUnits/ByPirateFest'
+import { byInkLvl } from './UserUnits/ByInk'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -45,6 +54,7 @@ export const UserUnitSortTypeKeys = [
   'byPotentialProgression',
   'byPirateFestSpecial',
   'byPirateFestAbility',
+  'byInkLvl',
   'byAddedToBox',
 ] as const
 export type SearchSortType =
@@ -136,6 +146,11 @@ export const SearchSortBuilder: {
     label: 'PR Ability Lvl',
     type: 'userUnit',
     fn: byPirateFestAbility,
+  },
+  byInkLvl: {
+    label: 'Ink Lvl',
+    type: 'userUnit',
+    fn: byInkLvl,
   },
   byAddedToBox: {
     label: 'Added to box',

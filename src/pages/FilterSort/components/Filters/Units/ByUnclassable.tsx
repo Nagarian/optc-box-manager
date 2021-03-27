@@ -11,6 +11,7 @@ export interface ByUnclassableCriteria {
   }
   evolvedOnly?: boolean
   superEvolvedOnly?: boolean
+  isInkable?: boolean
 }
 
 const UnclassedFilters = {
@@ -27,6 +28,8 @@ export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
     [criteria.superEvolvedOnly, UnclassedFilters.hasSuperEvolved],
     [criteria.exclude?.globalOnly, unit => !unit.flags?.gloOnly],
     [criteria.exclude?.japanOnly, unit => !unit.flags?.japOnly],
+    [criteria.isInkable === true, unit => !!unit.flags?.inkable],
+    [criteria.isInkable === false, unit => !unit.flags?.inkable],
   )
 
 export function ByUnclassableInput ({
@@ -100,6 +103,36 @@ export function ByUnclassableInput ({
           }
         >
           unevolved + not super-evolved
+        </ChoiceInput>
+      </FilterContainerPanel>
+
+      <FilterContainerPanel marginTop="2">
+        Ink Effects
+        <ChoiceInput
+          type="radio"
+          name="is-inkable"
+          checked={criteria?.isInkable ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              isInkable: true,
+            })
+          }
+        >
+          Is Inkable
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="is-inkable"
+          checked={criteria?.isInkable === false ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              isInkable: false,
+            })
+          }
+        >
+          Is not Inkable
         </ChoiceInput>
       </FilterContainerPanel>
     </>
