@@ -189,6 +189,9 @@ const dualRemapping = {
 
   3252: [5307, 5308],
   3253: [5309, 5310],
+
+  3279: [5311, 5312, 5313],
+  3280: [5314, 5315, 5316],
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
@@ -282,18 +285,42 @@ function fixupSpecificIssue (
     }
   }
 
-  /**
-   * @param {import("../models/old-units").ExtendedUnit} unit
-   * @param {string} name
-   * @returns {import("../models/old-units").ExtendedUnit}
-   */
+  if (unit.id === 3279) {
+    // @ts-ignore
+    if (unit.detail.sailor["combibned"]) {
+      // @ts-ignore
+      unit.detail.sailor.combined = unit.detail.sailor.combibned
+      // @ts-ignore
+      delete unit.detail.sailor.combibned
+      unit.detail.swap = "Completely removes Special Seal and Despair on himself, change own orb to matching orb (including BLOCK)"
+    } else {
+      console.warn('issue with unit 3279 has been fixed')
+    }
+  }
+
+  if (unit.id === 3280) {
+    // @ts-ignore
+    if (unit.detail.sailor["combibned"]) {
+      // @ts-ignore
+      unit.detail.sailor.combined = unit.detail.sailor.combibned
+      // @ts-ignore
+      delete unit.detail.sailor.combibned
+
+      unit.detail.swap = "Completely removes Special Seal and Despair on himself, change own orb to matching orb (including BLOCK)"
+    } else {
+      console.warn('issue with unit 3280 has been fixed')
+    }
+  }
+
+  if (unit.id === 3326) {
   // @ts-ignore
-  const copy = (unit, name) => ({
-    name: name,
-    class: unit.class,
-    detail: { ...unit.detail },
-    images: { ...unit.images }
-  })
+    if (unit.detail.sailor["global"]) {
+      // @ts-ignore
+      unit.detail.sailor.base = "global only: " + unit.detail.sailor.global
+      // @ts-ignore
+      delete unit.detail.sailor.global
+    }
+  }
 
   if (unit.evolutionMap?.includes(2784)) {
     // Lucci 6+
@@ -352,6 +379,19 @@ function removeProp (
     delete obj[badName]
   }
 }
+
+/**
+ * @param {import("../models/old-units").ExtendedUnit} unit
+ * @param {string} name
+ * @returns {import("../models/old-units").ExtendedUnit}
+ */
+// @ts-ignore
+const copy = (unit, name) => ({
+  name: name,
+  class: unit.class,
+  detail: { ...unit.detail },
+  images: { ...unit.images }
+})
 
 module.exports = {
   fixupDetail,
