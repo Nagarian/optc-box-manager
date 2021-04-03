@@ -28,25 +28,25 @@ const globalOnly = {
   5024: 2819,
   5025: 2685, // WB v2
   5026: 2686,
-  5027: 3339, // Neo Garp Raid
-  5028: 3340,
+  5027: 3312, // Neo Garp Raid
+  5028: 3313,
   5029: 3347, // Vivi
   5030: 3348,
   5031: 3349, // Ace
   5032: 3350,
-  5033: 3351, // Neo Iva
-  5034: 3352,
-  5035: 3353, // Neo WB inva
-  5036: 3354,
+  5033: 3314, // Neo Iva
+  5034: 3315,
+  5035: 3316, // Neo WB inva
+  5036: 3317,
   5037: 2772, //  wanda
   5038: 2919, // sanji/pudding
-  5039: 3366, // Neo Duval
-  5040: 3367,
-  5041: 3368,
-  5042: 3356, // Neo Nightmare Luffy
-  5043: 3357,
-  5044: 3358, // Neo Vergo
-  5045: 3359,
+  5039: 3318, // Neo Duval
+  5040: 3319,
+  5041: 3320,
+  5042: 3321, // Neo Nightmare Luffy
+  5043: 3322,
+  5044: 3323, // Neo Vergo
+  5045: 3324,
   5046: 3360, // Blue swimsuit pudding
   5047: 3361,
   5048: 2768, // Kimono Sakazuki
@@ -58,9 +58,9 @@ const globalOnly = {
   5054: 3372,
   5055: 3373, // Neo Helmep
   5056: 3374, // Sengoku
-  5057: 3375, // Heracles
-  5058: 3376,
-  5059: 3380, // Condoriano
+  5057: 3325, // Heracles
+  5058: 3326,
+  5059: 3327, // Condoriano
   5060: 2929, // Kuzan v3
   5061: 2930,
   5062: 2830, // Robin 6+
