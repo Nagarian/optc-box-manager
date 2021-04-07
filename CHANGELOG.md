@@ -1,3 +1,12 @@
+## [2.3.1](https://github.com/Nagarian/optc-box-manager/compare/v2.3.0...v2.3.1) (2021-04-07)
+
+
+### Bug Fixes
+
+* issue with safari ([d3a66e5](https://github.com/Nagarian/optc-box-manager/commit/d3a66e59cbeafb8519f1fbda177f2760f125a44d))
+
+
+
 # [2.3.0](https://github.com/Nagarian/optc-box-manager/compare/v2.2.0...v2.3.0) (2021-03-27)
 
 
@@ -101,21 +110,6 @@
 
 * **detail:** add diff highlighter to show the difference between two levels of support, potentials or captain ability ([a929e5c](https://github.com/Nagarian/optc-box-manager/commit/a929e5c2c0622475c5d0ff74efdd8a87e80bba0e))
 * **syncer:** improve CottonCandy syncer ([9ffa72a](https://github.com/Nagarian/optc-box-manager/commit/9ffa72a2a5e717bfaa47a6641c08fc49f381cb67))
-
-
-
-# [1.11.0](https://github.com/Nagarian/optc-box-manager/compare/v1.10.0...v1.11.0) (2020-10-11)
-
-
-### Features
-
-* add "Export For" Popup to export your box with format compatible to Nakama Network and OPTC-DB Log feature ([82ea766](https://github.com/Nagarian/optc-box-manager/commit/82ea76670944c34672aa902e615cb1ed777b265f)), closes [#46](https://github.com/Nagarian/optc-box-manager/issues/46)
-* add Dark Mode theme ([4dbd059](https://github.com/Nagarian/optc-box-manager/commit/4dbd0594dd9bc1681b455fde5d162fb112eea99b))
-* **detail:** add tracking of Power Socket ([99cfd3c](https://github.com/Nagarian/optc-box-manager/commit/99cfd3cf5fef2c0cab4eb13dbff5f5e432686d19)), closes [#102](https://github.com/Nagarian/optc-box-manager/issues/102)
-* **detail:** rework general layout of the popup ([4e15b6c](https://github.com/Nagarian/optc-box-manager/commit/4e15b6cbaf59f91df001119b8724c25bfbf801f4))
-* **detail:** show Power socket into Recap Box ([fd15654](https://github.com/Nagarian/optc-box-manager/commit/fd15654989dd8374b781a6181db29e7d4979167c))
-* **filter:** add User Power Socket filter ([9c48fc5](https://github.com/Nagarian/optc-box-manager/commit/9c48fc5a0d84d5bb85fcb13337427fdfdb968028))
-* improve Pirate Rumble icons ([a4735c4](https://github.com/Nagarian/optc-box-manager/commit/a4735c4ee96604590f2c7984a1571ffbd052f905))
 
 
 
