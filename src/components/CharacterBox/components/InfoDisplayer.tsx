@@ -6,6 +6,7 @@ import { cleanStyledSystem } from 'styles'
 type InfoDisplayerProps = ColorProps & FlexDirectionProps & {
   anchorY: 'top' | 'bottom' | 'middle'
   anchorX: 'left' | 'right' | 'middle'
+  anchorZ?: 'normal' | 'top'
 }
 
 const InfoDisplayer = styled('span').withConfig(cleanStyledSystem)<InfoDisplayerProps>(
@@ -58,6 +59,7 @@ const InfoDisplayer = styled('span').withConfig(cleanStyledSystem)<InfoDisplayer
 
 InfoDisplayer.defaultProps = {
   color: 'primaryText',
+  anchorZ: 'normal',
 }
 
 export default InfoDisplayer

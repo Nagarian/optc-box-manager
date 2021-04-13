@@ -6,12 +6,13 @@ export function DetailedCottonCandyDisplayer ({
   userUnit: {
     cc: { atk, hp, rcv },
   },
+
 }: SearchDisplayerProps) {
   const sum = atk + hp + rcv
   if (!sum) return null
 
   return (
-    <InfoDisplayer anchorX="middle" anchorY="bottom">
+    <InfoDisplayer anchorX="middle" anchorY="bottom" anchorZ="top">
       {hp > 0 && (
         <Text as="span" color="specific.ccHp">
           {hp}
