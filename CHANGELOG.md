@@ -1,3 +1,12 @@
+## [2.3.2](https://github.com/Nagarian/optc-box-manager/compare/v2.3.1...v2.3.2) (2021-04-16)
+
+
+### Bug Fixes
+
+* **box:** issue with detailed cotton candy Displayer ([aabcb05](https://github.com/Nagarian/optc-box-manager/commit/aabcb0538f17d60ece4b74b224e87d1f97af8b5d))
+
+
+
 ## [2.3.1](https://github.com/Nagarian/optc-box-manager/compare/v2.3.0...v2.3.1) (2021-04-07)
 
 
@@ -92,24 +101,6 @@
 * **sorter:** display issue when deleting a sorter ([f36b23c](https://github.com/Nagarian/optc-box-manager/commit/f36b23c80539181df677fc6e2165cf95363f132f))
 * **syncer:** issue with multiple sorters of cotton candy. Now only one sorter will be updated when changing of CC type filter ([ab39852](https://github.com/Nagarian/optc-box-manager/commit/ab398529af9ed7f736d1cc7f1b3e8d7274651101))
 * **syncer:** issue with multiple sorters of potentials. Now only one sorter will be updated when changing of Potential type filter ([c76e41b](https://github.com/Nagarian/optc-box-manager/commit/c76e41b687ed2225533155a80879084a37e393aa))
-
-
-
-# [1.12.0](https://github.com/Nagarian/optc-box-manager/compare/v1.11.0...v1.12.0) (2020-11-28)
-
-
-### Bug Fixes
-
-* **displayer:** uniformisation of cotton candy display order (HP/ATK/RCV instead of ATK/HP/RCV) ([9737475](https://github.com/Nagarian/optc-box-manager/commit/97374754f036a6c428fd317932ae53c5f3658e3c))
-* **gather island:** uniformisation of cotton candy display order (HP/ATK/RCV instead of RCV/HP/ATK) ([2ba5370](https://github.com/Nagarian/optc-box-manager/commit/2ba537043f565954d9032b41f0734660488546d7))
-* **search:** dark theme issue with Save Search box ([b50f1ee](https://github.com/Nagarian/optc-box-manager/commit/b50f1ee0f0532a9e3cb43ff2b35fcf86f93361e0))
-* **units:** Akainu GloFirst has changed id 3385 -> 3157 following their release in Japan version ([b80fe0d](https://github.com/Nagarian/optc-box-manager/commit/b80fe0d6a65d6316426697294bdbdb8812ee7766))
-
-
-### Features
-
-* **detail:** add diff highlighter to show the difference between two levels of support, potentials or captain ability ([a929e5c](https://github.com/Nagarian/optc-box-manager/commit/a929e5c2c0622475c5d0ff74efdd8a87e80bba0e))
-* **syncer:** improve CottonCandy syncer ([9ffa72a](https://github.com/Nagarian/optc-box-manager/commit/9ffa72a2a5e717bfaa47a6641c08fc49f381cb67))
 
 
 
