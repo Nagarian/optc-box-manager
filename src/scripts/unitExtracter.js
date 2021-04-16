@@ -15,6 +15,7 @@ const { evolutionMap } = require('./evolution')
 const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb, globalOnly } = require('./glo-jap-remapper')
 const dualMap = require('../models/optcdb-dual-units.json')
+const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
 const getFamilyId = (
   /** @type import('models/old-units').UnitFamily[] */ families,
@@ -96,6 +97,7 @@ function DBFactory () {
     .map(fixupImages)
     .map(fixupEvolution)
     .map(fixupFlags)
+    .map(applyNewPirateRumble)
 
   db.sort((u1, u2) => u1.id - u2.id)
   return db
