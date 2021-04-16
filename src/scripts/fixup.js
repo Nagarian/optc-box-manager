@@ -284,33 +284,6 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 3279) {
-    // @ts-ignore
-    if (unit.detail.sailor["combibned"]) {
-      // @ts-ignore
-      unit.detail.sailor.combined = unit.detail.sailor.combibned
-      // @ts-ignore
-      delete unit.detail.sailor.combibned
-      unit.detail.swap = "Completely removes Special Seal and Despair on himself, change own orb to matching orb (including BLOCK)"
-    } else {
-      console.warn('issue with unit 3279 has been fixed')
-    }
-  }
-
-  if (unit.id === 3280) {
-    // @ts-ignore
-    if (unit.detail.sailor["combibned"]) {
-      // @ts-ignore
-      unit.detail.sailor.combined = unit.detail.sailor.combibned
-      // @ts-ignore
-      delete unit.detail.sailor.combibned
-
-      unit.detail.swap = "Completely removes Special Seal and Despair on himself, change own orb to matching orb (including BLOCK)"
-    } else {
-      console.warn('issue with unit 3280 has been fixed')
-    }
-  }
-
   if (unit.id === 3326) {
   // @ts-ignore
     if (unit.detail.sailor["global"]) {
