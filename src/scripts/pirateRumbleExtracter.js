@@ -218,7 +218,7 @@ function getRumbleData (id) {
 
   if (unit.basedOn) {
     key = unit.basedOn
-    unit = rumbleUnits.find(unit => unit.id === unit.basedOn)
+    unit = rumbleUnits.find(u => u.id === unit.basedOn)
   }
 
   if (unit === undefined) {
