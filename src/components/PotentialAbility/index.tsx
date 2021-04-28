@@ -19,6 +19,7 @@ import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
 import ImageSkill15 from './images/potentialskill_icon_s_015.png'
 import ImageSkill16 from './images/potentialskill_icon_s_016.png'
+import ImageSkill19 from './images/potentialskill_icon_s_019.png'
 import ImageSkill20 from './images/potentialskill_icon_s_020.png'
 import NoIcon from './images/panel_limitbreak_001.png'
 
@@ -54,6 +55,8 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill15
     case 'Reduce Ship Bind duration':
       return ImageSkill16
+    case 'Reduce Healing Reduction duration':
+      return ImageSkill19
     case 'Nutrition/Reduce Hunger duration':
       return ImageSkill20
     default:
