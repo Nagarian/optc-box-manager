@@ -53,7 +53,7 @@ const globalOnly = {
   5049: 2769,
   5050: 2770, // Kimono Kuzan
   5051: 2771,
-  5052: 3370, // Usopp/Chopper
+  5052: 3331, // Usopp/Chopper
   5053: 3371, // Neo Coby
   5054: 3372,
   5055: 3373, // Neo Helmep
@@ -65,7 +65,7 @@ const globalOnly = {
   5061: 2930,
   5062: 2830, // Robin 6+
   5063: 2909, // WB v2 6+
-  5064: 3381, // Law/Chopper
+  5064: 3330, // Law/Chopper
   5065: 3382, // MOTNS
   5066: 3383, // Makino
   5067: 3156, // Akainu v3

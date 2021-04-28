@@ -103,7 +103,7 @@ function remapper (
             character2: extractVersusUnit(unit.dualCharacters[1], unit, false),
           }
         : {
-            swap: unit.detail.swap,
+            swap: typeof unit.detail.swap === 'string' ? unit.detail.swap : unit.detail.swap.base,
             character1: extractDualUnit(unit.dualCharacters[0], unit),
             character2: extractDualUnit(unit.dualCharacters[1], unit),
           },
