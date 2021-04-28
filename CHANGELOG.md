@@ -1,3 +1,12 @@
+## [2.3.3](https://github.com/Nagarian/optc-box-manager/compare/v2.3.2...v2.3.3) (2021-04-28)
+
+
+### Bug Fixes
+
+* handle new potential "Reduce Healing Reduction duration" ([85a78a6](https://github.com/Nagarian/optc-box-manager/commit/85a78a601080d48c4ff4f49ed8b6ca63ea141e83))
+
+
+
 ## [2.3.2](https://github.com/Nagarian/optc-box-manager/compare/v2.3.1...v2.3.2) (2021-04-16)
 
 
@@ -89,18 +98,6 @@
 - all global-only units have their ids updated to match those of the game
 - Glo-first units which have been released later on Japan version are now displayed along-side their japan counter-side
 - ids in the OPTC-BM export format are not compatible with DB-ids anymore (they are those of the game) NB: this doesn't affect "Export For" feature
-
-
-
-## [1.12.1](https://github.com/Nagarian/optc-box-manager/compare/v1.12.0...v1.12.1) (2020-12-24)
-
-
-### Bug Fixes
-
-* **detail:** default value of Power Socket is now based around the value of the first one. ([b89bc86](https://github.com/Nagarian/optc-box-manager/commit/b89bc86b19658351370af0792c06384c97f3c074))
-* **sorter:** display issue when deleting a sorter ([f36b23c](https://github.com/Nagarian/optc-box-manager/commit/f36b23c80539181df677fc6e2165cf95363f132f))
-* **syncer:** issue with multiple sorters of cotton candy. Now only one sorter will be updated when changing of CC type filter ([ab39852](https://github.com/Nagarian/optc-box-manager/commit/ab398529af9ed7f736d1cc7f1b3e8d7274651101))
-* **syncer:** issue with multiple sorters of potentials. Now only one sorter will be updated when changing of Potential type filter ([c76e41b](https://github.com/Nagarian/optc-box-manager/commit/c76e41b687ed2225533155a80879084a37e393aa))
 
 
 
