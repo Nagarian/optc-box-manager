@@ -1,4 +1,12 @@
-export const UnitTypes = ['STR', 'DEX', 'QCK', 'PSY', 'INT', 'DUAL', 'VS'] as const
+export const UnitTypes = [
+  'STR',
+  'DEX',
+  'QCK',
+  'PSY',
+  'INT',
+  'DUAL',
+  'VS',
+] as const
 export type UnitType = typeof UnitTypes[number]
 
 export const UnitClasses = [
@@ -16,13 +24,7 @@ export type UnitClass = typeof UnitClasses[number] | 'Evolver' | 'Booster'
 export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
 export type UnitStar = typeof Rarity[number]
 
-export const UnitPirateFestStyles = [
-  'ATK',
-  'DEF',
-  'RCV',
-  'DBF',
-  'SPT',
-] as const
+export const UnitPirateFestStyles = ['ATK', 'DEF', 'RCV', 'DBF', 'SPT'] as const
 export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
 
 export type BaseUnit = {
@@ -137,35 +139,49 @@ export type UnitCooldown = [number, number]
 export type UnitSpecial =
   | string
   | {
-    cooldown: UnitCooldown
-    description: string
-  }[]
+      cooldown: UnitCooldown
+      description: string
+    }[]
   | { [key: string]: any } // luffy/law + robin 767
 
-export type UnitCaptain = string | undefined | {
-  character1: string
-  character2: string
-  combined: string
-} | {
-  base: string
-  level1: string
-  level2: string
-  level3: string
-  level4: string
-  level5: string
-  level6: string
-}
+export type UnitCaptain =
+  | string
+  | undefined
+  | {
+      character1: string
+      character2: string
+      combined: string
+    }
+  | {
+      base: string
+      level1: string
+      level2: string
+      level3: string
+      level4: string
+      level5: string
+      level6: string
+    }
 
-export type UnitSailor = string | undefined | {
+export type UnitSailor =
+  | string
+  | undefined
+  | {
+      base: string
+      level1?: string
+      level2?: string
+    }
+  | {
+      character1: string
+      character2: string
+      combined: string
+      level1?: string
+      level2?: string
+    }
+
+export type UnitSuperSwap = {
   base: string
-  level1?: string
-  level2?: string
-} | {
-  character1: string
-  character2: string
-  combined: string
-  level1?: string
-  level2?: string
+  super: string
+  superTurns: number
 }
 
 export type UnitDetail = {
@@ -180,7 +196,7 @@ export type UnitDetail = {
   support: UnitSupport[]
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]
-  swap?: string
+  swap?: string | UnitSuperSwap
 }
 
 export type UnitEvolution = {

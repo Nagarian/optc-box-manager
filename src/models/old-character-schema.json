@@ -656,7 +656,14 @@
           "type": "string"
         },
         "swap": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/UnitSuperSwap"
+            }
+          ]
         },
         "swapNotes": {
           "type": "string"
@@ -956,6 +963,26 @@
         "number",
         "string"
       ]
+    },
+    "UnitSuperSwap": {
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "type": "string"
+        },
+        "super": {
+          "type": "string"
+        },
+        "superTurns": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "super",
+        "superTurns"
+      ],
+      "type": "object"
     },
     "UnitSupport": {
       "additionalProperties": false,

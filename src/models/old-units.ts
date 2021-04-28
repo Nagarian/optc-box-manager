@@ -180,6 +180,12 @@ export type UnitSailor =
       level2?: string
     }
 
+export type UnitSuperSwap = {
+  base: string
+  super: string
+  superTurns: number
+}
+
 export type UnitDetail = {
   captain: UnitCaptain
   captainNotes?: string
@@ -200,7 +206,7 @@ export type UnitDetail = {
   festAttackTarget?: string
   festResistance?: string
   festResilience?: string
-  swap?: string
+  swap?: string | UnitSuperSwap
   swapNotes?: string
   superSpecial?: string
   superSpecialNotes?: string
