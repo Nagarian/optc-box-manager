@@ -203,8 +203,10 @@ function denormalizeEffects (ability) {
   })
 }
 
+const fs = require('fs')
+const jsonc = require('jsonc-parser')
 /** @type import("models/pirate-rumble").RumbleSchema */
-const rumbleData = require('../optcdb/common/data/rumble.json')
+const rumbleData = jsonc.parse(fs.readFileSync('./src/optcdb/common/data/rumble.json', 'utf8'))
 
 /** @returns { import("models/pirate-rumble").Unit } */
 function getRumbleData (id) {
