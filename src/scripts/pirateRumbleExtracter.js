@@ -84,6 +84,7 @@ filters.abilityToString = function () {
             default:
               e += 'TODO:  ' + JSON.stringify(effect)
           }
+          e += effect.defbypass ? ' that will ignore DEF' : ''
           break
         case 'recharge':
           switch (effect.type) {
@@ -104,7 +105,7 @@ filters.abilityToString = function () {
           }
           break
         case 'hinderance':
-          e += `${effect.chance}% chance to inflict ${arrayToString(effect.attributes)}`
+          e += effect.amount ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}` : `${effect.chance}% chance to inflict ${arrayToString(effect.attributes)}`
           break
         case 'boon':
           e += `${effect.chance ? effect.chance + '% chance to ' : ''}`
@@ -114,7 +115,10 @@ filters.abilityToString = function () {
               e += 'Provoke enemies'
               break
             case 'Haste':
-              e += 'grant Haste'
+              e += `${effect.chance ? 'g' : 'G'}rant Haste`
+              break
+            case 'Counter':
+              e += `${effect.chance ? 'g' : 'G'}rant ${effect.amount}x Counter`
               break
             default:
               e += `${'reduce ' + attrStr}`
@@ -162,6 +166,8 @@ function conditionToString (condition) {
       return `When there are ${condition.count} or ${condition.comparator} ${condition.type} remaining, `
     case 'trigger':
       return `The first ${condition.count} times this character lands a ${condition.stat}, `
+    case 'defeat':
+      return `When ${condition.count} characters ${condition.team === 'enemies' ? 'on the enemy team ' : condition.team === 'crew' ? 'on your crew ' : ''}are defeated, `
     default:
       return `UNKNOWN CONDITION ${JSON.stringify(condition)}`
   }
@@ -172,16 +178,14 @@ function rangeToString (range) {
   return ` in a ${range.size}, ${range.direction} range`
 }
 
-function targetToString (
-  target,
-) {
+function targetToString (target) {
   if (!target) return ''
   let targetStr = arrayToString(target.targets)
   if (targetStr === 'crew') targetStr = 'crew member(s)'
   if (targetStr === 'enemies') {
     if (!target.count) { targetStr = 'all enemies' } else if (target.count === 1) { targetStr = 'enemy' }
   }
-  let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}`
+  let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}${target.targets.includes('self') || target.targets.includes('crew') || target.targets.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters'}`
   retVal = retVal + `${target.stat ? (' with ' + (target.percentage ? 'a ' + target.percentage + '% or ' : 'the ') + target.priority + ' ' + target.stat) : ''}`
   return retVal
 }
