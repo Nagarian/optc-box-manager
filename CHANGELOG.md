@@ -1,3 +1,12 @@
+## [2.3.4](https://github.com/Nagarian/optc-box-manager/compare/v2.3.3...v2.3.4) (2021-05-22)
+
+
+### Bug Fixes
+
+* handle new potential "Last Tap" ([42ece40](https://github.com/Nagarian/optc-box-manager/commit/42ece40d52165a2b13fe37802021901b6ab905ee))
+
+
+
 ## [2.3.3](https://github.com/Nagarian/optc-box-manager/compare/v2.3.2...v2.3.3) (2021-04-28)
 
 
@@ -69,35 +78,6 @@
 * **detail:** add button to improve cotton candy editing ([520cdc9](https://github.com/Nagarian/optc-box-manager/commit/520cdc98e7e91e84892e5f20b3cc10d28a4b217e))
 * **filter:** add Arena Drop Location filter ([6dc5800](https://github.com/Nagarian/optc-box-manager/commit/6dc5800eea691bbf17e24a0c2851277dffc2ece1))
 * **filter:** add limited rarerecruit filters (TM/KK/PR) ([6fe4917](https://github.com/Nagarian/optc-box-manager/commit/6fe4917052fcbcf7fc8b5570f009e551082eb31b))
-
-
-
-# [2.0.0](https://github.com/Nagarian/optc-box-manager/compare/v1.12.1...v2.0.0) (2021-01-03)
-
-
-### Bug Fixes
-
-* **db:** issue with id modification and evolutionMap ([640b1ff](https://github.com/Nagarian/optc-box-manager/commit/640b1ff75fc6d203a3b6e562025711791fc9c91d))
-* units database discrepancy with in-game ids ([dfb0128](https://github.com/Nagarian/optc-box-manager/commit/dfb01289253f8d89d2a7d267f7e26193226220ef))
-
-
-### Features
-
-* **bulk-edit:** add Global-Japan Id Converter ([def4749](https://github.com/Nagarian/optc-box-manager/commit/def47495a7f5b150929ca140dd8bc8bc4c7d5175))
-* change default Search value of Sugo Cleaner and Add Screen for new users ([2a0292b](https://github.com/Nagarian/optc-box-manager/commit/2a0292b0697a691f94bbec3b45a64c34a429840f))
-* **db:** add real image of characters 5001-5008 ([a616366](https://github.com/Nagarian/optc-box-manager/commit/a616366d39f85ebb3c7e34b035bb03ef9edbe07b))
-* **filter:** rework game version filter ([b2edbb8](https://github.com/Nagarian/optc-box-manager/commit/b2edbb847de8c78f1d3a1aab16a31688e482d92b))
-* add characters images caching strategy ([d625035](https://github.com/Nagarian/optc-box-manager/commit/d62503532a46ac54269d73952a27b558dba0c88f))
-* rework OPTC-DB dependency + add loading screen on application start ([079ff4f](https://github.com/Nagarian/optc-box-manager/commit/079ff4fd1f53a86bedad48b8177223107da6d2f1))
-
-
-### BREAKING CHANGES
-
-* rework of the ids, we now use the in-game ids instead of the DB ones. Which mean:
-
-- all global-only units have their ids updated to match those of the game
-- Glo-first units which have been released later on Japan version are now displayed along-side their japan counter-side
-- ids in the OPTC-BM export format are not compatible with DB-ids anymore (they are those of the game) NB: this doesn't affect "Export For" feature
 
 
 
