@@ -13,7 +13,7 @@ const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
 const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
-const { globalOnlyWrongId, globalOnlyMissingInDb } = require('./glo-jap-remapper')
+const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require('./glo-jap-remapper')
 const dualMap = require('../models/optcdb-dual-units.json')
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
@@ -82,6 +82,8 @@ function DBFactory () {
     if (!unit) throw new Error(`unit ${id} ${name} can't be find`)
     if (unit.name !== name) throw new Error(`unit ${unit.dbId} "${unit.name}" has not the right name which should be "${name}"`)
   }
+
+  checkGloJapMapping(db)
 
   db = db.filter(unit =>
     !unit.name.includes('Dual Unit') &&

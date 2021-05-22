@@ -13,8 +13,8 @@ export const globalOnly = {
   5010: 1924,
   5011: 2262, // Doflamingo Int Raid
   5012: 2263,
-  5013: 3333, // KFL
-  5014: 3334,
+  5013: 4986, // KFL
+  5014: 4987,
   5015: 2399, // Mr0/Mr1
   5016: 2784, // Lucci 6+
   5017: 2551, // Garpoku
@@ -29,10 +29,10 @@ export const globalOnly = {
   5026: 2686,
   5027: 3312, // Neo Garp Raid
   5028: 3313,
-  5029: 3347, // Vivi
-  5030: 3348,
-  5031: 3349, // Ace
-  5032: 3350,
+  5029: 4988, // Vivi
+  5030: 4989,
+  5031: 4990, // Ace
+  5032: 4991,
   5033: 3314, // Neo Iva
   5034: 3315,
   5035: 3316, // Neo WB inva
@@ -46,17 +46,17 @@ export const globalOnly = {
   5043: 3322,
   5044: 3323, // Neo Vergo
   5045: 3324,
-  5046: 3360, // Blue swimsuit pudding
-  5047: 3361,
+  5046: 4992, // Blue swimsuit pudding
+  5047: 4993,
   5048: 2768, // Kimono Sakazuki
   5049: 2769,
   5050: 2770, // Kimono Kuzan
   5051: 2771,
   5052: 3331, // Usopp/Chopper
-  5053: 3371, // Neo Coby
-  5054: 3372,
-  5055: 3373, // Neo Helmep
-  5056: 3374, // Sengoku
+  5053: 4994, // Neo Coby
+  5054: 4995,
+  5055: 4996, // Neo Helmep
+  5056: 4997, // Sengoku
   5057: 3325, // Heracles
   5058: 3326,
   5059: 3327, // Condoriano
@@ -65,8 +65,8 @@ export const globalOnly = {
   5062: 2830, // Robin 6+
   5063: 2909, // WB v2 6+
   5064: 3330, // Law/Chopper
-  5065: 3382, // MOTNS
-  5066: 3383, // Makino
+  5065: 4998, // MOTNS
+  5066: 4999, // Makino
   5067: 3156, // Akainu v3
   5068: 3157,
 }
@@ -75,12 +75,12 @@ export const globalOnlyReverseMap = Object.entries(globalOnly)
   .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 export const globalOnlyWrongId = Object.entries(globalOnly)
-  .filter(([, wrongId]) => wrongId >= 3333)
+  .filter(([, wrongId]) => wrongId >= 4986)
   .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 export const globalOnlyMissingInDb = Object.entries(globalOnly)
-  .filter(([, wrongId]) => wrongId < 3333)
+  .filter(([, wrongId]) => wrongId < 4986)
   .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 export const gloToJapConverter = Object.entries(globalOnly)
-  .reduce<Record<number, number>>((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 3333 ? null : japId }), {})
+  .reduce<Record<number, number>>((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }), {})
