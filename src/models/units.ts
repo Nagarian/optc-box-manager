@@ -121,6 +121,11 @@ export type UnitPotential = {
   description: string[]
 }
 
+export type UnitLastTap = {
+  condition: string
+  description: string[]
+}
+
 export type UnitSupport = {
   Characters: string
   description: string[]
@@ -194,6 +199,8 @@ export type UnitDetail = {
   limit?: LimitBreak[]
   potential?: UnitPotential[]
   potentialNotes: string
+  lastTap?: UnitLastTap[]
+  lastTapNotes?: string
   support: UnitSupport[]
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]

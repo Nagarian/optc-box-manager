@@ -1257,9 +1257,9 @@
                     "shop",
                     "slrr",
                     "special",
+                    "superlrr",
                     "tmlrr",
-                    "tmshop",
-                    "superlrr"
+                    "tmshop"
                 ],
                 "type": "string"
             },

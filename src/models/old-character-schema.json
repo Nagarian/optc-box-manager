@@ -557,6 +557,15 @@
           },
           "type": "array"
         },
+        "lastTap": {
+          "items": {
+            "$ref": "#/definitions/UnitLastTap"
+          },
+          "type": "array"
+        },
+        "lastTapNotes": {
+          "type": "string"
+        },
         "limit": {
           "items": {
             "$ref": "#/definitions/LimitBreak"
@@ -827,14 +836,14 @@
           "description": "Support limited rare recruit",
           "type": "number"
         },
-        "superlrr": {
-          "const": 1,
-          "description": "Super limited rare recruit",
-          "type": "number"
-        },
         "special": {
           "const": 1,
           "description": "Special characters (gifted mostly)",
+          "type": "number"
+        },
+        "superlrr": {
+          "const": 1,
+          "description": "Super limited rare recruit",
           "type": "number"
         },
         "tmlrr": {
@@ -863,6 +872,25 @@
       "required": [
         "thumbnail",
         "full"
+      ],
+      "type": "object"
+    },
+    "UnitLastTap": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "condition",
+        "description"
       ],
       "type": "object"
     },
