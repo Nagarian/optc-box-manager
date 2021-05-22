@@ -479,6 +479,9 @@ const potentialsRegex = {
   'Reduce Healing Reduction duration': [
     /^Reduces Healing Reduction duration by (?<value>\d+|\?) turns?$/i,
   ],
+  'Last Tap': [
+    /^Last Tap Ability Lv.(?<value>\d+|\?)$/i,
+  ],
 }
 /** @returns { import('models/limitbreak').LBPotentialLevel } */
 function extractPotentialLevel (

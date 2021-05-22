@@ -16,6 +16,7 @@ export const Potentials = [
   'Reduce Sailor Despair duration',
   'Reduce Healing Reduction duration',
   'Nutrition/Reduce Hunger duration',
+  'Last Tap',
 ] as const
 export type Potential = typeof Potentials[number]
 
@@ -70,4 +71,5 @@ export const LBDescriptionPattern = {
   'Reduce Ship Bind duration': 'Reduce Ship Bind duration by {value} turn',
   'Reduce Sailor Despair duration': 'Reduce own Sailor Despair duration by {value} turns',
   'Nutrition/Reduce Hunger duration': 'Boosts base ATK by {value} the turn after recovering {threshold} HP and reduces Hunger stack by {reduction} stacks',
+  'Last Tap': 'Last Tap Ability Lv.{value}',
 }
