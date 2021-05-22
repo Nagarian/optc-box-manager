@@ -1,6 +1,6 @@
 # OPTC Box Manager
 
-![OPTC Box Manager CI/CD](https://github.com/Nagarian/optc-box-manager/workflows/CI/CD/badge.svg?branch=master)
+![OPTC Box Manager CI/CD](https://github.com/Nagarian/optc-box-manager/workflows/CI/CD/badge.svg?branch=main)
 
 This project exist in order to help you maintain your [One Piece Treasure Cruise](https://optc-ww.channel.or.jp/en/) box cleaned and tidy.
 It's build on top of the [OPTC-DB project](https://github.com/optc-db/optc-db.github.io)
