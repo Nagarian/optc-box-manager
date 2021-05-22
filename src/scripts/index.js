@@ -1,7 +1,6 @@
 const { DB } = require('./unitExtracter')
 const { writeFileSync } = require('fs')
 const Ajv = require('ajv').default
-const { remapper } = require('./remapper')
 
 const prettify = false
 
@@ -31,7 +30,6 @@ function process (validator, units, excludeVS, name) {
 }
 
 const oldSchema = require('../models/old-character-schema.json')
-const newSchema = require('../models/character-schema.json')
 const { fixupVersusUnit } = require('./fixup')
 
 const ajv = new Ajv({
@@ -41,16 +39,11 @@ const ajv = new Ajv({
 })
 
 const oldValidator = ajv.compile(oldSchema)
-const newValidator = ajv.compile(newSchema)
 
 const DBFixed = DB.map(fixupVersusUnit)
 
 const oldErrors = process(oldValidator, DBFixed, true, 'old')
 
-const characters = DB.map(remapper)
-
-const newErrors = process(newValidator, characters, true, 'new')
-
-if (oldErrors.length || newErrors.length) {
+if (oldErrors.length) {
   throw new Error('some validation errors occured')
 }

@@ -37,8 +37,6 @@ To generate schema validator we need to be outside of this npm project because t
 cd ..
 # for the old format
 npx ts-json-schema-generator --path './optc-box-manager/src/models/old-units.ts' --type 'ExtendedUnit' -o './optc-box-manager/src/models/old-character-schema.json'
-# for the new format
-npx typescript-json-schema -o './optc-box-manager/src/models/character-schema.json' './optc-box-manager/src/models/character.ts' 'ExtendedCharacter' --required --noExtraProps --validationKeywords --strictNullChecks
 ```
 
 ### HTTPS mode

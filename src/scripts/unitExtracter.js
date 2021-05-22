@@ -13,7 +13,7 @@ const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
 const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
-const { globalOnlyWrongId, globalOnlyMissingInDb, globalOnly } = require('./glo-jap-remapper')
+const { globalOnlyWrongId, globalOnlyMissingInDb } = require('./glo-jap-remapper')
 const dualMap = require('../models/optcdb-dual-units.json')
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
