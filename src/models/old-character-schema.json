@@ -827,6 +827,11 @@
           "description": "Support limited rare recruit",
           "type": "number"
         },
+        "superlrr": {
+          "const": 1,
+          "description": "Super limited rare recruit",
+          "type": "number"
+        },
         "special": {
           "const": 1,
           "description": "Special characters (gifted mostly)",

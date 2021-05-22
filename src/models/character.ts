@@ -42,6 +42,7 @@ export const Flags = [
   'tmlrr',
   'kclrr',
   'pflrr',
+  'superlrr',
   'shop',
   'tmshop',
 

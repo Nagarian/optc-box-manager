@@ -228,6 +228,8 @@ export type UnitFlags = {
   kclrr: 1 | undefined
   /** Pirate Festival rare recruit */
   pflrr: 1 | undefined
+  /** Super limited rare recruit */
+  superlrr: 1 | undefined
 
   /** Fortnight only */
   fnonly: 1 | undefined

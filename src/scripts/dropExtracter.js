@@ -183,7 +183,7 @@ function getDropLocations (
     result.push('support RR')
   }
 
-  if (flags.lrr && result.length === 0) {
+  if ((flags.lrr || flags.superlrr) && result.length === 0) {
     result.push('limited RR')
   }
 
