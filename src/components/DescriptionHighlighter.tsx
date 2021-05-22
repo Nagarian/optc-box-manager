@@ -2,6 +2,7 @@ import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
 import { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import styled from 'styled-components'
 import { clean } from 'styles'
 
@@ -46,7 +47,7 @@ export default function DescriptionHighlighter ({
   )
 
   return (
-    <ReactMarkdown source={parts} escapeHtml={false} renderers={renderers} />
+    <ReactMarkdown children={parts} rehypePlugins={[rehypeRaw]} components={renderers} />
   )
 }
 
@@ -76,7 +77,7 @@ const DiffHiglighter = styled.em`
 `
 
 const renderers = {
-  paragraph: FakeParagraph,
-  link: Orb,
-  emphasis: DiffHiglighter,
+  p: FakeParagraph,
+  a: Orb,
+  em: DiffHiglighter,
 }

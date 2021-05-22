@@ -3,7 +3,7 @@ import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
 export default function Credits () {
   return (
-    <ReactMarkdown source={creditText} renderers={ReactMarkdownRenderers} />
+    <ReactMarkdown children={creditText} components={ReactMarkdownRenderers} />
   )
 }
 

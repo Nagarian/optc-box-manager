@@ -10,9 +10,7 @@ import { memo, ReactNode, useCallback, useState } from 'react'
 type DevModeProps = {
   children: ReactNode
 }
-export default function DevMode ({
-  children,
-}: DevModeProps) {
+export default function DevMode ({ children }: DevModeProps) {
   const [devModeEnabled] = useStorage<boolean>('devModeEnabled', false)
   const [selected, setSelected] = useState<ExtendedUnit>()
   const callback = useCallback(u => setSelected(u), [setSelected])
@@ -42,9 +40,7 @@ export default function DevMode ({
 type DisplayerProps = {
   onSelected: (u: ExtendedUnit) => void
 }
-function Displayer ({
-  onSelected,
-}: DisplayerProps) {
+function Displayer ({ onSelected }: DisplayerProps) {
   const { db } = useOptcDb()
 
   return (
@@ -60,7 +56,12 @@ function Displayer ({
           placeItems="center"
         >
           <CharacterBox unit={unit} size="3" onClick={onSelected} />
-          <Text>{unit.id}</Text>
+          <Box display="flex" flexDirection="column">
+            <Text>{unit.id}</Text>
+            <Text>
+              {Array.isArray(unit.family.name) ? '' : unit.family.name}
+            </Text>
+          </Box>
         </Box>
       ))}
     </Box>

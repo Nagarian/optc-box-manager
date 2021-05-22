@@ -94,7 +94,7 @@ function CopyBlock ({ title, content, payload }: CopyBlockProps) {
         />
       </Box>
 
-      <ReactMarkdown source={content} renderers={ReactMarkdownRenderers} />
+      <ReactMarkdown children={content} components={ReactMarkdownRenderers} />
     </>
   )
 }

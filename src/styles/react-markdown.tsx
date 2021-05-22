@@ -1,6 +1,6 @@
 import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
-import { ElementType } from 'react'
+import { Components } from 'react-markdown/src/ast-to-react'
 import styled from 'styled-components'
 
 const ListItem = styled.li<{ ordered: boolean }>`
@@ -18,12 +18,17 @@ const Img = styled.img`
   margin: 1rem auto;
 `
 
-export const ReactMarkdownRenderers: { [nodeType: string]: ElementType } = {
-  heading: p => <SubTitle {...p} m="2" />,
-  paragraph: p => <Text {...p} m="1" />,
+export const ReactMarkdownRenderers: Components = {
+  h1: p => <SubTitle {...p} m="2" />,
+  h2: p => <SubTitle {...p} m="2" />,
+  h3: p => <SubTitle {...p} m="2" />,
+  h4: p => <SubTitle {...p} m="2" />,
+  h5: p => <SubTitle {...p} m="2" />,
+  h6: p => <SubTitle {...p} m="2" />,
+  p: p => <Text {...p} m="1" />,
   // eslint-disable-next-line jsx-a11y/anchor-has-content
-  link: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-  listItem: p => { return <ListItem {...p} /> },
+  a: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
+  li: p => { return <ListItem {...p} /> },
   // listItem: ListItem,
-  image: Img,
+  img: Img,
 }
