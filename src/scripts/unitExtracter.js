@@ -12,9 +12,8 @@ const {
 const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupDualVersusMapping, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
+const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require('./glo-jap-remapper')
-const dualMap = require('../models/optcdb-dual-units.json')
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
 const getFamilyId = (
@@ -74,14 +73,7 @@ function DBFactory () {
         gamewith: gamewith[unit.number] ?? undefined,
       }
     })
-    .map(fixupDualVersusMapping)
     .map(fixupSpecificIssue)
-
-  for (const [id, name] of dualMap) {
-    const unit = db.find(u => u.dbId === id)
-    if (!unit) throw new Error(`unit ${id} ${name} can't be find`)
-    if (unit.name !== name) throw new Error(`unit ${unit.dbId} "${unit.name}" has not the right name which should be "${name}"`)
-  }
 
   checkGloJapMapping(db)
 
