@@ -1,15 +1,17 @@
 /* eslint-disable no-global-assign */
 /* eslint-disable no-native-reassign */
 window = {}
+require('../optcdb/common/js/unitUtils')
+global.UnitUtils = window.UnitUtils
 require('../optcdb/common/data/aliases')
 require('../optcdb/common/data/cooldowns')
-require('../optcdb/common/data/details')
 require('../optcdb/common/data/evolutions')
 require('../optcdb/common/data/families')
 require('../optcdb/common/data/festival')
 require('../optcdb/common/data/flags')
 require('../optcdb/common/data/units')
 require('../optcdb/common/js/utils')
+require('../optcdb/common/data/details')
 require('../optcdb/common/data/drops')
 require('../optcdb/common/data/gw')
 
