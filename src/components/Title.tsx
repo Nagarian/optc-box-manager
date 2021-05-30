@@ -1,7 +1,13 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import {
   color,
+  ColorProps,
+  compose,
+  display,
+  DisplayProps,
   flex,
+  flexbox,
+  FlexboxProps,
   FlexProps,
   gridArea,
   GridAreaProps,
@@ -11,12 +17,6 @@ import {
   TypographyProps,
   width,
   WidthProps,
-  compose,
-  ColorProps,
-  display,
-  DisplayProps,
-  flexbox,
-  FlexboxProps,
 } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
@@ -29,25 +29,28 @@ export type TypoProps = SpaceProps &
   DisplayProps &
   FlexboxProps
 
-const typoStyled = compose(space, typography, gridArea, color, flex, width, display, flexbox)
-
-export const Title = styled('h1').withConfig(cleanStyledSystem)<TypoProps>(
-  typoStyled,
+const typoStyled = compose(
+  space,
+  typography,
+  gridArea,
+  color,
+  flex,
+  width,
+  display,
+  flexbox,
 )
+
+export const Title = styled('h1', cleanStyledSystem)<TypoProps>(typoStyled)
 Title.defaultProps = {
   fontSize: '4',
   textAlign: 'center',
   my: '2',
 }
 
-export const SubTitle = styled('h2').withConfig(cleanStyledSystem)<TypoProps>(
-  typoStyled,
-)
+export const SubTitle = styled('h2', cleanStyledSystem)<TypoProps>(typoStyled)
 SubTitle.defaultProps = {
   fontSize: '3',
   textAlign: 'center',
 }
 
-export const Text = styled('p').withConfig(cleanStyledSystem)<TypoProps>(
-  typoStyled,
-)
+export const Text = styled('p', cleanStyledSystem)<TypoProps>(typoStyled)

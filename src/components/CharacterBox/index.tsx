@@ -1,3 +1,5 @@
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Image from 'components/Image'
 import { ExtendedUnit } from 'models/units'
@@ -6,15 +8,14 @@ import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,
 } from 'pages/FilterSort/components/Displayers'
-import styled, { css } from 'styled-components'
 import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
-import Support from './images/support.png'
-import SupportMax from './images/supportmax.png'
 import Ink from './images/ink.png'
 import InkMax from './images/inkmax.png'
+import Support from './images/support.png'
+import SupportMax from './images/supportmax.png'
 
 type CharacterBoxProps = {
   unit?: ExtendedUnit
@@ -29,7 +30,7 @@ type BtnProps = {
   rainbow?: string
 }
 
-const rainbowCss = css<BtnProps>`
+const rainbowCss = (p: BtnProps) => css`
   &:before {
     content: '';
     position: absolute;
@@ -39,13 +40,13 @@ const rainbowCss = css<BtnProps>`
     bottom: 0;
     border: 0.7rem solid;
     border-image-slice: 1;
-    border-image-source: ${p => themeGet(`colors.specific.${p.rainbow}`)};
+    border-image-source: ${themeGet(`colors.specific.${p.rainbow}`)(p)};
     opacity: 0.9;
   }
 `
 
 const computeBackground = ({ support, ink }: BtnProps) => {
-  const background : string[] = []
+  const background: string[] = []
 
   if (support) background.push(`url(${support}) center / contain no-repeat`)
   if (ink) background.push(`url(${ink}) center / contain no-repeat`)
@@ -53,7 +54,7 @@ const computeBackground = ({ support, ink }: BtnProps) => {
   return background.join(',')
 }
 
-const afterCss = css<BtnProps>`
+const afterCss = (p: BtnProps) => css`
   &:after {
     content: '';
     position: absolute;
@@ -61,7 +62,7 @@ const afterCss = css<BtnProps>`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${p => computeBackground(p)};
+    background: ${computeBackground(p)};
   }
 `
 
@@ -98,18 +99,12 @@ export default function CharacterBox ({
       support={
         support !== undefined ? (support > 0 ? SupportMax : Support) : undefined
       }
-      ink={
-        ink === 2 ? InkMax : (ink === 1 ? Ink : undefined)
-      }
+      ink={ink === 2 ? InkMax : ink === 1 ? Ink : undefined}
       rainbow={getRainbowState(userUnit)}
       title={`${unit.id} - ${unit.name}`}
       onClick={() => onClick?.(unit)}
     >
-      <Image
-        src={unit.images.thumbnail}
-        alt={unit.name}
-        size={size}
-      />
+      <Image src={unit.images.thumbnail} alt={unit.name} size={size} />
       <CottonCandyDisplayer cc={userUnit?.cc} />
       {userUnit && InfoDisplayer && (
         <InfoDisplayer userUnit={userUnit} options={displayer?.options} />

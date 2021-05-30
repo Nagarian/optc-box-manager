@@ -1,6 +1,6 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
-import styled from 'styled-components'
-import { SpaceProps, FlexProps, flex, space } from 'styled-system'
+import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 
 export const TextInput = styled.input<SpaceProps & FlexProps>`
   padding: ${themeGet('space.1')};

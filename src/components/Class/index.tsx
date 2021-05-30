@@ -1,5 +1,5 @@
+import styled from '@emotion/styled'
 import { UnitClass } from 'models/units'
-import styled from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import Cerebral from './images/cerebral.png'
 import Driven from './images/driven.png'
@@ -38,11 +38,12 @@ export type UnitClassIconProps = SpaceProps &
     type: UnitClass
   }
 
-export const UnitClassIcon = styled.img.attrs<{ type: UnitClass }>(p => ({
-  src: ClassToImage(p.type),
-  title: p.type,
-}))<UnitClassIconProps>`
+const ClassIcon = styled.img<SpaceProps & SizeProps>`
   object-fit: contain;
   ${space}
   ${size}
 `
+
+export function UnitClassIcon ({ type, ...p }: UnitClassIconProps) {
+  return <ClassIcon src={ClassToImage(type)} title={type} {...p} />
+}

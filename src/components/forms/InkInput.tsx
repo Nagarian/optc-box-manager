@@ -1,15 +1,20 @@
-import css from '@styled-system/css'
+import { useTheme } from '@emotion/react'
 import { InkSvg } from 'components/Icon'
-import styled from 'styled-components'
+import { InputHTMLAttributes } from 'react'
+import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
-const InkInput = styled(RangeInput).attrs(() => ({
-  min: 0,
-  max: 2,
-  thumbSvg: InkSvg,
-  range: css({
-    color: 'primaryText',
-  }),
-}))``
-
-export default InkInput
+export default function InkInput (p: InputHTMLAttributes<HTMLInputElement> & SpaceProps) {
+  const theme = useTheme()
+  return (
+    <RangeInput
+      {...p}
+      min={0}
+      max={2}
+      thumbSvg={InkSvg}
+      range={{
+        color: theme.colors.primaryText,
+      }}
+    />
+  )
+}

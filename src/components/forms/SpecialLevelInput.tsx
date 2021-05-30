@@ -1,14 +1,21 @@
-import css from '@styled-system/css'
+import { useTheme } from '@emotion/react'
 import { SpecialLvl } from 'components/Icon'
-import styled from 'styled-components'
+import { InputHTMLAttributes } from 'react'
+import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
-const SpecialLevelInput = styled(RangeInput).attrs(() => ({
-  min: 1,
-  thumbImage: SpecialLvl,
-  range: css({
-    color: 'specific.support',
-  }),
-}))``
-
-export default SpecialLevelInput
+export default function SpecialLevelInput (
+  p: InputHTMLAttributes<HTMLInputElement> & SpaceProps,
+) {
+  const theme = useTheme()
+  return (
+    <RangeInput
+      {...p}
+      min={1}
+      thumbImage={SpecialLvl}
+      range={{
+        color: theme.colors.specific.support,
+      }}
+    />
+  )
+}

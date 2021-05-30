@@ -1,5 +1,6 @@
-import { ButtonHTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+import { ButtonHTMLAttributes, FC } from 'react'
 import {
   border,
   BorderProps,
@@ -10,11 +11,11 @@ import {
   FontWeightProps,
   gridArea,
   GridAreaProps,
+  SizeProps,
   space,
   SpaceProps,
   typography,
   variant,
-  SizeProps,
 } from 'styled-system'
 import { cleanStyledSystem, place, PlaceProps } from 'styles'
 import { Icon, LoaderIcon } from './Icon'
@@ -27,16 +28,16 @@ type StyledButtonProps = SpaceProps &
   FontSizeProps &
   SizeProps &
   FontWeightProps & {
-    variant: 'primary' | 'secondary' | 'link' | 'danger' | 'discord'
+    variant?: 'primary' | 'secondary' | 'link' | 'danger' | 'discord'
     href?: string
   }
 
-type ButtonProps = StyledButtonProps & {
+export type ButtonProps = StyledButtonProps & {
   icon?: Icon
   isLoading?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export default function Button ({
+const Button: FC<ButtonProps> = ({
   icon: Icon,
   children,
   variant,
@@ -44,7 +45,7 @@ export default function Button ({
   href,
   size = 1,
   ...rest
-}: ButtonProps) {
+}) => {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
   const asLink = href ? { as: 'a', href, target: '_blank' } : ({} as any)
   return (
@@ -56,7 +57,9 @@ export default function Button ({
       {...defaultPaddingFix}
     >
       {isLoading && <LoaderIcon size={size} marginRight={children ? 2 : 0} />}
-      {Icon && <Icon size={size} marginRight={children ? 2 : 0} color="currentColor" />}
+      {Icon && (
+        <Icon size={size} marginRight={children ? 2 : 0} color="currentColor" />
+      )}
       {children}
     </Btn>
   )
@@ -75,7 +78,9 @@ Button.defaultProps = {
   placeContent: 'center',
 }
 
-const Btn = styled('button').withConfig(cleanStyledSystem)<StyledButtonProps>(
+export default Button
+
+const Btn = styled('button', cleanStyledSystem)<StyledButtonProps>(
   compose(space, color, border, typography, gridArea, place),
   variant({
     scale: 'buttons',

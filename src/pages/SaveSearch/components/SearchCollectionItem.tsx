@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { SavedSearch } from 'hooks/useStoredSearches'
-import { Text } from 'components/Title'
+import styled from '@emotion/styled'
+import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
 import {
-  SaveSearchIcon,
+  DeleteIcon,
   ResetApplyIcon,
   ResetRemoveIcon,
-  DeleteIcon,
+  SaveSearchIcon,
 } from 'components/Icon'
-import styled from 'styled-components'
-import { themeGet } from '@styled-system/theme-get'
 import Popup from 'components/Popup'
+import { Text } from 'components/Title'
+import { SavedSearch } from 'hooks/useStoredSearches'
+import { useState } from 'react'
 
 type SearchCollectionItemProps = {
   search: SavedSearch
@@ -45,9 +45,7 @@ export function SearchCollectionItem ({
               ? 'Remove from Custom Reset'
               : 'Set as Custom Reset'
           }
-          onClick={() =>
-            setAsReseter(isCurrentReseter ? undefined : search)
-          }
+          onClick={() => setAsReseter(isCurrentReseter ? undefined : search)}
         />
         <Button
           icon={SaveSearchIcon}
@@ -75,7 +73,7 @@ const Panel = styled.div`
   align-items: center;
   padding: ${themeGet('space.1')};
 
-  :nth-child(odd) {
+  :nth-of-type(odd) {
     background-color: ${themeGet('colors.primary')};
     color: ${themeGet('colors.primaryText')};
   }

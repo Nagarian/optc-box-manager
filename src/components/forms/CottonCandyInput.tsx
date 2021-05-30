@@ -1,34 +1,43 @@
+import { useTheme } from '@emotion/react'
 import { CottonCandySvg } from 'components/Icon'
-import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { InputHTMLAttributes } from 'react'
+import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
 type CottonCandyInputProps = {
   variant: 'atk' | 'rcv' | 'hp'
-  min: number
+  min?: number
 }
-
-const CottonCandyInput = styled(RangeInput).attrs(p => ({
-  min: p.min ?? 0,
-  thumbSvg: CottonCandySvg,
-  range: variant({
-    variants: {
-      atk: {
-        color: 'specific.ccAtk',
-      },
-      rcv: {
-        color: 'specific.ccRcv',
-      },
-      hp: {
-        color: 'specific.ccHp',
-      },
-    },
-  })(p),
-}))<CottonCandyInputProps>`
-`
-
+export default function CottonCandyInput ({
+  min,
+  variant,
+  ...p
+}: InputHTMLAttributes<HTMLInputElement> & SpaceProps & CottonCandyInputProps) {
+  const color = useVariant(variant)
+  return (
+    <RangeInput
+      {...p}
+      min={min ?? 0}
+      thumbSvg={CottonCandySvg}
+      range={{
+        color,
+      }}
+    />
+  )
+}
 CottonCandyInput.defaultProps = {
   max: 100,
 }
 
-export default CottonCandyInput
+function useVariant (variant: 'atk' | 'rcv' | 'hp') {
+  const theme = useTheme()
+
+  switch (variant) {
+    case 'atk':
+      return theme.colors.specific.ccAtk
+    case 'rcv':
+      return theme.colors.specific.ccRcv
+    case 'hp':
+      return theme.colors.specific.ccHp
+  }
+}

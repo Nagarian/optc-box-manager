@@ -1,7 +1,7 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
 import { Components } from 'react-markdown/src/ast-to-react'
-import styled from 'styled-components'
 
 const ListItem = styled.li<{ ordered: boolean }>`
   margin-left: ${p => p.ordered && '2rem'};
@@ -28,7 +28,9 @@ export const ReactMarkdownRenderers: Components = {
   p: p => <Text {...p} m="1" />,
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   a: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-  li: p => { return <ListItem {...p} /> },
+  li: p => {
+    return <ListItem {...p} />
+  },
   // listItem: ListItem,
   img: Img,
 }

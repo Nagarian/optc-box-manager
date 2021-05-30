@@ -1,10 +1,10 @@
+import styled from '@emotion/styled'
 import CharacterBox from 'components/CharacterBox'
 import Pagination from 'components/Pagination'
 import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import styled from 'styled-components'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 
 export const ResultList = styled.div<SpaceProps & FlexProps>`

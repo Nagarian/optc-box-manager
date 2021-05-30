@@ -1,8 +1,9 @@
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
-import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 
-type RangeInputProps = {
+export type RangeInputProps = SpaceProps & {
   thumbImage?: string
   thumbSvg?: string
   range?: {
@@ -11,59 +12,63 @@ type RangeInputProps = {
   }
 }
 
-const track = css<RangeInputProps>`
-  height: ${themeGet('sizes.0')};
+const track = (p: RangeInputProps) => css`
+  height: ${themeGet('sizes.0')(p)};
   cursor: pointer;
-  background-color: ${themeGet('colors.grey')};
-  ${p => p.range}
-  border-radius: ${themeGet('sizes.2')};
+  background-color: ${themeGet('colors.grey')(p)};
+  ${p.range}
+  border-radius: ${themeGet('sizes.2')(p)};
   box-sizing: border-box;
 `
 
-const thumb = css<RangeInputProps>`
+const thumb = (p: RangeInputProps) => css`
   -webkit-appearance: none;
   cursor: pointer;
-  height: ${themeGet('sizes.0')};
-  width: ${themeGet('sizes.0')};
+  height: ${themeGet('sizes.0')(p)};
+  width: ${themeGet('sizes.0')(p)};
   transform: scale(4);
   border: none;
-  ${p => p.range}
+  ${p.range}
 
   // as image
-  background: ${p => p.thumbImage && `url(${p.thumbImage}) center / contain no-repeat`};
+  background: ${p.thumbImage &&
+  `url(${p.thumbImage}) center / contain no-repeat`};
   // as svg mask
-  background-color: ${p => p.thumbSvg && 'currentColor'};
-  mask: ${p => p.thumbSvg && `url(${p.thumbSvg})`};
+  background-color: ${p.thumbSvg && 'currentColor'};
+  mask: ${p.thumbSvg && `url(${p.thumbSvg})`};
 `
 
-const RangeInput = styled.input.attrs(() => ({ type: 'range' }))<
-  SpaceProps & RangeInputProps
->`
-  -webkit-appearance: none;
-  width: 100%;
-  background-color: transparent;
-  ${space}
-  padding:
-    calc(${themeGet('sizes.0')} * 1.5)
-    calc(${themeGet('sizes.0')} * 1.5);
+const RangeInput = styled.input<RangeInputProps>(
+  p => css`
+    -webkit-appearance: none;
+    width: 100%;
+    background-color: transparent;
+    ${space(p)}
+    padding:
+    calc(${themeGet('sizes.0')(p)} * 1.5)
+    calc(${themeGet('sizes.0')(p)} * 1.5);
 
-  ::-webkit-slider-runnable-track {
-    ${track}
-  }
+    ::-webkit-slider-runnable-track {
+      ${track(p)}
+    }
 
-  ::-webkit-slider-thumb {
-    ${thumb}
-    ${p => p.value === 0 && 'filter: grayscale(0.6);'}
-  }
+    ::-webkit-slider-thumb {
+      ${thumb(p)}
+      ${p.value === 0 && 'filter: grayscale(0.6);'}
+    }
 
-  ::-moz-range-track {
-    ${track}
-  }
+    ::-moz-range-track {
+      ${track(p)}
+    }
 
-  ::-moz-range-thumb {
-    ${thumb}
-    ${p => p.value === 0 && 'filter: grayscale(0.6);'}
-  }
-`
+    ::-moz-range-thumb {
+      ${thumb(p)}
+      ${p.value === 0 && 'filter: grayscale(0.6);'}
+    }
+  `,
+)
+RangeInput.defaultProps = {
+  type: 'range',
+}
 
 export default RangeInput

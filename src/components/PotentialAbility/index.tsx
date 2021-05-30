@@ -1,8 +1,9 @@
+import styled from '@emotion/styled'
 import Image from 'components/Image'
 import { PotentialKey } from 'models/units'
-import styled from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
+import NoIcon from './images/panel_limitbreak_001.png'
 import ImageFrame from './images/potentialskill_iconframe.png'
 import ImageSkill01 from './images/potentialskill_icon_s_001.png'
 import ImageSkill02 from './images/potentialskill_icon_s_002.png'
@@ -22,7 +23,6 @@ import ImageSkill16 from './images/potentialskill_icon_s_016.png'
 import ImageSkill19 from './images/potentialskill_icon_s_019.png'
 import ImageSkill20 from './images/potentialskill_icon_s_020.png'
 import ImageSkill21 from './images/potentialskill_icon_s_021.png'
-import NoIcon from './images/panel_limitbreak_001.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -73,7 +73,7 @@ type PotentialAbilityProps = SpaceProps &
     hideChrome?: boolean
   }
 
-const Container = styled('div').withConfig(cleanStyledSystem)<SizeProps>`
+const Container = styled('div', cleanStyledSystem)<SizeProps>`
   ${space}
   ${size}
   display: grid;

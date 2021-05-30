@@ -1,13 +1,20 @@
-import css from '@styled-system/css'
+import { useTheme } from '@emotion/react'
 import { PirateFestSvg } from 'components/Icon'
-import styled from 'styled-components'
+import { InputHTMLAttributes } from 'react'
+import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
-const PirateFestInput = styled(RangeInput).attrs(() => ({
-  thumbSvg: PirateFestSvg,
-  range: css({
-    color: 'primaryText',
-  }),
-}))``
-
-export default PirateFestInput
+export default function PirateFestInput (
+  p: InputHTMLAttributes<HTMLInputElement> & SpaceProps,
+) {
+  const theme = useTheme()
+  return (
+    <RangeInput
+      {...p}
+      thumbSvg={PirateFestSvg}
+      range={{
+        color: theme.colors.primaryText,
+      }}
+    />
+  )
+}

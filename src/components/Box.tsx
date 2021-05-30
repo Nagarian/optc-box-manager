@@ -1,9 +1,12 @@
-import styled, { StyledComponent } from 'styled-components'
+import styled, { StyledComponent } from '@emotion/styled'
 import {
   background,
   BackgroundColorProps,
   BackgroundProps,
+  border,
+  BorderProps,
   color,
+  compose,
   flexbox,
   FlexboxProps,
   grid,
@@ -16,9 +19,6 @@ import {
   ShadowProps,
   space,
   SpaceProps,
-  border,
-  BorderProps,
-  compose,
 } from 'styled-system'
 import { cleanStyledSystem, place, PlaceProps } from 'styles'
 
@@ -33,9 +33,12 @@ export type BoxProps = SpaceProps &
   BorderProps &
   PlaceProps
 
-export type BoxStyledProps = StyledComponent<'div', any, BoxProps, never>
+export type BoxStyledProps = StyledComponent<'div', BoxProps, any>
 
-const Box: BoxStyledProps = styled.div.withConfig(cleanStyledSystem)<BoxProps>(
+const Box: BoxStyledProps = styled(
+  'div',
+  cleanStyledSystem,
+)<BoxProps>(
   compose(
     border,
     layout,

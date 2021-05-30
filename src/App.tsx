@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
@@ -30,7 +31,6 @@ import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
 import SugoCleaner from 'pages/SugoCleaner'
 import { useState } from 'react'
-import styled from 'styled-components'
 
 const AppBlock = styled.div`
   display: grid;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { color, ColorProps, width, WidthProps } from 'styled-system'
 import { Text } from './Title'
 

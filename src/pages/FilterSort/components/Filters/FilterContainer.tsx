@@ -1,8 +1,8 @@
+import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { SubTitle } from 'components/Title'
 import { ReactNode } from 'react'
-import styled from 'styled-components'
 
 type FilterContainerProps = {
   title: string

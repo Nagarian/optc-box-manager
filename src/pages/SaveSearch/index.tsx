@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
@@ -7,7 +8,6 @@ import { SubTitle } from 'components/Title'
 import { useStoredSearches } from 'hooks/useStoredSearches'
 import { Search } from 'models/search'
 import { useState } from 'react'
-import styled from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 import { SearchCollectionItem } from './components/SearchCollectionItem'
 

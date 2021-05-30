@@ -1,7 +1,11 @@
-import { SearchSortInputProps, SearchSortWithOptionFunction, UnitSort } from 'models/search'
-import { UnitStar } from 'models/units'
+import styled from '@emotion/styled'
 import Box from 'components/Box'
-import styled from 'styled-components'
+import {
+  SearchSortInputProps,
+  SearchSortWithOptionFunction,
+  UnitSort,
+} from 'models/search'
+import { UnitStar } from 'models/units'
 
 const ParseStar = (star: UnitStar): number => {
   switch (star) {
@@ -42,9 +46,7 @@ export type RaritySortOption = {
 export const byRarity: SearchSortWithOptionFunction<RaritySortOption> = (
   option,
 ): UnitSort => {
-  return option.truncated
-    ? byRarityTruncated
-    : byRaritySimple
+  return option.truncated ? byRarityTruncated : byRaritySimple
 }
 
 const Displayer = styled.span`
@@ -52,9 +54,7 @@ const Displayer = styled.span`
 `
 
 export const byRarityLabel = (option: RaritySortOption) => (
-  <Displayer>
-    {option.truncated ? '⭐+ = ⭐' : '⭐+ ≠ ⭐'}
-  </Displayer>
+  <Displayer>{option.truncated ? '⭐+ = ⭐' : '⭐+ ≠ ⭐'}</Displayer>
 )
 
 export function RaritySortOptionInput ({

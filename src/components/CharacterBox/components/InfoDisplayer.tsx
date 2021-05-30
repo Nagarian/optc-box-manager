@@ -1,5 +1,5 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
-import styled, { css } from 'styled-components'
 import { color, ColorProps, flexDirection, FlexDirectionProps, variant } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 
@@ -9,23 +9,22 @@ type InfoDisplayerProps = ColorProps & FlexDirectionProps & {
   anchorZ?: 'normal' | 'top'
 }
 
-const InfoDisplayer = styled('span').withConfig(cleanStyledSystem)<InfoDisplayerProps>(
-  color,
-  flexDirection,
-  css`
-    position: absolute;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: ${themeGet('fontSizes.0')};
-    border-radius: ${themeGet('fontSizes.0')};
-    padding: ${(p: any) => p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem'};
-    margin: 0.3rem;
+const InfoDisplayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
+  ${color}
+  ${flexDirection}
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: ${themeGet('fontSizes.0')};
+  border-radius: ${themeGet('fontSizes.0')};
+  padding: ${(p: any) => p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem'};
+  margin: 0.3rem;
 
-    background-color: ${themeGet('colors.primary')}99;
-    backdrop-filter: brightness(0.8) blur(2px);
-  `,
-  variant({
+  background-color: ${themeGet('colors.primary')}99;
+  backdrop-filter: brightness(0.8) blur(2px);
+
+  ${variant({
     prop: 'anchorY',
     variants: {
       top: {
@@ -39,8 +38,9 @@ const InfoDisplayer = styled('span').withConfig(cleanStyledSystem)<InfoDisplayer
         transform: 'translateY(-50%)',
       },
     },
-  }),
-  variant({
+  })}
+
+  ${variant({
     prop: 'anchorX',
     variants: {
       left: {
@@ -54,8 +54,8 @@ const InfoDisplayer = styled('span').withConfig(cleanStyledSystem)<InfoDisplayer
         transform: 'translateX(-50%)',
       },
     },
-  }),
-)
+  })}
+`
 
 InfoDisplayer.defaultProps = {
   color: 'primaryText',

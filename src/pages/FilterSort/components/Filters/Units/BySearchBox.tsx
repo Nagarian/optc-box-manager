@@ -1,9 +1,9 @@
+import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import { CloseIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
-import styled from 'styled-components'
 import { SpaceProps } from 'styled-system'
 import { SlideInRight } from 'styles/animation'
 

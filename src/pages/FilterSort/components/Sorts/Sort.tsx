@@ -1,10 +1,10 @@
+import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { SubTitle } from 'components/Title'
 import { SearchSortCriteria } from 'models/search'
 import { SearchSortBuilder, UnitSortTypeKeys, UserUnitSortTypeKeys } from '.'
 import SearchSortItem from './components/SearchSortItem'
-import styled from 'styled-components'
 
 export type SortProps = {
   unitOnly: boolean

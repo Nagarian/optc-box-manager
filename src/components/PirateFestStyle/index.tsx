@@ -1,5 +1,5 @@
+import styled from '@emotion/styled'
 import { UnitPirateFestStyle } from 'models/units'
-import styled from 'styled-components'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import Attacker from './images/Attacker.png'
 import Defender from './images/Defender.png'
@@ -29,11 +29,18 @@ export type PirateFestStyleIconProps = SpaceProps &
     type: UnitPirateFestStyle
   }
 
-export const PirateFestStyleIcon = styled.img.attrs<{ type: UnitPirateFestStyle }>(p => ({
-  src: UnitPirateFestStyleToImage(p.type),
-  title: p.type,
-})) <PirateFestStyleIconProps>`
+const BasePirateFestStyleIcon = styled.img<SpaceProps & SizeProps>`
   object-fit: contain;
   ${space}
   ${size}
 `
+
+export function PirateFestStyleIcon ({ type, ...p }: PirateFestStyleIconProps) {
+  return (
+    <BasePirateFestStyleIcon
+      {...p}
+      src={UnitPirateFestStyleToImage(type)}
+      title={type}
+    />
+  )
+}

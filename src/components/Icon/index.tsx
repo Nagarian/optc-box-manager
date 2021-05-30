@@ -1,5 +1,6 @@
+import { css } from '@emotion/react'
+import styled, { StyledComponent } from '@emotion/styled'
 import { FunctionComponent, SVGProps } from 'react'
-import styled, { StyledComponent } from 'styled-components'
 import {
   color,
   compose,
@@ -17,7 +18,9 @@ import { ReactComponent as Cancel } from './cancel.svg'
 import { ReactComponent as Clear } from './clear.svg'
 import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
-import CottonCandySvg, { ReactComponent as CottonCandy } from './cottoncandy.svg'
+import CottonCandySvg, {
+  ReactComponent as CottonCandy,
+} from './cottoncandy.svg'
 import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
 import { ReactComponent as Discord } from './discord.svg'
@@ -49,97 +52,97 @@ import SupportSvg, { ReactComponent as Support } from './support.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
 import { ReactComponent as Treasure } from './treasure.svg'
 
-type StyledIconProps = SpaceProps & SizeProps & PlaceProps
+type StyledIconProps = SpaceProps & SizeProps & PlaceProps & { title?: string }
+
+export type Icon = StyledComponent<
+  FunctionComponent<SVGProps<SVGSVGElement>>,
+  StyledIconProps,
+  any
+>
 
 const BaseSvg = (
-  svg: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>,
-) => styled(svg).withConfig(clean('color', 'fill'))<StyledIconProps>`
+  svg: FunctionComponent<SVGProps<SVGSVGElement>>,
+): Icon => styled(svg, clean('color', 'fill'))<StyledIconProps>`
   ${compose(space, size, color, place)}
   fill: currentColor;
 `
 
-export type Icon = StyledComponent<
-  FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>,
-  any,
-  StyledIconProps,
-  never
->
+const BaseBaseImg = styled.img<StyledIconProps>(
+  space,
+  size,
+  css`
+    object-fit: contain;
+  `,
+)
+
+const BaseImg = (src: string, title?: string): Icon => {
+  const icon = styled(BaseBaseImg)()
+  icon.defaultProps = {
+    src,
+    title,
+  }
+  return icon
+}
 
 export { CottonCandySvg, SupportSvg, SpecialLvl, PirateFestSvg, InkSvg }
 
-export const AddIcon: Icon = BaseSvg(Add)
-export const ArrowIcon: Icon = BaseSvg(Arrow)
-export const AscendingIcon: Icon = BaseSvg(Ascending)
-export const BellyIcon: Icon = BaseSvg(Belly)
-export const CancelIcon: Icon = BaseSvg(Cancel)
-export const ClearIcon: Icon = BaseSvg(Clear)
-export const CloseIcon: Icon = BaseSvg(Close)
-export const ConfirmIcon: Icon = BaseSvg(Confirm)
-export const CottonCandyIcon: Icon = BaseSvg(CottonCandy)
-export const DeleteIcon: Icon = BaseSvg(Delete)
-export const DescendingIcon: Icon = BaseSvg(Descending)
-export const DiscordIcon: Icon = BaseSvg(Discord)
-export const EditIcon: Icon = BaseSvg(Edit)
-export const EvolveIcon: Icon = BaseSvg(Evolve)
-export const FilterSortIcon: Icon = BaseSvg(FilterSort)
-export const GatherIslandIcon: Icon = BaseSvg(GatherIsland)
-export const InkIcon: Icon = BaseSvg(Ink)
+export const AddIcon = BaseSvg(Add)
+export const ArrowIcon = BaseSvg(Arrow)
+export const AscendingIcon = BaseSvg(Ascending)
+export const BellyIcon = BaseSvg(Belly)
+export const CancelIcon = BaseSvg(Cancel)
+export const ClearIcon = BaseSvg(Clear)
+export const CloseIcon = BaseSvg(Close)
+export const ConfirmIcon = BaseSvg(Confirm)
+export const CottonCandyIcon = BaseSvg(CottonCandy)
+export const DeleteIcon = BaseSvg(Delete)
+export const DescendingIcon = BaseSvg(Descending)
+export const DiscordIcon = BaseSvg(Discord)
+export const EditIcon = BaseSvg(Edit)
+export const EvolveIcon = BaseSvg(Evolve)
+export const FilterSortIcon = BaseSvg(FilterSort)
+export const GatherIslandIcon = BaseSvg(GatherIsland)
+export const InkIcon = BaseSvg(Ink)
 InkIcon.defaultProps = {
   color: 'primaryText',
   title: 'Support',
 }
-export const LimitBreakIcon: Icon = BaseSvg(LimitBreak)
-export const LoaderIcon: Icon = BaseSvg(TailSpin)
-export const NewsCooIcon: Icon = BaseSvg(NewsCoo)
-export const OpenInDBIcon: Icon = BaseSvg(OpenInDB)
-export const PirateFestIcon: Icon = BaseSvg(PirateFest)
+export const LimitBreakIcon = BaseSvg(LimitBreak)
+export const LoaderIcon = BaseSvg(TailSpin)
+export const NewsCooIcon = BaseSvg(NewsCoo)
+export const OpenInDBIcon = BaseSvg(OpenInDB)
+export const PirateFestIcon = BaseSvg(PirateFest)
 PirateFestIcon.defaultProps = {
   color: 'primaryText',
 }
-export const PirateFestAbilityIcon: Icon = BaseSvg(PirateFestAbility)
+export const PirateFestAbilityIcon = BaseSvg(PirateFestAbility)
 PirateFestAbilityIcon.defaultProps = {
   color: 'primaryText',
 }
-export const PirateFestBothIcon: Icon = BaseSvg(PirateFestBoth)
+export const PirateFestBothIcon = BaseSvg(PirateFestBoth)
 PirateFestBothIcon.defaultProps = {
   color: 'primaryText',
 }
-export const PirateFestSpecialIcon: Icon = BaseSvg(PirateFestSpecial)
+export const PirateFestSpecialIcon = BaseSvg(PirateFestSpecial)
 PirateFestSpecialIcon.defaultProps = {
   color: 'primaryText',
 }
-export const PotentialIcon: Icon = BaseSvg(Potential)
-export const ResetIcon: Icon = BaseSvg(Reset)
-export const ResetApplyIcon: Icon = BaseSvg(ResetApply)
-export const ResetRemoveIcon: Icon = BaseSvg(ResetRemove)
-export const SaveSearchIcon: Icon = BaseSvg(SaveSearch)
-export const SettingsIcon: Icon = BaseSvg(Settings)
-export const SearchIcon: Icon = BaseSvg(Search)
-export const ShareIcon: Icon = BaseSvg(Share)
-export const SkillBookIcon: Icon = BaseSvg(SkillBook)
-export const SugoPullIcon: Icon = BaseSvg(SugoPull)
-export const SupportIcon: Icon = BaseSvg(Support)
+export const PotentialIcon = BaseSvg(Potential)
+export const ResetIcon = BaseSvg(Reset)
+export const ResetApplyIcon = BaseSvg(ResetApply)
+export const ResetRemoveIcon = BaseSvg(ResetRemove)
+export const SaveSearchIcon = BaseSvg(SaveSearch)
+export const SettingsIcon = BaseSvg(Settings)
+export const SearchIcon = BaseSvg(Search)
+export const ShareIcon = BaseSvg(Share)
+export const SkillBookIcon = BaseSvg(SkillBook)
+export const SugoPullIcon = BaseSvg(SugoPull)
+export const SupportIcon = BaseSvg(Support)
 SupportIcon.defaultProps = {
   color: 'specific.support',
   title: 'Support',
 }
-export const TreasureIcon: Icon = BaseSvg(Treasure)
+export const TreasureIcon = BaseSvg(Treasure)
 
-export const SpecialLvlIcon = styled.img.attrs(() => ({
-  src: SpecialLvl,
-}))<SpaceProps & SizeProps>`
-  object-fit: contain;
-  ${space}
-  ${size}
-` as Icon
-SpecialLvlIcon.defaultProps = {
-  title: 'Special Level',
-}
-
-export const LogoIcon = styled.img.attrs(() => ({
-  src: Logo,
-}))<SpaceProps & SizeProps>`
-  object-fit: contain;
-  ${space}
-  ${size}
-` as Icon
+export const SpecialLvlIcon = BaseImg(SpecialLvl, 'Special Level')
+export const LogoIcon = BaseImg(Logo)

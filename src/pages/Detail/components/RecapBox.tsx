@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
@@ -18,7 +19,6 @@ import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, UnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import styled from 'styled-components'
 import {
   flexDirection,
   FlexDirectionProps,
@@ -39,7 +39,9 @@ const Container = styled(Box)`
   place-items: center;
 `
 
-const Element = styled.div<GridRowProps & GridColumnProps & GridAreaProps & FlexDirectionProps>`
+const Element = styled.div<
+  GridRowProps & GridColumnProps & GridAreaProps & FlexDirectionProps
+>`
   display: flex;
   ${flexDirection}
   place-items: center;

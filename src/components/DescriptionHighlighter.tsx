@@ -1,10 +1,9 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
 import { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
-import styled from 'styled-components'
-import { clean } from 'styles'
 
 export type DescriptionHighlighterProps = {
   value?: ReactNode
@@ -47,24 +46,20 @@ export default function DescriptionHighlighter ({
   )
 
   return (
-    <ReactMarkdown children={parts} rehypePlugins={[rehypeRaw]} components={renderers} />
+    <ReactMarkdown
+      children={parts}
+      rehypePlugins={[rehypeRaw]}
+      components={renderers}
+    />
   )
 }
 
-type OrbProps = {
-  href: string
-}
-
-const Orb = styled('span')
-  .attrs<OrbProps>(({ href }) => ({
-    children: href.replace(/\[|\]/g, ''),
-  }))
-  .withConfig(clean('href'))<OrbProps>`
+const Orb = styled.span`
   display: inline-block;
   background: ${p => themeGet(`colors.orb.${p.children}`)(p) ?? 'grey'};
   color: ${themeGet('colors.white')};
   border-radius: 1em;
-  padding: .1em .5em;
+  padding: 0.1em 0.5em;
   font-weight: bold;
 `
 
@@ -78,6 +73,6 @@ const DiffHiglighter = styled.em`
 
 const renderers = {
   p: FakeParagraph,
-  a: Orb,
+  a: ({ href, ...p }: any) => <Orb {...p}>{href?.replace(/\[|\]/g, '')}</Orb>,
   em: DiffHiglighter,
 }

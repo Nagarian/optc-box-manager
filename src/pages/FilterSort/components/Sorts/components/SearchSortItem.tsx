@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
 import {
@@ -10,7 +11,6 @@ import Popup from 'components/Popup'
 import { Text } from 'components/Title'
 import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
 import { FunctionComponent, useState } from 'react'
-import styled from 'styled-components'
 import { SearchSortBuilderProps } from '..'
 
 const Panel = styled.div`
@@ -21,7 +21,7 @@ const Panel = styled.div`
   justify-content: flex-end;
   flex: 0 0 auto;
 
-  :nth-child(odd) {
+  :nth-of-type(odd) {
     background-color: ${themeGet('colors.primary')};
     color: ${themeGet('colors.primaryText')};
   }

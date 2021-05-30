@@ -1,5 +1,5 @@
+import styled from '@emotion/styled'
 import { ImageInputProps } from './ImageInput'
-import styled from 'styled-components'
 
 export default function ChoiceInput ({
   children,

@@ -1,9 +1,10 @@
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
-import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
-import { BounceIn, FadeIn } from 'styles/animation'
 import { SafariSpecific } from 'styles'
+import { BounceIn, FadeIn } from 'styles/animation'
 
 export const PopupBackground = styled.div<SpaceProps>`
   min-width: ${themeGet('sizes.minimalRequired')};

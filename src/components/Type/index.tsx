@@ -1,11 +1,6 @@
+import styled from '@emotion/styled'
 import { UnitType } from 'models/units'
-import styled from 'styled-components'
-import {
-  size,
-  SizeProps,
-  space,
-  SpaceProps,
-} from 'styled-system'
+import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import DEX from './images/DEX.png'
 import DUAL from './images/DUAL.png'
 import INT from './images/INT.png'
@@ -40,14 +35,16 @@ export type TypeProps = SpaceProps &
     value: UnitType
   }
 
-const Type = styled.img.attrs<TypeProps>(p => ({
-  src: TypeToImage(p.value),
-  title: p.value,
-}))<TypeProps>`
+const BaseType = styled.img<SpaceProps & SizeProps>`
   object-fit: contain;
   ${space}
   ${size}
 `
+
+function Type ({ value, ...p }: TypeProps) {
+  return <BaseType {...p} src={TypeToImage(value)} title={value} />
+}
+
 Type.defaultProps = {
   size: 2,
 }

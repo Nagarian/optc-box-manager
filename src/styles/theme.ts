@@ -1,3 +1,6 @@
+import { Theme } from '@emotion/react'
+import { ThemeBreakpoints, ThemeFontSizes, ThemeFontWeight, ThemeSizes, ThemeSpace } from './theme-definition'
+
 const baseColors = {
   black: '#323232',
   white: '#FFFFFF',
@@ -81,25 +84,19 @@ const specificColors = {
   )`,
 }
 
-type FontSizes = string[] & {
-  body?: string
-  title?: string
-  subtitle?: string
-}
-
-const fontSizes: FontSizes = ['1.2rem', '1.4rem', '1.6rem', '2rem', '2.4rem', '3.2rem']
+const fontSizes: ThemeFontSizes = ['1.2rem', '1.4rem', '1.6rem', '2rem', '2.4rem', '3.2rem']
 fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]
 
-const fontWeights: number[] = [400, 600]
+const fontWeights: ThemeFontWeight = [400, 600]
 
-const space: any = [0, '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
+const space: ThemeSpace = [0, '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
 space.small = space[1]
 space.medium = space[2]
 space.large = space[3]
 
-const sizes: any = [
+const sizes: ThemeSizes = [
   '1rem',
   '2rem',
   '4rem',
@@ -111,9 +108,9 @@ const sizes: any = [
 ]
 sizes.minimalRequired = '320px'
 
-const breakpoints: any = ['768px', '970px', '1024px']
+const breakpoints: ThemeBreakpoints = ['768px', '970px', '1024px']
 
-export const lightTheme = {
+export const lightTheme: Theme = {
   colors: {
     ...baseColors,
     primary: baseColors.brown,
@@ -203,7 +200,7 @@ export const lightTheme = {
   },
 }
 
-export const darkTheme = {
+export const darkTheme: Theme = {
   ...lightTheme,
   colors: {
     ...lightTheme.colors,

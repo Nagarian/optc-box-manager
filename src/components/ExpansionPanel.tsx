@@ -1,15 +1,17 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import useMeasure from 'hooks/useMeasure'
 import { ReactNode, useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
 import { GridProps } from 'styled-system'
 import Box, { BoxProps } from './Box'
 import Button from './Button'
 import { Icon } from './Icon'
 
-const ExpandButton = styled(Button).attrs(() => ({
-  fontSize: 1,
-}))<{ isOpen: boolean }>`
+type ExpandButtonProps = {
+  isOpen: boolean
+}
+
+const ExpandButton = styled(Button)<ExpandButtonProps>`
   flex-direction: row-reverse;
   justify-content: space-between;
   > * {
@@ -78,7 +80,14 @@ export default function ExpansionPanel ({
       flex="1"
       {...rest}
     >
-      <ExpandButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} m="1" disabled={disabled} icon={icon}>
+      <ExpandButton
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        m="1"
+        disabled={disabled}
+        icon={icon}
+        fontSize={1}
+      >
         {title}
       </ExpandButton>
       <ExpandedPanel isOpen={isOpen}>{children}</ExpandedPanel>

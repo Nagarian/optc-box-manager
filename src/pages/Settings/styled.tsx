@@ -1,6 +1,6 @@
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
-import styled from 'styled-components'
 
 export const Container = styled(Box)`
   padding: ${themeGet('space.2')};

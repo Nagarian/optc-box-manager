@@ -1,8 +1,8 @@
+import { css, Global } from '@emotion/react'
 import shouldForwardProp from '@styled-system/should-forward-prop'
 import * as CSS from 'csstype'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { ThemeMode } from 'hooks/useUserSettings'
-import { createGlobalStyle, css } from 'styled-components'
 import { system } from 'styled-system'
 import { FontCss } from './font'
 import { FormsCss } from './forms'
@@ -20,11 +20,20 @@ export default function DefaultStyles () {
   )
 }
 
-const ColorScheme = createGlobalStyle<{ currentTheme: ThemeMode }>`
-:root {
-  color-scheme: ${p => p.currentTheme};
+type ColorSchemeProps = {
+  currentTheme: ThemeMode
 }
-`
+function ColorScheme ({ currentTheme }: ColorSchemeProps) {
+  return (
+    <Global
+      styles={css`
+        :root {
+          color-scheme: ${currentTheme};
+        }
+      `}
+    />
+  )
+}
 
 export const clean = (...propsToClean: string[]) => ({
   shouldForwardProp: (p: any) =>
