@@ -11,7 +11,7 @@ export default function SupportDisplayer ({
   if (!support || support.lvl === 0) return null
 
   return (
-    <InfoDisplayer anchorX="middle" anchorY="bottom">
+    <InfoDisplayer anchorX="middle" anchorY="bottom" anchorZ="top">
       <SupportIcon size="1" />
       <Progression value={support.lvl} max={5} color="white" />
     </InfoDisplayer>

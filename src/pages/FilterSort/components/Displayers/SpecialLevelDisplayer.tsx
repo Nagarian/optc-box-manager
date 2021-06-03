@@ -11,7 +11,7 @@ export default function SpecialLevelDisplayer ({
   if (!special) return null
 
   return (
-    <InfoDisplayer anchorX="middle" anchorY="bottom">
+    <InfoDisplayer anchorX="middle" anchorY="bottom" anchorZ="top">
       <SpecialLvlIcon size="1" />
       <Progression value={special.lvl} max={special.lvlMax} color="white" />
     </InfoDisplayer>
