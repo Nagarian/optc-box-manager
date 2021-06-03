@@ -24,7 +24,7 @@ export default function PirateFestDisplayer ({
 
   if (options.type === 'both') {
     return (
-      <InfoDisplayer anchorX="middle" anchorY="bottom">
+      <InfoDisplayer anchorX="middle" anchorY="bottom" anchorZ="top">
         <Box
           as="span"
           display="flex"

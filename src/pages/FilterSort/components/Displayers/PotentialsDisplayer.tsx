@@ -16,7 +16,7 @@ export default function PotentialsDisplayer ({
 
   return (
     <>
-      <InfoDisplayer anchorX="left" anchorY="bottom">
+      <InfoDisplayer anchorX="left" anchorY="bottom" anchorZ="top">
         {potentials.map(potential => (
           <Box
             as="span"
@@ -48,7 +48,7 @@ export function SpecificPotentialDisplayer ({
   if (!userPotential) return null
 
   return (
-    <InfoDisplayer anchorX="middle" anchorY="bottom">
+    <InfoDisplayer anchorX="middle" anchorY="bottom" anchorZ="top">
       <PotentialAbility size="1" type={userPotential.type} hideChrome />
       <Progression value={userPotential.lvl} max={5} color="white" />
     </InfoDisplayer>
