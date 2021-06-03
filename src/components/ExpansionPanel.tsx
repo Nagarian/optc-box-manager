@@ -14,7 +14,8 @@ type ExpandButtonProps = {
 const ExpandButton = styled(Button)<ExpandButtonProps>`
   flex-direction: row-reverse;
   justify-content: space-between;
-  > * {
+
+  && > * {
     margin: 0;
   }
 `
