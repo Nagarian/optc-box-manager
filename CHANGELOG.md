@@ -1,3 +1,12 @@
+## [2.3.6](https://github.com/Nagarian/optc-box-manager/compare/v2.3.5...v2.3.6) (2021-06-03)
+
+
+### Bug Fixes
+
+* **detail:** icon spacing issue ([385df54](https://github.com/Nagarian/optc-box-manager/commit/385df54409383abccde78dba47dfcfdb55111680))
+
+
+
 ## [2.3.5](https://github.com/Nagarian/optc-box-manager/compare/v2.3.4...v2.3.5) (2021-05-30)
 
 
@@ -51,24 +60,6 @@
 * **detail:** add Inkable tracker ([4d7e5a1](https://github.com/Nagarian/optc-box-manager/commit/4d7e5a155b8a979768f3ed81e2eb195fc9e8bdd5)), closes [#188](https://github.com/Nagarian/optc-box-manager/issues/188)
 * **filter:** add Dual and Versus Type filter ([1bce1a1](https://github.com/Nagarian/optc-box-manager/commit/1bce1a11ba0daa32587f1eaa84e992ce93e22a11))
 * **filter:** add filter and sorter for Ink characters ([e78c08c](https://github.com/Nagarian/optc-box-manager/commit/e78c08cb3a10da7e6e377dcbebbede9fab7de334))
-
-
-
-# [2.2.0](https://github.com/Nagarian/optc-box-manager/compare/v2.1.0...v2.2.0) (2021-03-07)
-
-
-### Bug Fixes
-
-* disable image caching until we found a decent solutions ([7ccbd38](https://github.com/Nagarian/optc-box-manager/commit/7ccbd38cdd088ded31d89de085fc5780a330eb0c))
-* issue with image caching which prevent whole application update (quota storage issue) ([de57cfb](https://github.com/Nagarian/optc-box-manager/commit/de57cfb57c6fd7c037c8ffeb0c72c4800b7b9f6f))
-
-
-### Features
-
-* **filter:** add support rarecruit filter ([62990a3](https://github.com/Nagarian/optc-box-manager/commit/62990a33e25f7972e22419084a36e2842a86738e))
-* **settings:** rework Settings layout + add App Management screen ([d53aac3](https://github.com/Nagarian/optc-box-manager/commit/d53aac36417c53f1c8c86f01985c70882d77e459))
-* **settings:** rework settings page + add Clear cache feature ([ebec55b](https://github.com/Nagarian/optc-box-manager/commit/ebec55b30d611be17427a3aa0e5e82a2a4e5cb75))
-* add Discord, Share and News-Coo icons ([c34957a](https://github.com/Nagarian/optc-box-manager/commit/c34957a20bd1e5421fcaf1cbc2c876e5d26950e2))
 
 
 
