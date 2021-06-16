@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "./static/js/main.4b8e44d2.chunk.js",
-    "main.js.map": "./static/js/main.4b8e44d2.chunk.js.map",
+    "main.js": "./static/js/main.36d2aab2.chunk.js",
+    "main.js.map": "./static/js/main.36d2aab2.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.5fa8313e.js",
     "runtime-main.js.map": "./static/js/runtime-main.5fa8313e.js.map",
     "static/css/2.d59c41ec.chunk.css": "./static/css/2.d59c41ec.chunk.css",
@@ -57,6 +57,7 @@
     "static/media/piratefest-special.d9df4d48.svg": "./static/media/piratefest-special.d9df4d48.svg",
     "static/media/piratefest.feb11246.svg": "./static/media/piratefest.feb11246.svg",
     "static/media/potential.d2b85c47.svg": "./static/media/potential.d2b85c47.svg",
+    "static/media/potentialskill_icon_s_018.8360c47a.png": "./static/media/potentialskill_icon_s_018.8360c47a.png",
     "static/media/potentialskill_icon_s_019.7095ef54.png": "./static/media/potentialskill_icon_s_019.7095ef54.png",
     "static/media/potentialskill_icon_s_020.3f628d34.png": "./static/media/potentialskill_icon_s_020.3f628d34.png",
     "static/media/potentialskill_icon_s_021.104cac66.png": "./static/media/potentialskill_icon_s_021.104cac66.png",
@@ -82,6 +83,6 @@
     "static/js/runtime-main.5fa8313e.js",
     "static/css/2.d59c41ec.chunk.css",
     "static/js/2.55aa1ef3.chunk.js",
-    "static/js/main.4b8e44d2.chunk.js"
+    "static/js/main.36d2aab2.chunk.js"
   ]
 }
