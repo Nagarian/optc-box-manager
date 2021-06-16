@@ -1,3 +1,14 @@
+## [2.3.7](https://github.com/Nagarian/optc-box-manager/compare/v2.3.6...v2.3.7) (2021-06-16)
+
+
+### Bug Fixes
+
+* handle new potential "Reduce Slot Barrier duration" ([0229c4d](https://github.com/Nagarian/optc-box-manager/commit/0229c4dd6240d4a688e52f25d1a9b1288f6bc217))
+* spacing css issue again ([d8ed05e](https://github.com/Nagarian/optc-box-manager/commit/d8ed05e2d1e86c6f6b0c0f1dbc73a03a958a6c1f))
+* **box:** issue with Info Displayer css ([e043adb](https://github.com/Nagarian/optc-box-manager/commit/e043adb608d19b52531f51ee9bb83246ee5ea0b0))
+
+
+
 ## [2.3.6](https://github.com/Nagarian/optc-box-manager/compare/v2.3.5...v2.3.6) (2021-06-03)
 
 
@@ -49,17 +60,6 @@
 ### Bug Fixes
 
 * issue with safari ([d3a66e5](https://github.com/Nagarian/optc-box-manager/commit/d3a66e59cbeafb8519f1fbda177f2760f125a44d))
-
-
-
-# [2.3.0](https://github.com/Nagarian/optc-box-manager/compare/v2.2.0...v2.3.0) (2021-03-27)
-
-
-### Features
-
-* **detail:** add Inkable tracker ([4d7e5a1](https://github.com/Nagarian/optc-box-manager/commit/4d7e5a155b8a979768f3ed81e2eb195fc9e8bdd5)), closes [#188](https://github.com/Nagarian/optc-box-manager/issues/188)
-* **filter:** add Dual and Versus Type filter ([1bce1a1](https://github.com/Nagarian/optc-box-manager/commit/1bce1a11ba0daa32587f1eaa84e992ce93e22a11))
-* **filter:** add filter and sorter for Ink characters ([e78c08c](https://github.com/Nagarian/optc-box-manager/commit/e78c08cb3a10da7e6e377dcbebbede9fab7de334))
 
 
 
