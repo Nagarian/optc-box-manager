@@ -66,7 +66,7 @@ const globalOnly = {
   5062: 2830, // Robin 6+
   5063: 2909, // WB v2 6+
   5064: 3330, // Law/Chopper
-  5065: 4998, // MOTNS
+  5065: 3383, // MOTNS
   5066: 4999, // Makino
   5067: 3156, // Akainu v3
   5068: 3157,
@@ -103,7 +103,6 @@ const remainingGlobalOnlyUnitMapping = {
   'War Hero Coby [EXTRA], Navy HQ Petty Officer': 4995,
   'Sergeant Helmeppo [EXTRA]': 4996,
   'Sengoku, Fatherly Buddha': 4997,
-  'Local Sea Monster, Man-Eating Monster': 4998,
   'Makino, Proprietor of a Relaxed Tavern': 4999,
 }
 
