@@ -56,7 +56,7 @@ export const globalOnly = {
   5053: 4994, // Neo Coby
   5054: 4995,
   5055: 4996, // Neo Helmep
-  5056: 4997, // Sengoku
+  5056: 3384, // Sengoku
   5057: 3325, // Heracles
   5058: 3326,
   5059: 3327, // Condoriano
