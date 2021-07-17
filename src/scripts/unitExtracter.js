@@ -12,7 +12,7 @@ const {
 const { getDropLocations } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags } = require('./fixup')
+const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupSpecificIssuePostGloFix } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require('./glo-jap-remapper')
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
@@ -92,6 +92,7 @@ function DBFactory () {
     .map(fixupEvolution)
     .map(fixupFlags)
     .map(applyNewPirateRumble)
+    .map(fixupSpecificIssuePostGloFix)
 
   db.sort((u1, u2) => u1.id - u2.id)
   return db
