@@ -65,6 +65,13 @@ export type BaseUnit = {
     minCP?: null
     maxCP?: null
   }
+  pirateFest2: {
+    class?: UnitPirateFestStyle | ''
+    DEF?: number | null
+    SPD?: number | null
+    minCP?: null
+    maxCP?: null
+  } | null
   incomplete?: boolean
   preview?: boolean
 }
