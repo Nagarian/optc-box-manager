@@ -308,6 +308,48 @@
           },
           "type": "object"
         },
+        "pirateFest2": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "DEF": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "SPD": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "class": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/UnitPirateFestStyle"
+                    },
+                    {
+                      "const": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "maxCP": {
+                  "type": "null"
+                },
+                "minCP": {
+                  "type": "null"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "preview": {
           "type": "boolean"
         },
@@ -368,6 +410,7 @@
         "name",
         "number",
         "pirateFest",
+        "pirateFest2",
         "slots",
         "stars",
         "type"
