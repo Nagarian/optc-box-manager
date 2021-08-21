@@ -213,7 +213,7 @@ const jsonc = require('jsonc-parser')
 /** @type import("models/pirate-rumble").RumbleSchema */
 const rumbleData = jsonc.parse(fs.readFileSync('./src/optcdb/common/data/rumble.json', 'utf8'))
 
-/** @returns { import("models/pirate-rumble").Unit } */
+/** @returns { import("models/pirate-rumble").Unit | [import("models/pirate-rumble").Unit, import("models/pirate-rumble").Unit]  } */
 function getRumbleData (id) {
   let key = id
   const rumbleUnits = rumbleData.units
@@ -237,11 +237,12 @@ function getRumbleData (id) {
 
   // Check for VS unit
   if (unit.id !== Math.floor(unit.id)) {
-    return undefined
-    // key = Math.floor(key)
-    // unit2 = rumbleUnits.filter(unit => Math.floor(unit.id) === key)[1]
-    // denormalizeEffects(unit2.ability)
-    // denormalizeEffects(unit2.special)
+    key = Math.floor(key)
+    const unit2 = rumbleUnits.filter(unit => Math.floor(unit.id) === key)[1]
+    denormalizeEffects(unit2.ability)
+    denormalizeEffects(unit2.special)
+
+    return [unit, unit2]
   }
 
   return unit
@@ -256,21 +257,66 @@ function applyNewPirateRumble (
     return unit
   }
 
-  unit.pirateFest.class = newRumble.stats.rumbleType
-  unit.pirateFest.DEF = newRumble.stats.def
-  unit.pirateFest.SPD = newRumble.stats.spd
-  unit.detail.festAbility = newRumble.ability.map(ab => ({
-    description: filters.abilityToString()(ab.effects),
-  }))
-  unit.detail.festAttackPattern = newRumble.pattern.map(p => ({
-    description: filters.patternToString()(p),
-  }))
-  unit.detail.festAttackTarget = filters.targetToString()(newRumble.target)
-  unit.detail.festResilience = filters.resilienceToString()(newRumble.resilience)
-  unit.detail.festSpecial = newRumble.special.map(s => ({
-    cooldown: s.cooldown,
-    description: filters.specialToString()(s.effects),
-  }))
+  if (Array.isArray(newRumble)) {
+    unit.pirateFest.class = newRumble[0].stats.rumbleType
+    unit.pirateFest.DEF = newRumble[0].stats.def
+    unit.pirateFest.SPD = newRumble[0].stats.spd
+
+    unit.pirateFest2.class = newRumble[1].stats.rumbleType
+    unit.pirateFest2.DEF = newRumble[1].stats.def
+    unit.pirateFest2.SPD = newRumble[1].stats.spd
+
+    unit.detail.festAbility = {
+      character1: newRumble[0].ability.map(ab => ({
+        description: filters.abilityToString()(ab.effects),
+      })),
+      character2: newRumble[1].ability.map(ab => ({
+        description: filters.abilityToString()(ab.effects),
+      })),
+    }
+    unit.detail.festAttackPattern = {
+      character1: newRumble[0].pattern.map(p => ({
+        description: filters.patternToString()(p),
+      })),
+      character2: newRumble[1].pattern.map(p => ({
+        description: filters.patternToString()(p),
+      })),
+    }
+    unit.detail.festAttackTarget = {
+      character1: filters.targetToString()(newRumble[0].target),
+      character2: filters.targetToString()(newRumble[1].target),
+    }
+    unit.detail.festResilience = {
+      character1: filters.resilienceToString()(newRumble[0].resilience),
+      character2: filters.resilienceToString()(newRumble[1].resilience),
+    }
+    unit.detail.festSpecial = {
+      character1: newRumble[0].special.map(s => ({
+        cooldown: s.cooldown,
+        description: filters.specialToString()(s.effects),
+      })),
+      character2: newRumble[1].special.map(s => ({
+        cooldown: s.cooldown,
+        description: filters.specialToString()(s.effects),
+      })),
+    }
+  } else {
+    unit.pirateFest.class = newRumble.stats.rumbleType
+    unit.pirateFest.DEF = newRumble.stats.def
+    unit.pirateFest.SPD = newRumble.stats.spd
+    unit.detail.festAbility = newRumble.ability.map(ab => ({
+      description: filters.abilityToString()(ab.effects),
+    }))
+    unit.detail.festAttackPattern = newRumble.pattern.map(p => ({
+      description: filters.patternToString()(p),
+    }))
+    unit.detail.festAttackTarget = filters.targetToString()(newRumble.target)
+    unit.detail.festResilience = filters.resilienceToString()(newRumble.resilience)
+    unit.detail.festSpecial = newRumble.special.map(s => ({
+      cooldown: s.cooldown,
+      description: filters.specialToString()(s.effects),
+    }))
+  }
 
   return unit
 }

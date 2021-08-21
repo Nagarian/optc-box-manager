@@ -47,7 +47,7 @@ function fixupVersusUnit (
     ...unit,
     class: [[], ...untyped.class],
     pirateFest: {
-      class: untyped.pirateFest.class[0],
+      class: untyped.pirateFest.class,
       DEF: 0,
       SPD: 0,
     },
