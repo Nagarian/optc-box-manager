@@ -6,11 +6,11 @@ import Image from 'components/Image'
 import { SubTitle, Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import {
+  ColorUnitTypes,
   ExtendedDrop,
   ExtendedDropKeys,
   ExtendedUnit,
   UnitType,
-  UnitTypes,
 } from 'models/units'
 import { BookQuestDrops } from 'services/drops'
 import { BooleanFilterMapper } from 'services/filterHelper'
@@ -75,7 +75,7 @@ export function ByDropInput ({
       </LabelDisplayer>
 
       <SubTitle fontSize="2">Manuals Quests</SubTitle>
-      {UnitTypes.map(type => (
+      {ColorUnitTypes.map(type => (
         <ByBookQuest
           key={type}
           type={type}

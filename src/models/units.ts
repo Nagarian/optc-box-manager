@@ -1,9 +1,12 @@
-export const UnitTypes = [
+export const ColorUnitTypes = [
   'STR',
   'DEX',
   'QCK',
   'PSY',
   'INT',
+] as const
+export const UnitTypes = [
+  ...ColorUnitTypes,
   'DUAL',
   'VS',
 ] as const
