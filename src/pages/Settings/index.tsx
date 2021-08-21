@@ -1,7 +1,6 @@
 import Button from 'components/Button'
 import Changelog from 'components/Changelog'
 import {
-  DiscordIcon,
   Icon,
   NewsCooIcon,
   SettingsIcon,
@@ -31,15 +30,6 @@ export default function Settings ({ onClose, myUserBox }: SettingsProps) {
       <SettingAction title="Changelog" icon={NewsCooIcon}>
         <Changelog />
       </SettingAction>
-
-      <Button
-        my="1"
-        href="https://discord.gg/rKBRT8HxeE"
-        icon={DiscordIcon}
-        variant="discord"
-      >
-        Discord
-      </Button>
 
       <Button
         my="1"

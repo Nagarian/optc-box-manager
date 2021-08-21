@@ -185,18 +185,6 @@ export const lightTheme: Theme = {
         filter: 'opacity(0.5)',
       },
     },
-    discord: {
-      backgroundColor: '#7289DA',
-      color: '#FFFFFF',
-      borderColor: '#7289DA',
-      '&:hover:enabled': {
-        filter: 'opacity(0.5)',
-      },
-      '&[href]:hover': {
-        filter: 'opacity(0.5)',
-      },
-      textDecoration: 'none',
-    },
   },
 }
 

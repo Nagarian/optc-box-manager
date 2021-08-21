@@ -23,7 +23,6 @@ import CottonCandySvg, {
 } from './cottoncandy.svg'
 import { ReactComponent as Delete } from './delete.svg'
 import { ReactComponent as Descending } from './descending.svg'
-import { ReactComponent as Discord } from './discord.svg'
 import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
@@ -97,7 +96,6 @@ export const ConfirmIcon = BaseSvg(Confirm)
 export const CottonCandyIcon = BaseSvg(CottonCandy)
 export const DeleteIcon = BaseSvg(Delete)
 export const DescendingIcon = BaseSvg(Descending)
-export const DiscordIcon = BaseSvg(Discord)
 export const EditIcon = BaseSvg(Edit)
 export const EvolveIcon = BaseSvg(Evolve)
 export const FilterSortIcon = BaseSvg(FilterSort)
