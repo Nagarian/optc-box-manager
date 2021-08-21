@@ -38,169 +38,173 @@ export default function BulkEdit ({
   const { ccLimit } = useUserSettings()
 
   return (
-    <Popup
-      onClose={onCancel}
-      customAction={
-        <Button
-          disabled={!edit}
-          onClick={() => setShowStep2(true)}
-          icon={ArrowIcon}
-          title="Next step"
-        />
-      }
-      title="Bulk Edit - Step 1"
-    >
-      <Box display="flex" flexDirection="column">
-        <FilterContainer
-          title="Potential abilities"
-          onReset={() =>
-            setEdit({
-              ...edit,
-              limitBreakState: undefined,
-            })
+    <>
+      {!showStep2 && (
+        <Popup
+          onClose={onCancel}
+          customAction={
+            <Button
+              disabled={!edit}
+              onClick={() => setShowStep2(true)}
+              icon={ArrowIcon}
+              title="Next step"
+            />
           }
-          disableReset={!edit?.limitBreakState}
+          title="Bulk Edit - Step 1"
         >
-          {UserUnitBulkEditLimitBreakStateKeys.map(lbState => (
-            <LbStateEdit
-              key={lbState}
-              state={lbState}
-              label={lbStateToLabel(lbState)}
-              currentValue={edit?.limitBreakState}
-              onChange={state =>
+          <Box display="flex" flexDirection="column">
+            <FilterContainer
+              title="Potential abilities"
+              onReset={() =>
                 setEdit({
                   ...edit,
-                  limitBreakState: state,
+                  limitBreakState: undefined,
                 })
               }
-            />
-          ))}
-        </FilterContainer>
+              disableReset={!edit?.limitBreakState}
+            >
+              {UserUnitBulkEditLimitBreakStateKeys.map(lbState => (
+                <LbStateEdit
+                  key={lbState}
+                  state={lbState}
+                  label={lbStateToLabel(lbState)}
+                  currentValue={edit?.limitBreakState}
+                  onChange={state =>
+                    setEdit({
+                      ...edit,
+                      limitBreakState: state,
+                    })
+                  }
+                />
+              ))}
+            </FilterContainer>
 
-        <FilterContainer
-          title="Support"
-          onReset={() =>
-            setEdit({
-              ...edit,
-              supportLvl: undefined,
-            })
-          }
-          disableReset={!edit?.supportLvl}
-        >
-          <BulkEditContainer value={edit?.supportLvl}>
-            <SupportInput
-              name="support"
-              value={edit?.supportLvl ?? 0}
-              onChange={e =>
+            <FilterContainer
+              title="Support"
+              onReset={() =>
                 setEdit({
                   ...edit,
-                  supportLvl: Number(e.target.value),
+                  supportLvl: undefined,
                 })
               }
-            />
-          </BulkEditContainer>
-        </FilterContainer>
+              disableReset={!edit?.supportLvl}
+            >
+              <BulkEditContainer value={edit?.supportLvl}>
+                <SupportInput
+                  name="support"
+                  value={edit?.supportLvl ?? 0}
+                  onChange={e =>
+                    setEdit({
+                      ...edit,
+                      supportLvl: Number(e.target.value),
+                    })
+                  }
+                />
+              </BulkEditContainer>
+            </FilterContainer>
 
-        <FilterContainer
-          title="Cotton Candies"
-          onReset={() =>
-            setEdit({
-              ...edit,
-              cottonCandies: undefined,
-            })
-          }
-          disableReset={!edit?.cottonCandies}
-        >
-          <BulkEditContainer value={edit?.cottonCandies?.atk}>
-            <CottonCandyInput
-              name="cc-atk"
-              variant="atk"
-              value={edit?.cottonCandies?.atk ?? 0}
-              max={ccLimit.atk}
-              onChange={e =>
+            <FilterContainer
+              title="Cotton Candies"
+              onReset={() =>
                 setEdit({
                   ...edit,
-                  cottonCandies: {
-                    ...edit?.cottonCandies,
-                    atk: Number(e.target.value),
-                  },
+                  cottonCandies: undefined,
                 })
               }
-            />
-          </BulkEditContainer>
-          <BulkEditContainer value={edit?.cottonCandies?.hp}>
-            <CottonCandyInput
-              name="cc-hp"
-              variant="hp"
-              value={edit?.cottonCandies?.hp ?? 0}
-              max={ccLimit.hp}
-              onChange={e =>
-                setEdit({
-                  ...edit,
-                  cottonCandies: {
-                    ...edit?.cottonCandies,
-                    hp: Number(e.target.value),
-                  },
-                })
-              }
-            />
-          </BulkEditContainer>
-          <BulkEditContainer value={edit?.cottonCandies?.rcv}>
-            <CottonCandyInput
-              name="cc-rcv"
-              variant="rcv"
-              value={edit?.cottonCandies?.rcv ?? 0}
-              max={ccLimit.rcv}
-              onChange={e =>
-                setEdit({
-                  ...edit,
-                  cottonCandies: {
-                    ...edit?.cottonCandies,
-                    rcv: Number(e.target.value),
-                  },
-                })
-              }
-            />
-          </BulkEditContainer>
-        </FilterContainer>
+              disableReset={!edit?.cottonCandies}
+            >
+              <BulkEditContainer value={edit?.cottonCandies?.atk}>
+                <CottonCandyInput
+                  name="cc-atk"
+                  variant="atk"
+                  value={edit?.cottonCandies?.atk ?? 0}
+                  max={ccLimit.atk}
+                  onChange={e =>
+                    setEdit({
+                      ...edit,
+                      cottonCandies: {
+                        ...edit?.cottonCandies,
+                        atk: Number(e.target.value),
+                      },
+                    })
+                  }
+                />
+              </BulkEditContainer>
+              <BulkEditContainer value={edit?.cottonCandies?.hp}>
+                <CottonCandyInput
+                  name="cc-hp"
+                  variant="hp"
+                  value={edit?.cottonCandies?.hp ?? 0}
+                  max={ccLimit.hp}
+                  onChange={e =>
+                    setEdit({
+                      ...edit,
+                      cottonCandies: {
+                        ...edit?.cottonCandies,
+                        hp: Number(e.target.value),
+                      },
+                    })
+                  }
+                />
+              </BulkEditContainer>
+              <BulkEditContainer value={edit?.cottonCandies?.rcv}>
+                <CottonCandyInput
+                  name="cc-rcv"
+                  variant="rcv"
+                  value={edit?.cottonCandies?.rcv ?? 0}
+                  max={ccLimit.rcv}
+                  onChange={e =>
+                    setEdit({
+                      ...edit,
+                      cottonCandies: {
+                        ...edit?.cottonCandies,
+                        rcv: Number(e.target.value),
+                      },
+                    })
+                  }
+                />
+              </BulkEditContainer>
+            </FilterContainer>
 
-        <FilterContainer
-          title="Global-Japan Id Converter"
-          onReset={() =>
-            setEdit({
-              ...edit,
-              idConverter: undefined,
-            })
-          }
-          disableReset={!edit?.idConverter}
-        >
-          <ChoiceInput
-            type="radio"
-            name="gameVersionIdConverter"
-            checked={edit?.idConverter === 'toGlobal'}
-            onChange={e =>
-              setEdit({
-                idConverter: 'toGlobal',
-              })
-            }
-          >
-            Japan to Global
-          </ChoiceInput>
+            <FilterContainer
+              title="Global-Japan Id Converter"
+              onReset={() =>
+                setEdit({
+                  ...edit,
+                  idConverter: undefined,
+                })
+              }
+              disableReset={!edit?.idConverter}
+            >
+              <ChoiceInput
+                type="radio"
+                name="gameVersionIdConverter"
+                checked={edit?.idConverter === 'toGlobal'}
+                onChange={e =>
+                  setEdit({
+                    idConverter: 'toGlobal',
+                  })
+                }
+              >
+                Japan to Global
+              </ChoiceInput>
 
-          <ChoiceInput
-            type="radio"
-            name="gameVersionIdConverter"
-            checked={edit?.idConverter === 'toJapan'}
-            onChange={e =>
-              setEdit({
-                idConverter: 'toJapan',
-              })
-            }
-          >
-            Global to Japan
-          </ChoiceInput>
-        </FilterContainer>
-      </Box>
+              <ChoiceInput
+                type="radio"
+                name="gameVersionIdConverter"
+                checked={edit?.idConverter === 'toJapan'}
+                onChange={e =>
+                  setEdit({
+                    idConverter: 'toJapan',
+                  })
+                }
+              >
+                Global to Japan
+              </ChoiceInput>
+            </FilterContainer>
+          </Box>
+        </Popup>
+      )}
 
       {showStep2 && (
         <BulkEditSelect
@@ -210,7 +214,7 @@ export default function BulkEdit ({
           onSubmit={uu => onSubmit(uu, edit!)}
         />
       )}
-    </Popup>
+    </>
   )
 }
 

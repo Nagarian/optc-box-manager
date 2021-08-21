@@ -29,8 +29,7 @@ const InfoDisplayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
     p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem'};
   margin: 0.3rem;
 
-  background-color: ${themeGet('colors.primary')}99;
-  backdrop-filter: brightness(0.8) blur(2px);
+  background-color: ${themeGet('colors.primary')}C9;
 
   ${variant({
     prop: 'anchorY',
