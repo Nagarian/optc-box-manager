@@ -1,3 +1,14 @@
+## [2.3.8](https://github.com/Nagarian/optc-box-manager/compare/v2.3.7...v2.3.8) (2021-08-21)
+
+
+### Bug Fixes
+
+* **filter:** remove invalid dual and versus Book Quest category ([25c683b](https://github.com/Nagarian/optc-box-manager/commit/25c683b3f8134a62774e33a85e395430c59ad890))
+* remove Discord link ([a6da152](https://github.com/Nagarian/optc-box-manager/commit/a6da152dc0474496c37660fe2903beb1d8d62beb))
+* **bulk-edit:** CSS performance issue when too many units have CC ([f601c1a](https://github.com/Nagarian/optc-box-manager/commit/f601c1aab67cb99490991156dc623b639e3addc6))
+
+
+
 ## [2.3.7](https://github.com/Nagarian/optc-box-manager/compare/v2.3.6...v2.3.7) (2021-06-16)
 
 
@@ -51,15 +62,6 @@
 ### Bug Fixes
 
 * **box:** issue with detailed cotton candy Displayer ([aabcb05](https://github.com/Nagarian/optc-box-manager/commit/aabcb0538f17d60ece4b74b224e87d1f97af8b5d))
-
-
-
-## [2.3.1](https://github.com/Nagarian/optc-box-manager/compare/v2.3.0...v2.3.1) (2021-04-07)
-
-
-### Bug Fixes
-
-* issue with safari ([d3a66e5](https://github.com/Nagarian/optc-box-manager/commit/d3a66e59cbeafb8519f1fbda177f2760f125a44d))
 
 
 
