@@ -1,3 +1,13 @@
+## [2.3.9](https://github.com/Nagarian/optc-box-manager/compare/v2.3.8...v2.3.9) (2021-09-14)
+
+
+### Bug Fixes
+
+* **db:** global Sengoku/Neo Coby/Neo Helmep wrong ID ([fcc3dcc](https://github.com/Nagarian/optc-box-manager/commit/fcc3dcc784c22839f18816793c7da7e9803598ac))
+* **detail:** improve ergonomy of Power Socket editor ([da7a719](https://github.com/Nagarian/optc-box-manager/commit/da7a7198443fc89a4fb4b301577e76eb144b7a00))
+
+
+
 ## [2.3.8](https://github.com/Nagarian/optc-box-manager/compare/v2.3.7...v2.3.8) (2021-08-21)
 
 
@@ -53,15 +63,6 @@
 ### Bug Fixes
 
 * handle new potential "Reduce Healing Reduction duration" ([85a78a6](https://github.com/Nagarian/optc-box-manager/commit/85a78a601080d48c4ff4f49ed8b6ca63ea141e83))
-
-
-
-## [2.3.2](https://github.com/Nagarian/optc-box-manager/compare/v2.3.1...v2.3.2) (2021-04-16)
-
-
-### Bug Fixes
-
-* **box:** issue with detailed cotton candy Displayer ([aabcb05](https://github.com/Nagarian/optc-box-manager/commit/aabcb0538f17d60ece4b74b224e87d1f97af8b5d))
 
 
 
