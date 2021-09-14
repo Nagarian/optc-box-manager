@@ -24,7 +24,7 @@ export default function PWA () {
     if (!waitingWorker) return
     waitingWorker.postMessage({ type: 'SKIP_WAITING' })
     setShowReload(false)
-    window.location.reload(true)
+    window.location.reload()
   }
 
   if (!showReload) return null
