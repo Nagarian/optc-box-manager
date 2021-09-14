@@ -5,7 +5,7 @@ import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
 type PowerSocketInputProps = SpaceProps & {
-  variant: PowerSocketKey
+  variant?: PowerSocketKey
 }
 
 export default function PowerSocketInput ({

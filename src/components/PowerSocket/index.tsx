@@ -44,10 +44,11 @@ type PowerSocketProps = SpaceProps &
   SizeProps & {
     type?: PowerSocketKey
     hideChrome?: boolean
+    isFocused?: boolean
     as?: any
   }
 
-const Container = styled('div', cleanStyledSystem)<SizeProps>`
+const Container = styled('div', cleanStyledSystem)<SizeProps & { isFocused: boolean }>`
   ${space}
   ${size}
   display: grid;
@@ -57,6 +58,7 @@ const Container = styled('div', cleanStyledSystem)<SizeProps>`
   > * {
     grid-column: 1 / 1;
     grid-row: 1 / 1;
+    ${p => p.isFocused && 'filter: drop-shadow(0 0 1rem);'}
   }
 `
 
@@ -64,14 +66,15 @@ export default function PowerSocket ({
   type,
   size = 3,
   hideChrome,
+  isFocused,
   ...rest
 }: PowerSocketProps) {
   const src = PowerSocketToImage(type)
   return (
-    <Container size={size} {...rest}>
+    <Container size={size} isFocused={isFocused ?? false} {...rest}>
       {!hideChrome && <Image src={ImageFrame} />}
       {src && (
-        <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} />
+        <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} alt={type} />
       )}
     </Container>
   )

@@ -44,6 +44,7 @@ export default function PowerSocketEdit ({
     >
       <UserPowerSocketDispayer
         powerSockets={powerSockets}
+        selectedIndex={currentIndex}
         onClick={i => setCurrentIndex(i)}
       />
 
@@ -97,19 +98,18 @@ function PowerSocketEditor ({
       </Box>
 
       <Box marginY="1">
-        {type && (
-          <PowerSocketInput
-            name={type}
-            value={lvl}
-            variant={type}
-            onChange={e =>
-              onChange({
-                type,
-                lvl: Number(e.target.value),
-              })
-            }
-          />
-        )}
+        <PowerSocketInput
+          name={type}
+          value={lvl}
+          variant={type}
+          disabled={!type}
+          onChange={e =>
+            onChange({
+              type,
+              lvl: Number(e.target.value),
+            })
+          }
+        />
       </Box>
     </InputLabel>
   )
@@ -117,10 +117,12 @@ function PowerSocketEditor ({
 
 type UserPowerSocketDispayerProps = {
   powerSockets: UserUnitPowerSocket[]
+  selectedIndex?: number
   onClick?: (index: number) => void
 }
 export function UserPowerSocketDispayer ({
   powerSockets,
+  selectedIndex,
   onClick,
 }: UserPowerSocketDispayerProps) {
   return (
@@ -135,7 +137,7 @@ export function UserPowerSocketDispayer ({
           fontSize="1"
         >
           <Box display="flex" flexDirection="column">
-            <PowerSocket type={type} size="2" />
+            <PowerSocket type={type} size="2" isFocused={selectedIndex === i} />
             <Progression value={lvl} max={5} />
           </Box>
         </Button>
