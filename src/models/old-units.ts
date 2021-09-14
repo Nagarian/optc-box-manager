@@ -24,6 +24,7 @@ export type BaseUnit = {
   type: UnitType | [UnitType, UnitType]
   class: UnitClass | UnitClass[] | [UnitClass[], UnitClass[], UnitClass[]]
   stars: UnitStar
+  families: string[] | null
   cost: number
   combo: number
   slots: number
@@ -286,10 +287,10 @@ export type UnitFlags = {
   japOnly: 1 | undefined
 }
 
-export type UnitFamily = string | null | string[]
+export type UnitFamily = Record<number, string[]>
 
 export type ExtendedUnitFamily = {
-  name?: UnitFamily
+  name?: string[]
   id: number
 }
 

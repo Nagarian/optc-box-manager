@@ -263,7 +263,7 @@ export type UnitFlags = {
   japOnly: 1 | undefined
 }
 
-export type UnitFamily = string | null | string[]
+export type UnitFamily = string[]
 
 export type ExtendedUnitFamily = {
   name: UnitFamily

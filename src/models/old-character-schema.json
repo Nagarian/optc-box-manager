@@ -99,6 +99,19 @@
           },
           "type": "array"
         },
+        "families": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "family": {
           "$ref": "#/definitions/ExtendedUnitFamily"
         },
@@ -383,6 +396,7 @@
         "detail",
         "dropLocations",
         "evolutionMap",
+        "families",
         "family",
         "flags",
         "growth",
@@ -424,7 +438,10 @@
           "type": "number"
         },
         "name": {
-          "$ref": "#/definitions/UnitFamily"
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -764,22 +781,6 @@
         "evolvers"
       ],
       "type": "object"
-    },
-    "UnitFamily": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        },
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      ]
     },
     "UnitFestAbility": {
       "additionalProperties": false,

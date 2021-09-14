@@ -34,7 +34,7 @@ module.exports = {
   cooldowns: window.cooldowns,
   /** @type import('models/old-units').UnitFlags[] */
   flags: window.flags,
-  /** @type import('models/old-units').UnitFamily[] */
+  /** @type import('models/old-units').UnitFamily */
   families: window.families,
   /** @type import('models/old-units').BaseUnit[] */
   units: window.units,
