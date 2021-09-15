@@ -17,14 +17,12 @@ const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
 const getFamilyId = (
-  /** @type import('models/old-units').UnitFamily */ families,
-  /** @type number */ unitId,
+  /** @type import('models/old-units').BaseUnit[] */ units,
+  /** @type import('models/old-units').BaseUnit */ unit,
 ) => {
-  const family = families[unitId]
+  if (!unit.families) return -1
 
-  if (!family) return -1
-
-  return Object.values(families).findIndex(f => f.every(fam => family.includes(fam)))
+  return units.findIndex(u => u.families?.every(fam => unit.families?.includes(fam))) + 1
 }
 
 /** @returns { import('models/old-units').ExtendedUnit[] } */
@@ -33,7 +31,6 @@ function DBFactory () {
   const Evolutions = evolutions
   const Cooldowns = cooldowns
   const Flags = flags
-  const Families = families
   const EvolutionMap = evolutionMap()
 
   let db = units
@@ -57,8 +54,8 @@ function DBFactory () {
         detail: fixupDetail(Details[dbId]),
         flags,
         family: {
-          name: Families[unit.number] || undefined,
-          id: getFamilyId(Families, unit.number),
+          name: unit.families || undefined,
+          id: getFamilyId(units, unit),
         },
         pirateFest: unit.pirateFest,
         dropLocations: getDropLocations(dbId, flags, EvolutionMap),
