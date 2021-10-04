@@ -67,7 +67,7 @@ const globalOnly = {
   5063: 2909, // WB v2 6+
   5064: 3330, // Law/Chopper
   5065: 3383, // MOTNS
-  5066: 4999, // Makino
+  5066: 3478, // Makino
   5067: 3156, // Akainu v3
   5068: 3157,
 }
@@ -102,7 +102,6 @@ const remainingGlobalOnlyUnitMapping = {
   'Coby [EXTRA], Navy HQ Petty Officer': 4994,
   'War Hero Coby [EXTRA], Navy HQ Petty Officer': 4995,
   'Sergeant Helmeppo [EXTRA]': 4996,
-  'Makino, Proprietor of a Relaxed Tavern': 4999,
 }
 
 const checkGloJapMapping = (
