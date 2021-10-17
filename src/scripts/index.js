@@ -5,28 +5,53 @@ const Ajv = require('ajv').default
 const prettify = false
 
 function process (validator, units, excludeVS, name) {
-  let errors = []
+  const errors = []
   for (const unit of units) {
     if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria)) continue
 
     const isValid = validator(unit)
     if (!isValid) {
-      errors = [...errors, { id: unit.id, errors: validator.errors }]
+      for (const error of validator.errors) {
+        const add = error.params?.additionalProperty
+        errors.push({
+          id: unit.id,
+          message: `${error.message} ${add ? JSON.stringify(add) : ''}`,
+          path: error.instancePath,
+        })
+      }
     }
   }
 
-  const err = errors.flatMap(er => er.errors).map(e => e.dataPath + ' ' + e.message)
-
-  console.log([...(new Set(err))].map(e => [e, err.filter(er => er === e).length]))
-
-  console.log('unit in error:', errors.length)
-  console.log('errors count', errors.flatMap(er => er.errors).length)
-
-  writeFileSync(`./public/errors-${name}.json`, JSON.stringify(errors, null, 2))
+  validate(errors)
 
   writeFileSync(`./public/db-${name}.json`, prettify ? JSON.stringify(units, null, 2) : JSON.stringify(units))
 
   return errors
+}
+
+function validate (errors) {
+  console.log('unit in error:', new Set(errors.filter(e => e.id)).size)
+  console.log('errors count', errors.length)
+
+  const messageTypes = new Set(errors.map(x => x.message))
+
+  for (const messageType of messageTypes) {
+    const matching = errors.filter(e => e.message === messageType)
+
+    console.error(`- ${messageType} (${matching.length} occurence)`)
+
+    const groupByPath = new Set(matching.map(m => m.path))
+
+    for (const group of groupByPath) {
+      const ids = matching.filter(e => e.path === group).map(e => e.id)
+
+      console.error(
+        `  - ${group} (${ids.length} occurence) ${JSON.stringify(ids)}`,
+      )
+    }
+  }
+
+  return errors.length === 0
 }
 
 const oldSchema = require('../models/old-character-schema.json')
