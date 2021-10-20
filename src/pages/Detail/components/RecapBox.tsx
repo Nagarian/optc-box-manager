@@ -17,7 +17,7 @@ import PowerSocket from 'components/PowerSocket'
 import Progression, { Max } from 'components/Progression'
 import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
-import { ExtendedUnit, UnitClass } from 'models/units'
+import { ExtendedUnit, SingleUnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import {
   flexDirection,
@@ -28,6 +28,7 @@ import {
   GridColumnProps,
   gridRow,
   GridRowProps,
+  MarginProps,
   SpaceProps,
 } from 'styled-system'
 
@@ -196,38 +197,53 @@ function UnitClassesDisplayer ({
     return null
   }
 
-  if (typeof classes === 'string') {
-    return <UnitClassIcon type={classes} size="1" margin="1" />
-  }
-
-  if (classes.length < 3) {
-    return (
-      <Box display="flex">
-        {(classes as UnitClass[]).map(c => (
-          <UnitClassIcon key={c} type={c} size="1" margin="1" />
-        ))}
-      </Box>
-    )
+  if (typeof classes === 'string' || classes.length < 3) {
+    return <SingleUnitClassesDisplayer classes={classes as SingleUnitClass} />
   }
 
   return (
     <Box display="flex">
-      {(classes as UnitClass[][]).map((c, i) => (
-        <Box
+      {(classes as SingleUnitClass[]).map((c, i) => (
+        <SingleUnitClassesDisplayer
           key={i}
-          display="flex"
+          classes={c}
           flexDirection="column"
           marginLeft={i + 1 === classes.length ? 1 : 0}
-        >
-          {c.map(subClasses => (
-            <UnitClassIcon
-              key={subClasses}
-              type={subClasses}
-              size="1"
-              margin="0.2rem"
-            />
-          ))}
-        </Box>
+          small
+        />
+      ))}
+    </Box>
+  )
+}
+
+function SingleUnitClassesDisplayer ({
+  classes,
+  small,
+  ...props
+}: FlexDirectionProps &
+  MarginProps & {
+    classes: SingleUnitClass
+    small?: boolean
+  }) {
+  if (!classes) {
+    return null
+  }
+
+  if (typeof classes === 'string') {
+    return (
+      <UnitClassIcon type={classes} size="1" margin={small ? '0.2rem' : '1'} />
+    )
+  }
+
+  return (
+    <Box display="flex" {...props}>
+      {classes.map(c => (
+        <UnitClassIcon
+          key={c}
+          type={c}
+          size="1"
+          margin={small ? '0.2rem' : '1'}
+        />
       ))}
     </Box>
   )
