@@ -1,3 +1,12 @@
+## [2.3.10](https://github.com/Nagarian/optc-box-manager/compare/v2.3.9...v2.3.10) (2021-10-20)
+
+
+### Bug Fixes
+
+* issue with Usopp/Chopper class issue ([296cf0d](https://github.com/Nagarian/optc-box-manager/commit/296cf0dd0f1f81e12a862e3dadf9f78a1da19615))
+
+
+
 ## [2.3.9](https://github.com/Nagarian/optc-box-manager/compare/v2.3.8...v2.3.9) (2021-09-14)
 
 
@@ -54,15 +63,6 @@
 ### Bug Fixes
 
 * handle new potential "Last Tap" ([42ece40](https://github.com/Nagarian/optc-box-manager/commit/42ece40d52165a2b13fe37802021901b6ab905ee))
-
-
-
-## [2.3.3](https://github.com/Nagarian/optc-box-manager/compare/v2.3.2...v2.3.3) (2021-04-28)
-
-
-### Bug Fixes
-
-* handle new potential "Reduce Healing Reduction duration" ([85a78a6](https://github.com/Nagarian/optc-box-manager/commit/85a78a601080d48c4ff4f49ed8b6ca63ea141e83))
 
 
 
