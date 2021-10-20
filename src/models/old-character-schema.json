@@ -35,20 +35,11 @@
         "class": {
           "anyOf": [
             {
-              "$ref": "#/definitions/UnitClass"
+              "$ref": "#/definitions/SingleUnitClass"
             },
             {
               "items": {
-                "$ref": "#/definitions/UnitClass"
-              },
-              "type": "array"
-            },
-            {
-              "items": {
-                "items": {
-                  "$ref": "#/definitions/UnitClass"
-                },
-                "type": "array"
+                "$ref": "#/definitions/SingleUnitClass"
               },
               "maxItems": 3,
               "minItems": 3,
@@ -484,6 +475,19 @@
         "Last Tap"
       ],
       "type": "string"
+    },
+    "SingleUnitClass": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/UnitClass"
+        },
+        {
+          "items": {
+            "$ref": "#/definitions/UnitClass"
+          },
+          "type": "array"
+        }
+      ]
     },
     "UnitClass": {
       "enum": [

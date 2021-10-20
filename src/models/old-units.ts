@@ -19,10 +19,12 @@ export type UnitStar = typeof Rarity[number]
 export const UnitPirateFestStyles = ['ATK', 'DEF', 'RCV', 'DBF', 'SPT'] as const
 export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
 
+export type SingleUnitClass = UnitClass | UnitClass[]
+
 export type BaseUnit = {
   name: string
   type: UnitType | [UnitType, UnitType]
-  class: UnitClass | UnitClass[] | [UnitClass[], UnitClass[], UnitClass[]]
+  class: SingleUnitClass | [SingleUnitClass, SingleUnitClass, SingleUnitClass]
   stars: UnitStar
   families: string[] | null
   cost: number
