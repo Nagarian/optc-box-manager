@@ -1,18 +1,9 @@
 import styled from '@emotion/styled'
 import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
-import ImageInput from 'components/forms/ImageInput'
-import Image from 'components/Image'
-import { SubTitle, Text } from 'components/Title'
+import { SubTitle } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
-import {
-  ColorUnitTypes,
-  ExtendedDrop,
-  ExtendedDropKeys,
-  ExtendedUnit,
-  UnitType,
-} from 'models/units'
-import { BookQuestDrops } from 'services/drops'
+import { ExtendedDrop, ExtendedDropKeys, ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
 
 export type BookDrop = {
@@ -73,26 +64,6 @@ export function ByDropInput ({
           </ChoiceInput>
         ))}
       </LabelDisplayer>
-
-      <SubTitle fontSize="2">Manuals Quests</SubTitle>
-      {ColorUnitTypes.map(type => (
-        <ByBookQuest
-          key={type}
-          type={type}
-          onChange={selected =>
-            onChange({
-              ...criteria,
-              bookDrop: {
-                eventIds: selected,
-                unitIds: BookQuestDrops.filter(q =>
-                  selected.includes(q.id),
-                ).flatMap(q => q.manual),
-              },
-            })
-          }
-          selected={criteria?.bookDrop?.eventIds ?? []}
-        />
-      ))}
     </Box>
   )
 }
@@ -105,45 +76,3 @@ const LabelDisplayer = styled.div`
     padding: 0.5rem 0;
   }
 `
-
-function ByBookQuest ({
-  selected,
-  type,
-  onChange,
-}: {
-  type: UnitType
-  selected: string[]
-  onChange: (selected: string[]) => void
-}) {
-  return (
-    <>
-      <Text my="1">{type} Manual Acquirement Quests</Text>
-      <Box display="flex" overflowX="auto">
-        {BookQuestDrops.filter(quest => quest.category === type).map(
-          dropEvent => (
-            <ImageInput
-              key={dropEvent.id}
-              type="checkbox"
-              name="bookDrop"
-              checked={selected.includes(dropEvent.id)}
-              onChange={() =>
-                onChange(
-                  selected.includes(dropEvent.id)
-                    ? selected.filter(s => s !== dropEvent.id)
-                    : [...selected, dropEvent.id],
-                )
-              }
-            >
-              <Image
-                src={dropEvent.icon}
-                alt={dropEvent.name}
-                title={dropEvent.name}
-                size="3"
-              />
-            </ImageInput>
-          ),
-        )}
-      </Box>
-    </>
-  )
-}
