@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import Image from 'components/Image'
 import { PowerSocketKey } from 'models/units'
+import { memo } from 'react'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 import ImageFrame from './images/teamskill_iconframe_l.png'
@@ -62,7 +63,7 @@ const Container = styled('div', cleanStyledSystem)<SizeProps & { isFocused: bool
   }
 `
 
-export default function PowerSocket ({
+function PowerSocket ({
   type,
   size = 3,
   hideChrome,
@@ -79,3 +80,4 @@ export default function PowerSocket ({
     </Container>
   )
 }
+export default memo(PowerSocket)

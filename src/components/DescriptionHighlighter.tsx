@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
-import { ReactNode } from 'react'
+import { memo, ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 
@@ -9,7 +9,7 @@ export type DescriptionHighlighterProps = {
   value?: ReactNode
   originalDiff?: string
 }
-export default function DescriptionHighlighter ({
+function DescriptionHighlighter ({
   value,
   originalDiff,
 }: DescriptionHighlighterProps) {
@@ -47,12 +47,14 @@ export default function DescriptionHighlighter ({
 
   return (
     <ReactMarkdown
-      children={parts}
+      children={parts!}
       rehypePlugins={[rehypeRaw]}
       components={renderers}
     />
   )
 }
+
+export default memo(DescriptionHighlighter)
 
 const Orb = styled.span`
   display: inline-block;
