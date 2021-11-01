@@ -1,3 +1,14 @@
+## [2.3.11](https://github.com/Nagarian/optc-box-manager/compare/v2.3.10...v2.3.11) (2021-11-01)
+
+
+### Bug Fixes
+
+* improve CharacterBox performance ([fe40f27](https://github.com/Nagarian/optc-box-manager/commit/fe40f274191c2755f6bc33ccdf16148059905a56))
+* **detail:** improve performance ([891c2d5](https://github.com/Nagarian/optc-box-manager/commit/891c2d579638247558c2c38c5e3ea5a4c9a42a21))
+* **filter:** remove Manuals Quests since they are no longer available in-game ([7e5a2b2](https://github.com/Nagarian/optc-box-manager/commit/7e5a2b22c3e259e022e570e452788222725a00ca))
+
+
+
 ## [2.3.10](https://github.com/Nagarian/optc-box-manager/compare/v2.3.9...v2.3.10) (2021-10-20)
 
 
@@ -54,15 +65,6 @@
 ### Bug Fixes
 
 * replace styled-components dependency with emotion ([be863e5](https://github.com/Nagarian/optc-box-manager/commit/be863e507a84de4695eaa2c11c4357a473584122))
-
-
-
-## [2.3.4](https://github.com/Nagarian/optc-box-manager/compare/v2.3.3...v2.3.4) (2021-05-22)
-
-
-### Bug Fixes
-
-* handle new potential "Last Tap" ([42ece40](https://github.com/Nagarian/optc-box-manager/commit/42ece40d52165a2b13fe37802021901b6ab905ee))
 
 
 
