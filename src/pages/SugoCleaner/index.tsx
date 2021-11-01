@@ -282,7 +282,7 @@ function SugoCleanerList ({
             key={i}
             unit={unit}
             size="3"
-            onClick={unit => action(unit)}
+            onClick={action}
           />
         ))}
 

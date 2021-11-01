@@ -18,9 +18,16 @@ import Support from './images/support.png'
 import SupportMax from './images/supportmax.png'
 
 type CharacterBoxProps = {
-  unit?: ExtendedUnit
-  userUnit?: UserUnit
+  unit: ExtendedUnit
+  userUnit?: never
   onClick?: (unit: ExtendedUnit) => void
+  displayer?: SearchDisplayerCriteria
+}
+
+type UserCharacterBoxProps = {
+  unit?: never
+  userUnit: UserUnit
+  onClick?: (unit: UserUnit) => void
   displayer?: SearchDisplayerCriteria
 }
 
@@ -74,7 +81,7 @@ const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
   position: relative;
   display: flex;
   ${afterCss}
-  ${p => p.rainbow && rainbowCss}
+  ${p => p.rainbow && rainbowCss(p)}
   ${gridArea}
   ${place}
 `
@@ -86,7 +93,7 @@ export default function CharacterBox ({
   displayer,
   size = '4',
   ...rest
-}: CharacterBoxProps & CharacterBoxStyledProps) {
+}: (CharacterBoxProps | UserCharacterBoxProps) & CharacterBoxStyledProps) {
   const unit: ExtendedUnit = userUnit?.unit ?? u!
   const support = userUnit?.support?.lvl
   const ink = userUnit?.ink?.lvl
@@ -102,7 +109,7 @@ export default function CharacterBox ({
       ink={ink === 2 ? InkMax : ink === 1 ? Ink : undefined}
       rainbow={getRainbowState(userUnit)}
       title={`${unit.id} - ${unit.name}`}
-      onClick={() => onClick?.(unit)}
+      onClick={() => onClick?.(userUnit ?? unit as any)}
     >
       <Image src={unit.images.thumbnail} alt={unit.name} size={size} />
       <CottonCandyDisplayer cc={userUnit?.cc} />
@@ -130,7 +137,7 @@ function getRainbowState (userUnit?: UserUnit) {
 
   if (
     userUnit.limitBreak.lvl >= userUnit.limitBreak.lvlMax &&
-    userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
+    userUnit.potentials.every(p => !p.keyState && p.lvl === 5)
   ) {
     return 'rainbow'
   }

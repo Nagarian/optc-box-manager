@@ -85,7 +85,7 @@ export default function RecapBox ({
         alignItems="center"
       >
         <SubTitle>N°{unit.id}</SubTitle>
-        <CharacterBox unit={unit} userUnit={userUnit} />
+        <CharacterBox userUnit={userUnit} />
         {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <Text margin="1" textAlign="center">
           {unit.stars}⭐ - {unit.dropLocations.join(', ')}
@@ -257,13 +257,12 @@ export function RecapBoxLight ({
   userUnit: UserUnit
   onClick?: (unit: UserUnit) => void
 } & SpaceProps) {
-  const { unit, potentials, special, support, pirateFest } = userUnit
+  const { potentials, special, support, pirateFest } = userUnit
 
   return (
     <Box display="flex" {...rest}>
       <CharacterBox
         gridArea="icon"
-        unit={unit}
         userUnit={userUnit}
         onClick={() => onClick?.(userUnit)}
         placeSelf="center"

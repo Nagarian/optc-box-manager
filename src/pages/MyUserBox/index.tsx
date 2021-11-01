@@ -50,7 +50,7 @@ export default function MyUserBox ({
             key={userUnit.id}
             userUnit={userUnit}
             displayer={search?.displayer}
-            onClick={() => onShowDetail(userUnit)}
+            onClick={onShowDetail}
           />
         ))}
       </ResultList>
