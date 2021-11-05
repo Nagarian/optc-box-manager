@@ -1,3 +1,12 @@
+## [2.3.12](https://github.com/Nagarian/optc-box-manager/compare/v2.3.11...v2.3.12) (2021-11-05)
+
+
+### Bug Fixes
+
+* **db:** issue with Ashura Doji remapped as Akainu ([54ba16d](https://github.com/Nagarian/optc-box-manager/commit/54ba16d0eb7dfa8e3c9a8ed0147acf7620105ea7))
+
+
+
 ## [2.3.11](https://github.com/Nagarian/optc-box-manager/compare/v2.3.10...v2.3.11) (2021-11-01)
 
 
@@ -56,15 +65,6 @@
 ### Bug Fixes
 
 * **detail:** icon spacing issue ([385df54](https://github.com/Nagarian/optc-box-manager/commit/385df54409383abccde78dba47dfcfdb55111680))
-
-
-
-## [2.3.5](https://github.com/Nagarian/optc-box-manager/compare/v2.3.4...v2.3.5) (2021-05-30)
-
-
-### Bug Fixes
-
-* replace styled-components dependency with emotion ([be863e5](https://github.com/Nagarian/optc-box-manager/commit/be863e507a84de4695eaa2c11c4357a473584122))
 
 
 
