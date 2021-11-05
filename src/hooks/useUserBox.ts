@@ -7,11 +7,6 @@ import { useOptcDb } from './useOptcDb'
 
 const userBoxKey = 'userBox'
 
-const fixupMigrationIdChanged : { [key: number]: number } = {
-  3384: 3156,
-  3385: 3157,
-}
-
 const reviver = (units: ExtendedUnit[] = []) =>
   units.length === 0
     ? undefined
@@ -19,9 +14,9 @@ const reviver = (units: ExtendedUnit[] = []) =>
         if (key !== 'unit') return value
 
         if (typeof value === 'number') {
-          const searchValue = fixupMigrationIdChanged[value] || value
-          return units.find(x => x.id === searchValue) ??
-            units.find(x => x.dbId === searchValue)
+          return (
+            units.find(x => x.id === value) ?? units.find(x => x.dbId === value)
+          )
         }
 
         return value
