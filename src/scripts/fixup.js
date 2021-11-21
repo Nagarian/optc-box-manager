@@ -120,7 +120,7 @@ function fixupEvolution (
       ...unit.evolution,
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
-        : globalOnlyReverseMap[unit.evolution.evolution],
+        : globalOnlyReverseMap[unit.evolution.evolution] ?? unit.evolution.evolution,
     },
   }
 }
@@ -213,23 +213,6 @@ function fixupSpecificIssue (
   return unit
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
-function fixupSpecificIssuePostGloFix (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
-  /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
-) {
-  if (unit.id === 5022) {
-    if (unit.evolution) {
-      unit.evolution = undefined
-    } else {
-      console.warn('issue with unit 5022 has been fixed')
-    }
-  }
-
-  return unit
-}
-
 function removeProp (
   /** @type any */ obj,
   /** @type string */ badName,
@@ -261,6 +244,5 @@ module.exports = {
   fixupEvolution,
   fixupFlags,
   fixupSpecificIssue,
-  fixupSpecificIssuePostGloFix,
   removeProp,
 }

@@ -22,9 +22,9 @@ function process (validator, units, excludeVS, name) {
     }
   }
 
-  validate(errors)
-
   writeFileSync(`./public/db-${name}.json`, prettify ? JSON.stringify(units, null, 2) : JSON.stringify(units))
+
+  validate(errors)
 
   return errors
 }
