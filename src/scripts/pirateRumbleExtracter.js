@@ -134,7 +134,7 @@ filters.abilityToString = function () {
           e = 'UNKNOWN EFFECT ' + JSON.stringify(effect)
           break
       }
-      retVal += e + `${targetToString(effect.targeting)}${rangeToString(effect.range)}${effect.duration ? ' for ' + effect.duration + ' seconds' : ''}.\n`
+      retVal += e + `${targetToString(effect.targeting)}${rangeToString(effect.range)}${effect.duration ? ' for ' + effect.duration + ' seconds' : ''}` + (effect.repeat ? ` ${new Intl.NumberFormat().format(effect.repeat)} times` : '') + '.\n'
     }
     return retVal
   }
