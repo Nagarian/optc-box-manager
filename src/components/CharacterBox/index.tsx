@@ -137,7 +137,7 @@ function getRainbowState (userUnit?: UserUnit) {
 
   if (
     userUnit.limitBreak.lvl >= userUnit.limitBreak.lvlMax &&
-    userUnit.potentials.every(p => !p.keyState && p.lvl === 5)
+    userUnit.potentials.filter(p => !p.keyState).every(p => p.lvl === 5)
   ) {
     return 'rainbow'
   }
