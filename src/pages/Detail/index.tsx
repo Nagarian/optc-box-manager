@@ -38,11 +38,12 @@ export default function Detail ({
   const { unit } = userUnit
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
 
-  const evolutions = (!unit.evolution?.evolution
-    ? []
-    : Array.isArray(unit.evolution.evolution)
-      ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
-      : [units.find(u => u.id === unit.evolution!.evolution)]
+  const evolutions = (
+    !unit.evolution?.evolution
+      ? []
+      : Array.isArray(unit.evolution.evolution)
+        ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
+        : [units.find(u => u.id === unit.evolution!.evolution)]
   ).filter(Boolean) as ExtendedUnit[]
 
   const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
@@ -55,12 +56,12 @@ export default function Detail ({
       .slice(0, potentialUnlockedLength)
       .filter(p => p.lvl === 0).length
       ? userUnit.potentials.map((p, i) =>
-          i < potentialUnlockedLength && p.lvl === 0
-            ? { ...p, lvl: 1 }
-            : i >= potentialUnlockedLength && p.lvl === 1
-              ? { ...p, lvl: 0 }
-              : p,
-        )
+        i < potentialUnlockedLength && p.lvl === 0
+          ? { ...p, lvl: 1 }
+          : i >= potentialUnlockedLength && p.lvl === 1
+            ? { ...p, lvl: 0 }
+            : p,
+      )
       : userUnit.potentials
 
     setUserUnit({

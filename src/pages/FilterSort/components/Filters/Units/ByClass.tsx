@@ -7,18 +7,17 @@ export interface ByClassCriteria {
   values: UnitClass[]
 }
 
-export const ByClassFilter = (criteria: ByClassCriteria) => (
-  unit: ExtendedUnit,
-) =>
-  criteria.values.some(crit =>
-    Array.isArray(unit.class)
-      ? unit.class.some((subClass: UnitClass[] | UnitClass) =>
+export const ByClassFilter =
+  (criteria: ByClassCriteria) => (unit: ExtendedUnit) =>
+    criteria.values.some(crit =>
+      Array.isArray(unit.class)
+        ? unit.class.some((subClass: UnitClass[] | UnitClass) =>
           Array.isArray(subClass)
             ? subClass.some(dualUnitClass => dualUnitClass === crit)
             : subClass === crit,
         )
-      : unit.class === crit,
-  )
+        : unit.class === crit,
+    )
 
 export function ByClassInput ({
   criteria,

@@ -59,9 +59,9 @@ export default function Changelog ({
 
   const displayed = onlyUnseen
     ? releases.slice(
-        0,
-        latestSeen && releases.findIndex(r => r.id === latestSeen),
-      )
+      0,
+      latestSeen && releases.findIndex(r => r.id === latestSeen),
+    )
     : releases
 
   if (displayed.length === 0) {

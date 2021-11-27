@@ -64,8 +64,8 @@ export default function LimitBreakEdit ({
                 ? '1rem'
                 : ['cooldown'].includes(type)
                     ? types.filter(t => t.type !== 'stat').length > 10
-                        ? '5rem'
-                        : '1rem'
+                      ? '5rem'
+                      : '1rem'
                     : undefined
         }
       />
