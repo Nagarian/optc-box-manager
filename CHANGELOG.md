@@ -1,3 +1,12 @@
+## [2.3.13](https://github.com/Nagarian/optc-box-manager/compare/v2.3.12...v2.3.13) (2021-11-27)
+
+
+### Bug Fixes
+
+* **Box:** issue with Character Limit Break rainbow state when they have a third Potential Ability ([95175fe](https://github.com/Nagarian/optc-box-manager/commit/95175fee4db85fd137720d1ef4503f7a3e114e75))
+
+
+
 ## [2.3.12](https://github.com/Nagarian/optc-box-manager/compare/v2.3.11...v2.3.12) (2021-11-05)
 
 
@@ -56,15 +65,6 @@
 * handle new potential "Reduce Slot Barrier duration" ([0229c4d](https://github.com/Nagarian/optc-box-manager/commit/0229c4dd6240d4a688e52f25d1a9b1288f6bc217))
 * spacing css issue again ([d8ed05e](https://github.com/Nagarian/optc-box-manager/commit/d8ed05e2d1e86c6f6b0c0f1dbc73a03a958a6c1f))
 * **box:** issue with Info Displayer css ([e043adb](https://github.com/Nagarian/optc-box-manager/commit/e043adb608d19b52531f51ee9bb83246ee5ea0b0))
-
-
-
-## [2.3.6](https://github.com/Nagarian/optc-box-manager/compare/v2.3.5...v2.3.6) (2021-06-03)
-
-
-### Bug Fixes
-
-* **detail:** icon spacing issue ([385df54](https://github.com/Nagarian/optc-box-manager/commit/385df54409383abccde78dba47dfcfdb55111680))
 
 
 
