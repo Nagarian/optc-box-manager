@@ -6,7 +6,7 @@ import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { getLimitType } from 'services/limit'
 import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
@@ -37,14 +37,16 @@ export default function Detail ({
   const [userUnit, setUserUnit] = useState<UserUnit>(original)
   const { unit } = userUnit
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
-
-  const evolutions = (
-    !unit.evolution?.evolution
-      ? []
-      : Array.isArray(unit.evolution.evolution)
-        ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
-        : [units.find(u => u.id === unit.evolution!.evolution)]
-  ).filter(Boolean) as ExtendedUnit[]
+  const evolutions = useMemo(
+    () =>
+      (!unit.evolution?.evolution
+        ? []
+        : Array.isArray(unit.evolution.evolution)
+          ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
+          : [units.find(u => u.id === unit.evolution!.evolution)]
+      ).filter(Boolean) as ExtendedUnit[],
+    [unit.evolution, units],
+  )
 
   const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
     const potentialUnlockedLength = unit.detail
