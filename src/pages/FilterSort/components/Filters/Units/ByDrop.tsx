@@ -6,22 +6,12 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedDrop, ExtendedDropKeys, ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
 
-export type BookDrop = {
-  eventIds: string[]
-  unitIds: number[]
-}
-
 export interface ByDropCriteria {
   dropLocations?: ExtendedDrop[]
-  bookDrop?: BookDrop
 }
 
 export const ByDropFilter = (criteria: ByDropCriteria) =>
   BooleanFilterMapper(
-    [
-      criteria.bookDrop?.unitIds?.length,
-      (unit: ExtendedUnit) => criteria.bookDrop!.unitIds.includes(unit.dbId),
-    ],
     [
       criteria.dropLocations?.length,
       (unit: ExtendedUnit) =>
