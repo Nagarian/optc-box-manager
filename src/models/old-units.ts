@@ -77,6 +77,7 @@ export type BaseUnit = {
   } | null
   incomplete?: boolean
   preview?: boolean
+  support?: undefined
 }
 
 export type LimitBreak = {

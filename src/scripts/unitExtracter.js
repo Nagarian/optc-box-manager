@@ -35,7 +35,7 @@ function DBFactory () {
   let db = units
     .filter(unit => unit.name)
     // .filter(unit => unit.class !== 'Booster' && unit.class !== 'Evolver')
-    .map(unit => {
+    .map(({ support, ...unit }) => {
       const dbId = unit.number + 1
       const gameId = globalOnlyWrongId[dbId] ?? dbId
       const flags = Flags[dbId] ?? {}
