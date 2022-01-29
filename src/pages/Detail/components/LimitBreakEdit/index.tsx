@@ -188,7 +188,7 @@ function SailorDescription (lockedCount: number, sailor: UnitSailor) {
   const sailors: string[] = []
 
   const base = anysailor.combined ?? anysailor.base ?? (anysailor as string)
-  if (base !== 'None') {
+  if (typeof base === 'string') {
     sailors.push(base)
   }
 
