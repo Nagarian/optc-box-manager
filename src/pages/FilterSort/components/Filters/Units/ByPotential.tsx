@@ -7,7 +7,6 @@ export interface ByPotentialCriteria {
   values: PotentialKey[]
 }
 const renamedPotentials: Record<string, PotentialKey> = {
-  'Nutrition/Hunger reduction': 'Nutrition/Reduce Hunger duration',
 }
 
 export const ByPotentialFilter = (criteria: ByPotentialCriteria) => (

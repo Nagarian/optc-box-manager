@@ -256,7 +256,6 @@ export function resync (userUnit: UserUnit) {
 
   if (!arrayEqual(userUnit.potentials, compare.potentials)) {
     const renamedPotentials: Record<string, PotentialKey> = {
-      'Nutrition/Hunger reduction': 'Nutrition/Reduce Hunger duration',
     }
 
     updated.potentials = compare.potentials.map(({ type, lvl }) => {

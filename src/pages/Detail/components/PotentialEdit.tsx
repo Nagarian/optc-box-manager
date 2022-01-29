@@ -49,7 +49,6 @@ export default function PotentialEdit ({
   }
 
   const renamedPotentials: Partial<Record<PotentialKey, string>> = {
-    'Nutrition/Reduce Hunger duration': 'Nutrition/Hunger reduction',
   }
 
   return (
