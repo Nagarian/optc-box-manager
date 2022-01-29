@@ -147,22 +147,17 @@ function fixupSpecificIssue (
   /** @type number */ index,
   /** @type import("models/old-units").ExtendedUnit[] */ units,
 ) {
-  if (unit.id === 1538) {
-    if (unit.detail.limit?.[14].description.includes('Acquire Potential 2')) {
+  if (unit.id === 2831 || unit.id === 2999 || unit.id === 3098) {
+    // @ts-ignore
+    if (unit.detail.sailor.character1 === null) {
       // @ts-ignore
-      unit.detail.limit[14].description = `Acquire Sailor Ability 2: ${unit.detail.sailor.level1}`
+      delete unit.detail.sailor.character1
+      // @ts-ignore
+      delete unit.detail.sailor.character2
+      // @ts-ignore
+      delete unit.detail.sailor.combined
     } else {
-      console.warn('issue with unit 1538 has been fixed')
-    }
-  }
-
-  if (unit.id === 3326) {
-  // @ts-ignore
-    if (unit.detail.sailor["global"]) {
-      // @ts-ignore
-      unit.detail.sailor.base = "global only: " + unit.detail.sailor.global
-      // @ts-ignore
-      delete unit.detail.sailor.global
+      console.warn(`issue with unit ${unit.id} has been fixed`)
     }
   }
 
