@@ -1,3 +1,12 @@
+## [2.3.14](https://github.com/Nagarian/optc-box-manager/compare/v2.3.13...v2.3.14) (2022-01-29)
+
+
+### Bug Fixes
+
+* **detail:** None value removing from sailor (following DB refactoring) ([101134d](https://github.com/Nagarian/optc-box-manager/commit/101134dc1553651af876bccd26e83e74580331f0))
+
+
+
 ## [2.3.13](https://github.com/Nagarian/optc-box-manager/compare/v2.3.12...v2.3.13) (2021-11-27)
 
 
@@ -54,17 +63,6 @@
 * **filter:** remove invalid dual and versus Book Quest category ([25c683b](https://github.com/Nagarian/optc-box-manager/commit/25c683b3f8134a62774e33a85e395430c59ad890))
 * remove Discord link ([a6da152](https://github.com/Nagarian/optc-box-manager/commit/a6da152dc0474496c37660fe2903beb1d8d62beb))
 * **bulk-edit:** CSS performance issue when too many units have CC ([f601c1a](https://github.com/Nagarian/optc-box-manager/commit/f601c1aab67cb99490991156dc623b639e3addc6))
-
-
-
-## [2.3.7](https://github.com/Nagarian/optc-box-manager/compare/v2.3.6...v2.3.7) (2021-06-16)
-
-
-### Bug Fixes
-
-* handle new potential "Reduce Slot Barrier duration" ([0229c4d](https://github.com/Nagarian/optc-box-manager/commit/0229c4dd6240d4a688e52f25d1a9b1288f6bc217))
-* spacing css issue again ([d8ed05e](https://github.com/Nagarian/optc-box-manager/commit/d8ed05e2d1e86c6f6b0c0f1dbc73a03a958a6c1f))
-* **box:** issue with Info Displayer css ([e043adb](https://github.com/Nagarian/optc-box-manager/commit/e043adb608d19b52531f51ee9bb83246ee5ea0b0))
 
 
 
