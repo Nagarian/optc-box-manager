@@ -23,7 +23,7 @@ function Wrapper ({
         onChange={e =>
           onChange({
             lvl: Number(e.target.value),
-            type: type,
+            type,
             keyState:
               keyState && (Number(e.target.value) > 0 ? 'unlocked' : 'locked'),
           })

@@ -16,7 +16,7 @@ export default function usePagination (itemCount: number, itemPerPage: number) {
   }, [page])
 
   return {
-    page: page,
+    page,
     slice: [(page - 1) * itemPerPage, page * itemPerPage],
     paginationProps: {
       current: page,

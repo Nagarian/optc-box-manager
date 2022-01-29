@@ -1,5 +1,6 @@
 {
   "extends": ["react-app", "standard"],
+  "root": true,
   "rules": {
     "comma-dangle": ["error", "always-multiline"],
     "no-unused-vars": "off",
