@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
 import { memo, ReactNode } from 'react'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { Components } from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 
 export type DescriptionHighlighterProps = {
@@ -73,8 +73,8 @@ const DiffHiglighter = styled.em`
   color: ${themeGet('colors.green')};
 `
 
-const renderers = {
-  p: FakeParagraph,
+const renderers: Components = {
+  p: FakeParagraph as any,
   a: ({ href, ...p }: any) => <Orb {...p}>{href?.replace(/\[|\]/g, '')}</Orb>,
-  em: DiffHiglighter,
+  em: DiffHiglighter as any,
 }

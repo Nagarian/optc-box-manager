@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
-import { Components } from 'react-markdown/src/ast-to-react'
+import { Components } from 'react-markdown'
 
 const ListItem = styled.li<{ ordered: boolean }>`
   margin-left: ${p => p.ordered && '2rem'};
@@ -32,5 +32,5 @@ export const ReactMarkdownRenderers: Components = {
     return <ListItem {...p} />
   },
   // listItem: ListItem,
-  img: Img,
+  img: Img as any,
 }

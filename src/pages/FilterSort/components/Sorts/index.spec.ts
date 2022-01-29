@@ -1,7 +1,7 @@
 import { unitsMock } from 'mocks/UnitMock'
 import { ExtendedUnit } from 'models/units'
 import { byId } from './Units/ByCommon'
-import byRarity from './Units/ByRarity'
+import { byRarity } from './Units/ByRarity'
 import byType from './Units/ByType'
 
 describe('UnitSort', () => {
@@ -17,7 +17,7 @@ describe('UnitSort', () => {
     it('should order by rarity', () => {
       expect(
         unitsMock()
-          .sort(byRarity)
+          .sort(byRarity({ truncated: false }) as any)
           .map(u => u.stars),
       ).toStrictEqual([5, 6, 6, '6+'])
     })
