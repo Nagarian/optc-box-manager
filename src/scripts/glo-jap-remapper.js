@@ -93,8 +93,8 @@ const gloToJapConverter = Object.entries(globalOnly)
 const remainingGlobalOnlyUnitMapping = {
   'Monkey D. Luffy - Kung Fu Training': 4986,
   'Monkey D. Luffy - To Become a True Kung Fu Master': 4987,
-  'Nefertari Vivi - Wake of an Endless Dream - Princess of Alabasta': 4988,
-  'Nefertari Vivi - Wake of an Endless Dream - Pirate Queen': 4989,
+  'Nefeltari Vivi - Wake of an Endless Dream - Princess of Alabasta': 4988,
+  'Nefeltari Vivi - Wake of an Endless Dream - Pirate Queen': 4989,
   'Portgas D. Ace - Wake of an Endless Dream - Whitebeard Pirates': 4990,
   'Portgas D. Ace - Wake of an Endless Dream - High Seas Pirate': 4991,
   'Charlotte Pudding - White Summer Sweets': 4992,
