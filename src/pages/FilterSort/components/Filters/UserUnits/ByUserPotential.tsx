@@ -8,8 +8,6 @@ import { Text } from 'components/Title'
 import ChoiceInput from 'components/forms/ChoiceInput'
 
 export const PotentialStateKeys = [
-  'locked',
-  'unlocked',
   'ongoing',
   'maxed',
 ] as const
@@ -21,10 +19,6 @@ export type ByUserPotentialCriteria = {
 
 const compareLvlToState = (state: PotentialState, lvl: number) => {
   switch (state) {
-    case 'locked':
-      return lvl === 0
-    case 'unlocked':
-      return lvl > 0
     case 'ongoing':
       return lvl > 0 && lvl < 5
     case 'maxed':

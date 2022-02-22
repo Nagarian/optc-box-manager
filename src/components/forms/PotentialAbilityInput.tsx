@@ -15,7 +15,7 @@ export default function PotentialAbilityInput ({
   return (
     <RangeInput
       {...p}
-      min={0}
+      min={1}
       max={5}
       thumbImage={PotentialAbilityToImage(variant)}
     />

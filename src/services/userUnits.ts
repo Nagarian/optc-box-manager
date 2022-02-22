@@ -21,7 +21,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     potentials:
       unit.detail.potential?.map(potential => ({
         type: potential.Name,
-        lvl: 0,
+        lvl: 1,
         keyState: getPotentialState(potential.Name, 0, unit.detail.limit),
       })) ?? [],
     limitBreak: UserUnitLimitBreakFactory(unit.detail.limit),
@@ -265,7 +265,7 @@ export function resync (userUnit: UserUnit) {
           p =>
             (renamedPotentials[p.type] ?? p.type) ===
             (renamedPotentials[type] ?? type),
-        )?.lvl ?? lvl
+        )?.lvl || lvl
       return {
         type: renamedPotentials[type] ?? type,
         lvl: updatedLvl,
