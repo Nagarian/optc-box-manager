@@ -85,7 +85,7 @@ export type LimitBreak = {
 }
 
 export const Potentials = [
-  'Enrage',
+  'Enrage/Reduce Increase Damage Taken duration',
   'Critical Hit',
   'Reduce Slot Bind duration',
   'Reduce No Healing duration',

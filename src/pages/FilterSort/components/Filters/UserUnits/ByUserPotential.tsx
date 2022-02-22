@@ -61,7 +61,7 @@ export function ByUserPotentialInput ({
             checked={selectedState === stateKey}
             onChange={e =>
               onChange({
-                [selectedPotential ?? 'Enrage']: stateKey,
+                [selectedPotential ?? 'Enrage/Reduce Increase Damage Taken duration']: stateKey,
               })
             }
           >

@@ -256,6 +256,7 @@ export function resync (userUnit: UserUnit) {
 
   if (!arrayEqual(userUnit.potentials, compare.potentials)) {
     const renamedPotentials: Record<string, PotentialKey> = {
+      Enrage: 'Enrage/Reduce Increase Damage Taken duration',
     }
 
     updated.potentials = compare.potentials.map(({ type, lvl }) => {

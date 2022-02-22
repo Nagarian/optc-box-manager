@@ -17,7 +17,7 @@ function fixupDetail (
   if (detail.potential?.length) {
     /** @type PotentialRenamedHash */
     const renamedPotentials = {
-      'Enrage/Reduce Increase Damage Taken duration': 'Enrage',
+      Enrage: 'Enrage/Reduce Increase Damage Taken duration',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
@@ -226,10 +226,10 @@ function removeProp (
  */
 // @ts-ignore
 const copy = (unit, name) => ({
-  name: name,
+  name,
   class: unit.class,
   detail: { ...unit.detail },
-  images: { ...unit.images }
+  images: { ...unit.images },
 })
 
 module.exports = {

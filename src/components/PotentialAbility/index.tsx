@@ -35,7 +35,7 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill03
     case 'Pinch Healing':
       return ImageSkill04
-    case 'Enrage':
+    case 'Enrage/Reduce Increase Damage Taken duration':
       return ImageSkill05
     case 'Critical Hit':
       return ImageSkill06

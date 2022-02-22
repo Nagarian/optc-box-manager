@@ -89,7 +89,7 @@ export const Potentials = [
   'Reduce No Healing duration',
   'Barrier Penetration',
   'Pinch Healing',
-  'Enrage',
+  'Enrage/Reduce Increase Damage Taken duration',
   'Critical Hit',
   'Cooldown Reduction',
   'Double Special Activation',
