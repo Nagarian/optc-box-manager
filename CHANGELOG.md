@@ -1,3 +1,12 @@
+## [2.4.1](https://github.com/Nagarian/optc-box-manager/compare/v2.4.0...v2.4.1) (2022-02-28)
+
+
+### Bug Fixes
+
+* **box:** issue with potential default to 1 update ([0b8d5ef](https://github.com/Nagarian/optc-box-manager/commit/0b8d5ef7bf62cdb3fd6c690cb776ec28ed09dc87))
+
+
+
 # [2.4.0](https://github.com/Nagarian/optc-box-manager/compare/v2.3.14...v2.4.0) (2022-02-28)
 
 
@@ -53,16 +62,6 @@
 ### Bug Fixes
 
 * issue with Usopp/Chopper class issue ([296cf0d](https://github.com/Nagarian/optc-box-manager/commit/296cf0dd0f1f81e12a862e3dadf9f78a1da19615))
-
-
-
-## [2.3.9](https://github.com/Nagarian/optc-box-manager/compare/v2.3.8...v2.3.9) (2021-09-14)
-
-
-### Bug Fixes
-
-* **db:** global Sengoku/Neo Coby/Neo Helmep wrong ID ([fcc3dcc](https://github.com/Nagarian/optc-box-manager/commit/fcc3dcc784c22839f18816793c7da7e9803598ac))
-* **detail:** improve ergonomy of Power Socket editor ([da7a719](https://github.com/Nagarian/optc-box-manager/commit/da7a7198443fc89a4fb4b301577e76eb144b7a00))
 
 
 
