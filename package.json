@@ -68,5 +68,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "testMatch": [
+      "**/(components|hooks|pages|services)/**/__tests__/**/*.[jt]s?(x)",
+      "**/(components|hooks|pages|services)/**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
   }
 }
