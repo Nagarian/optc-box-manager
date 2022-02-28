@@ -1,3 +1,12 @@
+## [2.4.2](https://github.com/Nagarian/optc-box-manager/compare/v2.4.1...v2.4.2) (2022-02-28)
+
+
+### Bug Fixes
+
+* **box:** issue with potential default to 1 for unit with limit break path not released yet ([9c56e6f](https://github.com/Nagarian/optc-box-manager/commit/9c56e6fa2370cbe02a7df121c136ed8dda9ef00a))
+
+
+
 ## [2.4.1](https://github.com/Nagarian/optc-box-manager/compare/v2.4.0...v2.4.1) (2022-02-28)
 
 
@@ -53,15 +62,6 @@
 * improve CharacterBox performance ([fe40f27](https://github.com/Nagarian/optc-box-manager/commit/fe40f274191c2755f6bc33ccdf16148059905a56))
 * **detail:** improve performance ([891c2d5](https://github.com/Nagarian/optc-box-manager/commit/891c2d579638247558c2c38c5e3ea5a4c9a42a21))
 * **filter:** remove Manuals Quests since they are no longer available in-game ([7e5a2b2](https://github.com/Nagarian/optc-box-manager/commit/7e5a2b22c3e259e022e570e452788222725a00ca))
-
-
-
-## [2.3.10](https://github.com/Nagarian/optc-box-manager/compare/v2.3.9...v2.3.10) (2021-10-20)
-
-
-### Bug Fixes
-
-* issue with Usopp/Chopper class issue ([296cf0d](https://github.com/Nagarian/optc-box-manager/commit/296cf0dd0f1f81e12a862e3dadf9f78a1da19615))
 
 
 
