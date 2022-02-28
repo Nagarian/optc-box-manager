@@ -100,6 +100,7 @@ export const Potentials = [
   'Double Special Activation',
   'Reduce Ship Bind duration',
   'Reduce Sailor Despair duration',
+  'Reduce Special Use Limit duration',
   'Reduce Slot Barrier duration',
   'Reduce Healing Reduction duration',
   'Nutrition/Reduce Hunger duration',
