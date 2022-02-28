@@ -1,3 +1,14 @@
+# [2.4.0](https://github.com/Nagarian/optc-box-manager/compare/v2.3.14...v2.4.0) (2022-02-28)
+
+
+### Features
+
+* add support for "Reduce Special Use Limit duration" potential ([52d9c12](https://github.com/Nagarian/optc-box-manager/commit/52d9c12678a4ea569aea3eb8fbcd1f58aa57a2bc))
+* **box:** rename potential Enrage to Enrage/Reduce Increase Damage Taken duration ([99fd39f](https://github.com/Nagarian/optc-box-manager/commit/99fd39f6cc876f7c0d72763847ae0f73f78dc6bd))
+* **box:** update Potentials logic to match the game update ([26ca73b](https://github.com/Nagarian/optc-box-manager/commit/26ca73b8d58f6ab11a3adc61e383ad9213097f9a))
+
+
+
 ## [2.3.14](https://github.com/Nagarian/optc-box-manager/compare/v2.3.13...v2.3.14) (2022-01-29)
 
 
@@ -52,17 +63,6 @@
 
 * **db:** global Sengoku/Neo Coby/Neo Helmep wrong ID ([fcc3dcc](https://github.com/Nagarian/optc-box-manager/commit/fcc3dcc784c22839f18816793c7da7e9803598ac))
 * **detail:** improve ergonomy of Power Socket editor ([da7a719](https://github.com/Nagarian/optc-box-manager/commit/da7a7198443fc89a4fb4b301577e76eb144b7a00))
-
-
-
-## [2.3.8](https://github.com/Nagarian/optc-box-manager/compare/v2.3.7...v2.3.8) (2021-08-21)
-
-
-### Bug Fixes
-
-* **filter:** remove invalid dual and versus Book Quest category ([25c683b](https://github.com/Nagarian/optc-box-manager/commit/25c683b3f8134a62774e33a85e395430c59ad890))
-* remove Discord link ([a6da152](https://github.com/Nagarian/optc-box-manager/commit/a6da152dc0474496c37660fe2903beb1d8d62beb))
-* **bulk-edit:** CSS performance issue when too many units have CC ([f601c1a](https://github.com/Nagarian/optc-box-manager/commit/f601c1aab67cb99490991156dc623b639e3addc6))
 
 
 

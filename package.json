@@ -1,7 +1,7 @@
 {
   "homepage": ".",
   "name": "optc-box-manager",
-  "version": "2.3.14",
+  "version": "2.4.0",
   "private": true,
   "scripts": {
     "extract-optcdb": "node ./src/scripts/index.js",
