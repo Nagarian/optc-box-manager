@@ -368,11 +368,11 @@ const getLimitBreakLevel = (
   potentials: UserUnitPotentialAbility[],
   limitBreak: LimitBreak[] | undefined = [],
 ) => {
-  if (!potentials.length || potentials.every(p => p.lvl === 0)) {
+  if (!potentials.length || potentials.every(p => p.lvl <= 1)) {
     return 0
   }
 
-  const lastPotentialAcquired = potentials.filter(p => p.lvl > 0).slice(-1)[0]
+  const lastPotentialAcquired = potentials.filter(p => p.lvl > 1).slice(-1)[0]
     .type
 
   return (
