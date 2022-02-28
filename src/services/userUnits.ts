@@ -47,9 +47,9 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
             specialLvl: 1,
           }
         : undefined,
-    sockets: Array(
-      Math.max(unit.slots, unit.limitSlot, unit.limitexSlot),
-    ).fill({ type: undefined, lvl: 0 }),
+    sockets: Array(Math.max(unit.slots, unit.limitSlot, unit.limitexSlot)).fill(
+      { type: undefined, lvl: 0 },
+    ),
     ink: unit.flags.inkable ? { lvl: 0 } : undefined,
   }
 }
@@ -285,9 +285,7 @@ export function resync (userUnit: UserUnit) {
   ) {
     updated.limitBreak = {
       ...compare.limitBreak!,
-      lvl:
-        userUnit.limitBreak?.lvl ??
-        getLimitBreakLevel(updated.potentials, userUnit.unit.detail.limit),
+      lvl: userUnit.limitBreak?.lvl ?? 0,
     }
 
     isUpdated = true
@@ -362,21 +360,4 @@ const getPotentialState = (
   }
 
   return lvl === 0 ? 'locked' : 'unlocked'
-}
-
-const getLimitBreakLevel = (
-  potentials: UserUnitPotentialAbility[],
-  limitBreak: LimitBreak[] | undefined = [],
-) => {
-  if (!potentials.length || potentials.every(p => p.lvl <= 1)) {
-    return 0
-  }
-
-  const lastPotentialAcquired = potentials.filter(p => p.lvl > 1).slice(-1)[0]
-    .type
-
-  return (
-    limitBreak.findIndex(lb => lb.description.includes(lastPotentialAcquired)) +
-    1
-  )
 }
