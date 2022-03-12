@@ -103,10 +103,10 @@ filters.abilityToString = function () {
             default:
               e += 'TODO:  ' + JSON.stringify(effect)
           }
-          if (effect.interval) e += ` every ${effect.interval} ${effect.interval === 1 ? 'second' : 'seconds'} for ${effect.duration} ${effect.duration === 1 ? 'second' : 'seconds'}`
+          if (effect.interval) e += ` every ${effect.interval} ${effect.interval === 1 ? 'second' : 'seconds'}`
           break
         case 'hinderance':
-          e += effect.amount ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}` : `${effect.chance}% chance to inflict ${arrayToString(effect.attributes)}`
+          e += effect.amount ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}` : `${effect.chance}% chance to inflict ${effect.level ? 'Lv.' + effect.level + ' ' : ''}${arrayToString(effect.attributes)}`
           break
         case 'boon':
           e += `${effect.chance ? effect.chance + '% chance to ' : ''}`
@@ -121,6 +121,9 @@ filters.abilityToString = function () {
             case 'Counter':
               e += `${effect.chance ? 'g' : 'G'}rant ${effect.amount}x Counter`
               break
+            case 'Revive':
+              e += `${effect.chance ? 'r' : 'R'}evive to ${effect.amount}% HP after death`
+              break
             default:
               e += `${'reduce ' + attrStr}`
               break
@@ -129,6 +132,9 @@ filters.abilityToString = function () {
         case 'penalty':
           const tmpStr = arrayToString(effect.attributes)
           if (tmpStr === 'HP' && effect.amount) { e += `${new Intl.NumberFormat().format(effect.amount)}% health cut` } else if (effect.level) { e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty` } else { e += `${effect.chance}% chance to ${arrayToString(effect.attributes)}` }
+          break
+        case 'cleanse':
+          e += `${effect.chance}% chance to cleanse ${arrayToString(effect.attributes)} debuffs`
           break
         default:
           e = 'UNKNOWN EFFECT ' + JSON.stringify(effect)
