@@ -18,6 +18,7 @@ function fixupDetail (
     /** @type PotentialRenamedHash */
     const renamedPotentials = {
       Enrage: 'Enrage/Reduce Increase Damage Taken duration',
+      'Nutrition/Reduce Hunger duration': 'Nutrition/Reduce Hunger stacks',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
