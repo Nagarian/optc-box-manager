@@ -103,7 +103,7 @@ export const Potentials = [
   'Reduce Special Use Limit duration',
   'Reduce Slot Barrier duration',
   'Reduce Healing Reduction duration',
-  'Nutrition/Reduce Hunger duration',
+  'Nutrition/Reduce Hunger stacks',
   'Last Tap',
 ] as const
 

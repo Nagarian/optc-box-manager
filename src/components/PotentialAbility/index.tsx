@@ -64,7 +64,7 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill18
     case 'Reduce Healing Reduction duration':
       return ImageSkill19
-    case 'Nutrition/Reduce Hunger duration':
+    case 'Nutrition/Reduce Hunger stacks':
       return ImageSkill20
     case 'Last Tap':
       return ImageSkill21
