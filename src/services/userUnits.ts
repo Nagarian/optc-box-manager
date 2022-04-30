@@ -1,4 +1,4 @@
-import { ExtendedUnit, PotentialKey, LimitBreak } from 'models/units'
+import { ExtendedUnit, PotentialKey, LimitBreak, UnitStar } from 'models/units'
 import {
   UserUnit,
   UserUnitSpecial,
@@ -51,6 +51,12 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
       { type: undefined, lvl: 0 },
     ),
     ink: unit.flags.inkable ? { lvl: 0 } : undefined,
+    level: {
+      lvl: 1,
+      lvlMax: unit.maxLevel,
+      limitLvl: unit.maxLevel === 99 ? 0 : undefined,
+      limitStepLvl: unit.maxLevel === 99 ? 0 : undefined,
+    },
   }
 }
 
@@ -72,12 +78,17 @@ const UserUnitLimitBreakFactory = (
   }
 }
 
+const superEvolution: UnitStar[] = ['4+', '5+', '6+']
+
 export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit {
   if (!evolution) {
     return userUnit
   }
 
   const template = UserUnitFactory(evolution)
+  const isSuperEvolution =
+    superEvolution.includes(userUnit.unit.stars) ||
+    superEvolution.includes(evolution.stars)
 
   return {
     id: userUnit.id,
@@ -93,6 +104,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
     pirateFest: userUnit.pirateFest ?? template.pirateFest,
     sockets: template.sockets.map((s, i) => userUnit.sockets[i] ?? s),
     ink: userUnit.ink ?? template.ink,
+    level: isSuperEvolution ? userUnit.level : template.level,
   }
 }
 
@@ -104,7 +116,7 @@ function computeSpecialReset (
     return evolved.special
   }
 
-  if (evolved.unit.stars.toString().includes('+')) {
+  if (superEvolution.includes(evolved.unit.stars)) {
     // super evolution doesn't reset
     return base.special
   }
@@ -324,6 +336,11 @@ export function resync (userUnit: UserUnit) {
 
   if (!userUnit.ink && !!compare.ink) {
     updated.ink = compare.ink
+    isUpdated = true
+  }
+
+  if (!userUnit.level && !!compare.level) {
+    updated.level = compare.level
     isUpdated = true
   }
 

@@ -46,6 +46,13 @@ export type UserUnitPowerSocket = {
   lvl: number
 }
 
+export type UserUnitLevel = {
+  lvl: number
+  lvlMax: number
+  limitLvl?: number
+  limitStepLvl?: number
+}
+
 export type UserUnit = {
   id: string
   unit: ExtendedUnit
@@ -57,6 +64,7 @@ export type UserUnit = {
   cc: UserUnitCottonCandy
   pirateFest?: UserUnitPirateFest
   sockets: UserUnitPowerSocket[]
+  level: UserUnitLevel
 }
 
 export type UserBox = UserUnit[]
