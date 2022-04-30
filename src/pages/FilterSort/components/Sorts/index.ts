@@ -1,11 +1,13 @@
 import {
+  SearchSortInputProps,
+  SearchSortWithOptionFunction,
   Sort,
   UnitSort,
   UserUnitSort,
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
 } from 'models/search'
+import { FunctionComponent, ReactNode } from 'react'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
+import byFestStyle from './Units/ByPirateFest'
 import {
   byRarity,
   byRarityLabel,
@@ -16,27 +18,31 @@ import byType from './Units/ByType'
 import {
   byCottonCandy,
   bySpecificCottonCandy,
-  SpecificCottonCandySortInput,
   bySpecificCottonCandyLabel,
+  SpecificCottonCandySortInput,
 } from './UserUnits/ByCottonCandy'
-import { bySupportLvl } from './UserUnits/BySupport'
+import { byInkLvl } from './UserUnits/ByInk'
+import {
+  byLevel,
+  byLevelSortLabel,
+  byLevelWithOption,
+  LevelSortInput,
+} from './UserUnits/ByLevel'
 import {
   byLimitBreakLevel,
   byLimitBreakLevelGameLike,
 } from './UserUnits/ByLimitBreak'
 import {
-  byPotentialLvl,
-  bySpecificPotentialLvl,
-  SpecificPotentialSortInput,
-  bySpecificPotentialLabel,
-} from './UserUnits/ByPotential'
-import { FunctionComponent, ReactNode } from 'react'
-import byFestStyle from './Units/ByPirateFest'
-import {
   byPirateFestAbility,
   byPirateFestSpecial,
 } from './UserUnits/ByPirateFest'
-import { byInkLvl } from './UserUnits/ByInk'
+import {
+  byPotentialLvl,
+  bySpecificPotentialLabel,
+  bySpecificPotentialLvl,
+  SpecificPotentialSortInput,
+} from './UserUnits/ByPotential'
+import { bySupportLvl } from './UserUnits/BySupport'
 
 export const UnitSortTypeKeys = [
   'byType',
@@ -47,6 +53,7 @@ export const UnitSortTypeKeys = [
   'byFestStyle',
 ] as const
 export const UserUnitSortTypeKeys = [
+  'byLevel',
   'byCottonCandy',
   'bySupportLvl',
   'byLBLvlGameLike',
@@ -156,6 +163,14 @@ export const SearchSortBuilder: {
     label: 'Added to box',
     type: 'userUnit',
     fn: () => 1,
+  },
+  byLevel: {
+    label: 'Level',
+    type: 'userUnit',
+    fn: byLevel,
+    optionedFn: byLevelWithOption,
+    optionInput: LevelSortInput,
+    optionedLabel: byLevelSortLabel as any,
   },
 }
 
