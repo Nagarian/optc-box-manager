@@ -1,23 +1,40 @@
 import { useTheme } from '@emotion/react'
 import { CottonCandySvg } from 'components/Icon'
-import { InputHTMLAttributes } from 'react'
-import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
+import { RangeInputPlus, RangeInputPlusProps } from './RangeInputPlus'
 
 type CottonCandyInputProps = {
   variant: 'atk' | 'rcv' | 'hp'
-  min?: number
+  hideAdders?: boolean
 }
 export default function CottonCandyInput ({
-  min,
+  onChange,
   variant,
+  hideAdders,
   ...p
-}: InputHTMLAttributes<HTMLInputElement> & SpaceProps & CottonCandyInputProps) {
+}: Omit<RangeInputPlusProps, 'adders' | 'min'> & CottonCandyInputProps) {
   const color = useVariant(variant)
+
+  if (hideAdders) {
+    return (
+      <RangeInput
+        {...p}
+        onChange={e => onChange(Number(e.target.value))}
+        min={0}
+        thumbSvg={CottonCandySvg}
+        range={{
+          color,
+        }}
+      />
+    )
+  }
+
   return (
-    <RangeInput
+    <RangeInputPlus
       {...p}
-      min={min ?? 0}
+      onChange={onChange}
+      min={0}
+      adders={[-1, 100, 30, 5, 1]}
       thumbSvg={CottonCandySvg}
       range={{
         color,

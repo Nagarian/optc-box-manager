@@ -74,13 +74,13 @@ function CottonCandyLimitInput ({
       )}
     >
       <CottonCandyInput
-        min={0}
         max={cottonCandyLimitMarksHash.length}
         value={hashValue}
         name={`cc-${type}`}
         variant={type}
-        onChange={e => onChange(cottonCandyLimitMarksHash[Number(e.target.value) - 1] ?? 0)}
+        onChange={v => onChange(cottonCandyLimitMarksHash[v - 1] ?? 0)}
         list="CottonCandyLimit"
+        hideAdders
       />
     </InputLabel>
   )

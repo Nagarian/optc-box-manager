@@ -119,12 +119,13 @@ export default function BulkEdit ({
                   variant="atk"
                   value={edit?.cottonCandies?.atk ?? 0}
                   max={ccLimit.atk}
-                  onChange={e =>
+                  hideAdders
+                  onChange={v =>
                     setEdit({
                       ...edit,
                       cottonCandies: {
                         ...edit?.cottonCandies,
-                        atk: Number(e.target.value),
+                        atk: v,
                       },
                     })
                   }
@@ -136,12 +137,13 @@ export default function BulkEdit ({
                   variant="hp"
                   value={edit?.cottonCandies?.hp ?? 0}
                   max={ccLimit.hp}
-                  onChange={e =>
+                  hideAdders
+                  onChange={v =>
                     setEdit({
                       ...edit,
                       cottonCandies: {
                         ...edit?.cottonCandies,
-                        hp: Number(e.target.value),
+                        hp: v,
                       },
                     })
                   }
@@ -153,12 +155,13 @@ export default function BulkEdit ({
                   variant="rcv"
                   value={edit?.cottonCandies?.rcv ?? 0}
                   max={ccLimit.rcv}
-                  onChange={e =>
+                  hideAdders
+                  onChange={v =>
                     setEdit({
                       ...edit,
                       cottonCandies: {
                         ...edit?.cottonCandies,
-                        rcv: Number(e.target.value),
+                        rcv: v,
                       },
                     })
                   }
