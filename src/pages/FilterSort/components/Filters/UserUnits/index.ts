@@ -6,6 +6,7 @@ import {
   ByUserCottonCandyInput,
 } from './ByUserCottonCandy'
 import { ByUserInkFilter, ByUserInkInput } from './ByUserInk'
+import { ByUserLevelFilter, ByUserLevelInput } from './ByUserLevel'
 import {
   ByUserLimitBreakFilter,
   ByUserLimitBreakInput,
@@ -23,6 +24,7 @@ import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
 import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
 
 export const SearchFilterUserUnitsKeys = [
+  'byUserLevel',
   'byUserSpecial',
   'byUserCottonCandy',
   'byUserSupport',
@@ -88,5 +90,10 @@ export const UserUnitFilterBuilder: {
     title: 'Ink Effects',
     builder: ByUserInkFilter,
     input: ByUserInkInput,
+  },
+  byUserLevel: {
+    title: 'Level',
+    builder: ByUserLevelFilter,
+    input: ByUserLevelInput,
   },
 }
