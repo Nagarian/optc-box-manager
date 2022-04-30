@@ -14,7 +14,7 @@ import {
   SearchSortBuilder,
   UnitSort2UserUnitSort,
 } from 'pages/FilterSort/components/Sorts'
-import { useEffect, useState } from 'react'
+import { useStorage } from './useStorage'
 import { useUserSettings } from './useUserSettings'
 
 export const EmptySearch: Search = {
@@ -149,21 +149,7 @@ export function useSavedSearch (
   savedSearchKey: string = 'search',
   defaultSearch: Search = DefaultSearch,
 ) {
-  const [search, setSearch] = useState<Search>(defaultSearch)
-
-  useEffect(() => {
-    const json = localStorage.getItem(savedSearchKey)
-    if (json) {
-      setSearch(JSON.parse(json))
-    }
-  }, [savedSearchKey])
-
-  useEffect(() => {
-    if (search) {
-      localStorage.setItem(savedSearchKey, JSON.stringify(search))
-    }
-  }, [savedSearchKey, search])
-
+  const [search, setSearch] = useStorage<Search>(savedSearchKey, defaultSearch)
   const seaarch = useSearch(search)
 
   return {

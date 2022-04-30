@@ -5,12 +5,14 @@ import { useThemeMode } from 'hooks/useThemeMode'
 import { UserSettingsProvider } from 'hooks/useUserSettings'
 import DevMode from 'pages/DevMode'
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import DefaultStyles from './styles'
 import { darkTheme, lightTheme } from './styles/theme'
 
-ReactDOM.render(
+const container = createRoot(document.getElementById('root')!)
+
+container.render(
   <StrictMode>
     <UserSettingsProvider>
       <OptcDbProvider>
@@ -18,7 +20,6 @@ ReactDOM.render(
       </OptcDbProvider>
     </UserSettingsProvider>
   </StrictMode>,
-  document.getElementById('root'),
 )
 
 function AppWrapper () {

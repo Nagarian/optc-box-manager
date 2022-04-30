@@ -13,7 +13,7 @@ type DevModeProps = {
 export default function DevMode ({ children }: DevModeProps) {
   const [devModeEnabled] = useStorage<boolean>('devModeEnabled', false)
   const [selected, setSelected] = useState<ExtendedUnit>()
-  const callback = useCallback(u => setSelected(u), [setSelected])
+  const callback = useCallback((u : ExtendedUnit) => setSelected(u), [setSelected])
 
   if (!devModeEnabled) {
     return <>{children}</>

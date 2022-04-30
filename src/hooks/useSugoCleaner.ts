@@ -104,9 +104,9 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
       })
     },
 
-    reset: () => setSugoCleaner(defaultSugoCleaner),
+    reset: () => setSugoCleaner({ ...defaultSugoCleaner }),
     import: (json: string) => {
-      const importedDb : SugoCleaner = JSON.parse(json)
+      const importedDb: SugoCleaner = JSON.parse(json)
       // TODO: make safety check
       if (!importedDb.toClean) {
         throw new Error("That's not a valid Sugo Cleaner backup file")

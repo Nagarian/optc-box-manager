@@ -115,9 +115,9 @@ export function useUserSettings (): UserSettingEnhanced {
     userSetting: defaultUserSettings,
     ...context,
 
-    reset: () => context.setUserSetting?.(defaultUserSettings),
+    reset: () => context.setUserSetting?.({ ...defaultUserSettings }),
     import: (json: string) => {
-      const importedDb : UserSetting = JSON.parse(json)
+      const importedDb: UserSetting = JSON.parse(json)
       // TODO: make safety check
       if (!importedDb.themeMode) {
         throw new Error("That's not a valid Setting backup file")

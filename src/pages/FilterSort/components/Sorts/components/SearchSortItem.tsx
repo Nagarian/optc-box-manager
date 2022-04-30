@@ -53,13 +53,15 @@ export default function SearchSortItem ({
     <>
       <Panel>
         <Text flex="1" fontSize="2" display="inline-flex" alignItems="center">
-          {label}
-          {options && optionedLabel && (
-            <>
-              {' - '}
-              {optionedLabel(options)}
-            </>
-          )}
+          <>
+            {label}
+            {options && optionedLabel && (
+              <>
+                {' - '}
+                {optionedLabel(options)}
+              </>
+            )}
+          </>
         </Text>
 
         {optionInput && (

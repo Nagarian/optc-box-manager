@@ -88,7 +88,7 @@ export default function LimitBreakEdit ({
           onChange={v =>
             onChange({
               ...limitBreak,
-              lvl: v,
+              lvl: Array.isArray(v) ? v[0] : v,
             })
           }
           marks={marks}

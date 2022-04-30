@@ -1,9 +1,4 @@
-import {
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 export function useStorage<T> (
   key: string = 'search',
@@ -34,10 +29,10 @@ export function useStorage<T> (
   }, [key, migration, setValue])
 
   useEffect(() => {
-    if (value) {
+    if (value && value !== defaultValue) {
       localStorage.setItem(key, JSON.stringify(value))
     }
-  }, [key, value])
+  }, [defaultValue, key, value])
 
   return [value, setValue]
 }

@@ -1,5 +1,12 @@
 import { ExtendedUnit } from 'models/units'
-import { createContext, FC, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  FunctionComponent,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 type OptcDb = {
   db: ExtendedUnit[]
@@ -13,7 +20,9 @@ const defaultOptcDb = {
 
 const OptcDbContext = createContext<OptcDb>(defaultOptcDb)
 
-export const OptcDbProvider: FC = ({ children }) => {
+export const OptcDbProvider: FunctionComponent<PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const [optcDbValue, setOptcDbValue] = useState<OptcDb>(defaultOptcDb)
 
   useEffect(() => {
