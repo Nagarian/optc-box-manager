@@ -17,22 +17,24 @@ export type ProgressionProps = ColorProps & {
   value: number
   max: number
   variant?: 'normal' | 'spaced'
+  isExtended?: boolean
 }
 export default function Progression ({
   value,
   max,
   variant = 'normal',
   color = 'text',
+  isExtended = false,
 }: ProgressionProps) {
   if (value === max) {
-    return <Max width="5ch" />
+    return <Max width="5ch" color={isExtended ? 'red' : 'primaryText'} />
   }
 
   return (
     <Text
       as="span"
-      width="5ch"
-      color={color as any}
+      minWidth="5ch"
+      color={isExtended ? 'red' : color as any}
       fontWeight={variant === 'spaced' ? 'bold' : undefined}
     >
       {value}

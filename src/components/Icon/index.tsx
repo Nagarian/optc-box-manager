@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled, { StyledComponent } from '@emotion/styled'
+import { Text } from 'components/Title'
 import { FunctionComponent, SVGProps } from 'react'
 import {
   color,
@@ -28,6 +29,7 @@ import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
 import InkSvg, { ReactComponent as Ink } from './ink.svg'
+import LevelSvg, { ReactComponent as Level } from './level.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
 import Logo from './logo.png'
 import { ReactComponent as NewsCoo } from './news-coo.svg'
@@ -83,7 +85,14 @@ const BaseImg = (src: string, title?: string): Icon => {
   return icon
 }
 
-export { CottonCandySvg, SupportSvg, SpecialLvl, PirateFestSvg, InkSvg }
+export {
+  CottonCandySvg,
+  SupportSvg,
+  SpecialLvl,
+  PirateFestSvg,
+  InkSvg,
+  LevelSvg,
+}
 
 export const AddIcon = BaseSvg(Add)
 export const ArrowIcon = BaseSvg(Arrow)
@@ -140,6 +149,15 @@ SupportIcon.defaultProps = {
   color: 'specific.support',
   title: 'Support',
 }
+export const LevelIcon = BaseSvg(Level)
+LevelIcon.defaultProps = {
+  color: 'primaryText',
+}
+export const LevelTextIcon = () => (
+  <Text color="white" as="span">
+    Lv.{' '}
+  </Text>
+)
 export const TreasureIcon = BaseSvg(Treasure)
 
 export const SpecialLvlIcon = BaseImg(SpecialLvl, 'Special Level')

@@ -1,6 +1,7 @@
 import { UserUnit } from 'models/userBox'
 import { FunctionComponent } from 'react'
 import { DetailedCottonCandyDisplayer } from './DetailedCottonCandyDisplayer'
+import LevelDisplayer, { LevelDisplayerInput } from './LevelDisplayer'
 import PirateFestDisplayer, { PirateFestDisplayerInput } from './PirateFestDisplayer'
 import PotentialsDisplayer, {
   SpecificPotentialDisplayer,
@@ -10,6 +11,7 @@ import SpecialLevelDisplayer from './SpecialLevelDisplayer'
 import SupportDisplayer from './SupportDisplayer'
 
 export const UserUnitDisplayerTypeKeys = [
+  'level',
   'specialLvl',
   'cottonCandy',
   'support',
@@ -68,5 +70,10 @@ export const SearchDisplayerBuilder: {
     label: 'Pirate Rumble',
     displayer: PirateFestDisplayer,
     input: PirateFestDisplayerInput,
+  },
+  level: {
+    label: 'Level',
+    displayer: LevelDisplayer,
+    input: LevelDisplayerInput,
   },
 }
