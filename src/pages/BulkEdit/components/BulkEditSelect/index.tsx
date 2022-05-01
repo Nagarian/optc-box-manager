@@ -1,6 +1,10 @@
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
-import { FilterSortIcon } from 'components/Icon'
+import {
+  FilterSortIcon,
+  ResetApplyIcon,
+  ResetRemoveIcon,
+} from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useSearch } from 'hooks/useSearch'
@@ -54,11 +58,36 @@ export default function BulkEditSelect ({
       onCancel={onCancel}
       onValidate={() => onSubmit(selected)}
       customAction={
-        <Button
-          onClick={() => setShowSettings(true)}
-          icon={FilterSortIcon}
-          title="Filter/Sort"
-        />
+        <>
+          <Button
+            onClick={() => setShowSettings(true)}
+            icon={FilterSortIcon}
+            title="Filter/Sort"
+          />
+          {userUnits.filter(u => !selected.some(su => su.id === u.id))
+            .length
+            ? (
+            <Button
+              onClick={() =>
+                setSelected([
+                  ...selected,
+                  ...userUnits.filter(
+                    u => !selected.some(su => su.id === u.id),
+                  ),
+                ])
+              }
+              icon={ResetApplyIcon}
+              title="Select All"
+            />
+              )
+            : (
+            <Button
+              onClick={() => setSelected([])}
+              icon={ResetRemoveIcon}
+              title="Unselect All"
+            />
+              )}
+        </>
       }
     >
       <MyUserBox
