@@ -145,6 +145,28 @@ export function applyEdit (
     ...userUnit,
   }
 
+  if (edit.levelState === 'max') {
+    updated.level = {
+      ...updated.level,
+      lvl: updated.unit.maxLevel,
+    }
+  }
+
+  if (edit.levelState === 'postlbmax') {
+    updated.level = {
+      ...updated.level,
+      lvl: updated.level.lvlMax,
+    }
+  }
+
+  if (edit.levelState === 'lbmax' && updated.level.limitLvl !== undefined) {
+    updated.level = {
+      ...updated.level,
+      limitLvl: 5,
+      limitStepLvl: 9,
+    }
+  }
+
   if (edit.limitBreakState && updated.potentials.length > 0) {
     updated.potentials = updated.potentials.map(p =>
       editPotential(p, edit.limitBreakState),

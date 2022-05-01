@@ -1,10 +1,12 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
+import ChoiceInput from 'components/forms/ChoiceInput'
 import CottonCandyInput from 'components/forms/CottonCandyInput'
 import SupportInput from 'components/forms/SupportInput'
 import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { DefaultSearch } from 'hooks/useSearch'
+import { useUserSettings } from 'hooks/useUserSettings'
 import {
   Search,
   SearchFilterUserUnits,
@@ -20,12 +22,14 @@ import {
   UserUnitBulkEditLimitBreakState,
   UserUnitBulkEditLimitBreakStateKeys,
 } from 'models/userBox'
+import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
+import { LevelDisplayerOption } from 'pages/FilterSort/components/Displayers/LevelDisplayer'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
+import { ByUserLevelCriteria } from 'pages/FilterSort/components/Filters/UserUnits/ByUserLevel'
+import { LevelSortOption } from 'pages/FilterSort/components/Sorts/UserUnits/ByLevel'
 import { ReactNode, useState } from 'react'
-import BulkEditSelect from './components/BulkEditSelect'
-import { useUserSettings } from 'hooks/useUserSettings'
-import ChoiceInput from 'components/forms/ChoiceInput'
 import { gloToJapConverter } from 'scripts/glo-jap-remapper-proxy'
+import BulkEditSelect from './components/BulkEditSelect'
 
 type BulkEditProps = {
   userUnits: UserUnit[]
@@ -58,6 +62,30 @@ export default function BulkEdit ({
         >
           <Box display="flex" flexDirection="column">
             <FilterContainer
+              title="Level"
+              onReset={() =>
+                setEdit({
+                  ...edit,
+                  levelState: undefined,
+                })
+              }
+              disableReset={!edit?.levelState}
+            >
+              <MultiChoiceInput<UserUnitBulkEditLevelState>
+                name="lvl-state"
+                values={UserUnitBulkEditLevelStateKeys}
+                currentValue={edit?.levelState}
+                labelMapper={levelStateToLabel}
+                onChange={state =>
+                  setEdit({
+                    ...edit,
+                    levelState: state,
+                  })
+                }
+              />
+            </FilterContainer>
+
+            <FilterContainer
               title="Potential abilities"
               onReset={() =>
                 setEdit({
@@ -71,14 +99,14 @@ export default function BulkEdit ({
                 name="lb-state"
                 values={UserUnitBulkEditLimitBreakStateKeys}
                 labelMapper={lbStateToLabel}
-                  currentValue={edit?.limitBreakState}
-                  onChange={state =>
-                    setEdit({
-                      ...edit,
-                      limitBreakState: state,
-                    })
-                  }
-                />
+                currentValue={edit?.limitBreakState}
+                onChange={state =>
+                  setEdit({
+                    ...edit,
+                    limitBreakState: state,
+                  })
+                }
+              />
             </FilterContainer>
 
             <FilterContainer
@@ -243,10 +271,10 @@ function MultiChoiceInput<T extends string> ({
       {values.map(state => (
         <ChoiceInput
           key={state}
-        type="radio"
+          type="radio"
           name={name}
-        checked={currentValue === state ?? false}
-        onChange={e => e.target.checked && onChange(state)}
+          checked={currentValue === state ?? false}
+          onChange={e => e.target.checked && onChange(state)}
         >
           {labelMapper?.(state) ?? state}
         </ChoiceInput>
@@ -281,9 +309,47 @@ function idConverterToLabel (state: GameVersionIdConverter) {
   }
 }
 
+function levelStateToLabel (state: UserUnitBulkEditLevelState) {
+  switch (state) {
+    case 'max':
+      return 'Level max'
+    case 'postlbmax':
+      return 'Level max (post LLB)'
+    case 'lbmax':
+      return 'Level Limit Break max'
+    default:
+      return ''
+  }
+}
+
 function computeSearch (edit: UserUnitBulkEdit): Search {
   let uuf: SearchFilterUserUnits = {}
+  let displayer: SearchDisplayerCriteria | undefined
   const uus: SearchSortCriteria[] = []
+  if (edit?.levelState) {
+    uuf = {
+      ...uuf,
+      byUserLevel: {
+        state: edit.levelState === 'max' ? 'ongoing' : undefined,
+        lbState: edit.levelState === 'lbmax' ? 'unmaxed' : undefined,
+        postLbState: edit.levelState === 'postlbmax' ? 'ongoing' : undefined,
+      } as ByUserLevelCriteria,
+    }
+    uus.push({
+      by: 'byLevel',
+      order: 'desc',
+      options: {
+        type: edit.levelState === 'lbmax' ? 'lvl LB' : 'lvl',
+      } as LevelSortOption,
+    })
+    displayer = {
+      type: 'level',
+      options: {
+        type: edit.levelState === 'lbmax' ? 'level LB' : 'progression',
+      } as LevelDisplayerOption,
+    }
+  }
+
   if (edit?.supportLvl) {
     uuf = {
       ...uuf,
@@ -291,6 +357,7 @@ function computeSearch (edit: UserUnitBulkEdit): Search {
         state: 'unmaxed',
       },
     }
+    displayer = { type: 'support' }
   }
 
   if (edit?.limitBreakState) {
@@ -315,6 +382,7 @@ function computeSearch (edit: UserUnitBulkEdit): Search {
         rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
       },
     }
+    displayer = { type: 'cottonCandy' }
   }
 
   if (edit.idConverter === 'toGlobal') {
@@ -353,5 +421,6 @@ function computeSearch (edit: UserUnitBulkEdit): Search {
       },
     },
     sorts: [...uus, ...DefaultSearch.sorts],
+    displayer,
   }
 }
