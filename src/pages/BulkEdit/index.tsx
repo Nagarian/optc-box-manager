@@ -11,8 +11,12 @@ import {
   SearchSortCriteria,
 } from 'models/search'
 import {
+  GameVersionIdConverter,
+  GameVersionIdConverterKeys,
   UserUnit,
   UserUnitBulkEdit,
+  UserUnitBulkEditLevelState,
+  UserUnitBulkEditLevelStateKeys,
   UserUnitBulkEditLimitBreakState,
   UserUnitBulkEditLimitBreakStateKeys,
 } from 'models/userBox'
@@ -63,11 +67,10 @@ export default function BulkEdit ({
               }
               disableReset={!edit?.limitBreakState}
             >
-              {UserUnitBulkEditLimitBreakStateKeys.map(lbState => (
-                <LbStateEdit
-                  key={lbState}
-                  state={lbState}
-                  label={lbStateToLabel(lbState)}
+              <MultiChoiceInput<UserUnitBulkEditLimitBreakState>
+                name="lb-state"
+                values={UserUnitBulkEditLimitBreakStateKeys}
+                labelMapper={lbStateToLabel}
                   currentValue={edit?.limitBreakState}
                   onChange={state =>
                     setEdit({
@@ -76,7 +79,6 @@ export default function BulkEdit ({
                     })
                   }
                 />
-              ))}
             </FilterContainer>
 
             <FilterContainer
@@ -179,31 +181,18 @@ export default function BulkEdit ({
               }
               disableReset={!edit?.idConverter}
             >
-              <ChoiceInput
-                type="radio"
-                name="gameVersionIdConverter"
-                checked={edit?.idConverter === 'toGlobal'}
-                onChange={e =>
+              <MultiChoiceInput<GameVersionIdConverter>
+                name="lb-state"
+                values={GameVersionIdConverterKeys}
+                labelMapper={idConverterToLabel}
+                currentValue={edit?.idConverter}
+                onChange={state =>
                   setEdit({
-                    idConverter: 'toGlobal',
+                    ...edit,
+                    idConverter: state,
                   })
                 }
-              >
-                Japan to Global
-              </ChoiceInput>
-
-              <ChoiceInput
-                type="radio"
-                name="gameVersionIdConverter"
-                checked={edit?.idConverter === 'toJapan'}
-                onChange={e =>
-                  setEdit({
-                    idConverter: 'toJapan',
-                  })
-                }
-              >
-                Global to Japan
-              </ChoiceInput>
+              />
             </FilterContainer>
           </Box>
         </Popup>
@@ -236,27 +225,33 @@ function BulkEditContainer ({
   )
 }
 
-function LbStateEdit ({
-  state,
+function MultiChoiceInput<T extends string> ({
+  name,
+  values,
   currentValue,
   onChange,
-  label,
+  labelMapper,
 }: {
-  state: UserUnitBulkEditLimitBreakState
-  currentValue: UserUnitBulkEditLimitBreakState | undefined
-  onChange: (state: UserUnitBulkEditLimitBreakState) => void
-  label: string
+  name: string
+  values: readonly T[] | T[]
+  labelMapper?: (str: T) => string
+  currentValue: T | undefined
+  onChange: (state: T) => void
 }) {
   return (
-    <label>
-      <input
-        name={`lb-state-${state}`}
+    <Box display="grid" gridTemplateColumns="auto auto" gridGap="2">
+      {values.map(state => (
+        <ChoiceInput
+          key={state}
         type="radio"
+          name={name}
         checked={currentValue === state ?? false}
         onChange={e => e.target.checked && onChange(state)}
-      />
-      {label}
-    </label>
+        >
+          {labelMapper?.(state) ?? state}
+        </ChoiceInput>
+      ))}
+    </Box>
   )
 }
 
@@ -270,6 +265,17 @@ function lbStateToLabel (lbState: UserUnitBulkEditLimitBreakState) {
       return 'Is Limit Break key unlocked'
     case 'rainbow+':
       return 'Is Rainbow + (key unlocked and max+)'
+    default:
+      return ''
+  }
+}
+
+function idConverterToLabel (state: GameVersionIdConverter) {
+  switch (state) {
+    case 'toGlobal':
+      return 'Japan to Global'
+    case 'toJapan':
+      return 'Global to Japan'
     default:
       return ''
   }
