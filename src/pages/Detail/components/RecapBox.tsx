@@ -5,12 +5,14 @@ import CharacterBox from 'components/CharacterBox'
 import { UnitClassIcon } from 'components/Class'
 import {
   CottonCandyIcon,
+  LevelTextIcon,
   PirateFestAbilityIcon,
   PirateFestBothIcon,
   PirateFestSpecialIcon,
   SpecialLvlIcon,
   SupportIcon,
 } from 'components/Icon'
+import { LevelLB } from 'components/LevelLB'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import PotentialAbility from 'components/PotentialAbility'
 import PowerSocket from 'components/PowerSocket'
@@ -20,8 +22,11 @@ import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, SingleUnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import {
-  flexDirection,
+  flexbox,
+  FlexboxProps,
   FlexDirectionProps,
+  fontSize,
+  FontSizeProps,
   gridArea,
   GridAreaProps,
   gridColumn,
@@ -41,16 +46,17 @@ const Container = styled(Box)`
 `
 
 const Element = styled.div<
-  GridRowProps & GridColumnProps & GridAreaProps & FlexDirectionProps
+  GridRowProps & GridColumnProps & GridAreaProps & FlexboxProps & FontSizeProps
 >`
   display: flex;
-  ${flexDirection}
+  ${flexbox}
   place-items: center;
   text-align: center;
   margin: ${themeGet('space.1')};
   ${gridRow}
   ${gridColumn}
   ${gridArea}
+  ${fontSize}
 `
 Element.defaultProps = {
   flexDirection: 'column',
@@ -70,6 +76,7 @@ export default function RecapBox ({
     pirateFest,
     sockets,
     cc: { atk, hp, rcv },
+    level,
   } = userUnit
 
   const { ccLimit } = useUserSettings()
@@ -112,8 +119,28 @@ export default function RecapBox ({
           "spe cch cca ccr sup"
           "po1 po2 po3 pfs pfa"
           "so1 so2 so3 so4 so5"
+          "lvl lvl lvl llb llb"
         `}
       >
+        <Element
+          gridArea="lvl"
+          flexDirection="row"
+          justifyContent="center"
+          fontSize="2"
+        >
+          <LevelTextIcon />
+          <Progression value={level.lvl} max={level.lvlMax} variant="spaced" />
+        </Element>
+
+        {level.limitLvl !== undefined && level.limitStepLvl !== undefined && (
+          <Element gridArea="llb" fontSize="2" justifyContent="left">
+            <LevelLB
+              limitLvl={level.limitLvl}
+              limitStepLvl={level.limitStepLvl}
+            />
+          </Element>
+        )}
+
         {special && (
           <Element gridArea="spe">
             <SpecialLvlIcon size="2" />

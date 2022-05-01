@@ -1,12 +1,11 @@
-import styled from '@emotion/styled'
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { LevelTextIcon } from 'components/Icon'
+import { LevelLB } from 'components/LevelLB'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
-import LevelLimitBreakImg from './images/level-limitbreak.png'
 
 const LevelDisplayerOptionTypes = [
   'level',
@@ -19,9 +18,6 @@ export type LevelDisplayerOptionType = typeof LevelDisplayerOptionTypes[number]
 export type LevelDisplayerOption = {
   type: LevelDisplayerOptionType
 }
-
-const stepMax = [1, 1, 2, 2, 3]
-const stepLevelMax = [0, 0, 0, 1, 0, 1, 0, 1, 2]
 
 export default function LevelDisplayer ({
   userUnit: { level },
@@ -67,16 +63,12 @@ export default function LevelDisplayer ({
     level.limitStepLvl !== undefined
   ) {
     return (
-      <LevelLimitBreakDisplayer anchorX="middle" anchorY="bottom">
-        <Text color={level.limitLvl === 5 ? 'primaryText' : 'white'} mr="1">
-          {level.limitLvl}
-        </Text>
-        <Progression
-          value={stepLevelMax[level.limitStepLvl]}
-          max={stepMax[level.limitLvl]}
-          color="white"
+      <InfoDisplayer anchorX="middle" anchorY="bottom">
+        <LevelLB
+          limitLvl={level.limitLvl}
+          limitStepLvl={level.limitStepLvl}
         />
-      </LevelLimitBreakDisplayer>
+      </InfoDisplayer>
     )
   }
 
@@ -107,8 +99,3 @@ export function LevelDisplayerInput ({
     </FilterContainerPanel>
   )
 }
-
-const LevelLimitBreakDisplayer = styled(InfoDisplayer)`
-  background-image: url(${LevelLimitBreakImg});
-  background-size: contain;
-`

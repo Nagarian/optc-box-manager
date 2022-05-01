@@ -11,6 +11,7 @@ import { getLimitType } from 'services/limit'
 import { Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import InkEdit from './components/InkEdit'
+import LevelEdit from './components/LevelEdit'
 import LimitBreakEdit from './components/LimitBreakEdit'
 import PirateFestEdit from './components/PirateFestEdit'
 import PotentialEdit from './components/PotentialEdit'
@@ -99,10 +100,10 @@ export default function Detail ({
       <RecapBox userUnit={userUnit} marginBottom="3" />
 
       <Box display="flex" flexWrap="wrap">
-        <PowerSocketEdit
-          powerSockets={userUnit.sockets}
+        <LevelEdit
+          level={userUnit.level}
           unit={unit}
-          onChange={sockets => setUserUnit({ ...userUnit, sockets })}
+          onChange={level => setUserUnit({ ...userUnit, level })}
         />
 
         <SpecialLvlEdit
@@ -132,6 +133,12 @@ export default function Detail ({
           potentials={userUnit.potentials}
           details={unit.detail.potential ?? []}
           onChange={potentials => setUserUnit({ ...userUnit, potentials })}
+        />
+
+        <PowerSocketEdit
+          powerSockets={userUnit.sockets}
+          unit={unit}
+          onChange={sockets => setUserUnit({ ...userUnit, sockets })}
         />
 
         <PirateFestEdit
