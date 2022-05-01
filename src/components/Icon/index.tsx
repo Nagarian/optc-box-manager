@@ -47,6 +47,7 @@ import { ReactComponent as Search } from './search.svg'
 import { ReactComponent as Settings } from './settings.svg'
 import { ReactComponent as Share } from './share.svg'
 import { ReactComponent as SkillBook } from './skillbook.svg'
+import SpecialSvg, { ReactComponent as Special } from './special.svg'
 import SpecialLvl from './special.png'
 import { ReactComponent as SugoPull } from './sugopull.svg'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
@@ -92,6 +93,7 @@ export {
   PirateFestSvg,
   InkSvg,
   LevelSvg,
+  SpecialSvg,
 }
 
 export const AddIcon = BaseSvg(Add)
@@ -160,5 +162,9 @@ export const LevelTextIcon = () => (
 )
 export const TreasureIcon = BaseSvg(Treasure)
 
-export const SpecialLvlIcon = BaseImg(SpecialLvl, 'Special Level')
+export const SpecialLvlIcon = BaseSvg(Special)
+SpecialLvlIcon.defaultProps = {
+  color: 'primaryText',
+}
+// export const SpecialLvlIcon = BaseImg(SpecialLvl, 'Special Level')
 export const LogoIcon = BaseImg(Logo)

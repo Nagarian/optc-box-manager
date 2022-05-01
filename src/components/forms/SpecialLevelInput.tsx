@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react'
-import { SpecialLvl } from 'components/Icon'
+import { SpecialSvg } from 'components/Icon'
 import { InputHTMLAttributes } from 'react'
 import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
@@ -12,9 +12,9 @@ export default function SpecialLevelInput (
     <RangeInput
       {...p}
       min={1}
-      thumbImage={SpecialLvl}
+      thumbSvg={SpecialSvg}
       range={{
-        color: theme.colors.specific.support,
+        color: theme.colors.secondaryText,
       }}
     />
   )
