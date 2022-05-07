@@ -21,6 +21,7 @@ import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, SingleUnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
+import { LevelDisplayerOption } from 'pages/FilterSort/components/Displayers/LevelDisplayer'
 import {
   flexbox,
   FlexboxProps,
@@ -293,6 +294,7 @@ export function RecapBoxLight ({
         userUnit={userUnit}
         onClick={() => onClick?.(userUnit)}
         placeSelf="center"
+        displayer={{ type: 'level', options: { type: 'level LB' } as LevelDisplayerOption }}
       />
       <Box
         gridArea="info"
