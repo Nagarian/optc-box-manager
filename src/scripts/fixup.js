@@ -206,6 +206,18 @@ function fixupSpecificIssue (
     }
   }
 
+  if (unit.id === 1413 || unit.id === 1816) {
+    // @ts-ignore
+    if (unit.detail.special.level1) {
+      // @ts-ignore
+      unit.detail.special.llbbase = unit.detail.special.level1
+      // @ts-ignore
+      delete unit.detail.special.level1
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
   return unit
 }
 

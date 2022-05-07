@@ -41,6 +41,9 @@ export type BaseUnit = {
   limitHP: number | null
   limitATK: number | null
   limitRCV: number | null
+  llbmaxHP: number | null
+  llbmaxATK: number | null
+  llbmaxRCV: number | null
   limitSlot: number
   limitCD: number
   limitexHP: number | null
@@ -85,19 +88,19 @@ export type LimitBreak = {
 }
 
 export const Potentials = [
-  'Enrage/Reduce Increase Damage Taken duration',
-  'Critical Hit',
   'Reduce Slot Bind duration',
   'Reduce No Healing duration',
-  'Pinch Healing',
   'Barrier Penetration',
+  'Pinch Healing',
+  'Enrage/Reduce Increase Damage Taken duration',
+  'Critical Hit',
+  'Cooldown Reduction',
+  'Double Special Activation',
   '[STR] Damage Reduction',
   '[DEX] Damage Reduction',
   '[QCK] Damage Reduction',
   '[PSY] Damage Reduction',
   '[INT] Damage Reduction',
-  'Cooldown Reduction',
-  'Double Special Activation',
   'Reduce Ship Bind duration',
   'Reduce Sailor Despair duration',
   'Reduce Special Use Limit duration',
@@ -149,7 +152,7 @@ export type UnitFestSpecial = {
 
 export type UnitCooldown = [number, number]
 
-export type UnitSpecial =
+export type BaseUnitSpecial =
   | string
   | {
       cooldown: UnitCooldown
@@ -164,6 +167,10 @@ export type UnitSpecial =
       japan: string
     }
 
+export type UnitSpecial =
+  | BaseUnitSpecial
+  | { base: BaseUnitSpecial; llbbase: BaseUnitSpecial }
+
 export type UnitCaptain =
   | string
   | undefined
@@ -174,12 +181,14 @@ export type UnitCaptain =
     }
   | {
       base: string
-      level1: string
+      level1?: string
       level2?: string
       level3?: string
       level4?: string
       level5?: string
       level6?: string
+      llbbase?: string
+      llblevel1?: string
     }
 
 export type UnitSailor =
@@ -190,6 +199,8 @@ export type UnitSailor =
       base2?: string
       level1?: string
       level2?: string
+      llblevel1?: string
+      llblevel2?: string
     }
   | {
       character1: string
@@ -205,6 +216,15 @@ export type UnitSuperSwap = {
   superTurns: number
 }
 
+export type UnitLevelLimitBreak = null | Partial<{
+  rAbility: boolean
+  rSpecial: boolean
+  rResilience: true
+  captain: UnitCaptain
+  special: BaseUnitSpecial
+  sailor: UnitSailor
+}>
+
 export type UnitDetail = {
   captain: UnitCaptain
   captainNotes?: string
@@ -217,6 +237,7 @@ export type UnitDetail = {
   limitNotes?: string
   potential?: UnitPotential[]
   potentialNotes?: string
+  lLimit?: UnitLevelLimitBreak[]
   lastTap?: UnitLastTap[]
   lastTapNotes?: string
   support?: UnitSupport[]

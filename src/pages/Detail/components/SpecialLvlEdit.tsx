@@ -27,24 +27,28 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
     ]
   }
 
-  if (typeof special === 'object') {
-    return [
-      <ul>
-        {Object.keys(special)
-          .filter(key => typeof special[key] === 'string')
-          .map((key, i) => (
-            <li key={i}>
-              <strong>{key}: </strong>
-              <DescriptionHighlighter value={special[key]} />
-            </li>
-          ))}
-      </ul>,
-    ]
-  }
-
   if (typeof special === 'string') return [special]
 
-  return []
+  if (typeof special !== 'object') {
+    return []
+  }
+
+  if ('base' in special) {
+    return MultiStageSpecial(special.llbbase)
+  }
+
+  return [
+    <ul>
+      {Object.entries(special)
+        .filter(([key, value]) => typeof value === 'string')
+        .map(([key, value], i) => (
+          <li key={i}>
+            <strong>{key}: </strong>
+            <DescriptionHighlighter value={value} />
+          </li>
+        ))}
+    </ul>,
+  ]
 }
 
 export default function SpecialLvlEdit ({

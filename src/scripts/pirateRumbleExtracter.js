@@ -236,7 +236,7 @@ function getRumbleData (id) {
     return undefined
   }
 
-  if (unit.basedOn) {
+  while (unit.basedOn) {
     key = unit.basedOn
     unit = rumbleUnits.find(u => u.id === unit.basedOn)
   }
@@ -247,6 +247,8 @@ function getRumbleData (id) {
   // normalize the data here:
   denormalizeEffects(unit.ability)
   denormalizeEffects(unit.special)
+  if (unit.llbability) denormalizeEffects(unit.llbability)
+  if (unit.llbspecial) denormalizeEffects(unit.llbspecial)
 
   // Check for VS unit
   if (unit.id !== Math.floor(unit.id)) {
@@ -254,6 +256,8 @@ function getRumbleData (id) {
     const unit2 = rumbleUnits.filter(unit => Math.floor(unit.id) === key)[1]
     denormalizeEffects(unit2.ability)
     denormalizeEffects(unit2.special)
+    if (unit2.llbability) denormalizeEffects(unit2.llbability)
+    if (unit2.llbspecial) denormalizeEffects(unit2.llbspecial)
 
     return [unit, unit2]
   }
@@ -264,7 +268,13 @@ function getRumbleData (id) {
 function applyNewPirateRumble (
   /** @type import('models/old-units').ExtendedUnit */ unit,
 ) {
-  const newRumble = getRumbleData(unit.dbId)
+  let newRumble
+  try {
+    newRumble = getRumbleData(unit.dbId)
+  } catch (error) {
+    error.unitId = unit.id
+    throw error
+  }
 
   if (!newRumble) {
     return unit

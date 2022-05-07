@@ -1,15 +1,5 @@
-export const ColorUnitTypes = [
-  'STR',
-  'DEX',
-  'QCK',
-  'PSY',
-  'INT',
-] as const
-export const UnitTypes = [
-  ...ColorUnitTypes,
-  'DUAL',
-  'VS',
-] as const
+export const ColorUnitTypes = ['STR', 'DEX', 'QCK', 'PSY', 'INT'] as const
+export const UnitTypes = [...ColorUnitTypes, 'DUAL', 'VS'] as const
 export type UnitType = typeof UnitTypes[number]
 
 export const UnitClasses = [
@@ -51,6 +41,9 @@ export type BaseUnit = {
   limitHP: number
   limitATK: number
   limitRCV: number
+  llbmaxHP: number
+  llbmaxATK: number
+  llbmaxRCV: number
   limitSlot: number
   limitCD: number
   limitexHP: number
@@ -149,13 +142,24 @@ export type UnitFestSpecial = {
 
 export type UnitCooldown = [number, number]
 
-export type UnitSpecial =
+export type BaseUnitSpecial =
   | string
   | {
       cooldown: UnitCooldown
       description: string
     }[]
-  | { [key: string]: any } // luffy/law + robin 767
+  | {
+      character1: string
+      character2: string
+    }
+  | {
+      global: string
+      japan: string
+    }
+
+export type UnitSpecial =
+  | BaseUnitSpecial
+  | { base: BaseUnitSpecial; llbbase: BaseUnitSpecial }
 
 export type UnitCaptain =
   | string
@@ -167,21 +171,26 @@ export type UnitCaptain =
     }
   | {
       base: string
-      level1: string
-      level2: string
-      level3: string
-      level4: string
-      level5: string
-      level6: string
+      level1?: string
+      level2?: string
+      level3?: string
+      level4?: string
+      level5?: string
+      level6?: string
+      llbbase?: string
+      llblevel1?: string
     }
 
 export type UnitSailor =
   | string
   | undefined
   | {
-      base: string
+      base?: string
+      base2?: string
       level1?: string
       level2?: string
+      llblevel1?: string
+      llblevel2?: string
     }
   | {
       character1: string
@@ -191,6 +200,15 @@ export type UnitSailor =
       level2?: string
     }
 
+export type UnitLevelLimitBreak = null | Partial<{
+  rAbility: boolean
+  rSpecial: boolean
+  rResilience: true
+  captain: UnitCaptain
+  special: BaseUnitSpecial
+  sailor: UnitSailor
+}>
+
 export type UnitSuperSwap = {
   base: string
   super: string
@@ -199,19 +217,33 @@ export type UnitSuperSwap = {
 
 export type UnitDetail = {
   captain: UnitCaptain
+  captainNotes?: string
   special: UnitSpecial
+  specialNotes?: string
   sailor: UnitSailor
   sailorNotes: string
   specialName: string
   limit?: LimitBreak[]
+  limitNotes?: string
   potential?: UnitPotential[]
   potentialNotes: string
+  lLimit?: UnitLevelLimitBreak[]
   lastTap?: UnitLastTap[]
   lastTapNotes?: string
   support: UnitSupport[]
+  supportNotes?: string
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]
   swap?: string | UnitSuperSwap
+  swapNotes?: string
+  superSpecial?: string
+  superSpecialNotes?: string
+  superSpecialCriteria?: string
+  VSCondition?: string
+  VSSpecial?: {
+    character1: string
+    character2: string
+  }
 }
 
 export type UnitEvolution = {

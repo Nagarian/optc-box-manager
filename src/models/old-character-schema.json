@@ -2,6 +2,64 @@
   "$ref": "#/definitions/ExtendedUnit",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "BaseUnitSpecial": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cooldown": {
+                "$ref": "#/definitions/UnitCooldown"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "cooldown",
+              "description"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "character1": {
+              "type": "string"
+            },
+            "character2": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "character1",
+            "character2"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "global": {
+              "type": "string"
+            },
+            "japan": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "global",
+            "japan"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "ExtendedDrop": {
       "enum": [
         "rarerecruit",
@@ -232,6 +290,24 @@
         "limitexSlot": {
           "type": "number"
         },
+        "llbmaxATK": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "llbmaxHP": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "llbmaxRCV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
         "maxATK": {
           "type": [
             "number",
@@ -363,6 +439,10 @@
         "stars": {
           "$ref": "#/definitions/UnitStar"
         },
+        "support": {
+          "not": {
+          }
+        },
         "type": {
           "anyOf": [
             {
@@ -404,6 +484,9 @@
         "limitexHP",
         "limitexRCV",
         "limitexSlot",
+        "llbmaxATK",
+        "llbmaxHP",
+        "llbmaxRCV",
         "maxATK",
         "maxEXP",
         "maxHP",
@@ -454,19 +537,19 @@
     },
     "PotentialKey": {
       "enum": [
-        "Enrage/Reduce Increase Damage Taken duration",
-        "Critical Hit",
         "Reduce Slot Bind duration",
         "Reduce No Healing duration",
-        "Pinch Healing",
         "Barrier Penetration",
+        "Pinch Healing",
+        "Enrage/Reduce Increase Damage Taken duration",
+        "Critical Hit",
+        "Cooldown Reduction",
+        "Double Special Activation",
         "[STR] Damage Reduction",
         "[DEX] Damage Reduction",
         "[QCK] Damage Reduction",
         "[PSY] Damage Reduction",
         "[INT] Damage Reduction",
-        "Cooldown Reduction",
-        "Double Special Activation",
         "Reduce Ship Bind duration",
         "Reduce Sailor Despair duration",
         "Reduce Special Use Limit duration",
@@ -583,11 +666,16 @@
                 },
                 "level6": {
                   "type": "string"
+                },
+                "llbbase": {
+                  "type": "string"
+                },
+                "llblevel1": {
+                  "type": "string"
                 }
               },
               "required": [
-                "base",
-                "level1"
+                "base"
               ],
               "type": "object"
             }
@@ -620,6 +708,12 @@
         "festSpecial": {
           "items": {
             "$ref": "#/definitions/UnitFestSpecial"
+          },
+          "type": "array"
+        },
+        "lLimit": {
+          "items": {
+            "$ref": "#/definitions/UnitLevelLimitBreak"
           },
           "type": "array"
         },
@@ -668,6 +762,12 @@
                   "type": "string"
                 },
                 "level2": {
+                  "type": "string"
+                },
+                "llblevel1": {
+                  "type": "string"
+                },
+                "llblevel2": {
                   "type": "string"
                 }
               },
@@ -944,6 +1044,152 @@
       ],
       "type": "object"
     },
+    "UnitLevelLimitBreak": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "captain": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "character1": {
+                      "type": "string"
+                    },
+                    "character2": {
+                      "type": "string"
+                    },
+                    "combined": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "character1",
+                    "character2",
+                    "combined"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "type": "string"
+                    },
+                    "level1": {
+                      "type": "string"
+                    },
+                    "level2": {
+                      "type": "string"
+                    },
+                    "level3": {
+                      "type": "string"
+                    },
+                    "level4": {
+                      "type": "string"
+                    },
+                    "level5": {
+                      "type": "string"
+                    },
+                    "level6": {
+                      "type": "string"
+                    },
+                    "llbbase": {
+                      "type": "string"
+                    },
+                    "llblevel1": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "base"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "rAbility": {
+              "type": "boolean"
+            },
+            "rResilience": {
+              "const": true,
+              "type": "boolean"
+            },
+            "rSpecial": {
+              "type": "boolean"
+            },
+            "sailor": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "type": "string"
+                    },
+                    "base2": {
+                      "type": "string"
+                    },
+                    "level1": {
+                      "type": "string"
+                    },
+                    "level2": {
+                      "type": "string"
+                    },
+                    "llblevel1": {
+                      "type": "string"
+                    },
+                    "llblevel2": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "character1": {
+                      "type": "string"
+                    },
+                    "character2": {
+                      "type": "string"
+                    },
+                    "combined": {
+                      "type": "string"
+                    },
+                    "level1": {
+                      "type": "string"
+                    },
+                    "level2": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "character1",
+                    "character2",
+                    "combined"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "special": {
+              "$ref": "#/definitions/BaseUnitSpecial"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "UnitPirateFestStyle": {
       "enum": [
         "ATK",
@@ -976,56 +1222,21 @@
     "UnitSpecial": {
       "anyOf": [
         {
-          "type": "string"
-        },
-        {
-          "items": {
-            "additionalProperties": false,
-            "properties": {
-              "cooldown": {
-                "$ref": "#/definitions/UnitCooldown"
-              },
-              "description": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "cooldown",
-              "description"
-            ],
-            "type": "object"
-          },
-          "type": "array"
+          "$ref": "#/definitions/BaseUnitSpecial"
         },
         {
           "additionalProperties": false,
           "properties": {
-            "character1": {
-              "type": "string"
+            "base": {
+              "$ref": "#/definitions/BaseUnitSpecial"
             },
-            "character2": {
-              "type": "string"
+            "llbbase": {
+              "$ref": "#/definitions/BaseUnitSpecial"
             }
           },
           "required": [
-            "character1",
-            "character2"
-          ],
-          "type": "object"
-        },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "global": {
-              "type": "string"
-            },
-            "japan": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "global",
-            "japan"
+            "base",
+            "llbbase"
           ],
           "type": "object"
         }
