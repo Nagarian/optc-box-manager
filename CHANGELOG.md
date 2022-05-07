@@ -1,3 +1,21 @@
+# [2.6.0](https://github.com/Nagarian/optc-box-manager/compare/v2.5.0...v2.6.0) (2022-05-07)
+
+
+### Bug Fixes
+
+* **bulk:** fix issue with LLB max editor which doesn't update lvl max ([4fa18e5](https://github.com/Nagarian/optc-box-manager/commit/4fa18e53a616acad5381c0db4bf5c84dc6f0cfba))
+* **db:** fix LLB  modifications from OPTC-DB ([2e4c999](https://github.com/Nagarian/optc-box-manager/commit/2e4c9997dd11c2b9ba9926d3e374964113cb04e8))
+* **displayer:** fix issue with Level Displayer ([cdb3c0c](https://github.com/Nagarian/optc-box-manager/commit/cdb3c0ce75ec62b3dd42086294685d02dde2119e))
+
+
+### Features
+
+* **filter:** add Has LLB filter ([2d4d3bf](https://github.com/Nagarian/optc-box-manager/commit/2d4d3bf82899e1fff20096444fe32cec482913be))
+* **filter:** add Level syncer ([8445b4e](https://github.com/Nagarian/optc-box-manager/commit/8445b4e45403b495d6b045f665c6dfd211649c38))
+* **sugocleaner:** display LLB into SugoCleaner recap ([8108351](https://github.com/Nagarian/optc-box-manager/commit/8108351253b929bef37e5b33e1efa1535323f422))
+
+
+
 # [2.5.0](https://github.com/Nagarian/optc-box-manager/compare/v2.4.3...v2.5.0) (2022-05-01)
 
 
@@ -58,15 +76,6 @@
 ### Bug Fixes
 
 * **detail:** None value removing from sailor (following DB refactoring) ([101134d](https://github.com/Nagarian/optc-box-manager/commit/101134dc1553651af876bccd26e83e74580331f0))
-
-
-
-## [2.3.13](https://github.com/Nagarian/optc-box-manager/compare/v2.3.12...v2.3.13) (2021-11-27)
-
-
-### Bug Fixes
-
-* **Box:** issue with Character Limit Break rainbow state when they have a third Potential Ability ([95175fe](https://github.com/Nagarian/optc-box-manager/commit/95175fee4db85fd137720d1ef4503f7a3e114e75))
 
 
 
