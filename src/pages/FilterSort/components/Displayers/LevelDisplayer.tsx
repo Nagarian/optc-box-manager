@@ -25,54 +25,39 @@ export default function LevelDisplayer ({
 }: SearchDisplayerProps<LevelDisplayerOption>) {
   if (!level || !options) return null
 
-  if (options.type === 'level') {
-    return (
-      <InfoDisplayer anchorX="middle" anchorY="bottom">
-        <LevelTextIcon />
-        <Text color={level.lvl > 99 ? 'red' : 'white'}>{level.lvl}</Text>
-      </InfoDisplayer>
-    )
-  }
-
   if (options.type === 'level max') {
     return (
       <InfoDisplayer anchorX="middle" anchorY="bottom">
         <LevelTextIcon />
-        <Text color={level.lvl > 99 ? 'red' : 'white'}>{level.lvlMax}</Text>
+        <Text color={level.lvlMax > 99 ? 'red' : 'white'}>{level.lvlMax}</Text>
       </InfoDisplayer>
     )
   }
 
-  if (options.type === 'progression') {
+  if (options.type === 'level LB') {
+    if (level.limitLvl === undefined || level.limitStepLvl === undefined) {
+      return null
+    }
+
     return (
       <InfoDisplayer anchorX="middle" anchorY="bottom">
-        <LevelTextIcon />
-        <Progression
-          value={level.lvl}
-          max={level.lvlMax}
-          color="white"
-          isExtended={level.lvl > 99}
-        />
+        <LevelLB limitLvl={level.limitLvl} limitStepLvl={level.limitStepLvl} />
       </InfoDisplayer>
     )
   }
 
-  if (
-    options.type === 'level LB' &&
-    level.limitLvl !== undefined &&
-    level.limitStepLvl !== undefined
-  ) {
-    return (
-      <InfoDisplayer anchorX="middle" anchorY="bottom">
-        <LevelLB
-          limitLvl={level.limitLvl}
-          limitStepLvl={level.limitStepLvl}
-        />
-      </InfoDisplayer>
-    )
-  }
-
-  return null
+  return (
+    <InfoDisplayer anchorX="middle" anchorY="bottom">
+      <LevelTextIcon />
+      <Progression
+        value={level.lvl}
+        max={level.lvlMax}
+        color="white"
+        variant={options.type === 'progression' ? 'normal' : 'no-max'}
+        isExtended={level.lvl > 99}
+      />
+    </InfoDisplayer>
+  )
 }
 
 export function LevelDisplayerInput ({
