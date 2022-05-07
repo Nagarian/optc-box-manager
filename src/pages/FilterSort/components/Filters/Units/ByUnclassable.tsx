@@ -12,6 +12,7 @@ export interface ByUnclassableCriteria {
   evolvedOnly?: boolean
   superEvolvedOnly?: boolean
   isInkable?: boolean
+  hasLevelLB?: boolean
 }
 
 const UnclassedFilters = {
@@ -30,6 +31,8 @@ export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
     [criteria.exclude?.japanOnly, unit => !unit.flags?.japOnly],
     [criteria.isInkable === true, unit => !!unit.flags?.inkable],
     [criteria.isInkable === false, unit => !unit.flags?.inkable],
+    [criteria.hasLevelLB === true, unit => unit.maxLevel >= 99],
+    [criteria.hasLevelLB === false, unit => unit.maxLevel < 99],
   )
 
 export function ByUnclassableInput ({
@@ -133,6 +136,36 @@ export function ByUnclassableInput ({
           }
         >
           Is not Inkable
+        </ChoiceInput>
+      </FilterContainerPanel>
+
+      <FilterContainerPanel marginTop="2">
+        Level LB
+        <ChoiceInput
+          type="radio"
+          name="has-llb"
+          checked={criteria?.hasLevelLB ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasLevelLB: true,
+            })
+          }
+        >
+          Has LLB
+        </ChoiceInput>
+        <ChoiceInput
+          type="radio"
+          name="has-llb"
+          checked={criteria?.hasLevelLB === false ?? false}
+          onChange={e =>
+            onChange({
+              ...criteria,
+              hasLevelLB: false,
+            })
+          }
+        >
+          Hasn't LLB
         </ChoiceInput>
       </FilterContainerPanel>
     </>
