@@ -162,6 +162,7 @@ export function applyEdit (
   if (edit.levelState === 'lbmax' && updated.level.limitLvl !== undefined) {
     updated.level = {
       ...updated.level,
+      lvlMax: 150,
       limitLvl: 5,
       limitStepLvl: 9,
     }

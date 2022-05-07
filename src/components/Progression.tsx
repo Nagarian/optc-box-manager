@@ -16,7 +16,7 @@ Max.defaultProps = {
 export type ProgressionProps = ColorProps & {
   value: number
   max: number
-  variant?: 'normal' | 'spaced'
+  variant?: 'normal' | 'spaced' | 'no-max'
   isExtended?: boolean
 }
 export default function Progression ({
@@ -34,12 +34,12 @@ export default function Progression ({
     <Text
       as="span"
       minWidth="5ch"
-      color={isExtended ? 'red' : color as any}
-      fontWeight={variant === 'spaced' ? 'bold' : undefined}
+      color={isExtended ? 'red' : (color as any)}
+      fontWeight={variant !== 'normal' ? 'bold' : undefined}
     >
-      {value}
-      {variant === 'spaced' ? ' / ' : '/'}
-      {max}
+      {variant === 'normal' && `${value}/${max}`}
+      {variant === 'spaced' && `${value} / ${max}`}
+      {variant === 'no-max' && `${value}`}
     </Text>
   )
 }
