@@ -232,6 +232,12 @@ function getRumbleData (id) {
   const rumbleUnits = rumbleData.units
   let unit = rumbleUnits.find(unit => Math.floor(unit.id) === key)
 
+  if (id === 1918) {
+    const uu = rumbleUnits.filter(unit => Math.floor(unit.id) === key)
+    unit = uu[uu.length - 1]
+    uu.length === 1 && console.log('rumble issue 1948 has been fixed')
+  }
+
   if (!unit) {
     return undefined
   }
