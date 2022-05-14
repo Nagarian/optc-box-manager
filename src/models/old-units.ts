@@ -108,6 +108,7 @@ export const Potentials = [
   'Reduce Healing Reduction duration',
   'Nutrition/Reduce Hunger stacks',
   'Last Tap',
+  'Super Tandem',
 ] as const
 
 export type PotentialKey = typeof Potentials[number]
@@ -216,6 +217,12 @@ export type UnitSuperSwap = {
   superTurns: number
 }
 
+export type UnitSuperTandem = {
+  condition?: string
+  characterCondition: string[]
+  description: string[]
+}
+
 export type UnitLevelLimitBreak = null | Partial<{
   rAbility: boolean
   rSpecial: boolean
@@ -238,8 +245,9 @@ export type UnitDetail = {
   potential?: UnitPotential[]
   potentialNotes?: string
   lLimit?: UnitLevelLimitBreak[]
-  lastTap?: UnitLastTap[]
+  lastTap?: UnitLastTap
   lastTapNotes?: string
+  superTandem?: UnitSuperTandem
   support?: UnitSupport[]
   supportNotes?: string
   festAbility?: UnitFestAbility[]
