@@ -1,3 +1,12 @@
+## [2.6.1](https://github.com/Nagarian/optc-box-manager/compare/v2.6.0...v2.6.1) (2022-05-14)
+
+
+### Bug Fixes
+
+* **db:** handle Super Tandem potential ([e8346e0](https://github.com/Nagarian/optc-box-manager/commit/e8346e0bbb8a77885295a42668f37889a120b40e))
+
+
+
 # [2.6.0](https://github.com/Nagarian/optc-box-manager/compare/v2.5.0...v2.6.0) (2022-05-07)
 
 
@@ -67,15 +76,6 @@
 * add support for "Reduce Special Use Limit duration" potential ([52d9c12](https://github.com/Nagarian/optc-box-manager/commit/52d9c12678a4ea569aea3eb8fbcd1f58aa57a2bc))
 * **box:** rename potential Enrage to Enrage/Reduce Increase Damage Taken duration ([99fd39f](https://github.com/Nagarian/optc-box-manager/commit/99fd39f6cc876f7c0d72763847ae0f73f78dc6bd))
 * **box:** update Potentials logic to match the game update ([26ca73b](https://github.com/Nagarian/optc-box-manager/commit/26ca73b8d58f6ab11a3adc61e383ad9213097f9a))
-
-
-
-## [2.3.14](https://github.com/Nagarian/optc-box-manager/compare/v2.3.13...v2.3.14) (2022-01-29)
-
-
-### Bug Fixes
-
-* **detail:** None value removing from sailor (following DB refactoring) ([101134d](https://github.com/Nagarian/optc-box-manager/commit/101134dc1553651af876bccd26e83e74580331f0))
 
 
 
