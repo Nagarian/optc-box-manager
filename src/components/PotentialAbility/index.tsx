@@ -25,6 +25,7 @@ import ImageSkill18 from './images/potentialskill_icon_s_018.png'
 import ImageSkill19 from './images/potentialskill_icon_s_019.png'
 import ImageSkill20 from './images/potentialskill_icon_s_020.png'
 import ImageSkill21 from './images/potentialskill_icon_s_021.png'
+import ImageSkill22 from './images/potentialskill_icon_s_022.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -68,6 +69,8 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill20
     case 'Last Tap':
       return ImageSkill21
+    case 'Super Tandem':
+      return ImageSkill22
     default:
       return NoIcon
   }
