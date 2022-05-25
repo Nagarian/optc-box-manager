@@ -218,6 +218,18 @@ function fixupSpecificIssue (
     }
   }
 
+  if (unit.id === 3625) {
+    // @ts-ignore
+    if (unit.detail.special.llbase) {
+      // @ts-ignore
+      unit.detail.special.llbbase = unit.detail.special.llbase
+      // @ts-ignore
+      delete unit.detail.special.llbase
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
   return unit
 }
 
