@@ -1,3 +1,24 @@
+# [2.7.0](https://github.com/Nagarian/optc-box-manager/compare/v2.6.1...v2.7.0) (2022-06-11)
+
+
+### Bug Fixes
+
+* **search:** issue with User Level LB filter ([f8e3a26](https://github.com/Nagarian/optc-box-manager/commit/f8e3a2602f4804f8147b53a3228f8cd287818f25))
+
+
+### Features
+
+* **box:** improve messaging when the box is empty ([63b5b34](https://github.com/Nagarian/optc-box-manager/commit/63b5b34e0f67db4445fa79d925a8bd5dda169694))
+* **box:** update default search ([fb9f640](https://github.com/Nagarian/optc-box-manager/commit/fb9f6409bf1a19a6543e1e6e59be7904a791fc9e))
+* **detail:** add a dirty indicator onto recap box when a stat is modified ([6fd4155](https://github.com/Nagarian/optc-box-manager/commit/6fd4155096078f3023118a2b9aaac3211002f266))
+* **detail:** add LimitBreak block placeholder in case of unit with potentials but LB is not yet specified ([2b4faf2](https://github.com/Nagarian/optc-box-manager/commit/2b4faf2caa3ba8d4b78bba266b4b0d197493cbab))
+* **sugocleaner:** add a popup confirmation when clicking on clear list button to avoid mistake ([5712adb](https://github.com/Nagarian/optc-box-manager/commit/5712adb83bb3a71081a8a74edf459b7a16080667))
+* **sugocleaner:** allow filtering & sorting list ([e668b46](https://github.com/Nagarian/optc-box-manager/commit/e668b46cfcea01324fbcc6dba8818088f48d873a))
+* **sugocleaner:** automatically bump some stat when using a dupe ([99b1e42](https://github.com/Nagarian/optc-box-manager/commit/99b1e42abd47b4b254e4762617aaab68a9da5b69))
+* **sugocleaner:** rework lists ([a59bd06](https://github.com/Nagarian/optc-box-manager/commit/a59bd0652f70b7df6cef5f3f94a89f765ad13a31))
+
+
+
 ## [2.6.1](https://github.com/Nagarian/optc-box-manager/compare/v2.6.0...v2.6.1) (2022-05-14)
 
 
@@ -65,17 +86,6 @@
 ### Bug Fixes
 
 * **box:** issue with potential default to 1 update ([0b8d5ef](https://github.com/Nagarian/optc-box-manager/commit/0b8d5ef7bf62cdb3fd6c690cb776ec28ed09dc87))
-
-
-
-# [2.4.0](https://github.com/Nagarian/optc-box-manager/compare/v2.3.14...v2.4.0) (2022-02-28)
-
-
-### Features
-
-* add support for "Reduce Special Use Limit duration" potential ([52d9c12](https://github.com/Nagarian/optc-box-manager/commit/52d9c12678a4ea569aea3eb8fbcd1f58aa57a2bc))
-* **box:** rename potential Enrage to Enrage/Reduce Increase Damage Taken duration ([99fd39f](https://github.com/Nagarian/optc-box-manager/commit/99fd39f6cc876f7c0d72763847ae0f73f78dc6bd))
-* **box:** update Potentials logic to match the game update ([26ca73b](https://github.com/Nagarian/optc-box-manager/commit/26ca73b8d58f6ab11a3adc61e383ad9213097f9a))
 
 
 
