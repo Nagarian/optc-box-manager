@@ -52,7 +52,7 @@ export const DefaultSugoCleanerSearch: Search = {
 export const DefaultUserBoxSearch: Search = {
   filters: { units: {}, userUnits: {} },
   sorts: [{ by: 'byAddedToBox', order: 'desc' }],
-  displayer: { type: 'specialLvl' },
+  displayer: { type: 'level', options: { type: 'level' } },
 }
 
 export function mergeSearch (search: Search, search2: Search): Search {
