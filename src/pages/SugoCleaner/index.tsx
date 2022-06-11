@@ -211,6 +211,8 @@ function SugoCleanerList ({
   onClearAll: () => void
   showOnEmpty?: boolean
 }) {
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+
   if (!list.length && !showOnEmpty) {
     return null
   }
@@ -218,17 +220,12 @@ function SugoCleanerList ({
   return (
     <FilterContainer
       title={title}
-      onReset={onClearAll}
+      onReset={() => setShowConfirmation(true)}
       disableReset={list.length === 0}
     >
       <ResultList>
         {list.map((unit, i) => (
-          <CharacterBox
-            key={i}
-            unit={unit}
-            size="3"
-            onClick={action}
-          />
+          <CharacterBox key={i} unit={unit} size="3" onClick={action} />
         ))}
 
         {!!onAdd && (
@@ -241,6 +238,17 @@ function SugoCleanerList ({
           />
         )}
       </ResultList>
+
+      {showConfirmation && (
+        <Popup
+          title={`Are you sure to clear « ${title} » ?`}
+          onValidate={() => {
+            setShowConfirmation(false)
+            onClearAll()
+          }}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
     </FilterContainer>
   )
 }
