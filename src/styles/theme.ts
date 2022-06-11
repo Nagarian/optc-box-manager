@@ -105,6 +105,8 @@ const sizes: ThemeSizes = [
   '10rem',
   '12rem',
   '14rem',
+  '16rem',
+  '32rem',
 ]
 sizes.minimalRequired = '320px'
 

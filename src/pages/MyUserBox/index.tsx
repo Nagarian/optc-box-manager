@@ -1,9 +1,9 @@
 import Box from 'components/Box'
-import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
-import { AddIcon } from 'components/Icon'
+import { GatherIslandIcon, NewsCooIcon } from 'components/Icon'
 import Pagination from 'components/Pagination'
 import { ResultList } from 'components/SearchPanel'
+import { SubTitle } from 'components/Title'
 import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
@@ -25,19 +25,32 @@ export default function MyUserBox ({
   ...rest
 }: UserBoxProps & SpaceProps & FlexProps) {
   const { userUnitFilters, userUnitSort } = useSearch(search)
-  const filtered = userBox
-    .filter(userUnitFilters)
-    .sort(userUnitSort)
+  const filtered = userBox.filter(userUnitFilters).sort(userUnitSort)
   const { slice, paginationProps, setPage, pageScrollRef } = usePagination(
     filtered.length,
     100,
   )
 
+  if (!filtered.length && userBox.length) {
+    return (
+      <Box display="grid" alignContent="center" placeItems="center" p="2">
+        <GatherIslandIcon size="9" color="primaryText" />
+        <SubTitle>
+          There are no units in your box that match your current search, you
+          should try to modify your filters !
+        </SubTitle>
+      </Box>
+    )
+  }
+
   if (filtered.length === 0 && !!onAddUnit) {
     return (
-      <Box display="flex" alignItems="center" flexDirection="column">
-        It's seem pretty lonely here, try adding some units !
-        <Button onClick={() => onAddUnit()} icon={AddIcon} />
+      <Box display="grid" alignContent="center" placeItems="center" p="2">
+        <NewsCooIcon size="9" color="primaryText" />
+        <SubTitle>
+          It looks quite empty here, you should try to add some units or go to
+          the setting to restore a backup!
+        </SubTitle>
       </Box>
     )
   }
