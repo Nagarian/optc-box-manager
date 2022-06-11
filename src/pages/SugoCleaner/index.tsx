@@ -244,6 +244,7 @@ export default function SugoCleaner ({
           }}
           userUnit={openDetail}
           units={units}
+          isSugoCleaner
         />
       )}
     </Popup>

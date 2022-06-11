@@ -1,12 +1,13 @@
-import { ExtendedUnit, PotentialKey, LimitBreak, UnitStar } from 'models/units'
+import { levelLBFromStepLevel, levelLBMaxLevel } from 'components/LevelLB'
+import { ExtendedUnit, LimitBreak, PotentialKey, UnitStar } from 'models/units'
 import {
   UserUnit,
-  UserUnitSpecial,
   UserUnitBulkEdit,
-  UserUnitPotentialAbilityKeyState,
   UserUnitBulkEditLimitBreakState,
-  UserUnitPotentialAbility,
   UserUnitLimitBreak,
+  UserUnitPotentialAbility,
+  UserUnitPotentialAbilityKeyState,
+  UserUnitSpecial,
 } from 'models/userBox'
 import {
   globalOnlyMissingInDb,
@@ -134,6 +135,41 @@ function computeSpecialReset (
         ? evolved.special.lvlMax
         : base.special.lvl,
   }
+}
+
+export function ConsumeUnitDupe (userUnit: UserUnit): UserUnit {
+  const updated = {
+    ...userUnit,
+  }
+
+  if (
+    userUnit.level.limitStepLvl !== undefined &&
+    userUnit.level.limitStepLvl < 9
+  ) {
+    const newStepLvl = userUnit.level.limitStepLvl + 1
+    updated.level = {
+      ...userUnit.level,
+      lvlMax: levelLBMaxLevel[levelLBFromStepLevel[newStepLvl]],
+      limitLvl: levelLBFromStepLevel[newStepLvl],
+      limitStepLvl: newStepLvl,
+    }
+  }
+
+  if (userUnit.support && userUnit.support.lvl < 5) {
+    updated.support = {
+      ...updated.support,
+      lvl: userUnit.support.lvl + 1,
+    }
+  }
+
+  if (userUnit.special && userUnit.special.lvl < userUnit.special.lvlMax) {
+    updated.special = {
+      ...userUnit.special,
+      lvl: userUnit.special.lvl + 1,
+    }
+  }
+
+  return updated
 }
 
 export function applyEdit (

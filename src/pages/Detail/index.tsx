@@ -6,9 +6,9 @@ import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getLimitType } from 'services/limit'
-import { Evolve } from 'services/userUnits'
+import { ConsumeUnitDupe, Evolve } from 'services/userUnits'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import InkEdit from './components/InkEdit'
 import LevelEdit from './components/LevelEdit'
@@ -26,6 +26,7 @@ type DetailProps = {
   onCancel: () => void
   onValidate: (updated: UserUnit) => void
   onDelete?: (id: string) => void
+  isSugoCleaner?: boolean
 }
 
 export default function Detail ({
@@ -34,6 +35,7 @@ export default function Detail ({
   units,
   userUnit: original,
   onDelete,
+  isSugoCleaner = false,
 }: DetailProps) {
   const [userUnit, setUserUnit] = useState<UserUnit>(original)
   const { unit } = userUnit
@@ -48,6 +50,14 @@ export default function Detail ({
       ).filter(Boolean) as ExtendedUnit[],
     [unit.evolution, units],
   )
+
+  useEffect(() => {
+    if (!isSugoCleaner) {
+      return
+    }
+
+    setUserUnit(u => ConsumeUnitDupe(u))
+  }, [isSugoCleaner])
 
   const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
     const potentialUnlockedLength = unit.detail
