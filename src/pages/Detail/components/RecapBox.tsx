@@ -16,7 +16,7 @@ import { LevelLB } from 'components/LevelLB'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import PotentialAbility from 'components/PotentialAbility'
 import PowerSocket from 'components/PowerSocket'
-import Progression, { Max } from 'components/Progression'
+import Progression from 'components/Progression'
 import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, SingleUnitClass } from 'models/units'
@@ -63,12 +63,16 @@ Element.defaultProps = {
   flexDirection: 'column',
 }
 
+type RecapBoxProps = {
+  userUnit: UserUnit
+  original: UserUnit
+}
+
 export default function RecapBox ({
   userUnit,
+  original,
   ...rest
-}: {
-  userUnit: UserUnit
-} & SpaceProps) {
+}: RecapBoxProps & SpaceProps) {
   const {
     unit,
     potentials,
@@ -130,7 +134,12 @@ export default function RecapBox ({
           fontSize="2"
         >
           <LevelTextIcon />
-          <Progression value={level.lvl} max={level.lvlMax} variant="spaced" />
+          <Progression
+            value={level.lvl}
+            max={level.lvlMax}
+            variant="spaced"
+            isDirty={level.lvl !== original.level.lvl}
+          />
         </Element>
 
         {level.limitLvl !== undefined && level.limitStepLvl !== undefined && (
@@ -138,6 +147,7 @@ export default function RecapBox ({
             <LevelLB
               limitLvl={level.limitLvl}
               limitStepLvl={level.limitStepLvl}
+              isDirty={level.limitStepLvl !== original.level.limitStepLvl}
             />
           </Element>
         )}
@@ -145,14 +155,22 @@ export default function RecapBox ({
         {special && (
           <Element gridArea="spe">
             <SpecialLvlIcon size="2" />
-            <Progression value={special.lvl} max={special.lvlMax} />
+            <Progression
+              value={special.lvl}
+              max={special.lvlMax}
+              isDirty={special.lvl !== original.special?.lvl}
+            />
           </Element>
         )}
 
         {support && (
           <Element gridArea="sup">
             <SupportIcon size="2" />
-            <Progression value={support.lvl} max={5} />
+            <Progression
+              value={support.lvl}
+              max={5}
+              isDirty={support.lvl !== original.support?.lvl}
+            />
           </Element>
         )}
 
@@ -162,7 +180,13 @@ export default function RecapBox ({
             color="specific.ccHp"
             title="Cotton Candy HP"
           />
-          {hp === ccLimit.hp ? <Max /> : '+' + hp}
+          <Progression
+            value={hp}
+            max={ccLimit.hp}
+            isDirty={hp !== original.cc.hp}
+            prefix="+"
+            variant="no-max"
+          />
         </Element>
 
         <Element gridArea="cca">
@@ -171,7 +195,13 @@ export default function RecapBox ({
             color="specific.ccAtk"
             title="Cotton Candy ATK"
           />
-          {atk === ccLimit.atk ? <Max /> : '+' + atk}
+          <Progression
+            value={atk}
+            max={ccLimit.atk}
+            isDirty={atk !== original.cc.atk}
+            prefix="+"
+            variant="no-max"
+          />
         </Element>
 
         <Element gridArea="ccr">
@@ -180,14 +210,24 @@ export default function RecapBox ({
             color="specific.ccRcv"
             title="Cotton Candy RCV"
           />
-          {rcv === ccLimit.rcv ? <Max /> : '+' + rcv}
+          <Progression
+            value={rcv}
+            max={ccLimit.rcv}
+            isDirty={rcv !== original.cc.rcv}
+            prefix="+"
+            variant="no-max"
+          />
         </Element>
 
         {potentials.length > 0 &&
           potentials.map(({ type, lvl }, i) => (
             <Element key={i} gridArea={`po${i + 1}`}>
               <PotentialAbility size="2" type={type} />
-              <Progression value={lvl} max={5} />
+              <Progression
+                value={lvl}
+                max={5}
+                isDirty={lvl !== original.potentials[i]?.lvl}
+              />
             </Element>
           ))}
 
@@ -195,11 +235,23 @@ export default function RecapBox ({
           <>
             <Element gridArea="pfs">
               <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
-              <Progression value={pirateFest.specialLvl} max={10} />
+              <Progression
+                value={pirateFest.specialLvl}
+                max={10}
+                isDirty={
+                  pirateFest.specialLvl !== original.pirateFest?.specialLvl
+                }
+              />
             </Element>
             <Element gridArea="pfa">
               <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
-              <Progression value={pirateFest.abilityLvl} max={5} />
+              <Progression
+                value={pirateFest.abilityLvl}
+                max={5}
+                isDirty={
+                  pirateFest.abilityLvl !== original.pirateFest?.abilityLvl
+                }
+              />
             </Element>
           </>
         )}
@@ -208,7 +260,14 @@ export default function RecapBox ({
           sockets.map(({ type, lvl }, i) => (
             <Element key={i} gridArea={`so${i + 1}}`}>
               <PowerSocket type={type} size="2" />
-              <Progression value={lvl} max={5} />
+              <Progression
+                value={lvl}
+                max={5}
+                isDirty={
+                  lvl !== original.sockets[i]?.lvl ||
+                  type !== original.sockets[i]?.type
+                }
+              />
             </Element>
           ))}
       </Box>
@@ -294,7 +353,10 @@ export function RecapBoxLight ({
         userUnit={userUnit}
         onClick={() => onClick?.(userUnit)}
         placeSelf="center"
-        displayer={{ type: 'level', options: { type: 'level LB' } as LevelDisplayerOption }}
+        displayer={{
+          type: 'level',
+          options: { type: 'level LB' } as LevelDisplayerOption,
+        }}
       />
       <Box
         gridArea="info"

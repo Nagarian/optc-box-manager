@@ -97,7 +97,7 @@ export default function Detail ({
         </>
       }
     >
-      <RecapBox userUnit={userUnit} marginBottom="3" />
+      <RecapBox userUnit={userUnit} original={original} marginBottom="3" />
 
       <Box display="flex" flexWrap="wrap">
         <LevelEdit
