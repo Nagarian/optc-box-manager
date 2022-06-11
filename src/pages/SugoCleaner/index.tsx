@@ -2,22 +2,27 @@ import Box from 'components/Box'
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
 import {
-  AddIcon,
   BellyIcon,
   DeleteIcon,
+  FilterSortIcon,
   NewsCooIcon,
   TreasureIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
-import { ResultList } from 'components/SearchPanel'
+import SearchPanel from 'components/SearchPanel'
 import { SubTitle, Title } from 'components/Title'
-import { DefaultSugoCleanerSearch } from 'hooks/useSearch'
+import {
+  DefaultSugoCleanerSearch,
+  EmptySearch,
+  useSavedSearch,
+} from 'hooks/useSearch'
 import useSugoCleaner, { SugoCleanerListType } from 'hooks/useSugoCleaner'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import Add from 'pages/Add'
 import Detail from 'pages/Detail'
 import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
+import FilterSort from 'pages/FilterSort'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
 import { useState } from 'react'
 
@@ -58,6 +63,7 @@ export default function SugoCleaner ({
   return (
     <Popup title="Sugo Pull Cleaner" onClose={onClose} minHeightRequired>
       <SugoCleanerList
+        name="toClean"
         title="To clean"
         list={toClean}
         action={action('toClean')}
@@ -66,6 +72,7 @@ export default function SugoCleaner ({
         showOnEmpty
       />
       <SugoCleanerList
+        name="toSell"
         title="Selling list"
         list={toSell}
         onClearAll={() => removeAll('toSell')}
@@ -73,6 +80,7 @@ export default function SugoCleaner ({
         showOnEmpty
       />
       <SugoCleanerList
+        name="toWaiting"
         title="Waiting list"
         list={toWaiting}
         onClearAll={() => removeAll('toWaiting')}
@@ -196,6 +204,7 @@ export default function SugoCleaner ({
 }
 
 function SugoCleanerList ({
+  name,
   title,
   list,
   action,
@@ -203,6 +212,7 @@ function SugoCleanerList ({
   onAdd,
   onClearAll,
 }: {
+  name: string
   title: string
   list: ExtendedUnit[]
   action: (unit: ExtendedUnit) => void
@@ -212,6 +222,11 @@ function SugoCleanerList ({
   showOnEmpty?: boolean
 }) {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+  const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
+  const { search, setSearch } = useSavedSearch(
+    `sugocleaner-${name}`,
+    EmptySearch,
+  )
 
   if (!list.length && !showOnEmpty) {
     return null
@@ -220,24 +235,37 @@ function SugoCleanerList ({
   return (
     <FilterContainer
       title={title}
+      customAction={
+        <Button
+          title="Sort"
+          icon={FilterSortIcon}
+          variant="secondary"
+          disabled={!list.length}
+          onClick={() => setShowFilterSort(true)}
+        />
+      }
       onReset={() => setShowConfirmation(true)}
       disableReset={list.length === 0}
     >
-      <ResultList>
-        {list.map((unit, i) => (
-          <CharacterBox key={i} unit={unit} size="3" onClick={action} />
-        ))}
+      <SearchPanel
+        search={search}
+        units={list}
+        onUnitClick={action}
+        size="3"
+        onAdd={onAdd}
+      />
 
-        {!!onAdd && (
-          <Button
-            onClick={onAdd}
-            icon={AddIcon}
-            size="1"
-            alignSelf="center"
-            margin="2"
-          />
-        )}
-      </ResultList>
+      {showFilterSort && (
+        <FilterSort
+          unitOnly
+          onCancel={() => setShowFilterSort(false)}
+          search={search}
+          onSubmit={s => {
+            setSearch(s)
+            setShowFilterSort(false)
+          }}
+        />
+      )}
 
       {showConfirmation && (
         <Popup

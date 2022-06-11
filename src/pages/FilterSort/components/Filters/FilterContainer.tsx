@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
+import { ClearIcon } from 'components/Icon'
 import { SubTitle } from 'components/Title'
 import { ReactNode } from 'react'
 
 type FilterContainerProps = {
   title: string
   children: ReactNode
+  customAction?: ReactNode
   disableReset: boolean
   onReset: () => void
 }
@@ -14,6 +16,7 @@ type FilterContainerProps = {
 export default function FilterContainer ({
   title,
   children,
+  customAction,
   disableReset,
   onReset,
 }: FilterContainerProps) {
@@ -25,15 +28,17 @@ export default function FilterContainer ({
         justifyContent="space-between"
         marginBottom="2"
       >
-        <SubTitle textAlign="left">{title}</SubTitle>
+        <SubTitle textAlign="left" flex="1">{title}</SubTitle>
+        {customAction}
         <Button
           onClick={onReset}
           disabled={disableReset}
           fontSize="1"
           variant="secondary"
-        >
-          Clear
-        </Button>
+          icon={ClearIcon}
+          title="Clear"
+          ml="2"
+        />
       </Box>
       {children}
     </Box>
