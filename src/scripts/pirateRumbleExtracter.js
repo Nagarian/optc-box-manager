@@ -27,6 +27,7 @@ filters.patternToString = function () {
           return ''
       }
     } else if (input.action === 'heal') {
+      input.area = input.area[0].toUpperCase() + input.area.slice(1)
       return `*Level ${input.level} ${input.area === 'Self' ? input.area : input.area + ' Range'} Heal*`
     } else {
       return 'UNKNOWN'
@@ -41,9 +42,9 @@ filters.resilienceToString = function () {
       return `${conditionToString(input.condition)}Heals ${input.amount} HP every ${input.interval} seconds.`
     }
     if (input.type === 'damage') {
-      return `${input.percentage}% reduction to ${input.attribute} damage.`
+      return `${conditionToString(input.condition)}${input.percentage}% reduction to ${input.attribute} damage.`
     }
-    return `${input.chance}% to resist ${input.attribute}.`
+    return `${conditionToString(input.condition)}${input.chance}% to resist ${input.attribute}.`
   }
 }
 
@@ -125,13 +126,13 @@ filters.abilityToString = function () {
               e += `${effect.chance ? 'r' : 'R'}evive to ${effect.amount}% HP after death`
               break
             default:
-              e += `${'reduce ' + attrStr}`
+              e += `${'Reduce ' + attrStr}`
               break
           }
           break
         case 'penalty':
           const tmpStr = arrayToString(effect.attributes)
-          if (tmpStr === 'HP' && effect.amount) { e += `${new Intl.NumberFormat().format(effect.amount)}% health cut` } else if (effect.level) { e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty` } else { e += `${effect.chance}% chance to ${arrayToString(effect.attributes)}` }
+          if (tmpStr === 'HP' && effect.amount) { e += `${new Intl.NumberFormat().format(effect.amount)}% health cut` } else if (effect.level) { e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty` } else { e += `${effect.chance || 100}% chance to ${arrayToString(effect.attributes)}` }
           break
         case 'cleanse':
           e += `${effect.chance}% chance to cleanse ${arrayToString(effect.attributes)} debuffs`
@@ -177,7 +178,7 @@ function conditionToString (condition) {
     case 'enemies':
       return `When there are ${condition.count} or ${condition.comparator} ${condition.type} ${condition.relative ? condition.type === 'crew' ? 'than the enemy team' : 'than your crew' : ''} remaining, `
     case 'trigger':
-      return `The first ${condition.count} times this character lands a ${condition.stat}, `
+      return `The first ${condition.count} times this character ${condition.stat === 'takes damage' ? condition.stat : 'lands a ' + condition.stat}, `
     case 'defeat':
       return `When ${condition.count} characters ${condition.team === 'enemies' ? 'on the enemy team ' : condition.team === 'crew' ? 'on your crew ' : ''}are defeated, `
     case 'character':
@@ -195,11 +196,13 @@ function rangeToString (range) {
 function targetToString (target) {
   if (!target) return ''
   let targetStr = arrayToString(target.targets)
+  const excludeStr = arrayToString(target.excludes)
   if (targetStr === 'crew') targetStr = 'crew member(s)'
   if (targetStr === 'enemies') {
     if (!target.count) { targetStr = 'all enemies' } else if (target.count === 1) { targetStr = 'enemy' }
   }
   let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}${target.targets.includes('self') || target.targets.includes('crew') || target.targets.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters'}`
+  retVal = retVal + `${target.excludes ? ', excluding ' : ''}${target.excludes ? excludeStr : ''}${target.excludes ? target.excludes.includes('self') || target.excludes.includes('crew') || target.excludes.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters' : ''}`
   retVal = retVal + `${target.stat ? (' with ' + (target.percentage ? 'a ' + target.percentage + '% or ' : 'the ') + target.priority + ' ' + target.stat) : ''}`
   return retVal
 }
@@ -336,7 +339,7 @@ function applyNewPirateRumble (
     unit.detail.festAttackTarget = filters.targetToString()(newRumble.target)
     unit.detail.festResilience = filters.resilienceToString()(newRumble.resilience)
     unit.detail.festSpecial = newRumble.special.map(s => ({
-      cooldown: s.cooldown,
+      cooldown: s.cooldown ?? 0,
       description: filters.specialToString()(s.effects),
     }))
   }
