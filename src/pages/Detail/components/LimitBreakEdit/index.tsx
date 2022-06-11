@@ -31,7 +31,13 @@ export default function LimitBreakEdit ({
 }: LimitBreakEditProps) {
   const theme = useTheme() as any
 
-  if (!limitBreak || !detail.limit?.length) return null
+  if (!limitBreak || !detail.limit?.length) {
+    return !detail.potential?.length
+      ? null
+      : (
+      <ExpansionPanel title="Limit Break" icon={LimitBreakIcon} disabled />
+        )
+  }
 
   const { lvl, lvlMax, keyLvlMax } = limitBreak
 

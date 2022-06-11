@@ -53,7 +53,7 @@ type ExpansionPanelProps = {
   title: string
   icon?: Icon
   disabled?: boolean
-  children: ReactNode
+  children?: ReactNode
 }
 
 export default function ExpansionPanel ({
