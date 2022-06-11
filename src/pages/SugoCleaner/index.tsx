@@ -5,9 +5,7 @@ import {
   AddIcon,
   BellyIcon,
   DeleteIcon,
-  LimitBreakIcon,
-  SkillBookIcon,
-  SupportIcon,
+  NewsCooIcon,
   TreasureIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
@@ -21,8 +19,6 @@ import Add from 'pages/Add'
 import Detail from 'pages/Detail'
 import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
-import { ByUserSpecialFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSpecial'
-import { ByUserSupportFilter } from 'pages/FilterSort/components/Filters/UserUnits/ByUserSupport'
 import { useState } from 'react'
 
 export type SugoCleanerProps = {
@@ -39,17 +35,8 @@ export default function SugoCleaner ({
   onClose,
   onAddUnit,
 }: SugoCleanerProps) {
-  const {
-    toClean,
-    toSell,
-    toWaiting,
-    toWaitingForLB,
-    toWaitingForSupport,
-    addTo,
-    move,
-    remove,
-    removeAll,
-  } = useSugoCleaner(units)
+  const { toClean, toSell, toWaiting, addTo, move, remove, removeAll } =
+    useSugoCleaner(units)
   const [openAdd, setOpenAdd] = useState<boolean>(false)
   const [openChooser, setOpenChooser] = useState<ExtendedUnit>()
   const [openDetail, setOpenDetail] = useState<UserUnit>()
@@ -79,29 +66,17 @@ export default function SugoCleaner ({
         showOnEmpty
       />
       <SugoCleanerList
-        title="To sell"
+        title="Selling list"
         list={toSell}
         onClearAll={() => removeAll('toSell')}
         action={action('toSell')}
         showOnEmpty
       />
       <SugoCleanerList
-        title="Wait for skill-up event"
+        title="Waiting list"
         list={toWaiting}
         onClearAll={() => removeAll('toWaiting')}
         action={action('toWaiting')}
-      />
-      <SugoCleanerList
-        title="Wait for LB materials"
-        list={toWaitingForLB}
-        onClearAll={() => removeAll('toWaitingForLB')}
-        action={action('toWaitingForLB')}
-      />
-      <SugoCleanerList
-        title="Wait for support release"
-        list={toWaitingForSupport}
-        onClearAll={() => removeAll('toWaitingForSupport')}
-        action={action('toWaitingForSupport')}
       />
 
       {openAdd && (
@@ -170,52 +145,21 @@ export default function SugoCleaner ({
                 }}
                 icon={BellyIcon}
               >
-                To Sell
+                Put on selling list
               </Button>
             )}
 
-            {filteredUserUnit.some(WaitForSpecialEvent) &&
-              currentList !== 'toWaiting' && (
-                <Button
-                  {...commonPopupButton}
-                  onClick={() => {
-                    currentList && move(currentList, 'toWaiting', openChooser)
-                    setOpenChooser(undefined)
-                  }}
-                  icon={SkillBookIcon}
-                >
-                  Wait for skill-up event
-                </Button>
-            )}
-
-            {filteredUserUnit.some(WaitForLBMaterials) &&
-              currentList !== 'toWaitingForLB' && (
-                <Button
-                  {...commonPopupButton}
-                  onClick={() => {
-                    currentList &&
-                      move(currentList, 'toWaitingForLB', openChooser)
-                    setOpenChooser(undefined)
-                  }}
-                  icon={LimitBreakIcon}
-                >
-                  Wait for LB materials
-                </Button>
-            )}
-
-            {filteredUserUnit.some(WaitForSupport) &&
-              currentList !== 'toWaitingForSupport' && (
-                <Button
-                  {...commonPopupButton}
-                  onClick={() => {
-                    currentList &&
-                      move(currentList, 'toWaitingForSupport', openChooser)
-                    setOpenChooser(undefined)
-                  }}
-                  icon={SupportIcon}
-                >
-                  Wait for support release
-                </Button>
+            {currentList !== 'toWaiting' && (
+              <Button
+                {...commonPopupButton}
+                onClick={() => {
+                  currentList && move(currentList, 'toWaiting', openChooser)
+                  setOpenChooser(undefined)
+                }}
+                icon={NewsCooIcon}
+              >
+                Put on waiting list
+              </Button>
             )}
 
             <Button
@@ -300,8 +244,3 @@ function SugoCleanerList ({
     </FilterContainer>
   )
 }
-
-const WaitForSpecialEvent = ByUserSpecialFilter({ state: 'ongoing' })
-const WaitForSupport = ByUserSupportFilter({ state: 'locked' })
-const WaitForLBMaterials = (uu: UserUnit) =>
-  uu.potentials.some(p => p.lvl === 0)

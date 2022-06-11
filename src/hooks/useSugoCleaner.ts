@@ -1,14 +1,9 @@
 import { useStorage } from './useStorage'
 import { ExtendedUnit } from 'models/units'
 import { exportAsJson } from 'services/share'
+import { useEffect } from 'react'
 
-export const SugoCleanerList = [
-  'toClean',
-  'toSell',
-  'toWaiting',
-  'toWaitingForLB',
-  'toWaitingForSupport',
-] as const
+export const SugoCleanerList = ['toClean', 'toSell', 'toWaiting'] as const
 export type SugoCleanerListType = typeof SugoCleanerList[number]
 
 export type SugoCleaner = {
@@ -19,8 +14,6 @@ const defaultSugoCleaner: SugoCleaner = {
   toClean: [],
   toSell: [],
   toWaiting: [],
-  toWaitingForLB: [],
-  toWaitingForSupport: [],
 }
 
 export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
@@ -33,9 +26,29 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
     toClean = [],
     toSell = [],
     toWaiting = [],
+    // @ts-ignore
     toWaitingForLB = [],
+    // @ts-ignore
     toWaitingForSupport = [],
   } = sugoCleaner
+
+  useEffect(() => {
+    if (toWaitingForLB?.length) {
+      setSugoCleaner(sugo => ({
+        ...sugo,
+        toWaiting: [...sugo.toWaiting, ...toWaitingForLB],
+        toWaitingForLB: undefined,
+      }))
+    }
+
+    if (toWaitingForSupport?.length) {
+      setSugoCleaner(sugo => ({
+        ...sugo,
+        toWaiting: [...sugo.toWaiting, ...toWaitingForSupport],
+        toWaitingForSupport: undefined,
+      }))
+    }
+  }, [setSugoCleaner, toWaitingForLB, toWaitingForSupport])
 
   return {
     toClean: toClean
@@ -47,14 +60,6 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
       .filter(Boolean) as ExtendedUnit[],
 
     toWaiting: toWaiting
-      .map(id => unitDB.find(u => u.id === id))
-      .filter(Boolean) as ExtendedUnit[],
-
-    toWaitingForLB: toWaitingForLB
-      .map(id => unitDB.find(u => u.id === id))
-      .filter(Boolean) as ExtendedUnit[],
-
-    toWaitingForSupport: toWaitingForSupport
       .map(id => unitDB.find(u => u.id === id))
       .filter(Boolean) as ExtendedUnit[],
 
