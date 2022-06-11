@@ -97,6 +97,7 @@ export function ByUserLevelInput ({
             checked={criteria?.state === stateKey}
             onChange={e =>
               onChange({
+                ...criteria,
                 state: stateKey,
               })
             }
@@ -115,6 +116,7 @@ export function ByUserLevelInput ({
             checked={criteria?.lbState === stateKey}
             onChange={e =>
               onChange({
+                ...criteria,
                 lbState: stateKey,
               })
             }
@@ -133,6 +135,7 @@ export function ByUserLevelInput ({
             checked={criteria?.postLbState === stateKey}
             onChange={e =>
               onChange({
+                ...criteria,
                 postLbState: stateKey,
               })
             }
