@@ -218,13 +218,11 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 1928) {
+  if (unit.id === 3666) {
     // @ts-ignore
-    if (unit.detail.llbpotential) {
+    if (!unit.minRCV) {
       // @ts-ignore
-      unit.detail.potential = unit.detail.llbpotential
-      // @ts-ignore
-      delete unit.detail.llbpotential
+      unit.minRCV = 0
     } else {
       console.warn(`issue with unit ${unit.id} has been fixed`)
     }
