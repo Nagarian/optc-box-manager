@@ -762,6 +762,9 @@
                 "level2": {
                   "type": "string"
                 },
+                "llbbase": {
+                  "type": "string"
+                },
                 "llblevel1": {
                   "type": "string"
                 },
@@ -1144,6 +1147,9 @@
                       "type": "string"
                     },
                     "level2": {
+                      "type": "string"
+                    },
+                    "llbbase": {
                       "type": "string"
                     },
                     "llblevel1": {
