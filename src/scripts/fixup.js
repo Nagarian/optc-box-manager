@@ -218,16 +218,6 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 3666) {
-    // @ts-ignore
-    if (!unit.minRCV) {
-      // @ts-ignore
-      unit.minRCV = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
-  }
-
   return unit
 }
 
