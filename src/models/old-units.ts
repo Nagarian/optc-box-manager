@@ -200,6 +200,7 @@ export type UnitSailor =
       base2?: string
       level1?: string
       level2?: string
+      llbbase?: string
       llblevel1?: string
       llblevel2?: string
     }
