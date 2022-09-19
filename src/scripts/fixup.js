@@ -218,6 +218,13 @@ function fixupSpecificIssue (
     }
   }
 
+  if (unit.id === 3719 || unit.id === 3720) {
+    if (unit.detail.captinNotes) {
+      unit.detail.captainNotes = unit.detail.captinNotes
+      delete unit.detail.captinNotes 
+    }
+  }
+
   return unit
 }
 
