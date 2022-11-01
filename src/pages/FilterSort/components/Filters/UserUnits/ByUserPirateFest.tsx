@@ -1,5 +1,5 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { PirateFestAbilityIcon, PirateFestSpecialIcon } from 'components/Icon'
+import { PirateFestAbilityIcon, PirateFestBothIcon, PirateFestSpecialIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
@@ -11,6 +11,7 @@ export type UserPirateFestState = typeof UserPirateFestStateKeys[number]
 export interface ByUserPirateFestCriteria {
   specialLvlState?: UserPirateFestState
   abilityLvlState?: UserPirateFestState
+  gpLvlState?: UserPirateFestState
 }
 
 const festFilter = (
@@ -39,6 +40,10 @@ export const ByUserPirateFestFilter = (criteria: ByUserPirateFestCriteria) =>
     [
       criteria.specialLvlState,
       (userUnit) => festFilter(userUnit.pirateFest?.specialLvl, 10, criteria.specialLvlState!),
+    ],
+    [
+      criteria.gpLvlState,
+      (userUnit) => festFilter(userUnit.pirateFest?.gplvl, 5, criteria.gpLvlState!),
     ],
   )
 
@@ -79,6 +84,25 @@ export function ByUserPirateFestInput ({
               onChange({
                 ...criteria,
                 abilityLvlState: stateKey,
+              })
+            }
+          >
+            {stateKey}
+          </ChoiceInput>
+        ))}
+      </FilterContainerPanel>
+      <FilterContainerPanel>
+        <PirateFestBothIcon size="2" title="Pirate Rumble Ability" />
+        GP level
+        {UserPirateFestStateKeys.map(stateKey => (
+          <ChoiceInput key={stateKey}
+            type="radio"
+            name="userunit-festGP"
+            checked={criteria?.gpLvlState === stateKey}
+            onChange={e =>
+              onChange({
+                ...criteria,
+                gpLvlState: stateKey,
               })
             }
           >

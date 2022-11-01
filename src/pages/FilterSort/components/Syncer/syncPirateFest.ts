@@ -1,7 +1,10 @@
 import { Syncer } from '.'
 import { SearchDisplayerCriteria } from '../Displayers'
 import { SearchSortCriteria } from 'models/search'
-import { PirateFestDisplayerOption, PirateFestDisplayerOptionType } from '../Displayers/PirateFestDisplayer'
+import {
+  PirateFestDisplayerOption,
+  PirateFestDisplayerOptionType,
+} from '../Displayers/PirateFestDisplayer'
 import { ByUserPirateFestCriteria } from '../Filters/UserUnits/ByUserPirateFest'
 
 export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
@@ -10,11 +13,14 @@ export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
     return [undefined, undefined]
   }
 
-  const optionType: PirateFestDisplayerOptionType = userS.abilityLvlState && userS.specialLvlState
-    ? 'both'
-    : userS.abilityLvlState
-      ? 'ability'
-      : 'special'
+  const optionType: PirateFestDisplayerOptionType =
+    userS.abilityLvlState && userS.specialLvlState
+      ? 'all'
+      : userS.abilityLvlState
+        ? 'ability'
+        : userS.specialLvlState
+          ? 'special'
+          : 'gp'
 
   const syncDisplayer = syncPirateFestDisplayer(displayer, optionType)
 
@@ -60,6 +66,15 @@ export function syncPirateFestSort (
     return [
       {
         by: 'byPirateFestSpecial',
+        order: 'desc',
+      },
+    ]
+  }
+
+  if (type === 'gp') {
+    return [
+      {
+        by: 'byPirateFestGp',
         order: 'desc',
       },
     ]

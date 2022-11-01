@@ -34,6 +34,7 @@ import {
 } from './UserUnits/ByLimitBreak'
 import {
   byPirateFestAbility,
+  byPirateFestGp,
   byPirateFestSpecial,
 } from './UserUnits/ByPirateFest'
 import {
@@ -61,6 +62,7 @@ export const UserUnitSortTypeKeys = [
   'byPotentialProgression',
   'byPirateFestSpecial',
   'byPirateFestAbility',
+  'byPirateFestGp',
   'byInkLvl',
   'byAddedToBox',
 ] as const
@@ -153,6 +155,11 @@ export const SearchSortBuilder: {
     label: 'PR Ability Lvl',
     type: 'userUnit',
     fn: byPirateFestAbility,
+  },
+  byPirateFestGp: {
+    label: 'PR GP Lvl',
+    type: 'userUnit',
+    fn: byPirateFestGp,
   },
   byInkLvl: {
     label: 'Ink Lvl',
