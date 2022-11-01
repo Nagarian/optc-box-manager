@@ -1,3 +1,14 @@
+# [2.8.0](https://github.com/Nagarian/optc-box-manager/compare/v2.7.0...v2.8.0) (2022-11-01)
+
+
+### Features
+
+* **box:** allow 6 and 6+ characters to be inkable ([72c0fde](https://github.com/Nagarian/optc-box-manager/commit/72c0fde530c962905f713d867f08fe4dd62b5f73))
+* **detail:** add support for GP stats ([3751381](https://github.com/Nagarian/optc-box-manager/commit/3751381ec0122469db2da9ae02a4e6156408a3c2))
+* **filter:** add Rumble GP Filters, Displayers, Sorters and Syncers ([2b9fc8c](https://github.com/Nagarian/optc-box-manager/commit/2b9fc8cd12444947f6dfdbb1e7cd4cf11b11843e))
+
+
+
 # [2.7.0](https://github.com/Nagarian/optc-box-manager/compare/v2.6.1...v2.7.0) (2022-06-11)
 
 
@@ -77,15 +88,6 @@
 ### Bug Fixes
 
 * **box:** issue with potential default to 1 for unit with limit break path not released yet ([9c56e6f](https://github.com/Nagarian/optc-box-manager/commit/9c56e6fa2370cbe02a7df121c136ed8dda9ef00a))
-
-
-
-## [2.4.1](https://github.com/Nagarian/optc-box-manager/compare/v2.4.0...v2.4.1) (2022-02-28)
-
-
-### Bug Fixes
-
-* **box:** issue with potential default to 1 update ([0b8d5ef](https://github.com/Nagarian/optc-box-manager/commit/0b8d5ef7bf62cdb3fd6c690cb776ec28ed09dc87))
 
 
 
