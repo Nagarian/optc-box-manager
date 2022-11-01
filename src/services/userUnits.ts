@@ -52,7 +52,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
     sockets: Array(Math.max(unit.slots, unit.limitSlot, unit.limitexSlot)).fill(
       { type: undefined, lvl: 0 },
     ),
-    ink: unit.flags.inkable ? { lvl: 0 } : undefined,
+    ink: unit.flags.inkable || unit.stars === '6+' || unit.stars === 6 ? { lvl: 0 } : undefined,
     level: {
       lvl: 1,
       lvlMax: unit.maxLevel,
