@@ -124,7 +124,7 @@ export default function RecapBox ({
           "spe cch cca ccr sup"
           "po1 po2 po3 pfs pfa"
           "so1 so2 so3 so4 so5"
-          "lvl lvl lvl llb llb"
+          "lvl lvl llb llb pfg"
         `}
       >
         <Element
@@ -143,7 +143,7 @@ export default function RecapBox ({
         </Element>
 
         {level.limitLvl !== undefined && level.limitStepLvl !== undefined && (
-          <Element gridArea="llb" fontSize="2" justifyContent="left">
+          <Element gridArea="llb" fontSize="2" justifyContent="center">
             <LevelLB
               limitLvl={level.limitLvl}
               limitStepLvl={level.limitStepLvl}
@@ -254,6 +254,17 @@ export default function RecapBox ({
               />
             </Element>
           </>
+        )}
+
+        {pirateFest && pirateFest.gplvl && (
+          <Element gridArea="pfg">
+            <PirateFestBothIcon size="2" title="Pirate Rumble GP" />
+            <Progression
+              value={pirateFest.gplvl}
+              max={5}
+              isDirty={pirateFest.gplvl !== original.pirateFest?.gplvl}
+            />
+          </Element>
         )}
 
         {sockets.length > 0 &&
@@ -385,6 +396,9 @@ export function RecapBoxLight ({
             <Box display="flex" flexDirection="column">
               <Progression value={pirateFest.specialLvl} max={10} />
               <Progression value={pirateFest.abilityLvl} max={5} />
+              {pirateFest.gplvl && (
+                <Progression value={pirateFest.gplvl} max={5} />
+              )}
             </Box>
           </Element>
         )}
