@@ -141,6 +141,12 @@ export type UnitFestSpecial = {
   cooldown: number
 }
 
+export type UnitFestGPBurst = {
+  description: string
+  condition: string
+  use: number
+}
+
 export type UnitCooldown = [number, number]
 
 export type BaseUnitSpecial =
@@ -202,6 +208,18 @@ export type UnitSailor =
       level2?: string
     }
 
+export type UnitSuperSwap = {
+  base: string
+  super: string
+  superTurns: number
+}
+
+export type UnitSuperTandem = {
+  condition?: string
+  characterCondition: string[]
+  description: string[]
+}
+
 export type UnitLevelLimitBreak = null | Partial<{
   rAbility: boolean
   rSpecial: boolean
@@ -210,17 +228,6 @@ export type UnitLevelLimitBreak = null | Partial<{
   special: BaseUnitSpecial
   sailor: UnitSailor
 }>
-
-export type UnitSuperSwap = {
-  base: string
-  super: string
-  superTurns: number
-}
-
-export type UnitSuperTandem = {
-  characterCondition: string[]
-  description: string[]
-}
 
 export type UnitDetail = {
   captain: UnitCaptain
@@ -242,6 +249,8 @@ export type UnitDetail = {
   supportNotes?: string
   festAbility: UnitFestAbility[]
   festSpecial: UnitFestSpecial[]
+  festGPLeader?: UnitFestAbility[]
+  festGPBurst?: UnitFestGPBurst[]
   swap?: string | UnitSuperSwap
   swapNotes?: string
   superSpecial?: string

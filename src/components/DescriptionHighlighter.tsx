@@ -67,6 +67,11 @@ const Orb = styled.span`
 
 const FakeParagraph = styled.span``
 
+const Header3 = styled.h3`
+  font-weight: bold;
+  margin-top:${themeGet('space.1')};
+`
+
 const DiffHiglighter = styled.em`
   font-style: normal;
   font-weight: bold;
@@ -75,6 +80,7 @@ const DiffHiglighter = styled.em`
 
 const renderers: Components = {
   p: FakeParagraph as any,
+  h3: Header3 as any,
   a: ({ href, ...p }: any) => <Orb {...p}>{href?.replace(/\[|\]/g, '')}</Orb>,
   em: DiffHiglighter as any,
 }

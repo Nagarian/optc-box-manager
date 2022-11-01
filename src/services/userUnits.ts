@@ -46,6 +46,7 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
         ? {
             abilityLvl: 1,
             specialLvl: 1,
+            gplvl: unit.detail.festGPBurst ? 1 : undefined,
           }
         : undefined,
     sockets: Array(Math.max(unit.slots, unit.limitSlot, unit.limitexSlot)).fill(
@@ -372,7 +373,8 @@ export function resync (userUnit: UserUnit) {
     (userUnit.pirateFest?.abilityLvl ?? 0) <
       (compare.pirateFest?.abilityLvl ?? 0) ||
     (userUnit.pirateFest?.specialLvl ?? 0) <
-      (compare.pirateFest?.specialLvl ?? 0)
+      (compare.pirateFest?.specialLvl ?? 0) ||
+    (userUnit.pirateFest?.gplvl ?? 0) < (compare.pirateFest?.gplvl ?? 0)
   ) {
     updated.pirateFest = {
       abilityLvl: Math.max(
@@ -383,6 +385,12 @@ export function resync (userUnit: UserUnit) {
         updated.pirateFest?.specialLvl ?? 0,
         compare.pirateFest?.specialLvl ?? 0,
       ),
+      gplvl: compare.pirateFest?.gplvl
+        ? Math.max(
+          updated.pirateFest?.gplvl ?? 0,
+          compare.pirateFest?.gplvl ?? 0,
+        )
+        : undefined,
     }
 
     isUpdated = true

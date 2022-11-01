@@ -151,6 +151,12 @@ export type UnitFestSpecial = {
   cooldown: number
 }
 
+export type UnitFestGPBurst = {
+  description: string
+  condition: string
+  use: number
+}
+
 export type UnitCooldown = [number, number]
 
 export type BaseUnitSpecial =
@@ -255,8 +261,9 @@ export type UnitDetail = {
   festSpecial?: UnitFestSpecial[]
   festAttackPattern?: UnitFestAbility[]
   festAttackTarget?: string
-  festResistance?: string
   festResilience?: string
+  festGPLeader?: UnitFestAbility[]
+  festGPBurst?: UnitFestGPBurst[]
   swap?: string | UnitSuperSwap
   swapNotes?: string
   superSpecial?: string

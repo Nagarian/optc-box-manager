@@ -39,6 +39,7 @@ export type UserUnitLimitBreak = {
 export type UserUnitPirateFest = {
   abilityLvl: number
   specialLvl: number
+  gplvl?: number
 }
 
 export type UserUnitPowerSocket = {

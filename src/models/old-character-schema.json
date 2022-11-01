@@ -700,10 +700,19 @@
         "festAttackTarget": {
           "type": "string"
         },
-        "festResilience": {
-          "type": "string"
+        "festGPBurst": {
+          "items": {
+            "$ref": "#/definitions/UnitFestGPBurst"
+          },
+          "type": "array"
         },
-        "festResistance": {
+        "festGPLeader": {
+          "items": {
+            "$ref": "#/definitions/UnitFestAbility"
+          },
+          "type": "array"
+        },
+        "festResilience": {
           "type": "string"
         },
         "festSpecial": {
@@ -900,6 +909,26 @@
       },
       "required": [
         "description"
+      ],
+      "type": "object"
+    },
+    "UnitFestGPBurst": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "use": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "description",
+        "condition",
+        "use"
       ],
       "type": "object"
     },

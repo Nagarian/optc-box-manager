@@ -55,6 +55,33 @@ filters.specialToString = function () {
   }
 }
 
+filters.gpconditionToString = function () {
+  return function (input) {
+    switch (input.type) {
+      case 'damage':
+        return `After dealing damage ${input.count} times`
+      case 'action':
+        return `After ${input.action}ing ${input.count} times`
+      case 'debuff':
+        return `After landing ${input.attribute} ${input.count} times`
+      case 'attack':
+        return `After landing ${input.count} ${input.attack} attacks`
+      case 'defeat':
+        return `After ${input.count} ${input.team} are defeated`
+      case 'special':
+        return `After ${input.team} uses ${input.count} Rumble Specials`
+      case 'dbfreceived':
+        return `After ${input.count} debuffs recieved`
+      case 'dmgreceived':
+        return `After ${new Intl.NumberFormat().format(input.count)} damage recieved`
+      case 'hitreceived':
+        return `After ${input.count} hits recieved`
+      default:
+        return `UNKNOWN CONDITION ${JSON.stringify(input)}`
+    }
+  }
+}
+
 filters.abilityToString = function () {
   return function (input) {
     if (!input) return 'N/A'
@@ -74,7 +101,10 @@ filters.abilityToString = function () {
               e += `Deals Lv.${effect.level} Damage Over Time`
               break
             case 'atk':
-              e += `Deals ${new Intl.NumberFormat().format(effect.amount)}x ATK in damage`
+              e += `Deals ${new Intl.NumberFormat().format(effect.amount)}x ${effect.leader ? "Leader's " : ''}ATK in damage`
+              break
+            case 'atkbase':
+              e += `Deals ${new Intl.NumberFormat().format(effect.amount)}x ${effect.leader ? "Leader's " : ''}base ATK in damage`
               break
             case 'fixed':
               e += `Deals ${new Intl.NumberFormat().format(effect.amount)} fixed damage`
@@ -252,6 +282,8 @@ function getRumbleData (id) {
   denormalizeEffects(unit.special)
   if (unit.llbability) denormalizeEffects(unit.llbability)
   if (unit.llbspecial) denormalizeEffects(unit.llbspecial)
+  if (unit.gpspecial) denormalizeEffects(unit.gpspecial)
+  if (unit.gpability) denormalizeEffects(unit.gpability)
 
   // Check for VS unit
   if (unit.id !== Math.floor(unit.id)) {
@@ -341,6 +373,16 @@ function applyNewPirateRumble (
     unit.detail.festSpecial = newRumble.special.map(s => ({
       cooldown: s.cooldown ?? 0,
       description: filters.specialToString()(s.effects),
+    }))
+    unit.detail.festGPLeader = newRumble.gpability?.map(ab => ({
+      description: filters.abilityToString()(ab.effects),
+    }))
+
+    const gpCondition = (newRumble.gpcondition ? filters.gpconditionToString()(newRumble.gpcondition[0]) : undefined) ?? ''
+    unit.detail.festGPBurst = newRumble.gpspecial?.map(gps => ({
+      use: gps.uses,
+      condition: gpCondition,
+      description: filters.specialToString()(gps.effects),
     }))
   }
 
