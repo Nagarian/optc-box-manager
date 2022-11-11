@@ -10,6 +10,7 @@ import { useStorage } from './useStorage'
 import { SavedSearch } from './useStoredSearches'
 
 export type ThemeMode = 'auto' | 'light' | 'dark'
+export type GameVersion = 'global' | 'japan'
 
 export type UserSetting = {
   cottonCandiesMaximumLevel: {
@@ -20,6 +21,7 @@ export type UserSetting = {
   userSearches: SavedSearch[]
   resetSearchId?: string
   themeMode: ThemeMode
+  gameVersion: GameVersion
 }
 
 const defaultUserSettings: UserSetting = {
@@ -30,6 +32,7 @@ const defaultUserSettings: UserSetting = {
     rcv: 0,
   },
   themeMode: 'auto',
+  gameVersion: 'global',
 }
 
 export type UserSettingEnhanced = {
@@ -64,6 +67,10 @@ function migration (value: any): UserSetting {
       ...defaultUserSettings,
       ...value,
     }
+  }
+
+  if (!value.gameVersion) {
+    value.gameVersion = 'global'
   }
 
   return value

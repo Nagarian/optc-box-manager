@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CharacterFound, SquareSize } from 'services/image-cv-worker'
+import { GameVersion, useUserSettings } from './useUserSettings'
 
 export type ImageAnalyzer = {
   isInitialized: boolean
@@ -13,6 +14,9 @@ export type ImageAnalyzer = {
   reset: () => void
 }
 export function useImageAnalyzer (): ImageAnalyzer {
+  const {
+    userSetting: { gameVersion },
+  } = useUserSettings()
   const workerRef = useRef<Worker>()
   const charactersRef = useRef<ImageData>()
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
@@ -59,14 +63,14 @@ export function useImageAnalyzer (): ImageAnalyzer {
       }
     }
 
-    const imageData = await loadCharacterImage()
+    const imageData = await loadCharacterImage(gameVersion)
     charactersRef.current = imageData
 
     worker.postMessage({ type: 'INIT' })
     setState('Initialization in progress')
 
     workerRef.current = worker
-  }, [])
+  }, [gameVersion])
 
   useEffect(() => {
     currentImageRef.current = currentImage
@@ -134,8 +138,13 @@ export function useImageAnalyzer (): ImageAnalyzer {
   }
 }
 
-async function loadCharacterImage (): Promise<ImageData> {
-  const url = `${process.env.PUBLIC_URL}/characters/global-fixed-10x9.png`
+async function loadCharacterImage (
+  gameVersion: GameVersion,
+): Promise<ImageData> {
+  const url =
+    gameVersion === 'global'
+      ? `${process.env.PUBLIC_URL}/characters/global-fixed-10x9.png`
+      : `${process.env.PUBLIC_URL}/characters/japan-10x9.png`
   const res = await fetch(url, { mode: 'cors' })
   const imgBlob = await res.blob()
   const img = await createImageBitmap(imgBlob, {
