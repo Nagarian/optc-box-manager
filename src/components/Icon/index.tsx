@@ -28,6 +28,7 @@ import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
+import { ReactComponent as ImageAnalyzer } from './image-analyzer.svg'
 import InkSvg, { ReactComponent as Ink } from './ink.svg'
 import LevelSvg, { ReactComponent as Level } from './level.svg'
 import { ReactComponent as LimitBreak } from './limitbreak.svg'
@@ -47,8 +48,8 @@ import { ReactComponent as Search } from './search.svg'
 import { ReactComponent as Settings } from './settings.svg'
 import { ReactComponent as Share } from './share.svg'
 import { ReactComponent as SkillBook } from './skillbook.svg'
-import SpecialSvg, { ReactComponent as Special } from './special.svg'
 import SpecialLvl from './special.png'
+import SpecialSvg, { ReactComponent as Special } from './special.svg'
 import { ReactComponent as SugoPull } from './sugopull.svg'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
@@ -111,6 +112,7 @@ export const EditIcon = BaseSvg(Edit)
 export const EvolveIcon = BaseSvg(Evolve)
 export const FilterSortIcon = BaseSvg(FilterSort)
 export const GatherIslandIcon = BaseSvg(GatherIsland)
+export const ImageAnalyzerIcon = BaseSvg(ImageAnalyzer)
 export const InkIcon = BaseSvg(Ink)
 InkIcon.defaultProps = {
   color: 'primaryText',

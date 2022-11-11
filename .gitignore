@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 public/db-*.json
 public/errors-*.json
+public/characters/global-fixed-*.png
+public/characters/japan-*.png

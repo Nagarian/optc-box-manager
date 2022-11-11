@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "extract-optcdb": "node ./src/scripts/index.js",
+    "extract-image": "node ./src/scripts/cropImage.mjs",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -52,6 +53,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "jsonc-parser": "^3.2.0",
     "react-test-renderer": "^18.2.0",
+    "sharp": "^0.31.2",
     "source-map-explorer": "^2.5.3"
   },
   "browserslist": {

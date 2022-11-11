@@ -12,6 +12,7 @@ import {
   BySearchBoxCriteria,
   BySearchBoxInput,
 } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
+import { ImageAnalyzer } from 'pages/FilterSort/components/ImageAnalyzer'
 import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -61,11 +62,22 @@ export default function Add ({
       onCancel={onCancel}
       onValidate={() => onSubmit([...selectedUnits])}
       customAction={
-        <Button
-          onClick={() => setShowSettings(true)}
-          icon={FilterSortIcon}
-          title="Filter/Sort"
-        />
+        <>
+          <Button
+            onClick={() => setShowSettings(true)}
+            icon={FilterSortIcon}
+            title="Filter/Sort"
+          />
+
+          <ImageAnalyzer
+            onCharacterSelected={ids =>
+              setSelectedUnits(u => [
+                ...u,
+                ...ids.map(id => units.find(uu => uu.id === id)!).filter(u => !!u),
+              ])
+            }
+          />
+        </>
       }
     >
       <BySearchBoxInput
