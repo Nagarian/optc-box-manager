@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, RefObject } from 'react'
-import ResizeObserver from 'resize-observer-polyfill'
 
 type BoxMeasure = {
   readonly left: number

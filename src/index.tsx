@@ -35,3 +35,5 @@ function AppWrapper () {
     </ThemeProvider>
   )
 }
+
+// reportWebVitals(console.log)

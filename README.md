@@ -45,5 +45,6 @@ Follow <https://stackoverflow.com/questions/35127383/npm-http-server-with-ssl>
 
 ```bash
 npm run build
-npx http-server ./build -S
+# npx http-server ./build -S
+npx http-server -S -C cert.pem -K key.pem ./build
 ```
