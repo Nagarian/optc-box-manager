@@ -121,7 +121,7 @@ function fixupImages (
     ...unit,
     images: {
       ...unit.images,
-      thumbnail: `characters/${unit.id}.png`,
+      thumbnail: `https://optc-db.github.io/api/images/thumbnail/glo/5/000/${unit.id}.png`,
     },
   }
 }
