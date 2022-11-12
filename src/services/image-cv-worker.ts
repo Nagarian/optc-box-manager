@@ -1,11 +1,14 @@
 /// <reference lib="webworker" />
 
+import { ExtendedUnit } from 'models/units'
+
 // eslint-disable-next-line no-undef
 declare const self: DedicatedWorkerGlobalScope
 declare const cv: any
 
 export type SquareSize = {
   id: string
+  analysisId: string
   height: number
   width: number
   x: number
@@ -15,7 +18,20 @@ export type SquareSize = {
 export type CharacterFound = {
   squareId: string
   id: number
+  analysisId: string
   score: number
+  unit?: ExtendedUnit
+}
+
+export type AnalysisType = 'tavern' | 'box'
+
+export type Analysis = {
+  id: string
+  type: AnalysisType
+  image: ImageData
+  squares: SquareSize[]
+  founds: CharacterFound[]
+  done: boolean
 }
 
 const extractionSize = {
@@ -76,31 +92,24 @@ onmessage = async ({ data }) => {
         await loadOpenCv()
         self.postMessage({ type: 'READY' })
         break
-      case 'PROCESS_TAVERN': {
+      case 'PROCESS_IMAGE': {
+        const { image, type, id } = data.analysis as Analysis
         const charactersMat = cv.matFromImageData(data.characters)
-        const src = cv.matFromImageData(data.image)
-        const squares = detectTavernSquare(src)
+        const src = cv.matFromImageData(image)
+        const squares = type === 'tavern'
+          ? detectTavernSquare(src, id)
+          : detectBoxSquare(src, id)
         findCharacterIds(charactersMat, src, squares, 0.8)
         src.delete()
         charactersMat.delete()
-        self.postMessage({ type: 'PROCESS_TAVERN_END' })
-        break
-      }
-      case 'PROCESS_BOX': {
-        const charactersMat = cv.matFromImageData(data.characters)
-        const src = cv.matFromImageData(data.image)
-        const squares = detectBoxSquare(src)
-        findCharacterIds(charactersMat, src, squares, 0.75)
-        src.delete()
-        charactersMat.delete()
-        self.postMessage({ type: 'PROCESS_BOX_END' })
+        self.postMessage({ type: 'PROCESS_IMAGE_END', analysisId: data.analysis?.id })
         break
       }
       default:
         break
     }
   } catch (error) {
-    self.postMessage({ type: 'ERROR_OCCURED', error })
+    self.postMessage({ type: 'ERROR_OCCURED', error, analysisId: data.analysis?.id })
   }
 }
 
@@ -137,7 +146,7 @@ onmessage = async ({ data }) => {
 //   return cv.matFromImageData(imageData)
 // }
 
-function detectTavernSquare (src: any): SquareSize[] {
+function detectTavernSquare (src: any, analysisId: string): SquareSize[] {
   const copy = src.clone()
 
   // we filter image to keep only yellow one
@@ -225,6 +234,7 @@ function detectTavernSquare (src: any): SquareSize[] {
     const squareDetected: SquareSize = {
       ...extractedSquare,
       id: `${new Date().getTime()}-${squaresToExtract.length}`,
+      analysisId,
     }
 
     squaresToExtract.push(squareDetected)
@@ -239,7 +249,7 @@ function detectTavernSquare (src: any): SquareSize[] {
   return squaresToExtract.reverse()
 }
 
-function detectBoxSquare (src: any): SquareSize[] {
+function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
   const whiteMask = src.clone()
   let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
   let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
@@ -315,8 +325,9 @@ function detectBoxSquare (src: any): SquareSize[] {
     for (let xI = 0; xI < 5; xI++) {
       const x = minV + characterWidth * xI
 
-      const extractionSquare = {
+      const extractionSquare : SquareSize = {
         id: `${new Date().getTime()}-${squaresToExtract.length}`,
+        analysisId,
         x:
           x +
           Math.floor(
@@ -341,10 +352,11 @@ function detectBoxSquare (src: any): SquareSize[] {
         type: 'SQUARE_DETECTED',
         square: {
           id: extractionSquare.id,
+          analysisId,
           x,
           y,
-          width: characterWidth,
-          height: characterWidth,
+          width: characterWidth - 8,
+          height: characterWidth - 8,
         },
       })
 
@@ -406,6 +418,7 @@ function findCharacterIds (
     const characterFound: CharacterFound = {
       id,
       squareId: squareToSearch.id,
+      analysisId: squareToSearch.analysisId,
       score: found.val,
     }
 

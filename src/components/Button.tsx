@@ -7,6 +7,8 @@ import {
   color,
   ColorProps,
   compose,
+  flexDirection,
+  FlexDirectionProps,
   FontSizeProps,
   FontWeightProps,
   gridArea,
@@ -27,6 +29,7 @@ type StyledButtonProps = SpaceProps &
   BorderProps &
   FontSizeProps &
   SizeProps &
+  FlexDirectionProps &
   FontWeightProps & {
     variant?: 'primary' | 'secondary' | 'link' | 'danger'
     href?: string
@@ -34,12 +37,14 @@ type StyledButtonProps = SpaceProps &
 
 export type ButtonProps = StyledButtonProps & {
   icon?: Icon
+  iconVariant?: 'horizontal' | 'vertical'
   isLoading?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button: FC<ButtonProps> = ({
   icon: Icon,
   children,
+  iconVariant,
   variant,
   isLoading,
   href,
@@ -55,6 +60,7 @@ const Button: FC<ButtonProps> = ({
       {...asLink}
       {...rest}
       {...defaultPaddingFix}
+      flexDirection={iconVariant === 'vertical' ? 'column' : 'row'}
     >
       {isLoading && <LoaderIcon size={size} marginRight={children ? 2 : 0} />}
       {Icon && (
@@ -80,8 +86,8 @@ Button.defaultProps = {
 
 export default Button
 
-const Btn = styled('button', cleanStyledSystem)<StyledButtonProps>(
-  compose(space, color, border, typography, gridArea, place),
+const Btn = styled('button', cleanStyledSystem)<ButtonProps>(
+  compose(flexDirection, space, color, border, typography, gridArea, place),
   variant({
     scale: 'buttons',
     variants: {

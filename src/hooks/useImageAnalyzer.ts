@@ -1,16 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { CharacterFound, SquareSize } from 'services/image-cv-worker'
+import { Analysis, CharacterFound, SquareSize } from 'services/image-cv-worker'
+import { useOptcDb } from './useOptcDb'
 import { GameVersion, useUserSettings } from './useUserSettings'
 
 export type ImageAnalyzer = {
   isInitialized: boolean
-  isAnalyzisInProgress: boolean
+  isAnalysisInProgress: boolean
   state?: string
-  found: CharacterFound[]
-  squares: SquareSize[]
-  currentImage?: ImageData
+  analyses: Analysis[]
+  currentAnalysis?: Analysis
+
+  allFound: CharacterFound[]
+
   initialize: () => Promise<void>
-  processTavern: (files: File[]) => Promise<void>
+  processTavern: (files: FileList | File[] | null) => Promise<void>
+  processBox: (files: FileList | File[] | null) => Promise<void>
   reset: () => void
   removeFound: (found: CharacterFound) => void
 }
@@ -21,15 +25,15 @@ export function useImageAnalyzer (): ImageAnalyzer {
   const workerRef = useRef<Worker>()
   const charactersRef = useRef<ImageData>()
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
-  const [isAnalyzisInProgress, setIsAnalyzisInProgress] =
-    useState<boolean>(false)
+  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [state, setState] = useState<string>()
 
-  const [imagesToImport, setImagesToImport] = useState<ImageData[]>([])
-  const [currentImage, setCurrentImage] = useState<ImageData>()
-  const currentImageRef = useRef<ImageData>()
-  const [found, setFound] = useState<CharacterFound[]>([])
-  const [squares, setSquares] = useState<SquareSize[]>([])
+  const [analyses, setAnalyses] = useState<Analysis[]>([])
+  const [currentAnalysis, setCurrentAnalysis] = useState<Analysis>()
+  const remainingAnalysis = analyses.filter(a => !a.done).length
+  const hasAnalysisToProcess = remainingAnalysis > 0
+
+  const { db } = useOptcDb()
 
   const initialize = useCallback(async () => {
     const worker = new Worker(
@@ -42,27 +46,37 @@ export function useImageAnalyzer (): ImageAnalyzer {
           setIsInitialized(true)
           setState('Ready')
           break
-        case 'PROCESS_TAVERN_END':
-        case 'PROCESS_BOX_END':
-          if (!currentImageRef.current) break
-          setImagesToImport(([firstImg, ...imgs]) => imgs)
-          setIsAnalyzisInProgress(false)
+        case 'PROCESS_IMAGE_END':
+          setCurrentAnalysis(c => c && { ...c, done: true })
           setState('Analyzing images done')
           break
         case 'SQUARE_DETECTED':
-          if (!currentImageRef.current) break
-          setSquares(s => [...s, data.square as SquareSize])
+          setCurrentAnalysis(
+            c =>
+              c && {
+                ...c,
+                squares: [...c.squares, data.square as SquareSize],
+              },
+          )
           break
-        case 'CHARACTER_FOUND':
-          if (!currentImageRef.current) break
-          setFound(s => [...s, data.found as CharacterFound])
+        case 'CHARACTER_FOUND': {
+          const found: CharacterFound = {
+            ...data.found,
+            unit: db.find(u => u.id === data.found.id),
+          }
+          setCurrentAnalysis(c => c && { ...c, founds: [...c.founds, found] })
           break
+        }
         case 'ERROR_OCCURED':
+          setIsProcessing(false)
           setState(`Sorry an error occured: ${data.error.message}`)
           break
         default:
           break
       }
+    }
+    worker.onerror = ({ message }) => {
+      setState(`Sorry an error occured: ${message}`)
     }
 
     const imageData = await loadCharacterImage(gameVersion)
@@ -72,43 +86,84 @@ export function useImageAnalyzer (): ImageAnalyzer {
     setState('Initialization in progress')
 
     workerRef.current = worker
-  }, [gameVersion])
+  }, [db, gameVersion])
 
+  // update analyses when one is finished
   useEffect(() => {
-    currentImageRef.current = currentImage
-  }, [currentImage])
+    if (currentAnalysis?.done) {
+      setIsProcessing(false)
+      setAnalyses(aa =>
+        aa.map(a => (a.id === currentAnalysis.id ? currentAnalysis : a)),
+      )
+    }
+  }, [currentAnalysis])
 
+  // dequeue and start analysis when one is available or one is finished
   useEffect(() => {
-    if (!isInitialized || !imagesToImport.length || isAnalyzisInProgress) {
+    if (!isInitialized || !hasAnalysisToProcess || isProcessing) {
       return
     }
 
-    setIsAnalyzisInProgress(true)
+    const analysis = analyses.find(a => !a.done)
+    if (!analysis) {
+      return
+    }
+
+    setCurrentAnalysis(analysis)
+    setIsProcessing(true)
     setState(
-      `Images analysis in progress (${imagesToImport.length} remaining) - Searching squares`,
+      `Images analysis in progress (${remainingAnalysis} remaining) - Searching squares`,
     )
-    setSquares([])
-    setCurrentImage(imagesToImport[0])
 
     workerRef.current?.postMessage({
-      type: 'PROCESS_TAVERN',
-      // type: 'PROCESS_BOX',
+      type: 'PROCESS_IMAGE',
       characters: charactersRef.current,
-      image: imagesToImport[0],
+      analysis,
     })
-  }, [imagesToImport, isAnalyzisInProgress, isInitialized])
+  }, [
+    analyses,
+    hasAnalysisToProcess,
+    isInitialized,
+    isProcessing,
+    remainingAnalysis,
+  ])
 
+  // update state message when there is a modification
   useEffect(() => {
-    const realFound = found.filter(
-      f => !!squares.find(s => s.id === f.squareId),
-    )
-    if (isAnalyzisInProgress && squares.length && realFound.length) {
-      setState(
-        `Images analysis in progress (${imagesToImport.length} remaining) - Search of matching characters (${realFound.length} / ${squares.length})`,
-      )
-    }
-  }, [found, imagesToImport.length, isAnalyzisInProgress, squares])
+    if (hasAnalysisToProcess) {
+      if (!currentAnalysis) {
+        return
+      }
+      const { founds, squares } = currentAnalysis
 
+      const realFound = founds.filter(
+        f => !!squares.find(s => s.id === f.squareId),
+      )
+
+      if (squares.length && realFound.length) {
+        setState(
+          `Images analysis in progress (${remainingAnalysis} remaining) - Search of matching characters (${realFound.length} / ${squares.length})`,
+        )
+      }
+    } else {
+      const squareCount = analyses.reduce((sum, c) => sum + c.squares.length, 0)
+      const foundCount = analyses.reduce((sum, c) => sum + c.founds.length, 0)
+      if (squareCount === foundCount) {
+        setState('Analysis done - all characters has been recognized')
+      } else {
+        const invalidCount = analyses.reduce(
+          (sum, c) => sum + c.founds.filter(f => !f.unit).length,
+          0,
+        )
+        const invalid = invalidCount ? `(${invalidCount} not supported)` : ''
+        setState(
+          `Analysis done - ${foundCount} / ${squareCount} characters founds ${invalid}`,
+        )
+      }
+    }
+  }, [analyses, currentAnalysis, hasAnalysisToProcess, remainingAnalysis])
+
+  // gracefully shutdown worker on unmount
   useEffect(() => {
     return () => {
       if (!workerRef.current) return
@@ -120,26 +175,66 @@ export function useImageAnalyzer (): ImageAnalyzer {
 
   return {
     isInitialized,
-    isAnalyzisInProgress,
+    isAnalysisInProgress: hasAnalysisToProcess || isProcessing,
     state,
-    currentImage,
-    found,
-    squares,
+    analyses,
+    currentAnalysis,
+    allFound: analyses
+      .map(a => a.id === currentAnalysis?.id ? currentAnalysis : a)
+      .flatMap(a => a.founds),
     initialize,
     processTavern: async files => {
-      const images = await Promise.all(files.map(loadUserImage))
-      setImagesToImport(imgs => [...imgs, ...images])
+      if (!files?.length) return
+      const images = await Promise.all([...files].map(loadUserImage))
+
+      const toAnalyse = images.map<Analysis>((image, i) => ({
+        id: `${new Date().getTime()}-${i}`,
+        type: 'tavern',
+        image,
+        done: false,
+        founds: [],
+        squares: [],
+      }))
+
+      setAnalyses(a => [...a, ...toAnalyse])
+    },
+    processBox: async files => {
+      if (!files?.length) return
+      const images = await Promise.all([...files].map(loadUserImage))
+
+      const toAnalyse = images.map<Analysis>((image, i) => ({
+        id: `${new Date().getTime()}-${i}`,
+        type: 'box',
+        image,
+        done: false,
+        founds: [],
+        squares: [],
+      }))
+
+      setAnalyses(a => [...a, ...toAnalyse])
     },
     reset: () => {
-      setFound([])
-      setSquares([])
+      setAnalyses([])
+      setCurrentAnalysis(undefined)
       setState('Select new images')
-      setCurrentImage(undefined)
-      setImagesToImport([])
-      setIsAnalyzisInProgress(false)
+      setIsProcessing(false)
     },
-    removeFound: (found) => {
-      setFound(f => f.filter(ff => ff.squareId !== found.squareId))
+    removeFound: found => {
+      let update = analyses.find(a => a.id === found.analysisId)!
+      if (!update) {
+        return
+      }
+
+      update = {
+        ...update,
+        founds: update.founds.filter(f => f.squareId !== found.squareId),
+      }
+
+      setAnalyses(aa => aa.map(a => (a.id === found.analysisId ? update : a)))
+
+      if (!hasAnalysisToProcess) {
+        setCurrentAnalysis(update)
+      }
     },
   }
 }

@@ -1,82 +1,67 @@
+import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
-import { ImageAnalyzerIcon } from 'components/Icon'
+import { FileButtonInput } from 'components/forms/FileButtonInput'
+import {
+  CameraTavernIcon,
+  CameraTreasureIcon,
+  ImageAnalyzerIcon,
+} from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useImageAnalyzer } from 'hooks/useImageAnalyzer'
-import { useOptcDb } from 'hooks/useOptcDb'
-import { ExtendedUnit } from 'models/units'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { CharacterFound } from 'services/image-cv-worker'
+import { useEffect, useRef, useState } from 'react'
+import { Analysis } from 'services/image-cv-worker'
+import { display, DisplayProps } from 'styled-system'
 
 export type ImageAnalyzerProps = {
   onCharacterSelected?: (ids: number[]) => void
 }
 export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [oldAnalyses, setOldAnalyses] = useState<ImageData[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const canvasContainerRef = useRef<HTMLCanvasElement>(null)
-  const importRef = useRef<HTMLInputElement>(null)
   const selectionPanelRef = useRef<HTMLDivElement>(null)
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showPopup, setShowPopup] = useState<boolean>(false)
+  const [currentlyDisplayed, setCurrentlyDisplayed] = useState<Analysis>()
   const {
     initialize,
     isInitialized,
-    isAnalyzisInProgress,
+    isAnalysisInProgress,
     processTavern,
     state,
-    squares,
-    found,
-    currentImage,
+    analyses,
+    allFound,
+    currentAnalysis,
+    processBox,
     reset,
     removeFound,
   } = useImageAnalyzer()
-  const { db } = useOptcDb()
-  const selectedCharacters = found
-    .map<[CharacterFound, ExtendedUnit]>(f => [f, db.find(char => char.id === f.id)!])
-    .filter(([f, char]) => !!char)
-
-  const initOrImport = async () => {
-    if (!isInitialized) {
-      setIsLoading(true)
-      await initialize()
-    }
-
-    setShowPopup(true)
-
-    if (!importRef.current) {
-      return
-    }
-
-    importRef.current.value = ''
-    importRef.current.click()
-  }
-
-  const imp = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || !e.target.files.length) return
-    const context = canvasRef.current?.getContext('2d')
-    if (!context) return
-
-    processTavern([...e.target.files])
-  }
 
   useEffect(() => {
+    // update display when analysis change
+    setCurrentlyDisplayed(currentAnalysis)
+  }, [currentAnalysis])
+
+  useEffect(() => {
+    // update layout
     if (!canvasRef.current) return
 
     const ctx = canvasRef.current.getContext('2d')
 
     if (!ctx) return
 
-    if (!currentImage) return
+    if (!currentlyDisplayed) return
 
-    canvasRef.current.width = currentImage.width
-    canvasRef.current.height = currentImage.height
-    ctx.putImageData(currentImage, 0, 0)
+    const { image, squares, founds, done } = currentlyDisplayed
+    canvasRef.current.width = image.width
+    canvasRef.current.height = image.height
+    ctx.putImageData(image, 0, 0)
 
-    if (squares.length || !isAnalyzisInProgress) {
-      ctx.rect(0, 0, currentImage.width, currentImage.height)
+    if (squares.length || done) {
+      ctx.rect(0, 0, image.width, image.height)
       for (const square of squares) {
         ctx.moveTo(square.x, square.y)
         ctx.rect(square.x, square.y, square.width, square.height)
@@ -93,43 +78,33 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
       ctx.lineWidth = 8
       ctx.stroke(rectangle)
 
-      const founded = found.find(f => f.squareId === square.id)
+      const founded = founds.find(f => f.squareId === square.id)
       if (founded) {
-        ctx.strokeStyle = selectedCharacters.find(([f, sc]) => f.id === founded.id)
-          ? 'green'
-          : 'orange'
+        ctx.strokeStyle = founded.unit ? 'green' : 'orange'
         ctx.lineWidth = 5
         ctx.stroke(rectangle)
-      } else if (!isAnalyzisInProgress) {
+      } else if (done) {
         ctx.strokeStyle = 'red'
         ctx.lineWidth = 5
         ctx.stroke(rectangle)
       }
     }
-  }, [squares, found, isAnalyzisInProgress, currentImage, selectedCharacters])
+  }, [currentlyDisplayed])
 
   useEffect(() => {
-    if (isAnalyzisInProgress || !canvasRef.current) {
+    // autoscroll in canvas feature
+    if (
+      !canvasContainerRef.current ||
+      !canvasRef.current ||
+      !currentlyDisplayed?.squares.length
+    ) {
       return
     }
 
-    const ctx = canvasRef.current.getContext('2d')
-    const data = ctx!.getImageData(
-      0,
-      0,
-      canvasRef.current.width,
-      canvasRef.current.height,
-    )
-    setOldAnalyses(old => [...old, data])
-  }, [isAnalyzisInProgress])
-
-  useEffect(() => {
-    if (!canvasContainerRef.current || !canvasRef.current || !squares.length) {
-      return
-    }
-
-    const yMin = Math.min(...squares.map(s => s.y))
-    const yMax = Math.max(...squares.map(s => s.y)) + squares[0].height
+    const yMin = Math.min(...currentlyDisplayed.squares.map(s => s.y))
+    const yMax =
+      Math.max(...currentlyDisplayed.squares.map(s => s.y)) +
+      currentlyDisplayed.squares[0].height
     const panelHeight = canvasContainerRef.current.clientHeight
     const canvasRatio =
       canvasRef.current.height / canvasRef.current.clientHeight
@@ -142,56 +117,66 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
       ),
       behavior: 'smooth',
     })
-  }, [squares])
+  }, [currentlyDisplayed?.squares])
 
   useEffect(() => {
-    if (selectionPanelRef.current) {
+    // autoscroll when a found is added
+    if (selectionPanelRef.current && isAnalysisInProgress) {
       selectionPanelRef.current.scrollTo({
         left: selectionPanelRef.current.scrollWidth,
         behavior: 'smooth',
       })
     }
-  }, [found])
+  }, [currentAnalysis?.founds, isAnalysisInProgress])
 
   return (
     <>
-      <input
-        type="file"
-        accept=".jpg"
-        style={{ display: 'none' }}
-        multiple
-        ref={importRef}
-        onChange={imp}
-      />
       <Button
         m="1"
         fontSize="2"
-        onClick={initOrImport}
+        onClick={async () => {
+          if (!isInitialized) {
+            setIsLoading(true)
+            await initialize()
+          }
+
+          setShowPopup(true)
+        }}
+        title="Import characters from screenshot"
         isLoading={isLoading && !isInitialized}
         icon={ImageAnalyzerIcon}
       />
       {showPopup && (
         <Popup
-          title="Image Analyzer"
+          title="Screenshot Analyzer"
           onValidate={() => {
             setShowPopup(false)
-            onCharacterSelected?.(found.map(f => f.id))
-            setOldAnalyses([])
+            onCharacterSelected?.(allFound.filter(f => !!f.unit).map(f => f.id))
             reset()
           }}
           onCancel={() => {
             setShowPopup(false)
-            setOldAnalyses([])
             reset()
           }}
           customAction={
-            <Button
-              m="1"
-              fontSize="2"
-              onClick={initOrImport}
-              icon={ImageAnalyzerIcon}
-              isLoading={isLoading && !isInitialized}
-            />
+            <>
+              <FileButtonInput
+                accept=".jpg"
+                m="1"
+                fontSize="2"
+                title="Import Box screenshots"
+                onFiles={files => processBox(files)}
+                icon={CameraTreasureIcon}
+              />
+              <FileButtonInput
+                accept=".jpg"
+                m="1"
+                fontSize="2"
+                title="Import Tavern screenshots"
+                onFiles={files => processTavern(files)}
+                icon={CameraTavernIcon}
+              />
+            </>
           }
         >
           <Box
@@ -200,19 +185,15 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
             overflow="hidden"
           >
             <Box display="flex" overflowX="auto">
-              {oldAnalyses.length > 1 &&
-                oldAnalyses.map((old, i) => (
+              {analyses.length > 1 &&
+                analyses.map((old, i) => (
                   <Button
                     key={i}
                     m="2"
-                    disabled={isAnalyzisInProgress}
-                    onClick={() => {
-                      if (!canvasRef.current) return
-                      canvasRef.current.width = old.width
-                      canvasRef.current.height = old.height
-                      const ctx = canvasRef.current.getContext('2d')
-                      ctx!.putImageData(old, 0, 0)
-                    }}
+                    disabled={old.id === currentlyDisplayed?.id}
+                    onClick={() =>
+                      !isAnalysisInProgress && setCurrentlyDisplayed(old)
+                    }
                   >
                     {i + 1}
                   </Button>
@@ -225,18 +206,56 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
               overflowY="auto"
               ref={canvasContainerRef}
             >
-              <canvas ref={canvasRef} />
+              {!currentAnalysis && (
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  flexWrap="nowrap"
+                  justifyContent="center"
+                >
+                  <FileButtonInput
+                    accept=".jpg"
+                    m="1"
+                    fontSize="2"
+                    size="4"
+                    title="Import Box screenshots"
+                    iconVariant="vertical"
+                    onFiles={files => processBox(files)}
+                    icon={CameraTreasureIcon}
+                  >
+                    Import Box screenshots
+                  </FileButtonInput>
+                  <FileButtonInput
+                    accept=".jpg"
+                    m="1"
+                    fontSize="2"
+                    size="4"
+                    title="Import Tavern screenshots"
+                    iconVariant="vertical"
+                    onFiles={files => processTavern(files)}
+                    icon={CameraTavernIcon}
+                  >
+                    Import Tavern screenshots
+                  </FileButtonInput>
+                </Box>
+              )}
+              <Canvas
+                ref={canvasRef}
+                display={currentAnalysis ? 'block' : 'none'}
+              />
             </Box>
             <SubTitle my="2">{state}</SubTitle>
             <Box display="flex" overflowX="auto" ref={selectionPanelRef}>
-              {selectedCharacters.map(([f, unit], i) => (
-                <CharacterBox
-                  key={i}
-                  unit={unit as ExtendedUnit}
-                  size={4}
-                  onClick={() => removeFound(f)}
-                />
-              ))}
+              {allFound
+                .filter(f => !!f.unit)
+                .map((f, i) => (
+                  <CharacterBox
+                    key={i}
+                    unit={f.unit!}
+                    size={4}
+                    onClick={() => removeFound(f)}
+                  />
+                ))}
             </Box>
           </Box>
         </Popup>
@@ -244,3 +263,5 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
     </>
   )
 }
+
+const Canvas = styled.canvas<DisplayProps>(display)

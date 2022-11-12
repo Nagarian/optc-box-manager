@@ -16,6 +16,8 @@ import { ReactComponent as Arrow } from './arrow.svg'
 import { ReactComponent as Ascending } from './ascending.svg'
 import { ReactComponent as Belly } from './belly.svg'
 import { ReactComponent as Cancel } from './cancel.svg'
+import { ReactComponent as CameraTavern } from './camera-tavern.svg'
+import { ReactComponent as CameraTreasure } from './camera-treasure.svg'
 import { ReactComponent as Clear } from './clear.svg'
 import { ReactComponent as Close } from './close.svg'
 import { ReactComponent as Confirm } from './confirm.svg'
@@ -102,6 +104,8 @@ export const ArrowIcon = BaseSvg(Arrow)
 export const AscendingIcon = BaseSvg(Ascending)
 export const BellyIcon = BaseSvg(Belly)
 export const CancelIcon = BaseSvg(Cancel)
+export const CameraTavernIcon = BaseSvg(CameraTavern)
+export const CameraTreasureIcon = BaseSvg(CameraTreasure)
 export const ClearIcon = BaseSvg(Clear)
 export const CloseIcon = BaseSvg(Close)
 export const ConfirmIcon = BaseSvg(Confirm)
