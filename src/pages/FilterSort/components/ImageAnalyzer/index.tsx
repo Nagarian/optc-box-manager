@@ -8,6 +8,7 @@ import { useImageAnalyzer } from 'hooks/useImageAnalyzer'
 import { useOptcDb } from 'hooks/useOptcDb'
 import { ExtendedUnit } from 'models/units'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { CharacterFound } from 'services/image-cv-worker'
 
 export type ImageAnalyzerProps = {
   onCharacterSelected?: (ids: number[]) => void
@@ -30,11 +31,12 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
     found,
     currentImage,
     reset,
+    removeFound,
   } = useImageAnalyzer()
   const { db } = useOptcDb()
   const selectedCharacters = found
-    .map(f => db.find(char => char.id === f.id)!)
-    .filter(char => !!char)
+    .map<[CharacterFound, ExtendedUnit]>(f => [f, db.find(char => char.id === f.id)!])
+    .filter(([f, char]) => !!char)
 
   const initOrImport = async () => {
     if (!isInitialized) {
@@ -93,7 +95,7 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
 
       const founded = found.find(f => f.squareId === square.id)
       if (founded) {
-        ctx.strokeStyle = selectedCharacters.find(sc => sc.id === founded.id)
+        ctx.strokeStyle = selectedCharacters.find(([f, sc]) => f.id === founded.id)
           ? 'green'
           : 'orange'
         ctx.lineWidth = 5
@@ -227,8 +229,13 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
             </Box>
             <SubTitle my="2">{state}</SubTitle>
             <Box display="flex" overflowX="auto" ref={selectionPanelRef}>
-              {selectedCharacters.map((unit, i) => (
-                <CharacterBox key={i} unit={unit as ExtendedUnit} size={4} />
+              {selectedCharacters.map(([f, unit], i) => (
+                <CharacterBox
+                  key={i}
+                  unit={unit as ExtendedUnit}
+                  size={4}
+                  onClick={() => removeFound(f)}
+                />
               ))}
             </Box>
           </Box>

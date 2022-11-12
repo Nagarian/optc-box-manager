@@ -12,6 +12,7 @@ export type ImageAnalyzer = {
   initialize: () => Promise<void>
   processTavern: (files: File[]) => Promise<void>
   reset: () => void
+  removeFound: (found: CharacterFound) => void
 }
 export function useImageAnalyzer (): ImageAnalyzer {
   const {
@@ -42,6 +43,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
           setState('Ready')
           break
         case 'PROCESS_TAVERN_END':
+        case 'PROCESS_BOX_END':
           if (!currentImageRef.current) break
           setImagesToImport(([firstImg, ...imgs]) => imgs)
           setIsAnalyzisInProgress(false)
@@ -90,6 +92,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
 
     workerRef.current?.postMessage({
       type: 'PROCESS_TAVERN',
+      // type: 'PROCESS_BOX',
       characters: charactersRef.current,
       image: imagesToImport[0],
     })
@@ -134,6 +137,9 @@ export function useImageAnalyzer (): ImageAnalyzer {
       setCurrentImage(undefined)
       setImagesToImport([])
       setIsAnalyzisInProgress(false)
+    },
+    removeFound: (found) => {
+      setFound(f => f.filter(ff => ff.squareId !== found.squareId))
     },
   }
 }

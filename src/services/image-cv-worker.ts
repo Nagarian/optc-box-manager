@@ -40,6 +40,9 @@ const size = {
   height: extractionSize.croppedHeight,
   maxWidth: 0,
   maxHeight: 0,
+
+  tavernRatio: 0.158,
+  boxRatio: 0.175,
 }
 size.gridVertical = Math.ceil(size.maxId / size.gridHorizontal)
 size.maxWidth = size.gridHorizontal * size.width
@@ -77,10 +80,20 @@ onmessage = async ({ data }) => {
         const charactersMat = cv.matFromImageData(data.characters)
         const src = cv.matFromImageData(data.image)
         const squares = detectTavernSquare(src)
-        findCharacterIds(charactersMat, src, squares)
+        findCharacterIds(charactersMat, src, squares, 0.8)
         src.delete()
         charactersMat.delete()
         self.postMessage({ type: 'PROCESS_TAVERN_END' })
+        break
+      }
+      case 'PROCESS_BOX': {
+        const charactersMat = cv.matFromImageData(data.characters)
+        const src = cv.matFromImageData(data.image)
+        const squares = detectBoxSquare(src)
+        findCharacterIds(charactersMat, src, squares, 0.75)
+        src.delete()
+        charactersMat.delete()
+        self.postMessage({ type: 'PROCESS_BOX_END' })
         break
       }
       default:
@@ -124,13 +137,14 @@ onmessage = async ({ data }) => {
 //   return cv.matFromImageData(imageData)
 // }
 
-function detectTavernSquare (src: any) {
+function detectTavernSquare (src: any): SquareSize[] {
   const copy = src.clone()
 
   // we filter image to keep only yellow one
   const colorMask = src.clone()
   const low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
   const high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+  const characterWidth = src.cols * size.tavernRatio
   cv.inRange(src, low, high, colorMask)
   cv.filter2D(
     colorMask,
@@ -168,9 +182,13 @@ function detectTavernSquare (src: any) {
 
     // we keep only square
     if (aspectRatio < 0.95 || aspectRatio > 1.05) continue
-    if (rect.width < 155 || rect.height < 155) continue
+    if (rect.width < characterWidth - 5 || rect.height < characterWidth - 5) {
+      continue
+    }
 
-    // if (rect.width > 165 || rect.height > 165) continue;
+    if (rect.width > characterWidth + 5 || rect.height > characterWidth + 5) {
+      continue
+    }
 
     const extractedSquare = {
       x:
@@ -221,7 +239,128 @@ function detectTavernSquare (src: any) {
   return squaresToExtract.reverse()
 }
 
-function findCharacterIds (charactersMat: any, src: any, squares: SquareSize[]) {
+function detectBoxSquare (src: any): SquareSize[] {
+  const whiteMask = src.clone()
+  let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
+  let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+  cv.inRange(src, low, high, whiteMask)
+  low.delete()
+  high.delete()
+
+  const yellowMask = src.clone()
+  low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
+  high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+  cv.inRange(src, low, high, yellowMask)
+  low.delete()
+  high.delete()
+
+  const bitOr = new cv.Mat()
+  cv.bitwise_or(whiteMask, yellowMask, bitOr)
+  whiteMask.delete()
+  yellowMask.delete()
+
+  const bitwised = new cv.Mat()
+  cv.bitwise_and(src, src, bitwised, bitOr)
+  bitOr.delete()
+
+  const lines = new cv.Mat()
+  cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
+  cv.Canny(bitwised, bitwised, 50, 255)
+  cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
+  bitwised.delete()
+
+  const horizontals: number[] = []
+  const verticals: number[] = []
+
+  for (let i = 0; i < lines.rows; ++i) {
+    const [x1, y1, x2, y2] = [
+      lines.data32S[i * 4],
+      lines.data32S[i * 4 + 1],
+      lines.data32S[i * 4 + 2],
+      lines.data32S[i * 4 + 3],
+    ]
+
+    const horizontal = Math.abs(x2 - x1)
+    const vertical = Math.abs(y2 - y1)
+    const minimalLength = src.cols * 0.05
+
+    if (horizontal === 0 && vertical > minimalLength) {
+      verticals.push(x1)
+    }
+
+    if (vertical === 0 && horizontal > minimalLength) {
+      horizontals.push(y1)
+    }
+  }
+
+  lines.delete()
+
+  const characterWidth = src.cols * size.boxRatio
+  horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
+  verticals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
+
+  const minH = horizontals.find(h1 =>
+    horizontals.find(h2 => characterWidth === h2 - h1),
+  )
+  const minV = verticals.find(v1 =>
+    verticals.find(v2 => characterWidth === v2 - v1),
+  )
+
+  if (!minH || !minV) return []
+
+  const squaresToExtract: SquareSize[] = []
+  for (let yI = 0; yI < 5; yI++) {
+    const y = minH + characterWidth * yI
+
+    for (let xI = 0; xI < 5; xI++) {
+      const x = minV + characterWidth * xI
+
+      const extractionSquare = {
+        id: `${new Date().getTime()}-${squaresToExtract.length}`,
+        x:
+          x +
+          Math.floor(
+            (extractionSize.left * characterWidth) /
+              extractionSize.originalSize,
+          ),
+        width: Math.floor(
+          (extractionSize.width * characterWidth) / extractionSize.originalSize,
+        ),
+        y:
+          y +
+          Math.floor(
+            (extractionSize.top * characterWidth) / extractionSize.originalSize,
+          ),
+        height: Math.floor(
+          (extractionSize.height * characterWidth) /
+            extractionSize.originalSize,
+        ),
+      }
+
+      self.postMessage({
+        type: 'SQUARE_DETECTED',
+        square: {
+          id: extractionSquare.id,
+          x,
+          y,
+          width: characterWidth,
+          height: characterWidth,
+        },
+      })
+
+      squaresToExtract.push(extractionSquare)
+    }
+  }
+
+  return squaresToExtract
+}
+
+function findCharacterIds (
+  charactersMat: any,
+  src: any,
+  squares: SquareSize[],
+  minConfidence: number,
+) {
   const mask = new cv.Mat()
 
   console.time('Finding all matching')
@@ -260,7 +399,7 @@ function findCharacterIds (charactersMat: any, src: any, squares: SquareSize[]) 
       (Math.ceil((found.loc.y + 5) / size.height) - 1) * size.gridHorizontal +
       Math.ceil((found.loc.x + 5) / size.width)
 
-    if (found.val < 0.8) {
+    if (found.val < minConfidence) {
       continue
     }
 
