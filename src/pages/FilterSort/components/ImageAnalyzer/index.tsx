@@ -4,15 +4,17 @@ import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
 import { FileButtonInput } from 'components/forms/FileButtonInput'
 import {
+  CameraFppIcon,
   CameraTavernIcon,
   CameraTreasureIcon,
+  Icon,
   ImageAnalyzerIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useImageAnalyzer } from 'hooks/useImageAnalyzer'
 import { useEffect, useRef, useState } from 'react'
-import { Analysis } from 'services/image-cv-worker'
+import { Analysis, AnalysisType } from 'services/image-cv-worker'
 import { display, DisplayProps } from 'styled-system'
 
 export type ImageAnalyzerProps = {
@@ -30,12 +32,11 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
     initialize,
     isInitialized,
     isAnalysisInProgress,
-    processTavern,
+    process,
     state,
     analyses,
     allFound,
     currentAnalysis,
-    processBox,
     reset,
     removeFound,
   } = useImageAnalyzer()
@@ -160,22 +161,17 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
           }}
           customAction={
             <>
-              <FileButtonInput
-                accept=".jpg"
-                m="1"
-                fontSize="2"
-                title="Import Box screenshots"
-                onFiles={files => processBox(files)}
-                icon={CameraTreasureIcon}
-              />
-              <FileButtonInput
-                accept=".jpg"
-                m="1"
-                fontSize="2"
-                title="Import Tavern screenshots"
-                onFiles={files => processTavern(files)}
-                icon={CameraTavernIcon}
-              />
+              {ImporterType.map(it => (
+                <FileButtonInput
+                  key={it.type}
+                  accept=".jpg"
+                  m="1"
+                  fontSize="2"
+                  title={it.title}
+                  onFiles={files => process(it.type, files)}
+                  icon={it.icon}
+                />
+              ))}
             </>
           }
         >
@@ -207,36 +203,22 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
               ref={canvasContainerRef}
             >
               {!currentAnalysis && (
-                <Box
-                  display="flex"
-                  flexDirection="row"
-                  flexWrap="nowrap"
-                  justifyContent="center"
-                >
-                  <FileButtonInput
-                    accept=".jpg"
-                    m="1"
-                    fontSize="2"
-                    size="4"
-                    title="Import Box screenshots"
-                    iconVariant="vertical"
-                    onFiles={files => processBox(files)}
-                    icon={CameraTreasureIcon}
-                  >
-                    Import Box screenshots
-                  </FileButtonInput>
-                  <FileButtonInput
-                    accept=".jpg"
-                    m="1"
-                    fontSize="2"
-                    size="4"
-                    title="Import Tavern screenshots"
-                    iconVariant="vertical"
-                    onFiles={files => processTavern(files)}
-                    icon={CameraTavernIcon}
-                  >
-                    Import Tavern screenshots
-                  </FileButtonInput>
+                <Box display="grid" gridTemplateColumns="1fr 1fr">
+                  {ImporterType.map(it => (
+                    <FileButtonInput
+                      key={it.type}
+                      accept=".jpg"
+                      m="1"
+                      fontSize="2"
+                      size="4"
+                      title={it.title}
+                      iconVariant="vertical"
+                      onFiles={files => process(it.type, files)}
+                      icon={it.icon}
+                    >
+                      {it.title}
+                    </FileButtonInput>
+                  ))}
                 </Box>
               )}
               <Canvas
@@ -265,3 +247,22 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
 }
 
 const Canvas = styled.canvas<DisplayProps>(display)
+
+const ImporterType: { type: AnalysisType; title: string; icon: Icon }[] = [
+  {
+    type: 'generic',
+    title: 'Import screenshots - Generic Square',
+    icon: ImageAnalyzerIcon,
+  },
+  { type: 'box', title: 'Import Box screenshots', icon: CameraTreasureIcon },
+  {
+    type: 'fpp',
+    title: 'Import Friend Point Pull screenshots',
+    icon: CameraFppIcon,
+  },
+  {
+    type: 'tavern',
+    title: 'Import Tavern screenshots',
+    icon: CameraTavernIcon,
+  },
+]

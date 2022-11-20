@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Analysis, CharacterFound, SquareSize } from 'services/image-cv-worker'
+import { Analysis, AnalysisType, CharacterFound, SquareSize } from 'services/image-cv-worker'
 import { useOptcDb } from './useOptcDb'
 import { GameVersion, useUserSettings } from './useUserSettings'
 
@@ -13,8 +13,7 @@ export type ImageAnalyzer = {
   allFound: CharacterFound[]
 
   initialize: () => Promise<void>
-  processTavern: (files: FileList | File[] | null) => Promise<void>
-  processBox: (files: FileList | File[] | null) => Promise<void>
+  process: (type: AnalysisType, files: FileList | File[] | null) => Promise<void>
   reset: () => void
   removeFound: (found: CharacterFound) => void
 }
@@ -183,28 +182,13 @@ export function useImageAnalyzer (): ImageAnalyzer {
       .map(a => a.id === currentAnalysis?.id ? currentAnalysis : a)
       .flatMap(a => a.founds),
     initialize,
-    processTavern: async files => {
+    process: async (type, files) => {
       if (!files?.length) return
       const images = await Promise.all([...files].map(loadUserImage))
 
       const toAnalyse = images.map<Analysis>((image, i) => ({
         id: `${new Date().getTime()}-${i}`,
-        type: 'tavern',
-        image,
-        done: false,
-        founds: [],
-        squares: [],
-      }))
-
-      setAnalyses(a => [...a, ...toAnalyse])
-    },
-    processBox: async files => {
-      if (!files?.length) return
-      const images = await Promise.all([...files].map(loadUserImage))
-
-      const toAnalyse = images.map<Analysis>((image, i) => ({
-        id: `${new Date().getTime()}-${i}`,
-        type: 'box',
+        type,
         image,
         done: false,
         founds: [],

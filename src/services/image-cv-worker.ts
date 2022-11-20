@@ -23,7 +23,7 @@ export type CharacterFound = {
   unit?: ExtendedUnit
 }
 
-export type AnalysisType = 'tavern' | 'box'
+export type AnalysisType = 'tavern' | 'fpp' | 'box' | 'generic'
 
 export type Analysis = {
   id: string
@@ -32,6 +32,15 @@ export type Analysis = {
   squares: SquareSize[]
   founds: CharacterFound[]
   done: boolean
+}
+
+export type InitialSizeMatrix = {
+  gameWidth: number
+  gameHeight: number
+  rows: number[]
+  cols: number[]
+  matrix?: number[][]
+  characterSize: number
 }
 
 const extractionSize = {
@@ -63,6 +72,27 @@ const size = {
 size.gridVertical = Math.ceil(size.maxId / size.gridHorizontal)
 size.maxWidth = size.gridHorizontal * size.width
 size.maxHeight = size.gridVertical * size.height
+
+const tavernSizeMatrix: InitialSizeMatrix = {
+  gameWidth: 1080,
+  gameHeight: 1620,
+  rows: [372, 606, 887],
+  cols: [76, 265, 454, 643, 832],
+  matrix: [
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 0, 1, 0, 0],
+  ],
+  characterSize: 172,
+}
+
+const fppSizeMatrix: InitialSizeMatrix = {
+  gameWidth: 1080,
+  gameHeight: 1620,
+  rows: [583, 776],
+  cols: [74, 263, 452, 641, 830],
+  characterSize: 172,
+}
 
 function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
   self.importScripts(`${process.env.PUBLIC_URL}/opencv-4.6.0.js`)
@@ -96,64 +126,51 @@ onmessage = async ({ data }) => {
         const { image, type, id } = data.analysis as Analysis
         const charactersMat = cv.matFromImageData(data.characters)
         const src = cv.matFromImageData(image)
-        const squares = type === 'tavern'
-          ? detectTavernSquare(src, id)
-          : detectBoxSquare(src, id)
+        let squares = []
+        switch (type) {
+          case 'tavern':
+            squares = detectMatrixSquare(src, id, tavernSizeMatrix)
+            break
+          case 'fpp':
+            squares = detectMatrixSquare(src, id, fppSizeMatrix)
+            break
+          case 'box':
+            squares = detectBoxSquare(src, id)
+            break
+          case 'generic':
+            squares = detectGenericSquare(src, id)
+            break
+        }
+
         findCharacterIds(charactersMat, src, squares, 0.8)
         src.delete()
         charactersMat.delete()
-        self.postMessage({ type: 'PROCESS_IMAGE_END', analysisId: data.analysis?.id })
+        self.postMessage({
+          type: 'PROCESS_IMAGE_END',
+          analysisId: data.analysis?.id,
+        })
         break
       }
       default:
         break
     }
   } catch (error) {
-    self.postMessage({ type: 'ERROR_OCCURED', error, analysisId: data.analysis?.id })
+    self.postMessage({
+      type: 'ERROR_OCCURED',
+      error,
+      analysisId: data.analysis?.id,
+    })
   }
 }
 
-// export async function loadCharacterImage (): Promise<ImageData> {
-//   const url = `${process.env.PUBLIC_URL}/characters/global-fixed-${extractionSize.croppedWidth}x${extractionSize.croppedHeight}.png`
-//   const res = await fetch(url, { mode: 'cors' })
-//   const imgBlob = await res.blob()
-//   const img = await createImageBitmap(imgBlob, {
-//     premultiplyAlpha: 'none',
-//     colorSpaceConversion: 'none',
-//   })
-
-//   const canvas = document.createElement('canvas')
-//   canvas.width = img.width
-//   canvas.height = img.height
-//   const ctx = canvas.getContext('2d')
-//   ctx!.drawImage(img, 0, 0, img.width, img.height)
-//   return ctx!.getImageData(0, 0, img.width, img.height)
-// }
-
-// async function loadCharactersMat () {
-//   const url = `./img/cropped/global-fixed-${extractionSize.croppedWidth}x${extractionSize.croppedHeight}.png`
-//   const res = await fetch(url, { mode: 'cors' })
-//   const imgBlob = await res.blob()
-//   const img = await createImageBitmap(imgBlob, {
-//     premultiplyAlpha: 'none',
-//     colorSpaceConversion: 'none',
-//   })
-
-//   const test = new OffscreenCanvas(img.width, img.height)
-//   const ctx = test.getContext('2d')
-//   ctx.drawImage(img, 0, 0, img.width, img.height)
-//   const imageData = ctx.getImageData(0, 0, img.width, img.height)
-//   return cv.matFromImageData(imageData)
-// }
-
-function detectTavernSquare (src: any, analysisId: string): SquareSize[] {
+function detectGenericSquare (src: any, analysisId: string): SquareSize[] {
   const copy = src.clone()
 
   // we filter image to keep only yellow one
   const colorMask = src.clone()
   const low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
   const high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
-  const characterWidth = src.cols * size.tavernRatio
+  const minimalSize = src.cols * 0.15
   cv.inRange(src, low, high, colorMask)
   cv.filter2D(
     colorMask,
@@ -191,50 +208,34 @@ function detectTavernSquare (src: any, analysisId: string): SquareSize[] {
 
     // we keep only square
     if (aspectRatio < 0.95 || aspectRatio > 1.05) continue
-    if (rect.width < characterWidth - 5 || rect.height < characterWidth - 5) {
+    if (rect.width < minimalSize - 5 || rect.height < minimalSize - 5) {
       continue
     }
 
-    if (rect.width > characterWidth + 5 || rect.height > characterWidth + 5) {
-      continue
-    }
+    // if (rect.width > minimalSize + 5 || rect.height > minimalSize + 5) {
+    //   continue
+    // }
 
-    const extractedSquare = {
-      x:
-        rect.x +
-        Math.floor(
-          (extractionSize.left * rect.width) / extractionSize.originalSize,
-        ),
-      width: Math.floor(
-        (extractionSize.width * rect.width) / extractionSize.originalSize,
-      ),
-      y:
-        rect.y +
-        Math.floor(
-          (extractionSize.top * rect.width) / extractionSize.originalSize,
-        ),
-      height: Math.floor(
-        (extractionSize.height * rect.width) / extractionSize.originalSize,
-      ),
-    }
+    const squareDetected = resizeSquare({
+      id: squaresToExtract.length.toString(),
+      analysisId,
+      x: rect.x,
+      width: rect.width,
+      y: rect.y,
+      height: rect.width,
+    })
 
     // we skipped doublons
     if (
       squaresToExtract.find(
         ({ height, width, x, y }) =>
-          height === extractedSquare.height &&
-          width === extractedSquare.width &&
-          x === extractedSquare.x &&
-          y === extractedSquare.y,
+          height === squareDetected.height &&
+          width === squareDetected.width &&
+          x === squareDetected.x &&
+          y === squareDetected.y,
       )
     ) {
       continue
-    }
-
-    const squareDetected: SquareSize = {
-      ...extractedSquare,
-      id: `${new Date().getTime()}-${squaresToExtract.length}`,
-      analysisId,
     }
 
     squaresToExtract.push(squareDetected)
@@ -247,6 +248,71 @@ function detectTavernSquare (src: any, analysisId: string): SquareSize[] {
 
   copy.delete()
   return squaresToExtract.reverse()
+}
+
+function detectMatrixSquare (
+  src: any,
+  analysisId: string,
+  initialSize: InitialSizeMatrix,
+): SquareSize[] {
+  const oldGray = new cv.Mat()
+  cv.cvtColor(src, oldGray, cv.COLOR_RGBA2GRAY)
+
+  const not = new cv.Mat()
+  cv.bitwise_not(oldGray, not)
+
+  cv.Canny(not, not, 80, 120)
+
+  const lines = new cv.Mat()
+  cv.HoughLinesP(not, lines, 1, Math.PI / 2, 2, 30, 1)
+  let topBound = src.rows
+  for (let i = 0; i < lines.rows; ++i) {
+    const [x1, y1, x2, y2] = [
+      lines.data32S[i * 4],
+      lines.data32S[i * 4 + 1],
+      lines.data32S[i * 4 + 2],
+      lines.data32S[i * 4 + 3],
+    ]
+
+    if (x2 - x1 < src.cols * 0.95) continue
+    if (y1 !== y2) continue
+    if (y1 > topBound) continue
+
+    topBound = y1
+  }
+
+  oldGray.delete()
+  not.delete()
+  lines.delete()
+
+  const ratio = src.cols / initialSize.gameWidth
+  const characterWith = initialSize.characterSize * ratio
+  const squares: SquareSize[] = []
+  for (const [ri, row] of initialSize.rows.entries()) {
+    for (const [ci, col] of initialSize.cols.entries()) {
+      if (initialSize.matrix && !initialSize.matrix[ri][ci]) continue
+
+      const square: SquareSize = {
+        id: squares.length.toString(),
+        analysisId,
+        y: topBound + row * ratio,
+        x: col * ratio,
+        height: characterWith,
+        width: characterWith,
+      }
+
+      const resized = resizeSquare(square)
+      square.id = resized.id
+      squares.push(resized)
+
+      self.postMessage({
+        type: 'SQUARE_DETECTED',
+        square,
+      })
+    }
+  }
+
+  return squares
 }
 
 function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
@@ -325,28 +391,14 @@ function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
     for (let xI = 0; xI < 5; xI++) {
       const x = minV + characterWidth * xI
 
-      const extractionSquare : SquareSize = {
-        id: `${new Date().getTime()}-${squaresToExtract.length}`,
+      const extractionSquare = resizeSquare({
+        id: squaresToExtract.length.toString(),
         analysisId,
-        x:
-          x +
-          Math.floor(
-            (extractionSize.left * characterWidth) /
-              extractionSize.originalSize,
-          ),
-        width: Math.floor(
-          (extractionSize.width * characterWidth) / extractionSize.originalSize,
-        ),
-        y:
-          y +
-          Math.floor(
-            (extractionSize.top * characterWidth) / extractionSize.originalSize,
-          ),
-        height: Math.floor(
-          (extractionSize.height * characterWidth) /
-            extractionSize.originalSize,
-        ),
-      }
+        x,
+        width: characterWidth,
+        y,
+        height: characterWidth,
+      })
 
       self.postMessage({
         type: 'SQUARE_DETECTED',
@@ -365,6 +417,27 @@ function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
   }
 
   return squaresToExtract
+}
+
+function resizeSquare ({ analysisId, id, x, y, width }: SquareSize): SquareSize {
+  const extractionSquare: SquareSize = {
+    id: `${new Date().getTime()}-${id}`,
+    analysisId,
+    x:
+      x +
+      Math.floor((extractionSize.left * width) / extractionSize.originalSize),
+    width: Math.floor(
+      (extractionSize.width * width) / extractionSize.originalSize,
+    ),
+    y:
+      y +
+      Math.floor((extractionSize.top * width) / extractionSize.originalSize),
+    height: Math.floor(
+      (extractionSize.height * width) / extractionSize.originalSize,
+    ),
+  }
+
+  return extractionSquare
 }
 
 function findCharacterIds (
