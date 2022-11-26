@@ -27,7 +27,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
     [
       typeof criteria.hasKeyLimitBreak === 'boolean',
       (unit: ExtendedUnit) =>
-        unit?.detail?.limit?.some(lb => lb.description === 'LOCKED WITH KEY')
+        unit?.detail?.limit?.some(lb => lb.description.startsWith('LOCKED WITH KEY'))
           ? criteria.hasKeyLimitBreak!
           : !criteria.hasKeyLimitBreak!,
     ],
@@ -35,7 +35,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
       criteria.hasCooldownExtension,
       (unit: ExtendedUnit) => {
         const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description === 'LOCKED WITH KEY',
+          lb => lb.description.startsWith('LOCKED WITH KEY'),
         )
         if (!keyLockIndex || keyLockIndex === -1) {
           return false
@@ -50,7 +50,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
       criteria.hasCaptainReductionExtension,
       (unit: ExtendedUnit) => {
         const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description === 'LOCKED WITH KEY',
+          lb => lb.description.startsWith('LOCKED WITH KEY'),
         )
         if (!keyLockIndex || keyLockIndex === -1) {
           return false
@@ -65,7 +65,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
       criteria.hasPotentialExtension,
       (unit: ExtendedUnit) => {
         const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description === 'LOCKED WITH KEY',
+          lb => lb.description.startsWith('LOCKED WITH KEY'),
         )
         if (!keyLockIndex || keyLockIndex === -1) {
           return false
