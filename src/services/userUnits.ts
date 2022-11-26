@@ -70,7 +70,7 @@ const UserUnitLimitBreakFactory = (
   }
 
   const keyIndex = limitBreak.findIndex(
-    lb => lb.description === 'LOCKED WITH KEY',
+    lb => lb.description.startsWith('LOCKED WITH KEY'),
   )
 
   return {
@@ -433,7 +433,7 @@ const getPotentialState = (
   }
 
   const keyIndex = limitBreak.findIndex(
-    lb => lb.description === 'LOCKED WITH KEY',
+    lb => lb.description.startsWith('LOCKED WITH KEY'),
   )
 
   if (keyIndex === -1) {

@@ -11,7 +11,7 @@ export type LimitBreakType =
   | 'captain'
 
 export function getLimitType ({ description }: LimitBreak) : LimitBreakType {
-  if (description === 'LOCKED WITH KEY') {
+  if (description.startsWith('LOCKED WITH KEY')) {
     return 'key'
   }
 
