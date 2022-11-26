@@ -1,16 +1,85 @@
 const { DB } = require('./unitExtracter')
 const { writeFileSync } = require('fs')
 const Ajv = require('ajv').default
+const oldSchema = require('../models/old-character-schema.json')
+const { fixupVersusUnit } = require('./fixup')
 
 const prettify = false
+const excludeVS = true
 
-function process (validator, units, excludeVS, name) {
+function validate (db) {
+  console.log('Validation of extracted DB data')
+  const errors = getErrors(db)
+
+  if (errors.length === 0) {
+    console.log('No error detected')
+    return true
+  }
+
+  console.log('unit in error:', new Set(errors.map(e => e.id)).size)
+  console.log('errors count', errors.length)
+
+  console.log('Errors by unit')
+  const errorsByCharacters = new Set(errors.map(x => x.id))
+  for (const id of errorsByCharacters) {
+    console.error(`#${id} "${db.find(u => u.id === id)?.name}"`)
+
+    const matching = errors
+      .filter(e => e.id === id)
+      .sort((a, b) => a.path.localeCompare(b.path))
+
+    for (const path of new Set(matching.map(x => x.path))) {
+      console.error(`  - ${path}`)
+
+      for (const error of matching.filter(m => m.path === path)) {
+        console.error(`    - ${error.message}`)
+      }
+    }
+  }
+
+  if (errorsByCharacters.size < 10) {
+    return false
+  }
+
+  console.log('Errors by type')
+  for (const messageType of new Set(errors.map(x => x.message))) {
+    const matching = errors.filter(e => e.message === messageType)
+
+    console.error(`- ${messageType} (${matching.length} occurences)`)
+
+    for (const path of new Set(matching.map(m => m.path))) {
+      const ids = matching.filter(e => e.path === path).map(e => e.id)
+
+      console.error(
+        `  - ${path} (${ids.length} occurences) ${JSON.stringify(ids)}`,
+      )
+    }
+  }
+
+  if (false || process.env.DEBUG) {
+    for (const id of new Set(errors.map(x => x.id))) {
+      console.log(JSON.stringify(db.find(u => u.id === id)))
+    }
+  }
+
+  return false
+}
+
+function getErrors (db) {
+  const ajv = new Ajv({
+    allowUnionTypes: true,
+    allErrors: true,
+    useDefaults: 'empty',
+  })
+
+  const validator = ajv.compile(oldSchema)
+
   const errors = []
-  for (const unit of units) {
+  for (const unit of db) {
     if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria)) continue
 
     const isValid = validator(unit)
-    if (!isValid) {
+    if (!isValid && validator.errors) {
       for (const error of validator.errors) {
         const add = error.params?.additionalProperty
         errors.push({
@@ -22,53 +91,14 @@ function process (validator, units, excludeVS, name) {
     }
   }
 
-  writeFileSync(`./public/db-${name}.json`, prettify ? JSON.stringify(units, null, 2) : JSON.stringify(units))
-
-  validate(errors)
-
   return errors
 }
 
-function validate (errors) {
-  console.log('unit in error:', new Set(errors.filter(e => e.id)).size)
-  console.log('errors count', errors.length)
-
-  const messageTypes = new Set(errors.map(x => x.message))
-
-  for (const messageType of messageTypes) {
-    const matching = errors.filter(e => e.message === messageType)
-
-    console.error(`- ${messageType} (${matching.length} occurence)`)
-
-    const groupByPath = new Set(matching.map(m => m.path))
-
-    for (const group of groupByPath) {
-      const ids = matching.filter(e => e.path === group).map(e => e.id)
-
-      console.error(
-        `  - ${group} (${ids.length} occurence) ${JSON.stringify(ids)}`,
-      )
-    }
-  }
-
-  return errors.length === 0
-}
-
-const oldSchema = require('../models/old-character-schema.json')
-const { fixupVersusUnit } = require('./fixup')
-
-const ajv = new Ajv({
-  allowUnionTypes: true,
-  allErrors: true,
-  useDefaults: 'empty',
-})
-
-const oldValidator = ajv.compile(oldSchema)
-
 const DBFixed = DB.map(fixupVersusUnit)
 
-const oldErrors = process(oldValidator, DBFixed, true, 'old')
+writeFileSync('./public/db-old.json', prettify ? JSON.stringify(DBFixed, null, 2) : JSON.stringify(DBFixed))
+const isValide = validate(DBFixed)
 
-if (oldErrors.length) {
+if (!isValide) {
   throw new Error('some validation errors occured')
 }
