@@ -40,6 +40,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
     )
 
     worker.onmessage = ({ data }) => {
+      // console.log('client received message', data)
       switch (data.type) {
         case 'READY':
           setIsInitialized(true)
@@ -66,15 +67,13 @@ export function useImageAnalyzer (): ImageAnalyzer {
           setCurrentAnalysis(c => c && { ...c, founds: [...c.founds, found] })
           break
         }
-        case 'ERROR_OCCURED':
-          setIsProcessing(false)
-          setState(`Sorry an error occured: ${data.error.message}`)
-          break
         default:
           break
       }
     }
     worker.onerror = ({ message }) => {
+      console.log(message)
+      setCurrentAnalysis(c => c && { ...c, done: true, error: message })
       setState(`Sorry an error occured: ${message}`)
     }
 
@@ -144,6 +143,8 @@ export function useImageAnalyzer (): ImageAnalyzer {
           `Images analysis in progress (${remainingAnalysis} remaining) - Search of matching characters (${realFound.length} / ${squares.length})`,
         )
       }
+    } else if (currentAnalysis?.error) {
+      setState(`Sorry an error occured: ${currentAnalysis.error}`)
     } else {
       const squareCount = analyses.reduce((sum, c) => sum + c.squares.length, 0)
       const foundCount = analyses.reduce((sum, c) => sum + c.founds.length, 0)

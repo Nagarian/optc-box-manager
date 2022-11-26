@@ -32,6 +32,7 @@ export type Analysis = {
   squares: SquareSize[]
   founds: CharacterFound[]
   done: boolean
+  error?: string
 }
 
 export type InitialSizeMatrix = {
@@ -115,51 +116,49 @@ function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
   })
 }
 
-onmessage = async ({ data }) => {
-  try {
-    switch (data.type) {
-      case 'INIT':
-        await loadOpenCv()
-        self.postMessage({ type: 'READY' })
-        break
-      case 'PROCESS_IMAGE': {
-        const { image, type, id } = data.analysis as Analysis
-        const charactersMat = cv.matFromImageData(data.characters)
-        const src = cv.matFromImageData(image)
-        let squares = []
-        switch (type) {
-          case 'tavern':
-            squares = detectMatrixSquare(src, id, tavernSizeMatrix)
-            break
-          case 'fpp':
-            squares = detectMatrixSquare(src, id, fppSizeMatrix)
-            break
-          case 'box':
-            squares = detectBoxSquare(src, id)
-            break
-          case 'generic':
-            squares = detectGenericSquare(src, id)
-            break
-        }
-
-        findCharacterIds(charactersMat, src, squares, 0.8)
-        src.delete()
-        charactersMat.delete()
-        self.postMessage({
-          type: 'PROCESS_IMAGE_END',
-          analysisId: data.analysis?.id,
-        })
-        break
+onmessage = ({ data }) => {
+  // console.log('worker received message', data)
+  switch (data.type) {
+    case 'INIT':
+      loadOpenCv().then(
+        () => self.postMessage({ type: 'READY' }),
+        error => {
+          throw error
+        },
+      )
+      break
+    case 'PROCESS_IMAGE': {
+      const { image, type, id } = data.analysis as Analysis
+      const charactersMat = cv.matFromImageData(data.characters)
+      const src = cv.matFromImageData(image)
+      let squares = []
+      switch (type) {
+        case 'tavern':
+          squares = detectMatrixSquare(src, id, tavernSizeMatrix)
+          break
+        case 'fpp':
+          squares = detectMatrixSquare(src, id, fppSizeMatrix)
+          break
+        case 'box':
+          squares = detectBoxSquare(src, id)
+          break
+        case 'generic':
+          squares = detectGenericSquare(src, id)
+          break
       }
-      default:
-        break
+
+      findCharacterIds(charactersMat, src, squares, 0.8)
+      src.delete()
+      charactersMat.delete()
+      self.postMessage({
+        type: 'PROCESS_IMAGE_END',
+        analysisId: data.analysis?.id,
+      })
+      break
     }
-  } catch (error) {
-    self.postMessage({
-      type: 'ERROR_OCCURED',
-      error,
-      analysisId: data.analysis?.id,
-    })
+
+    default:
+      break
   }
 }
 
@@ -260,8 +259,11 @@ function detectMatrixSquare (
 
   const not = new cv.Mat()
   cv.bitwise_not(oldGray, not)
-
   cv.Canny(not, not, 80, 120)
+
+  // const not = oldGray.clone()
+  // cv.threshold(oldGray, not, 100, 200, cv.THRESH_BINARY)
+  // cv.Canny(not, not, 90, 120)
 
   const lines = new cv.Mat()
   cv.HoughLinesP(not, lines, 1, Math.PI / 2, 2, 30, 1)
@@ -446,13 +448,43 @@ function findCharacterIds (
   squares: SquareSize[],
   minConfidence: number,
 ) {
-  const mask = new cv.Mat()
+  try {
+    console.time('Finding all matching')
 
-  console.time('Finding all matching')
+    for (const squareToSearch of squares) {
+      const found = findMatching(charactersMat, src, squareToSearch)
 
-  for (const squareToSearch of squares) {
+      // we add constant to be sure to being into right image
+      const id =
+        (Math.ceil((found.loc.y + 5) / size.height) - 1) * size.gridHorizontal +
+        Math.ceil((found.loc.x + 5) / size.width)
+
+      if (found.val < minConfidence) {
+        continue
+      }
+
+      const characterFound: CharacterFound = {
+        id,
+        squareId: squareToSearch.id,
+        analysisId: squareToSearch.analysisId,
+        score: found.val,
+      }
+
+      self.postMessage({ type: 'CHARACTER_FOUND', found: characterFound })
+    }
+  } finally {
+    console.timeEnd('Finding all matching')
+  }
+}
+
+function findMatching (
+  charactersMat: any,
+  src: any,
+  squareToSearch: SquareSize,
+) {
+  try {
     console.time('Finding matching')
-
+    const mask = new cv.Mat()
     const imageRoi = src.roi(squareToSearch)
     cv.resize(
       imageRoi,
@@ -465,39 +497,18 @@ function findCharacterIds (
     const dst = new cv.Mat()
     cv.matchTemplate(charactersMat, imageRoi, dst, cv.TM_CCOEFF_NORMED, mask)
     const result = cv.minMaxLoc(dst, mask)
+    imageRoi.delete()
+    dst.delete()
+    mask.delete()
 
-    const found = {
+    return {
       val: result.maxVal,
       loc: {
         x: result.maxLoc.x,
         y: result.maxLoc.y,
       },
     }
-
-    imageRoi.delete()
-    dst.delete()
-
+  } finally {
     console.timeEnd('Finding matching')
-
-    // we add constant to be sure to being into right image
-    const id =
-      (Math.ceil((found.loc.y + 5) / size.height) - 1) * size.gridHorizontal +
-      Math.ceil((found.loc.x + 5) / size.width)
-
-    if (found.val < minConfidence) {
-      continue
-    }
-
-    const characterFound: CharacterFound = {
-      id,
-      squareId: squareToSearch.id,
-      analysisId: squareToSearch.analysisId,
-      score: found.val,
-    }
-
-    self.postMessage({ type: 'CHARACTER_FOUND', found: characterFound })
   }
-
-  console.timeEnd('Finding all matching')
-  mask.delete()
 }
