@@ -42,8 +42,6 @@ jobs:
       - name: CI
         run: |
           npm ci
-          npm run extract-optcdb
-          npm run extract-image
           npm test
           npm run build
 

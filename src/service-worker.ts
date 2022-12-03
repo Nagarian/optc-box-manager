@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies'
+import { StaleWhileRevalidate, NetworkFirst, CacheFirst } from 'workbox-strategies'
 
 // eslint-disable-next-line no-undef
 declare const self: ServiceWorkerGlobalScope
@@ -78,14 +78,6 @@ self.addEventListener('message', event => {
   }
 })
 
-precacheAndRoute([{ url: 'opencv-4.6.0.js' }], {
-  urlManipulation: ({ url }) => [
-    url,
-    new URL(`./${url}`),
-    new URL(`./static/js/${url}`),
-  ],
-})
-
 // const imagesRoutes = [
 //   'https://optc-db.github.io',
 //   'https://onepiece-treasurecruise.com',
@@ -96,6 +88,14 @@ registerRoute(
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new NetworkFirst({
     cacheName: 'db_data',
+  }),
+)
+
+registerRoute(
+  /\/opencv-\d\.\d\.\d\.js/i,
+  // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new CacheFirst({
+    cacheName: 'opencv',
   }),
 )
 
