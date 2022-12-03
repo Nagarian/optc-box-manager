@@ -21,7 +21,7 @@
     "rc-slider": "^10.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-markdown": "^8.0.3",
+    "react-markdown": "^8.0.4",
     "react-scripts": "^5.0.1",
     "rehype-raw": "^6.1.1",
     "resize-observer-polyfill": "^1.5.1",
