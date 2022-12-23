@@ -2,13 +2,16 @@ import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
-import { FileButtonInput } from 'components/forms/FileButtonInput'
+import {
+  FileButtonInput,
+  FileButtonInputProps,
+} from 'components/forms/FileButtonInput'
 import {
   CameraFppIcon,
   CameraTavernIcon,
   CameraTreasureIcon,
-  Icon,
   ImageAnalyzerIcon,
+  VideoTreasureIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
@@ -22,7 +25,7 @@ export type ImageAnalyzerProps = {
 }
 export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const canvasContainerRef = useRef<HTMLCanvasElement>(null)
+  const canvasContainerRef = useRef<HTMLDivElement>(null)
   const selectionPanelRef = useRef<HTMLDivElement>(null)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -37,6 +40,7 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
     analyses,
     allFound,
     currentAnalysis,
+    currentVideoRef,
     reset,
     removeFound,
   } = useImageAnalyzer()
@@ -161,15 +165,13 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
           }}
           customAction={
             <>
-              {ImporterType.map(it => (
+              {ImporterType.map(({ analysisType, ...it }) => (
                 <FileButtonInput
-                  key={it.type}
-                  accept=".jpg"
+                  key={analysisType}
                   m="1"
                   fontSize="2"
-                  title={it.title}
-                  onFiles={files => process(it.type, files)}
-                  icon={it.icon}
+                  onFiles={files => process(analysisType, files)}
+                  {...it}
                 />
               ))}
             </>
@@ -204,17 +206,15 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
             >
               {!currentAnalysis && (
                 <Box display="grid" gridTemplateColumns="1fr 1fr">
-                  {ImporterType.map(it => (
+                  {ImporterType.map(({ analysisType, ...it }) => (
                     <FileButtonInput
-                      key={it.type}
-                      accept=".jpg"
+                      key={analysisType}
                       m="1"
                       fontSize="2"
                       size="4"
-                      title={it.title}
                       iconVariant="vertical"
-                      onFiles={files => process(it.type, files)}
-                      icon={it.icon}
+                      onFiles={files => process(analysisType, files)}
+                      {...it}
                     >
                       {it.title}
                     </FileButtonInput>
@@ -224,6 +224,12 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
               <Canvas
                 ref={canvasRef}
                 display={currentAnalysis ? 'block' : 'none'}
+              />
+              <video
+                ref={currentVideoRef}
+                controls
+                muted
+                style={{ display: 'none' }}
               />
             </Box>
             <SubTitle my="2">{state}</SubTitle>
@@ -248,21 +254,41 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
 
 const Canvas = styled.canvas<DisplayProps>(display)
 
-const ImporterType: { type: AnalysisType; title: string; icon: Icon }[] = [
+const ImporterType: (Partial<FileButtonInputProps> & {
+  analysisType: AnalysisType
+})[] = [
   {
-    type: 'generic',
+    analysisType: 'generic',
+    accept: '.jpg',
     title: 'Import screenshots - Generic Square',
     icon: ImageAnalyzerIcon,
+    multiple: true,
   },
-  { type: 'box', title: 'Import Box screenshots', icon: CameraTreasureIcon },
   {
-    type: 'fpp',
+    analysisType: 'box',
+    accept: '.jpg',
+    title: 'Import Box screenshots',
+    icon: CameraTreasureIcon,
+    multiple: true,
+  },
+  {
+    analysisType: 'fpp',
+    accept: '.jpg',
     title: 'Import Friend Point Pull screenshots',
     icon: CameraFppIcon,
+    multiple: true,
   },
   {
-    type: 'tavern',
+    analysisType: 'tavern',
+    accept: '.jpg',
     title: 'Import Tavern screenshots',
     icon: CameraTavernIcon,
+    multiple: true,
+  },
+  {
+    analysisType: 'box-video',
+    accept: '.mp4',
+    title: '(Experimental) Import Box videos',
+    icon: VideoTreasureIcon,
   },
 ]

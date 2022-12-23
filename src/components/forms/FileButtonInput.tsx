@@ -3,9 +3,15 @@ import { useRef } from 'react'
 
 export type FileButtonInputProps = ButtonProps & {
   accept?: string
+  multiple?: boolean
   onFiles: (files: File[]) => void
 }
-export function FileButtonInput ({ accept, onFiles, ...buttonProps }: FileButtonInputProps) {
+export function FileButtonInput ({
+  accept,
+  multiple,
+  onFiles,
+  ...buttonProps
+}: FileButtonInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (
@@ -14,7 +20,7 @@ export function FileButtonInput ({ accept, onFiles, ...buttonProps }: FileButton
         type="file"
         accept={accept}
         style={{ display: 'none' }}
-        multiple
+        multiple={multiple}
         ref={inputRef}
         onChange={({ target: { files } }) => files && onFiles([...files])}
       />

@@ -23,12 +23,13 @@ export type CharacterFound = {
   unit?: ExtendedUnit
 }
 
-export type AnalysisType = 'tavern' | 'fpp' | 'box' | 'generic'
+export type AnalysisType = 'tavern' | 'fpp' | 'box' | 'generic' | 'box-video'
 
 export type Analysis = {
   id: string
   type: AnalysisType
   image: ImageData
+  video?: HTMLVideoElement
   squares: SquareSize[]
   founds: CharacterFound[]
   done: boolean
@@ -131,7 +132,7 @@ onmessage = ({ data }) => {
       const { image, type, id } = data.analysis as Analysis
       const charactersMat = cv.matFromImageData(data.characters)
       const src = cv.matFromImageData(image)
-      let squares = []
+      let squares: SquareSize[] = []
       switch (type) {
         case 'tavern':
           squares = detectMatrixSquare(src, id, tavernSizeMatrix)
@@ -147,13 +148,29 @@ onmessage = ({ data }) => {
           break
       }
 
-      findCharacterIds(charactersMat, src, squares, 0.8)
+      findCharacterIds(charactersMat, id, src, squares, 0.8)
       src.delete()
       charactersMat.delete()
       self.postMessage({
         type: 'PROCESS_IMAGE_END',
         analysisId: data.analysis?.id,
       })
+      break
+    }
+    case 'INIT_VIDEO': {
+      videoAnalyzer?.delete()
+      const { id } = data.analysis as Analysis
+      const charactersMat = cv.matFromImageData(data.characters)
+      videoAnalyzer = new VideoAnalyzer({
+        analysisId: id,
+        charactersMat,
+      })
+      break
+    }
+    case 'PROCESS_VIDEO': {
+      const frame = cv.matFromImageData(data.frame)
+      videoAnalyzer?.processFrame(frame)
+      frame.delete()
       break
     }
 
@@ -241,6 +258,7 @@ function detectGenericSquare (src: any, analysisId: string): SquareSize[] {
 
     self.postMessage({
       type: 'SQUARE_DETECTED',
+      analysisId,
       square: { ...squareDetected, ...rect },
     })
   }
@@ -309,6 +327,7 @@ function detectMatrixSquare (
 
       self.postMessage({
         type: 'SQUARE_DETECTED',
+        analysisId,
         square,
       })
     }
@@ -404,6 +423,7 @@ function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
 
       self.postMessage({
         type: 'SQUARE_DETECTED',
+        analysisId,
         square: {
           id: extractionSquare.id,
           analysisId,
@@ -444,6 +464,7 @@ function resizeSquare ({ analysisId, id, x, y, width }: SquareSize): SquareSize 
 
 function findCharacterIds (
   charactersMat: any,
+  analysisId: string,
   src: any,
   squares: SquareSize[],
   minConfidence: number,
@@ -470,7 +491,11 @@ function findCharacterIds (
         score: found.val,
       }
 
-      self.postMessage({ type: 'CHARACTER_FOUND', found: characterFound })
+      self.postMessage({
+        type: 'CHARACTER_FOUND',
+        analysisId,
+        found: characterFound,
+      })
     }
   } finally {
     console.timeEnd('Finding all matching')
@@ -512,3 +537,210 @@ function findMatching (
     console.timeEnd('Finding matching')
   }
 }
+
+type VideoAnalyzerOptions = { charactersMat: any; analysisId: string }
+class VideoAnalyzer {
+  private _frameRoiSize: { x: number; y: number; width: number; height: number }
+  private _isInitialized: boolean
+
+  private _lineCount: number
+  private _nextLineCount: number
+  private _currentMinH: number
+  private _characterSize: number
+
+  private _charactersMat: any
+  private _analysisId: string
+
+  constructor ({ analysisId, charactersMat }: VideoAnalyzerOptions) {
+    this._isInitialized = false
+    this._frameRoiSize = { x: 40, y: 320, width: 945, height: 1040 }
+    this._characterSize = 0
+
+    this._charactersMat = charactersMat
+    this._analysisId = analysisId
+
+    this._lineCount = -1
+    this._nextLineCount = 5
+    this._currentMinH = 0
+  }
+
+  delete () {
+    this._charactersMat?.delete()
+  }
+
+  processFrame (frame: any) {
+    this.computeInitialVideoConstants(frame)
+    if (!this._isInitialized) {
+      return this.signalEndOfImageProcess('not initialized')
+    }
+
+    const roi = frame.roi(this._frameRoiSize)
+    const roiRows = roi.rows
+    const previousMinH = this._currentMinH
+    this._currentMinH = this.detectFirstHorizontalLine(roi)
+    roi.delete()
+
+    if (this._currentMinH < previousMinH) {
+      // first row hasn't changed so we stop processing
+      return this.signalEndOfImageProcess('first row hasnt moved')
+    }
+
+    this._lineCount++
+
+    if (this._lineCount < this._nextLineCount) {
+      // the required number of line hasn't been scrolled so we stop processing
+      return this.signalEndOfImageProcess(
+        `waiting for the next screen ${this._lineCount} ${this._nextLineCount}`,
+      )
+    }
+
+    this._nextLineCount = this.getNextLineCount(roiRows)
+    this._lineCount = -1
+
+    this.signalEndOfImageProcess('frame fully processed', true)
+  }
+
+  private signalEndOfImageProcess (msg?: string, isGoodFrame = false) {
+    self.postMessage({
+      type: 'FRAME_PROCESSED',
+      analysisId: this._analysisId,
+      isGoodFrame,
+      msg,
+    })
+  }
+
+  private computeInitialVideoConstants (src: any) {
+    if (this._isInitialized) {
+      return
+    }
+
+    const topScreen = this.detectTopScreen(src)
+
+    if (topScreen < 0) {
+      return
+    }
+
+    const ratio = src.cols / tavernSizeMatrix.gameWidth
+    this._frameRoiSize = {
+      x: this._frameRoiSize.x * ratio,
+      y: topScreen + this._frameRoiSize.y * ratio,
+      width: this._frameRoiSize.width * ratio,
+      height: this._frameRoiSize.height * ratio,
+    }
+    this._characterSize = this._frameRoiSize.width / 5
+    this._isInitialized = true
+  }
+
+  private detectTopScreen (src: any): number {
+    const grayed = new cv.Mat()
+    cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY)
+    cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY)
+    cv.Canny(grayed, grayed, 90, 120)
+
+    const lines = new cv.Mat()
+    cv.HoughLinesP(grayed, lines, 1, Math.PI / 2, 2, 30, 1)
+    grayed.delete()
+
+    let topBound = src.rows
+    // const rows = []
+    for (let i = 0; i < lines.rows; ++i) {
+      const [x1, y1, x2, y2] = [
+        lines.data32S[i * 4],
+        lines.data32S[i * 4 + 1],
+        lines.data32S[i * 4 + 2],
+        lines.data32S[i * 4 + 3],
+      ]
+
+      if (x2 - x1 < src.cols * 0.8) continue
+      if (y1 !== y2) continue
+      if (y1 > topBound) continue
+      // cv.line(src, { x: 0, y: y1 }, { x: src.cols, y: y2 }, [255, 0, 0, 255], 1)
+      // rows.push({
+      //   x1,
+      //   y1,
+      //   x2,
+      //   y2,
+      //   width: x2 - x1,
+      //   screenwidth: src.cols,
+      //   percent: (x2 - x1) / src.cols,
+      // })
+      topBound = y1
+    }
+
+    lines.delete()
+    return topBound > src.rows / 2 ? -1 : topBound
+  }
+
+  private detectFirstHorizontalLine (src: any): number {
+    const whiteMask = src.clone()
+    let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+    cv.inRange(src, low, high, whiteMask)
+    low.delete()
+    high.delete()
+
+    const yellowMask = src.clone()
+    low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
+    high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+    cv.inRange(src, low, high, yellowMask)
+    low.delete()
+    high.delete()
+
+    const bitOr = new cv.Mat()
+    cv.bitwise_or(whiteMask, yellowMask, bitOr)
+    whiteMask.delete()
+    yellowMask.delete()
+
+    const bitwised = new cv.Mat()
+    cv.bitwise_and(src, src, bitwised, bitOr)
+    bitOr.delete()
+
+    const lines = new cv.Mat()
+    cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
+    cv.Canny(bitwised, bitwised, 50, 255)
+    // cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
+    cv.HoughLinesP(bitwised, lines, 1, Math.PI / 2, 2, 30, 1)
+    bitwised.delete()
+
+    const horizontals: number[] = []
+
+    for (let i = 0; i < lines.rows; ++i) {
+      const [x1, y1, x2, y2] = [
+        lines.data32S[i * 4],
+        lines.data32S[i * 4 + 1],
+        lines.data32S[i * 4 + 2],
+        lines.data32S[i * 4 + 3],
+      ]
+
+      const horizontalLength = Math.abs(x2 - x1)
+      const verticalLength = Math.abs(y2 - y1)
+      const minimalLength = src.cols * 0.1
+
+      if (verticalLength === 0 && horizontalLength > minimalLength) {
+        horizontals.push(y1)
+      }
+    }
+    lines.delete()
+
+    const characterWidth = src.cols / 5
+    horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
+
+    const minH = horizontals.find(h1 =>
+      horizontals.find(h2 => characterWidth === h2 - h1),
+    )
+
+    return minH ?? -1
+  }
+
+  private getNextLineCount (srcRows: any): number {
+    for (let yI = 0; yI < 5; yI++) {
+      const y = this._currentMinH + this._characterSize * yI
+
+      if (y + this._characterSize > srcRows) return yI
+    }
+
+    return 5
+  }
+}
+
+let videoAnalyzer: VideoAnalyzer | null = null
