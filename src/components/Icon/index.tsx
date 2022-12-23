@@ -57,6 +57,7 @@ import { ReactComponent as SugoPull } from './sugopull.svg'
 import SupportSvg, { ReactComponent as Support } from './support.svg'
 import { ReactComponent as TailSpin } from './tail-spin.svg'
 import { ReactComponent as Treasure } from './treasure.svg'
+import { ReactComponent as VideoTreasure } from './video-treasure.svg'
 
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps & { title?: string }
 
@@ -169,6 +170,7 @@ export const LevelTextIcon = () => (
   </Text>
 )
 export const TreasureIcon = BaseSvg(Treasure)
+export const VideoTreasureIcon = BaseSvg(VideoTreasure)
 
 export const SpecialLvlIcon = BaseSvg(Special)
 SpecialLvlIcon.defaultProps = {
