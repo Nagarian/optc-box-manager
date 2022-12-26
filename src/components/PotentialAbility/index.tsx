@@ -18,14 +18,15 @@ import ImageSkill11 from './images/potentialskill_icon_s_011.png'
 import ImageSkill12 from './images/potentialskill_icon_s_012.png'
 import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
-import ImageSkill15 from './images/potentialskill_icon_s_015.png'
 import ImageSkill16 from './images/potentialskill_icon_s_016.png'
-import ImageSkill17 from './images/potentialskill_icon_s_017.png'
-import ImageSkill18 from './images/potentialskill_icon_s_018.png'
 import ImageSkill19 from './images/potentialskill_icon_s_019.png'
 import ImageSkill20 from './images/potentialskill_icon_s_020.png'
 import ImageSkill21 from './images/potentialskill_icon_s_021.png'
 import ImageSkill22 from './images/potentialskill_icon_s_022.png'
+import ImageSkill24 from './images/potentialskill_icon_s_024.png'
+import ImageSkill25 from './images/potentialskill_icon_s_025.png'
+import ImageSkill100 from './images/potentialskill_icon_s_100.png'
+import ImageSkill101 from './images/potentialskill_icon_s_101.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -56,21 +57,23 @@ export function PotentialAbilityToImage (type: PotentialKey) {
     case '[INT] Damage Reduction':
       return ImageSkill14
     case 'Reduce Sailor Despair duration':
-      return ImageSkill15
-    case 'Reduce Ship Bind duration':
-      return ImageSkill16
-    case 'Reduce Special Use Limit duration':
-      return ImageSkill17
-    case 'Reduce Slot Barrier duration':
-      return ImageSkill18
-    case 'Reduce Healing Reduction duration':
-      return ImageSkill19
-    case 'Nutrition/Reduce Hunger stacks':
       return ImageSkill20
-    case 'Last Tap':
+    case 'Reduce Ship Bind duration':
+      return ImageSkill19
+    case 'Reduce Special Use Limit duration':
       return ImageSkill21
-    case 'Super Tandem':
+    case 'Reduce Slot Barrier duration':
       return ImageSkill22
+    case 'Reduce Healing Reduction duration':
+      return ImageSkill16
+    case 'Nutrition/Reduce Hunger stacks':
+      return ImageSkill24
+    case 'Last Tap':
+      return ImageSkill100
+    case 'Super Tandem':
+      return ImageSkill25
+    case 'Last Tap / Super Tandem':
+      return ImageSkill101
     default:
       return NoIcon
   }

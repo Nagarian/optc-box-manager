@@ -440,8 +440,7 @@
           "$ref": "#/definitions/UnitStar"
         },
         "support": {
-          "not": {
-          }
+          "not": {}
         },
         "type": {
           "anyOf": [
@@ -557,7 +556,8 @@
         "Reduce Healing Reduction duration",
         "Nutrition/Reduce Hunger stacks",
         "Last Tap",
-        "Super Tandem"
+        "Super Tandem",
+        "Last Tap / Super Tandem"
       ],
       "type": "string"
     },
@@ -835,6 +835,9 @@
         "superTandem": {
           "$ref": "#/definitions/UnitSuperTandem"
         },
+        "superTandemNotes": {
+          "type": "string"
+        },
         "support": {
           "items": {
             "$ref": "#/definitions/UnitSupport"
@@ -879,14 +882,12 @@
         "evolvers": {
           "anyOf": [
             {
-              "items": {
-              },
+              "items": {},
               "type": "array"
             },
             {
               "items": {
-                "items": {
-                },
+                "items": {},
                 "type": "array"
               },
               "type": "array"

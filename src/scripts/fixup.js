@@ -242,6 +242,53 @@ function fixupSpecificIssue (
     }
   }
 
+  if (unit.id === 3787 || unit.id === 3788) {
+    if (!unit.pirateFest2) {
+      unit.pirateFest2 = {
+        class: 'SPT',
+        DEF: 164,
+        SPD: 193,
+        minCP: undefined,
+        maxCP: undefined,
+      }
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
+  if (unit.id === 3796) {
+    // @ts-ignore
+    if (unit.detail.limit[0].Name) {
+      // @ts-ignore
+      unit.detail.potential = unit.detail.limit
+      delete unit.detail.limit
+      delete unit.detail.potential
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
+  if (unit.id === 3788) {
+    if (unit.detail.potential?.length ?? 0 > 3) {
+      unit.detail.potential = [
+        // @ts-ignore
+        ...unit.detail.potential?.slice(0, 2),
+        {
+          Name: 'Last Tap / Super Tandem',
+          description: [
+            'Last Tap Ability Lv.1 / Super Tandem Ability Lv.1',
+            'Last Tap Ability Lv.2 / Super Tandem Ability Lv.2',
+            'Last Tap Ability Lv.3 / Super Tandem Ability Lv.3',
+            'Last Tap Ability Lv.4 / Super Tandem Ability Lv.4',
+            'Last Tap Ability Lv.5 / Super Tandem Ability Lv.5',
+          ],
+        },
+      ]
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
   return unit
 }
 
@@ -255,19 +302,6 @@ function removeProp (
     delete obj[badName]
   }
 }
-
-/**
- * @param {import("../models/old-units").ExtendedUnit} unit
- * @param {string} name
- * @returns {import("../models/old-units").ExtendedUnit}
- */
-// @ts-ignore
-const copy = (unit, name) => ({
-  name,
-  class: unit.class,
-  detail: { ...unit.detail },
-  images: { ...unit.images },
-})
 
 module.exports = {
   fixupDetail,
