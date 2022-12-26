@@ -56,7 +56,6 @@ function DBFactory () {
           name: unit.families || undefined,
           id: getFamilyId(units, unit),
         },
-        pirateFest: unit.pirateFest,
         dropLocations: getDropLocations(dbId, flags, EvolutionMap),
         evolutionMap: EvolutionMap[dbId] ?? [dbId],
         aliases: aliases[dbId],

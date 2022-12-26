@@ -99,6 +99,7 @@ export const Potentials = [
   'Nutrition/Reduce Hunger stacks',
   'Last Tap',
   'Super Tandem',
+  'Last Tap / Super Tandem',
 ] as const
 
 export type PotentialKey = typeof Potentials[number]
@@ -245,6 +246,7 @@ export type UnitDetail = {
   lastTap?: UnitLastTap
   lastTapNotes?: string
   superTandem?: UnitSuperTandem
+  superTandemNotes?: string
   support: UnitSupport[]
   supportNotes?: string
   festAbility: UnitFestAbility[]
