@@ -300,6 +300,8 @@ function getRumbleData (id) {
     denormalizeEffects(unit2.special)
     if (unit2.llbability) denormalizeEffects(unit2.llbability)
     if (unit2.llbspecial) denormalizeEffects(unit2.llbspecial)
+    if (unit2.gpspecial) denormalizeEffects(unit2.gpspecial)
+    if (unit2.gpability) denormalizeEffects(unit2.gpability)
 
     return [unit, unit2]
   }
@@ -363,6 +365,28 @@ function applyNewPirateRumble (
       character2: newRumble[1].special.map(s => ({
         cooldown: s.cooldown,
         description: filters.specialToString()(s.effects),
+      })),
+    }
+    unit.detail.festGPLeader = newRumble[0].gpability && {
+      character1: newRumble[0].gpability?.map(ab => ({
+        description: filters.abilityToString()(ab.effects),
+      })),
+      character2: newRumble[1].gpability?.map(ab => ({
+        description: filters.abilityToString()(ab.effects),
+      })),
+    }
+    const gpCondition1 = (newRumble[0].gpcondition ? filters.gpconditionToString()(newRumble[0].gpcondition[0]) : undefined) ?? ''
+    const gpCondition2 = (newRumble[1].gpcondition ? filters.gpconditionToString()(newRumble[1].gpcondition[0]) : undefined) ?? ''
+    unit.detail.festGPBurst = newRumble[0].gpspecial && {
+      character1: newRumble[0].gpspecial?.map(gps => ({
+        use: gps.uses,
+        condition: gpCondition1,
+        description: filters.specialToString()(gps.effects),
+      })),
+      character2: newRumble[1].gpspecial?.map(gps => ({
+        use: gps.uses,
+        condition: gpCondition2,
+        description: filters.specialToString()(gps.effects),
       })),
     }
   } else {

@@ -81,6 +81,28 @@ function fixupVersusUnit (
           cooldown: `${desc.cooldown} / ${untyped.detail.festSpecial.character2[i].cooldown}`,
         }),
       ),
+      festGPBurst: untyped.detail.festGPBurst?.character1.map(
+        (/** @type any */ desc, /** @type number */ i) => ({
+          description: format({
+            character1: desc.description,
+            character2: untyped.detail.festGPBurst.character2[i].description,
+          }),
+          condition: format({
+            character1: desc.condition,
+            character2: untyped.detail.festGPBurst.character2[i].condition,
+          }),
+          /** @type any */
+          use: `${desc.use} / ${untyped.detail.festGPBurst.character2[i].use}`,
+        }),
+      ),
+      festGPLeader: untyped.detail.festGPLeader?.character1.map(
+        (/** @type any */ desc, /** @type number */ i) => ({
+          description: format({
+            character1: desc.description,
+            character2: untyped.detail.festGPLeader.character2[i].description,
+          }),
+        }),
+      ),
     },
   }
 }
