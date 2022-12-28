@@ -44,6 +44,18 @@ export type InitialSizeMatrix = {
   matrix?: number[][]
   characterSize: number
 }
+export type BoxSizeMatrix = {
+  gameWidth: number
+  gameHeight: number
+  roi: {
+    x: number
+    y: number
+    width: number
+    height: number
+  }
+  characterSize: number
+  minH: number
+}
 
 const extractionSize = {
   top: 28,
@@ -74,6 +86,14 @@ const size = {
 size.gridVertical = Math.ceil(size.maxId / size.gridHorizontal)
 size.maxWidth = size.gridHorizontal * size.width
 size.maxHeight = size.gridVertical * size.height
+
+const boxSizeMatrix: BoxSizeMatrix = {
+  gameWidth: 1080,
+  gameHeight: 1620,
+  roi: { x: 40, y: 320, width: 945, height: 1040 },
+  characterSize: -1,
+  minH: -1,
+}
 
 const tavernSizeMatrix: InitialSizeMatrix = {
   gameWidth: 1080,
@@ -267,11 +287,7 @@ function detectGenericSquare (src: any, analysisId: string): SquareSize[] {
   return squaresToExtract.reverse()
 }
 
-function detectMatrixSquare (
-  src: any,
-  analysisId: string,
-  initialSize: InitialSizeMatrix,
-): SquareSize[] {
+function detectTopScreenV1 (src: any) {
   const oldGray = new cv.Mat()
   cv.cvtColor(src, oldGray, cv.COLOR_RGBA2GRAY)
 
@@ -282,7 +298,6 @@ function detectMatrixSquare (
   // const not = oldGray.clone()
   // cv.threshold(oldGray, not, 100, 200, cv.THRESH_BINARY)
   // cv.Canny(not, not, 90, 120)
-
   const lines = new cv.Mat()
   cv.HoughLinesP(not, lines, 1, Math.PI / 2, 2, 30, 1)
   let topBound = src.rows
@@ -304,7 +319,105 @@ function detectMatrixSquare (
   oldGray.delete()
   not.delete()
   lines.delete()
+  return topBound
+}
 
+function detectTopScreenV2 (src: any): number {
+  const grayed = new cv.Mat()
+  cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY)
+  cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY)
+  cv.Canny(grayed, grayed, 90, 120)
+
+  const lines = new cv.Mat()
+  cv.HoughLinesP(grayed, lines, 1, Math.PI / 2, 2, 30, 1)
+  grayed.delete()
+
+  let topBound = src.rows
+  for (let i = 0; i < lines.rows; ++i) {
+    const [x1, y1, x2, y2] = [
+      lines.data32S[i * 4],
+      lines.data32S[i * 4 + 1],
+      lines.data32S[i * 4 + 2],
+      lines.data32S[i * 4 + 3],
+    ]
+
+    if (x2 - x1 < src.cols * 0.8) continue
+    if (y1 !== y2) continue
+    if (y1 > topBound) continue
+    topBound = y1
+  }
+
+  lines.delete()
+  return topBound > src.rows / 2 ? -1 : topBound
+}
+
+function detectFirstHorizontalLine (src: any): number {
+  const whiteMask = src.clone()
+  let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
+  let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+  cv.inRange(src, low, high, whiteMask)
+  low.delete()
+  high.delete()
+
+  const yellowMask = src.clone()
+  low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
+  high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
+  cv.inRange(src, low, high, yellowMask)
+  low.delete()
+  high.delete()
+
+  const bitOr = new cv.Mat()
+  cv.bitwise_or(whiteMask, yellowMask, bitOr)
+  whiteMask.delete()
+  yellowMask.delete()
+
+  const bitwised = new cv.Mat()
+  cv.bitwise_and(src, src, bitwised, bitOr)
+  bitOr.delete()
+
+  const lines = new cv.Mat()
+  cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
+  cv.Canny(bitwised, bitwised, 50, 255)
+  // cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
+  cv.HoughLinesP(bitwised, lines, 1, Math.PI / 2, 2, 30, 1)
+  bitwised.delete()
+
+  const horizontals: number[] = []
+
+  for (let i = 0; i < lines.rows; ++i) {
+    const [x1, y1, x2, y2] = [
+      lines.data32S[i * 4],
+      lines.data32S[i * 4 + 1],
+      lines.data32S[i * 4 + 2],
+      lines.data32S[i * 4 + 3],
+    ]
+
+    const horizontalLength = Math.abs(x2 - x1)
+    const verticalLength = Math.abs(y2 - y1)
+    const minimalLength = src.cols * 0.1
+
+    if (verticalLength === 0 && horizontalLength > minimalLength) {
+      horizontals.push(y1)
+    }
+  }
+  lines.delete()
+
+  const characterWidth = src.cols / 5
+  horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
+
+  const minH = horizontals.find(h1 =>
+    horizontals.find(h2 => characterWidth === h2 - h1),
+  )
+
+  return (minH ?? -1) % characterWidth
+}
+
+function detectMatrixSquare (
+  src: any,
+  analysisId: string,
+  initialSize: InitialSizeMatrix,
+): SquareSize[] {
+  const topBound = detectTopScreenV1(src)
   const ratio = src.cols / initialSize.gameWidth
   const characterWith = initialSize.characterSize * ratio
   const squares: SquareSize[] = []
@@ -336,109 +449,84 @@ function detectMatrixSquare (
   return squares
 }
 
-function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
-  const whiteMask = src.clone()
-  let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
-  let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
-  cv.inRange(src, low, high, whiteMask)
-  low.delete()
-  high.delete()
+function detectBoxRoiSizing (src: any): BoxSizeMatrix | undefined {
+  const initialRoi = boxSizeMatrix.roi
 
-  const yellowMask = src.clone()
-  low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
-  high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
-  cv.inRange(src, low, high, yellowMask)
-  low.delete()
-  high.delete()
+  const topScreen = detectTopScreenV2(src)
 
-  const bitOr = new cv.Mat()
-  cv.bitwise_or(whiteMask, yellowMask, bitOr)
-  whiteMask.delete()
-  yellowMask.delete()
-
-  const bitwised = new cv.Mat()
-  cv.bitwise_and(src, src, bitwised, bitOr)
-  bitOr.delete()
-
-  const lines = new cv.Mat()
-  cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
-  cv.Canny(bitwised, bitwised, 50, 255)
-  cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
-  bitwised.delete()
-
-  const horizontals: number[] = []
-  const verticals: number[] = []
-
-  for (let i = 0; i < lines.rows; ++i) {
-    const [x1, y1, x2, y2] = [
-      lines.data32S[i * 4],
-      lines.data32S[i * 4 + 1],
-      lines.data32S[i * 4 + 2],
-      lines.data32S[i * 4 + 3],
-    ]
-
-    const horizontal = Math.abs(x2 - x1)
-    const vertical = Math.abs(y2 - y1)
-    const minimalLength = src.cols * 0.05
-
-    if (horizontal === 0 && vertical > minimalLength) {
-      verticals.push(x1)
-    }
-
-    if (vertical === 0 && horizontal > minimalLength) {
-      horizontals.push(y1)
-    }
+  if (topScreen < 0) {
+    return undefined
   }
 
-  lines.delete()
+  const ratio = src.cols / boxSizeMatrix.gameWidth
+  return {
+    ...boxSizeMatrix,
+    roi: {
+      x: initialRoi.x * ratio,
+      y: topScreen + initialRoi.y * ratio,
+      width: initialRoi.width * ratio,
+      height: initialRoi.height * ratio,
+    },
+    characterSize: (initialRoi.width * ratio) / 5,
+  }
+}
 
-  const characterWidth = src.cols * size.boxRatio
-  horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
-  verticals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
-
-  const minH = horizontals.find(h1 =>
-    horizontals.find(h2 => characterWidth === h2 - h1),
-  )
-  const minV = verticals.find(v1 =>
-    verticals.find(v2 => characterWidth === v2 - v1),
-  )
-
-  if (!minH || !minV) return []
-
+function extractBoxSquareFromRoi (
+  analysisId: string,
+  boxSize: BoxSizeMatrix,
+): SquareSize[] {
   const squaresToExtract: SquareSize[] = []
+  const threshold = boxSize.roi.y + boxSize.roi.height - (boxSize.characterSize * 0.6)
   for (let yI = 0; yI < 5; yI++) {
-    const y = minH + characterWidth * yI
+    const y = boxSize.minH + boxSize.characterSize * yI
 
     for (let xI = 0; xI < 5; xI++) {
-      const x = minV + characterWidth * xI
+      const x = 0 + boxSize.characterSize * xI
 
-      const extractionSquare = resizeSquare({
-        id: squaresToExtract.length.toString(),
+      const square: SquareSize = {
         analysisId,
-        x,
-        width: characterWidth,
-        y,
-        height: characterWidth,
-      })
+        id: `${yI}-${xI}`,
+        x: boxSize.roi.x + x,
+        width: boxSize.characterSize,
+        y: boxSize.roi.y + y,
+        height: boxSize.characterSize,
+      }
+
+      const extractionSquare: SquareSize = resizeSquare(square)
+      square.id = extractionSquare.id
+
+      if (square.y > threshold) {
+        continue
+      }
+
+      squaresToExtract.push(extractionSquare)
 
       self.postMessage({
         type: 'SQUARE_DETECTED',
-        analysisId,
         square: {
           id: extractionSquare.id,
           analysisId,
-          x,
-          y,
-          width: characterWidth - 8,
-          height: characterWidth - 8,
+          x: boxSize.roi.x + x,
+          y: boxSize.roi.y + y,
+          width: boxSize.characterSize - 8,
+          height: boxSize.characterSize - 8,
         },
       })
-
-      squaresToExtract.push(extractionSquare)
     }
   }
 
   return squaresToExtract
+}
+
+function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
+  const roiSize = detectBoxRoiSizing(src)
+  if (!roiSize) return []
+  const roi = src.roi(roiSize.roi)
+  const minH = detectFirstHorizontalLine(roi)
+  roi.delete()
+  if (minH < 0) return []
+  roiSize.minH = minH
+  return extractBoxSquareFromRoi(analysisId, roiSize)
 }
 
 function resizeSquare ({ analysisId, id, x, y, width }: SquareSize): SquareSize {
@@ -614,122 +702,21 @@ class VideoAnalyzer {
       return
     }
 
-    const topScreen = this.detectTopScreen(src)
+    const { roi, characterSize } = detectBoxRoiSizing(src) ?? {}
+    if (!roi || !characterSize) return
 
-    if (topScreen < 0) {
-      return
-    }
-
-    const ratio = src.cols / tavernSizeMatrix.gameWidth
     this._frameRoiSize = {
-      x: this._frameRoiSize.x * ratio,
-      y: topScreen + this._frameRoiSize.y * ratio,
-      width: this._frameRoiSize.width * ratio,
-      height: this._frameRoiSize.height * ratio,
+      x: roi.x,
+      y: roi.y,
+      height: roi.height,
+      width: roi.width,
     }
-    this._characterSize = this._frameRoiSize.width / 5
+    this._characterSize = characterSize!
     this._isInitialized = true
   }
 
-  private detectTopScreen (src: any): number {
-    const grayed = new cv.Mat()
-    cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY)
-    cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY)
-    cv.Canny(grayed, grayed, 90, 120)
-
-    const lines = new cv.Mat()
-    cv.HoughLinesP(grayed, lines, 1, Math.PI / 2, 2, 30, 1)
-    grayed.delete()
-
-    let topBound = src.rows
-    // const rows = []
-    for (let i = 0; i < lines.rows; ++i) {
-      const [x1, y1, x2, y2] = [
-        lines.data32S[i * 4],
-        lines.data32S[i * 4 + 1],
-        lines.data32S[i * 4 + 2],
-        lines.data32S[i * 4 + 3],
-      ]
-
-      if (x2 - x1 < src.cols * 0.8) continue
-      if (y1 !== y2) continue
-      if (y1 > topBound) continue
-      // cv.line(src, { x: 0, y: y1 }, { x: src.cols, y: y2 }, [255, 0, 0, 255], 1)
-      // rows.push({
-      //   x1,
-      //   y1,
-      //   x2,
-      //   y2,
-      //   width: x2 - x1,
-      //   screenwidth: src.cols,
-      //   percent: (x2 - x1) / src.cols,
-      // })
-      topBound = y1
-    }
-
-    lines.delete()
-    return topBound > src.rows / 2 ? -1 : topBound
-  }
-
   private detectFirstHorizontalLine (src: any): number {
-    const whiteMask = src.clone()
-    let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
-    cv.inRange(src, low, high, whiteMask)
-    low.delete()
-    high.delete()
-
-    const yellowMask = src.clone()
-    low = new cv.Mat(src.rows, src.cols, src.type(), [150, 150, 0, 255])
-    high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
-    cv.inRange(src, low, high, yellowMask)
-    low.delete()
-    high.delete()
-
-    const bitOr = new cv.Mat()
-    cv.bitwise_or(whiteMask, yellowMask, bitOr)
-    whiteMask.delete()
-    yellowMask.delete()
-
-    const bitwised = new cv.Mat()
-    cv.bitwise_and(src, src, bitwised, bitOr)
-    bitOr.delete()
-
-    const lines = new cv.Mat()
-    cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
-    cv.Canny(bitwised, bitwised, 50, 255)
-    // cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
-    cv.HoughLinesP(bitwised, lines, 1, Math.PI / 2, 2, 30, 1)
-    bitwised.delete()
-
-    const horizontals: number[] = []
-
-    for (let i = 0; i < lines.rows; ++i) {
-      const [x1, y1, x2, y2] = [
-        lines.data32S[i * 4],
-        lines.data32S[i * 4 + 1],
-        lines.data32S[i * 4 + 2],
-        lines.data32S[i * 4 + 3],
-      ]
-
-      const horizontalLength = Math.abs(x2 - x1)
-      const verticalLength = Math.abs(y2 - y1)
-      const minimalLength = src.cols * 0.1
-
-      if (verticalLength === 0 && horizontalLength > minimalLength) {
-        horizontals.push(y1)
-      }
-    }
-    lines.delete()
-
-    const characterWidth = src.cols / 5
-    horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
-
-    const minH = horizontals.find(h1 =>
-      horizontals.find(h2 => characterWidth === h2 - h1),
-    )
-
-    return minH ?? -1
+    return detectFirstHorizontalLine(src)
   }
 
   private getNextLineCount (srcRows: any): number {
