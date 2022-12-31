@@ -24,6 +24,7 @@ export type ImageAnalyzer = {
   ) => Promise<void>
   reset: () => void
   removeFound: (found: CharacterFound) => void
+  removeAnalysis: (analysisId: string) => void
 }
 export function useImageAnalyzer (): ImageAnalyzer {
   const {
@@ -58,7 +59,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
           break
         case 'PROCESS_IMAGE_END':
           setCurrentAnalysis(c => c && { ...c, done: true })
-          setState('Analyzing images done')
+          setState('Analyzis of image done')
           break
         case 'SQUARE_DETECTED':
           setCurrentAnalysis(
@@ -147,9 +148,10 @@ export function useImageAnalyzer (): ImageAnalyzer {
 
     setCurrentAnalysis(analysis)
     setIsProcessing(true)
-    setState(analysis.type === 'box-video'
-      ? 'Video analysis in progress - Searching good frame to process'
-      : `Images analysis in progress (${remainingAnalysis} remaining) - Searching squares`,
+    setState(
+      analysis.type === 'box-video'
+        ? 'Video analysis in progress - Searching good frame to process'
+        : `Images analysis in progress (${remainingAnalysis} remaining) - Searching squares`,
     )
 
     if (analysis.type !== 'box-video') {
@@ -344,6 +346,13 @@ export function useImageAnalyzer (): ImageAnalyzer {
       if (!hasAnalysisToProcess) {
         setCurrentAnalysis(update)
       }
+    },
+    removeAnalysis: analysisId => {
+      if (currentAnalysis?.id === analysisId && !currentAnalysis?.done) {
+        return
+      }
+
+      setAnalyses(aa => aa.filter(a => a.id !== analysisId))
     },
   }
 }

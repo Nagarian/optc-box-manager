@@ -31,6 +31,7 @@ import { ReactComponent as Edit } from './edit.svg'
 import { ReactComponent as Evolve } from './evolve.svg'
 import { ReactComponent as FilterSort } from './filtersort.svg'
 import { ReactComponent as GatherIsland } from './gather-island.svg'
+import { ReactComponent as Hide } from './hide.svg'
 import { ReactComponent as ImageAnalyzer } from './image-analyzer.svg'
 import InkSvg, { ReactComponent as Ink } from './ink.svg'
 import LevelSvg, { ReactComponent as Level } from './level.svg'
@@ -50,6 +51,7 @@ import { ReactComponent as SaveSearch } from './savesearch.svg'
 import { ReactComponent as Search } from './search.svg'
 import { ReactComponent as Settings } from './settings.svg'
 import { ReactComponent as Share } from './share.svg'
+import { ReactComponent as Show } from './show.svg'
 import { ReactComponent as SkillBook } from './skillbook.svg'
 import SpecialLvl from './special.png'
 import SpecialSvg, { ReactComponent as Special } from './special.svg'
@@ -119,6 +121,7 @@ export const EditIcon = BaseSvg(Edit)
 export const EvolveIcon = BaseSvg(Evolve)
 export const FilterSortIcon = BaseSvg(FilterSort)
 export const GatherIslandIcon = BaseSvg(GatherIsland)
+export const HideIcon = BaseSvg(Hide)
 export const ImageAnalyzerIcon = BaseSvg(ImageAnalyzer)
 export const InkIcon = BaseSvg(Ink)
 InkIcon.defaultProps = {
@@ -153,6 +156,7 @@ export const SaveSearchIcon = BaseSvg(SaveSearch)
 export const SettingsIcon = BaseSvg(Settings)
 export const SearchIcon = BaseSvg(Search)
 export const ShareIcon = BaseSvg(Share)
+export const ShowIcon = BaseSvg(Show)
 export const SkillBookIcon = BaseSvg(SkillBook)
 export const SugoPullIcon = BaseSvg(SugoPull)
 export const SupportIcon = BaseSvg(Support)
