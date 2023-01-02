@@ -126,9 +126,7 @@ function App () {
 
       {displayedPanel === 'add' && (
         <Add
-          units={unitDatabase.filter(
-            unit => !userBox.some(uu => uu.unit.id === unit.id),
-          )}
+          units={unitDatabase}
           onCancel={closePanel}
           onSubmit={addSelectedUnits}
         />
