@@ -165,6 +165,20 @@ function fixupFlags (
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
+function fixupDropLocation (
+  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("models/old-units").ExtendedUnit[] */ units,
+) {
+  return {
+    ...unit,
+    dropLocations: unit.evolutionMap.map(id => units.find(u => u.id === id)).find(u => u?.stars === 6)
+      ? ['legend', ...unit.dropLocations]
+      : unit.dropLocations,
+  }
+}
+
+/** @return { import("models/old-units").ExtendedUnit } */
 function fixupSpecificIssue (
   /** @type import("models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
@@ -326,6 +340,7 @@ module.exports = {
   fixupImages,
   fixupEvolution,
   fixupFlags,
+  fixupDropLocation,
   fixupSpecificIssue,
   removeProp,
 }

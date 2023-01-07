@@ -348,6 +348,7 @@ export const ExtendedDropKeys = [
   'arena',
 
   'special',
+  'legend',
 ] as const
 export type ExtendedDrop = typeof ExtendedDropKeys[number]
 

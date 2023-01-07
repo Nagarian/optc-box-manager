@@ -77,7 +77,8 @@
         "raid",
         "coliseum",
         "arena",
-        "special"
+        "special",
+        "legend"
       ],
       "type": "string"
     },
