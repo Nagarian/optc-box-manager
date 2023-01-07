@@ -45,9 +45,9 @@ export default function SearchPanel ({
   return (
     <>
       <ResultList {...rest} ref={pageScrollRef}>
-        {filtered.slice(...slice).map(unit => (
+        {filtered.slice(...slice).map((unit, i) => (
           <CharacterBox
-            key={unit.id}
+            key={`${unit.id}-${i}`}
             unit={unit}
             size={size}
             onClick={onUnitClick}
@@ -57,6 +57,7 @@ export default function SearchPanel ({
         {!!onAdd && (
           <Button
             onClick={onAdd}
+            title="Add units"
             icon={AddIcon}
             size="1"
             alignSelf="center"
