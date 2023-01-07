@@ -153,6 +153,7 @@ export default function Add ({
           unitOnly
           onCancel={() => setShowFilterSort(false)}
           search={search}
+          resetSaveKey={saveKey}
           onSubmit={s => {
             setSearch(s)
             setShowFilterSort(false)

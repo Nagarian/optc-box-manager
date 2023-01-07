@@ -15,6 +15,8 @@ import { useEffect, useRef, useState } from 'react'
 
 type SearchCollectionItemProps = {
   search: SavedSearch
+  showReseter: boolean
+  allowDelete: boolean
   isCurrentReseter: boolean
   onUpdate: (search: SavedSearch) => void
   setAsReseter: (search: SavedSearch | undefined) => void
@@ -23,6 +25,8 @@ type SearchCollectionItemProps = {
 }
 export function SearchCollectionItem ({
   search,
+  showReseter,
+  allowDelete,
   isCurrentReseter,
   onUpdate,
   setAsReseter,
@@ -46,7 +50,12 @@ export function SearchCollectionItem ({
     <>
       <Panel>
         {!editTitle && (
-          <Text flex="1" onClick={() => setEditTitle(true)}>
+          <Text
+            flex="1"
+            fontSize={isCurrentReseter ? 2 : undefined}
+            fontStyle={isCurrentReseter ? 'italic' : undefined}
+            onClick={() => setEditTitle(true)}
+          >
             {search.name}
           </Text>
         )}
@@ -70,17 +79,22 @@ export function SearchCollectionItem ({
           icon={DeleteIcon}
           title="Delete"
           onClick={() => setShowConfirmation(true)}
-          disabled={isCurrentReseter}
+          disabled={!allowDelete}
         />
-        <Button
-          icon={isCurrentReseter ? ResetRemoveIcon : ResetApplyIcon}
-          title={
-            isCurrentReseter
-              ? 'Remove from Custom Reset'
-              : 'Set as Custom Reset'
-          }
-          onClick={() => setAsReseter(isCurrentReseter ? undefined : search)}
-        />
+
+        {showReseter && (
+          <Button
+            variant={isCurrentReseter ? 'secondary' : 'primary'}
+            icon={isCurrentReseter ? ResetRemoveIcon : ResetApplyIcon}
+            title={
+              isCurrentReseter
+                ? 'Remove from Custom Reset'
+                : 'Set as Custom Reset'
+            }
+            onClick={() => setAsReseter(isCurrentReseter ? undefined : search)}
+          />
+        )}
+
         <Button
           icon={SaveSearchIcon}
           title="Apply"

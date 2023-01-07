@@ -22,12 +22,14 @@ import { EmptySearch } from 'hooks/useSearch'
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
 type FilterSortProps = {
+  resetSaveKey?: string
   onCancel: () => void
   onSubmit: (search: Search) => void
   search: Search
   unitOnly?: boolean
 }
 export default function FilterSort ({
+  resetSaveKey,
   search,
   unitOnly = false,
   onCancel,
@@ -63,7 +65,7 @@ export default function FilterSort ({
     setDisplayer(search.displayer)
   }
 
-  const { reseter, searches } = useStoredSearches()
+  const { reseter, searches } = useStoredSearches(resetSaveKey)
 
   useSyncer(userUnitFilter, sorts, displayer, sync => {
     if (!sync.some(Boolean)) {
@@ -190,6 +192,7 @@ export default function FilterSort ({
       </Box>
       {showSaveSearch && (
         <SaveSearch
+          saveKey={resetSaveKey}
           onClose={() => setShowSaveSearch(false)}
           search={computeNewSearch()}
           onSearchSelected={search => {

@@ -260,6 +260,7 @@ function SugoCleanerList ({
           unitOnly
           onCancel={() => setShowFilterSort(false)}
           search={search}
+          resetSaveKey="sugocleaner"
           onSubmit={s => {
             setSearch(s)
             setShowFilterSort(false)

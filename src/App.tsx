@@ -149,6 +149,7 @@ function App () {
       {displayedPanel === 'filters' && (
         <FilterSort
           onCancel={closePanel}
+          resetSaveKey="box"
           onSubmit={search => {
             setSearch(search)
             closePanel()

@@ -12,17 +12,19 @@ import { space, SpaceProps } from 'styled-system'
 import { SearchCollectionItem } from './components/SearchCollectionItem'
 
 export type SaveSearchProps = {
+  saveKey?: string
   search: Search
   onClose: () => void
   onSearchSelected: (search: Search) => void
 }
 export default function SaveSearch ({
+  saveKey,
   search,
   onClose,
   onSearchSelected,
 }: SaveSearchProps) {
-  const { searches, add, remove, setAsReseter, reseter, update } =
-    useStoredSearches()
+  const { searches, add, remove, setAsReseter, reseters, reseter, update } =
+    useStoredSearches(saveKey)
   const [searchName, setSearchName] = useState<string>('')
 
   const onNameValidation = () => {
@@ -57,9 +59,11 @@ export default function SaveSearch ({
               key={s.id}
               search={s}
               applySearch={s => onSearchSelected(s.search)}
-              isCurrentReseter={s.id === reseter?.id}
+              allowDelete={!reseters.includes(s.id)}
+              isCurrentReseter={reseter?.id === s.id}
               remove={remove}
-              setAsReseter={setAsReseter}
+              showReseter={!!saveKey}
+              setAsReseter={s => saveKey && setAsReseter(saveKey, s)}
               onUpdate={update}
             />
           ))}

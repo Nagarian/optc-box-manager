@@ -7,25 +7,33 @@ import {
 } from 'react'
 import { exportAsJson } from 'services/share'
 import { useStorage } from './useStorage'
-import { SavedSearch } from './useStoredSearches'
+import { DefaultSearches, SavedSearch } from './useStoredSearches'
 
 export type ThemeMode = 'auto' | 'light' | 'dark'
 export type GameVersion = 'global' | 'japan'
 
 export type UserSetting = {
+  settingVersion: number
   cottonCandiesMaximumLevel: {
     atk: number
     hp: number
     rcv: number
   }
   userSearches: SavedSearch[]
-  resetSearchId?: string
+  reseter: Record<string, string | undefined>
   themeMode: ThemeMode
   gameVersion: GameVersion
 }
 
 const defaultUserSettings: UserSetting = {
-  userSearches: [],
+  settingVersion: 1,
+  userSearches: DefaultSearches,
+  reseter: {
+    box: DefaultSearches[0].id,
+    addSettingSearch: DefaultSearches[1].id,
+    sugocleaner: DefaultSearches[2].id,
+    sugoCleanerAddSearch: DefaultSearches[3].id,
+  },
   cottonCandiesMaximumLevel: {
     atk: 0,
     hp: 0,
@@ -53,27 +61,32 @@ export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
   {},
 )
 
-function migration (value: any): UserSetting {
-  if (value.is200cc !== undefined) {
-    return {
+function migration (initial: any): UserSetting {
+  let updated = initial
+  if (initial.settingVersion === undefined) {
+    updated = {
       ...defaultUserSettings,
-      ...value,
-      is200cc: undefined,
+      ...initial,
     }
   }
 
-  if (!value.themeMode) {
-    return {
-      ...defaultUserSettings,
-      ...value,
+  if (initial.resetSearchId) {
+    updated.reseter.box = initial.resetSearchId
+    delete initial.resetSearchId
+  }
+
+  if (updated.settingVersion === 1) {
+    updated.settingVersion = 2
+    if (
+      !updated.userSearches.find(
+        (s: SavedSearch) => s.id === DefaultSearches[0].id,
+      )
+    ) {
+      updated.userSearches = [...DefaultSearches, ...initial.userSearches]
     }
   }
 
-  if (!value.gameVersion) {
-    value.gameVersion = 'global'
-  }
-
-  return value
+  return updated
 }
 
 export function UserSettingsProvider ({ children }: { children: ReactNode }) {
@@ -129,7 +142,7 @@ export function useUserSettings (): UserSettingEnhanced {
       if (!importedDb.themeMode) {
         throw new Error("That's not a valid Setting backup file")
       }
-      context.setUserSetting?.(importedDb)
+      context.setUserSetting?.(migration(importedDb))
     },
     export: async () => {
       if (!context.userSetting) {
