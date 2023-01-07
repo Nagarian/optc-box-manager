@@ -21,7 +21,8 @@ export default function SaveSearch ({
   onClose,
   onSearchSelected,
 }: SaveSearchProps) {
-  const { searches, add, remove, setAsReseter, reseter } = useStoredSearches()
+  const { searches, add, remove, setAsReseter, reseter, update } =
+    useStoredSearches()
   const [searchName, setSearchName] = useState<string>('')
 
   const onNameValidation = () => {
@@ -40,7 +41,7 @@ export default function SaveSearch ({
           value={searchName}
           onChange={e => setSearchName(e.target.value)}
           onFocus={e => e.target.select()}
-          onKeyPress={e => e.key === 'Enter' && onNameValidation()}
+          onKeyDown={e => e.key === 'Enter' && onNameValidation()}
         />
         <Button onClick={onNameValidation} icon={ConfirmIcon} />
       </Box>
@@ -49,16 +50,19 @@ export default function SaveSearch ({
       <SubTitle marginBottom="2">Load your saved searches</SubTitle>
 
       <Box display="flex" flexDirection="column" overflowY="auto">
-        {searches.map(s => (
-          <SearchCollectionItem
-            key={s.id}
-            search={s}
-            applySearch={s => onSearchSelected(s.search)}
-            isCurrentReseter={s.id === reseter?.id}
-            remove={remove}
-            setAsReseter={setAsReseter}
-          />
-        ))}
+        {[...searches]
+          .sort((s1, s2) => s1.name.localeCompare(s2.name))
+          .map(s => (
+            <SearchCollectionItem
+              key={s.id}
+              search={s}
+              applySearch={s => onSearchSelected(s.search)}
+              isCurrentReseter={s.id === reseter?.id}
+              remove={remove}
+              setAsReseter={setAsReseter}
+              onUpdate={update}
+            />
+          ))}
       </Box>
     </Popup>
   )

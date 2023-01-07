@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
+import { TextInput } from 'components/forms/TextInput'
 import {
   DeleteIcon,
   ResetApplyIcon,
@@ -10,11 +11,12 @@ import {
 import Popup from 'components/Popup'
 import { Text } from 'components/Title'
 import { SavedSearch } from 'hooks/useStoredSearches'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type SearchCollectionItemProps = {
   search: SavedSearch
   isCurrentReseter: boolean
+  onUpdate: (search: SavedSearch) => void
   setAsReseter: (search: SavedSearch | undefined) => void
   applySearch: (search: SavedSearch) => void
   remove: (search: SavedSearch) => void
@@ -22,15 +24,47 @@ type SearchCollectionItemProps = {
 export function SearchCollectionItem ({
   search,
   isCurrentReseter,
+  onUpdate,
   setAsReseter,
   applySearch,
   remove,
 }: SearchCollectionItemProps) {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+  const [editTitle, setEditTitle] = useState<boolean>(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const validate = (name: string) => {
+    name && onUpdate({ ...search, name })
+    setEditTitle(false)
+  }
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [editTitle])
+
   return (
     <>
       <Panel>
-        <Text flex="1">{search.name}</Text>
+        {!editTitle && (
+          <Text flex="1" onClick={() => setEditTitle(true)}>
+            {search.name}
+          </Text>
+        )}
+
+        {editTitle && (
+          <TextInput
+            ref={inputRef}
+            type="text"
+            flex="1"
+            placeholder="Search name (i.e. : Cotton Candy not maxed, ...)"
+            defaultValue={search.name}
+            onFocus={e => e.target.select()}
+            onKeyDown={e =>
+              e.key === 'Enter' && validate(e.currentTarget.value)
+            }
+            onBlur={e => validate(e.target.value)}
+          />
+        )}
 
         <Button
           icon={DeleteIcon}
