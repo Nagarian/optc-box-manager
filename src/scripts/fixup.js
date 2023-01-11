@@ -278,16 +278,11 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 3796) {
+  // @ts-ignore
+  if (unit.detail.limit?.[0]?.Name && unit.detail.potential?.length === 0) {
     // @ts-ignore
-    if (unit.detail.limit[0].Name) {
-      // @ts-ignore
-      unit.detail.potential = unit.detail.limit
-      delete unit.detail.limit
-      delete unit.detail.potential
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
+    unit.detail.potential = unit.detail.limit
+    unit.detail.limit = []
   }
 
   if (unit.id === 3788) {
