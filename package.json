@@ -26,7 +26,7 @@
     "rehype-raw": "^6.1.1",
     "resize-observer-polyfill": "^1.5.1",
     "styled-system": "^5.1.5",
-    "typescript": "^4.9.4",
+    "typescript": "^4.9.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
