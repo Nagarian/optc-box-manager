@@ -117,7 +117,7 @@ const fppSizeMatrix: InitialSizeMatrix = {
 }
 
 function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
-  self.importScripts(`${process.env.PUBLIC_URL}/opencv-4.6.0.js`)
+  self.importScripts(`${process.env.PUBLIC_URL}/opencv-4.7.0.js`)
   return new Promise((resolve, reject) => {
     if (cv.Mat) {
       resolve()
