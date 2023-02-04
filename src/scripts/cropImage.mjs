@@ -38,10 +38,10 @@ async function retrievePictures (version) {
 
   const dirCont = await getFiles(`./src/optcdb/api/images/thumbnail/${version}`)
   return dirCont
-    .filter(file => file.match(/.*\\\d{4}\.(png?)/ig))
+    .filter(file => file.match(/.*(\\|\/)\d{4}\.(png?)/ig))
     .map(file => ({
       path: file,
-      id: parseInt(/.*\\(?<charid>\d{4})\.(png?)/ig.exec(file).groups.charid),
+      id: parseInt(/.*(\\|\/)(?<charid>\d{4})\.(png?)/ig.exec(file).groups.charid),
     }))
 }
 
