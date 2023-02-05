@@ -25,7 +25,6 @@ import {
   BySearchBoxCriteria,
   BySearchBoxInput,
 } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
-import { byId } from 'pages/FilterSort/components/Sorts/Units/ByCommon'
 import GatherIsland from 'pages/GatherIsland'
 import MyUserBox from 'pages/MyUserBox'
 import Settings from 'pages/Settings'
@@ -86,7 +85,7 @@ function App () {
   const closePanel = () => setDisplayedPanel(undefined)
 
   const addSelectedUnits = (units: ExtendedUnit[]) => {
-    add(...units.sort(byId))
+    add(...units)
     closePanel()
   }
 
