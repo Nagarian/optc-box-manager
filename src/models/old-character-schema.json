@@ -952,6 +952,11 @@
     "UnitFlags": {
       "additionalProperties": false,
       "properties": {
+        "annilrr": {
+          "const": 1,
+          "description": "Anniversary limited rare recruit",
+          "type": "number"
+        },
         "fnonly": {
           "const": 1,
           "description": "Fortnight only",
