@@ -308,7 +308,9 @@ export type UnitFlags = {
   pflrr: 1 | undefined
   /** Super limited rare recruit */
   superlrr: 1 | undefined
-
+  /** Anniversary limited rare recruit */
+  annilrr: 1 | undefined
+  
   /** Fortnight only */
   fnonly: 1 | undefined
   /** Raid only */
