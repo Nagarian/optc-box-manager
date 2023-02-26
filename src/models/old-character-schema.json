@@ -636,6 +636,15 @@
                 },
                 "combined": {
                   "type": "string"
+                },
+                "llbcharacter1": {
+                  "type": "string"
+                },
+                "llbcharacter2": {
+                  "type": "string"
+                },
+                "llbcombined": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -1107,6 +1116,15 @@
                       "type": "string"
                     },
                     "combined": {
+                      "type": "string"
+                    },
+                    "llbcharacter1": {
+                      "type": "string"
+                    },
+                    "llbcharacter2": {
+                      "type": "string"
+                    },
+                    "llbcombined": {
                       "type": "string"
                     }
                   },
