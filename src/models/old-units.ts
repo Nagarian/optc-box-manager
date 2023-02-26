@@ -186,6 +186,9 @@ export type UnitCaptain =
       character1: string
       character2: string
       combined: string
+      llbcharacter1?: string
+      llbcharacter2?: string
+      llbcombined?: string
     }
   | {
       base: string
@@ -310,7 +313,7 @@ export type UnitFlags = {
   superlrr: 1 | undefined
   /** Anniversary limited rare recruit */
   annilrr: 1 | undefined
-  
+
   /** Fortnight only */
   fnonly: 1 | undefined
   /** Raid only */
