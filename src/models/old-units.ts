@@ -1,5 +1,5 @@
 export const UnitTypes = ['STR', 'DEX', 'QCK', 'PSY', 'INT'] as const
-export type UnitType = typeof UnitTypes[number]
+export type UnitType = (typeof UnitTypes)[number]
 
 export const UnitClasses = [
   'Fighter',
@@ -11,13 +11,13 @@ export const UnitClasses = [
   'Powerhouse',
   'Driven',
 ] as const
-export type UnitClass = typeof UnitClasses[number] | 'Evolver' | 'Booster'
+export type UnitClass = (typeof UnitClasses)[number] | 'Evolver' | 'Booster'
 
 export const Rarity = [1, 2, 3, 4, '4+', 5, '5+', 6, '6+'] as const
-export type UnitStar = typeof Rarity[number]
+export type UnitStar = (typeof Rarity)[number]
 
 export const UnitPirateFestStyles = ['ATK', 'DEF', 'RCV', 'DBF', 'SPT'] as const
-export type UnitPirateFestStyle = typeof UnitPirateFestStyles[number]
+export type UnitPirateFestStyle = (typeof UnitPirateFestStyles)[number]
 
 export type SingleUnitClass = UnitClass | UnitClass[]
 
@@ -63,6 +63,12 @@ export type BaseUnit = {
     rcv: number[]
     sailors: number[]
     captains: number[]
+  }
+  llimitStats: {
+    sailors1: number[]
+    sailors2: number[]
+    captains: number[]
+    specials: number[]
   }
   pirateFest: {
     class?: UnitPirateFestStyle | ''
@@ -112,7 +118,7 @@ export const Potentials = [
   'Last Tap / Super Tandem',
 ] as const
 
-export type PotentialKey = typeof Potentials[number]
+export type PotentialKey = (typeof Potentials)[number]
 
 export const PowerSockets = [
   'Damage Reduction',
@@ -126,7 +132,7 @@ export const PowerSockets = [
   'Map Damage Resistance',
   'Resilience',
 ] as const
-export type PowerSocketKey = typeof PowerSockets[number]
+export type PowerSocketKey = (typeof PowerSockets)[number]
 
 export type UnitPotential = {
   Name: PotentialKey
@@ -366,7 +372,7 @@ export const ExtendedDropKeys = [
   'special',
   'legend',
 ] as const
-export type ExtendedDrop = typeof ExtendedDropKeys[number]
+export type ExtendedDrop = (typeof ExtendedDropKeys)[number]
 
 export type ExtendedUnit = BaseUnit & {
   id: number

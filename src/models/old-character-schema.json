@@ -309,6 +309,42 @@
             "null"
           ]
         },
+        "llimitStats": {
+          "additionalProperties": false,
+          "properties": {
+            "captains": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "sailors1": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "sailors2": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "specials": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "sailors1",
+            "sailors2",
+            "captains",
+            "specials"
+          ],
+          "type": "object"
+        },
         "maxATK": {
           "type": [
             "number",
@@ -487,6 +523,7 @@
         "llbmaxATK",
         "llbmaxHP",
         "llbmaxRCV",
+        "llimitStats",
         "maxATK",
         "maxEXP",
         "maxHP",
