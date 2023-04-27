@@ -720,6 +720,21 @@
                 },
                 "llblevel1": {
                   "type": "string"
+                },
+                "llblevel2": {
+                  "type": "string"
+                },
+                "llblevel3": {
+                  "type": "string"
+                },
+                "llblevel4": {
+                  "type": "string"
+                },
+                "llblevel5": {
+                  "type": "string"
+                },
+                "llblevel6": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -1200,6 +1215,21 @@
                       "type": "string"
                     },
                     "llblevel1": {
+                      "type": "string"
+                    },
+                    "llblevel2": {
+                      "type": "string"
+                    },
+                    "llblevel3": {
+                      "type": "string"
+                    },
+                    "llblevel4": {
+                      "type": "string"
+                    },
+                    "llblevel5": {
+                      "type": "string"
+                    },
+                    "llblevel6": {
                       "type": "string"
                     }
                   },
