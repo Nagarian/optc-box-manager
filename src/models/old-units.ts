@@ -206,6 +206,11 @@ export type UnitCaptain =
       level6?: string
       llbbase?: string
       llblevel1?: string
+      llblevel2?: string
+      llblevel3?: string
+      llblevel4?: string
+      llblevel5?: string
+      llblevel6?: string
     }
 
 export type UnitSailor =
