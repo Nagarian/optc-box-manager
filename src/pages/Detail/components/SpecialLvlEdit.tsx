@@ -33,7 +33,7 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
     return []
   }
 
-  if ('base' in special) {
+  if ('llbbase' in special) {
     return MultiStageSpecial(special.llbbase)
   }
 
