@@ -170,6 +170,10 @@ export type BaseUnitSpecial =
       global: string
       japan: string
     }
+  | {
+      base: string
+      combined: string
+    }
 
 export type UnitSpecial =
   | BaseUnitSpecial

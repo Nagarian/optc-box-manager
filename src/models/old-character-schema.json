@@ -57,6 +57,22 @@
             "japan"
           ],
           "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "base": {
+              "type": "string"
+            },
+            "combined": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "base",
+            "combined"
+          ],
+          "type": "object"
         }
       ]
     },
