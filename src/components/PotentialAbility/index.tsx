@@ -4,7 +4,6 @@ import { PotentialKey } from 'models/units'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
 import NoIcon from './images/panel_limitbreak_001.png'
-import ImageFrame from './images/potentialskill_iconframe.png'
 import ImageSkill01 from './images/potentialskill_icon_s_001.png'
 import ImageSkill02 from './images/potentialskill_icon_s_002.png'
 import ImageSkill03 from './images/potentialskill_icon_s_003.png'
@@ -25,8 +24,10 @@ import ImageSkill21 from './images/potentialskill_icon_s_021.png'
 import ImageSkill22 from './images/potentialskill_icon_s_022.png'
 import ImageSkill24 from './images/potentialskill_icon_s_024.png'
 import ImageSkill25 from './images/potentialskill_icon_s_025.png'
+import ImageSkill26 from './images/potentialskill_icon_s_026.png'
 import ImageSkill100 from './images/potentialskill_icon_s_100.png'
 import ImageSkill101 from './images/potentialskill_icon_s_101.png'
+import ImageFrame from './images/potentialskill_iconframe.png'
 
 export function PotentialAbilityToImage (type: PotentialKey) {
   switch (type) {
@@ -74,6 +75,8 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill25
     case 'Last Tap / Super Tandem':
       return ImageSkill101
+    case 'Triple Special Activation':
+      return ImageSkill26
     default:
       return NoIcon
   }

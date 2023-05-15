@@ -116,6 +116,7 @@ export const Potentials = [
   'Last Tap',
   'Super Tandem',
   'Last Tap / Super Tandem',
+  'Triple Special Activation',
 ] as const
 
 export type PotentialKey = (typeof Potentials)[number]

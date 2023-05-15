@@ -611,8 +611,9 @@
         "Nutrition/Reduce Hunger stacks",
         "Last Tap",
         "Super Tandem",
-        "Last Tap / Super Tandem"
-      ],
+        "Last Tap / Super Tandem",
+        "Triple Special Activation"
+    ],
       "type": "string"
     },
     "SingleUnitClass": {
