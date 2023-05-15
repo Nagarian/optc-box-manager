@@ -3,7 +3,7 @@ name: OPTC-DB dependency checker
 on:
   push:
     branches:
-      - dependabot/submodules/src/optcdb-*
+      - dependabot/*
       - feature/*
 
 jobs:
