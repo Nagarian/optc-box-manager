@@ -22,7 +22,8 @@ function validate (db) {
   console.log('Errors by unit')
   const errorsByCharacters = new Set(errors.map(x => x.id))
   for (const id of errorsByCharacters) {
-    console.error(`#${id} "${db.find(u => u.id === id)?.name}"`)
+    const characterInError = db.find(u => u.id === id)
+    console.error(`#${id} "${characterInError?.name}"`)
 
     const matching = errors
       .filter(e => e.id === id)
@@ -33,6 +34,12 @@ function validate (db) {
 
       for (const error of matching.filter(m => m.path === path)) {
         console.error(`    - ${error.message}`)
+
+        let obj = characterInError
+        for (const walkthrough of error.path.split('/').filter(p => !!p)) {
+          obj = obj[walkthrough]
+        }
+        console.error('      Found values: ', obj)
       }
     }
   }
