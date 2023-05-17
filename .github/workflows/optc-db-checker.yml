@@ -3,8 +3,8 @@ name: OPTC-DB dependency checker
 on:
   push:
     branches:
-      - dependabot/*
-      - feature/*
+      - dependabot/**
+      - feature/**
 
 jobs:
   build-test-check-db:
