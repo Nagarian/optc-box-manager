@@ -25,6 +25,7 @@ import ImageSkill22 from './images/potentialskill_icon_s_022.png'
 import ImageSkill24 from './images/potentialskill_icon_s_024.png'
 import ImageSkill25 from './images/potentialskill_icon_s_025.png'
 import ImageSkill26 from './images/potentialskill_icon_s_026.png'
+import ImageSkill27 from './images/potentialskill_icon_s_027.png'
 import ImageSkill100 from './images/potentialskill_icon_s_100.png'
 import ImageSkill101 from './images/potentialskill_icon_s_101.png'
 import ImageFrame from './images/potentialskill_iconframe.png'
@@ -77,6 +78,8 @@ export function PotentialAbilityToImage (type: PotentialKey) {
       return ImageSkill101
     case 'Triple Special Activation':
       return ImageSkill26
+    case 'Rush':
+      return ImageSkill27
     default:
       return NoIcon
   }
