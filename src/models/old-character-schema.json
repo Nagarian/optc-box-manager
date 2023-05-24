@@ -612,8 +612,9 @@
         "Last Tap",
         "Super Tandem",
         "Last Tap / Super Tandem",
-        "Triple Special Activation"
-    ],
+        "Triple Special Activation",
+        "Rush"
+      ],
       "type": "string"
     },
     "SingleUnitClass": {
@@ -829,6 +830,9 @@
         },
         "potentialNotes": {
           "type": "string"
+        },
+        "rush": {
+          "$ref": "#/definitions/UnitRush"
         },
         "sailor": {
           "anyOf": [
@@ -1361,6 +1365,35 @@
       "required": [
         "Name",
         "description"
+      ],
+      "type": "object"
+    },
+    "UnitRush": {
+      "additionalProperties": false,
+      "properties": {
+        "characterCondition": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "description": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "stats": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "characterCondition",
+        "description",
+        "stats"
       ],
       "type": "object"
     },

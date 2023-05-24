@@ -107,6 +107,7 @@ export const Potentials = [
   'Super Tandem',
   'Last Tap / Super Tandem',
   'Triple Special Activation',
+  'Rush',
 ] as const
 
 export type PotentialKey = (typeof Potentials)[number]
@@ -249,6 +250,12 @@ export type UnitLevelLimitBreak = null | Partial<{
   sailor: UnitSailor
 }>
 
+export type UnitRush = {
+  characterCondition: string[]
+  description: string[]
+  stats: string[]
+}
+
 export type UnitDetail = {
   captain: UnitCaptain
   captainNotes?: string
@@ -266,6 +273,7 @@ export type UnitDetail = {
   lastTapNotes?: string
   superTandem?: UnitSuperTandem
   superTandemNotes?: string
+  rush?: UnitRush
   support: UnitSupport[]
   supportNotes?: string
   festAbility: UnitFestAbility[]
