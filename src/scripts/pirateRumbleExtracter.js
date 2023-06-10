@@ -324,7 +324,15 @@ function applyNewPirateRumble (
     return unit
   }
 
+  if (!unit.pirateFest) {
+    unit.pirateFest = {}
+  }
+
   if (Array.isArray(newRumble)) {
+    if (!unit.pirateFest2) {
+      unit.pirateFest2 = {}
+    }
+
     unit.pirateFest.class = newRumble[0].stats.rumbleType
     unit.pirateFest.DEF = newRumble[0].stats.def
     unit.pirateFest.SPD = newRumble[0].stats.spd
