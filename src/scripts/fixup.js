@@ -108,6 +108,35 @@ function fixupVersusUnit (
 }
 
 /** @return { import("models/old-units").ExtendedUnit } */
+function fixupVsLastTapSuperTandem (
+  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("models/old-units").ExtendedUnit[] */ units,
+) {
+  if ((unit.detail.potential?.length ?? 0) > 3 &&
+    unit.detail.potential?.find(p => p.Name === 'Last Tap') &&
+    unit.detail.potential?.find(p => p.Name === 'Super Tandem')
+  ) {
+    unit.detail.potential = [
+      // @ts-ignore
+      ...unit.detail.potential?.slice(0, 2),
+      {
+        Name: 'Last Tap / Super Tandem',
+        description: [
+          'Last Tap Ability Lv.1 / Super Tandem Ability Lv.1',
+          'Last Tap Ability Lv.2 / Super Tandem Ability Lv.2',
+          'Last Tap Ability Lv.3 / Super Tandem Ability Lv.3',
+          'Last Tap Ability Lv.4 / Super Tandem Ability Lv.4',
+          'Last Tap Ability Lv.5 / Super Tandem Ability Lv.5',
+        ],
+      },
+    ]
+  }
+
+  return unit
+}
+
+/** @return { import("models/old-units").ExtendedUnit } */
 function fixupImages (
   /** @type import("models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
@@ -299,27 +328,6 @@ function fixupSpecificIssue (
     unit.detail.limit = []
   }
 
-  if (unit.id === 3788) {
-    if (unit.detail.potential?.length ?? 0 > 3) {
-      unit.detail.potential = [
-        // @ts-ignore
-        ...unit.detail.potential?.slice(0, 2),
-        {
-          Name: 'Last Tap / Super Tandem',
-          description: [
-            'Last Tap Ability Lv.1 / Super Tandem Ability Lv.1',
-            'Last Tap Ability Lv.2 / Super Tandem Ability Lv.2',
-            'Last Tap Ability Lv.3 / Super Tandem Ability Lv.3',
-            'Last Tap Ability Lv.4 / Super Tandem Ability Lv.4',
-            'Last Tap Ability Lv.5 / Super Tandem Ability Lv.5',
-          ],
-        },
-      ]
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
-  }
-
   return unit
 }
 
@@ -337,6 +345,7 @@ function removeProp (
 module.exports = {
   fixupDetail,
   fixupVersusUnit,
+  fixupVsLastTapSuperTandem,
   fixupImages,
   fixupEvolution,
   fixupFlags,
