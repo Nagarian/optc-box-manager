@@ -2,79 +2,27 @@
   "$ref": "#/definitions/ExtendedUnit",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "BaseUnitSpecial": {
-      "anyOf": [
-        {
-          "type": "string"
+    "DualUnitSpecial": {
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
         },
-        {
-          "items": {
-            "additionalProperties": false,
-            "properties": {
-              "cooldown": {
-                "$ref": "#/definitions/UnitCooldown"
-              },
-              "description": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "cooldown",
-              "description"
-            ],
-            "type": "object"
-          },
-          "type": "array"
+        "combined": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "character1": {
-              "type": "string"
-            },
-            "character2": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "character1",
-            "character2"
-          ],
-          "type": "object"
+        "llbbase": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "global": {
-              "type": "string"
-            },
-            "japan": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "global",
-            "japan"
-          ],
-          "type": "object"
-        },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "base": {
-              "type": "string"
-            },
-            "combined": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "base",
-            "combined"
-          ],
-          "type": "object"
+        "llbcombined": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
         }
-      ]
+      },
+      "required": [
+        "base",
+        "combined"
+      ],
+      "type": "object"
     },
     "ExtendedDrop": {
       "enum": [
@@ -576,6 +524,24 @@
       ],
       "type": "object"
     },
+    "LLBSimpleUnitSpecial": {
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        },
+        "llbbase": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        },
+        "llbcombined": {
+          "not": {}
+        }
+      },
+      "required": [
+        "base"
+      ],
+      "type": "object"
+    },
     "LimitBreak": {
       "additionalProperties": false,
       "properties": {
@@ -616,6 +582,32 @@
         "Rush"
       ],
       "type": "string"
+    },
+    "SimpleUnitSpecial": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cooldown": {
+                "$ref": "#/definitions/UnitCooldown"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "cooldown",
+              "description"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      ]
     },
     "SingleUnitClass": {
       "anyOf": [
@@ -1332,7 +1324,7 @@
               ]
             },
             "special": {
-              "$ref": "#/definitions/BaseUnitSpecial"
+              "$ref": "#/definitions/UnitSpecial"
             }
           },
           "type": "object"
@@ -1400,23 +1392,16 @@
     "UnitSpecial": {
       "anyOf": [
         {
-          "$ref": "#/definitions/BaseUnitSpecial"
+          "$ref": "#/definitions/SimpleUnitSpecial"
         },
         {
-          "additionalProperties": false,
-          "properties": {
-            "base": {
-              "$ref": "#/definitions/BaseUnitSpecial"
-            },
-            "llbbase": {
-              "$ref": "#/definitions/BaseUnitSpecial"
-            }
-          },
-          "required": [
-            "base",
-            "llbbase"
-          ],
-          "type": "object"
+          "$ref": "#/definitions/LLBSimpleUnitSpecial"
+        },
+        {
+          "$ref": "#/definitions/DualUnitSpecial"
+        },
+        {
+          "$ref": "#/definitions/VersusUnitSpecial"
         }
       ]
     },
@@ -1510,6 +1495,28 @@
         "INT"
       ],
       "type": "string"
+    },
+    "VersusUnitSpecial": {
+      "additionalProperties": false,
+      "properties": {
+        "character1": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        },
+        "character2": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        },
+        "llbcharacter1": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        },
+        "llbcharacter2": {
+          "$ref": "#/definitions/SimpleUnitSpecial"
+        }
+      },
+      "required": [
+        "character1",
+        "character2"
+      ],
+      "type": "object"
     }
   }
 }

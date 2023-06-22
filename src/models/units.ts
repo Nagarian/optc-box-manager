@@ -158,28 +158,38 @@ export type UnitFestGPBurst = {
 
 export type UnitCooldown = [number, number]
 
-export type BaseUnitSpecial =
+export type SimpleUnitSpecial =
   | string
   | {
       cooldown: UnitCooldown
       description: string
     }[]
-  | {
-      character1: string
-      character2: string
-    }
-  | {
-      global: string
-      japan: string
-    }
-  | {
-      base: string
-      combined: string
-    }
+
+export type LLBSimpleUnitSpecial = {
+  base: SimpleUnitSpecial
+  llbbase?: SimpleUnitSpecial
+  llbcombined: undefined
+}
+
+export type VersusUnitSpecial = {
+  character1: SimpleUnitSpecial
+  llbcharacter1?: SimpleUnitSpecial
+  character2: SimpleUnitSpecial
+  llbcharacter2?: SimpleUnitSpecial
+}
+
+export type DualUnitSpecial = {
+  base: SimpleUnitSpecial
+  llbbase?: SimpleUnitSpecial
+  combined: SimpleUnitSpecial
+  llbcombined?: SimpleUnitSpecial
+}
 
 export type UnitSpecial =
-  | BaseUnitSpecial
-  | { base: BaseUnitSpecial; llbbase: BaseUnitSpecial }
+  | SimpleUnitSpecial
+  | LLBSimpleUnitSpecial
+  | DualUnitSpecial
+  | VersusUnitSpecial
 
 export type UnitCaptain =
   | string
@@ -246,7 +256,7 @@ export type UnitLevelLimitBreak = null | Partial<{
   rSpecial: boolean
   rResilience: true
   captain: UnitCaptain
-  special: BaseUnitSpecial
+  special: UnitSpecial
   sailor: UnitSailor
 }>
 
