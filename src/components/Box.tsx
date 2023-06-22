@@ -20,7 +20,7 @@ import {
   space,
   SpaceProps,
 } from 'styled-system'
-import { cleanStyledSystem, place, PlaceProps } from 'styles'
+import { cleanStyledSystem, gap, GapProps, place, PlaceProps } from 'styles'
 
 export type BoxProps = SpaceProps &
   LayoutProps &
@@ -31,7 +31,8 @@ export type BoxProps = SpaceProps &
   PositionProps &
   FlexboxProps &
   BorderProps &
-  PlaceProps
+  PlaceProps &
+  GapProps
 
 export type BoxStyledProps = StyledComponent<'div', BoxProps, any>
 
@@ -50,6 +51,7 @@ const Box: BoxStyledProps = styled(
     position,
     flexbox,
     place,
+    gap,
   ),
 )
 
