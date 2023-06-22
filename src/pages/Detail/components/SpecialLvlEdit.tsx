@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import { InputLabel } from '.'
 import DescriptionHighlighter from 'components/DescriptionHighlighter'
 import { SpecialLvlIcon } from 'components/Icon'
+import Box from 'components/Box'
 
 type SpecialLvlEditProps = {
   special?: UserUnitSpecial
@@ -14,40 +15,38 @@ type SpecialLvlEditProps = {
 }
 
 function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
+  if (typeof special === 'string') {
+    return [<DescriptionHighlighter value={special} />]
+  }
+
+  if (typeof special !== 'object') {
+    return []
+  }
+
   if (Array.isArray(special)) {
     return [
-      <ul>
+      <Box as="ul" display="grid" gridAutoFlow="row" gap="2">
         {special.map(({ description }, i) => (
           <li key={i}>
             <strong>Stage {i + 1}: </strong>
             <DescriptionHighlighter value={description} />
           </li>
         ))}
-      </ul>,
+      </Box>,
     ]
   }
 
-  if (typeof special === 'string') return [special]
-
-  if (typeof special !== 'object') {
-    return []
-  }
-
-  if ('llbbase' in special) {
-    return MultiStageSpecial(special.llbbase)
-  }
-
   return [
-    <ul>
+    <Box as="ul" display="grid" gridAutoFlow="row" gap="2">
       {Object.entries(special)
-        .filter(([key, value]) => typeof value === 'string')
+        .filter(([key, value]) => !!value)
         .map(([key, value], i) => (
           <li key={i}>
             <strong>{key}: </strong>
-            <DescriptionHighlighter value={value} />
+            {MultiStageSpecial(value!)}
           </li>
         ))}
-    </ul>,
+    </Box>,
   ]
 }
 
@@ -66,7 +65,7 @@ export default function SpecialLvlEdit ({
         value={lvl}
         max={lvlMax}
         name={detail.specialName}
-        descriptions={MultiStageSpecial(detail.special) as any}
+        descriptions={MultiStageSpecial(detail.special)}
       >
         {special.lvlMax > 1 && (
           <SpecialLevelInput
