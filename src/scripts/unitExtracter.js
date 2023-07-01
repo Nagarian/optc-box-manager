@@ -67,8 +67,8 @@ function DBFactory () {
   checkGloJapMapping(db)
 
   db = db.filter(unit =>
-    !unit.name.includes('Dual Unit') &&
-    !unit.name.includes('VS Unit'),
+    !unit.name.includes('⚐') &&
+    !unit.name.includes('⚔'),
   )
 
   db = db.concat(db
