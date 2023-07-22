@@ -271,13 +271,25 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 1413 || unit.id === 1816) {
+  if (unit.id === 2505) {
     // @ts-ignore
     if (unit.detail.special.level1) {
       // @ts-ignore
       unit.detail.special.llbbase = unit.detail.special.level1
       // @ts-ignore
       delete unit.detail.special.level1
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
+  }
+
+  if (unit.id === 1889) {
+    // @ts-ignore
+    if (unit.detail.special.llbase) {
+      // @ts-ignore
+      unit.detail.special.llbbase = unit.detail.special.llbase
+      // @ts-ignore
+      delete unit.detail.special.llbase
     } else {
       console.warn(`issue with unit ${unit.id} has been fixed`)
     }
@@ -290,18 +302,6 @@ function fixupSpecificIssue (
       unit.detail.captainNotes = unit.detail.captinNotes
       // @ts-ignore
       delete unit.detail.captinNotes
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
-  }
-
-  if (unit.id === 1751) {
-    // @ts-ignore
-    if (unit.detail.special.level1) {
-      // @ts-ignore
-      unit.detail.special.llbbase = unit.detail.special.level1
-      // @ts-ignore
-      delete unit.detail.special.level1
     } else {
       console.warn(`issue with unit ${unit.id} has been fixed`)
     }
