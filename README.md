@@ -25,7 +25,7 @@ To install the PWA to your phone/computer
 
 ## Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [ViteJS](https://vitejs.dev/).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
@@ -43,8 +43,16 @@ npx ts-json-schema-generator --path './optc-box-manager/src/models/old-units.ts'
 
 Follow <https://stackoverflow.com/questions/35127383/npm-http-server-with-ssl>
 
+```powershell
+$cert = New-SelfSignedCertificate -DnsName "localhost" -FriendlyName "Dev certicate localhost" -CertStoreLocation "cert:\LocalMachine\My"
+$pwd = ConvertTo-SecureString -String 'optc-box-manager-pwd' -Force -AsPlainText
+Export-PfxCertificate -Cert $cert -FilePath c:/git/optc-box-manager/cert.pfx -Password $pwd
+
+# then open Certificate manager and copy the certificate from "Personal certificate" to "Trusted certificate", then re-open navigator
+```
+
 ```bash
 npm run build
-# npx http-server ./build -S
-npx http-server -S -C cert.pem -K key.pem ./build
+# npx http-server ./dist -S
+npx http-server -S -C cert.pem -K key.pem ./dist
 ```

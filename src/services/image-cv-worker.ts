@@ -116,9 +116,12 @@ const fppSizeMatrix: InitialSizeMatrix = {
   characterSize: 172,
 }
 
-function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
-  self.importScripts(`${process.env.PUBLIC_URL}/opencv-4.7.0.js`)
+async function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
+  // lib has been modified to remove default export
+  const opencv = await import(/* @vite-ignore */`${import.meta.env.BASE_URL}/opencv-4.8.0.js`)
   return new Promise((resolve, reject) => {
+    // @ts-ignore
+    self.cv = opencv.cv()
     if (cv.Mat) {
       resolve()
       return
@@ -476,7 +479,8 @@ function extractBoxSquareFromRoi (
   boxSize: BoxSizeMatrix,
 ): SquareSize[] {
   const squaresToExtract: SquareSize[] = []
-  const threshold = boxSize.roi.y + boxSize.roi.height - (boxSize.characterSize * 0.6)
+  const threshold =
+    boxSize.roi.y + boxSize.roi.height - boxSize.characterSize * 0.6
   for (let yI = 0; yI < 5; yI++) {
     const y = boxSize.minH + boxSize.characterSize * yI
 

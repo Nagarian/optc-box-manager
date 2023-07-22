@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@emotion/react'
-import PWA from 'components/PWA'
 import { OptcDbProvider } from 'hooks/useOptcDb'
 import { useThemeMode } from 'hooks/useThemeMode'
 import { UserSettingsProvider } from 'hooks/useUserSettings'
@@ -31,7 +30,6 @@ function AppWrapper () {
       <DevMode>
         <App />
       </DevMode>
-      <PWA />
     </ThemeProvider>
   )
 }

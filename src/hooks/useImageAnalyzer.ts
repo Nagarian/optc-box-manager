@@ -5,6 +5,7 @@ import {
   CharacterFound,
   SquareSize,
 } from 'services/image-cv-worker'
+import ImageCVWorker from 'services/image-cv-worker?worker'
 import { useOptcDb } from './useOptcDb'
 import { GameVersion, useUserSettings } from './useUserSettings'
 
@@ -46,9 +47,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
   const { db } = useOptcDb()
 
   const initialize = useCallback(async () => {
-    const worker = new Worker(
-      new URL('services/image-cv-worker', import.meta.url),
-    )
+    const worker = new ImageCVWorker()
 
     worker.onmessage = ({ data }) => {
       // console.log('client received message', data)
@@ -362,8 +361,8 @@ async function loadCharacterImage (
 ): Promise<ImageData> {
   const url =
     gameVersion === 'global'
-      ? `${process.env.PUBLIC_URL}/characters/global-fixed-10x9.png`
-      : `${process.env.PUBLIC_URL}/characters/japan-10x9.png`
+      ? `${import.meta.env.BASE_URL}/characters/global-fixed-10x9.png`
+      : `${import.meta.env.BASE_URL}/characters/japan-10x9.png`
   const res = await fetch(url, { mode: 'cors' })
   const imgBlob = await res.blob()
   const img = await createImageBitmap(imgBlob, {
