@@ -32,18 +32,25 @@ export default defineConfig({
     svgrPlugin(),
     VitePWA({
       devOptions: {
-        enabled: true,
+        enabled: false,
         type: 'module',
       },
       injectRegister: 'inline',
       registerType: 'autoUpdate',
-      strategies: 'injectManifest',
-      injectManifest: {
-        maximumFileSizeToCacheInBytes: 10000000,
-        globPatterns: ['**/*.{js,css,html,png,svg}'],
+      // strategies: 'injectManifest',
+      // injectManifest: {
+      //   maximumFileSizeToCacheInBytes: 10000000,
+      //   globPatterns: ['**/*.{js,css,html,png,svg}'],
+      // },
+      // srcDir: 'src',
+      // filename: 'service-worker.ts',
+
+      strategies: 'generateSW',
+      workbox: {
+        maximumFileSizeToCacheInBytes: 50000000,
+        globPatterns: ['**/*.{js,css,json,html,png,svg}'],
       },
-      srcDir: 'src',
-      filename: 'service-worker.ts',
+
       manifest: {
         short_name: 'OPTC-BM',
         name: 'OPTC Box Manager',
