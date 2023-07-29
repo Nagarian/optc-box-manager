@@ -13,17 +13,9 @@ export function useThemeMode () {
     const handle = (result: MediaQueryListEvent) => {
       setRefresher(new Date().toString())
     }
-    try {
-      matcher.addEventListener('change', handle)
-    } catch (error) {
-      try {
-        matcher.addListener(handle)
-      } catch (error) {
-      }
-    }
+    matcher.addEventListener('change', handle)
 
     return () => matcher.removeEventListener?.('change', handle)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   let currentTheme = themeMode
