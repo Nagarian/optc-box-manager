@@ -8,10 +8,10 @@ const {
   flags,
   gamewith,
 } = require('./DBLoader')
-const { getDropLocations } = require('./dropExtracter')
+const { applyDropLocation } = require('./dropExtracter')
 const { getUnitThumbnail, getUnitFullPicture } = require('./image')
 const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupDropLocation, fixupVsLastTapSuperTandem } = require('./fixup')
+const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupVsLastTapSuperTandem } = require('./fixup')
 const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require('./glo-jap-remapper')
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
@@ -56,7 +56,7 @@ function DBFactory () {
           name: unit.families || undefined,
           id: getFamilyId(units, unit),
         },
-        dropLocations: getDropLocations(dbId, flags, EvolutionMap),
+        dropLocations: [],
         evolutionMap: EvolutionMap[dbId] ?? [dbId],
         aliases: aliases[dbId],
         gamewith: gamewith[unit.number] ?? undefined,
@@ -80,8 +80,8 @@ function DBFactory () {
     .map(fixupImages)
     .map(fixupEvolution)
     .map(fixupFlags)
-    .map(fixupDropLocation)
     .map(fixupVsLastTapSuperTandem)
+    .map(applyDropLocation)
     .map(applyNewPirateRumble)
 
   db.sort((u1, u2) => u1.id - u2.id)

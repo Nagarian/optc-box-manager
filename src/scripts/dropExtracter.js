@@ -53,9 +53,10 @@ const RookieIcons = {
 }
 
 const { drops, units } = require('./DBLoader')
+const { globalOnly } = require('./glo-jap-remapper')
 const { getUnitThumbnail } = require('./image')
 
-/** @type { ({ [key: string]: import('models/drops').EventDrop[] }) } */
+/** @type { ({ [key: string]: import('../models/drops').EventDrop[] }) } */
 const eventModules = {
   Fortnight: drops.Fortnight.map(fn => {
     const fnUnits = fn['All Difficulties'] ?? fn.Global ?? []
@@ -90,14 +91,14 @@ const eventModules = {
             name: key,
             icon: getUnitThumbnail(iconId),
             manual: value.filter(id => id < 0).map(id => 0 - id),
-            category: category,
+            category,
           }
         })
     })
     .filter(Boolean),
 }
 
-/** @type { ({ [key: string]: import('models/drops').EventDropLight }) } */
+/** @type { ({ [key: string]: import('../models/drops').EventDropLight }) } */
 const eventLightModules = {
   TM: drops['Treasure Map'].map(tm => tm.thumb),
   Ambush: dropMapper('Ambush'),
@@ -119,6 +120,7 @@ const eventLightModules = {
     'Completion Units',
     ...[...Array(100).keys()].map(i => i.toString().padStart(2, '0')),
   ),
+  PKA: dropMapper('Pirate King Adventure'),
 }
 
 // @ts-ignore
@@ -126,7 +128,7 @@ function distinct (value, index, self) {
   return self.indexOf(value) === index
 }
 
-/** @return import('models/drops').EventDropLight */
+/** @return import('../models/drops').EventDropLight */
 function dropMapper (
   /** @type string */ dropKey,
   /** @type string[] */ ...subKey
@@ -158,14 +160,16 @@ function dropMapper (
     .filter(distinct)
 }
 
-/** @returns { import('models/units').ExtendedDrop[] } */
-function getDropLocations (
-  /** @type number */ id,
-  /** @type import('models/units').UnitFlags */ flags,
-  /** @type import('./evolution').EvolutionMapHash */ evolutions,
+/** @return { import("../models/old-units").ExtendedUnit } */
+function applyDropLocation (
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
-  /** @type { import('models/units').ExtendedDrop[] } */
+  /** @type { import('../models/units').ExtendedDrop[] } */
   const result = []
+
+  const flags = unit.flags
 
   if (flags.tmlrr) {
     result.push('TM RR')
@@ -187,14 +191,19 @@ function getDropLocations (
     result.push('limited RR')
   }
 
-  if (Object.keys(flags).some(key => key.includes('rr'))) {
-    return ['rarerecruit', ...result]
+  if (unit.evolutionMap.map(id => units.find(u => u.id === id)).find(u => u?.stars === 6)) {
+    result.push('legend')
   }
 
-  const evolve = evolutions[id] ?? []
+  if (Object.keys(flags).some(key => key.includes('rr'))) {
+    unit.dropLocations = ['rarerecruit', ...result]
+    return unit
+  }
 
-  const condition = (/** @type import('models/drops').EventDropLight */ event) =>
-    event.includes(id) || event.some(eventId => evolve.includes(eventId))
+  const evolve = unit.evolutionMap
+
+  const condition = (/** @type import('../models/drops').EventDropLight */ event) =>
+    event.includes(unit.id) || event.some(eventId => evolve.includes(eventId)) || event.includes(globalOnly[unit.id])
 
   if (condition(eventLightModules.Story)) {
     result.push('story')
@@ -203,7 +212,7 @@ function getDropLocations (
   if (
     eventModules.Fortnight.some(
       fn =>
-        fn.units.includes(id) ||
+        fn.units.includes(unit.id) ||
         evolve.some(evolveId => fn.units.includes(evolveId)),
     )
   ) {
@@ -230,6 +239,10 @@ function getDropLocations (
     result.push('piratefest')
   }
 
+  if (condition(eventLightModules.PKA)) {
+    result.push('pka')
+  }
+
   // we put raid and ambush last because they often includes some units from other game mode
   // IE: ambush shanks
   if (condition(eventLightModules.Raid)) {
@@ -245,11 +258,10 @@ function getDropLocations (
     result.push('special')
   }
 
-  return result
+  unit.dropLocations = result
+  return unit
 }
 
 module.exports = {
-  ...eventLightModules,
-  ...eventModules,
-  getDropLocations,
+  applyDropLocation,
 }
