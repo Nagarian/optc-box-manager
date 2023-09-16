@@ -1,8 +1,28 @@
 const { DB } = require('./unitExtracter')
 const { writeFileSync } = require('fs')
+const tsj = require('ts-json-schema-generator')
 const Ajv = require('ajv').default
-const oldSchema = require('../models/old-character-schema.json')
 const { fixupVersusUnit } = require('./fixup')
+
+/** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
+const config = {
+  path: '../models/old-units.ts',
+  tsconfig: './tsconfig.json',
+  type: 'ExtendedUnit',
+}
+
+console.log('Generate schema validation')
+const oldSchema = tsj.createGenerator(config).createSchema(config.type)
+console.log('Schema validation generated')
+
+console.log('Create validator')
+const ajv = new Ajv({
+  allowUnionTypes: true,
+  allErrors: true,
+  useDefaults: 'empty',
+})
+const validator = ajv.compile(oldSchema)
+console.log('Validator created')
 
 const prettify = false
 const excludeVS = true
@@ -39,7 +59,9 @@ function validate (db) {
         for (const walkthrough of error.path.split('/').filter(p => !!p)) {
           obj = obj[walkthrough]
         }
-        console.error('      Found values: ', obj)
+        if (!error.message.startsWith('must NOT have additional properties')) {
+          console.error('      Found values: ', obj)
+        }
       }
     }
   }
@@ -73,14 +95,6 @@ function validate (db) {
 }
 
 function getErrors (db) {
-  const ajv = new Ajv({
-    allowUnionTypes: true,
-    allErrors: true,
-    useDefaults: 'empty',
-  })
-
-  const validator = ajv.compile(oldSchema)
-
   const errors = []
   for (const unit of db) {
     if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria)) continue
