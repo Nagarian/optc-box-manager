@@ -105,7 +105,7 @@ const remainingGlobalOnlyUnitMapping = {
 }
 
 const checkGloJapMapping = (
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) => {
   const errors = []
 
