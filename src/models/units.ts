@@ -384,6 +384,7 @@ export const ExtendedDropKeys = [
   'coliseum',
   'arena',
 
+  'pka',
   'special',
   'legend',
 ] as const
