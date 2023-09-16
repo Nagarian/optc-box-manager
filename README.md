@@ -29,16 +29,6 @@ This project was bootstrapped with [ViteJS](https://vitejs.dev/).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Schema validation
-
-To generate schema validator we need to be outside of this npm project because typescript is messed-up with the config define in the project
-
-```bash
-cd ..
-# for the old format
-npx ts-json-schema-generator --path './optc-box-manager/src/models/old-units.ts' --type 'ExtendedUnit' -o './optc-box-manager/src/models/old-character-schema.json'
-```
-
 ### HTTPS mode
 
 Follow <https://stackoverflow.com/questions/35127383/npm-http-server-with-ssl>
