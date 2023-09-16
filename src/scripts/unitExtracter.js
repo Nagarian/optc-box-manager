@@ -16,15 +16,15 @@ const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require
 const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
 
 const getFamilyId = (
-  /** @type import('models/old-units').BaseUnit[] */ units,
-  /** @type import('models/old-units').BaseUnit */ unit,
+  /** @type import('../models/old-units').BaseUnit[] */ units,
+  /** @type import('../models/old-units').BaseUnit */ unit,
 ) => {
   if (!unit.families) return -1
 
   return units.findIndex(u => u.families?.every(fam => unit.families?.includes(fam))) + 1
 }
 
-/** @returns { import('models/old-units').ExtendedUnit[] } */
+/** @returns { import('../models/old-units').ExtendedUnit[] } */
 function DBFactory () {
   const Details = details
   const Evolutions = evolutions

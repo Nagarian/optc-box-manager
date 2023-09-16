@@ -20,7 +20,7 @@ if (Array.isArray(window.units[0])) {
 }
 
 /**
- * @typedef { import('models/old-units').UnitEvolution } UnitEvol
+ * @typedef { import('../models/old-units').UnitEvolution } UnitEvol
  * @typedef { ({ [id: number]: UnitEvol })  } BaseUnitEvolution
  */
 
@@ -28,15 +28,15 @@ module.exports = {
   Utils: window.Utils,
   /** @type BaseUnitEvolution */
   evolutions: window.evolutions,
-  /** @type import('models/old-units').UnitDetail[] */
+  /** @type import('../models/old-units').UnitDetail[] */
   details: window.details,
-  /** @type import('models/old-units').UnitCooldown[] */
+  /** @type import('../models/old-units').UnitCooldown[] */
   cooldowns: window.cooldowns,
-  /** @type import('models/old-units').UnitFlags[] */
+  /** @type import('../models/old-units').UnitFlags[] */
   flags: window.flags,
-  /** @type import('models/old-units').UnitFamily */
+  /** @type import('../models/old-units').UnitFamily */
   families: window.families,
-  /** @type import('models/old-units').BaseUnit[] */
+  /** @type import('../models/old-units').BaseUnit[] */
   units: window.units,
   /** @type import('models/drops').BaseDrops */
   drops: window.drops,

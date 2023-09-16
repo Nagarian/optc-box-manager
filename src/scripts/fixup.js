@@ -3,13 +3,13 @@
 const { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } = require('./glo-jap-remapper')
 
 /**
- * @typedef { ({ [key: string]: import("models/old-units").PotentialKey })} PotentialRenamedHash
- * @typedef { ({ [key: string]: import("models/old-units").UnitPirateFestStyle })} PirateFestRenamedHash
+ * @typedef { ({ [key: string]: import("../models/old-units").PotentialKey })} PotentialRenamedHash
+ * @typedef { ({ [key: string]: import("../models/old-units").UnitPirateFestStyle })} PirateFestRenamedHash
  */
 
-/** @return { import("models/old-units").UnitDetail } */
+/** @return { import("../models/old-units").UnitDetail } */
 function fixupDetail (
-  /** @type { import("models/old-units").UnitDetail } */ detail,
+  /** @type { import("../models/old-units").UnitDetail } */ detail,
 ) {
   // @ts-ignore
   if (!detail) return {}
@@ -32,9 +32,9 @@ function fixupDetail (
   return detail
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupVersusUnit (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
 ) {
   if (!unit.detail.VSCondition) {
     return unit
@@ -107,11 +107,11 @@ function fixupVersusUnit (
   }
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupVsLastTapSuperTandem (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   if ((unit.detail.potential?.length ?? 0) > 3 &&
     unit.detail.potential?.find(p => p.Name === 'Last Tap') &&
@@ -136,11 +136,11 @@ function fixupVsLastTapSuperTandem (
   return unit
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupImages (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   if (unit.id < 5001 || unit.id > 5008) {
     return unit
@@ -155,11 +155,11 @@ function fixupImages (
   }
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupEvolution (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   if (unit.id < 5001) {
     return unit
@@ -177,11 +177,11 @@ function fixupEvolution (
   }
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupFlags (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   return {
     ...unit,
@@ -193,11 +193,11 @@ function fixupFlags (
   }
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupDropLocation (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   return {
     ...unit,
@@ -207,11 +207,11 @@ function fixupDropLocation (
   }
 }
 
-/** @return { import("models/old-units").ExtendedUnit } */
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupSpecificIssue (
-  /** @type import("models/old-units").ExtendedUnit */ unit,
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
-  /** @type import("models/old-units").ExtendedUnit[] */ units,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   if (unit.id === 2831 || unit.id === 2999 || unit.id === 3098) {
     // @ts-ignore
@@ -283,18 +283,6 @@ function fixupSpecificIssue (
     }
   }
 
-  if (unit.id === 1889) {
-    // @ts-ignore
-    if (unit.detail.special.llbase) {
-      // @ts-ignore
-      unit.detail.special.llbbase = unit.detail.special.llbase
-      // @ts-ignore
-      delete unit.detail.special.llbase
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
-  }
-
   if (unit.id === 3719 || unit.id === 3720) {
     // @ts-ignore
     if (unit.detail.captinNotes) {
@@ -326,6 +314,22 @@ function fixupSpecificIssue (
     // @ts-ignore
     unit.detail.potential = unit.detail.limit
     unit.detail.limit = []
+  }
+
+  if (unit.id === 3957) {
+    // @ts-ignore
+    if (unit.detail.festAbilityGP) {
+      // @ts-ignore
+      delete unit.detail.festAbilityGP
+      // @ts-ignore
+      delete unit.detail.festAbilityGPCondition
+      // @ts-ignore
+      delete unit.detail.festResistance
+      // @ts-ignore
+      delete unit.detail.festStats
+    } else {
+      console.warn(`issue with unit ${unit.id} has been fixed`)
+    }
   }
 
   return unit

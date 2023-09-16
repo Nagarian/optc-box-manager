@@ -310,7 +310,7 @@ function getRumbleData (id) {
 }
 
 function applyNewPirateRumble (
-  /** @type import('models/old-units').ExtendedUnit */ unit,
+  /** @type import('../models/old-units').ExtendedUnit */ unit,
 ) {
   let newRumble
   try {
