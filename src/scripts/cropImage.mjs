@@ -97,8 +97,6 @@ async function computeMatrice (files, size, version) {
 const globalFiles = await retrievePictures('glo')
 const japanFiles = await retrievePictures('jap')
 
-const japExIds = [650, 651, 660, 661, 579, 580, 596, 597, 1923, 1924, 2262, 2263, 4986, 4987, 2399, 2784, 2551, 2552, 2663, 2664, 2440, 2441, 2818, 2819, 2685, 2686, 3312, 3313, 4988, 4989, 4990, 4991, 3314, 3315, 3316, 3317, 2772, 2919, 3318, 3319, 3320, 3321, 3322, 3323, 3324, 4992, 4993, 2768, 2769, 2770, 2771, 3331, 3384, 4994, 4995, 4996, 3325, 3326, 3327, 2929, 2930, 2830, 2909, 3330, 3383, 3478, 3156, 3157]
-
 const gloExWrongIds = {
   2768: 5048,
   2769: 5049,
@@ -106,16 +104,11 @@ const gloExWrongIds = {
   2771: 5051,
 }
 
-const fixedGlobalFiles = [
-  ...globalFiles
-    .map(f => gloExWrongIds[f.id]
-      ? ({ id: gloExWrongIds[f.id], path: f.path })
-      : f,
-    ),
-  ...japanFiles
-    .filter(f => !globalFiles.find(gf => gf.id === f.id))
-    .filter(f => !japExIds.includes(f.id)),
-]
+const fixedGlobalFiles = globalFiles
+  .map(f => gloExWrongIds[f.id]
+    ? ({ id: gloExWrongIds[f.id], path: f.path })
+    : f,
+  )
 
 const size = {
   top: 28,
