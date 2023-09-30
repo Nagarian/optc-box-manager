@@ -308,6 +308,7 @@ export type UnitDetail = {
   superSpecial?: string
   superSpecialNotes?: string
   superSpecialCriteria?: string
+  superSpecialCriteriaNotes?: string
   VSCondition?: string
   VSSpecial?: {
     character1: string

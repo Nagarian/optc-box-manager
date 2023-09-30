@@ -209,7 +209,7 @@ function fixupSpecificIssue (
       // @ts-ignore
       delete unit.detail.sailor.combined
     } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
   }
 
@@ -265,7 +265,7 @@ function fixupSpecificIssue (
       // @ts-ignore
       delete unit.detail.special.level1
     } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
   }
 
@@ -277,7 +277,7 @@ function fixupSpecificIssue (
       // @ts-ignore
       delete unit.detail.captinNotes
     } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
   }
 
@@ -291,7 +291,7 @@ function fixupSpecificIssue (
         maxCP: undefined,
       }
     } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
   }
 
@@ -300,22 +300,6 @@ function fixupSpecificIssue (
     // @ts-ignore
     unit.detail.potential = unit.detail.limit
     unit.detail.limit = []
-  }
-
-  if (unit.id === 3957) {
-    // @ts-ignore
-    if (unit.detail.festAbilityGP) {
-      // @ts-ignore
-      delete unit.detail.festAbilityGP
-      // @ts-ignore
-      delete unit.detail.festAbilityGPCondition
-      // @ts-ignore
-      delete unit.detail.festResistance
-      // @ts-ignore
-      delete unit.detail.festStats
-    } else {
-      console.warn(`issue with unit ${unit.id} has been fixed`)
-    }
   }
 
   return unit
