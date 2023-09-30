@@ -3,65 +3,69 @@ import styled, { StyledComponent } from '@emotion/styled'
 import { Text } from 'components/Title'
 import { FunctionComponent, SVGProps } from 'react'
 import {
+  SizeProps,
+  SpaceProps,
   color,
   compose,
   size,
-  SizeProps,
   space,
-  SpaceProps,
 } from 'styled-system'
-import { clean, place, PlaceProps } from 'styles'
-import { ReactComponent as Add } from './add.svg'
-import { ReactComponent as Arrow } from './arrow.svg'
-import { ReactComponent as Ascending } from './ascending.svg'
-import { ReactComponent as Belly } from './belly.svg'
-import { ReactComponent as Cancel } from './cancel.svg'
-import { ReactComponent as CameraFpp } from './camera-fpp.svg'
-import { ReactComponent as CameraTavern } from './camera-tavern.svg'
-import { ReactComponent as CameraTreasure } from './camera-treasure.svg'
-import { ReactComponent as Clear } from './clear.svg'
-import { ReactComponent as Close } from './close.svg'
-import { ReactComponent as Confirm } from './confirm.svg'
-import CottonCandySvg, {
-  ReactComponent as CottonCandy,
-} from './cottoncandy.svg'
-import { ReactComponent as Delete } from './delete.svg'
-import { ReactComponent as Descending } from './descending.svg'
-import { ReactComponent as DuplicateHide } from './duplicate-hide.svg'
-import { ReactComponent as DuplicateShow } from './duplicate-show.svg'
-import { ReactComponent as Edit } from './edit.svg'
-import { ReactComponent as Evolve } from './evolve.svg'
-import { ReactComponent as FilterSort } from './filtersort.svg'
-import { ReactComponent as GatherIsland } from './gather-island.svg'
-import { ReactComponent as Hide } from './hide.svg'
-import { ReactComponent as ImageAnalyzer } from './image-analyzer.svg'
-import InkSvg, { ReactComponent as Ink } from './ink.svg'
-import LevelSvg, { ReactComponent as Level } from './level.svg'
-import { ReactComponent as LimitBreak } from './limitbreak.svg'
+import { PlaceProps, clean, place } from 'styles'
+import Add from './add.svg?react'
+import Arrow from './arrow.svg?react'
+import Ascending from './ascending.svg?react'
+import Belly from './belly.svg?react'
+import CameraFpp from './camera-fpp.svg?react'
+import CameraTavern from './camera-tavern.svg?react'
+import CameraTreasure from './camera-treasure.svg?react'
+import Cancel from './cancel.svg?react'
+import Clear from './clear.svg?react'
+import Close from './close.svg?react'
+import Confirm from './confirm.svg?react'
+import CottonCandySvg from './cottoncandy.svg'
+import CottonCandy from './cottoncandy.svg?react'
+import Delete from './delete.svg?react'
+import Descending from './descending.svg?react'
+import DuplicateHide from './duplicate-hide.svg?react'
+import DuplicateShow from './duplicate-show.svg?react'
+import Edit from './edit.svg?react'
+import Evolve from './evolve.svg?react'
+import FilterSort from './filtersort.svg?react'
+import GatherIsland from './gather-island.svg?react'
+import Hide from './hide.svg?react'
+import ImageAnalyzer from './image-analyzer.svg?react'
+import InkSvg from './ink.svg'
+import Ink from './ink.svg?react'
+import LevelSvg from './level.svg'
+import Level from './level.svg?react'
+import LimitBreak from './limitbreak.svg?react'
 import Logo from './logo.png'
-import { ReactComponent as NewsCoo } from './news-coo.svg'
-import { ReactComponent as OpenInDB } from './open-in-db.svg'
-import { ReactComponent as PirateFestAbility } from './piratefest-ability.svg'
-import { ReactComponent as PirateFestBoth } from './piratefest-both.svg'
-import { ReactComponent as PirateFestSpecial } from './piratefest-special.svg'
-import PirateFestSvg, { ReactComponent as PirateFest } from './piratefest.svg'
-import { ReactComponent as Potential } from './potential.svg'
-import { ReactComponent as ResetApply } from './reset-apply.svg'
-import { ReactComponent as ResetRemove } from './reset-remove.svg'
-import { ReactComponent as Reset } from './reset.svg'
-import { ReactComponent as SaveSearch } from './savesearch.svg'
-import { ReactComponent as Search } from './search.svg'
-import { ReactComponent as Settings } from './settings.svg'
-import { ReactComponent as Share } from './share.svg'
-import { ReactComponent as Show } from './show.svg'
-import { ReactComponent as SkillBook } from './skillbook.svg'
+import NewsCoo from './news-coo.svg?react'
+import OpenInDB from './open-in-db.svg?react'
+import PirateFestAbility from './piratefest-ability.svg?react'
+import PirateFestBoth from './piratefest-both.svg?react'
+import PirateFestSpecial from './piratefest-special.svg?react'
+import PirateFestSvg from './piratefest.svg'
+import PirateFest from './piratefest.svg?react'
+import Potential from './potential.svg?react'
+import ResetApply from './reset-apply.svg?react'
+import ResetRemove from './reset-remove.svg?react'
+import Reset from './reset.svg?react'
+import SaveSearch from './savesearch.svg?react'
+import Search from './search.svg?react'
+import Settings from './settings.svg?react'
+import Share from './share.svg?react'
+import Show from './show.svg?react'
+import SkillBook from './skillbook.svg?react'
 import SpecialLvl from './special.png'
-import SpecialSvg, { ReactComponent as Special } from './special.svg'
-import { ReactComponent as SugoPull } from './sugopull.svg'
-import SupportSvg, { ReactComponent as Support } from './support.svg'
-import { ReactComponent as TailSpin } from './tail-spin.svg'
-import { ReactComponent as Treasure } from './treasure.svg'
-import { ReactComponent as VideoTreasure } from './video-treasure.svg'
+import SpecialSvg from './special.svg'
+import Special from './special.svg?react'
+import SugoPull from './sugopull.svg?react'
+import SupportSvg from './support.svg'
+import Support from './support.svg?react'
+import TailSpin from './tail-spin.svg?react'
+import Treasure from './treasure.svg?react'
+import VideoTreasure from './video-treasure.svg?react'
 
 type StyledIconProps = SpaceProps & SizeProps & PlaceProps & { title?: string }
 
@@ -97,12 +101,12 @@ const BaseImg = (src: string, title?: string): Icon => {
 
 export {
   CottonCandySvg,
-  SupportSvg,
-  SpecialLvl,
-  PirateFestSvg,
   InkSvg,
   LevelSvg,
+  PirateFestSvg,
+  SpecialLvl,
   SpecialSvg,
+  SupportSvg,
 }
 
 export const AddIcon = BaseSvg(Add)
