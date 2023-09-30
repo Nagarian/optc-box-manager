@@ -405,7 +405,7 @@ function detectFirstHorizontalLine (src: any): number {
   }
   lines.delete()
 
-  const characterWidth = src.cols / 5
+  const characterWidth = Math.round(src.cols / 5)
   horizontals.sort((h1, h2) => (h1 > h2 ? 1 : h1 === h2 ? 0 : -1))
 
   const minH = horizontals.find(h1 =>
