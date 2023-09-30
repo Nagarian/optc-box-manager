@@ -17,7 +17,7 @@ import {
   BySearchBoxCriteria,
   BySearchBoxInput,
 } from 'pages/FilterSort/components/Filters/Units/BySearchBox'
-import { ImageAnalyzer } from 'pages/FilterSort/components/ImageAnalyzer'
+import { ImageAnalyzer } from 'pages/ImageAnalyzer'
 import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
