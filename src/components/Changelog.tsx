@@ -92,7 +92,6 @@ export default function Changelog ({
           <ReactMarkdown
             key={release.id}
             children={release.body}
-            linkTarget="_blank"
             components={ReactMarkdownRenderers}
           />
         </div>

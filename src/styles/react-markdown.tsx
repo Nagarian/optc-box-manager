@@ -3,12 +3,16 @@ import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
 import { Components } from 'react-markdown'
 
-const ListItem = styled.li<{ ordered: boolean }>`
-  margin-left: ${p => p.ordered && '2rem'};
-
+const ListItem = styled.li`
   ::before {
-    content: ${p => !p.ordered && "'🏴‍☠️ '"};
+    content: '🏴‍☠️ ';
     font-size: ${themeGet('fontSizes.2')};
+  }
+`
+
+const OrderedList = styled.ol`
+  & > ${ListItem} {
+    margin-left: 2rem;
   }
 `
 
@@ -28,9 +32,7 @@ export const ReactMarkdownRenderers: Components = {
   p: p => <Text {...p} m="1" />,
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   a: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-  li: p => {
-    return <ListItem {...p} />
-  },
-  // listItem: ListItem,
+  li: p => <ListItem {...p} />,
+  ol: p => <OrderedList {...p} />,
   img: Img as any,
 }
