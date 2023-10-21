@@ -194,6 +194,33 @@ function fixupFlags (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
+function fixupFestProperties (
+  /** @type import("../models/old-units").ExtendedUnit */ unit,
+  /** @type number */ index,
+  /** @type import("../models/old-units").ExtendedUnit[] */ units,
+) {
+  delete unit.detail.festAbility
+  delete unit.detail.festAttackPattern
+  delete unit.detail.festAttackTarget
+  delete unit.detail.festGPBurst
+  delete unit.detail.festGPLeader
+  delete unit.detail.festResilience
+  delete unit.detail.festSpecial
+  // @ts-ignore
+  delete unit.detail.festAbilityGP
+  // @ts-ignore
+  delete unit.detail.festAbilityGPCondition
+  // @ts-ignore
+  delete unit.detail.festResistance
+  // @ts-ignore
+  delete unit.detail.festStats
+  // @ts-ignore
+  delete unit.detail.specialCooldown
+
+  return unit
+}
+
+/** @return { import("../models/old-units").ExtendedUnit } */
 function fixupSpecificIssue (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
@@ -324,5 +351,6 @@ module.exports = {
   fixupEvolution,
   fixupFlags,
   fixupSpecificIssue,
+  fixupFestProperties,
   removeProp,
 }
