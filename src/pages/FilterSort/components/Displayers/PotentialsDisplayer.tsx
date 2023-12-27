@@ -66,7 +66,7 @@ export function SpecificPotentialDisplayerInput ({
           key={potential}
           type="radio"
           name="potentials-displayer"
-          checked={options?.type === potential ?? false}
+          checked={options?.type === potential}
           onChange={e => onChange({
             type: potential,
           })}

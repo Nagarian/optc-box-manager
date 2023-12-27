@@ -30,7 +30,7 @@ export default function Displayer ({
       {UserUnitDisplayerTypeKeys.map(displayerType => (
         <ChoiceInput key={displayerType}
           type="radio"
-          checked={searchDisplayer?.type === displayerType ?? false}
+          checked={searchDisplayer?.type === displayerType}
           name="displayer-type"
           onChange={() =>
             onChange({

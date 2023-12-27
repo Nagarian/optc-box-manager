@@ -37,7 +37,7 @@ export function SpecificPotentialSortInput ({
           key={potential}
           type="radio"
           name="potentials-sort"
-          checked={options?.type === potential ?? false}
+          checked={options?.type === potential}
           onChange={e =>
             onChange({
               type: potential,

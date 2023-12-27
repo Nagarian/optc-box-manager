@@ -106,7 +106,7 @@ export function ByUserPowerSocketInput ({
             key={stateKey}
             type="radio"
             name="userunit-allpowersocket-state"
-            checked={criteria?.all === stateKey ?? false}
+            checked={criteria?.all === stateKey}
             onChange={e =>
               onChange({
                 ...criteria,
@@ -139,7 +139,7 @@ export function ByUserPowerSocketInput ({
           key={socketType}
           type="checkbox"
           name="userunit-powersocket-chooser"
-          checked={!!criteria?.state?.[socketType] ?? false}
+          checked={!!criteria?.state?.[socketType]}
           onChange={e => trigger(socketType, null)}
         >
           <PowerSocket type={socketType} size="3" />
