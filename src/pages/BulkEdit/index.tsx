@@ -273,7 +273,7 @@ function MultiChoiceInput<T extends string> ({
           key={state}
           type="radio"
           name={name}
-          checked={currentValue === state ?? false}
+          checked={currentValue === state}
           onChange={e => e.target.checked && onChange(state)}
         >
           {labelMapper?.(state) ?? state}

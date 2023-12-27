@@ -136,7 +136,7 @@ export function ByUserLimitBreakInput ({
           <ChoiceInput key={state}
             type="radio"
             name="uu-lbstate"
-            checked={criteria?.lbState === state ?? false}
+            checked={criteria?.lbState === state}
             onChange={e =>
               onChange({
                 ...criteria,
@@ -155,7 +155,7 @@ export function ByUserLimitBreakInput ({
           <ChoiceInput key={state}
             type="radio"
             name="uu-keyLbState"
-            checked={criteria?.keyLbState === state ?? false}
+            checked={criteria?.keyLbState === state}
             onChange={e =>
               onChange({
                 ...criteria,
@@ -174,7 +174,7 @@ export function ByUserLimitBreakInput ({
           <ChoiceInput key={state}
             type="radio"
             name="uu-lb-rainbow"
-            checked={criteria?.rainbowState === state ?? false}
+            checked={criteria?.rainbowState === state}
             onChange={e =>
               onChange({
                 ...criteria,

@@ -92,7 +92,7 @@ export function PirateFestDisplayerInput ({
           key={stateKey}
           type="radio"
           name="displayer-fest"
-          checked={options?.type === stateKey ?? false}
+          checked={options?.type === stateKey}
           onChange={e =>
             onChange({
               type: stateKey,

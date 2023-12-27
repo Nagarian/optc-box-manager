@@ -49,7 +49,7 @@ export function SpecificCottonCandySortInput ({
           <input
             type="radio"
             name="cc-sort"
-            checked={options?.cc === type ?? false}
+            checked={options?.cc === type}
             onChange={e =>
               onChange({
                 cc: type,

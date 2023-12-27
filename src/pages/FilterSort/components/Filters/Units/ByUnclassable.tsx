@@ -127,7 +127,7 @@ export function ByUnclassableInput ({
         <ChoiceInput
           type="radio"
           name="is-inkable"
-          checked={criteria?.isInkable === false ?? false}
+          checked={criteria?.isInkable === false}
           onChange={e =>
             onChange({
               ...criteria,
@@ -157,7 +157,7 @@ export function ByUnclassableInput ({
         <ChoiceInput
           type="radio"
           name="has-llb"
-          checked={criteria?.hasLevelLB === false ?? false}
+          checked={criteria?.hasLevelLB === false}
           onChange={e =>
             onChange({
               ...criteria,

@@ -44,7 +44,7 @@ export function LevelSortInput ({
           <input
             type="radio"
             name="lvl-sort"
-            checked={options?.type === type ?? false}
+            checked={options?.type === type}
             onChange={e =>
               onChange({
                 type,

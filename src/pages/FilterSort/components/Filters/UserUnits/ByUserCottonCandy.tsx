@@ -65,7 +65,7 @@ function CottonCandyStateInput ({
           key={stateKey}
           type="radio"
           name={`userunit-cc-${type}`}
-          checked={state === stateKey ?? false}
+          checked={state === stateKey}
           onChange={e => onChange(stateKey)}
         >
           {stateKey}
@@ -90,7 +90,7 @@ export function ByUserCottonCandyInput ({
             key={stateKey}
             type="radio"
             name="userunit-cc-all"
-            checked={criteria?.all === stateKey ?? false}
+            checked={criteria?.all === stateKey}
             onChange={e =>
               onChange({
                 ...criteria,
