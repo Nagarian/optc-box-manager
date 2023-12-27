@@ -1,5 +1,5 @@
 // @ts-check
-const { Utils } = require('./DBLoader')
+import { Utils } from './DBLoader.js'
 
 /**
  * @callback ImageComposerFunc
@@ -23,13 +23,5 @@ const getImage = (
   }
 }
 
-function sleep (/** @type number */ ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
-
-module.exports = {
-  getUnitThumbnail: getImage(Utils.getThumbnailUrl),
-  getUnitFullPicture: getImage(Utils.getBigThumbnailUrl),
-}
+export const getUnitThumbnail = getImage(Utils.getThumbnailUrl)
+export const getUnitFullPicture = getImage(Utils.getBigThumbnailUrl)

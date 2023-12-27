@@ -2,10 +2,11 @@
   "homepage": ".",
   "name": "optc-box-manager",
   "version": "3.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "extract-optcdb": "node ./src/scripts/index.js",
-    "extract-image": "node ./src/scripts/cropImage.mjs",
+    "extract-image": "node ./src/scripts/cropImage.js",
     "analyze": "source-map-explorer 'dist/assets/*.js' --no-border-checks",
     "prebuild": "npm run extract-optcdb && npm run extract-image",
     "start": "vite",
@@ -75,5 +76,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

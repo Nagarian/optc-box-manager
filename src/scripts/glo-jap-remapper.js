@@ -1,5 +1,5 @@
 /** @type { ({ [key: number]: number }) } */
-const globalOnly = {
+export const globalOnly = {
   // 1120: 577, // Luffy // different image
   // 1121: 578,
   5001: 650, // nami // different image
@@ -73,24 +73,24 @@ const globalOnly = {
 }
 
 /** @type { ({ [key: number]: number }) } */
-const globalOnlyReverseMap = Object.entries(globalOnly)
+export const globalOnlyReverseMap = Object.entries(globalOnly)
   .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 /** @type { ({ [key: number]: number }) } */
-const globalOnlyWrongId = Object.entries(globalOnly)
+export const globalOnlyWrongId = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId >= 4986)
   .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 /** @type { ({ [key: number]: number }) } */
-const globalOnlyMissingInDb = Object.entries(globalOnly)
+export const globalOnlyMissingInDb = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId < 4986)
   .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 /** @type { ({ [key: number]: number }) } */
-const gloToJapConverter = Object.entries(globalOnly)
+export const gloToJapConverter = Object.entries(globalOnly)
   .reduce((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }), {})
 
-const remainingGlobalOnlyUnitMapping = {
+export const remainingGlobalOnlyUnitMapping = {
   'Monkey D. Luffy - Kung Fu Training': 4986,
   'Monkey D. Luffy - To Become a True Kung Fu Master': 4987,
   'Nefeltari Vivi - Wake of an Endless Dream - Princess of Alabasta': 4988,
@@ -104,7 +104,7 @@ const remainingGlobalOnlyUnitMapping = {
   'Sergeant Helmeppo [EXTRA]': 4996,
 }
 
-const checkGloJapMapping = (
+export const checkGloJapMapping = (
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) => {
   const errors = []
@@ -123,13 +123,4 @@ const checkGloJapMapping = (
     console.error(errors)
     throw new Error('Global -> Jap units have changed')
   }
-}
-
-module.exports = {
-  globalOnly,
-  globalOnlyReverseMap,
-  globalOnlyWrongId,
-  globalOnlyMissingInDb,
-  gloToJapConverter,
-  checkGloJapMapping,
 }

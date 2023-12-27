@@ -1,4 +1,7 @@
 // @ts-check
+import { drops, units } from './DBLoader.js'
+import { globalOnly } from './glo-jap-remapper.js'
+import { getUnitThumbnail } from './image.js'
 
 /** @type { ({ [key: string]: number }) } */
 const RookieIcons = {
@@ -51,10 +54,6 @@ const RookieIcons = {
   'Coliseum Executioner': 2144,
   'Reunited in Wano! Straw Hat Pirates': 2802,
 }
-
-const { drops, units } = require('./DBLoader')
-const { globalOnly } = require('./glo-jap-remapper')
-const { getUnitThumbnail } = require('./image')
 
 /** @type { ({ [key: string]: import('../models/drops').EventDrop[] }) } */
 const eventModules = {
@@ -161,7 +160,7 @@ function dropMapper (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function applyDropLocation (
+export function applyDropLocation (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -260,8 +259,4 @@ function applyDropLocation (
 
   unit.dropLocations = result
   return unit
-}
-
-module.exports = {
-  applyDropLocation,
 }

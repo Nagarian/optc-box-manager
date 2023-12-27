@@ -1,8 +1,8 @@
-const { DB } = require('./unitExtracter')
-const { writeFileSync } = require('fs')
-const tsj = require('ts-json-schema-generator')
-const Ajv = require('ajv').default
-const { fixupVersusUnit } = require('./fixup')
+import { DB } from './unitExtracter.js'
+import { writeFileSync } from 'fs'
+import { createGenerator } from 'ts-json-schema-generator'
+import Ajv from 'ajv'
+import { fixupVersusUnit } from './fixup.js'
 
 /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
 const config = {
@@ -12,7 +12,7 @@ const config = {
 }
 
 console.log('Generate schema validation')
-const oldSchema = tsj.createGenerator(config).createSchema(config.type)
+const oldSchema = createGenerator(config).createSchema(config.type)
 console.log('Schema validation generated')
 
 console.log('Create validator')
