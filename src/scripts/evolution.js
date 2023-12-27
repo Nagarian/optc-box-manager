@@ -1,12 +1,12 @@
 // @ts-check
-const { evolutions: EvolsArray } = require('./DBLoader')
+import { evolutions as EvolsArray } from './DBLoader.js'
 
 /**
  *  @typedef { ({ [id: number]: number[] }) } EvolutionMapHash
  */
 
 /** @returns EvolutionMapHash */
-function evolutionMap () {
+export function evolutionMap () {
   /** @type EvolutionMapHash */
   const evolutionHash = {}
 
@@ -44,8 +44,4 @@ function evolutionSeeker (
   }
 
   return result.concat(evolutionSeeker(evolutions, evolutionForward.evolution))
-}
-
-module.exports = {
-  evolutionMap,
 }

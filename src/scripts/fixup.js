@@ -1,6 +1,5 @@
 // @ts-check
-
-const { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } = require('./glo-jap-remapper')
+import { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } from './glo-jap-remapper.js'
 
 /**
  * @typedef { ({ [key: string]: import("../models/old-units").PotentialKey })} PotentialRenamedHash
@@ -8,7 +7,7 @@ const { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } = require('./g
  */
 
 /** @return { import("../models/old-units").UnitDetail } */
-function fixupDetail (
+export function fixupDetail (
   /** @type { import("../models/old-units").UnitDetail } */ detail,
 ) {
   // @ts-ignore
@@ -33,7 +32,7 @@ function fixupDetail (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupVersusUnit (
+export function fixupVersusUnit (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
 ) {
   if (!unit.detail.VSCondition) {
@@ -108,7 +107,7 @@ function fixupVersusUnit (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupVsLastTapSuperTandem (
+export function fixupVsLastTapSuperTandem (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -137,7 +136,7 @@ function fixupVsLastTapSuperTandem (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupImages (
+export function fixupImages (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -156,7 +155,7 @@ function fixupImages (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupEvolution (
+export function fixupEvolution (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -178,7 +177,7 @@ function fixupEvolution (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupFlags (
+export function fixupFlags (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -194,7 +193,7 @@ function fixupFlags (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupFestProperties (
+export function fixupFestProperties (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -221,7 +220,7 @@ function fixupFestProperties (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-function fixupSpecificIssue (
+export function fixupSpecificIssue (
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -332,7 +331,7 @@ function fixupSpecificIssue (
   return unit
 }
 
-function removeProp (
+export function removeProp (
   /** @type any */ obj,
   /** @type string */ badName,
   /** @type string */ realName,
@@ -341,16 +340,4 @@ function removeProp (
     obj[realName] = obj[badName]
     delete obj[badName]
   }
-}
-
-module.exports = {
-  fixupDetail,
-  fixupVersusUnit,
-  fixupVsLastTapSuperTandem,
-  fixupImages,
-  fixupEvolution,
-  fixupFlags,
-  fixupSpecificIssue,
-  fixupFestProperties,
-  removeProp,
 }

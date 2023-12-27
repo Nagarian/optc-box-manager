@@ -1,19 +1,11 @@
 // @ts-check
-const {
-  aliases,
-  evolutions,
-  units,
-  details,
-  cooldowns,
-  flags,
-  gamewith,
-} = require('./DBLoader')
-const { applyDropLocation } = require('./dropExtracter')
-const { getUnitThumbnail, getUnitFullPicture } = require('./image')
-const { evolutionMap } = require('./evolution')
-const { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupVsLastTapSuperTandem, fixupFestProperties } = require('./fixup')
-const { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } = require('./glo-jap-remapper')
-const { applyNewPirateRumble } = require('./pirateRumbleExtracter')
+import { aliases, evolutions, units, details, cooldowns, flags, gamewith } from './DBLoader.js'
+import { applyDropLocation } from './dropExtracter.js'
+import { getUnitThumbnail, getUnitFullPicture } from './image.js'
+import { evolutionMap } from './evolution.js'
+import { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupVsLastTapSuperTandem, fixupFestProperties } from './fixup.js'
+import { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } from './glo-jap-remapper.js'
+import { applyNewPirateRumble } from './pirateRumbleExtracter.js'
 
 const getFamilyId = (
   /** @type import('../models/old-units').BaseUnit[] */ units,
@@ -89,8 +81,4 @@ function DBFactory () {
   return db
 }
 
-const DB = DBFactory()
-
-module.exports = {
-  DB,
-}
+export const DB = DBFactory()

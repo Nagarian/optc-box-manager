@@ -1,3 +1,6 @@
+import fs from 'fs'
+import jsonc from 'jsonc-parser'
+
 const filters = {}
 
 // copy from src\optcdb\characters\js\directives.js
@@ -146,7 +149,7 @@ filters.abilityToString = function () {
         case 'hinderance':
           e += effect.amount ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}` : `${effect.chance}% chance to inflict ${effect.level ? 'Lv.' + effect.level + ' ' : ''}${arrayToString(effect.attributes)}`
           break
-        case 'boon':
+        case 'boon': {
           e += `${effect.chance ? effect.chance + '% chance to ' : ''}`
           const attrStr = arrayToString(effect.attributes)
           switch (attrStr) {
@@ -167,10 +170,12 @@ filters.abilityToString = function () {
               break
           }
           break
-        case 'penalty':
+        }
+        case 'penalty': {
           const tmpStr = arrayToString(effect.attributes)
           if (tmpStr === 'HP' && effect.amount) { e += `${new Intl.NumberFormat().format(effect.amount)}% health cut` } else if (effect.level) { e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty` } else { e += `${effect.chance || 100}% chance to ${arrayToString(effect.attributes)}` }
           break
+        }
         case 'cleanse':
           e += `${effect.chance}% chance to cleanse ${arrayToString(effect.attributes)} debuffs`
           break
@@ -261,8 +266,6 @@ function denormalizeEffects (ability) {
   })
 }
 
-const fs = require('fs')
-const jsonc = require('jsonc-parser')
 /** @type import("models/pirate-rumble").RumbleSchema */
 const rumbleData = jsonc.parse(fs.readFileSync('./src/optcdb/common/data/rumble.json', 'utf8'))
 
@@ -309,7 +312,7 @@ function getRumbleData (id) {
   return unit
 }
 
-function applyNewPirateRumble (
+export function applyNewPirateRumble (
   /** @type import('../models/old-units').ExtendedUnit */ unit,
 ) {
   let newRumble
@@ -426,8 +429,4 @@ function applyNewPirateRumble (
   }
 
   return unit
-}
-
-module.exports = {
-  applyNewPirateRumble,
 }
