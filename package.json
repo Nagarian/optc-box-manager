@@ -42,8 +42,8 @@
     "@types/styled-system__should-forward-prop": "^5.1.4",
     "@types/styled-system__theme-get": "^5.0.4",
     "@types/uuid": "^9.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
     "ajv": "^8.12.0",
     "eslint-config-react-app": "^7.0.0",
@@ -79,5 +79,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "overrides": {
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0"
   }
 }
