@@ -194,17 +194,24 @@ export type VersusUnitSpecial = {
   llbcharacter2?: SimpleUnitSpecial
 }
 
-export type DualUnitSpecial = {
+export type DualUnitV1Special = {
   base: SimpleUnitSpecial
   llbbase?: SimpleUnitSpecial
   combined: SimpleUnitSpecial
   llbcombined?: SimpleUnitSpecial
 }
 
+export type DualUnitV2Special = {
+  character1: SimpleUnitSpecial
+  character2: SimpleUnitSpecial
+  combined: SimpleUnitSpecial
+}
+
 export type UnitSpecial =
   | SimpleUnitSpecial
   | LLBSimpleUnitSpecial
-  | DualUnitSpecial
+  | DualUnitV1Special
+  | DualUnitV2Special
   | VersusUnitSpecial
 
 export type UnitCaptain =
