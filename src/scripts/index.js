@@ -45,23 +45,25 @@ function validate (db) {
     const characterInError = db.find(u => u.id === id)
     console.error(`#${id} "${characterInError?.name}"`)
 
-    const matching = errors
+    const matchingIdErrors = errors
       .filter(e => e.id === id)
       .sort((a, b) => a.path.localeCompare(b.path))
 
-    for (const path of new Set(matching.map(x => x.path))) {
+    for (const path of new Set(matchingIdErrors.map(x => x.path))) {
       console.error(`  - ${path}`)
 
-      for (const error of matching.filter(m => m.path === path)) {
-        console.error(`    - ${error.message}`)
+      const messages = matchingIdErrors.filter(m => m.path === path).map(m => m.message)
 
-        let obj = characterInError
-        for (const walkthrough of error.path.split('/').filter(p => !!p)) {
-          obj = obj[walkthrough]
-        }
-        if (!error.message.startsWith('must NOT have additional properties')) {
-          console.error('      Found values: ', obj)
-        }
+      for (const message of messages) {
+        console.error(`    - ${message}`)
+      }
+
+      let obj = characterInError
+      for (const walkthrough of path.split('/').filter(p => !!p)) {
+        obj = obj[walkthrough]
+      }
+      if (!messages[0].startsWith('must NOT have additional properties')) {
+        console.error('      Found values: ', obj)
       }
     }
   }
