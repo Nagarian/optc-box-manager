@@ -10,12 +10,12 @@ jobs:
   build-test-check-db:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
 
       - name: Restore package & run test
@@ -23,12 +23,3 @@ jobs:
           npm ci
           npm run extract-optcdb
           npm test
-
-      - uses: actions/upload-artifact@v3
-        name: Extract validation errors
-        if: failure()
-        with:
-          name: extract-optc-db-error
-          path: |
-            public/errors-old.json
-            public/errors-new.json
