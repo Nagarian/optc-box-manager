@@ -41,7 +41,7 @@ function DBFactory () {
           full: getUnitFullPicture(dbId),
         },
         evolution: Evolutions[dbId],
-        cooldown: Cooldowns[unit.number],
+        cooldown: Cooldowns[unit.number] ?? Details[dbId]?.specialCooldown,
         detail: fixupDetail(Details[dbId]),
         flags,
         family: {

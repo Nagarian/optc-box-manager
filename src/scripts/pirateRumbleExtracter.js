@@ -364,7 +364,7 @@ export function applyNewPirateRumble (
       character1: filters.targetToString()(newRumble[0].target),
       character2: filters.targetToString()(newRumble[1].target),
     }
-    unit.detail.festResilience = {
+    unit.detail.festResistance = {
       character1: filters.resilienceToString()(newRumble[0].resilience),
       character2: filters.resilienceToString()(newRumble[1].resilience),
     }
@@ -411,7 +411,7 @@ export function applyNewPirateRumble (
       description: filters.patternToString()(p),
     }))
     unit.detail.festAttackTarget = filters.targetToString()(newRumble.target)
-    unit.detail.festResilience = filters.resilienceToString()(newRumble.resilience)
+    unit.detail.festResistance = filters.resilienceToString()(newRumble.resilience)
     unit.detail.festSpecial = newRumble.special.map(s => ({
       cooldown: s.cooldown ?? 0,
       description: filters.specialToString()(s.effects),

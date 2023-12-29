@@ -288,6 +288,7 @@ export type UnitDetail = {
   captainNotes?: string
   special?: UnitSpecial
   specialNotes?: string
+  specialCooldown?: UnitCooldown
   sailor?: UnitSailor
   sailorNotes?: string
   specialName?: string
@@ -307,7 +308,7 @@ export type UnitDetail = {
   festSpecial?: UnitFestSpecial[]
   festAttackPattern?: UnitFestAbility[]
   festAttackTarget?: string
-  festResilience?: string
+  festResistance?: string
   festGPLeader?: UnitFestAbility[]
   festGPBurst?: UnitFestGPBurst[]
   swap?: string | UnitSuperSwap

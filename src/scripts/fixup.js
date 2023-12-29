@@ -198,19 +198,25 @@ export function fixupFestProperties (
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
-  delete unit.detail.festAbility
-  delete unit.detail.festAttackPattern
-  delete unit.detail.festAttackTarget
-  delete unit.detail.festGPBurst
-  delete unit.detail.festGPLeader
-  delete unit.detail.festResilience
-  delete unit.detail.festSpecial
+  // @ts-ignore
+  unit.detail.festAbility = unit.detail.festAbility?.map(str => ({ description: str }))
+  // @ts-ignore
+  unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({ description: str }))
+  // @ts-ignore
+  unit.detail.festGPBurst = unit.detail.festAbilityGP?.map(({ festGPSpecial, uses }) => ({
+    description: festGPSpecial,
+    // @ts-ignore
+    condition: unit.detail.festAbilityGPCondition,
+    use: uses,
+  }))
+  // @ts-ignore
+  unit.detail.festGPLeader = unit.detail.festAbilityGP?.map(({ festGPAbility }) => ({
+    description: festGPAbility,
+  }))
   // @ts-ignore
   delete unit.detail.festAbilityGP
   // @ts-ignore
   delete unit.detail.festAbilityGPCondition
-  // @ts-ignore
-  delete unit.detail.festResistance
   // @ts-ignore
   delete unit.detail.festStats
   // @ts-ignore
