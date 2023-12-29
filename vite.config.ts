@@ -13,6 +13,7 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    assetsInlineLimit: 0,
   },
   test: {
     globals: true,
