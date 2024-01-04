@@ -184,6 +184,8 @@ export type SimpleUnitSpecial =
 export type LLBSimpleUnitSpecial = {
   base: SimpleUnitSpecial
   llbbase?: SimpleUnitSpecial
+  llblevel1?: SimpleUnitSpecial
+  llblevel2?: SimpleUnitSpecial
   llbcombined: undefined
 }
 

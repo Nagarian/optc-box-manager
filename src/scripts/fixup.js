@@ -334,6 +334,18 @@ export function fixupSpecificIssue (
     unit.detail.limit = []
   }
 
+  if (unit.id === 4062) {
+    // @ts-ignore
+    if (unit.detail.SuperSpecialNotes) {
+      // @ts-ignore
+      unit.detail.superSpecialNotes = unit.detail.SuperSpecialNotes
+      // @ts-ignore
+      delete unit.detail.SuperSpecialNotes
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
   return unit
 }
 
