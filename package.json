@@ -28,41 +28,41 @@
     "rehype-raw": "^7.0.0",
     "styled-system": "^5.1.5",
     "uuid": "^9.0.1",
-    "web-vitals": "^3.5.1"
+    "web-vitals": "^3.5.2"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.2.0",
+    "@testing-library/jest-dom": "^6.3.0",
     "@testing-library/react": "^14.1.2",
     "@types/diff": "^5.0.9",
-    "@types/node": "^20.10.6",
-    "@types/react": "^18.2.46",
+    "@types/node": "^20.11.8",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@types/styled-system": "^5.1.22",
     "@types/styled-system__css": "^5.0.21",
     "@types/styled-system__should-forward-prop": "^5.1.4",
     "@types/styled-system__theme-get": "^5.0.4",
-    "@types/uuid": "^9.0.7",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-react": "^4.2.1",
     "ajv": "^8.12.0",
     "eslint-config-react-app": "^7.0.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-n": "^16.6.1",
+    "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "jsdom": "^23.0.1",
-    "jsonc-parser": "^3.2.0",
+    "jsdom": "^24.0.0",
+    "jsonc-parser": "^3.2.1",
     "react-test-renderer": "^18.2.0",
-    "sharp": "^0.33.1",
+    "sharp": "^0.33.2",
     "source-map-explorer": "^2.5.3",
     "ts-json-schema-generator": "^1.5.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10",
-    "vite-plugin-pwa": "^0.17.4",
+    "vite": "^5.0.12",
+    "vite-plugin-pwa": "^0.17.5",
     "vite-plugin-svgr": "^4.2.0",
-    "vite-tsconfig-paths": "^4.2.3",
-    "vitest": "^1.1.2"
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.2"
   },
   "browserslist": {
     "production": [
@@ -79,9 +79,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "overrides": {
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0"
   }
 }
