@@ -346,6 +346,18 @@ export function fixupSpecificIssue (
     }
   }
 
+  // @ts-ignore
+  if (unit.detail.lLimit?.gpAbility) {
+    // @ts-ignore
+    delete unit.detail.lLimit.gpAbility
+  }
+
+  // @ts-ignore
+  if (unit.detail.lLimit?.gpSpecial) {
+    // @ts-ignore
+    delete unit.detail.lLimit.gpSpecial
+  }
+
   return unit
 }
 
