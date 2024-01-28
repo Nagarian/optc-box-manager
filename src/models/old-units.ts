@@ -277,9 +277,11 @@ export type UnitSuperTandem = {
 }
 
 export type UnitLevelLimitBreak = null | Partial<{
-  rAbility: boolean
-  rSpecial: boolean
+  rAbility: true
+  rSpecial: true
   rResilience: true
+  gpAbility: true
+  gpSpecial: true
   captain: UnitCaptain
   special: UnitSpecial
   sailor: UnitSailor
