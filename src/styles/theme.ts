@@ -90,26 +90,23 @@ const specificColors = {
   )`,
 }
 
-const fontSizes: ThemeFontSizes = [
-  '1.2rem',
-  '1.4rem',
-  '1.6rem',
-  '2rem',
-  '2.4rem',
-  '3.2rem',
-]
-fontSizes.body = fontSizes[2]
-fontSizes.title = fontSizes[5]
-fontSizes.subtitle = fontSizes[4]
+const fs = ['1.2rem', '1.4rem', '1.6rem', '2rem', '2.4rem', '3.2rem']
+const fontSizes: ThemeFontSizes = Object.assign(fs, {
+  body: fs[2],
+  title: fs[5],
+  subtitle: fs[4],
+})
 
 const fontWeights: ThemeFontWeight = [400, 600]
 
-const space: ThemeSpace = [0, '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
-space.small = space[1]
-space.medium = space[2]
-space.large = space[3]
+const sp = ['0rem', '.4rem', '.8rem', '1.6rem', '3.2rem', '6.4rem']
+const space: ThemeSpace = Object.assign(sp, {
+  small: sp[1],
+  medium: sp[2],
+  large: sp[3],
+})
 
-const sizes: ThemeSizes = [
+const si = [
   '1rem',
   '2rem',
   '4rem',
@@ -121,7 +118,9 @@ const sizes: ThemeSizes = [
   '16rem',
   '32rem',
 ]
-sizes.minimalRequired = '320px'
+const sizes: ThemeSizes = Object.assign(si, {
+  minimalRequired: '320px',
+})
 
 const breakpoints: ThemeBreakpoints = ['768px', '970px', '1024px']
 

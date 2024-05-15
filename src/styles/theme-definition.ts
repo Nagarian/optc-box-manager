@@ -1,7 +1,7 @@
 import { Property } from 'csstype'
 
-type Space = Property.Margin<unknown>
-type Size = Property.Height<unknown>
+type Space = Property.Margin<object>
+type Size = Property.Height<object>
 type Color = Property.Color
 type Font = Property.FontFamily
 type Weigth = Property.FontWeight
@@ -9,26 +9,23 @@ type BorderWidth = Property.BorderWidth
 type ZIndex = Property.ZIndex
 type Shadow = Property.BoxShadow
 
-export type ThemeFontSizes = Font[] &
-  Partial<{
-    body: Font
-    title: Font
-    subtitle: Font
-  }>
+export type ThemeFontSizes = Font[] & {
+  body: Font
+  title: Font
+  subtitle: Font
+}
 
 export type ThemeFontWeight = [Weigth, Weigth]
 
-export type ThemeSpace = Space[] &
-  Partial<{
-    small: Space
-    medium: Space
-    large: Space
-  }>
+export type ThemeSpace = Space[] & {
+  small: Space
+  medium: Space
+  large: Space
+}
 
-export type ThemeSizes = Size[] &
-  Partial<{
-    minimalRequired: Size
-  }>
+export type ThemeSizes = Size[] & {
+  minimalRequired: Size
+}
 
 export type ThemeBorderWith = {
   thin: BorderWidth

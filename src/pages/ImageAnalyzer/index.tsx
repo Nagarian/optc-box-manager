@@ -28,7 +28,7 @@ export type ImageAnalyzerProps = {
 }
 export function ImageAnalyzer({ onCharacterSelected }: ImageAnalyzerProps) {
   const characterSelectionPanelRef = useRef<HTMLDivElement>(null)
-  const analysisSelectionPanelRef = useRef<HTMLButtonElement>(null)
+  const analysisSelectionPanelRef = useRef<HTMLDivElement>(null)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showPopup, setShowPopup] = useState<boolean>(false)

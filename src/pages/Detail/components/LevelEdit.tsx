@@ -86,7 +86,7 @@ export default function LevelEdit({ level, unit, onChange }: LevelEditProps) {
               },
             }}
             style={{
-              margin: `${theme.space[3]} ${theme.space[3]} ${theme.space[4]} ${theme.space[3]}`,
+              margin: `${theme.space[3] as string} ${theme.space[3] as string} ${theme.space[4] as string} ${theme.space[3] as string}`,
               width: 'auto',
             }}
             styles={{
