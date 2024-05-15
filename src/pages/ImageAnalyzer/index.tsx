@@ -18,6 +18,7 @@ import {
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useImageAnalyzer } from 'hooks/useImageAnalyzer'
+import { ExtendedUnit } from 'models/units'
 import { useEffect, useRef, useState } from 'react'
 import { Analysis, AnalysisType } from 'services/image-cv-worker'
 import { CanvasRenderer } from './components/CanvasRenderer'
@@ -201,7 +202,7 @@ export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
                 .map((f, i) => (
                   <CharacterBox
                     key={i}
-                    unit={f.unit!}
+                    unit={f.unit as ExtendedUnit}
                     size={4}
                     onClick={() => removeFound(f)}
                   />

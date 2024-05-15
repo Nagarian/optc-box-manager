@@ -20,7 +20,7 @@ export function ByPirateFestStyleInput ({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByPirateFestStyleCriteria>) {
-  const values = criteria?.values! ?? []
+  const values = criteria?.values ?? []
   const triggerChange = (value: UnitPirateFestStyle, check: boolean) => {
     const newValues = check
       ? values.concat(value)

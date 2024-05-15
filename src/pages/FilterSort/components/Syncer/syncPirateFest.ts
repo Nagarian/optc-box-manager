@@ -1,11 +1,11 @@
-import { Syncer } from '.'
-import { SearchDisplayerCriteria } from '../Displayers'
 import { SearchSortCriteria } from 'models/search'
+import { SearchDisplayerCriteria } from '../Displayers'
 import {
   PirateFestDisplayerOption,
   PirateFestDisplayerOptionType,
 } from '../Displayers/PirateFestDisplayer'
 import { ByUserPirateFestCriteria } from '../Filters/UserUnits/ByUserPirateFest'
+import { Syncer } from '.'
 
 export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
   const userS = filters.byUserPirateFest as ByUserPirateFestCriteria

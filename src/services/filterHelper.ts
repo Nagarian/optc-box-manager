@@ -1,8 +1,6 @@
 import { Filter } from 'models/search'
 
-export function BooleanFilterMapper<T> (
-  ...args: [boolean | unknown | undefined, Filter<T>][]
-) {
+export function BooleanFilterMapper<T>(...args: [unknown, Filter<T>][]) {
   const filters = args
     .filter(([include, filter]) => Boolean(include))
     .map(([, filter]) => filter)

@@ -37,7 +37,7 @@ export const SearchFilterUserUnitsKeys = [
 
 export type SearchFilterUserUnitsType = typeof SearchFilterUserUnitsKeys[number]
 
-type Builder<T = unknown | undefined> = (
+type Builder<T = unknown> = (
   criteria: T,
   userSetting: UserSettingEnhanced,
 ) => UserUnitFilter
@@ -49,6 +49,7 @@ type UserUnitFilterBuilderType<T> = {
 }
 
 export const UserUnitFilterBuilder: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key in SearchFilterUserUnitsType]: UserUnitFilterBuilderType<any>
 } = {
   byUserPotential: {

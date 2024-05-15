@@ -1,10 +1,10 @@
-import { SearchFilterCriteriaInputProps } from 'models/search'
-import { ExtendedUnit } from 'models/units'
-import { FilterContainerPanel } from '../FilterContainer'
-import { SubTitle } from 'components/Title'
-import { BooleanFilterMapper } from 'services/filterHelper'
 import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
+import { SubTitle } from 'components/Title'
+import { SearchFilterCriteriaInputProps } from 'models/search'
+import { ExtendedUnit } from 'models/units'
+import { BooleanFilterMapper } from 'services/filterHelper'
+import { FilterContainerPanel } from '../FilterContainer'
 
 export interface BySupportCriteria {
   hasSupport?: boolean
@@ -63,7 +63,7 @@ export const BySupportFilter = (criteria: BySupportCriteria) =>
     ],
   )
 
-export function BySupportInput ({
+export function BySupportInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<BySupportCriteria>) {
@@ -82,7 +82,7 @@ export function BySupportInput ({
           checked={criteria?.hasSupport === true}
           onChange={e => triggerChange(true)}
         >
-          Has support ability
+          {'Has support ability'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -90,12 +90,12 @@ export function BySupportInput ({
           checked={criteria?.hasSupport === false}
           onChange={e => triggerChange(false)}
         >
-          Hasn't support ability
+          {"Hasn't support ability"}
         </ChoiceInput>
       </FilterContainerPanel>
 
       <SubTitle fontSize="2" my="2">
-        Specific Support Finder
+        {'Specific Support Finder'}
       </SubTitle>
       <FilterContainerPanel>
         <ChoiceInput
@@ -109,7 +109,7 @@ export function BySupportInput ({
             })
           }
         >
-          ATK
+          {'ATK'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -122,7 +122,7 @@ export function BySupportInput ({
             })
           }
         >
-          HP
+          {'HP'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -135,7 +135,7 @@ export function BySupportInput ({
             })
           }
         >
-          RCV
+          {'RCV'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -151,7 +151,7 @@ export function BySupportInput ({
             })
           }
         >
-          Other
+          {'Other'}
         </ChoiceInput>
       </FilterContainerPanel>
     </Box>

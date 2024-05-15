@@ -67,20 +67,21 @@ export const UserUnitSortTypeKeys = [
   'byAddedToBox',
 ] as const
 export type SearchSortType =
-  | typeof UnitSortTypeKeys[number]
-  | typeof UserUnitSortTypeKeys[number]
+  | (typeof UnitSortTypeKeys)[number]
+  | (typeof UserUnitSortTypeKeys)[number]
 
-export type SearchSortBuilderProps<T = any> = {
+export type SearchSortBuilderProps<T = unknown> = {
   label: string
   type: 'unit' | 'userUnit'
   fn: UnitSort | UserUnitSort
   optionInput?: FunctionComponent<SearchSortInputProps<T>>
   optionedFn?: SearchSortWithOptionFunction<T>
-  optionedLabel?: <T>(option: T) => ReactNode
+  optionedLabel?: (option: T) => ReactNode
 }
 
 export const SearchSortBuilder: {
-  [key in SearchSortType]: SearchSortBuilderProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key in SearchSortType]: SearchSortBuilderProps<any>
 } = {
   byType: {
     label: 'Type',
@@ -92,7 +93,7 @@ export const SearchSortBuilder: {
     type: 'unit',
     fn: byRaritySimple,
     optionedFn: byRarity,
-    optionedLabel: byRarityLabel as any,
+    optionedLabel: byRarityLabel,
     optionInput: RaritySortOptionInput,
   },
   byFamily: {
@@ -116,7 +117,7 @@ export const SearchSortBuilder: {
     fn: byCottonCandy,
     optionedFn: bySpecificCottonCandy,
     optionInput: SpecificCottonCandySortInput,
-    optionedLabel: bySpecificCottonCandyLabel as any,
+    optionedLabel: bySpecificCottonCandyLabel,
   },
   bySupportLvl: {
     label: 'Support',
@@ -144,7 +145,7 @@ export const SearchSortBuilder: {
     fn: byPotentialLvl,
     optionedFn: bySpecificPotentialLvl,
     optionInput: SpecificPotentialSortInput,
-    optionedLabel: bySpecificPotentialLabel as any,
+    optionedLabel: bySpecificPotentialLabel,
   },
   byPirateFestSpecial: {
     label: 'PR Special Lvl',
@@ -177,14 +178,14 @@ export const SearchSortBuilder: {
     fn: byLevel,
     optionedFn: byLevelWithOption,
     optionInput: LevelSortInput,
-    optionedLabel: byLevelSortLabel as any,
+    optionedLabel: byLevelSortLabel,
   },
 }
 
-export function DescendingSort<T> (fn: Sort<T>) {
+export function DescendingSort<T>(fn: Sort<T>) {
   return (u1: T, u2: T) => 0 - fn(u1, u2)
 }
 
-export function UnitSort2UserUnitSort (fn: UnitSort): UserUnitSort {
+export function UnitSort2UserUnitSort(fn: UnitSort): UserUnitSort {
   return (u1, u2) => fn(u1.unit, u2.unit)
 }

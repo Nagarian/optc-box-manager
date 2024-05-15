@@ -1,6 +1,6 @@
-import { Syncer } from '.'
-import { ByUserLimitBreakCriteria } from '../Filters/UserUnits/ByUserLimitBreak'
 import { SearchSortCriteria } from 'models/search'
+import { ByUserLimitBreakCriteria } from '../Filters/UserUnits/ByUserLimitBreak'
+import { Syncer } from '.'
 
 export const syncLimitBreak: Syncer = (filters, sorts, displayer) => {
   const userLB = filters.byUserLimitBreak as ByUserLimitBreakCriteria

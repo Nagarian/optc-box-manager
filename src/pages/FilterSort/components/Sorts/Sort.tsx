@@ -11,7 +11,7 @@ export type SortProps = {
   searchSort: SearchSortCriteria[]
   onChange: (searchSort: SearchSortCriteria[]) => void
 }
-export default function Sort ({
+export default function Sort({
   unitOnly,
   searchSort = [],
   onChange,
@@ -44,7 +44,7 @@ export default function Sort ({
           fontSize="1"
           margin="1"
         >
-          Default
+          {'Default'}
         </Button>
 
         <Button
@@ -54,17 +54,17 @@ export default function Sort ({
           fontSize="1"
           margin="1"
         >
-          "Newest"
+          {`"Newest"`}
         </Button>
 
         <hr />
-        <SubTitle>Unit sort</SubTitle>
+        <SubTitle>{'Unit sort'}</SubTitle>
         {UnitSortTypeKeys.map(s => SortItemRender({ by: s, order: 'asc' }))}
 
         {!unitOnly && (
           <>
             <hr />
-            <SubTitle>My Box sort</SubTitle>
+            <SubTitle>{'My Box sort'}</SubTitle>
             {UserUnitSortTypeKeys.map(s =>
               SortItemRender({ by: s, order: 'desc' }),
             )}
@@ -95,7 +95,7 @@ export default function Sort ({
           onClick={() => onChange([])}
           alignSelf="center"
         >
-          Clear
+          {'Clear'}
         </Button>
       </Box>
     </Box>

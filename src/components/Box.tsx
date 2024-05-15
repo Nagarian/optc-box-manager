@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from '@emotion/styled'
+import styled from '@emotion/styled'
 import {
   background,
   BackgroundColorProps,
@@ -34,9 +34,7 @@ export type BoxProps = SpaceProps &
   PlaceProps &
   GapProps
 
-export type BoxStyledProps = StyledComponent<'div', BoxProps, any>
-
-const Box: BoxStyledProps = styled(
+const Box = styled(
   'div',
   cleanStyledSystem,
 )<BoxProps>(

@@ -5,7 +5,7 @@ import { PotentialKey, UnitPotential } from 'models/units'
 import { UserUnitPotentialAbility } from 'models/userBox'
 import { InputLabel } from '.'
 
-function Wrapper ({
+function Wrapper({
   potential: { type, lvl, keyState },
   detail: { description, Name },
   onChange,
@@ -39,7 +39,7 @@ type PotentialEditProps = {
   onChange: (potentials: UserUnitPotentialAbility[]) => void
 }
 
-export default function PotentialEdit ({
+export default function PotentialEdit({
   potentials,
   details,
   onChange,
@@ -48,8 +48,7 @@ export default function PotentialEdit ({
     return null
   }
 
-  const renamedPotentials: Partial<Record<PotentialKey, string>> = {
-  }
+  const renamedPotentials: Partial<Record<PotentialKey, string>> = {}
 
   return (
     <ExpansionPanel title="Potentials" icon={PotentialIcon}>
@@ -57,7 +56,13 @@ export default function PotentialEdit ({
         <Wrapper
           key={potential.type}
           potential={potential}
-          detail={details.find(d => d.Name === potential.type || d.Name === renamedPotentials[potential.type])!}
+          detail={
+            details.find(
+              d =>
+                d.Name === potential.type ||
+                d.Name === renamedPotentials[potential.type],
+            ) as UnitPotential
+          }
           onChange={potential =>
             onChange(
               potentials.map(p => (p.type === potential.type ? potential : p)),

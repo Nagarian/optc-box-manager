@@ -11,16 +11,16 @@ export type Filter<T> = (unit: T) => boolean
 export type UnitFilter = Filter<ExtendedUnit>
 export type UserUnitFilter = Filter<UserUnit>
 
-export type SearchFilterCriteriaInputProps<T = unknown | undefined> = {
+export type SearchFilterCriteriaInputProps<T = unknown> = {
   criteria?: T
   onChange: (criteria?: T) => void
 }
 
-export type SearchFilterUnits<T = unknown | undefined> = {
+export type SearchFilterUnits<T = unknown> = {
   [key in SearchFilterUnitsType]?: T
 }
 
-export type SearchFilterUserUnits<T = unknown | undefined> = {
+export type SearchFilterUserUnits<T = unknown> = {
   [key in SearchFilterUserUnitsType]?: T
 }
 
@@ -28,7 +28,7 @@ export type Sort<T> = (u1: T, u2: T) => number
 export type UnitSort = Sort<ExtendedUnit>
 export type UserUnitSort = Sort<UserUnit>
 
-export type SearchSortCriteria<T = unknown | undefined> = {
+export type SearchSortCriteria<T = unknown> = {
   by: SearchSortType
   order: 'asc' | 'desc'
   options?: T

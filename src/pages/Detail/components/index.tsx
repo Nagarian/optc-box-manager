@@ -1,8 +1,8 @@
 import Box from 'components/Box'
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 import Progression from 'components/Progression'
 import { SubTitle } from 'components/Title'
 import { ReactNode } from 'react'
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
 
 type InputLabelProps = {
   value: number

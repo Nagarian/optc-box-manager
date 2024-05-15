@@ -22,7 +22,7 @@ const ExpandButton = styled(Button)<ExpandButtonProps>`
 
 const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: 0;
-  max-height: ${p => p.isOpen && p.innerHeight + 'px'};
+  max-height: ${p => p.isOpen && `${p.innerHeight}px`};
   overflow: ${p => !p.isOpen && 'hidden'};
   transition: max-height 0.25s ease;
   margin-bottom: ${p => p.isOpen && themeGet('space.2')};
@@ -32,7 +32,7 @@ const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   place-items: stretch;
 `
 
-function ExpandedPanel ({
+function ExpandedPanel({
   isOpen,
   children,
   ...rest
@@ -40,11 +40,11 @@ function ExpandedPanel ({
   isOpen: boolean
   children: ReactNode
 } & BoxProps) {
-  const [bind, { height }] = useMeasure()
+  const [bind, { height }] = useMeasure<HTMLDivElement>()
 
   return (
     <Panel innerHeight={height} isOpen={isOpen} {...rest}>
-      <div ref={bind as any}>{children}</div>
+      <div ref={bind}>{children}</div>
     </Panel>
   )
 }
@@ -56,7 +56,7 @@ type ExpansionPanelProps = {
   children?: ReactNode
 }
 
-export default function ExpansionPanel ({
+export default function ExpansionPanel({
   title,
   icon,
   disabled = false,
@@ -65,7 +65,7 @@ export default function ExpansionPanel ({
 }: ExpansionPanelProps & GridProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const boxRef = useRef<HTMLElement>(null)
+  const boxRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (isOpen && boxRef.current) {
       boxRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -74,7 +74,7 @@ export default function ExpansionPanel ({
 
   return (
     <Box
-      ref={boxRef as any}
+      ref={boxRef}
       display="flex"
       flexDirection="column"
       minWidth={isOpen ? '100%' : '50%'}

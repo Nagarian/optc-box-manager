@@ -1,14 +1,14 @@
+import Box from 'components/Box'
 import {
-  UserUnitSort,
-  SearchSortWithOptionFunction,
   SearchSortInputProps,
+  SearchSortWithOptionFunction,
+  UserUnitSort,
 } from 'models/search'
 import {
-  UserUnitCottonCandy,
   CottonCandyType,
   CottonCandyTypeKeys,
+  UserUnitCottonCandy,
 } from 'models/userBox'
-import Box from 'components/Box'
 
 const ccSum = ({ atk, hp, rcv }: UserUnitCottonCandy) => atk + hp + rcv
 

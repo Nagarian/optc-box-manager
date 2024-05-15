@@ -330,7 +330,7 @@ export type UnitDetail = {
 
 export type UnitEvolution = {
   evolution: number | number[]
-  evolvers: any[] | any[][]
+  evolvers: unknown[] | unknown[][]
 }
 
 export type UnitImages = {

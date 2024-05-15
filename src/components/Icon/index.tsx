@@ -1,16 +1,16 @@
 import { css } from '@emotion/react'
-import styled, { StyledComponent } from '@emotion/styled'
+import styled from '@emotion/styled'
 import { Text } from 'components/Title'
-import { FunctionComponent, SVGProps } from 'react'
+import { FunctionComponent } from 'react'
 import {
-  SizeProps,
-  SpaceProps,
   color,
-  compose,
+  ColorProps,
   size,
+  SizeProps,
   space,
+  SpaceProps,
 } from 'styled-system'
-import { PlaceProps, clean, place } from 'styles'
+import { clean, place,PlaceProps } from 'styles'
 import Add from './add.svg?react'
 import Arrow from './arrow.svg?react'
 import Ascending from './ascending.svg?react'
@@ -42,15 +42,15 @@ import LimitBreak from './limitbreak.svg?react'
 import Logo from './logo.png'
 import NewsCoo from './news-coo.svg?react'
 import OpenInDB from './open-in-db.svg?react'
+import PirateFestSvg from './piratefest.svg'
+import PirateFest from './piratefest.svg?react'
 import PirateFestAbility from './piratefest-ability.svg?react'
 import PirateFestBoth from './piratefest-both.svg?react'
 import PirateFestSpecial from './piratefest-special.svg?react'
-import PirateFestSvg from './piratefest.svg'
-import PirateFest from './piratefest.svg?react'
 import Potential from './potential.svg?react'
+import Reset from './reset.svg?react'
 import ResetApply from './reset-apply.svg?react'
 import ResetRemove from './reset-remove.svg?react'
-import Reset from './reset.svg?react'
 import SaveSearch from './savesearch.svg?react'
 import Search from './search.svg?react'
 import Settings from './settings.svg?react'
@@ -67,37 +67,30 @@ import TailSpin from './tail-spin.svg?react'
 import Treasure from './treasure.svg?react'
 import VideoTreasure from './video-treasure.svg?react'
 
-type StyledIconProps = SpaceProps & SizeProps & PlaceProps & { title?: string }
+type StyledIconProps = ColorProps &
+  SpaceProps &
+  SizeProps &
+  PlaceProps & { title?: string }
 
-export type Icon = StyledComponent<
-  FunctionComponent<SVGProps<SVGSVGElement>>,
-  StyledIconProps,
-  any
->
+export type Icon = FunctionComponent<StyledIconProps>
 
-const BaseSvg = (
-  svg: FunctionComponent<SVGProps<SVGSVGElement>>,
-): Icon => styled(svg, clean('color', 'fill'))<StyledIconProps>`
-  ${compose(space, size, color, place)}
-  fill: currentColor;
-`
+const BaseSvg = styled('svg', clean('color', 'fill'))(
+  space,
+  size,
+  color,
+  place,
+  css`
+    fill: currentColor;
+  `,
+)
 
-const BaseBaseImg = styled.img<StyledIconProps>(
+const BaseImg = styled.img<StyledIconProps>(
   space,
   size,
   css`
     object-fit: contain;
   `,
 )
-
-const BaseImg = (src: string, title?: string): Icon => {
-  const icon = styled(BaseBaseImg)()
-  icon.defaultProps = {
-    src,
-    title,
-  }
-  return icon
-}
 
 export {
   CottonCandySvg,
@@ -109,84 +102,74 @@ export {
   SupportSvg,
 }
 
-export const AddIcon = BaseSvg(Add)
-export const ArrowIcon = BaseSvg(Arrow)
-export const AscendingIcon = BaseSvg(Ascending)
-export const BellyIcon = BaseSvg(Belly)
-export const CancelIcon = BaseSvg(Cancel)
-export const CameraFppIcon = BaseSvg(CameraFpp)
-export const CameraTavernIcon = BaseSvg(CameraTavern)
-export const CameraTreasureIcon = BaseSvg(CameraTreasure)
-export const ClearIcon = BaseSvg(Clear)
-export const CloseIcon = BaseSvg(Close)
-export const ConfirmIcon = BaseSvg(Confirm)
-export const CottonCandyIcon = BaseSvg(CottonCandy)
-export const DeleteIcon = BaseSvg(Delete)
-export const DescendingIcon = BaseSvg(Descending)
-export const DuplicateHideIcon = BaseSvg(DuplicateHide)
-export const DuplicateShowIcon = BaseSvg(DuplicateShow)
-export const EditIcon = BaseSvg(Edit)
-export const EvolveIcon = BaseSvg(Evolve)
-export const FilterSortIcon = BaseSvg(FilterSort)
-export const GatherIslandIcon = BaseSvg(GatherIsland)
-export const HideIcon = BaseSvg(Hide)
-export const ImageAnalyzerIcon = BaseSvg(ImageAnalyzer)
-export const InkIcon = BaseSvg(Ink)
-InkIcon.defaultProps = {
-  color: 'primaryText',
-  title: 'Support',
-}
-export const LimitBreakIcon = BaseSvg(LimitBreak)
-export const LoaderIcon = BaseSvg(TailSpin)
-export const NewsCooIcon = BaseSvg(NewsCoo)
-export const OpenInDBIcon = BaseSvg(OpenInDB)
-export const PirateFestIcon = BaseSvg(PirateFest)
-PirateFestIcon.defaultProps = {
-  color: 'primaryText',
-}
-export const PirateFestAbilityIcon = BaseSvg(PirateFestAbility)
-PirateFestAbilityIcon.defaultProps = {
-  color: 'primaryText',
-}
-export const PirateFestBothIcon = BaseSvg(PirateFestBoth)
-PirateFestBothIcon.defaultProps = {
-  color: 'primaryText',
-}
-export const PirateFestSpecialIcon = BaseSvg(PirateFestSpecial)
-PirateFestSpecialIcon.defaultProps = {
-  color: 'primaryText',
-}
-export const PotentialIcon = BaseSvg(Potential)
-export const ResetIcon = BaseSvg(Reset)
-export const ResetApplyIcon = BaseSvg(ResetApply)
-export const ResetRemoveIcon = BaseSvg(ResetRemove)
-export const SaveSearchIcon = BaseSvg(SaveSearch)
-export const SettingsIcon = BaseSvg(Settings)
-export const SearchIcon = BaseSvg(Search)
-export const ShareIcon = BaseSvg(Share)
-export const ShowIcon = BaseSvg(Show)
-export const SkillBookIcon = BaseSvg(SkillBook)
-export const SugoPullIcon = BaseSvg(SugoPull)
-export const SupportIcon = BaseSvg(Support)
-SupportIcon.defaultProps = {
-  color: 'specific.support',
-  title: 'Support',
-}
-export const LevelIcon = BaseSvg(Level)
-LevelIcon.defaultProps = {
-  color: 'primaryText',
-}
+export const AddIcon: Icon = BaseSvg.withComponent(Add)
+export const ArrowIcon: Icon = BaseSvg.withComponent(Arrow)
+export const AscendingIcon: Icon = BaseSvg.withComponent(Ascending)
+export const BellyIcon: Icon = BaseSvg.withComponent(Belly)
+export const CancelIcon: Icon = BaseSvg.withComponent(Cancel)
+export const CameraFppIcon: Icon = BaseSvg.withComponent(CameraFpp)
+export const CameraTavernIcon: Icon = BaseSvg.withComponent(CameraTavern)
+export const CameraTreasureIcon: Icon = BaseSvg.withComponent(CameraTreasure)
+export const ClearIcon: Icon = BaseSvg.withComponent(Clear)
+export const CloseIcon: Icon = BaseSvg.withComponent(Close)
+export const ConfirmIcon: Icon = BaseSvg.withComponent(Confirm)
+export const CottonCandyIcon: Icon = BaseSvg.withComponent(CottonCandy)
+export const DeleteIcon: Icon = BaseSvg.withComponent(Delete)
+export const DescendingIcon: Icon = BaseSvg.withComponent(Descending)
+export const DuplicateHideIcon: Icon = BaseSvg.withComponent(DuplicateHide)
+export const DuplicateShowIcon: Icon = BaseSvg.withComponent(DuplicateShow)
+export const EditIcon: Icon = BaseSvg.withComponent(Edit)
+export const EvolveIcon: Icon = BaseSvg.withComponent(Evolve)
+export const FilterSortIcon: Icon = BaseSvg.withComponent(FilterSort)
+export const GatherIslandIcon: Icon = BaseSvg.withComponent(GatherIsland)
+export const HideIcon: Icon = BaseSvg.withComponent(Hide)
+export const ImageAnalyzerIcon: Icon = BaseSvg.withComponent(ImageAnalyzer)
+export const InkIcon: Icon = p => (
+  <BaseSvg as={Ink} color="primaryText" title="Support" {...p} />
+)
+export const LevelIcon: Icon = p => (
+  <BaseSvg as={Level} color="primaryText" {...p} />
+)
+export const LimitBreakIcon: Icon = BaseSvg.withComponent(LimitBreak)
+export const LoaderIcon: Icon = BaseSvg.withComponent(TailSpin)
+export const LogoIcon: Icon = ({ color, ...p }: StyledIconProps) => (
+  <BaseImg src={Logo} {...p} />
+)
+export const NewsCooIcon: Icon = BaseSvg.withComponent(NewsCoo)
+export const OpenInDBIcon: Icon = BaseSvg.withComponent(OpenInDB)
+export const PirateFestIcon: Icon = p => (
+  <BaseSvg as={PirateFest} color="primaryText" {...p} />
+)
+export const PirateFestAbilityIcon: Icon = p => (
+  <BaseSvg as={PirateFestAbility} color="primaryText" {...p} />
+)
+export const PirateFestBothIcon: Icon = p => (
+  <BaseSvg as={PirateFestBoth} color="primaryText" {...p} />
+)
+export const PirateFestSpecialIcon: Icon = p => (
+  <BaseSvg as={PirateFestSpecial} color="primaryText" {...p} />
+)
+export const PotentialIcon: Icon = BaseSvg.withComponent(Potential)
+export const ResetIcon: Icon = BaseSvg.withComponent(Reset)
+export const ResetApplyIcon: Icon = BaseSvg.withComponent(ResetApply)
+export const ResetRemoveIcon: Icon = BaseSvg.withComponent(ResetRemove)
+export const SaveSearchIcon: Icon = BaseSvg.withComponent(SaveSearch)
+export const SettingsIcon: Icon = BaseSvg.withComponent(Settings)
+export const SearchIcon: Icon = BaseSvg.withComponent(Search)
+export const ShareIcon: Icon = BaseSvg.withComponent(Share)
+export const ShowIcon: Icon = BaseSvg.withComponent(Show)
+export const SkillBookIcon: Icon = BaseSvg.withComponent(SkillBook)
+export const SpecialLvlIcon: Icon = p => (
+  <BaseSvg as={Special} color="primaryText" {...p} />
+)
+export const SugoPullIcon: Icon = BaseSvg.withComponent(SugoPull)
+export const SupportIcon: Icon = p => (
+  <BaseSvg as={Support} color="specific.support" title="Support" {...p} />
+)
 export const LevelTextIcon = () => (
   <Text color="white" as="span">
     Lv.{' '}
   </Text>
 )
-export const TreasureIcon = BaseSvg(Treasure)
-export const VideoTreasureIcon = BaseSvg(VideoTreasure)
-
-export const SpecialLvlIcon = BaseSvg(Special)
-SpecialLvlIcon.defaultProps = {
-  color: 'primaryText',
-}
-// export const SpecialLvlIcon = BaseImg(SpecialLvl, 'Special Level')
-export const LogoIcon = BaseImg(Logo)
+export const TreasureIcon: Icon = BaseSvg.withComponent(Treasure)
+export const VideoTreasureIcon: Icon = BaseSvg.withComponent(VideoTreasure)

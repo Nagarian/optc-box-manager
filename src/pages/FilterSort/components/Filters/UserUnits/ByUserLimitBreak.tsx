@@ -11,10 +11,10 @@ export const LimitBreakStateKeys = [
   'unmaxed',
   'maxed',
 ] as const
-export type LimitBreakState = typeof LimitBreakStateKeys[number]
+export type LimitBreakState = (typeof LimitBreakStateKeys)[number]
 
 export const RainbowStateKeys = ['to rainbow', 'rainbow'] as const
-export type RainbowState = typeof RainbowStateKeys[number]
+export type RainbowState = (typeof RainbowStateKeys)[number]
 
 export type ByUserLimitBreakCriteria = {
   lbState?: LimitBreakState
@@ -22,9 +22,9 @@ export type ByUserLimitBreakCriteria = {
   rainbowState?: RainbowState
 }
 
-function lbStateToCriteria (
+function lbStateToCriteria(
   userUnit: UserUnit,
-  state: LimitBreakState,
+  state?: LimitBreakState,
 ): boolean {
   if (!userUnit.limitBreak) {
     return false
@@ -46,9 +46,9 @@ function lbStateToCriteria (
   }
 }
 
-function keyLbStateToCriteria (
+function keyLbStateToCriteria(
   userUnit: UserUnit,
-  state: LimitBreakState,
+  state?: LimitBreakState,
 ): boolean {
   if (!userUnit.limitBreak || !userUnit.limitBreak.keyLvlMax) {
     return false
@@ -72,7 +72,7 @@ function keyLbStateToCriteria (
   }
 }
 
-function isRainbowCriteria (userUnit: UserUnit) {
+function isRainbowCriteria(userUnit: UserUnit) {
   if (!userUnit.limitBreak) {
     return false
   }
@@ -98,12 +98,12 @@ export const ByUserLimitBreakFilter = (criteria: ByUserLimitBreakCriteria) =>
   BooleanFilterMapper(
     [
       criteria.lbState,
-      (userUnit: UserUnit) => lbStateToCriteria(userUnit, criteria.lbState!),
+      (userUnit: UserUnit) => lbStateToCriteria(userUnit, criteria.lbState),
     ],
     [
       criteria.keyLbState,
       (userUnit: UserUnit) =>
-        keyLbStateToCriteria(userUnit, criteria.keyLbState!),
+        keyLbStateToCriteria(userUnit, criteria.keyLbState),
     ],
     [
       criteria.rainbowState,
@@ -112,7 +112,7 @@ export const ByUserLimitBreakFilter = (criteria: ByUserLimitBreakCriteria) =>
           return false
         }
 
-        switch (criteria.rainbowState!) {
+        switch (criteria.rainbowState) {
           case 'rainbow':
             return isRainbowCriteria(userUnit)
           case 'to rainbow':
@@ -124,7 +124,7 @@ export const ByUserLimitBreakFilter = (criteria: ByUserLimitBreakCriteria) =>
     ],
   )
 
-export function ByUserLimitBreakInput ({
+export function ByUserLimitBreakInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserLimitBreakCriteria>) {
@@ -133,7 +133,8 @@ export function ByUserLimitBreakInput ({
       <FilterContainerPanel marginY="2">
         <Text>Limit Break</Text>
         {LimitBreakStateKeys.map(state => (
-          <ChoiceInput key={state}
+          <ChoiceInput
+            key={state}
             type="radio"
             name="uu-lbstate"
             checked={criteria?.lbState === state}
@@ -152,7 +153,8 @@ export function ByUserLimitBreakInput ({
       <FilterContainerPanel marginY="2">
         <Text>Keyed Limit Break</Text>
         {LimitBreakStateKeys.map(state => (
-          <ChoiceInput key={state}
+          <ChoiceInput
+            key={state}
             type="radio"
             name="uu-keyLbState"
             checked={criteria?.keyLbState === state}
@@ -171,7 +173,8 @@ export function ByUserLimitBreakInput ({
       <FilterContainerPanel marginY="3">
         <Text>Rainbow</Text>
         {RainbowStateKeys.map(state => (
-          <ChoiceInput key={state}
+          <ChoiceInput
+            key={state}
             type="radio"
             name="uu-lb-rainbow"
             checked={criteria?.rainbowState === state}

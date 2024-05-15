@@ -2,7 +2,7 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { CottonCandyIcon } from 'components/Icon'
 import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps } from 'models/search'
-import { UserUnit, CottonCandyType, CottonCandyTypeKeys } from 'models/userBox'
+import { CottonCandyType, CottonCandyTypeKeys,UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 

@@ -10,7 +10,7 @@ const userBoxKey = 'userBox'
 const reviver = (units: ExtendedUnit[] = []) =>
   units.length === 0
     ? undefined
-    : (key: string, value: any) => {
+    : (key: string, value: unknown) => {
         if (key !== 'unit') return value
 
         if (typeof value === 'number') {
@@ -22,13 +22,13 @@ const reviver = (units: ExtendedUnit[] = []) =>
         return value
       }
 
-const replacer = (key: string, value: any) => {
+const replacer = (key: string, value: unknown) => {
   if (key !== 'unit') return value
   if (typeof value === 'number') return value
   return (value as ExtendedUnit).id
 }
 
-export default function useUserBox (): MyUserBox {
+export default function useUserBox(): MyUserBox {
   const { db, isLoaded: dbLoaded } = useOptcDb()
   const [userBox, setUserBox] = useState<UserBox>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -40,7 +40,7 @@ export default function useUserBox (): MyUserBox {
 
     const json = localStorage.getItem(userBoxKey)
     if (json) {
-      let userBox: UserBox = JSON.parse(json, reviver(db))
+      let userBox = JSON.parse(json, reviver(db)) as UserBox
       if (db.length) {
         userBox = userBox.map(resync)
       }
@@ -88,7 +88,7 @@ export default function useUserBox (): MyUserBox {
       localStorage.setItem(userBoxKey, '[]')
     },
     importDB: (json: string) => {
-      let importedDb = JSON.parse(json, reviver(db))
+      let importedDb = JSON.parse(json, reviver(db)) as UserBox
       if (!Array.isArray(importedDb)) {
         // TODO: make more check
         throw new Error('invalid JSON file')
@@ -98,7 +98,7 @@ export default function useUserBox (): MyUserBox {
         importedDb = importedDb.map(resync)
       }
 
-      setUserBox(importedDb as UserBox)
+      setUserBox(importedDb)
     },
     exportDB: async () => {
       const payload = JSON.stringify(userBox, replacer)

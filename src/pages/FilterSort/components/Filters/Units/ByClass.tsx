@@ -23,7 +23,7 @@ export function ByClassInput ({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByClassCriteria>) {
-  const values = criteria?.values! ?? []
+  const values = criteria?.values ?? []
   const triggerChange = (value: UnitClass, check: boolean) => {
     const newValues = check
       ? values.concat(value)

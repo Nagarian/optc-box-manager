@@ -7,6 +7,7 @@ import {
   UserUnitLimitBreak,
   UserUnitPotentialAbility,
   UserUnitPotentialAbilityKeyState,
+  UserUnitPowerSocket,
   UserUnitSpecial,
 } from 'models/userBox'
 import {
@@ -15,7 +16,7 @@ import {
 } from 'scripts/glo-jap-remapper-proxy'
 import { v4 as uuid } from 'uuid'
 
-export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
+export function UserUnitFactory(unit: ExtendedUnit): UserUnit {
   return {
     id: uuid(),
     unit,
@@ -49,10 +50,13 @@ export function UserUnitFactory (unit: ExtendedUnit): UserUnit {
             gplvl: unit.detail.festGPBurst ? 1 : undefined,
           }
         : undefined,
-    sockets: Array(Math.max(unit.slots, unit.limitSlot, unit.limitexSlot)).fill(
-      { type: undefined, lvl: 0 },
-    ),
-    ink: unit.flags.inkable || unit.stars === '6+' || unit.stars === 6 ? { lvl: 0 } : undefined,
+    sockets: Array<UserUnitPowerSocket>(
+      Math.max(unit.slots, unit.limitSlot, unit.limitexSlot),
+    ).fill({ type: undefined, lvl: 0 }),
+    ink:
+      unit.flags.inkable || unit.stars === '6+' || unit.stars === 6
+        ? { lvl: 0 }
+        : undefined,
     level: {
       lvl: 1,
       lvlMax: unit.maxLevel,
@@ -69,8 +73,8 @@ const UserUnitLimitBreakFactory = (
     return undefined
   }
 
-  const keyIndex = limitBreak.findIndex(
-    lb => lb.description.startsWith('LOCKED WITH KEY'),
+  const keyIndex = limitBreak.findIndex(lb =>
+    lb.description.startsWith('LOCKED WITH KEY'),
   )
 
   return {
@@ -82,7 +86,7 @@ const UserUnitLimitBreakFactory = (
 
 const superEvolution: UnitStar[] = ['4+', '5+', '6+']
 
-export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit {
+export function Evolve(userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit {
   if (!evolution) {
     return userUnit
   }
@@ -110,7 +114,7 @@ export function Evolve (userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit 
   }
 }
 
-function computeSpecialReset (
+function computeSpecialReset(
   base: UserUnit,
   evolved: UserUnit,
 ): UserUnitSpecial | undefined {
@@ -130,7 +134,7 @@ function computeSpecialReset (
 
   // by prevention of optc-db issue with cooldown definition, we re-compute to avoid over-range
   return {
-    lvlMax: evolved.special!.lvlMax,
+    lvlMax: evolved.special.lvlMax,
     lvl:
       base.special.lvl > evolved.special.lvlMax
         ? evolved.special.lvlMax
@@ -138,7 +142,7 @@ function computeSpecialReset (
   }
 }
 
-export function ConsumeUnitDupe (userUnit: UserUnit): UserUnit {
+export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
   const updated = {
     ...userUnit,
   }
@@ -173,7 +177,7 @@ export function ConsumeUnitDupe (userUnit: UserUnit): UserUnit {
   return updated
 }
 
-export function applyEdit (
+export function applyEdit(
   userUnit: UserUnit,
   edit: UserUnitBulkEdit,
   db: ExtendedUnit[],
@@ -210,9 +214,11 @@ export function applyEdit (
       editPotential(p, edit.limitBreakState),
     )
 
-    updated.limitBreak = {
-      ...updated.limitBreak!,
-      lvl: editLimitBreak(updated.limitBreak!, edit.limitBreakState),
+    if (updated.limitBreak) {
+      updated.limitBreak = {
+        ...updated.limitBreak,
+        lvl: editLimitBreak(updated.limitBreak, edit.limitBreakState),
+      }
     }
   }
 
@@ -256,7 +262,7 @@ export function applyEdit (
   return updated
 }
 
-function editPotential (
+function editPotential(
   userPotential: UserUnitPotentialAbility,
   state?: UserUnitBulkEditLimitBreakState,
 ): UserUnitPotentialAbility {
@@ -288,7 +294,7 @@ function editPotential (
   }
 }
 
-function editLimitBreak (
+function editLimitBreak(
   limitBreak: UserUnitLimitBreak,
   state?: UserUnitBulkEditLimitBreakState,
 ): number {
@@ -304,7 +310,7 @@ function editLimitBreak (
   }
 }
 
-export function resync (userUnit: UserUnit) {
+export function resync(userUnit: UserUnit) {
   const updated = { ...userUnit }
   const compare = UserUnitFactory(userUnit.unit)
   let isUpdated = false
@@ -356,12 +362,14 @@ export function resync (userUnit: UserUnit) {
     userUnit.limitBreak?.keyLvlMax !== compare.limitBreak?.keyLvlMax ||
     userUnit.limitBreak?.lvlMax !== compare.limitBreak?.lvlMax
   ) {
-    updated.limitBreak = {
-      ...compare.limitBreak!,
-      lvl: userUnit.limitBreak?.lvl ?? 0,
-    }
+    if (compare.limitBreak) {
+      updated.limitBreak = {
+        ...compare.limitBreak,
+        lvl: userUnit.limitBreak?.lvl ?? 0,
+      }
 
-    isUpdated = true
+      isUpdated = true
+    }
   }
 
   if (!userUnit.pirateFest && compare.pirateFest) {
@@ -387,9 +395,9 @@ export function resync (userUnit: UserUnit) {
       ),
       gplvl: compare.pirateFest?.gplvl
         ? Math.max(
-          updated.pirateFest?.gplvl ?? 0,
-          compare.pirateFest?.gplvl ?? 0,
-        )
+            updated.pirateFest?.gplvl ?? 0,
+            compare.pirateFest?.gplvl ?? 0,
+          )
         : undefined,
     }
 
@@ -414,7 +422,7 @@ export function resync (userUnit: UserUnit) {
   return isUpdated ? updated : userUnit
 }
 
-function arrayEqual<T> (array1: T[], array2: T[]) {
+function arrayEqual<T>(array1: T[], array2: T[]) {
   return (
     array1.length === array2.length &&
     array1.every((value, index) => value === array2[index])
@@ -432,8 +440,8 @@ const getPotentialState = (
     return undefined
   }
 
-  const keyIndex = limitBreak.findIndex(
-    lb => lb.description.startsWith('LOCKED WITH KEY'),
+  const keyIndex = limitBreak.findIndex(lb =>
+    lb.description.startsWith('LOCKED WITH KEY'),
   )
 
   if (keyIndex === -1) {

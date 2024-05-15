@@ -112,7 +112,7 @@ function App () {
           setSearch(
             mergeSearch(search, {
               filters: { units: { bySearchBox: criteria } },
-            } as any),
+            }),
           )
         }
       />
@@ -183,7 +183,7 @@ function App () {
         display="grid"
         gridAutoFlow="column"
         justifyContent="center"
-        gridGap="3"
+        gap="3"
         py="2"
         boxShadow="none"
       >

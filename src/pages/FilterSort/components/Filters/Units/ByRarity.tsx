@@ -40,9 +40,8 @@ export function ByRarityInput ({
           checked={values.includes(value)}
           onChange={e => triggerChange(value, e.target.checked)}
         >
-          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
           <Text fontSize="2" margin="2">
-            ⭐{value}
+            {`⭐${value}`}
           </Text>
         </ImageInput>
       ))}

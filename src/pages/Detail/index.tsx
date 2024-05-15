@@ -29,7 +29,7 @@ type DetailProps = {
   isSugoCleaner?: boolean
 }
 
-export default function Detail ({
+export default function Detail({
   onCancel,
   onValidate,
   units,
@@ -46,7 +46,7 @@ export default function Detail ({
         ? []
         : Array.isArray(unit.evolution.evolution)
           ? unit.evolution.evolution.map(id => units.find(u => u.id === id))
-          : [units.find(u => u.id === unit.evolution!.evolution)]
+          : [units.find(u => u.id === unit.evolution?.evolution)]
       ).filter(Boolean) as ExtendedUnit[],
     [unit.evolution, units],
   )
@@ -60,21 +60,22 @@ export default function Detail ({
   }, [isSugoCleaner])
 
   const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
-    const potentialUnlockedLength = unit.detail
-      .limit!.slice(0, limitBreak.lvl)
-      .map(lb => getLimitType(lb))
-      .filter(type => type === 'potential').length
+    const potentialUnlockedLength =
+      unit.detail.limit
+        ?.slice(0, limitBreak.lvl)
+        .map(lb => getLimitType(lb))
+        .filter(type => type === 'potential').length ?? 0
 
     const potentials = userUnit.potentials
       .slice(0, potentialUnlockedLength)
       .filter(p => p.lvl === 0).length
       ? userUnit.potentials.map((p, i) =>
-        i < potentialUnlockedLength && p.lvl === 0
-          ? { ...p, lvl: 1 }
-          : i >= potentialUnlockedLength && p.lvl === 1
-            ? { ...p, lvl: 0 }
-            : p,
-      )
+          i < potentialUnlockedLength && p.lvl === 0
+            ? { ...p, lvl: 1 }
+            : i >= potentialUnlockedLength && p.lvl === 1
+              ? { ...p, lvl: 0 }
+              : p,
+        )
       : userUnit.potentials
 
     setUserUnit({
@@ -182,7 +183,7 @@ export default function Detail ({
           title="Are you sure to delete it ?"
           onValidate={() => {
             setShowConfirmation(false)
-            onDelete!(userUnit.id)
+            onDelete?.(userUnit.id)
           }}
           onCancel={() => setShowConfirmation(false)}
         />

@@ -1,14 +1,14 @@
 import { SearchFilterUserUnits, SearchSortCriteria } from 'models/search'
-import { SearchDisplayerCriteria } from '../Displayers'
 import { useEffect } from 'react'
-import { syncPotentials } from './syncPotentials'
-import { syncSupport } from './syncSupport'
-import { syncSpecialLevel } from './syncSpecialLevel'
-import { syncLimitBreak } from './syncLimitBreak'
+import { SearchDisplayerCriteria } from '../Displayers'
 import { syncCottonCandy } from './syncCottonCandy'
-import { syncPirateFest } from './syncPirateFest'
 import { syncInk } from './syncInk'
 import { syncLevel } from './syncLevel'
+import { syncLimitBreak } from './syncLimitBreak'
+import { syncPirateFest } from './syncPirateFest'
+import { syncPotentials } from './syncPotentials'
+import { syncSpecialLevel } from './syncSpecialLevel'
+import { syncSupport } from './syncSupport'
 
 export type SyncerResult = [
   SearchSortCriteria[] | undefined,

@@ -1,10 +1,9 @@
 import styled from '@emotion/styled'
 import Image from 'components/Image'
 import { PowerSocketKey } from 'models/units'
-import { memo } from 'react'
+import { ElementType, memo } from 'react'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
-import ImageFrame from './images/teamskill_iconframe_l.png'
 import ImageSkill01 from './images/teamskill_icon_001.png'
 import ImageSkill02 from './images/teamskill_icon_002.png'
 import ImageSkill03 from './images/teamskill_icon_003.png'
@@ -15,6 +14,7 @@ import ImageSkill07 from './images/teamskill_icon_007.png'
 import ImageSkill08 from './images/teamskill_icon_008.png'
 import ImageSkill09 from './images/teamskill_icon_009.png'
 import ImageSkill10 from './images/teamskill_icon_010.png'
+import ImageFrame from './images/teamskill_iconframe_l.png'
 
 export function PowerSocketToImage (type: PowerSocketKey | undefined) {
   switch (type) {
@@ -46,7 +46,6 @@ type PowerSocketProps = SpaceProps &
     type?: PowerSocketKey
     hideChrome?: boolean
     isFocused?: boolean
-    as?: any
   }
 
 const Container = styled('div', cleanStyledSystem)<SizeProps & { isFocused: boolean }>`

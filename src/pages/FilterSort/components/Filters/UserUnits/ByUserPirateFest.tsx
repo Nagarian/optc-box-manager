@@ -17,7 +17,7 @@ export interface ByUserPirateFestCriteria {
 const festFilter = (
   value: number | undefined,
   max: number,
-  state: UserPirateFestState,
+  state?: UserPirateFestState,
 ) => {
   if (!value) return false
 
@@ -35,15 +35,15 @@ export const ByUserPirateFestFilter = (criteria: ByUserPirateFestCriteria) =>
   BooleanFilterMapper<UserUnit>(
     [
       criteria.abilityLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.abilityLvl, 5, criteria.abilityLvlState!),
+      (userUnit) => festFilter(userUnit.pirateFest?.abilityLvl, 5, criteria.abilityLvlState),
     ],
     [
       criteria.specialLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.specialLvl, 10, criteria.specialLvlState!),
+      (userUnit) => festFilter(userUnit.pirateFest?.specialLvl, 10, criteria.specialLvlState),
     ],
     [
       criteria.gpLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.gplvl, 5, criteria.gpLvlState!),
+      (userUnit) => festFilter(userUnit.pirateFest?.gplvl, 5, criteria.gpLvlState),
     ],
   )
 

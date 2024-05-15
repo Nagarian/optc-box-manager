@@ -5,7 +5,7 @@ import { ArrowIcon } from 'components/Icon'
 import { Text } from 'components/Title'
 import { useThemeMode } from 'hooks/useThemeMode'
 
-export function ThemeChooser () {
+export function ThemeChooser() {
   const { themeMode, setThemeMode } = useThemeMode()
 
   return (
@@ -18,7 +18,7 @@ export function ThemeChooser () {
           checked={themeMode === 'auto'}
           onChange={e => setThemeMode('auto')}
         >
-          Auto (defined by system)
+          {"Auto (defined by system)"}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -26,7 +26,7 @@ export function ThemeChooser () {
           checked={themeMode === 'light'}
           onChange={e => setThemeMode('light')}
         >
-          Light ☀
+          {'Light ☀'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -34,8 +34,7 @@ export function ThemeChooser () {
           checked={themeMode === 'dark'}
           onChange={e => setThemeMode('dark')}
         >
-          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-          Dark 🌙
+          {'Dark 🌙'}
         </ChoiceInput>
       </Box>
     </ExpansionPanel>

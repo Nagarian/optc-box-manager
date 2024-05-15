@@ -17,6 +17,7 @@ describe('UnitSort', () => {
     it('should order by rarity', () => {
       expect(
         unitsMock()
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
           .sort(byRarity({ truncated: false }) as any)
           .map(u => u.stars),
       ).toStrictEqual([5, 6, 6, '6+'])

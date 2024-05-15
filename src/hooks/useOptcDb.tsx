@@ -20,7 +20,7 @@ const defaultOptcDb = {
 
 const OptcDbContext = createContext<OptcDb>(defaultOptcDb)
 
-export const OptcDbProvider: FunctionComponent<PropsWithChildren<unknown>> = ({
+export const OptcDbProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const [optcDbValue, setOptcDbValue] = useState<OptcDb>(defaultOptcDb)
@@ -30,7 +30,7 @@ export const OptcDbProvider: FunctionComponent<PropsWithChildren<unknown>> = ({
 
     const load = async () => {
       const response = await fetch('db-old.json')
-      const db: ExtendedUnit[] = await response.json()
+      const db = await response.json() as ExtendedUnit[]
       if (!cancelled) {
         setOptcDbValue({
           db: db.filter(u => u.class !== 'Booster' && u.class !== 'Evolver'),
@@ -39,7 +39,7 @@ export const OptcDbProvider: FunctionComponent<PropsWithChildren<unknown>> = ({
       }
     }
 
-    load()
+    load().catch((e: unknown) => console.error(e))
 
     return () => {
       cancelled = true

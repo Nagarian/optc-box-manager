@@ -98,7 +98,6 @@ export default function RecapBox ({
       >
         <SubTitle>N°{unit.id}</SubTitle>
         <CharacterBox userUnit={userUnit} />
-        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <Text margin="1" textAlign="center">
           {unit.stars}⭐ - {unit.dropLocations.join(', ')}
         </Text>

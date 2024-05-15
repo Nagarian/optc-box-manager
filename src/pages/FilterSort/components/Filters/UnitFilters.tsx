@@ -33,6 +33,7 @@ export default function UnitFilters ({
             onChange={value =>
               onChange({
                 ...unitFilter,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 [key]: value,
               })
             }

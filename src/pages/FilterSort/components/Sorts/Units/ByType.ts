@@ -21,7 +21,7 @@ const _ParseType = (type: UnitType): number => {
 const ParseType = (type: UnitType | [UnitType, UnitType]): number => {
   return Array.isArray(type)
     ? 0 // dual unit
-    : _ParseType(type as UnitType)
+    : _ParseType(type)
 }
 
 const byType: UnitSort = (unit1, unit2) =>

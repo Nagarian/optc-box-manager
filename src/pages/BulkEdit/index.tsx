@@ -228,10 +228,10 @@ export default function BulkEdit ({
 
       {showStep2 && (
         <BulkEditSelect
-          relatedSearch={computeSearch(edit!)}
+          relatedSearch={computeSearch(edit)}
           userUnits={userUnits}
           onCancel={() => setShowStep2(false)}
-          onSubmit={uu => onSubmit(uu, edit!)}
+          onSubmit={uu => edit && onSubmit(uu, edit)}
         />
       )}
     </>
@@ -267,7 +267,7 @@ function MultiChoiceInput<T extends string> ({
   onChange: (state: T) => void
 }) {
   return (
-    <Box display="grid" gridTemplateColumns="auto auto" gridGap="2">
+    <Box display="grid" gridTemplateColumns="auto auto" gap="2">
       {values.map(state => (
         <ChoiceInput
           key={state}
@@ -322,7 +322,7 @@ function levelStateToLabel (state: UserUnitBulkEditLevelState) {
   }
 }
 
-function computeSearch (edit: UserUnitBulkEdit): Search {
+function computeSearch (edit: UserUnitBulkEdit | undefined): Search {
   let uuf: SearchFilterUserUnits = {}
   let displayer: SearchDisplayerCriteria | undefined
   const uus: SearchSortCriteria[] = []
@@ -385,7 +385,7 @@ function computeSearch (edit: UserUnitBulkEdit): Search {
     displayer = { type: 'cottonCandy' }
   }
 
-  if (edit.idConverter === 'toGlobal') {
+  if (edit?.idConverter === 'toGlobal') {
     return {
       filters: {
         units: {
@@ -398,7 +398,7 @@ function computeSearch (edit: UserUnitBulkEdit): Search {
     }
   }
 
-  if (edit.idConverter === 'toJapan') {
+  if (edit?.idConverter === 'toJapan') {
     return {
       filters: {
         units: {

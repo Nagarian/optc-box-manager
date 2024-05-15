@@ -1,9 +1,9 @@
 import { SearchSortCriteria } from 'models/search'
 import { SearchDisplayerCriteria } from '../Displayers'
-import { ByUserLevelCriteria } from '../Filters/UserUnits/ByUserLevel'
-import { Syncer } from '.'
 import { LevelDisplayerOption } from '../Displayers/LevelDisplayer'
+import { ByUserLevelCriteria } from '../Filters/UserUnits/ByUserLevel'
 import { LevelSortOption } from '../Sorts/UserUnits/ByLevel'
+import { Syncer } from '.'
 
 export const syncLevel: Syncer = (filters, sorts, displayer) => {
   const userL = filters.byUserLevel as ByUserLevelCriteria

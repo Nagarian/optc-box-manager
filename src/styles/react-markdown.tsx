@@ -34,5 +34,5 @@ export const ReactMarkdownRenderers: Components = {
   a: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
   li: p => <ListItem {...p} />,
   ol: p => <OrderedList {...p} />,
-  img: Img as any,
+  img: p => <Img {...p} />,
 }

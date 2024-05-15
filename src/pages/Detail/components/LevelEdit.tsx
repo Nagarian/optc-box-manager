@@ -1,3 +1,4 @@
+import 'rc-slider/assets/index.css'
 import { useTheme } from '@emotion/react'
 import ExpansionPanel from 'components/ExpansionPanel'
 import LevelInput from 'components/forms/LevelInput'
@@ -6,7 +7,6 @@ import { levelLBFromStepLevel, levelLBMaxLevel } from 'components/LevelLB'
 import { ExtendedUnit, UnitType } from 'models/units'
 import { UserUnitLevel } from 'models/userBox'
 import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
 import { InputLabel } from '.'
 
 type LevelEditProps = {
@@ -15,14 +15,17 @@ type LevelEditProps = {
   onChange: (level: UserUnitLevel) => void
 }
 
-export default function LevelEdit ({ level, unit, onChange }: LevelEditProps) {
+export default function LevelEdit({ level, unit, onChange }: LevelEditProps) {
   const theme = useTheme()
 
   if (!level) return null
 
   const { lvl, lvlMax, limitLvl, limitStepLvl } = level
 
-  const type: UnitType = Array.isArray(unit.type) ? unit.type[0] : unit.type
+  const type = (Array.isArray(unit.type) ? unit.type[0] : unit.type) as Exclude<
+    UnitType,
+    'DUAL' | 'VS'
+  >
 
   return (
     <ExpansionPanel title="Level" icon={LevelIcon}>
@@ -31,7 +34,7 @@ export default function LevelEdit ({ level, unit, onChange }: LevelEditProps) {
           name="level-input"
           value={lvl}
           max={lvlMax}
-          color={(theme.colors.orb as any)[type]}
+          color={theme.colors.orb[type]}
           onChange={v =>
             onChange({
               ...level,
@@ -86,13 +89,15 @@ export default function LevelEdit ({ level, unit, onChange }: LevelEditProps) {
               margin: `${theme.space[3]} ${theme.space[3]} ${theme.space[4]} ${theme.space[3]}`,
               width: 'auto',
             }}
-            trackStyle={{
-              backgroundColor: theme.colors.primaryText,
+            styles={{
+              track: {
+                backgroundColor: theme.colors.primaryText,
+              },
+              handle: {
+                borderColor: theme.colors.primaryText,
+              },
             }}
             activeDotStyle={{
-              borderColor: theme.colors.primaryText,
-            }}
-            handleStyle={{
               borderColor: theme.colors.primaryText,
             }}
           />

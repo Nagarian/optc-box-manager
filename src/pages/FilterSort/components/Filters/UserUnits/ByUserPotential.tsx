@@ -1,11 +1,11 @@
+import ChoiceInput from 'components/forms/ChoiceInput'
+import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
+import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import ImageInput from 'components/forms/ImageInput'
 import { FilterContainerPanel } from '../FilterContainer'
-import { Text } from 'components/Title'
-import ChoiceInput from 'components/forms/ChoiceInput'
 
 export const PotentialStateKeys = [
   'ongoing',
@@ -31,7 +31,7 @@ export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
 ) =>
   Object.entries(criteria).some(([potentialKey, potentialState]) =>
     userUnit.potentials.some(
-      p => p.type === potentialKey && compareLvlToState(potentialState!, p.lvl),
+      p => p.type === potentialKey && compareLvlToState(potentialState, p.lvl),
     ),
   )
 

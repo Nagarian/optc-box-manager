@@ -14,7 +14,7 @@ import { FontCss } from './font'
 import { FormsCss } from './forms'
 import { ResetCss } from './reset'
 
-export default function DefaultStyles () {
+export default function DefaultStyles() {
   const { currentTheme } = useThemeMode()
   return (
     <>
@@ -29,7 +29,7 @@ export default function DefaultStyles () {
 type ColorSchemeProps = {
   currentTheme: ThemeMode
 }
-function ColorScheme ({ currentTheme }: ColorSchemeProps) {
+function ColorScheme({ currentTheme }: ColorSchemeProps) {
   return (
     <Global
       styles={css`
@@ -42,7 +42,7 @@ function ColorScheme ({ currentTheme }: ColorSchemeProps) {
 }
 
 export const clean = (...propsToClean: string[]) => ({
-  shouldForwardProp: (p: any) =>
+  shouldForwardProp: (p: string) =>
     shouldForwardProp(p) || propsToClean.includes(p),
 })
 
@@ -114,11 +114,3 @@ export const gap = system({
     defaultScale: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   },
 })
-
-export const SafariSpecific = (cssRule: any) => css`
-  @media not all and (min-resolution: 0.001dpcm) {
-    @media {
-      ${cssRule}
-    }
-  }
-`

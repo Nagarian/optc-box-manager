@@ -1,11 +1,11 @@
 import Box from 'components/Box'
 import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
+import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { PotentialKey, Potentials } from 'models/units'
-import { SearchDisplayerProps, SearchDisplayerInputProps } from '.'
-import ImageInput from 'components/forms/ImageInput'
+import { SearchDisplayerInputProps,SearchDisplayerProps } from '.'
 
 export default function PotentialsDisplayer ({
   userUnit: {

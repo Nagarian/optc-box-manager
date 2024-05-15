@@ -13,7 +13,7 @@ type PaginationProps = {
   onPageChange: (page: number) => void
 }
 
-export default function Pagination ({
+export default function Pagination({
   current,
   maxPage,
   onPageChange,
@@ -24,16 +24,18 @@ export default function Pagination ({
 
   return (
     <Container>
-      {[...Array(maxPage)].map((_, i) => (
-        <Button
-          key={i + 1}
-          onClick={() => onPageChange(i + 1)}
-          disabled={i + 1 === current}
-          m="1"
-        >
-          {i + 1}
-        </Button>
-      ))}
+      {Array(maxPage)
+        .fill(null)
+        .map((_, i) => (
+          <Button
+            key={i + 1}
+            onClick={() => onPageChange(i + 1)}
+            disabled={i + 1 === current}
+            m="1"
+          >
+            {i + 1}
+          </Button>
+        ))}
     </Container>
   )
 }

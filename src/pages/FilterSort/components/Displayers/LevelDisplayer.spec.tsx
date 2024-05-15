@@ -22,7 +22,7 @@ describe('Level Displayer', () => {
           options={{ type: 'level LB' }}
           userUnit={{
             id: '04fdbb60-4b76-4ef1-9e95-f46851c69115',
-            unit: undefined as any as ExtendedUnit,
+            unit: {} as ExtendedUnit,
             potentials: [],
             cc: {
               hp: 180,

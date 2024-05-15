@@ -74,7 +74,7 @@ export function syncPotentialSort (
     return undefined
   }
 
-  if (optioned.find(s => (s.options as any)?.type === potential)) {
+  if (optioned.find(s => (s.options as SpecificPotentialDisplayerOption)?.type === potential)) {
     return undefined
   }
 

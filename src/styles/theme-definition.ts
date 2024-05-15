@@ -1,6 +1,7 @@
 import { Property } from 'csstype'
 
-type Size = Property.Height<{}> | Property.Width<{}>
+type Space = Property.Margin<unknown>
+type Size = Property.Height<unknown>
 type Color = Property.Color
 type Font = Property.FontFamily
 type Weigth = Property.FontWeight
@@ -8,23 +9,26 @@ type BorderWidth = Property.BorderWidth
 type ZIndex = Property.ZIndex
 type Shadow = Property.BoxShadow
 
-export type ThemeFontSizes = Font[] & Partial<{
-  body: Font
-  title: Font
-  subtitle: Font
-}>
+export type ThemeFontSizes = Font[] &
+  Partial<{
+    body: Font
+    title: Font
+    subtitle: Font
+  }>
 
 export type ThemeFontWeight = [Weigth, Weigth]
 
-export type ThemeSpace = any[] & Partial<{
-  small: any
-  medium: any
-  large: any
-}>
+export type ThemeSpace = Space[] &
+  Partial<{
+    small: Space
+    medium: Space
+    large: Space
+  }>
 
-export type ThemeSizes = Size[] & Partial<{
-  minimalRequired: Size
-}>
+export type ThemeSizes = Size[] &
+  Partial<{
+    minimalRequired: Size
+  }>
 
 export type ThemeBorderWith = {
   thin: BorderWidth
@@ -112,6 +116,6 @@ declare module '@emotion/react' {
     zIndices: ThemeZIndex
     shadows: ThemeShadow
 
-    buttons: any
+    buttons: unknown
   }
 }

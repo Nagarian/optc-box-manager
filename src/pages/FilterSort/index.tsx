@@ -1,23 +1,23 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
+import { ClearIcon,ResetIcon, SaveSearchIcon } from 'components/Icon'
 import Popup from 'components/Popup'
+import { EmptySearch } from 'hooks/useSearch'
+import { useStoredSearches } from 'hooks/useStoredSearches'
 import {
   Search,
-  SearchSortCriteria,
   SearchFilterUnits,
   SearchFilterUserUnits,
+  SearchSortCriteria,
 } from 'models/search'
+import SaveSearch from 'pages/SaveSearch'
 import { useState } from 'react'
 import { SearchDisplayerCriteria } from './components/Displayers'
 import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
 import Sort from './components/Sorts/Sort'
-import { SaveSearchIcon, ResetIcon, ClearIcon } from 'components/Icon'
-import SaveSearch from 'pages/SaveSearch'
 import { useSyncer } from './components/Syncer'
-import { useStoredSearches } from 'hooks/useStoredSearches'
-import { EmptySearch } from 'hooks/useSearch'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 

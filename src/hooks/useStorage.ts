@@ -1,9 +1,9 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction,useEffect, useState } from 'react'
 
 export function useStorage<T> (
   key: string = 'search',
   defaultValue: T,
-  migration?: (value: any) => T,
+  migration?: (value: T) => T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [value, setValue] = useState<T>(defaultValue)
 
@@ -13,7 +13,7 @@ export function useStorage<T> (
       return
     }
 
-    const parsed = JSON.parse(json)
+    const parsed = JSON.parse(json) as T
 
     if (!parsed) {
       return

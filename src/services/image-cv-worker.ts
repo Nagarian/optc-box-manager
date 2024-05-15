@@ -1,10 +1,31 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference lib="webworker" />
 
 import { ExtendedUnit } from 'models/units'
 
-// eslint-disable-next-line no-undef
-declare const self: DedicatedWorkerGlobalScope
+declare const self: DedicatedWorkerGlobalScope & { cv: any }
 declare const cv: any
+
+export type MessageToWorker =
+  | { type: 'INIT' }
+  | { type: 'PROCESS_IMAGE'; characters: ImageData; analysis: Analysis }
+  | { type: 'INIT_VIDEO'; characters: ImageData; analysis: Analysis }
+  | { type: 'PROCESS_VIDEO'; frame: ImageData }
+
+export type MessageFromWorker =
+  | { type: 'READY' }
+  | { type: 'PROCESS_IMAGE_END'; analysisId: string }
+  | { type: 'SQUARE_DETECTED'; analysisId: string; square: SquareSize }
+  | { type: 'CHARACTER_FOUND'; analysisId: string; found: CharacterFound }
+  | {
+      type: 'FRAME_PROCESSED'
+      analysisId: string
+      isGoodFrame: boolean
+      msg?: string
+    }
 
 export type SquareSize = {
   id: string
@@ -116,11 +137,12 @@ const fppSizeMatrix: InitialSizeMatrix = {
   characterSize: 172,
 }
 
-async function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
+async function loadOpenCv(waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
   // lib has been modified to remove default export
-  const opencv = await import(/* @vite-ignore */`${import.meta.env.BASE_URL}/opencv-4.8.0.js`)
+  const opencv = await import(
+    /* @vite-ignore */ `${import.meta.env.BASE_URL}/opencv-4.8.0.js`
+  )
   return new Promise((resolve, reject) => {
-    // @ts-ignore
     self.cv = opencv.cv()
     if (cv.Mat) {
       resolve()
@@ -140,7 +162,7 @@ async function loadOpenCv (waitTimeMs = 30000, stepTimeMs = 100): Promise<void> 
   })
 }
 
-onmessage = ({ data }) => {
+onmessage = ({ data }: MessageEvent<MessageToWorker>) => {
   // console.log('worker received message', data)
   switch (data.type) {
     case 'INIT':
@@ -152,7 +174,7 @@ onmessage = ({ data }) => {
       )
       break
     case 'PROCESS_IMAGE': {
-      const { image, type, id } = data.analysis as Analysis
+      const { image, type, id } = data.analysis
       const charactersMat = cv.matFromImageData(data.characters)
       const src = cv.matFromImageData(image)
       let squares: SquareSize[] = []
@@ -182,7 +204,7 @@ onmessage = ({ data }) => {
     }
     case 'INIT_VIDEO': {
       videoAnalyzer?.delete()
-      const { id } = data.analysis as Analysis
+      const { id } = data.analysis
       const charactersMat = cv.matFromImageData(data.characters)
       videoAnalyzer = new VideoAnalyzer({
         analysisId: id,
@@ -202,7 +224,7 @@ onmessage = ({ data }) => {
   }
 }
 
-function detectGenericSquare (src: any, analysisId: string): SquareSize[] {
+function detectGenericSquare(src: any, analysisId: string): SquareSize[] {
   const copy = src.clone()
 
   // we filter image to keep only yellow one
@@ -290,7 +312,7 @@ function detectGenericSquare (src: any, analysisId: string): SquareSize[] {
   return squaresToExtract.reverse()
 }
 
-function detectTopScreenV1 (src: any) {
+function detectTopScreenV1(src: any): number {
   const oldGray = new cv.Mat()
   cv.cvtColor(src, oldGray, cv.COLOR_RGBA2GRAY)
 
@@ -303,7 +325,7 @@ function detectTopScreenV1 (src: any) {
   // cv.Canny(not, not, 90, 120)
   const lines = new cv.Mat()
   cv.HoughLinesP(not, lines, 1, Math.PI / 2, 2, 30, 1)
-  let topBound = src.rows
+  let topBound: number = src.rows
   for (let i = 0; i < lines.rows; ++i) {
     const [x1, y1, x2, y2] = [
       lines.data32S[i * 4],
@@ -325,7 +347,7 @@ function detectTopScreenV1 (src: any) {
   return topBound
 }
 
-function detectTopScreenV2 (src: any): number {
+function detectTopScreenV2(src: any): number {
   const grayed = new cv.Mat()
   cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY)
   cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY)
@@ -335,7 +357,7 @@ function detectTopScreenV2 (src: any): number {
   cv.HoughLinesP(grayed, lines, 1, Math.PI / 2, 2, 30, 1)
   grayed.delete()
 
-  let topBound = src.rows
+  let topBound: number = src.rows
   for (let i = 0; i < lines.rows; ++i) {
     const [x1, y1, x2, y2] = [
       lines.data32S[i * 4],
@@ -354,7 +376,7 @@ function detectTopScreenV2 (src: any): number {
   return topBound > src.rows / 2 ? -1 : topBound
 }
 
-function detectFirstHorizontalLine (src: any): number {
+function detectFirstHorizontalLine(src: any): number {
   const whiteMask = src.clone()
   let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
   let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
@@ -400,7 +422,7 @@ function detectFirstHorizontalLine (src: any): number {
     const minimalLength = src.cols * 0.1
 
     if (verticalLength === 0 && horizontalLength > minimalLength) {
-      horizontals.push(y1)
+      horizontals.push(y1 as number)
     }
   }
   lines.delete()
@@ -415,7 +437,7 @@ function detectFirstHorizontalLine (src: any): number {
   return (minH ?? -1) % characterWidth
 }
 
-function detectMatrixSquare (
+function detectMatrixSquare(
   src: any,
   analysisId: string,
   initialSize: InitialSizeMatrix,
@@ -452,7 +474,7 @@ function detectMatrixSquare (
   return squares
 }
 
-function detectBoxRoiSizing (src: any): BoxSizeMatrix | undefined {
+function detectBoxRoiSizing(src: any): BoxSizeMatrix | undefined {
   const initialRoi = boxSizeMatrix.roi
 
   const topScreen = detectTopScreenV2(src)
@@ -474,7 +496,7 @@ function detectBoxRoiSizing (src: any): BoxSizeMatrix | undefined {
   }
 }
 
-function extractBoxSquareFromRoi (
+function extractBoxSquareFromRoi(
   analysisId: string,
   boxSize: BoxSizeMatrix,
 ): SquareSize[] {
@@ -522,7 +544,7 @@ function extractBoxSquareFromRoi (
   return squaresToExtract
 }
 
-function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
+function detectBoxSquare(src: any, analysisId: string): SquareSize[] {
   const roiSize = detectBoxRoiSizing(src)
   if (!roiSize) return []
   const roi = src.roi(roiSize.roi)
@@ -533,7 +555,7 @@ function detectBoxSquare (src: any, analysisId: string): SquareSize[] {
   return extractBoxSquareFromRoi(analysisId, roiSize)
 }
 
-function resizeSquare ({ analysisId, id, x, y, width }: SquareSize): SquareSize {
+function resizeSquare({ analysisId, id, x, y, width }: SquareSize): SquareSize {
   const extractionSquare: SquareSize = {
     id: `${new Date().getTime()}-${id}`,
     analysisId,
@@ -554,7 +576,7 @@ function resizeSquare ({ analysisId, id, x, y, width }: SquareSize): SquareSize 
   return extractionSquare
 }
 
-function findCharacterIds (
+function findCharacterIds(
   charactersMat: any,
   analysisId: string,
   src: any,
@@ -594,7 +616,7 @@ function findCharacterIds (
   }
 }
 
-function findMatching (
+function findMatching(
   charactersMat: any,
   src: any,
   squareToSearch: SquareSize,
@@ -619,10 +641,10 @@ function findMatching (
     mask.delete()
 
     return {
-      val: result.maxVal,
+      val: result.maxVal as number,
       loc: {
-        x: result.maxLoc.x,
-        y: result.maxLoc.y,
+        x: result.maxLoc.x as number,
+        y: result.maxLoc.y as number,
       },
     }
   } finally {
@@ -643,7 +665,7 @@ class VideoAnalyzer {
   private _charactersMat: any
   private _analysisId: string
 
-  constructor ({ analysisId, charactersMat }: VideoAnalyzerOptions) {
+  constructor({ analysisId, charactersMat }: VideoAnalyzerOptions) {
     this._isInitialized = false
     this._frameRoiSize = { x: 40, y: 320, width: 945, height: 1040 }
     this._characterSize = 0
@@ -656,14 +678,15 @@ class VideoAnalyzer {
     this._currentMinH = 0
   }
 
-  delete () {
+  delete() {
     this._charactersMat?.delete()
   }
 
-  processFrame (frame: any) {
+  processFrame(frame: any) {
     this.computeInitialVideoConstants(frame)
     if (!this._isInitialized) {
-      return this.signalEndOfImageProcess('not initialized')
+      this.signalEndOfImageProcess('not initialized')
+      return
     }
 
     const roi = frame.roi(this._frameRoiSize)
@@ -674,16 +697,18 @@ class VideoAnalyzer {
 
     if (this._currentMinH < previousMinH) {
       // first row hasn't changed so we stop processing
-      return this.signalEndOfImageProcess('first row hasnt moved')
+      this.signalEndOfImageProcess('first row hasnt moved')
+      return
     }
 
     this._lineCount++
 
     if (this._lineCount < this._nextLineCount) {
       // the required number of line hasn't been scrolled so we stop processing
-      return this.signalEndOfImageProcess(
+      this.signalEndOfImageProcess(
         `waiting for the next screen ${this._lineCount} ${this._nextLineCount}`,
       )
+      return
     }
 
     this._nextLineCount = this.getNextLineCount(roiRows)
@@ -692,7 +717,7 @@ class VideoAnalyzer {
     this.signalEndOfImageProcess('frame fully processed', true)
   }
 
-  private signalEndOfImageProcess (msg?: string, isGoodFrame = false) {
+  private signalEndOfImageProcess(msg?: string, isGoodFrame = false) {
     self.postMessage({
       type: 'FRAME_PROCESSED',
       analysisId: this._analysisId,
@@ -701,7 +726,7 @@ class VideoAnalyzer {
     })
   }
 
-  private computeInitialVideoConstants (src: any) {
+  private computeInitialVideoConstants(src: any) {
     if (this._isInitialized) {
       return
     }
@@ -715,15 +740,15 @@ class VideoAnalyzer {
       height: roi.height,
       width: roi.width,
     }
-    this._characterSize = characterSize!
+    this._characterSize = characterSize
     this._isInitialized = true
   }
 
-  private detectFirstHorizontalLine (src: any): number {
+  private detectFirstHorizontalLine(src: any): number {
     return detectFirstHorizontalLine(src)
   }
 
-  private getNextLineCount (srcRows: any): number {
+  private getNextLineCount(srcRows: any): number {
     for (let yI = 0; yI < 5; yI++) {
       const y = this._currentMinH + this._characterSize * yI
 

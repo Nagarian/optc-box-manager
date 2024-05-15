@@ -25,8 +25,7 @@ const InfoDisplayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
   font-weight: bold;
   font-size: ${themeGet('fontSizes.0')};
   border-radius: ${themeGet('fontSizes.0')};
-  padding: ${(p: any) =>
-    p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem'};
+  padding: ${p => (p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem')};
   margin: 0.3rem;
 
   background-color: ${themeGet('colors.primary')}C9;

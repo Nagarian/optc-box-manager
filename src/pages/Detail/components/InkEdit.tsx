@@ -16,7 +16,7 @@ export default function InkEdit ({ ink, onChange }: InkEditProps) {
 
   return (
     <ExpansionPanel title="Ink Effects" disabled={!ink} icon={InkIcon}>
-      <InputLabel value={lvl!} max={2} name="Ink Effects">
+      <InputLabel value={lvl} max={2} name="Ink Effects">
         <InkInput
           name="ink"
           value={lvl}

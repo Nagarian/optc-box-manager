@@ -3,7 +3,7 @@ import {
   Analysis,
   AnalysisType,
   CharacterFound,
-  SquareSize,
+  MessageFromWorker,
 } from 'services/image-cv-worker'
 import ImageCVWorker from 'services/image-cv-worker?worker'
 import { useOptcDb } from './useOptcDb'
@@ -27,7 +27,7 @@ export type ImageAnalyzer = {
   removeFound: (found: CharacterFound) => void
   removeAnalysis: (analysisId: string) => void
 }
-export function useImageAnalyzer (): ImageAnalyzer {
+export function useImageAnalyzer(): ImageAnalyzer {
   const {
     userSetting: { gameVersion },
   } = useUserSettings()
@@ -49,7 +49,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
   const initialize = useCallback(async () => {
     const worker = new ImageCVWorker()
 
-    worker.onmessage = ({ data }) => {
+    worker.onmessage = ({ data }: MessageEvent<MessageFromWorker>) => {
       // console.log('client received message', data)
       switch (data.type) {
         case 'READY':
@@ -65,39 +65,24 @@ export function useImageAnalyzer (): ImageAnalyzer {
             c =>
               c && {
                 ...c,
-                squares: [...c.squares, data.square as SquareSize],
+                squares: [...c.squares, data.square],
               },
           )
           break
         case 'CHARACTER_FOUND': {
-          const found: CharacterFound = {
+          const found = {
             ...data.found,
             unit: db.find(u => u.id === data.found.id),
-          }
+          } as CharacterFound
           setCurrentAnalysis(c => c && { ...c, founds: [...c.founds, found] })
           break
         }
-        case 'VIDEO_PAUSE': {
-          currentVideoRef.current?.pause()
-          break
-        }
-        case 'VIDEO_RESUME': {
-          currentVideoRef.current?.play()
-          setCurrentAnalysis(c => {
-            if (!c?.video) {
-              return c
-            }
-
-            return { ...c, squares: [] }
-          })
-          break
-        }
         case 'FRAME_PROCESSED':
-          if (data.isGoodFrame) {
+          if (data.isGoodFrame && currentVideoFrameOnProcessing.current) {
             const analysis: Analysis = {
               id: `${new Date().getTime()}`,
               type: 'box',
-              image: currentVideoFrameOnProcessing.current!,
+              image: currentVideoFrameOnProcessing.current,
               done: false,
               founds: [],
               squares: [],
@@ -176,8 +161,10 @@ export function useImageAnalyzer (): ImageAnalyzer {
     const canvas = document.createElement('canvas')
     canvas.height = analysis.video.videoHeight
     canvas.width = analysis.video.videoWidth
-    const context = canvas.getContext('2d', { willReadFrequently: true })!
-    if (!currentVideoRef.current) {
+    const context = canvas.getContext('2d', {
+      willReadFrequently: true,
+    }) as CanvasRenderingContext2D
+    if (!currentVideoRef.current || !context) {
       return
     }
 
@@ -187,7 +174,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
     const video = currentVideoRef.current
     const FPS = 30
 
-    function processFrame () {
+    function processFrame() {
       if (video.paused || video.ended) {
         return
       }
@@ -219,9 +206,9 @@ export function useImageAnalyzer (): ImageAnalyzer {
       setCurrentAnalysis(c => c && { ...c, done: true })
     })
     video.addEventListener('play', processFrame)
-    video.addEventListener('canplaythrough', e => {
+    video.addEventListener('canplaythrough', async e => {
       video.playbackRate = 0.8
-      video.play()
+      await video.play()
     })
   }, [
     analyses,
@@ -330,7 +317,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
       setIsProcessing(false)
     },
     removeFound: found => {
-      let update = analyses.find(a => a.id === found.analysisId)!
+      let update = analyses.find(a => a.id === found.analysisId)
       if (!update) {
         return
       }
@@ -356,7 +343,7 @@ export function useImageAnalyzer (): ImageAnalyzer {
   }
 }
 
-async function loadCharacterImage (
+async function loadCharacterImage(
   gameVersion: GameVersion,
 ): Promise<ImageData> {
   const url =
@@ -374,11 +361,14 @@ async function loadCharacterImage (
   canvas.width = img.width
   canvas.height = img.height
   const ctx = canvas.getContext('2d')
-  ctx!.drawImage(img, 0, 0, img.width, img.height)
-  return ctx!.getImageData(0, 0, img.width, img.height)
+  if (!ctx) {
+    throw new Error('context2D not found')
+  }
+  ctx.drawImage(img, 0, 0, img.width, img.height)
+  return ctx.getImageData(0, 0, img.width, img.height)
 }
 
-async function loadUserImage (file: File): Promise<ImageData> {
+async function loadUserImage(file: File): Promise<ImageData> {
   return new Promise<ImageData>((resolve, reject) => {
     const canvas = document.createElement('canvas')
     const baseImage = new Image()
@@ -386,14 +376,18 @@ async function loadUserImage (file: File): Promise<ImageData> {
     baseImage.onload = function () {
       canvas.width = baseImage.width
       canvas.height = baseImage.height
-      const ctx = canvas.getContext('2d')!
+      const ctx = canvas.getContext('2d')
+      if (!ctx) {
+        reject(new Error('context2D not found'))
+        return
+      }
       ctx.drawImage(baseImage, 0, 0)
       resolve(ctx.getImageData(0, 0, baseImage.width, baseImage.height))
     }
   })
 }
 
-async function loadUserVideo (file: File): Promise<HTMLVideoElement> {
+async function loadUserVideo(file: File): Promise<HTMLVideoElement> {
   return new Promise<HTMLVideoElement>((resolve, reject) => {
     const video = document.createElement('video')
     video.src = URL.createObjectURL(file)

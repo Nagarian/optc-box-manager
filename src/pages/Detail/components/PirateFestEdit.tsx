@@ -11,7 +11,7 @@ type PirateFestEditProps = {
   onChange: (support: UserUnitPirateFest) => void
 }
 
-export default function PirateFestEdit ({
+export default function PirateFestEdit({
   pirateFest: pf,
   detail,
   onChange,
@@ -25,7 +25,11 @@ export default function PirateFestEdit ({
 
   const { abilityLvl, specialLvl, gplvl } = pirateFest
 
-  const { festAbility, festSpecial, festGPBurst, festGPLeader } = detail!
+  if (!detail) {
+    return undefined
+  }
+
+  const { festAbility, festSpecial, festGPBurst, festGPLeader } = detail
 
   return (
     <ExpansionPanel title="Pirate Rumble" icon={PirateFestBothIcon}>

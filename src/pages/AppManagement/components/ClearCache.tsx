@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react'
 const imagesCacheKey = 'characters_images'
 const dbCacheKey = 'db_data'
 
-export function ClearCache () {
-  // eslint-disable-next-line no-undef
+export function ClearCache() {
   const [storageEstimation, setStorageEstimation] = useState<StorageEstimate>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -24,7 +23,7 @@ export function ClearCache () {
   }
 
   useEffect(() => {
-    computeStorageEstimation()
+    computeStorageEstimation().catch((e: unknown) => console.error(e))
   }, [])
 
   return (
@@ -36,12 +35,7 @@ export function ClearCache () {
       </Text>
 
       {storageEstimation && (
-        <Text my="2">
-          Storage used / Total Storage: {bytesToSize(storageEstimation.usage)} /{' '}
-          {bytesToSize(storageEstimation.quota)} (
-          {(storageEstimation.usage! / storageEstimation.quota! * 100).toFixed(2)}{' '}
-          %)
-        </Text>
+        <Text my="2">{computeSentences(storageEstimation)}</Text>
       )}
 
       <Button
@@ -49,19 +43,17 @@ export function ClearCache () {
         my="2"
         fontSize="2"
         isLoading={isLoading}
-        onClick={() => {
-          const clear = async () => {
-            setIsLoading(true)
-            try {
-              await window.caches.delete(imagesCacheKey)
-              await window.caches.delete(dbCacheKey)
-            } catch (error) {}
-            setIsLoading(false)
-
-            await computeStorageEstimation()
+        onClick={async () => {
+          setIsLoading(true)
+          try {
+            await window.caches.delete(imagesCacheKey)
+            await window.caches.delete(dbCacheKey)
+          } catch (error) {
+            console.error(error)
           }
+          setIsLoading(false)
 
-          clear()
+          await computeStorageEstimation()
         }}
       >
         Clear cache
@@ -70,7 +62,16 @@ export function ClearCache () {
   )
 }
 
-export function bytesToSize (bytes?: number): string {
+function computeSentences(storageEstimation: StorageEstimate) {
+  const usage = bytesToSize(storageEstimation.usage)
+  const quota = bytesToSize(storageEstimation.quota)
+  const percent = (
+    (storageEstimation.usage ?? 0 / (storageEstimation.quota ?? 1)) * 100
+  ).toFixed(2)
+  return `Storage used / Total Storage: ${usage} / ${quota} (${percent} %)`
+}
+
+function bytesToSize(bytes?: number): string {
   if (!bytes) return 'n/a'
 
   const sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB']

@@ -21,17 +21,17 @@ export const UserUnitDisplayerTypeKeys = [
 ] as const
 export type SearchDisplayerType = typeof UserUnitDisplayerTypeKeys[number]
 
-export interface SearchDisplayerCriteria<T = unknown | undefined> {
+export interface SearchDisplayerCriteria<T = unknown> {
   type: SearchDisplayerType
   options?: T
 }
 
-export type SearchDisplayerProps<T = unknown | undefined> = {
+export type SearchDisplayerProps<T = unknown> = {
   userUnit: UserUnit
   options?: T
 }
 
-export type SearchDisplayerInputProps<T = unknown | undefined> = {
+export type SearchDisplayerInputProps<T = unknown> = {
   options?: T
   onChange: (options?: T) => void
 }
@@ -43,6 +43,7 @@ type SearchDisplayerBuilderType<T> = {
 }
 
 export const SearchDisplayerBuilder: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key in SearchDisplayerType]: SearchDisplayerBuilderType<any>
 } = {
   cottonCandy: {

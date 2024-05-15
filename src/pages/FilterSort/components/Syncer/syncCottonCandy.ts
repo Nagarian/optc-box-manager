@@ -1,8 +1,8 @@
-import { Syncer } from '.'
-import { ByUserCottonCandyCriteria } from '../Filters/UserUnits/ByUserCottonCandy'
-import { SearchDisplayerCriteria } from '../Displayers'
 import { SearchSortCriteria } from 'models/search'
 import { CottonCandyType } from 'models/userBox'
+import { SearchDisplayerCriteria } from '../Displayers'
+import { ByUserCottonCandyCriteria } from '../Filters/UserUnits/ByUserCottonCandy'
+import { Syncer } from '.'
 
 export const syncCottonCandy: Syncer = (filters, sorts, displayer) => {
   const userS = filters.byUserCottonCandy as ByUserCottonCandyCriteria
@@ -24,7 +24,7 @@ export const syncCottonCandy: Syncer = (filters, sorts, displayer) => {
   return [syncSort, syncDisplayer]
 }
 
-export function syncCottonCandyDisplayer (
+export function syncCottonCandyDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
 ): SearchDisplayerCriteria | undefined {
   if (displayer) {
@@ -36,7 +36,11 @@ export function syncCottonCandyDisplayer (
   }
 }
 
-export function syncCottonCandySort (
+type ByUserCottonCandyCriteriaOptions = {
+  cc: CottonCandyType
+}
+
+export function syncCottonCandySort(
   sorts: SearchSortCriteria[],
   ccType?: CottonCandyType,
 ): SearchSortCriteria[] | undefined {
@@ -70,7 +74,11 @@ export function syncCottonCandySort (
     return undefined
   }
 
-  if (optioned.find(s => (s.options as any)?.cc === ccType)) {
+  if (
+    optioned.find(
+      s => (s.options as ByUserCottonCandyCriteriaOptions)?.cc === ccType,
+    )
+  ) {
     return undefined
   }
 

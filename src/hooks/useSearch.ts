@@ -55,7 +55,7 @@ export const DefaultUserBoxSearch: Search = {
   displayer: { type: 'level', options: { type: 'level' } },
 }
 
-export function mergeSearch (search: Search, search2: Search): Search {
+export function mergeSearch (search: Search, search2: Partial<Search>): Search {
   return {
     ...search,
     ...search2,
@@ -64,11 +64,11 @@ export function mergeSearch (search: Search, search2: Search): Search {
       ...search2.filters,
       units: {
         ...search.filters.units,
-        ...search2.filters.units,
+        ...(search2.filters?.units ?? {}),
       },
       userUnits: {
         ...search.filters.userUnits,
-        ...search2.filters.userUnits,
+        ...(search2.filters?.userUnits ?? {}),
       },
     },
     sorts: search2.sorts?.length ? search2.sorts : search.sorts,

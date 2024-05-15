@@ -9,10 +9,10 @@ import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 const PowerSocketStateKeys = ['hasnt', 'has', 'ongoing', 'maxed'] as const
-type PowerSocketState = typeof PowerSocketStateKeys[number]
+type PowerSocketState = (typeof PowerSocketStateKeys)[number]
 
 const AllPowerSocketStateKeys = ['has empty', 'ongoing', 'maxed'] as const
-type AllPowerSocketState = typeof AllPowerSocketStateKeys[number]
+type AllPowerSocketState = (typeof AllPowerSocketStateKeys)[number]
 
 export type ByUserPowerSocketCriteria = {
   all?: AllPowerSocketState
@@ -41,24 +41,26 @@ export const ByUserPowerSocketFilter = (criteria: ByUserPowerSocketCriteria) =>
     [
       criteria.state,
       ({ sockets }: UserUnit) =>
-        Object.entries(criteria.state!).every(([socketType, state]) => {
-          switch (state) {
-            case 'hasnt':
-              return sockets.every(s => s.type !== socketType)
-            case 'has':
-              return sockets.some(s => s.type === socketType)
-            case 'ongoing':
-              return sockets.some(s => s.type === socketType && s.lvl < 5)
-            case 'maxed':
-              return sockets.some(s => s.type === socketType && s.lvl === 5)
-            default:
-              return false
-          }
-        }),
+        criteria.state
+          ? Object.entries(criteria.state).every(([socketType, state]) => {
+              switch (state) {
+                case 'hasnt':
+                  return sockets.every(s => s.type !== socketType)
+                case 'has':
+                  return sockets.some(s => s.type === socketType)
+                case 'ongoing':
+                  return sockets.some(s => s.type === socketType && s.lvl < 5)
+                case 'maxed':
+                  return sockets.some(s => s.type === socketType && s.lvl === 5)
+                default:
+                  return false
+              }
+            })
+          : false,
     ],
   )
 
-export function ByUserPowerSocketInput ({
+export function ByUserPowerSocketInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserPowerSocketCriteria>) {
@@ -85,7 +87,7 @@ export function ByUserPowerSocketInput ({
         [key]: state ?? selectedState,
       }),
       {},
-    ) as any
+    ) as Record<PowerSocketKey, PowerSocketState>
 
     if (socketType) {
       newState[socketType] = state ?? selectedState ?? 'has'

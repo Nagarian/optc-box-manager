@@ -45,18 +45,38 @@ const Button: FC<ButtonProps> = ({
   icon: Icon,
   children,
   iconVariant,
-  variant,
   isLoading,
   href,
   size = 1,
+  variant = 'primary',
+  px = 3,
+  py = 2,
+  fontWeight = 1,
+  fontSize = 3,
+  border = 'currentColor solid',
+  borderWidth = 'thick',
+  borderRadius = 4,
+  placeItems = 'center',
+  placeContent = 'center',
   ...rest
 }) => {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
-  const asLink = href ? { as: 'a', href, target: '_blank' } : ({} as any)
+  const asLink = href
+    ? { as: 'a' as React.ElementType, href, target: '_blank' }
+    : {}
   return (
     <Btn
       variant={variant}
       disabled={isLoading}
+      px={px}
+      py={py}
+      fontWeight={fontWeight}
+      fontSize={fontSize}
+      border={border}
+      borderWidth={borderWidth}
+      borderRadius={borderRadius}
+      placeItems={placeItems}
+      placeContent={placeContent}
       {...asLink}
       {...rest}
       {...defaultPaddingFix}
@@ -69,19 +89,6 @@ const Button: FC<ButtonProps> = ({
       {children}
     </Btn>
   )
-}
-
-Button.defaultProps = {
-  variant: 'primary',
-  px: 3,
-  py: 2,
-  fontWeight: 1,
-  fontSize: 3,
-  border: 'currentColor solid',
-  borderWidth: 'thick',
-  borderRadius: 4,
-  placeItems: 'center',
-  placeContent: 'center',
 }
 
 export default Button

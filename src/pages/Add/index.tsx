@@ -30,18 +30,17 @@ type AddProps = {
   allowDuplicatedUnit?: boolean
 }
 
-export default function Add ({
+export default function Add({
   onCancel,
   onSubmit,
   units,
   saveKey = 'addSettingSearch',
   defaultSearch = DefaultSearch,
-  allowDuplicatedUnit,
+  allowDuplicatedUnit = false,
 }: AddProps) {
   const [selectedUnits, setSelectedUnits] = useState<ExtendedUnit[]>([])
-  const [showDuplicatedUnit, setShowDuplicatedUnit] = useState<boolean>(
-    allowDuplicatedUnit!!,
-  )
+  const [showDuplicatedUnit, setShowDuplicatedUnit] =
+    useState<boolean>(allowDuplicatedUnit)
   const selectedPanelRef = useRef<HTMLDivElement>(null)
   const { userBox } = useUserBox()
 
@@ -97,7 +96,7 @@ export default function Add ({
               setSelectedUnits(u => [
                 ...u,
                 ...ids
-                  .map(id => units.find(uu => uu.id === id)!)
+                  .map(id => units.find(uu => uu.id === id) as ExtendedUnit)
                   .filter(u => !!u),
               ])
             }
@@ -111,7 +110,7 @@ export default function Add ({
           setSearch(
             mergeSearch(search, {
               filters: { units: { bySearchBox: criteria } },
-            } as any),
+            }),
           )
         }
       />
@@ -121,8 +120,8 @@ export default function Add ({
           showDuplicatedUnit
             ? units
             : units
-              .filter(unit => !userBox.some(uu => uu.unit.id === unit.id))
-              .filter(u => !selectedUnits.some(su => su.id === u.id))
+                .filter(unit => !userBox.some(uu => uu.unit.id === unit.id))
+                .filter(u => !selectedUnits.some(su => su.id === u.id))
         }
         onUnitClick={u =>
           toggle(u, showDuplicatedUnit ? true : !selectedUnits.includes(u))

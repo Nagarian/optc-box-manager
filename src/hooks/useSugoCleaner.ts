@@ -1,7 +1,6 @@
-import { useStorage } from './useStorage'
 import { ExtendedUnit } from 'models/units'
 import { exportAsJson } from 'services/share'
-import { useEffect } from 'react'
+import { useStorage } from './useStorage'
 
 export const SugoCleanerList = ['toClean', 'toSell', 'toWaiting'] as const
 export type SugoCleanerListType = typeof SugoCleanerList[number]
@@ -26,29 +25,7 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
     toClean = [],
     toSell = [],
     toWaiting = [],
-    // @ts-ignore
-    toWaitingForLB = [],
-    // @ts-ignore
-    toWaitingForSupport = [],
   } = sugoCleaner
-
-  useEffect(() => {
-    if (toWaitingForLB?.length) {
-      setSugoCleaner(sugo => ({
-        ...sugo,
-        toWaiting: [...sugo.toWaiting, ...toWaitingForLB],
-        toWaitingForLB: undefined,
-      }))
-    }
-
-    if (toWaitingForSupport?.length) {
-      setSugoCleaner(sugo => ({
-        ...sugo,
-        toWaiting: [...sugo.toWaiting, ...toWaitingForSupport],
-        toWaitingForSupport: undefined,
-      }))
-    }
-  }, [setSugoCleaner, toWaitingForLB, toWaitingForSupport])
 
   return {
     toClean: toClean
@@ -111,7 +88,7 @@ export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
 
     reset: () => setSugoCleaner({ ...defaultSugoCleaner }),
     import: (json: string) => {
-      const importedDb: SugoCleaner = JSON.parse(json)
+      const importedDb = JSON.parse(json) as SugoCleaner
       // TODO: make safety check
       if (!importedDb.toClean) {
         throw new Error("That's not a valid Sugo Cleaner backup file")

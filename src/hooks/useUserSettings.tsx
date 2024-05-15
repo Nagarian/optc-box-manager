@@ -61,18 +61,13 @@ export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
   {},
 )
 
-function migration (initial: any): UserSetting {
+function migration (initial: UserSetting): UserSetting {
   let updated = initial
   if (initial.settingVersion === undefined) {
     updated = {
       ...defaultUserSettings,
       ...initial,
     }
-  }
-
-  if (initial.resetSearchId) {
-    updated.reseter.box = initial.resetSearchId
-    delete initial.resetSearchId
   }
 
   if (updated.settingVersion === 1) {
@@ -137,12 +132,11 @@ export function useUserSettings (): UserSettingEnhanced {
 
     reset: () => context.setUserSetting?.({ ...defaultUserSettings }),
     import: (json: string) => {
-      const importedDb: UserSetting = JSON.parse(json)
+      const importedDb = JSON.parse(json) as UserSetting
       // TODO: make safety check
       if (!importedDb.themeMode) {
         throw new Error("That's not a valid Setting backup file")
       }
-      context.setUserSetting?.(migration(importedDb))
     },
     export: async () => {
       if (!context.userSetting) {

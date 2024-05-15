@@ -1,12 +1,12 @@
+import Box from 'components/Box'
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 import ExpansionPanel from 'components/ExpansionPanel'
 import SpecialLevelInput from 'components/forms/SpecialLevelInput'
+import { SpecialLvlIcon } from 'components/Icon'
 import { UnitDetail, UnitSpecial } from 'models/units'
 import { UserUnitSpecial } from 'models/userBox'
 import { ReactNode } from 'react'
 import { InputLabel } from '.'
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
-import { SpecialLvlIcon } from 'components/Icon'
-import Box from 'components/Box'
 
 type SpecialLvlEditProps = {
   special?: UserUnitSpecial
@@ -14,17 +14,17 @@ type SpecialLvlEditProps = {
   onChange: (special: UserUnitSpecial) => void
 }
 
-function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
+function MultiStageSpecial(special: UnitSpecial): ReactNode {
   if (typeof special === 'string') {
-    return [<DescriptionHighlighter value={special} />]
+    return <DescriptionHighlighter value={special} />
   }
 
   if (typeof special !== 'object') {
-    return []
+    return undefined
   }
 
   if (Array.isArray(special)) {
-    return [
+    return (
       <Box as="ul" display="grid" gridAutoFlow="row" gap="2">
         {special.map(({ description }, i) => (
           <li key={i}>
@@ -32,25 +32,25 @@ function MultiStageSpecial (special: UnitSpecial): ReactNode[] {
             <DescriptionHighlighter value={description} />
           </li>
         ))}
-      </Box>,
-    ]
+      </Box>
+    )
   }
 
-  return [
+  return (
     <Box as="ul" display="grid" gridAutoFlow="row" gap="2">
       {Object.entries(special)
         .filter(([key, value]) => !!value)
         .map(([key, value], i) => (
           <li key={i}>
             <strong>{key}: </strong>
-            {MultiStageSpecial(value!)}
+            {value && MultiStageSpecial(value)}
           </li>
         ))}
-    </Box>,
-  ]
+    </Box>
+  )
 }
 
-export default function SpecialLvlEdit ({
+export default function SpecialLvlEdit({
   special,
   detail,
   onChange,
@@ -65,7 +65,7 @@ export default function SpecialLvlEdit ({
         value={lvl}
         max={lvlMax}
         name={detail.specialName}
-        descriptions={MultiStageSpecial(detail.special)}
+        descriptions={[MultiStageSpecial(detail.special)]}
       >
         {special.lvlMax > 1 && (
           <SpecialLevelInput

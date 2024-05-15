@@ -1,6 +1,4 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import Image from 'components/Image'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
@@ -8,8 +6,8 @@ import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,
 } from 'pages/FilterSort/components/Displayers'
-import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
-import { place, PlaceProps } from 'styles'
+import { gridArea,GridAreaProps, SizeProps } from 'styled-system'
+import { place,PlaceProps } from 'styles'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
 import Ink from './images/ink.png'
@@ -37,56 +35,9 @@ type BtnProps = {
   rainbow?: string
 }
 
-const rainbowCss = (p: BtnProps) => css`
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 0.7rem solid;
-    border-image-slice: 1;
-    border-image-source: ${themeGet(`colors.specific.${p.rainbow}`)(p)};
-    opacity: 0.9;
-  }
-`
-
-const computeBackground = ({ support, ink }: BtnProps) => {
-  const background: string[] = []
-
-  if (support) background.push(`url(${support}) center / contain no-repeat`)
-  if (ink) background.push(`url(${ink}) center / contain no-repeat`)
-
-  return background.join(',')
-}
-
-const afterCss = (p: BtnProps) => css`
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: ${computeBackground(p)};
-  }
-`
-
 export type CharacterBoxStyledProps = GridAreaProps & PlaceProps & SizeProps
 
-const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
-  padding: 0;
-  background-color: ${themeGet('primary')};
-  position: relative;
-  display: flex;
-  ${afterCss}
-  ${p => p.rainbow && rainbowCss(p)}
-  ${gridArea}
-  ${place}
-`
-
-export default function CharacterBox ({
+export default function CharacterBox({
   unit: u,
   userUnit,
   onClick,
@@ -94,7 +45,10 @@ export default function CharacterBox ({
   size = '4',
   ...rest
 }: (CharacterBoxProps | UserCharacterBoxProps) & CharacterBoxStyledProps) {
-  const unit: ExtendedUnit = userUnit?.unit ?? u!
+  const [unit, callback] = userUnit
+    ? [userUnit.unit, () => onClick?.(userUnit)]
+    : [u, () => onClick?.(u)]
+
   const support = userUnit?.support?.lvl
   const ink = userUnit?.ink?.lvl
 
@@ -109,7 +63,7 @@ export default function CharacterBox ({
       ink={ink === 2 ? InkMax : ink === 1 ? Ink : undefined}
       rainbow={getRainbowState(userUnit)}
       title={`${unit.id} - ${unit.name}`}
-      onClick={() => onClick?.(userUnit ?? unit as any)}
+      onClick={callback}
     >
       <Image src={unit.images.thumbnail} alt={unit.name} size={size} />
       <CottonCandyDisplayer cc={userUnit?.cc} />
@@ -122,7 +76,7 @@ export default function CharacterBox ({
   )
 }
 
-function getRainbowState (userUnit?: UserUnit) {
+function getRainbowState(userUnit?: UserUnit) {
   if (!userUnit || !userUnit.potentials.length || !userUnit.limitBreak) {
     return undefined
   }
@@ -144,3 +98,42 @@ function getRainbowState (userUnit?: UserUnit) {
 
   return undefined
 }
+
+const computeBackground = ({ support, ink }: BtnProps) => {
+  const background: string[] = []
+
+  if (support) background.push(`url(${support}) center / contain no-repeat`)
+  if (ink) background.push(`url(${ink}) center / contain no-repeat`)
+
+  return background.join(',')
+}
+
+const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
+  padding: 0;
+  background-color: ${p => p.theme.colors.primary};
+  position: relative;
+  display: flex;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${computeBackground};
+  }
+  &:before {
+    content: ${p => p.rainbow && "''"};
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 0.7rem solid;
+    border-image-slice: 1;
+    border-image-source: ${p => p.theme.colors.specific.rainbow};
+    opacity: 0.9;
+  }
+  ${gridArea}
+  ${place}
+`

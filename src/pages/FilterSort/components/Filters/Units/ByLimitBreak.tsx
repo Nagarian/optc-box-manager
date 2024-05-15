@@ -1,11 +1,11 @@
+import Box from 'components/Box'
+import ChoiceInput from 'components/forms/ChoiceInput'
+import { SubTitle } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
-import Box from 'components/Box'
 import { getLimitType } from 'services/limit'
-import { SubTitle } from 'components/Title'
 import { FilterContainerPanel } from '../FilterContainer'
-import ChoiceInput from 'components/forms/ChoiceInput'
 
 export interface ByLimitBreakCriteria {
   hasLimitBreak?: boolean
@@ -21,64 +21,66 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
       typeof criteria.hasLimitBreak === 'boolean',
       (unit: ExtendedUnit) =>
         unit?.detail?.limit?.length
-          ? criteria.hasLimitBreak!
-          : !criteria.hasLimitBreak!,
+          ? criteria.hasLimitBreak ?? false
+          : !criteria.hasLimitBreak,
     ],
     [
       typeof criteria.hasKeyLimitBreak === 'boolean',
       (unit: ExtendedUnit) =>
-        unit?.detail?.limit?.some(lb => lb.description.startsWith('LOCKED WITH KEY'))
-          ? criteria.hasKeyLimitBreak!
-          : !criteria.hasKeyLimitBreak!,
+        unit?.detail?.limit?.some(lb =>
+          lb.description.startsWith('LOCKED WITH KEY'),
+        )
+          ? criteria.hasKeyLimitBreak ?? false
+          : !criteria.hasKeyLimitBreak,
     ],
     [
       criteria.hasCooldownExtension,
       (unit: ExtendedUnit) => {
-        const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description.startsWith('LOCKED WITH KEY'),
+        const keyLockIndex = unit?.detail?.limit?.findIndex(lb =>
+          lb.description.startsWith('LOCKED WITH KEY'),
         )
-        if (!keyLockIndex || keyLockIndex === -1) {
+        if (!keyLockIndex || keyLockIndex === -1 || !unit.detail.limit) {
           return false
         }
 
-        return unit!
-          .detail!.limit!.slice(keyLockIndex)
+        return unit.detail.limit
+          .slice(keyLockIndex)
           .some(limit => getLimitType(limit) === 'cooldown')
       },
     ],
     [
       criteria.hasCaptainReductionExtension,
       (unit: ExtendedUnit) => {
-        const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description.startsWith('LOCKED WITH KEY'),
+        const keyLockIndex = unit?.detail?.limit?.findIndex(lb =>
+          lb.description.startsWith('LOCKED WITH KEY'),
         )
-        if (!keyLockIndex || keyLockIndex === -1) {
+        if (!keyLockIndex || keyLockIndex === -1 || !unit.detail.limit) {
           return false
         }
 
-        return unit!
-          .detail!.limit!.slice(keyLockIndex)
+        return unit.detail.limit
+          .slice(keyLockIndex)
           .some(limit => getLimitType(limit) === 'captain')
       },
     ],
     [
       criteria.hasPotentialExtension,
       (unit: ExtendedUnit) => {
-        const keyLockIndex = unit?.detail?.limit?.findIndex(
-          lb => lb.description.startsWith('LOCKED WITH KEY'),
+        const keyLockIndex = unit?.detail?.limit?.findIndex(lb =>
+          lb.description.startsWith('LOCKED WITH KEY'),
         )
-        if (!keyLockIndex || keyLockIndex === -1) {
+        if (!keyLockIndex || keyLockIndex === -1 || !unit.detail.limit) {
           return false
         }
 
-        return unit!
-          .detail!.limit!.slice(keyLockIndex)
+        return unit.detail.limit
+          .slice(keyLockIndex)
           .some(limit => getLimitType(limit) === 'potential')
       },
     ],
   )
 
-export function ByLimitBreakInput ({
+export function ByLimitBreakInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByLimitBreakCriteria>) {
@@ -89,7 +91,7 @@ export function ByLimitBreakInput ({
         gridTemplateColumns="auto auto"
         gridTemplateRows="auto auto"
         gridAutoFlow="column"
-        gridGap="2"
+        gap="2"
       >
         <ChoiceInput
           type="radio"
@@ -102,7 +104,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Has limit break
+          {'Has limit break'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -115,7 +117,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Hasn't limit break
+          {"Hasn't limit break"}
         </ChoiceInput>
 
         <ChoiceInput
@@ -129,7 +131,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Has limit break key extension
+          {'Has limit break key extension'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -142,7 +144,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Hasn't limit break key extension
+          {"Hasn't limit break key extension"}
         </ChoiceInput>
       </Box>
 
@@ -161,7 +163,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Has cooldown reduction
+          {'Has cooldown reduction'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -174,7 +176,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Has captain amelioration
+          {'Has captain amelioration'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -187,7 +189,7 @@ export function ByLimitBreakInput ({
             })
           }
         >
-          Has another potential
+          {'Has another potential'}
         </ChoiceInput>
       </FilterContainerPanel>
     </>

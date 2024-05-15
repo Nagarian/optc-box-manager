@@ -2,17 +2,6 @@ import styled from '@emotion/styled'
 import { color, ColorProps, width, WidthProps } from 'styled-system'
 import { Text } from './Title'
 
-export const Max = styled.span<WidthProps & ColorProps>`
-  text-transform: uppercase;
-  font-weight: bold;
-  ${color};
-  ${width};
-`
-Max.defaultProps = {
-  color: 'primaryText',
-  children: 'Max',
-}
-
 export type ProgressionProps = ColorProps & {
   value: number
   max: number
@@ -21,7 +10,7 @@ export type ProgressionProps = ColorProps & {
   isExtended?: boolean
   isDirty?: boolean
 }
-export default function Progression ({
+export default function Progression({
   value,
   max,
   prefix,
@@ -42,7 +31,7 @@ export default function Progression ({
     <Text
       as="span"
       minWidth="5ch"
-      color={isExtended ? 'red' : (color as any)}
+      color={isExtended ? 'red' : (color as string)}
       fontWeight={variant !== 'normal' ? 'bold' : undefined}
     >
       {prefix}
@@ -54,8 +43,15 @@ export default function Progression ({
   )
 }
 
-export const DirtyIndicator = () => (
+const DirtyIndicator = () => (
   <Text as="span" color="red">
-    *
+    {'*'}
   </Text>
 )
+
+const Max = styled.span<WidthProps & ColorProps>`
+  text-transform: uppercase;
+  font-weight: bold;
+  ${color};
+  ${width};
+`

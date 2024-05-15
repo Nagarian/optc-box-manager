@@ -1,9 +1,7 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import { space, SpaceProps } from 'styled-system'
-import { SafariSpecific } from 'styles'
 import { BounceIn, FadeIn } from 'styles/animation'
 
 export const PopupBackground = styled.div<SpaceProps>`
@@ -20,10 +18,6 @@ export const PopupBackground = styled.div<SpaceProps>`
   align-content: center;
   justify-items: center;
   animation: 200ms ${FadeIn};
-
-  ${SafariSpecific(css`
-    display: flex;
-  `)}
 `
 
 export const PopupContainer = styled(Box)<SpaceProps>`

@@ -8,8 +8,8 @@ import {
 } from 'components/Icon'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
-import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
+import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 
 const PirateFestDisplayerOptionTypes = [
   'all',

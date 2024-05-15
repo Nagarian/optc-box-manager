@@ -1,10 +1,10 @@
+import DescriptionHighlighter from 'components/DescriptionHighlighter'
 import ExpansionPanel from 'components/ExpansionPanel'
 import SupportInput from 'components/forms/SupportInput'
+import { SupportIcon } from 'components/Icon'
 import { UnitSupport } from 'models/units'
 import { UserUnitSupport } from 'models/userBox'
 import { InputLabel } from '.'
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
-import { SupportIcon } from 'components/Icon'
 
 type SupportEditProps = {
   detail?: UnitSupport
@@ -17,14 +17,14 @@ export default function SupportEdit ({
   detail,
   onChange,
 }: SupportEditProps) {
-  const { lvl } = support || {}
+  const { lvl = 0 } = support || {}
 
   const { Characters, description } = detail || {}
 
   return (
     <ExpansionPanel title="Support" disabled={!support} icon={SupportIcon}>
       <InputLabel
-        value={lvl!}
+        value={lvl}
         max={5}
         name={
           <>

@@ -1,8 +1,8 @@
+import Box from 'components/Box'
+import CottonCandyInput from 'components/forms/CottonCandyInput'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyType } from 'models/userBox'
 import { InputLabel } from 'pages/Detail/components'
-import Box from 'components/Box'
-import CottonCandyInput from 'components/forms/CottonCandyInput'
 
 const cottonCandyLimitMarksHash = [1, 3, 5, 7, 10, 12, 14, 16, 18, 30, 32, 34, 36, 38, 45, 47, 49, 51, 53, 60, 62, 64, 66, 68, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100]
 

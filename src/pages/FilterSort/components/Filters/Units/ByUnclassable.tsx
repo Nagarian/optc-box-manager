@@ -17,10 +17,13 @@ export interface ByUnclassableCriteria {
 
 const UnclassedFilters = {
   hasSuperEvolved: (unit: ExtendedUnit) => !unit.evolution,
-  hasEvolved: (unit: ExtendedUnit) =>
-    (!unit.evolution ||
-      unit.evolution.evolvers[0]?.startsWith?.('skull') ||
-      false) as boolean,
+  hasEvolved: (unit: ExtendedUnit) => {
+    if (!unit.evolution) return true
+    if (Array.isArray(unit.evolution.evolvers[0])) {
+      return unit.evolution.evolvers[0][0].toString().startsWith?.('skull')
+    }
+    return unit.evolution.evolvers[0].toString().startsWith?.('skull')
+  },
 }
 
 export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
@@ -35,14 +38,14 @@ export const ByUnclassableFilter = (criteria: ByUnclassableCriteria) =>
     [criteria.hasLevelLB === false, unit => unit.maxLevel < 99],
   )
 
-export function ByUnclassableInput ({
+export function ByUnclassableInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUnclassableCriteria>) {
   return (
     <>
       <FilterContainerPanel marginTop="2">
-        Exclude
+        {'Exclude'}
         <ChoiceInput
           type="checkbox"
           name="global-only"
@@ -57,7 +60,7 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Global Only
+          {'Global Only'}
         </ChoiceInput>
         <ChoiceInput
           type="checkbox"
@@ -73,12 +76,12 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Japan Only
+          {'Japan Only'}
         </ChoiceInput>
       </FilterContainerPanel>
 
       <FilterContainerPanel marginTop="2">
-        Exclude
+        {'Exclude'}
         <ChoiceInput
           type="radio"
           name="evolved-only"
@@ -91,7 +94,7 @@ export function ByUnclassableInput ({
             })
           }
         >
-          unevolved
+          {'unevolved'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -105,12 +108,12 @@ export function ByUnclassableInput ({
             })
           }
         >
-          unevolved + not super-evolved
+          {'unevolved + not super-evolved'}
         </ChoiceInput>
       </FilterContainerPanel>
 
       <FilterContainerPanel marginTop="2">
-        Ink Effects
+        {'Ink Effects'}
         <ChoiceInput
           type="radio"
           name="is-inkable"
@@ -122,7 +125,7 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Is Inkable
+          {'Is Inkable'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -135,12 +138,12 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Is not Inkable
+          {'Is not Inkable'}
         </ChoiceInput>
       </FilterContainerPanel>
 
       <FilterContainerPanel marginTop="2">
-        Level LB
+        {'Level LB'}
         <ChoiceInput
           type="radio"
           name="has-llb"
@@ -152,7 +155,7 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Has LLB
+          {'Has LLB'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"
@@ -165,7 +168,7 @@ export function ByUnclassableInput ({
             })
           }
         >
-          Hasn't LLB
+          {"Hasn't LLB"}
         </ChoiceInput>
       </FilterContainerPanel>
     </>

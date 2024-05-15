@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, RefObject } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 
 type BoxMeasure = {
   readonly left: number
@@ -7,8 +7,11 @@ type BoxMeasure = {
   readonly height: number
 }
 
-export default function useMeasure (): [RefObject<HTMLElement>, BoxMeasure] {
-  const ref = useRef<HTMLElement>(null)
+export default function useMeasure<T extends HTMLElement>(): [
+  RefObject<T>,
+  BoxMeasure,
+] {
+  const ref = useRef<T>(null)
   const [bounds, set] = useState<BoxMeasure>({
     left: 0,
     top: 0,
@@ -17,11 +20,16 @@ export default function useMeasure (): [RefObject<HTMLElement>, BoxMeasure] {
   })
 
   const [ro] = useState(
-    () => new ResizeObserver(([entry]: ResizeObserverEntry[]) => set(entry.contentRect)),
+    () =>
+      new ResizeObserver(([entry]: ResizeObserverEntry[]) =>
+        set(entry.contentRect),
+      ),
   )
 
   useEffect(() => {
-    ro.observe(ref.current!)
+    if (ref.current) {
+      ro.observe(ref.current)
+    }
     return () => ro.disconnect()
   }, [ro])
 

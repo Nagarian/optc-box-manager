@@ -1,6 +1,6 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
-import { ExtendedUnit, UnitSpecial, UnitCaptain } from 'models/units'
+import { ExtendedUnit, UnitCaptain,UnitSpecial } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
 
 export interface ByRcvFinderCriteria {

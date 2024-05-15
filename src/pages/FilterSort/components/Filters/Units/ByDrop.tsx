@@ -11,15 +11,14 @@ export interface ByDropCriteria {
 }
 
 export const ByDropFilter = (criteria: ByDropCriteria) =>
-  BooleanFilterMapper(
-    [
-      criteria.dropLocations?.length,
-      (unit: ExtendedUnit) =>
-        criteria.dropLocations!.some(dl => unit.dropLocations.includes(dl)),
-    ],
-  )
+  BooleanFilterMapper([
+    criteria.dropLocations?.length,
+    (unit: ExtendedUnit) =>
+      criteria.dropLocations?.some(dl => unit.dropLocations.includes(dl)) ??
+      false,
+  ])
 
-export function ByDropInput ({
+export function ByDropInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByDropCriteria>) {

@@ -33,7 +33,7 @@ export type SugoCleanerProps = {
   onUpdateUnit: (userUnit: UserUnit) => void
   onAddUnit: (userUnit: ExtendedUnit) => void
 }
-export default function SugoCleaner ({
+export default function SugoCleaner({
   units,
   userBox,
   onUpdateUnit,
@@ -111,7 +111,6 @@ export default function SugoCleaner ({
 
             <hr />
 
-            {/* eslint-disable-next-line multiline-ternary */}
             {filteredUserUnit.length ? (
               <>
                 <SubTitle>On which unit do you want to use it ?</SubTitle>
@@ -126,7 +125,7 @@ export default function SugoCleaner ({
               </>
             ) : (
               <SubTitle>
-                You don't possess this unit, you should keep it !
+                {"You don't possess this unit, you should keep it !"}
               </SubTitle>
             )}
             <hr />
@@ -203,7 +202,7 @@ export default function SugoCleaner ({
   )
 }
 
-function SugoCleanerList ({
+function SugoCleanerList({
   name,
   title,
   list,

@@ -12,7 +12,7 @@ type ExportForProps = {
   myUserBox: MyUserBox
 }
 
-export default function ExportFor ({ myUserBox: { userBox } }: ExportForProps) {
+export default function ExportFor({ myUserBox: { userBox } }: ExportForProps) {
   const payload = userBox.map(u => u.unit.dbId).join(',')
 
   return (
@@ -55,8 +55,8 @@ type CopyBlockProps = {
   content: string
   payload: string
 }
-function CopyBlock ({ title, content, payload }: CopyBlockProps) {
-  const ref = useRef<HTMLInputElement>()
+function CopyBlock({ title, content, payload }: CopyBlockProps) {
+  const ref = useRef<HTMLInputElement>(null)
   const [isCopied, setIsCopied] = useState<boolean>(false)
 
   const copy = () => {
@@ -80,7 +80,7 @@ function CopyBlock ({ title, content, payload }: CopyBlockProps) {
           name={`${title}-format`}
           readOnly
           value={payload}
-          ref={ref as any}
+          ref={ref}
         />
         <Button
           icon={isCopied ? ConfirmIcon : undefined}
@@ -88,13 +88,16 @@ function CopyBlock ({ title, content, payload }: CopyBlockProps) {
           onClick={copy}
           size={0}
           marginLeft={1}
-          children={!isCopied && 'Copy'}
           disabled={isCopied}
           fontSize="0"
-        />
+        >
+          {!isCopied && 'Copy'}
+        </Button>
       </Box>
 
-      <ReactMarkdown children={content} components={ReactMarkdownRenderers} />
+      <ReactMarkdown components={ReactMarkdownRenderers}>
+        {content}
+      </ReactMarkdown>
     </>
   )
 }

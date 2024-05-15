@@ -31,7 +31,7 @@ const Panel = styled.div`
   }
 `
 
-export type SearchSortItemProps<T = unknown | undefined> = {
+export type SearchSortItemProps<T = unknown> = {
   criteria: SearchSortCriteria<T>
   sortBuilder: SearchSortBuilderProps<T>
   onUpdate: (
@@ -111,20 +111,20 @@ export default function SearchSortItem ({
   )
 }
 
-type OptionPopupProps = {
-  options: any
-  optionInput: FunctionComponent<SearchSortInputProps<any>>
+type OptionPopupProps<T = unknown> = {
+  options: T
+  optionInput: FunctionComponent<SearchSortInputProps<T>>
   onCancel: () => void
-  onValidate: (options?: any) => void
+  onValidate: (options?: T) => void
 }
 
-function OptionPopup ({
+function OptionPopup<T> ({
   onCancel,
   onValidate,
   options,
   optionInput: OptionComponent,
-}: OptionPopupProps) {
-  const [opts, setOptions] = useState<any>(options)
+}: OptionPopupProps<T>) {
+  const [opts, setOptions] = useState<T | undefined>(options)
 
   return (
     <Popup
@@ -137,7 +137,7 @@ function OptionPopup ({
         </Button>
       }
     >
-      <OptionComponent options={opts} onChange={o => setOptions(o)} />
+      <OptionComponent options={opts} onChange={setOptions} />
     </Popup>
   )
 }

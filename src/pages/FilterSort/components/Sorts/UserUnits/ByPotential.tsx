@@ -1,12 +1,12 @@
-import {
-  UserUnitSort,
-  SearchSortWithOptionFunction,
-  SearchSortInputProps,
-} from 'models/search'
-import { PotentialKey, Potentials } from 'models/units'
 import Box from 'components/Box'
 import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
+import {
+  SearchSortInputProps,
+  SearchSortWithOptionFunction,
+  UserUnitSort,
+} from 'models/search'
+import { PotentialKey, Potentials } from 'models/units'
 
 export const byPotentialLvl: UserUnitSort = (userUnit1, userUnit2) =>
   userUnit1.potentials.reduce((acc, current) => acc + current.lvl, 0) -
