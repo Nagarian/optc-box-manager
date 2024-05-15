@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference lib="webworker" />
-
+import { CV, Mat } from '@techstark/opencv-js'
 import { ExtendedUnit } from 'models/units'
 
-declare const self: DedicatedWorkerGlobalScope & { cv: any }
-declare const cv: any
+declare const self: DedicatedWorkerGlobalScope & { cv: CV }
+declare const cv: CV
 
 export type MessageToWorker =
   | { type: 'INIT' }
@@ -139,11 +135,13 @@ const fppSizeMatrix: InitialSizeMatrix = {
 
 async function loadOpenCv(waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
   // lib has been modified to remove default export
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const opencv = await import(
     /* @vite-ignore */ `${import.meta.env.BASE_URL}/opencv-4.8.0.js`
   )
   return new Promise((resolve, reject) => {
-    self.cv = opencv.cv()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    self.cv = opencv.cv() as CV
     if (cv.Mat) {
       resolve()
       return
@@ -224,7 +222,7 @@ onmessage = ({ data }: MessageEvent<MessageToWorker>) => {
   }
 }
 
-function detectGenericSquare(src: any, analysisId: string): SquareSize[] {
+function detectGenericSquare(src: Mat, analysisId: string): SquareSize[] {
   const copy = src.clone()
 
   // we filter image to keep only yellow one
@@ -236,11 +234,11 @@ function detectGenericSquare(src: any, analysisId: string): SquareSize[] {
   cv.filter2D(
     colorMask,
     copy,
-    cv.CV_8U,
-    cv.Mat.eye(3, 3, cv.CV_32FC1),
+    cv.CV_8U as number,
+    cv.Mat.eye(3, 3, cv.CV_32FC1 as number),
     new cv.Point(-1, -1),
     0,
-    cv.BORDER_DEFAULT,
+    cv.BORDER_DEFAULT as number,
   )
   colorMask.delete()
   low.delete()
@@ -256,8 +254,8 @@ function detectGenericSquare(src: any, analysisId: string): SquareSize[] {
     copy,
     contours,
     hierarchy,
-    cv.RETR_LIST,
-    cv.CHAIN_APPROX_SIMPLE,
+    cv.RETR_LIST as number,
+    cv.CHAIN_APPROX_SIMPLE as number,
   )
   hierarchy.delete()
 
@@ -312,9 +310,9 @@ function detectGenericSquare(src: any, analysisId: string): SquareSize[] {
   return squaresToExtract.reverse()
 }
 
-function detectTopScreenV1(src: any): number {
+function detectTopScreenV1(src: Mat): number {
   const oldGray = new cv.Mat()
-  cv.cvtColor(src, oldGray, cv.COLOR_RGBA2GRAY)
+  cv.cvtColor(src, oldGray, cv.COLOR_RGBA2GRAY as number)
 
   const not = new cv.Mat()
   cv.bitwise_not(oldGray, not)
@@ -347,10 +345,10 @@ function detectTopScreenV1(src: any): number {
   return topBound
 }
 
-function detectTopScreenV2(src: any): number {
+function detectTopScreenV2(src: Mat): number {
   const grayed = new cv.Mat()
-  cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY)
-  cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY)
+  cv.cvtColor(src, grayed, cv.COLOR_RGBA2GRAY as number)
+  cv.threshold(grayed, grayed, 100, 200, cv.THRESH_BINARY as number)
   cv.Canny(grayed, grayed, 90, 120)
 
   const lines = new cv.Mat()
@@ -376,7 +374,7 @@ function detectTopScreenV2(src: any): number {
   return topBound > src.rows / 2 ? -1 : topBound
 }
 
-function detectFirstHorizontalLine(src: any): number {
+function detectFirstHorizontalLine(src: Mat): number {
   const whiteMask = src.clone()
   let low = new cv.Mat(src.rows, src.cols, src.type(), [240, 240, 240, 255])
   let high = new cv.Mat(src.rows, src.cols, src.type(), [255, 255, 255, 255])
@@ -401,7 +399,7 @@ function detectFirstHorizontalLine(src: any): number {
   bitOr.delete()
 
   const lines = new cv.Mat()
-  cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY)
+  cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY as number)
   cv.Canny(bitwised, bitwised, 50, 255)
   // cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
   cv.HoughLinesP(bitwised, lines, 1, Math.PI / 2, 2, 30, 1)
@@ -422,7 +420,7 @@ function detectFirstHorizontalLine(src: any): number {
     const minimalLength = src.cols * 0.1
 
     if (verticalLength === 0 && horizontalLength > minimalLength) {
-      horizontals.push(y1 as number)
+      horizontals.push(y1)
     }
   }
   lines.delete()
@@ -438,7 +436,7 @@ function detectFirstHorizontalLine(src: any): number {
 }
 
 function detectMatrixSquare(
-  src: any,
+  src: Mat,
   analysisId: string,
   initialSize: InitialSizeMatrix,
 ): SquareSize[] {
@@ -474,7 +472,7 @@ function detectMatrixSquare(
   return squares
 }
 
-function detectBoxRoiSizing(src: any): BoxSizeMatrix | undefined {
+function detectBoxRoiSizing(src: Mat): BoxSizeMatrix | undefined {
   const initialRoi = boxSizeMatrix.roi
 
   const topScreen = detectTopScreenV2(src)
@@ -544,7 +542,7 @@ function extractBoxSquareFromRoi(
   return squaresToExtract
 }
 
-function detectBoxSquare(src: any, analysisId: string): SquareSize[] {
+function detectBoxSquare(src: Mat, analysisId: string): SquareSize[] {
   const roiSize = detectBoxRoiSizing(src)
   if (!roiSize) return []
   const roi = src.roi(roiSize.roi)
@@ -577,9 +575,9 @@ function resizeSquare({ analysisId, id, x, y, width }: SquareSize): SquareSize {
 }
 
 function findCharacterIds(
-  charactersMat: any,
+  charactersMat: Mat,
   analysisId: string,
-  src: any,
+  src: Mat,
   squares: SquareSize[],
   minConfidence: number,
 ) {
@@ -617,8 +615,8 @@ function findCharacterIds(
 }
 
 function findMatching(
-  charactersMat: any,
-  src: any,
+  charactersMat: Mat,
+  src: Mat,
   squareToSearch: SquareSize,
 ) {
   try {
@@ -631,20 +629,26 @@ function findMatching(
       new cv.Size(size.width, size.height),
       0,
       0,
-      cv.INTER_AREA,
+      cv.INTER_AREA as number,
     )
     const dst = new cv.Mat()
-    cv.matchTemplate(charactersMat, imageRoi, dst, cv.TM_CCOEFF_NORMED, mask)
+    cv.matchTemplate(
+      charactersMat,
+      imageRoi,
+      dst,
+      cv.TM_CCOEFF_NORMED as number,
+      mask,
+    )
     const result = cv.minMaxLoc(dst, mask)
     imageRoi.delete()
     dst.delete()
     mask.delete()
 
     return {
-      val: result.maxVal as number,
+      val: result.maxVal,
       loc: {
-        x: result.maxLoc.x as number,
-        y: result.maxLoc.y as number,
+        x: result.maxLoc.x,
+        y: result.maxLoc.y,
       },
     }
   } finally {
@@ -652,7 +656,7 @@ function findMatching(
   }
 }
 
-type VideoAnalyzerOptions = { charactersMat: any; analysisId: string }
+type VideoAnalyzerOptions = { charactersMat: Mat; analysisId: string }
 class VideoAnalyzer {
   private _frameRoiSize: { x: number; y: number; width: number; height: number }
   private _isInitialized: boolean
@@ -662,7 +666,7 @@ class VideoAnalyzer {
   private _currentMinH: number
   private _characterSize: number
 
-  private _charactersMat: any
+  private _charactersMat: Mat
   private _analysisId: string
 
   constructor({ analysisId, charactersMat }: VideoAnalyzerOptions) {
@@ -682,7 +686,7 @@ class VideoAnalyzer {
     this._charactersMat?.delete()
   }
 
-  processFrame(frame: any) {
+  processFrame(frame: Mat) {
     this.computeInitialVideoConstants(frame)
     if (!this._isInitialized) {
       this.signalEndOfImageProcess('not initialized')
@@ -726,7 +730,7 @@ class VideoAnalyzer {
     })
   }
 
-  private computeInitialVideoConstants(src: any) {
+  private computeInitialVideoConstants(src: Mat) {
     if (this._isInitialized) {
       return
     }
@@ -744,11 +748,11 @@ class VideoAnalyzer {
     this._isInitialized = true
   }
 
-  private detectFirstHorizontalLine(src: any): number {
+  private detectFirstHorizontalLine(src: Mat): number {
     return detectFirstHorizontalLine(src)
   }
 
-  private getNextLineCount(srcRows: any): number {
+  private getNextLineCount(srcRows: number): number {
     for (let yI = 0; yI < 5; yI++) {
       const y = this._currentMinH + this._characterSize * yI
 
