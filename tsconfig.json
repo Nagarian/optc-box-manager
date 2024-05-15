@@ -1,17 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext",
-      "WebWorker"
-    ],
-    "types": [
-      "vite/client",
-      "vite-plugin-svgr/client",
-      "vitest/globals"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],
+    "types": ["vite/client", "vite-plugin-svgr/client", "vitest/globals"],
     "allowJs": false,
     "baseUrl": "src",
     "skipLibCheck": true,
@@ -28,7 +19,5 @@
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
