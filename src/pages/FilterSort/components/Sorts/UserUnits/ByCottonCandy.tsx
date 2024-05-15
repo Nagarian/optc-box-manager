@@ -19,9 +19,9 @@ export type SpecificCottonCandySortOption = {
   cc: CottonCandyType
 }
 
-export const bySpecificCottonCandy: SearchSortWithOptionFunction<SpecificCottonCandySortOption> = (
-  option,
-): UserUnitSort => {
+export const bySpecificCottonCandy: SearchSortWithOptionFunction<
+  SpecificCottonCandySortOption
+> = (option): UserUnitSort => {
   switch (option.cc) {
     case 'atk':
       return (userUnit1, userUnit2) => userUnit1.cc.atk - userUnit2.cc.atk
@@ -38,7 +38,7 @@ export const bySpecificCottonCandyLabel = (
   option: SpecificCottonCandySortOption,
 ) => option.cc
 
-export function SpecificCottonCandySortInput ({
+export function SpecificCottonCandySortInput({
   options,
   onChange,
 }: SearchSortInputProps<SpecificCottonCandySortOption>) {

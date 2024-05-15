@@ -1,6 +1,6 @@
 import Box from 'components/Box'
 import Button from 'components/Button'
-import { ClearIcon,ResetIcon, SaveSearchIcon } from 'components/Icon'
+import { ClearIcon, ResetIcon, SaveSearchIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { EmptySearch } from 'hooks/useSearch'
 import { useStoredSearches } from 'hooks/useStoredSearches'
@@ -28,7 +28,7 @@ type FilterSortProps = {
   search: Search
   unitOnly?: boolean
 }
-export default function FilterSort ({
+export default function FilterSort({
   resetSaveKey,
   search,
   unitOnly = false,
@@ -205,7 +205,7 @@ export default function FilterSort ({
   )
 }
 
-function displayerTitle (panel: DisplayedPanel) {
+function displayerTitle(panel: DisplayedPanel) {
   switch (panel) {
     case 'displayer':
       return 'Info Displayed'

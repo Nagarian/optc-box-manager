@@ -9,7 +9,7 @@ export type CanvasRendererProps = {
   showFound: boolean
   onFoundClick: (found: CharacterFound) => void
 }
-export function CanvasRenderer ({
+export function CanvasRenderer({
   analysis,
   showFound,
   onFoundClick,
@@ -118,14 +118,13 @@ type SvgImageProps = {
   showFound: boolean
   onFoundClick: (found: CharacterFound) => void
 }
-function SvgImage ({
+function SvgImage({
   square: { id, x, y, width, height },
   found,
   showFound,
   onFoundClick,
 }: SvgImageProps) {
-  return found
-    ? (
+  return found ? (
     <Image
       xlinkHref={found?.unit?.images.thumbnail}
       x={x}
@@ -135,10 +134,9 @@ function SvgImage ({
       showFound={showFound}
       onClick={() => found && onFoundClick(found)}
     />
-      )
-    : (
+  ) : (
     <Rect x={x} y={y} width={width} height={height} showFound={showFound} />
-      )
+  )
 }
 
 const Canvas = styled.canvas`

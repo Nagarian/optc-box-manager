@@ -9,7 +9,7 @@ import QCK from './images/QCK.png'
 import STR from './images/STR.png'
 import VS from './images/VS.png'
 
-export function TypeToImage (type: UnitType) {
+export function TypeToImage(type: UnitType) {
   switch (type) {
     case 'STR':
       return STR
@@ -41,7 +41,7 @@ const BaseType = styled.img<SpaceProps & SizeProps>`
   ${size}
 `
 
-function Type ({ value, ...p }: TypeProps) {
+function Type({ value, ...p }: TypeProps) {
   return <BaseType {...p} src={TypeToImage(value)} title={value} />
 }
 

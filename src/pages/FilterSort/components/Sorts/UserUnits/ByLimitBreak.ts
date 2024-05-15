@@ -7,7 +7,7 @@ export const byLimitBreakLevel: UserUnitSort = (userUnit1, userUnit2) =>
 export const byLimitBreakLevelGameLike: UserUnitSort = (userUnit1, userUnit2) =>
   computeLvl(userUnit1.limitBreak) - computeLvl(userUnit2.limitBreak)
 
-function computeLvl (userLimitBreak?: UserUnitLimitBreak) {
+function computeLvl(userLimitBreak?: UserUnitLimitBreak) {
   if (!userLimitBreak) {
     return -1
   }

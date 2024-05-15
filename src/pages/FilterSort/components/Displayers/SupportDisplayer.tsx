@@ -3,10 +3,8 @@ import Progression from 'components/Progression'
 import InfoDisplayer from '../../../../components/CharacterBox/components/InfoDisplayer'
 import { SearchDisplayerProps } from '.'
 
-export default function SupportDisplayer ({
-  userUnit: {
-    support,
-  },
+export default function SupportDisplayer({
+  userUnit: { support },
 }: SearchDisplayerProps) {
   if (!support || support.lvl === 0) return null
 

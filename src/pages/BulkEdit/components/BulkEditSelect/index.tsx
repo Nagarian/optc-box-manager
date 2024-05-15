@@ -22,7 +22,7 @@ type BulkEditSelectProps = {
   userUnits: UserUnit[]
 }
 
-export default function BulkEditSelect ({
+export default function BulkEditSelect({
   relatedSearch,
   onCancel,
   onSubmit,
@@ -65,8 +65,7 @@ export default function BulkEditSelect ({
             title="Filter/Sort"
           />
           {userUnits.filter(u => !selected.some(su => su.id === u.id))
-            .length
-            ? (
+            .length ? (
             <Button
               onClick={() =>
                 setSelected([
@@ -79,14 +78,13 @@ export default function BulkEditSelect ({
               icon={ResetApplyIcon}
               title="Select All"
             />
-              )
-            : (
+          ) : (
             <Button
               onClick={() => setSelected([])}
               icon={ResetRemoveIcon}
               title="Unselect All"
             />
-              )}
+          )}
         </>
       }
     >

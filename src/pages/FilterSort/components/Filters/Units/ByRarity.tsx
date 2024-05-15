@@ -7,11 +7,11 @@ export interface ByRarityCriteria {
   values: UnitStar[]
 }
 
-export const ByRarityFilter = (criteria: ByRarityCriteria) => (
-  unit: ExtendedUnit,
-) => criteria.values.includes(unit.stars)
+export const ByRarityFilter =
+  (criteria: ByRarityCriteria) => (unit: ExtendedUnit) =>
+    criteria.values.includes(unit.stars)
 
-export function ByRarityInput ({
+export function ByRarityInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByRarityCriteria>) {

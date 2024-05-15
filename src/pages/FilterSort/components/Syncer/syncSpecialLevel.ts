@@ -13,7 +13,7 @@ export const syncSpecialLevel: Syncer = (filters, sorts, displayer) => {
   return [undefined, syncDisplayer]
 }
 
-export function syncSpecialLevelDisplayer (
+export function syncSpecialLevelDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
 ): SearchDisplayerCriteria | undefined {
   if (displayer) {

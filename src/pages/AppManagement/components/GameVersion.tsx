@@ -5,7 +5,7 @@ import { ArrowIcon } from 'components/Icon'
 import { Text } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 
-export function GameVersion () {
+export function GameVersion() {
   const { userSetting, setUserSetting } = useUserSettings()
 
   return (

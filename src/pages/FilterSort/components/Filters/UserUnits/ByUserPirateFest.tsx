@@ -1,12 +1,16 @@
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { PirateFestAbilityIcon, PirateFestBothIcon, PirateFestSpecialIcon } from 'components/Icon'
+import {
+  PirateFestAbilityIcon,
+  PirateFestBothIcon,
+  PirateFestSpecialIcon,
+} from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserPirateFestStateKeys = ['ongoing', 'maxed'] as const
-export type UserPirateFestState = typeof UserPirateFestStateKeys[number]
+export type UserPirateFestState = (typeof UserPirateFestStateKeys)[number]
 
 export interface ByUserPirateFestCriteria {
   specialLvlState?: UserPirateFestState
@@ -35,19 +39,30 @@ export const ByUserPirateFestFilter = (criteria: ByUserPirateFestCriteria) =>
   BooleanFilterMapper<UserUnit>(
     [
       criteria.abilityLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.abilityLvl, 5, criteria.abilityLvlState),
+      userUnit =>
+        festFilter(
+          userUnit.pirateFest?.abilityLvl,
+          5,
+          criteria.abilityLvlState,
+        ),
     ],
     [
       criteria.specialLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.specialLvl, 10, criteria.specialLvlState),
+      userUnit =>
+        festFilter(
+          userUnit.pirateFest?.specialLvl,
+          10,
+          criteria.specialLvlState,
+        ),
     ],
     [
       criteria.gpLvlState,
-      (userUnit) => festFilter(userUnit.pirateFest?.gplvl, 5, criteria.gpLvlState),
+      userUnit =>
+        festFilter(userUnit.pirateFest?.gplvl, 5, criteria.gpLvlState),
     ],
   )
 
-export function ByUserPirateFestInput ({
+export function ByUserPirateFestInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserPirateFestCriteria>) {
@@ -57,7 +72,8 @@ export function ByUserPirateFestInput ({
         <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
         Special level
         {UserPirateFestStateKeys.map(stateKey => (
-          <ChoiceInput key={stateKey}
+          <ChoiceInput
+            key={stateKey}
             type="radio"
             name="userunit-festSpecial"
             checked={criteria?.specialLvlState === stateKey}
@@ -76,7 +92,8 @@ export function ByUserPirateFestInput ({
         <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
         Ability level
         {UserPirateFestStateKeys.map(stateKey => (
-          <ChoiceInput key={stateKey}
+          <ChoiceInput
+            key={stateKey}
             type="radio"
             name="userunit-festAbility"
             checked={criteria?.abilityLvlState === stateKey}
@@ -95,7 +112,8 @@ export function ByUserPirateFestInput ({
         <PirateFestBothIcon size="2" title="Pirate Rumble Ability" />
         GP level
         {UserPirateFestStateKeys.map(stateKey => (
-          <ChoiceInput key={stateKey}
+          <ChoiceInput
+            key={stateKey}
             type="radio"
             name="userunit-festGP"
             checked={criteria?.gpLvlState === stateKey}

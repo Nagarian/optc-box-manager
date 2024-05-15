@@ -144,10 +144,13 @@ filters.abilityToString = function () {
             default:
               e += 'TODO:  ' + JSON.stringify(effect)
           }
-          if (effect.interval) e += ` every ${effect.interval} ${effect.interval === 1 ? 'second' : 'seconds'}`
+          if (effect.interval)
+            e += ` every ${effect.interval} ${effect.interval === 1 ? 'second' : 'seconds'}`
           break
         case 'hinderance':
-          e += effect.amount ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}` : `${effect.chance}% chance to inflict ${effect.level ? 'Lv.' + effect.level + ' ' : ''}${arrayToString(effect.attributes)}`
+          e += effect.amount
+            ? `Removes ${new Intl.NumberFormat().format(effect.amount)}% of ${arrayToString(effect.attributes)}`
+            : `${effect.chance}% chance to inflict ${effect.level ? 'Lv.' + effect.level + ' ' : ''}${arrayToString(effect.attributes)}`
           break
         case 'boon': {
           e += `${effect.chance ? effect.chance + '% chance to ' : ''}`
@@ -173,7 +176,13 @@ filters.abilityToString = function () {
         }
         case 'penalty': {
           const tmpStr = arrayToString(effect.attributes)
-          if (tmpStr === 'HP' && effect.amount) { e += `${new Intl.NumberFormat().format(effect.amount)}% health cut` } else if (effect.level) { e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty` } else { e += `${effect.chance || 100}% chance to ${arrayToString(effect.attributes)}` }
+          if (tmpStr === 'HP' && effect.amount) {
+            e += `${new Intl.NumberFormat().format(effect.amount)}% health cut`
+          } else if (effect.level) {
+            e += `Inflicts Lv.${new Intl.NumberFormat().format(effect.level)} ${arrayToString(effect.attributes)} down penalty`
+          } else {
+            e += `${effect.chance || 100}% chance to ${arrayToString(effect.attributes)}`
+          }
           break
         }
         case 'cleanse':
@@ -183,23 +192,31 @@ filters.abilityToString = function () {
           e = 'UNKNOWN EFFECT ' + JSON.stringify(effect)
           break
       }
-      retVal += e + `${targetToString(effect.targeting)}${rangeToString(effect.range)}${effect.duration ? ' for ' + effect.duration + ' seconds' : ''}` + (effect.repeat ? ` ${new Intl.NumberFormat().format(effect.repeat)} times` : '') + '.\n'
+      retVal +=
+        e +
+        `${targetToString(effect.targeting)}${rangeToString(effect.range)}${effect.duration ? ' for ' + effect.duration + ' seconds' : ''}` +
+        (effect.repeat
+          ? ` ${new Intl.NumberFormat().format(effect.repeat)} times`
+          : '') +
+        '.\n'
     }
     return retVal
   }
 }
 
-function arrayToString (array) {
+function arrayToString(array) {
   const tmpStr = new Intl.ListFormat('en').format(array)
   return tmpStr
 }
 
-function arrayToStringOr (array) {
-  const tmpStr = new Intl.ListFormat('en', { type: 'disjunction' }).format(array)
+function arrayToStringOr(array) {
+  const tmpStr = new Intl.ListFormat('en', { type: 'disjunction' }).format(
+    array,
+  )
   return tmpStr
 }
 
-function conditionToString (condition) {
+function conditionToString(condition) {
   if (!condition) return ''
 
   switch (condition.type) {
@@ -218,7 +235,7 @@ function conditionToString (condition) {
       }
     case 'crew':
     case 'enemies':
-      return `When there are ${condition.count} or ${condition.comparator} ${condition.type} ${condition.relative ? condition.type === 'crew' ? 'than the enemy team' : 'than your crew' : ''} remaining, `
+      return `When there are ${condition.count} or ${condition.comparator} ${condition.type} ${condition.relative ? (condition.type === 'crew' ? 'than the enemy team' : 'than your crew') : ''} remaining, `
     case 'trigger':
       return `The first ${condition.count} times this character ${condition.stat === 'takes damage' ? condition.stat : 'lands a ' + condition.stat}, `
     case 'defeat':
@@ -230,36 +247,47 @@ function conditionToString (condition) {
   }
 }
 
-function rangeToString (range) {
+function rangeToString(range) {
   if (!range) return ''
   return ` in a ${range.size}, ${range.direction} range`
 }
 
-function targetToString (target) {
+function targetToString(target) {
   if (!target) return ''
   let targetStr = arrayToString(target.targets)
   const excludeStr = arrayToString(target.excludes)
   if (targetStr === 'crew') targetStr = 'crew member(s)'
   if (targetStr === 'enemies') {
-    if (!target.count) { targetStr = 'all enemies' } else if (target.count === 1) { targetStr = 'enemy' }
+    if (!target.count) {
+      targetStr = 'all enemies'
+    } else if (target.count === 1) {
+      targetStr = 'enemy'
+    }
   }
   let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}${target.targets.includes('self') || target.targets.includes('crew') || target.targets.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters'}`
-  retVal = retVal + `${target.excludes ? ', excluding ' : ''}${target.excludes ? excludeStr : ''}${target.excludes ? target.excludes.includes('self') || target.excludes.includes('crew') || target.excludes.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters' : ''}`
-  retVal = retVal + `${target.stat ? (' with ' + (target.percentage ? 'a ' + target.percentage + '% or ' : 'the ') + target.priority + ' ' + target.stat) : ''}`
+  retVal =
+    retVal +
+    `${target.excludes ? ', excluding ' : ''}${target.excludes ? excludeStr : ''}${target.excludes ? (target.excludes.includes('self') || target.excludes.includes('crew') || target.excludes.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters') : ''}`
+  retVal =
+    retVal +
+    `${target.stat ? ' with ' + (target.percentage ? 'a ' + target.percentage + '% or ' : 'the ') + target.priority + ' ' + target.stat : ''}`
   return retVal
 }
 
-function denormalizeEffects (ability) {
+function denormalizeEffects(ability) {
   const lastEffect = []
   let mergedEffect = []
-  ability.forEach((ability) => {
+  ability.forEach(ability => {
     mergedEffect = [...lastEffect]
     ability.effects.forEach((effect, effectIdx) => {
       if (effect.effect) {
         lastEffect[effectIdx] = effect
         mergedEffect[effectIdx] = effect
       } else if (effect.override) {
-        mergedEffect[effectIdx] = { ...lastEffect[effectIdx], ...effect.override }
+        mergedEffect[effectIdx] = {
+          ...lastEffect[effectIdx],
+          ...effect.override,
+        }
       }
     })
     ability.effects = mergedEffect
@@ -267,10 +295,12 @@ function denormalizeEffects (ability) {
 }
 
 /** @type import("models/pirate-rumble").RumbleSchema */
-const rumbleData = jsonc.parse(fs.readFileSync('./src/optcdb/common/data/rumble.json', 'utf8'))
+const rumbleData = jsonc.parse(
+  fs.readFileSync('./src/optcdb/common/data/rumble.json', 'utf8'),
+)
 
 /** @returns { import("models/pirate-rumble").Unit | [import("models/pirate-rumble").Unit, import("models/pirate-rumble").Unit]  } */
-function getRumbleData (id) {
+function getRumbleData(id) {
   let key = id
   const rumbleUnits = rumbleData.units
   let unit = rumbleUnits.find(unit => Math.floor(unit.id) === key)
@@ -312,7 +342,7 @@ function getRumbleData (id) {
   return unit
 }
 
-export function applyNewPirateRumble (
+export function applyNewPirateRumble(
   /** @type import('../models/old-units').ExtendedUnit */ unit,
 ) {
   let newRumble
@@ -386,8 +416,14 @@ export function applyNewPirateRumble (
         description: filters.abilityToString()(ab.effects),
       })),
     }
-    const gpCondition1 = (newRumble[0].gpcondition ? filters.gpconditionToString()(newRumble[0].gpcondition[0]) : undefined) ?? ''
-    const gpCondition2 = (newRumble[1].gpcondition ? filters.gpconditionToString()(newRumble[1].gpcondition[0]) : undefined) ?? ''
+    const gpCondition1 =
+      (newRumble[0].gpcondition
+        ? filters.gpconditionToString()(newRumble[0].gpcondition[0])
+        : undefined) ?? ''
+    const gpCondition2 =
+      (newRumble[1].gpcondition
+        ? filters.gpconditionToString()(newRumble[1].gpcondition[0])
+        : undefined) ?? ''
     unit.detail.festGPBurst = newRumble[0].gpspecial && {
       character1: newRumble[0].gpspecial?.map(gps => ({
         use: gps.uses,
@@ -411,7 +447,9 @@ export function applyNewPirateRumble (
       description: filters.patternToString()(p),
     }))
     unit.detail.festAttackTarget = filters.targetToString()(newRumble.target)
-    unit.detail.festResistance = filters.resilienceToString()(newRumble.resilience)
+    unit.detail.festResistance = filters.resilienceToString()(
+      newRumble.resilience,
+    )
     unit.detail.festSpecial = newRumble.special.map(s => ({
       cooldown: s.cooldown ?? 0,
       description: filters.specialToString()(s.effects),
@@ -420,7 +458,10 @@ export function applyNewPirateRumble (
       description: filters.abilityToString()(ab.effects),
     }))
 
-    const gpCondition = (newRumble.gpcondition ? filters.gpconditionToString()(newRumble.gpcondition[0]) : undefined) ?? ''
+    const gpCondition =
+      (newRumble.gpcondition
+        ? filters.gpconditionToString()(newRumble.gpcondition[0])
+        : undefined) ?? ''
     unit.detail.festGPBurst = newRumble.gpspecial?.map(gps => ({
       use: gps.uses,
       condition: gpCondition,

@@ -6,7 +6,7 @@ import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyType, UserUnitCottonCandy } from 'models/userBox'
 import { InputLabel } from '.'
 
-function Wrapper ({
+function Wrapper({
   type,
   value,
   onChange,
@@ -37,7 +37,7 @@ type CottonCandyEditProps = {
   onChange: (uucc: UserUnitCottonCandy) => void
 }
 
-export default function CottonCandyEdit ({
+export default function CottonCandyEdit({
   cc,
   onChange,
 }: CottonCandyEditProps) {

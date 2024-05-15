@@ -1,4 +1,4 @@
-export function exportAsJson (data: string, filename: string): Promise<void> {
+export function exportAsJson(data: string, filename: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const file = new Blob([data], { type: 'application/json' })
 
@@ -16,7 +16,7 @@ export function exportAsJson (data: string, filename: string): Promise<void> {
   })
 }
 
-export function importAsJson (file: File): Promise<string> {
+export function importAsJson(file: File): Promise<string> {
   if (!file || file.type !== 'application/json') {
     return Promise.reject(new Error('not a json file'))
   }

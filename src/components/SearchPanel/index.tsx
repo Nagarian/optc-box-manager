@@ -27,7 +27,7 @@ type SearchPanelProps = {
   onAdd?: () => void
 }
 
-export default function SearchPanel ({
+export default function SearchPanel({
   units,
   search,
   onUnitClick,

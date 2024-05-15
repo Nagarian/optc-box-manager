@@ -7,7 +7,7 @@ type CottonCandyInputProps = {
   variant: 'atk' | 'rcv' | 'hp'
   hideAdders?: boolean
 }
-export default function CottonCandyInput ({
+export default function CottonCandyInput({
   onChange,
   variant,
   hideAdders,
@@ -46,7 +46,7 @@ CottonCandyInput.defaultProps = {
   max: 100,
 }
 
-function useVariant (variant: 'atk' | 'rcv' | 'hp') {
+function useVariant(variant: 'atk' | 'rcv' | 'hp') {
   const theme = useTheme()
 
   switch (variant) {

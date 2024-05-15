@@ -41,7 +41,7 @@ export type SearchSortItemProps<T = unknown> = {
   onDelete: (criteria: SearchSortCriteria) => void
 }
 
-export default function SearchSortItem ({
+export default function SearchSortItem({
   criteria,
   sortBuilder: { label, optionInput, optionedLabel },
   onUpdate,
@@ -118,7 +118,7 @@ type OptionPopupProps<T = unknown> = {
   onValidate: (options?: T) => void
 }
 
-function OptionPopup<T> ({
+function OptionPopup<T>({
   onCancel,
   onValidate,
   options,

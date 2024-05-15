@@ -61,7 +61,7 @@ export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
   {},
 )
 
-function migration (initial: UserSetting): UserSetting {
+function migration(initial: UserSetting): UserSetting {
   let updated = initial
   if (initial.settingVersion === undefined) {
     updated = {
@@ -84,7 +84,7 @@ function migration (initial: UserSetting): UserSetting {
   return updated
 }
 
-export function UserSettingsProvider ({ children }: { children: ReactNode }) {
+export function UserSettingsProvider({ children }: { children: ReactNode }) {
   const [userSetting, setUserSetting] = useStorage<UserSetting>(
     'userSetting',
     defaultUserSettings,
@@ -116,7 +116,7 @@ export function UserSettingsProvider ({ children }: { children: ReactNode }) {
   )
 }
 
-export function useUserSettings (): UserSettingEnhanced {
+export function useUserSettings(): UserSettingEnhanced {
   const context = useContext(UserSettingsContext)
 
   return {

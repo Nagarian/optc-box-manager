@@ -10,7 +10,7 @@ export type DisplayerProps = {
   searchDisplayer?: SearchDisplayerCriteria
   onChange: (criteria?: SearchDisplayerCriteria) => void
 }
-export default function Displayer ({
+export default function Displayer({
   searchDisplayer,
   onChange,
 }: DisplayerProps) {
@@ -18,7 +18,12 @@ export default function Displayer ({
     searchDisplayer && SearchDisplayerBuilder[searchDisplayer.type].input
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="50vh" alignContent="flex-start">
+    <Box
+      display="flex"
+      flexDirection="column"
+      minHeight="50vh"
+      alignContent="flex-start"
+    >
       <ChoiceInput
         type="radio"
         checked={!searchDisplayer}
@@ -28,7 +33,8 @@ export default function Displayer ({
         None
       </ChoiceInput>
       {UserUnitDisplayerTypeKeys.map(displayerType => (
-        <ChoiceInput key={displayerType}
+        <ChoiceInput
+          key={displayerType}
           type="radio"
           checked={searchDisplayer?.type === displayerType}
           name="displayer-type"

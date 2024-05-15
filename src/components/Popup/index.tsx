@@ -3,7 +3,12 @@ import { CancelIcon, CloseIcon, ConfirmIcon } from 'components/Icon'
 import { Title } from 'components/Title'
 import { ReactNode } from 'react'
 import { SpaceProps } from 'styled-system'
-import { PopupActionPanel, PopupBackground, PopupContainer, PopupPanel } from './styled'
+import {
+  PopupActionPanel,
+  PopupBackground,
+  PopupContainer,
+  PopupPanel,
+} from './styled'
 
 type PopupProps = {
   title?: string
@@ -15,7 +20,7 @@ type PopupProps = {
   customAction?: ReactNode
 }
 
-export default function Popup ({
+export default function Popup({
   title,
   onClose,
   onCancel,

@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction,useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-export function useStorage<T> (
+export function useStorage<T>(
   key: string = 'search',
   defaultValue: T,
   migration?: (value: T) => T,

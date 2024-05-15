@@ -18,13 +18,13 @@ const PirateFestDisplayerOptionTypes = [
   'gp',
 ] as const
 export type PirateFestDisplayerOptionType =
-  typeof PirateFestDisplayerOptionTypes[number]
+  (typeof PirateFestDisplayerOptionTypes)[number]
 
 export type PirateFestDisplayerOption = {
   type: PirateFestDisplayerOptionType
 }
 
-export default function PirateFestDisplayer ({
+export default function PirateFestDisplayer({
   userUnit: { pirateFest },
   options,
 }: SearchDisplayerProps<PirateFestDisplayerOption>) {
@@ -81,7 +81,7 @@ export default function PirateFestDisplayer ({
   return null
 }
 
-export function PirateFestDisplayerInput ({
+export function PirateFestDisplayerInput({
   options,
   onChange,
 }: SearchDisplayerInputProps<PirateFestDisplayerOption>) {

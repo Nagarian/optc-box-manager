@@ -5,7 +5,8 @@ import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 export const TextInput = styled.input<SpaceProps & FlexProps>`
   padding: ${themeGet('space.1')};
   font-size: ${themeGet('fontSizes.1')};
-  border-bottom: solid ${themeGet('colors.grey')} ${themeGet('borderWidths.thin')};
+  border-bottom: solid ${themeGet('colors.grey')}
+    ${themeGet('borderWidths.thin')};
   border-radius: 0;
   transition: border-color 250ms;
   color: ${themeGet('colors.text')};

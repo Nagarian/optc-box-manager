@@ -16,7 +16,7 @@ import ImageSkill09 from './images/teamskill_icon_009.png'
 import ImageSkill10 from './images/teamskill_icon_010.png'
 import ImageFrame from './images/teamskill_iconframe_l.png'
 
-export function PowerSocketToImage (type: PowerSocketKey | undefined) {
+export function PowerSocketToImage(type: PowerSocketKey | undefined) {
   switch (type) {
     case 'Damage Reduction':
       return ImageSkill01
@@ -48,7 +48,9 @@ type PowerSocketProps = SpaceProps &
     isFocused?: boolean
   }
 
-const Container = styled('div', cleanStyledSystem)<SizeProps & { isFocused: boolean }>`
+const Container = styled('div', cleanStyledSystem)<
+  SizeProps & { isFocused: boolean }
+>`
   ${space}
   ${size}
   display: grid;
@@ -62,7 +64,7 @@ const Container = styled('div', cleanStyledSystem)<SizeProps & { isFocused: bool
   }
 `
 
-function PowerSocket ({
+function PowerSocket({
   type,
   size = 3,
   hideChrome,
@@ -74,7 +76,12 @@ function PowerSocket ({
     <Container size={size} isFocused={isFocused ?? false} {...rest}>
       {!hideChrome && <Image src={ImageFrame} />}
       {src && (
-        <Image src={src} margin={!hideChrome ? '20%' : ''} title={type} alt={type} />
+        <Image
+          src={src}
+          margin={!hideChrome ? '20%' : ''}
+          title={type}
+          alt={type}
+        />
       )}
     </Container>
   )

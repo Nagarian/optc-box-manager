@@ -22,7 +22,7 @@ export type UserUnitInk = {
 }
 
 export const CottonCandyTypeKeys = ['atk', 'hp', 'rcv'] as const
-export type CottonCandyType = typeof CottonCandyTypeKeys[number]
+export type CottonCandyType = (typeof CottonCandyTypeKeys)[number]
 
 export type UserUnitCottonCandy = {
   hp: number
@@ -70,14 +70,25 @@ export type UserUnit = {
 
 export type UserBox = UserUnit[]
 
-export const UserUnitBulkEditLimitBreakStateKeys = ['max', 'rainbow', 'max+', 'rainbow+'] as const
-export type UserUnitBulkEditLimitBreakState = typeof UserUnitBulkEditLimitBreakStateKeys[number]
+export const UserUnitBulkEditLimitBreakStateKeys = [
+  'max',
+  'rainbow',
+  'max+',
+  'rainbow+',
+] as const
+export type UserUnitBulkEditLimitBreakState =
+  (typeof UserUnitBulkEditLimitBreakStateKeys)[number]
 
-export const UserUnitBulkEditLevelStateKeys = ['max', 'lbmax', 'postlbmax'] as const
-export type UserUnitBulkEditLevelState = typeof UserUnitBulkEditLevelStateKeys[number]
+export const UserUnitBulkEditLevelStateKeys = [
+  'max',
+  'lbmax',
+  'postlbmax',
+] as const
+export type UserUnitBulkEditLevelState =
+  (typeof UserUnitBulkEditLevelStateKeys)[number]
 
 export const GameVersionIdConverterKeys = ['toJapan', 'toGlobal'] as const
-export type GameVersionIdConverter = typeof GameVersionIdConverterKeys[number]
+export type GameVersionIdConverter = (typeof GameVersionIdConverterKeys)[number]
 
 export type UserUnitBulkEdit = {
   levelState?: UserUnitBulkEditLevelState
@@ -97,7 +108,7 @@ export type MyUserBox = {
   loadingStatus: string
   add: (...units: ExtendedUnit[]) => void
   update: (userUnit: UserUnit) => void
-  bulkUpdate: (userUnits : UserUnit[], edit: UserUnitBulkEdit) => void
+  bulkUpdate: (userUnits: UserUnit[], edit: UserUnitBulkEdit) => void
   remove: (id: string) => void
   reset: () => void
   importDB: (json: string) => void

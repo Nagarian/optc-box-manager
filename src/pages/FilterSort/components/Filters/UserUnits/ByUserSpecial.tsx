@@ -5,7 +5,7 @@ import { UserUnit } from 'models/userBox'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const
-export type UserSpecialState = typeof UserSpecialStateKeys[number]
+export type UserSpecialState = (typeof UserSpecialStateKeys)[number]
 
 export interface ByUserSpecialCriteria {
   state: UserSpecialState
@@ -26,22 +26,22 @@ const specialFilter = (
   }
 }
 
-export const ByUserSpecialFilter = (criteria: ByUserSpecialCriteria) => (
-  userUnit: UserUnit,
-) =>
-  !!userUnit.special &&
-  specialFilter(userUnit.special.lvl, userUnit.special.lvlMax, criteria.state)
+export const ByUserSpecialFilter =
+  (criteria: ByUserSpecialCriteria) => (userUnit: UserUnit) =>
+    !!userUnit.special &&
+    specialFilter(userUnit.special.lvl, userUnit.special.lvlMax, criteria.state)
 
-export function ByUserSpecialInput ({
+export function ByUserSpecialInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserSpecialCriteria>) {
   return (
     <FilterContainerPanel>
       <SpecialLvlIcon size="2" />
-        Special level
+      Special level
       {UserSpecialStateKeys.map(stateKey => (
-        <ChoiceInput key={stateKey}
+        <ChoiceInput
+          key={stateKey}
           type="radio"
           name="userunit-special"
           checked={criteria?.state === stateKey}

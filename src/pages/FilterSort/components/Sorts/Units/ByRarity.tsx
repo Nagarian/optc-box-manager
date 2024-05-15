@@ -57,7 +57,7 @@ export const byRarityLabel = (option: RaritySortOption) => (
   <Displayer>{option.truncated ? '⭐+ = ⭐' : '⭐+ ≠ ⭐'}</Displayer>
 )
 
-export function RaritySortOptionInput ({
+export function RaritySortOptionInput({
   options,
   onChange,
 }: SearchSortInputProps<RaritySortOption>) {

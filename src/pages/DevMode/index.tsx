@@ -10,10 +10,13 @@ import { memo, ReactNode, useCallback, useState } from 'react'
 type DevModeProps = {
   children: ReactNode
 }
-export default function DevMode ({ children }: DevModeProps) {
+export default function DevMode({ children }: DevModeProps) {
   const [devModeEnabled] = useStorage<boolean>('devModeEnabled', false)
   const [selected, setSelected] = useState<ExtendedUnit>()
-  const callback = useCallback((u : ExtendedUnit) => setSelected(u), [setSelected])
+  const callback = useCallback(
+    (u: ExtendedUnit) => setSelected(u),
+    [setSelected],
+  )
 
   if (!devModeEnabled) {
     return <>{children}</>
@@ -40,7 +43,7 @@ export default function DevMode ({ children }: DevModeProps) {
 type DisplayerProps = {
   onSelected: (u: ExtendedUnit) => void
 }
-function Displayer ({ onSelected }: DisplayerProps) {
+function Displayer({ onSelected }: DisplayerProps) {
   const { db } = useOptcDb()
 
   return (

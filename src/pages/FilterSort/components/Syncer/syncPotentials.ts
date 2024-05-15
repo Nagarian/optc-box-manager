@@ -24,7 +24,7 @@ export const syncPotentials: Syncer = (filters, sorts, displayer) => {
   return [syncSort, syncDisplayer]
 }
 
-export function syncPotentialDisplayer (
+export function syncPotentialDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   potential: PotentialKey,
 ): SearchDisplayerCriteria<SpecificPotentialDisplayerOption> | undefined {
@@ -40,7 +40,7 @@ export function syncPotentialDisplayer (
   }
 }
 
-export function syncPotentialSort (
+export function syncPotentialSort(
   sorts: SearchSortCriteria[],
   potential: PotentialKey,
 ): SearchSortCriteria[] | undefined {
@@ -64,7 +64,9 @@ export function syncPotentialSort (
 
   if (potentialSorters.length === 1) {
     return sorts.map(s =>
-      s === potentialSorters[0] ? { ...s, options: potential && { type: potential } } : s,
+      s === potentialSorters[0]
+        ? { ...s, options: potential && { type: potential } }
+        : s,
     )
   }
 
@@ -74,7 +76,11 @@ export function syncPotentialSort (
     return undefined
   }
 
-  if (optioned.find(s => (s.options as SpecificPotentialDisplayerOption)?.type === potential)) {
+  if (
+    optioned.find(
+      s => (s.options as SpecificPotentialDisplayerOption)?.type === potential,
+    )
+  ) {
     return undefined
   }
 

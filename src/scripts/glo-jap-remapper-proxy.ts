@@ -71,16 +71,27 @@ export const globalOnly = {
   5068: 3157,
 }
 
-export const globalOnlyReverseMap = Object.entries(globalOnly)
-  .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+export const globalOnlyReverseMap = Object.entries(globalOnly).reduce<
+  Record<number, number>
+>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
 
 export const globalOnlyWrongId = Object.entries(globalOnly)
   .filter(([, wrongId]) => wrongId >= 4986)
-  .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+  .reduce<Record<number, number>>(
+    (agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }),
+    {},
+  )
 
 export const globalOnlyMissingInDb = Object.entries(globalOnly)
   .filter(([, wrongId]) => wrongId < 4986)
-  .reduce<Record<number, number>>((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+  .reduce<Record<number, number>>(
+    (agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }),
+    {},
+  )
 
-export const gloToJapConverter = Object.entries(globalOnly)
-  .reduce<Record<number, number>>((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }), {})
+export const gloToJapConverter = Object.entries(globalOnly).reduce<
+  Record<number, number>
+>(
+  (agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }),
+  {},
+)

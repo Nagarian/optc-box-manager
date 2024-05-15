@@ -73,22 +73,32 @@ export const globalOnly = {
 }
 
 /** @type { ({ [key: number]: number }) } */
-export const globalOnlyReverseMap = Object.entries(globalOnly)
-  .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+export const globalOnlyReverseMap = Object.entries(globalOnly).reduce(
+  (agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }),
+  {},
+)
 
 /** @type { ({ [key: number]: number }) } */
 export const globalOnlyWrongId = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId >= 4986)
-  .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+  .reduce(
+    (agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }),
+    {},
+  )
 
 /** @type { ({ [key: number]: number }) } */
 export const globalOnlyMissingInDb = Object.entries(globalOnly)
   .filter(([realId, wrongId]) => wrongId < 4986)
-  .reduce((agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }), {})
+  .reduce(
+    (agg, [realId, wrongId]) => ({ ...agg, [wrongId]: parseInt(realId) }),
+    {},
+  )
 
 /** @type { ({ [key: number]: number }) } */
-export const gloToJapConverter = Object.entries(globalOnly)
-  .reduce((agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }), {})
+export const gloToJapConverter = Object.entries(globalOnly).reduce(
+  (agg, [gloId, japId]) => ({ ...agg, [gloId]: japId >= 4986 ? null : japId }),
+  {},
+)
 
 export const remainingGlobalOnlyUnitMapping = {
   'Monkey D. Luffy - Kung Fu Training': 4986,
@@ -115,7 +125,9 @@ export const checkGloJapMapping = (
     if (!selectedUnit) {
       errors.push(`"${name}" hasn't been found`)
     } else if (selectedUnit.dbId !== id) {
-      errors.push(`"${name}" should be at ID ${id} but was ${selectedUnit.dbId}`)
+      errors.push(
+        `"${name}" should be at ID ${id} but was ${selectedUnit.dbId}`,
+      )
     }
   }
 

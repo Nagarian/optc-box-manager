@@ -6,7 +6,7 @@ export type FileButtonInputProps = ButtonProps & {
   multiple?: boolean
   onFiles: (files: File[]) => void
 }
-export function FileButtonInput ({
+export function FileButtonInput({
   accept,
   multiple,
   onFiles,

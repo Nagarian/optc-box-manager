@@ -18,7 +18,7 @@ export function ThemeChooser() {
           checked={themeMode === 'auto'}
           onChange={e => setThemeMode('auto')}
         >
-          {"Auto (defined by system)"}
+          {'Auto (defined by system)'}
         </ChoiceInput>
         <ChoiceInput
           type="radio"

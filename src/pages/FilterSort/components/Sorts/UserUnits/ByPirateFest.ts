@@ -9,5 +9,4 @@ export const byPirateFestAbility: UserUnitSort = (userUnit1, userUnit2) =>
   (userUnit2.pirateFest?.abilityLvl ?? -1)
 
 export const byPirateFestGp: UserUnitSort = (userUnit1, userUnit2) =>
-  (userUnit1.pirateFest?.gplvl ?? -1) -
-  (userUnit2.pirateFest?.gplvl ?? -1)
+  (userUnit1.pirateFest?.gplvl ?? -1) - (userUnit2.pirateFest?.gplvl ?? -1)

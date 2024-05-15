@@ -18,7 +18,7 @@ export const syncLevel: Syncer = (filters, sorts, displayer) => {
   return [syncSort, syncDisplayer]
 }
 
-export function syncLevelDisplayer (
+export function syncLevelDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   levelCriteria: ByUserLevelCriteria,
 ): SearchDisplayerCriteria<LevelDisplayerOption> | undefined {
@@ -34,7 +34,7 @@ export function syncLevelDisplayer (
   }
 }
 
-export function syncLevelSort (
+export function syncLevelSort(
   sorts: SearchSortCriteria[],
   levelCriteria: ByUserLevelCriteria,
 ): SearchSortCriteria[] | undefined {

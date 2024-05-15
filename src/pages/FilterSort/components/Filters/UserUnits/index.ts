@@ -35,7 +35,8 @@ export const SearchFilterUserUnitsKeys = [
   'byUserPowerSocket',
 ] as const
 
-export type SearchFilterUserUnitsType = typeof SearchFilterUserUnitsKeys[number]
+export type SearchFilterUserUnitsType =
+  (typeof SearchFilterUserUnitsKeys)[number]
 
 type Builder<T = unknown> = (
   criteria: T,

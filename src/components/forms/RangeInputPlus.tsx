@@ -15,7 +15,7 @@ export type RangeInputPlusProps = Omit<
     adders: number[]
   }
 
-export function RangeInputPlus ({
+export function RangeInputPlus({
   value,
   min,
   max,

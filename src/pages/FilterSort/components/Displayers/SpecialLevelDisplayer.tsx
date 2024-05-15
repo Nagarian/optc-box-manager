@@ -3,10 +3,8 @@ import { SpecialLvlIcon } from 'components/Icon'
 import Progression from 'components/Progression'
 import { SearchDisplayerProps } from '.'
 
-export default function SpecialLevelDisplayer ({
-  userUnit: {
-    special,
-  },
+export default function SpecialLevelDisplayer({
+  userUnit: { special },
 }: SearchDisplayerProps) {
   if (!special) return null
 

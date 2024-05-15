@@ -68,7 +68,7 @@ type RecapBoxProps = {
   original: UserUnit
 }
 
-export default function RecapBox ({
+export default function RecapBox({
   userUnit,
   original,
   ...rest
@@ -285,7 +285,7 @@ export default function RecapBox ({
   )
 }
 
-function UnitClassesDisplayer ({
+function UnitClassesDisplayer({
   unit: { class: classes },
 }: {
   unit: ExtendedUnit
@@ -313,7 +313,7 @@ function UnitClassesDisplayer ({
   )
 }
 
-function SingleUnitClassesDisplayer ({
+function SingleUnitClassesDisplayer({
   classes,
   small,
   ...props
@@ -346,7 +346,7 @@ function SingleUnitClassesDisplayer ({
   )
 }
 
-export function RecapBoxLight ({
+export function RecapBoxLight({
   userUnit,
   onClick,
   ...rest

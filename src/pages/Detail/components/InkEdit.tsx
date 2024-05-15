@@ -9,7 +9,7 @@ type InkEditProps = {
   onChange: (support: UserUnitInk) => void
 }
 
-export default function InkEdit ({ ink, onChange }: InkEditProps) {
+export default function InkEdit({ ink, onChange }: InkEditProps) {
   if (!ink) return null
 
   const { lvl } = ink || {}

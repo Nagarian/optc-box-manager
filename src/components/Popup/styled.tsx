@@ -31,7 +31,7 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   flex-direction: column;
   place-items: stretch;
   overflow: hidden;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   box-shadow: ${themeGet('shadows.normal')};
   animation: 250ms ${BounceIn};
 `

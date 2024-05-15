@@ -23,7 +23,7 @@ type SearchCollectionItemProps = {
   applySearch: (search: SavedSearch) => void
   remove: (search: SavedSearch) => void
 }
-export function SearchCollectionItem ({
+export function SearchCollectionItem({
   search,
   showReseter,
   allowDelete,

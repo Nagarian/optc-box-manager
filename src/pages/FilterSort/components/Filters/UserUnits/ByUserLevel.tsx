@@ -5,7 +5,7 @@ import { BooleanFilterMapper } from 'services/filterHelper'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserLevelStateKeys = ['ongoing', 'maxed'] as const
-export type UserLevelState = typeof UserLevelStateKeys[number]
+export type UserLevelState = (typeof UserLevelStateKeys)[number]
 
 export const UserLevelLBStateKeys = [
   'locked',
@@ -13,7 +13,7 @@ export const UserLevelLBStateKeys = [
   'unmaxed',
   'maxed',
 ] as const
-export type UserLevelLBState = typeof UserLevelLBStateKeys[number]
+export type UserLevelLBState = (typeof UserLevelLBStateKeys)[number]
 
 export interface ByUserLevelCriteria {
   state?: UserLevelState
@@ -77,11 +77,15 @@ export const ByUserLevelFilter = (criteria: ByUserLevelCriteria) =>
     [
       criteria.postLbState,
       userUnit =>
-        llbFilter(userUnit.level.lvl, userUnit.level.lvlMax, criteria.postLbState),
+        llbFilter(
+          userUnit.level.lvl,
+          userUnit.level.lvlMax,
+          criteria.postLbState,
+        ),
     ],
   )
 
-export function ByUserLevelInput ({
+export function ByUserLevelInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserLevelCriteria>) {

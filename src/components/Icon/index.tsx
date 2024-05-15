@@ -10,7 +10,7 @@ import {
   space,
   SpaceProps,
 } from 'styled-system'
-import { clean, place,PlaceProps } from 'styles'
+import { clean, place, PlaceProps } from 'styles'
 import Add from './add.svg?react'
 import Arrow from './arrow.svg?react'
 import Ascending from './ascending.svg?react'

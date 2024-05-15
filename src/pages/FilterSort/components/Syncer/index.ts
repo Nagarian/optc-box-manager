@@ -21,7 +21,7 @@ export type Syncer = (
   displayer: SearchDisplayerCriteria | undefined,
 ) => SyncerResult
 
-export function useSyncer (
+export function useSyncer(
   filters: SearchFilterUserUnits,
   sorts: SearchSortCriteria[],
   displayer: SearchDisplayerCriteria | undefined,

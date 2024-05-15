@@ -7,11 +7,8 @@ import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import { FilterContainerPanel } from '../FilterContainer'
 
-export const PotentialStateKeys = [
-  'ongoing',
-  'maxed',
-] as const
-export type PotentialState = typeof PotentialStateKeys[number]
+export const PotentialStateKeys = ['ongoing', 'maxed'] as const
+export type PotentialState = (typeof PotentialStateKeys)[number]
 
 export type ByUserPotentialCriteria = {
   [key in PotentialKey]?: PotentialState
@@ -26,16 +23,16 @@ const compareLvlToState = (state: PotentialState, lvl: number) => {
   }
 }
 
-export const ByUserPotentialFilter = (criteria: ByUserPotentialCriteria) => (
-  userUnit: UserUnit,
-) =>
-  Object.entries(criteria).some(([potentialKey, potentialState]) =>
-    userUnit.potentials.some(
-      p => p.type === potentialKey && compareLvlToState(potentialState, p.lvl),
-    ),
-  )
+export const ByUserPotentialFilter =
+  (criteria: ByUserPotentialCriteria) => (userUnit: UserUnit) =>
+    Object.entries(criteria).some(([potentialKey, potentialState]) =>
+      userUnit.potentials.some(
+        p =>
+          p.type === potentialKey && compareLvlToState(potentialState, p.lvl),
+      ),
+    )
 
-export function ByUserPotentialInput ({
+export function ByUserPotentialInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserPotentialCriteria>) {
@@ -49,13 +46,15 @@ export function ByUserPotentialInput ({
       <FilterContainerPanel marginBottom="2">
         <Text>State</Text>
         {PotentialStateKeys.map(stateKey => (
-          <ChoiceInput key={stateKey}
+          <ChoiceInput
+            key={stateKey}
             type="radio"
             name="userunit-potential-state-chooser"
             checked={selectedState === stateKey}
             onChange={e =>
               onChange({
-                [selectedPotential ?? 'Enrage/Reduce Increase Damage Taken duration']: stateKey,
+                [selectedPotential ??
+                'Enrage/Reduce Increase Damage Taken duration']: stateKey,
               })
             }
           >

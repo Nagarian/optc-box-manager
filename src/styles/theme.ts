@@ -1,5 +1,11 @@
 import { Theme } from '@emotion/react'
-import { ThemeBreakpoints, ThemeFontSizes, ThemeFontWeight, ThemeSizes, ThemeSpace } from './theme-definition'
+import {
+  ThemeBreakpoints,
+  ThemeFontSizes,
+  ThemeFontWeight,
+  ThemeSizes,
+  ThemeSpace,
+} from './theme-definition'
 
 const baseColors = {
   black: '#323232',
@@ -84,7 +90,14 @@ const specificColors = {
   )`,
 }
 
-const fontSizes: ThemeFontSizes = ['1.2rem', '1.4rem', '1.6rem', '2rem', '2.4rem', '3.2rem']
+const fontSizes: ThemeFontSizes = [
+  '1.2rem',
+  '1.4rem',
+  '1.6rem',
+  '2rem',
+  '2.4rem',
+  '3.2rem',
+]
 fontSizes.body = fontSizes[2]
 fontSizes.title = fontSizes[5]
 fontSizes.subtitle = fontSizes[4]

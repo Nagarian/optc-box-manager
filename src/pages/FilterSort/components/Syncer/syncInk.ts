@@ -13,7 +13,7 @@ export const syncInk: Syncer = (filters, sorts, displayer) => {
   return [syncSort, undefined]
 }
 
-export function syncInkSort (
+export function syncInkSort(
   sorts: SearchSortCriteria[],
 ): SearchSortCriteria[] | undefined {
   if (sorts.length) {

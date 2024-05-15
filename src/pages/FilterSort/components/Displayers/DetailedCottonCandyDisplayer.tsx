@@ -2,11 +2,10 @@ import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import { Text } from 'components/Title'
 import { SearchDisplayerProps } from '.'
 
-export function DetailedCottonCandyDisplayer ({
+export function DetailedCottonCandyDisplayer({
   userUnit: {
     cc: { atk, hp, rcv },
   },
-
 }: SearchDisplayerProps) {
   const sum = atk + hp + rcv
   if (!sum) return null

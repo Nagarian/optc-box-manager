@@ -1,6 +1,6 @@
 import { css, Global, useTheme } from '@emotion/react'
 
-export function FontCss () {
+export function FontCss() {
   const theme = useTheme()
   return (
     <Global

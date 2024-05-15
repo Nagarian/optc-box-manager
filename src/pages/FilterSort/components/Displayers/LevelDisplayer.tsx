@@ -13,13 +13,14 @@ const LevelDisplayerOptionTypes = [
   'progression',
   'level LB',
 ] as const
-export type LevelDisplayerOptionType = typeof LevelDisplayerOptionTypes[number]
+export type LevelDisplayerOptionType =
+  (typeof LevelDisplayerOptionTypes)[number]
 
 export type LevelDisplayerOption = {
   type: LevelDisplayerOptionType
 }
 
-export default function LevelDisplayer ({
+export default function LevelDisplayer({
   userUnit: { level },
   options,
 }: SearchDisplayerProps<LevelDisplayerOption>) {
@@ -60,7 +61,7 @@ export default function LevelDisplayer ({
   )
 }
 
-export function LevelDisplayerInput ({
+export function LevelDisplayerInput({
   options,
   onChange,
 }: SearchDisplayerInputProps<LevelDisplayerOption>) {

@@ -192,6 +192,6 @@ const resetCss = (theme: Theme) => css`
   }
 `
 
-export function ResetCss () {
+export function ResetCss() {
   return <Global styles={resetCss} />
 }

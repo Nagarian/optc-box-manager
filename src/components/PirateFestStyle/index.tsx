@@ -7,7 +7,7 @@ import Healer from './images/Healer.png'
 import Obstructer from './images/Obstructer.png'
 import Supporter from './images/Supporter.png'
 
-export function UnitPirateFestStyleToImage (type: UnitPirateFestStyle) {
+export function UnitPirateFestStyleToImage(type: UnitPirateFestStyle) {
   switch (type) {
     case 'ATK':
       return Attacker
@@ -35,7 +35,7 @@ const BasePirateFestStyleIcon = styled.img<SpaceProps & SizeProps>`
   ${size}
 `
 
-export function PirateFestStyleIcon ({ type, ...p }: PirateFestStyleIconProps) {
+export function PirateFestStyleIcon({ type, ...p }: PirateFestStyleIconProps) {
   return (
     <BasePirateFestStyleIcon
       {...p}

@@ -6,7 +6,7 @@ import LimitBreak from '../images/limitbreak.png'
 export type LimitBreakDisplayerProps = {
   limitBreak?: UserUnitLimitBreak
 }
-export default function LimitBreakDisplayer ({
+export default function LimitBreakDisplayer({
   limitBreak,
 }: LimitBreakDisplayerProps) {
   if (!limitBreak || limitBreak.lvl === 0) return null
@@ -18,9 +18,7 @@ export default function LimitBreakDisplayer ({
   return (
     <>
       <Panel isKeyUnlocked={isKeyUnlocked} />
-      <Displayer color='white'>
-        {isMaxed ? 'MAX' : lvl}
-      </Displayer>
+      <Displayer color="white">{isMaxed ? 'MAX' : lvl}</Displayer>
     </>
   )
 }
@@ -31,7 +29,7 @@ const Panel = styled.span<{ isKeyUnlocked: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  margin: .2rem;
+  margin: 0.2rem;
   background: url(${LimitBreak}) center / contain no-repeat;
   filter: ${p => p.isKeyUnlocked && 'hue-rotate(320deg)'};
 `
@@ -41,8 +39,8 @@ const Displayer = styled.span<ColorProps>`
   top: 0;
   right: 0;
   width: 4ch;
-  margin-top: .8rem;
-  margin-right: .4rem;
+  margin-top: 0.8rem;
+  margin-right: 0.4rem;
   font-weight: bold;
   text-align: center;
   font-size: 0.8em;

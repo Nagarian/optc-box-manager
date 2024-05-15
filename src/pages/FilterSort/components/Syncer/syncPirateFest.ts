@@ -29,7 +29,7 @@ export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
   return [syncSort, syncDisplayer]
 }
 
-export function syncPirateFestDisplayer (
+export function syncPirateFestDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   type: PirateFestDisplayerOptionType,
 ): SearchDisplayerCriteria<PirateFestDisplayerOption> | undefined {
@@ -45,7 +45,7 @@ export function syncPirateFestDisplayer (
   }
 }
 
-export function syncPirateFestSort (
+export function syncPirateFestSort(
   sorts: SearchSortCriteria[],
   type: PirateFestDisplayerOptionType,
 ): SearchSortCriteria[] | undefined {

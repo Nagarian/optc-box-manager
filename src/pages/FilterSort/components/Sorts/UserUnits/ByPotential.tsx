@@ -16,17 +16,19 @@ export type SpecificPotentialSortOption = {
   type: PotentialKey
 }
 
-export const bySpecificPotentialLvl: SearchSortWithOptionFunction<SpecificPotentialSortOption> = (
-  option,
-): UserUnitSort => (userUnit1, userUnit2) =>
-  (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ?? -1) -
-  (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ?? -1)
+export const bySpecificPotentialLvl: SearchSortWithOptionFunction<
+  SpecificPotentialSortOption
+> =
+  (option): UserUnitSort =>
+  (userUnit1, userUnit2) =>
+    (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ?? -1) -
+    (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ?? -1)
 
 export const bySpecificPotentialLabel = (
   option: SpecificPotentialSortOption,
 ) => <PotentialAbility type={option.type} size="2" />
 
-export function SpecificPotentialSortInput ({
+export function SpecificPotentialSortInput({
   options,
   onChange,
 }: SearchSortInputProps<SpecificPotentialSortOption>) {

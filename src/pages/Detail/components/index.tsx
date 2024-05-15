@@ -12,7 +12,7 @@ type InputLabelProps = {
   children?: ReactNode
 }
 
-export function InputLabel ({
+export function InputLabel({
   name,
   descriptions,
   value,
@@ -33,27 +33,31 @@ export function InputLabel ({
             <DescriptionHighlighter
               value={descriptions[descriptions.length - 1]}
               originalDiff={
-                typeof descriptions[descriptions.length - 2] === 'string' && (value === max || max === 2)
-                  ? descriptions[descriptions.length - 2] as string
+                typeof descriptions[descriptions.length - 2] === 'string' &&
+                (value === max || max === 2)
+                  ? (descriptions[descriptions.length - 2] as string)
                   : undefined
               }
             />
           </div>
         )}
 
-        {descriptions && descriptions.length > 1 && value > 0 && value < max && (
-          <Box mt="2">
-            <strong>Level {value}: </strong>
-            <DescriptionHighlighter
-              value={descriptions[value - 1]}
-              originalDiff={
-                typeof descriptions[value - 2] === 'string'
-                  ? descriptions[value - 2] as string
-                  : undefined
-              }
-            />
-          </Box>
-        )}
+        {descriptions &&
+          descriptions.length > 1 &&
+          value > 0 &&
+          value < max && (
+            <Box mt="2">
+              <strong>Level {value}: </strong>
+              <DescriptionHighlighter
+                value={descriptions[value - 1]}
+                originalDiff={
+                  typeof descriptions[value - 2] === 'string'
+                    ? (descriptions[value - 2] as string)
+                    : undefined
+                }
+              />
+            </Box>
+          )}
       </Box>
       {children}
     </Box>

@@ -1,10 +1,30 @@
 // @ts-check
-import { aliases, evolutions, units, details, cooldowns, flags, gamewith } from './DBLoader.js'
+import {
+  aliases,
+  evolutions,
+  units,
+  details,
+  cooldowns,
+  flags,
+  gamewith,
+} from './DBLoader.js'
 import { applyDropLocation } from './dropExtracter.js'
 import { getUnitThumbnail, getUnitFullPicture } from './image.js'
 import { evolutionMap } from './evolution.js'
-import { fixupDetail, fixupSpecificIssue, fixupImages, fixupEvolution, fixupFlags, fixupVsLastTapSuperTandem, fixupFestProperties } from './fixup.js'
-import { globalOnlyWrongId, globalOnlyMissingInDb, checkGloJapMapping } from './glo-jap-remapper.js'
+import {
+  fixupDetail,
+  fixupSpecificIssue,
+  fixupImages,
+  fixupEvolution,
+  fixupFlags,
+  fixupVsLastTapSuperTandem,
+  fixupFestProperties,
+} from './fixup.js'
+import {
+  globalOnlyWrongId,
+  globalOnlyMissingInDb,
+  checkGloJapMapping,
+} from './glo-jap-remapper.js'
 import { applyNewPirateRumble } from './pirateRumbleExtracter.js'
 
 const getFamilyId = (
@@ -13,11 +33,15 @@ const getFamilyId = (
 ) => {
   if (!unit.families) return -1
 
-  return units.findIndex(u => u.families?.every(fam => unit.families?.includes(fam))) + 1
+  return (
+    units.findIndex(u =>
+      u.families?.every(fam => unit.families?.includes(fam)),
+    ) + 1
+  )
 }
 
 /** @returns { import('../models/old-units').ExtendedUnit[] } */
-function DBFactory () {
+function DBFactory() {
   const Details = details
   const Evolutions = evolutions
   const Cooldowns = cooldowns
@@ -58,14 +82,12 @@ function DBFactory () {
 
   checkGloJapMapping(db)
 
-  db = db.filter(unit =>
-    !unit.name.includes('⚐') &&
-    !unit.name.includes('⚔'),
-  )
+  db = db.filter(unit => !unit.name.includes('⚐') && !unit.name.includes('⚔'))
 
-  db = db.concat(db
-    .filter(u => !!globalOnlyMissingInDb[u.id])
-    .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] })),
+  db = db.concat(
+    db
+      .filter(u => !!globalOnlyMissingInDb[u.id])
+      .map(u => ({ ...u, id: globalOnlyMissingInDb[u.id] })),
   )
 
   db = db

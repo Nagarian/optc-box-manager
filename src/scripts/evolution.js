@@ -6,7 +6,7 @@ import { evolutions as EvolsArray } from './DBLoader.js'
  */
 
 /** @returns EvolutionMapHash */
-export function evolutionMap () {
+export function evolutionMap() {
   /** @type EvolutionMapHash */
   const evolutionHash = {}
 
@@ -25,7 +25,7 @@ export function evolutionMap () {
 }
 
 /** @return { number[] } */
-function evolutionSeeker (
+function evolutionSeeker(
   /** @type import('./DBLoader').BaseUnitEvolution */ evolutions,
   /** @type number */ id,
 ) {

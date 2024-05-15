@@ -30,7 +30,7 @@ export const OptcDbProvider: FunctionComponent<PropsWithChildren> = ({
 
     const load = async () => {
       const response = await fetch('db-old.json')
-      const db = await response.json() as ExtendedUnit[]
+      const db = (await response.json()) as ExtendedUnit[]
       if (!cancelled) {
         setOptcDbValue({
           db: db.filter(u => u.class !== 'Booster' && u.class !== 'Evolver'),
@@ -53,6 +53,6 @@ export const OptcDbProvider: FunctionComponent<PropsWithChildren> = ({
   )
 }
 
-export function useOptcDb () {
+export function useOptcDb() {
   return useContext(OptcDbContext)
 }

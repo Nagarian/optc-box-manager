@@ -1,5 +1,9 @@
 // @ts-check
-import { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } from './glo-jap-remapper.js'
+import {
+  globalOnlyReverseMap,
+  globalOnly,
+  globalOnlyMissingInDb,
+} from './glo-jap-remapper.js'
 
 /**
  * @typedef { ({ [key: string]: import("../models/old-units").PotentialKey })} PotentialRenamedHash
@@ -7,7 +11,7 @@ import { globalOnlyReverseMap, globalOnly, globalOnlyMissingInDb } from './glo-j
  */
 
 /** @return { import("../models/old-units").UnitDetail } */
-export function fixupDetail (
+export function fixupDetail(
   /** @type { import("../models/old-units").UnitDetail } */ detail,
 ) {
   // @ts-ignore
@@ -32,7 +36,7 @@ export function fixupDetail (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupVersusUnit (
+export function fixupVersusUnit(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
 ) {
   if (!unit.detail.VSCondition) {
@@ -41,7 +45,8 @@ export function fixupVersusUnit (
 
   /** @type any */
   const untyped = unit
-  const format = (/** @type any */ obj) => `**Character 1:** ${obj.character1}<br/>**Character 2:** ${obj.character2}`
+  const format = (/** @type any */ obj) =>
+    `**Character 1:** ${obj.character1}<br/>**Character 2:** ${obj.character2}`
 
   return {
     ...unit,
@@ -107,12 +112,13 @@ export function fixupVersusUnit (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupVsLastTapSuperTandem (
+export function fixupVsLastTapSuperTandem(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
-  if ((unit.detail.potential?.length ?? 0) > 3 &&
+  if (
+    (unit.detail.potential?.length ?? 0) > 3 &&
     unit.detail.potential?.find(p => p.Name === 'Last Tap') &&
     unit.detail.potential?.find(p => p.Name === 'Super Tandem')
   ) {
@@ -136,7 +142,7 @@ export function fixupVsLastTapSuperTandem (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupImages (
+export function fixupImages(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -155,7 +161,7 @@ export function fixupImages (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupEvolution (
+export function fixupEvolution(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -171,13 +177,14 @@ export function fixupEvolution (
       ...unit.evolution,
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
-        : globalOnlyReverseMap[unit.evolution.evolution] ?? unit.evolution.evolution,
+        : globalOnlyReverseMap[unit.evolution.evolution] ??
+          unit.evolution.evolution,
     },
   }
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupFlags (
+export function fixupFlags(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -193,26 +200,34 @@ export function fixupFlags (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupFestProperties (
+export function fixupFestProperties(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   // @ts-ignore
-  unit.detail.festAbility = unit.detail.festAbility?.map(str => ({ description: str }))
-  // @ts-ignore
-  unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({ description: str }))
-  // @ts-ignore
-  unit.detail.festGPBurst = unit.detail.festAbilityGP?.map(({ festGPSpecial, uses }) => ({
-    description: festGPSpecial,
-    // @ts-ignore
-    condition: unit.detail.festAbilityGPCondition,
-    use: uses,
+  unit.detail.festAbility = unit.detail.festAbility?.map(str => ({
+    description: str,
   }))
   // @ts-ignore
-  unit.detail.festGPLeader = unit.detail.festAbilityGP?.map(({ festGPAbility }) => ({
-    description: festGPAbility,
+  unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({
+    description: str,
   }))
+  // @ts-ignore
+  unit.detail.festGPBurst = unit.detail.festAbilityGP?.map(
+    ({ festGPSpecial, uses }) => ({
+      description: festGPSpecial,
+      // @ts-ignore
+      condition: unit.detail.festAbilityGPCondition,
+      use: uses,
+    }),
+  )
+  // @ts-ignore
+  unit.detail.festGPLeader = unit.detail.festAbilityGP?.map(
+    ({ festGPAbility }) => ({
+      description: festGPAbility,
+    }),
+  )
   // @ts-ignore
   delete unit.detail.festAbilityGP
   // @ts-ignore
@@ -226,7 +241,7 @@ export function fixupFestProperties (
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function fixupSpecificIssue (
+export function fixupSpecificIssue(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -361,7 +376,7 @@ export function fixupSpecificIssue (
   return unit
 }
 
-export function removeProp (
+export function removeProp(
   /** @type any */ obj,
   /** @type string */ badName,
   /** @type string */ realName,

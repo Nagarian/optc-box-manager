@@ -13,7 +13,7 @@ export const syncLimitBreak: Syncer = (filters, sorts, displayer) => {
   return [syncSort, undefined]
 }
 
-export function syncLimitBreakSort (
+export function syncLimitBreakSort(
   sorts: SearchSortCriteria[],
 ): SearchSortCriteria[] | undefined {
   if (sorts.length) {

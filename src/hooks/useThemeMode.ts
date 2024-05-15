@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ThemeMode, useUserSettings } from './useUserSettings'
 
-export function useThemeMode () {
+export function useThemeMode() {
   const { userSetting, setUserSetting } = useUserSettings()
   const { themeMode } = userSetting
 

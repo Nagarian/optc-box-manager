@@ -6,8 +6,8 @@ import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,
 } from 'pages/FilterSort/components/Displayers'
-import { gridArea,GridAreaProps, SizeProps } from 'styled-system'
-import { place,PlaceProps } from 'styles'
+import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
+import { place, PlaceProps } from 'styles'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
 import Ink from './images/ink.png'

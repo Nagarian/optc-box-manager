@@ -13,7 +13,7 @@ type FilterContainerProps = {
   onReset: () => void
 }
 
-export default function FilterContainer ({
+export default function FilterContainer({
   title,
   children,
   customAction,
@@ -28,7 +28,9 @@ export default function FilterContainer ({
         justifyContent="space-between"
         marginBottom="2"
       >
-        <SubTitle textAlign="left" flex="1">{title}</SubTitle>
+        <SubTitle textAlign="left" flex="1">
+          {title}
+        </SubTitle>
         {customAction}
         <Button
           onClick={onReset}

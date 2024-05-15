@@ -9,7 +9,7 @@ export type LimitBreakType =
   | 'cooldown'
   | 'captain'
 
-export function getLimitType ({ description }: LimitBreak) : LimitBreakType {
+export function getLimitType({ description }: LimitBreak): LimitBreakType {
   if (description.startsWith('LOCKED WITH KEY')) {
     return 'key'
   }

@@ -5,12 +5,10 @@ import PotentialAbility from 'components/PotentialAbility'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
 import { PotentialKey, Potentials } from 'models/units'
-import { SearchDisplayerInputProps,SearchDisplayerProps } from '.'
+import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
 
-export default function PotentialsDisplayer ({
-  userUnit: {
-    potentials,
-  },
+export default function PotentialsDisplayer({
+  userUnit: { potentials },
 }: SearchDisplayerProps) {
   if (!Potentials.length) return null
 
@@ -37,10 +35,8 @@ export type SpecificPotentialDisplayerOption = {
   type: PotentialKey
 }
 
-export function SpecificPotentialDisplayer ({
-  userUnit: {
-    potentials,
-  },
+export function SpecificPotentialDisplayer({
+  userUnit: { potentials },
   options,
 }: SearchDisplayerProps<SpecificPotentialDisplayerOption>) {
   if (!potentials || !options?.type) return null
@@ -55,7 +51,7 @@ export function SpecificPotentialDisplayer ({
   )
 }
 
-export function SpecificPotentialDisplayerInput ({
+export function SpecificPotentialDisplayerInput({
   options,
   onChange,
 }: SearchDisplayerInputProps<SpecificPotentialDisplayerOption>) {
@@ -67,9 +63,11 @@ export function SpecificPotentialDisplayerInput ({
           type="radio"
           name="potentials-displayer"
           checked={options?.type === potential}
-          onChange={e => onChange({
-            type: potential,
-          })}
+          onChange={e =>
+            onChange({
+              type: potential,
+            })
+          }
         >
           <PotentialAbility type={potential} size="3" />
         </ImageInput>

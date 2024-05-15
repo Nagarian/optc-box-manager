@@ -23,7 +23,10 @@ describe('ByUnclassable', () => {
   })
 
   it('should fail when one condition is not meet', () => {
-    const filter = ByUnclassableFilter({ exclude: { japanOnly: true }, evolvedOnly: true })
+    const filter = ByUnclassableFilter({
+      exclude: { japanOnly: true },
+      evolvedOnly: true,
+    })
 
     expect(
       filter({

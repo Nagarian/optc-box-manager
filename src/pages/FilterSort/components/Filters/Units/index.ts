@@ -3,7 +3,10 @@ import { FunctionComponent } from 'react'
 import { ByClassFilter, ByClassInput } from './ByClass'
 import { ByDropFilter, ByDropInput } from './ByDrop'
 import { ByLimitBreakFilter, ByLimitBreakInput } from './ByLimitBreak'
-import { ByPirateFestStyleFilter, ByPirateFestStyleInput } from './ByPirateFestStyle'
+import {
+  ByPirateFestStyleFilter,
+  ByPirateFestStyleInput,
+} from './ByPirateFestStyle'
 import { ByPotentialFilter, ByPotentialInput } from './ByPotential'
 import { ByRarityFilter, ByRarityInput } from './ByRarity'
 import { ByRcvFinderFilter, ByRcvFinderInput } from './ByRcvFinder'
@@ -26,7 +29,7 @@ export const SearchFilterUnitsKeys = [
   'byDrop',
 ] as const
 
-export type SearchFilterUnitsType = typeof SearchFilterUnitsKeys[number]
+export type SearchFilterUnitsType = (typeof SearchFilterUnitsKeys)[number]
 
 type Builder<T = unknown> = (criteria: T) => UnitFilter
 

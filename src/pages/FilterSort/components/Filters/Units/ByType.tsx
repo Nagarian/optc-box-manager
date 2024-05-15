@@ -7,20 +7,19 @@ export interface ByTypeCriteria {
   values: UnitType[]
 }
 
-export const ByTypeFilter = (criteria: ByTypeCriteria) => (
-  unit: ExtendedUnit,
-) =>
-  criteria.values?.some(crit =>
-    crit === 'DUAL'
-      ? Array.isArray(unit.type) && !!unit.detail?.swap
-      : crit === 'VS'
-        ? Array.isArray(unit.type) && !unit.detail?.swap
-        : Array.isArray(unit.type)
-          ? unit.type.some(t => t === crit)
-          : unit.type === crit,
-  ) ?? false
+export const ByTypeFilter =
+  (criteria: ByTypeCriteria) => (unit: ExtendedUnit) =>
+    criteria.values?.some(crit =>
+      crit === 'DUAL'
+        ? Array.isArray(unit.type) && !!unit.detail?.swap
+        : crit === 'VS'
+          ? Array.isArray(unit.type) && !unit.detail?.swap
+          : Array.isArray(unit.type)
+            ? unit.type.some(t => t === crit)
+            : unit.type === crit,
+    ) ?? false
 
-export function ByTypeInput ({
+export function ByTypeInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByTypeCriteria>) {

@@ -7,7 +7,7 @@ import { ThemeChooser } from './components/ThemeChooser'
 type AppManagementProps = {
   myUserBox: MyUserBox
 }
-export default function AppManagement ({ myUserBox }: AppManagementProps) {
+export default function AppManagement({ myUserBox }: AppManagementProps) {
   return (
     <>
       <ThemeChooser />

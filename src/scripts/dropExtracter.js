@@ -49,7 +49,7 @@ const RookieIcons = {
   "The Genius Jester! Buggy's Festival!": 2277,
   'Miracle Cherry Blossoms': 2491,
   'Revenge of the Assassins! Galette': 2751,
-  'Holy Mother\'s Lover: Mother Caramel': 2377,
+  "Holy Mother's Lover: Mother Caramel": 2377,
   'The Finest of Art': 1649,
   'Coliseum Executioner': 2144,
   'Reunited in Wano! Straw Hat Pirates': 2802,
@@ -123,12 +123,12 @@ const eventLightModules = {
 }
 
 // @ts-ignore
-function distinct (value, index, self) {
+function distinct(value, index, self) {
   return self.indexOf(value) === index
 }
 
 /** @return import('../models/drops').EventDropLight */
-function dropMapper (
+function dropMapper(
   /** @type string */ dropKey,
   /** @type string[] */ ...subKey
 ) {
@@ -152,15 +152,13 @@ function dropMapper (
       (/** @type number */ id) =>
         id > 0 && // remove books
         !!units[id - 1] && // remove skull and other tricks
-        !(
-          ['Evolver', 'Booster'].includes(units[id - 1].toString())
-        ), // remove evolver and booster
+        !['Evolver', 'Booster'].includes(units[id - 1].toString()), // remove evolver and booster
     )
     .filter(distinct)
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
-export function applyDropLocation (
+export function applyDropLocation(
   /** @type import("../models/old-units").ExtendedUnit */ unit,
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
@@ -190,7 +188,11 @@ export function applyDropLocation (
     result.push('limited RR')
   }
 
-  if (unit.evolutionMap.map(id => units.find(u => u.id === id)).find(u => u?.stars === 6)) {
+  if (
+    unit.evolutionMap
+      .map(id => units.find(u => u.id === id))
+      .find(u => u?.stars === 6)
+  ) {
     result.push('legend')
   }
 
@@ -201,8 +203,12 @@ export function applyDropLocation (
 
   const evolve = unit.evolutionMap
 
-  const condition = (/** @type import('../models/drops').EventDropLight */ event) =>
-    event.includes(unit.id) || event.some(eventId => evolve.includes(eventId)) || event.includes(globalOnly[unit.id])
+  const condition = (
+    /** @type import('../models/drops').EventDropLight */ event,
+  ) =>
+    event.includes(unit.id) ||
+    event.some(eventId => evolve.includes(eventId)) ||
+    event.includes(globalOnly[unit.id])
 
   if (condition(eventLightModules.Story)) {
     result.push('story')

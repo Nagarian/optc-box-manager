@@ -30,7 +30,7 @@ export const BySearchBoxFilter = (
     unit.id.toString().startsWith(searchValue)
 }
 
-export function BySearchBoxInput ({
+export function BySearchBoxInput({
   criteria,
   onChange,
   ...rest

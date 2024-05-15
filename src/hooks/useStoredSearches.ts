@@ -8,7 +8,7 @@ export type SavedSearch = {
   search: Search
 }
 
-export function useStoredSearches (key?: string) {
+export function useStoredSearches(key?: string) {
   const { userSetting, setUserSetting } = useUserSettings()
 
   const searches = userSetting.userSearches ?? []

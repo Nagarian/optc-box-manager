@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from 'react'
 import { SpaceProps } from 'styled-system'
 import RangeInput from './RangeInput'
 
-export default function SpecialLevelInput (
+export default function SpecialLevelInput(
   p: InputHTMLAttributes<HTMLInputElement> & SpaceProps,
 ) {
   const theme = useTheme()

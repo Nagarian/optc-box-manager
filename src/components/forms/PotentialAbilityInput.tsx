@@ -8,7 +8,7 @@ type PotentialAbilityInputProps = SpaceProps & {
   variant: PotentialKey
 }
 
-export default function PotentialAbilityInput ({
+export default function PotentialAbilityInput({
   variant,
   ...p
 }: InputHTMLAttributes<HTMLInputElement> & PotentialAbilityInputProps) {

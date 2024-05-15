@@ -1,16 +1,11 @@
 import styled from '@emotion/styled'
 import { ImageInputProps } from './ImageInput'
 
-export default function ChoiceInput ({
-  children,
-  ...rest
-}: ImageInputProps) {
+export default function ChoiceInput({ children, ...rest }: ImageInputProps) {
   return (
     <Label>
       <input {...rest} />
-      <span>
-        {children}
-      </span>
+      <span>{children}</span>
     </Label>
   )
 }

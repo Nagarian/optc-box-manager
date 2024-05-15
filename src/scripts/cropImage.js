@@ -25,23 +25,27 @@ import { readdir, mkdir } from 'fs/promises'
  * @param {string} version
  * @returns {Promise<CharacterFile[]>}
  */
-async function retrievePictures (version) {
-  async function getFiles (dir) {
+async function retrievePictures(version) {
+  async function getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true })
-    const files = await Promise.all(dirents.map((dirent) => {
-      const res = resolve(dir, dirent.name)
-      return dirent.isDirectory() ? getFiles(res) : res
-    }))
+    const files = await Promise.all(
+      dirents.map(dirent => {
+        const res = resolve(dir, dirent.name)
+        return dirent.isDirectory() ? getFiles(res) : res
+      }),
+    )
 
     return Array.prototype.concat(...files)
   }
 
   const dirCont = await getFiles(`./src/optcdb/api/images/thumbnail/${version}`)
   return dirCont
-    .filter(file => file.match(/.*(\\|\/)\d{4}\.(png?)/ig))
+    .filter(file => file.match(/.*(\\|\/)\d{4}\.(png?)/gi))
     .map(file => ({
       path: file,
-      id: parseInt(/.*(\\|\/)(?<charid>\d{4})\.(png?)/ig.exec(file).groups.charid),
+      id: parseInt(
+        /.*(\\|\/)(?<charid>\d{4})\.(png?)/gi.exec(file).groups.charid,
+      ),
     }))
 }
 
@@ -51,18 +55,18 @@ async function retrievePictures (version) {
  * @param {CharacterDesiredSize} size
  * @param {string} version
  */
-async function computeMatrice (files, size, version) {
+async function computeMatrice(files, size, version) {
   const filename = `${version}-${size.croppedWidth}x${size.croppedHeight}`
   const grid = {
     horizontal: 100,
-    vertical: (Math.ceil(Math.max(...files.map(f => f.id)) / 100)),
+    vertical: Math.ceil(Math.max(...files.map(f => f.id)) / 100),
   }
 
   console.log(`Computation of ${filename} pictures: start processing`)
   console.time(`Computation of ${filename} pictures`)
 
-  const pictures = await Promise.all(files
-    .map(async (file) => {
+  const pictures = await Promise.all(
+    files.map(async file => {
       const buffer = await sharp(file.path)
         .extract({ ...size })
         .resize({ width: size.croppedWidth })
@@ -73,9 +77,13 @@ async function computeMatrice (files, size, version) {
         left: ((file.id - 1) % grid.horizontal) * size.croppedWidth,
         top: (Math.ceil(file.id / grid.horizontal) - 1) * size.croppedHeight,
       }
-    }))
+    }),
+  )
 
-  console.timeLog(`Computation of ${filename} pictures`, 'retrieval done - start rendering')
+  console.timeLog(
+    `Computation of ${filename} pictures`,
+    'retrieval done - start rendering',
+  )
 
   mkdir('./public/characters/', { recursive: true })
 
@@ -104,11 +112,9 @@ const gloExWrongIds = {
   2771: 5051,
 }
 
-const fixedGlobalFiles = globalFiles
-  .map(f => gloExWrongIds[f.id]
-    ? ({ id: gloExWrongIds[f.id], path: f.path })
-    : f,
-  )
+const fixedGlobalFiles = globalFiles.map(f =>
+  gloExWrongIds[f.id] ? { id: gloExWrongIds[f.id], path: f.path } : f,
+)
 
 const size = {
   top: 28,

@@ -20,7 +20,7 @@ type SettingsProps = {
   myUserBox: MyUserBox
 }
 
-export default function Settings ({ onClose, myUserBox }: SettingsProps) {
+export default function Settings({ onClose, myUserBox }: SettingsProps) {
   return (
     <Popup title="Extras" onClose={onClose}>
       <SettingAction title="Credits" icon={TreasureIcon}>
@@ -55,7 +55,7 @@ type SettingActionProps = {
   icon?: Icon
   children: ReactNode
 }
-function SettingAction ({ title, icon, children }: SettingActionProps) {
+function SettingAction({ title, icon, children }: SettingActionProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (

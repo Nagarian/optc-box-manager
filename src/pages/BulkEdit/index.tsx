@@ -36,7 +36,7 @@ type BulkEditProps = {
   onCancel: () => void
   onSubmit: (userUnits: UserUnit[], editValue: UserUnitBulkEdit) => void
 }
-export default function BulkEdit ({
+export default function BulkEdit({
   userUnits,
   onCancel,
   onSubmit,
@@ -238,7 +238,7 @@ export default function BulkEdit ({
   )
 }
 
-function BulkEditContainer ({
+function BulkEditContainer({
   value,
   children,
 }: {
@@ -253,7 +253,7 @@ function BulkEditContainer ({
   )
 }
 
-function MultiChoiceInput<T extends string> ({
+function MultiChoiceInput<T extends string>({
   name,
   values,
   currentValue,
@@ -283,7 +283,7 @@ function MultiChoiceInput<T extends string> ({
   )
 }
 
-function lbStateToLabel (lbState: UserUnitBulkEditLimitBreakState) {
+function lbStateToLabel(lbState: UserUnitBulkEditLimitBreakState) {
   switch (lbState) {
     case 'max':
       return 'Is Limit Break maxed'
@@ -298,7 +298,7 @@ function lbStateToLabel (lbState: UserUnitBulkEditLimitBreakState) {
   }
 }
 
-function idConverterToLabel (state: GameVersionIdConverter) {
+function idConverterToLabel(state: GameVersionIdConverter) {
   switch (state) {
     case 'toGlobal':
       return 'Japan to Global'
@@ -309,7 +309,7 @@ function idConverterToLabel (state: GameVersionIdConverter) {
   }
 }
 
-function levelStateToLabel (state: UserUnitBulkEditLevelState) {
+function levelStateToLabel(state: UserUnitBulkEditLevelState) {
   switch (state) {
     case 'max':
       return 'Level max'
@@ -322,7 +322,7 @@ function levelStateToLabel (state: UserUnitBulkEditLevelState) {
   }
 }
 
-function computeSearch (edit: UserUnitBulkEdit | undefined): Search {
+function computeSearch(edit: UserUnitBulkEdit | undefined): Search {
   let uuf: SearchFilterUserUnits = {}
   let displayer: SearchDisplayerCriteria | undefined
   const uus: SearchSortCriteria[] = []

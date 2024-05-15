@@ -55,7 +55,7 @@ export const DefaultUserBoxSearch: Search = {
   displayer: { type: 'level', options: { type: 'level' } },
 }
 
-export function mergeSearch (search: Search, search2: Partial<Search>): Search {
+export function mergeSearch(search: Search, search2: Partial<Search>): Search {
   return {
     ...search,
     ...search2,
@@ -75,7 +75,7 @@ export function mergeSearch (search: Search, search2: Partial<Search>): Search {
   }
 }
 
-export function useSearch (search: Search = DefaultSearch) {
+export function useSearch(search: Search = DefaultSearch) {
   const userSettings = useUserSettings()
 
   const unitFilters = Object.entries(search.filters.units || {})
@@ -145,7 +145,7 @@ export function useSearch (search: Search = DefaultSearch) {
   }
 }
 
-export function useSavedSearch (
+export function useSavedSearch(
   savedSearchKey: string = 'search',
   defaultSearch: Search = DefaultSearch,
 ) {

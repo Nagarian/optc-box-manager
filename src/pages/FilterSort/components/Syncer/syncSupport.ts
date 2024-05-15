@@ -16,7 +16,7 @@ export const syncSupport: Syncer = (filters, sorts, displayer) => {
   return [syncSort, syncDisplayer]
 }
 
-export function syncSupportDisplayer (
+export function syncSupportDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
 ): SearchDisplayerCriteria | undefined {
   if (displayer) {
@@ -28,7 +28,7 @@ export function syncSupportDisplayer (
   }
 }
 
-export function syncSupportSort (
+export function syncSupportSort(
   sorts: SearchSortCriteria[],
 ): SearchSortCriteria[] | undefined {
   if (sorts.length) {

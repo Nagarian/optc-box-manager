@@ -27,7 +27,7 @@ console.log('Validator created')
 const prettify = false
 const excludeVS = true
 
-function validate (db) {
+function validate(db) {
   console.log('Validation of extracted DB data')
   const errors = getErrors(db)
 
@@ -52,7 +52,9 @@ function validate (db) {
     for (const path of new Set(matchingIdErrors.map(x => x.path))) {
       console.error(`  - ${path}`)
 
-      const messages = matchingIdErrors.filter(m => m.path === path).map(m => m.message)
+      const messages = matchingIdErrors
+        .filter(m => m.path === path)
+        .map(m => m.message)
 
       for (const message of messages) {
         console.error(`    - ${message}`)
@@ -96,10 +98,11 @@ function validate (db) {
   return false
 }
 
-function getErrors (db) {
+function getErrors(db) {
   const errors = []
   for (const unit of db) {
-    if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria)) continue
+    if (excludeVS && (unit.detail?.VSCondition || unit.characters?.criteria))
+      continue
 
     const isValid = validator(unit)
     if (!isValid && validator.errors) {
@@ -119,7 +122,10 @@ function getErrors (db) {
 
 const DBFixed = DB.map(fixupVersusUnit)
 
-writeFileSync('./public/db-old.json', prettify ? JSON.stringify(DBFixed, null, 2) : JSON.stringify(DBFixed))
+writeFileSync(
+  './public/db-old.json',
+  prettify ? JSON.stringify(DBFixed, null, 2) : JSON.stringify(DBFixed),
+)
 const isValide = validate(DBFixed)
 
 if (!isValide) {

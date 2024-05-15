@@ -11,12 +11,11 @@ export interface ByPirateFestStyleCriteria {
   values: UnitPirateFestStyle[]
 }
 
-export const ByPirateFestStyleFilter = (
-  criteria: ByPirateFestStyleCriteria,
-) => (unit: ExtendedUnit) =>
-  criteria.values.some(crit => unit.pirateFest.class === crit)
+export const ByPirateFestStyleFilter =
+  (criteria: ByPirateFestStyleCriteria) => (unit: ExtendedUnit) =>
+    criteria.values.some(crit => unit.pirateFest.class === crit)
 
-export function ByPirateFestStyleInput ({
+export function ByPirateFestStyleInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByPirateFestStyleCriteria>) {

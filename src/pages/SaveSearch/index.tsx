@@ -17,7 +17,7 @@ export type SaveSearchProps = {
   onClose: () => void
   onSearchSelected: (search: Search) => void
 }
-export default function SaveSearch ({
+export default function SaveSearch({
   saveKey,
   search,
   onClose,

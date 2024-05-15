@@ -30,7 +30,7 @@ import ImageSkill100 from './images/potentialskill_icon_s_100.png'
 import ImageSkill101 from './images/potentialskill_icon_s_101.png'
 import ImageFrame from './images/potentialskill_iconframe.png'
 
-export function PotentialAbilityToImage (type: PotentialKey) {
+export function PotentialAbilityToImage(type: PotentialKey) {
   switch (type) {
     case 'Reduce Slot Bind duration':
       return ImageSkill01
@@ -104,7 +104,7 @@ const Container = styled('div', cleanStyledSystem)<SizeProps>`
   }
 `
 
-export default function PotentialAbility ({
+export default function PotentialAbility({
   type,
   size = 3,
   hideChrome,

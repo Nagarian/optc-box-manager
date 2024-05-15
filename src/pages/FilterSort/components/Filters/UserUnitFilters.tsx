@@ -7,7 +7,7 @@ export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits
   onChange: (userUnitFilter: SearchFilterUserUnits) => void
 }
-export default function UserUnitFilters ({
+export default function UserUnitFilters({
   userUnitFilter,
   onChange,
 }: UserUnitFiltersProps) {

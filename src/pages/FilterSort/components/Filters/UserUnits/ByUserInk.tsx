@@ -4,12 +4,8 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { FilterContainerPanel } from '../FilterContainer'
 
-export const InkStateKeys = [
-  'locked',
-  'level1',
-  'level2',
-] as const
-export type InkState = typeof InkStateKeys[number]
+export const InkStateKeys = ['locked', 'level1', 'level2'] as const
+export type InkState = (typeof InkStateKeys)[number]
 
 export interface ByUserInkCriteria {
   state: InkState
@@ -28,21 +24,21 @@ const compareLvlToState = (state: InkState, lvl: number) => {
   }
 }
 
-export const ByUserInkFilter = (criteria: ByUserInkCriteria) => (
-  userUnit: UserUnit,
-) =>
-  !!userUnit?.ink && compareLvlToState(criteria.state, userUnit.ink.lvl)
+export const ByUserInkFilter =
+  (criteria: ByUserInkCriteria) => (userUnit: UserUnit) =>
+    !!userUnit?.ink && compareLvlToState(criteria.state, userUnit.ink.lvl)
 
-export function ByUserInkInput ({
+export function ByUserInkInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByUserInkCriteria>) {
   return (
     <FilterContainerPanel>
       <InkIcon size="2" />
-        Ink level
+      Ink level
       {InkStateKeys.map(stateKey => (
-        <ChoiceInput key={stateKey}
+        <ChoiceInput
+          key={stateKey}
           type="radio"
           name="userunit-Ink"
           checked={criteria?.state === stateKey}

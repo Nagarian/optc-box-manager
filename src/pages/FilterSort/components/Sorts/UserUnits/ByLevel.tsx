@@ -8,7 +8,7 @@ import {
 const LevelOptions = ['lvl', 'lvl Max', 'lvl LB'] as const
 
 export type LevelSortOption = {
-  type: typeof LevelOptions[number]
+  type: (typeof LevelOptions)[number]
 }
 
 export const byLevelWithOption: SearchSortWithOptionFunction<
@@ -33,7 +33,7 @@ export const byLevel: UserUnitSort = (userUnit1, userUnit2) =>
 
 export const byLevelSortLabel = (option: LevelSortOption) => option.type
 
-export function LevelSortInput ({
+export function LevelSortInput({
   options,
   onChange,
 }: SearchSortInputProps<LevelSortOption>) {

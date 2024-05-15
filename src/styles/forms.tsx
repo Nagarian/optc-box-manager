@@ -107,6 +107,6 @@ const formCss = css`
   }
 `
 
-export function FormsCss () {
+export function FormsCss() {
   return <Global styles={formCss} />
 }

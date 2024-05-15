@@ -8,7 +8,7 @@ type PowerSocketInputProps = SpaceProps & {
   variant?: PowerSocketKey
 }
 
-export default function PowerSocketInput ({
+export default function PowerSocketInput({
   variant,
   ...p
 }: InputHTMLAttributes<HTMLInputElement> & PowerSocketInputProps) {

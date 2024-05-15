@@ -6,17 +6,17 @@ import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 export interface ByPotentialCriteria {
   values: PotentialKey[]
 }
-const renamedPotentials: Record<string, PotentialKey> = {
-}
+const renamedPotentials: Record<string, PotentialKey> = {}
 
-export const ByPotentialFilter = (criteria: ByPotentialCriteria) => (
-  unit: ExtendedUnit,
-) =>
-  criteria.values.some(crit =>
-    unit.detail.potential?.some(p => (renamedPotentials[p.Name] ?? p.Name) === crit),
-  )
+export const ByPotentialFilter =
+  (criteria: ByPotentialCriteria) => (unit: ExtendedUnit) =>
+    criteria.values.some(crit =>
+      unit.detail.potential?.some(
+        p => (renamedPotentials[p.Name] ?? p.Name) === crit,
+      ),
+    )
 
-export function ByPotentialInput ({
+export function ByPotentialInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByPotentialCriteria>) {

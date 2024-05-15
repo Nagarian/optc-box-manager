@@ -10,7 +10,7 @@ import Shooter from './images/shooter.png'
 import Slasher from './images/slasher.png'
 import Striker from './images/striker.png'
 
-export function ClassToImage (type: UnitClass) {
+export function ClassToImage(type: UnitClass) {
   switch (type) {
     case 'Cerebral':
       return Cerebral
@@ -44,6 +44,6 @@ const ClassIcon = styled.img<SpaceProps & SizeProps>`
   ${size}
 `
 
-export function UnitClassIcon ({ type, ...p }: UnitClassIconProps) {
+export function UnitClassIcon({ type, ...p }: UnitClassIconProps) {
   return <ClassIcon src={ClassToImage(type)} title={type} {...p} />
 }

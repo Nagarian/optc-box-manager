@@ -17,7 +17,7 @@ type PowerSocketEditProps = {
   onChange: (PowerSockets: UserUnitPowerSocket[]) => void
 }
 
-export default function PowerSocketEdit ({
+export default function PowerSocketEdit({
   powerSockets,
   unit,
   onChange,
@@ -65,7 +65,7 @@ type PowerSocketEditorProps = {
   onChange: (uu: UserUnitPowerSocket) => void
 }
 
-function PowerSocketEditor ({
+function PowerSocketEditor({
   defaultSocketLvl,
   userUnitSocket: { type, lvl },
   onChange,
@@ -120,7 +120,7 @@ type UserPowerSocketDispayerProps = {
   selectedIndex?: number
   onClick?: (index: number) => void
 }
-export function UserPowerSocketDispayer ({
+export function UserPowerSocketDispayer({
   powerSockets,
   selectedIndex,
   onClick,

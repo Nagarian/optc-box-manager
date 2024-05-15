@@ -4,7 +4,7 @@ import CottonCandyLimitEdit from './components/CottonCandyLimitEdit'
 type GatherIslandProps = {
   onClose: () => void
 }
-export default function GatherIsland ({ onClose }: GatherIslandProps) {
+export default function GatherIsland({ onClose }: GatherIslandProps) {
   return (
     <Popup title="Gather Island" onClose={onClose}>
       <CottonCandyLimitEdit />

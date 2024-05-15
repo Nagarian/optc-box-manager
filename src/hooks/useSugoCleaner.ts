@@ -3,7 +3,7 @@ import { exportAsJson } from 'services/share'
 import { useStorage } from './useStorage'
 
 export const SugoCleanerList = ['toClean', 'toSell', 'toWaiting'] as const
-export type SugoCleanerListType = typeof SugoCleanerList[number]
+export type SugoCleanerListType = (typeof SugoCleanerList)[number]
 
 export type SugoCleaner = {
   [key in SugoCleanerListType]: number[]
@@ -15,17 +15,13 @@ const defaultSugoCleaner: SugoCleaner = {
   toWaiting: [],
 }
 
-export default function useSugoCleaner (unitDB: ExtendedUnit[]) {
+export default function useSugoCleaner(unitDB: ExtendedUnit[]) {
   const [sugoCleaner, setSugoCleaner] = useStorage<SugoCleaner>(
     'sugocleaner',
     defaultSugoCleaner,
   )
 
-  const {
-    toClean = [],
-    toSell = [],
-    toWaiting = [],
-  } = sugoCleaner
+  const { toClean = [], toSell = [], toWaiting = [] } = sugoCleaner
 
   return {
     toClean: toClean

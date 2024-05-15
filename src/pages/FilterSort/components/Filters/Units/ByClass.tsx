@@ -12,14 +12,14 @@ export const ByClassFilter =
     criteria.values.some(crit =>
       Array.isArray(unit.class)
         ? unit.class.some((subClass: UnitClass[] | UnitClass) =>
-          Array.isArray(subClass)
-            ? subClass.some(dualUnitClass => dualUnitClass === crit)
-            : subClass === crit,
-        )
+            Array.isArray(subClass)
+              ? subClass.some(dualUnitClass => dualUnitClass === crit)
+              : subClass === crit,
+          )
         : unit.class === crit,
     )
 
-export function ByClassInput ({
+export function ByClassInput({
   criteria,
   onChange,
 }: SearchFilterCriteriaInputProps<ByClassCriteria>) {

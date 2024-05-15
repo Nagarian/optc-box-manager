@@ -4,7 +4,7 @@ import InfoDisplayer from './InfoDisplayer'
 export type CottonCandyDisplayerProps = {
   cc?: UserUnitCottonCandy
 }
-export default function CottonCandyDisplayer ({
+export default function CottonCandyDisplayer({
   cc,
 }: CottonCandyDisplayerProps) {
   if (!cc) return null

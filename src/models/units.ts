@@ -313,7 +313,7 @@ export type UnitDetail = {
 
 export type UnitEvolution = {
   evolution: number | number[]
-  evolvers: (string| number)[] | (string| number)[][]
+  evolvers: (string | number)[] | (string | number)[][]
 }
 
 export type UnitImages = {

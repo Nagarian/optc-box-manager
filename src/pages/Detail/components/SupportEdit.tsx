@@ -12,7 +12,7 @@ type SupportEditProps = {
   onChange: (support: UserUnitSupport) => void
 }
 
-export default function SupportEdit ({
+export default function SupportEdit({
   support,
   detail,
   onChange,

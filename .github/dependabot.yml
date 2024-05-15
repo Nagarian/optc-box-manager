@@ -4,17 +4,17 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-      day: "saturday"
-      time: "09:00"
-      timezone: "Europe/Paris"
+      day: 'saturday'
+      time: '09:00'
+      timezone: 'Europe/Paris'
     allow:
-      - dependency-type: "production"
+      - dependency-type: 'production'
 
   - package-ecosystem: 'gitsubmodule'
     directory: '/'
     schedule:
       interval: 'daily'
-      time: "08:00"
-      timezone: "Europe/Paris"
+      time: '08:00'
+      timezone: 'Europe/Paris'
     # commit-message:
     #   prefix: "optc-db"

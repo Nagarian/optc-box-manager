@@ -26,7 +26,7 @@ import { CanvasRenderer } from './components/CanvasRenderer'
 export type ImageAnalyzerProps = {
   onCharacterSelected?: (ids: number[]) => void
 }
-export function ImageAnalyzer ({ onCharacterSelected }: ImageAnalyzerProps) {
+export function ImageAnalyzer({ onCharacterSelected }: ImageAnalyzerProps) {
   const characterSelectionPanelRef = useRef<HTMLDivElement>(null)
   const analysisSelectionPanelRef = useRef<HTMLButtonElement>(null)
 

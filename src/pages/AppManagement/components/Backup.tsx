@@ -14,7 +14,7 @@ import { importAsJson } from 'services/share'
 type BackupProps = {
   myUserBox: MyUserBox
 }
-export default function Backup ({ myUserBox }: BackupProps) {
+export default function Backup({ myUserBox }: BackupProps) {
   const userSetting = useUserSettings()
   const db = useOptcDb()
   const sugoCleaner = useSugoCleaner(db.db)
@@ -62,7 +62,7 @@ type SectionProps = {
   importFn: (json: string) => void
   exportFn: () => Promise<void>
 }
-function Section ({
+function Section({
   title,
   description,
   reset,

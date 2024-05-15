@@ -17,7 +17,7 @@ type UserBoxProps = {
   onShowDetail: (userUnit: UserUnit) => void
 }
 
-export default function MyUserBox ({
+export default function MyUserBox({
   userBox,
   search,
   onAddUnit,
