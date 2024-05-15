@@ -1,3 +1,4 @@
+import { css, Theme } from '@emotion/react'
 import styled from '@emotion/styled'
 import * as CSS from 'csstype'
 import { space, SpaceProps } from 'styled-system'
@@ -11,6 +12,39 @@ export type RangeInputProps = SpaceProps & {
   }
 }
 
+const track = (p: RangeInputProps & { theme: Theme }) => css`
+  height: ${p.theme.sizes[0]};
+  cursor: pointer;
+  background-color: ${p.theme.colors.grey};
+  color: ${p.range?.color};
+  background-color: ${p.range?.backgroundColor};
+  border-radius: ${p.theme.sizes[2]};
+  box-sizing: border-box;
+`
+
+const thumb = (
+  p: RangeInputProps & {
+    theme: Theme
+    value?: unknown
+  },
+) => css`
+  appearance: none;
+  cursor: pointer;
+  height: ${p.theme.sizes[0]};
+  width: ${p.theme.sizes[0]};
+  transform: scale(4);
+  border: none;
+  ${p.range}
+
+  // as image
+  background: ${p.thumbImage &&
+  `url(${p.thumbImage}) center / contain no-repeat`};
+  // as svg mask
+  background-color: ${p.thumbSvg && 'currentColor'};
+  mask: ${p.thumbSvg && `url(${p.thumbSvg})`};
+  ${p.value === 0 && 'filter: grayscale(0.6);'}
+`
+
 const RangeInput = styled.input<RangeInputProps>`
   appearance: none;
   width: 100%;
@@ -20,33 +54,18 @@ const RangeInput = styled.input<RangeInputProps>`
     calc(${p => p.theme.sizes[0]} * 1.5)
     calc(${p => p.theme.sizes[0]} * 1.5);
 
-  ::-webkit-slider-runnable-track,
+  ::-webkit-slider-runnable-track {
+    ${p => track(p)}
+  }
   ::-moz-range-track {
-    height: ${p => p.theme.sizes[0]};
-    cursor: pointer;
-    background-color: ${p => p.theme.colors.grey};
-    ${p => p.range}
-    border-radius: ${p => p.theme.sizes[2]};
-    box-sizing: border-box;
+    ${p => track(p)}
   }
 
-  ::-webkit-slider-thumb,
+  ::-webkit-slider-thumb {
+    ${p => thumb(p)}
+  }
   ::-moz-range-thumb {
-    appearance: none;
-    cursor: pointer;
-    height: ${p => p.theme.sizes[0]};
-    width: ${p => p.theme.sizes[0]};
-    transform: scale(4);
-    border: none;
-    ${p => p.range}
-
-    // as image
-    background: ${p =>
-      p.thumbImage && `url(${p.thumbImage}) center / contain no-repeat`};
-    // as svg mask
-    background-color: ${p => p.thumbSvg && 'currentColor'};
-    mask: ${p => p.thumbSvg && `url(${p.thumbSvg})`};
-    ${p => p.value === 0 && 'filter: grayscale(0.6);'}
+    ${p => thumb(p)}
   }
 `
 RangeInput.defaultProps = {

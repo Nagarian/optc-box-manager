@@ -8,6 +8,7 @@ import {
 } from 'pages/FilterSort/components/Displayers'
 import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
+import { SpecificColor } from 'styles/theme-definition'
 import CottonCandyDisplayer from './components/CottonCandyDisplayer'
 import LimitBreakDisplayer from './components/LimitBreakDisplayer'
 import Ink from './images/ink.png'
@@ -32,7 +33,7 @@ type UserCharacterBoxProps = {
 type BtnProps = {
   support?: string
   ink?: string
-  rainbow?: string
+  rainbow?: keyof SpecificColor
 }
 
 export type CharacterBoxStyledProps = GridAreaProps & PlaceProps & SizeProps
@@ -136,7 +137,8 @@ const Btn = styled.button<BtnProps & CharacterBoxStyledProps>`
     bottom: 0;
     border: 0.7rem solid;
     border-image-slice: 1;
-    border-image-source: ${p => p.theme.colors.specific.rainbow};
+    border-image-source: ${p =>
+      p.rainbow && p.theme.colors.specific[p.rainbow]};
     opacity: 0.9;
   }
   ${gridArea}
