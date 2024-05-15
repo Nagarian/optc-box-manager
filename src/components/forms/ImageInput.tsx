@@ -1,9 +1,8 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import { InputHTMLAttributes, ReactNode } from 'react'
 
 const Input = styled.input`
-  -moz-appearance: initial;
+  appearance: initial;
   width: 0;
   height: 0;
   position: absolute;
@@ -23,7 +22,7 @@ const Label = styled.label`
   position: relative;
 
   :focus-within {
-    filter: drop-shadow(0 0 1rem ${themeGet('grey')});
+    filter: drop-shadow(0 0 1rem ${p => p.theme.colors.grey});
   }
 `
 

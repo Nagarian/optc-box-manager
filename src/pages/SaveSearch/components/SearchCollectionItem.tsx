@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import Button from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import {
@@ -119,14 +118,14 @@ export function SearchCollectionItem({
 const Panel = styled.div`
   display: flex;
   align-items: center;
-  padding: ${themeGet('space.1')};
+  padding: ${p => p.theme.space[1]};
 
   :nth-of-type(odd) {
-    background-color: ${themeGet('colors.primary')};
-    color: ${themeGet('colors.primaryText')};
+    background-color: ${p => p.theme.colors.primary};
+    color: ${p => p.theme.colors.primaryText};
   }
 
   > * {
-    margin: ${themeGet('space.1')};
+    margin: ${p => p.theme.space[1]};
   }
 `

@@ -1,12 +1,11 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import { SubTitle, Text } from 'components/Title'
 import { Components } from 'react-markdown'
 
 const ListItem = styled.li`
   ::before {
     content: '🏴‍☠️ ';
-    font-size: ${themeGet('fontSizes.2')};
+    font-size: ${p => p.theme.fontSizes[2]};
   }
 `
 

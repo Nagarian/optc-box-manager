@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import {
@@ -39,7 +38,7 @@ const AppBlock = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
-  min-width: ${themeGet('sizes.minimalRequired')};
+  min-width: ${p => p.theme.sizes.minimalRequired};
   position: relative;
 `
 

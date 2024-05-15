@@ -1,17 +1,16 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import { space, SpaceProps } from 'styled-system'
 import { BounceIn, FadeIn } from 'styles/animation'
 
 export const PopupBackground = styled.div<SpaceProps>`
-  min-width: ${themeGet('sizes.minimalRequired')};
+  min-width: ${p => p.theme.sizes.minimalRequired};
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: ${themeGet('colors.popupBackground')}B3;
+  background-color: ${p => p.theme.colors.popupBackground}B3;
   z-index: 1;
   ${space}
   display: grid;
@@ -21,7 +20,7 @@ export const PopupBackground = styled.div<SpaceProps>`
 `
 
 export const PopupContainer = styled(Box)<SpaceProps>`
-  background-color: ${themeGet('colors.background')};
+  background-color: ${p => p.theme.colors.background};
   width: 100%;
   max-width: 80rem;
   max-height: 100%;
@@ -32,7 +31,7 @@ export const PopupContainer = styled(Box)<SpaceProps>`
   place-items: stretch;
   overflow: hidden;
   border-radius: 0.5rem;
-  box-shadow: ${themeGet('shadows.normal')};
+  box-shadow: ${p => p.theme.shadows.normal};
   animation: 250ms ${BounceIn};
 `
 

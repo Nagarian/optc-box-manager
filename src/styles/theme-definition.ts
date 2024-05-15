@@ -1,7 +1,7 @@
 import { Property } from 'csstype'
 
-type Space = Property.Margin<object>
-type Size = Property.Height<object>
+type Space = Property.Margin<0>
+type Size = Property.Height<0> | Property.Width<0>
 type Color = Property.Color
 type Font = Property.FontFamily
 type Weigth = Property.FontWeight

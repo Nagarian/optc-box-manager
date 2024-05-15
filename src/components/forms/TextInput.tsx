@@ -1,20 +1,19 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import { flex, FlexProps, space, SpaceProps } from 'styled-system'
 
 export const TextInput = styled.input<SpaceProps & FlexProps>`
-  padding: ${themeGet('space.1')};
-  font-size: ${themeGet('fontSizes.1')};
-  border-bottom: solid ${themeGet('colors.grey')}
-    ${themeGet('borderWidths.thin')};
+  padding: ${p => p.theme.space[1]};
+  font-size: ${p => p.theme.fontSizes[1]};
+  border-bottom: ${p =>
+    `solid ${p.theme.colors.grey} ${p.theme.borderWidths.thin}`};
   border-radius: 0;
   transition: border-color 250ms;
-  color: ${themeGet('colors.text')};
+  color: ${p => p.theme.colors.text};
   ${flex}
   ${space}
 
   :focus {
-    border-color: ${themeGet('colors.secondaryText')};
+    border-color: ${p => p.theme.colors.secondaryText};
   }
 
   ::-webkit-search-decoration,

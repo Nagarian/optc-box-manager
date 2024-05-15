@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import * as CSS from 'csstype'
 import { space, SpaceProps } from 'styled-system'
 
@@ -18,16 +17,16 @@ const RangeInput = styled.input<RangeInputProps>`
   background-color: transparent;
   ${space}
   padding:
-    calc(${themeGet('sizes.0')} * 1.5)
-    calc(${themeGet('sizes.0')} * 1.5);
+    calc(${p => p.theme.sizes[0]} * 1.5)
+    calc(${p => p.theme.sizes[0]} * 1.5);
 
   ::-webkit-slider-runnable-track,
   ::-moz-range-track {
-    height: ${themeGet('sizes.0')};
+    height: ${p => p.theme.sizes[0]};
     cursor: pointer;
-    background-color: ${themeGet('colors.grey')};
+    background-color: ${p => p.theme.colors.grey};
     ${p => p.range}
-    border-radius: ${themeGet('sizes.2')};
+    border-radius: ${p => p.theme.sizes[2]};
     box-sizing: border-box;
   }
 
@@ -35,8 +34,8 @@ const RangeInput = styled.input<RangeInputProps>`
   ::-moz-range-thumb {
     appearance: none;
     cursor: pointer;
-    height: ${themeGet('sizes.0')};
-    width: ${themeGet('sizes.0')};
+    height: ${p => p.theme.sizes[0]};
+    width: ${p => p.theme.sizes[0]};
     transform: scale(4);
     border: none;
     ${p => p.range}

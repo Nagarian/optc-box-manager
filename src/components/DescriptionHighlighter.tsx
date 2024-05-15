@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import { diffWords } from 'diff'
 import { memo, ReactNode } from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
@@ -69,13 +68,13 @@ const FakeParagraph = styled.span``
 
 const Header3 = styled.h3`
   font-weight: bold;
-  margin-top: ${themeGet('space.1')};
+  margin-top: ${p => p.theme.space[1]};
 `
 
 const DiffHiglighter = styled.em`
   font-style: normal;
   font-weight: bold;
-  color: ${themeGet('colors.green')};
+  color: ${p => p.theme.colors.green};
 `
 
 const renderers: Components = {

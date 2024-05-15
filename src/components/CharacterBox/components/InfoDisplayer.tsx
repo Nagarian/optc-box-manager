@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import { FunctionComponent, PropsWithChildren } from 'react'
 import {
   color,
@@ -24,12 +23,12 @@ const Displayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: ${themeGet('fontSizes.0')};
-  border-radius: ${themeGet('fontSizes.0')};
+  font-size: ${p => p.theme.fontSizes[0]};
+  border-radius: ${p => p.theme.fontSizes[0]};
   padding: ${p => (p.flexDirection === 'column' ? '0.5rem 0' : '0 0.5rem')};
   margin: 0.3rem;
 
-  background-color: ${themeGet('colors.primary')}C9;
+  background-color: ${p => p.theme.colors.primary}C9;
 
   ${variant({
     prop: 'anchorY',
@@ -74,7 +73,7 @@ const Displayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
       },
     },
   })}
-` as  FunctionComponent<InfoDisplayerProps>
+` as FunctionComponent<InfoDisplayerProps>
 
 const InfoDisplayer = (p: PropsWithChildren<InfoDisplayerProps>) => (
   <Displayer color="primaryText" anchorZ="normal" {...p} />

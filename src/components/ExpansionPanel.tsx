@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import useMeasure from 'hooks/useMeasure'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import { GridProps } from 'styled-system'
@@ -25,7 +24,7 @@ const Panel = styled(Box)<{ isOpen: boolean; innerHeight?: number }>`
   max-height: ${p => p.isOpen && `${p.innerHeight}px`};
   overflow: ${p => !p.isOpen && 'hidden'};
   transition: max-height 0.25s ease;
-  margin-bottom: ${p => p.isOpen && themeGet('space.2')};
+  margin-bottom: ${p => p.isOpen && p.theme.space[2]};
 
   display: flex;
   flex-direction: column;

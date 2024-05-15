@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { themeGet } from '@styled-system/theme-get'
 import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
 import { UnitClassIcon } from 'components/Class'
@@ -408,7 +407,7 @@ const Element = styled.div<ElementType>`
   ${flexbox}
   place-items: center;
   text-align: center;
-  margin: ${themeGet('space.1')};
+  margin: ${p => p.theme.space[1]};
   ${gridRow}
   ${gridColumn}
   ${gridArea}

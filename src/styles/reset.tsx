@@ -117,7 +117,7 @@ const resetCss = (theme: Theme) => css`
   body {
     overscroll-behavior: none;
     line-height: normal;
-    min-width: ${theme.sizes.minimalRequired as string};
+    min-width: ${theme.sizes.minimalRequired};
     background-color: ${theme.colors.background};
   }
 
