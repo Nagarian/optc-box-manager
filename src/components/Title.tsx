@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { PropsWithChildren } from 'react'
 import {
   color,
   ColorProps,
-  compose,
   flex,
   flexbox,
   FlexboxProps,
@@ -26,7 +26,7 @@ export type TypoProps = SpaceProps &
   ColorProps &
   FlexboxProps
 
-const typoStyled = compose(
+export const Text = styled('p', cleanStyledSystem)<TypoProps>(
   space,
   typography,
   gridArea,
@@ -36,17 +36,34 @@ const typoStyled = compose(
   layout,
 )
 
-export const Title = styled('h1', cleanStyledSystem)<TypoProps>(typoStyled)
-Title.defaultProps = {
-  fontSize: '4',
-  textAlign: 'center',
-  my: '2',
-}
+export const Title = ({
+  color,
+  fontSize = '4',
+  textAlign = 'center',
+  my = '2',
+  ...p
+}: PropsWithChildren<TypoProps>) => (
+  <Text
+    as="h1"
+    color={color as string}
+    fontSize={fontSize}
+    textAlign={textAlign}
+    my={my}
+    {...p}
+  />
+)
 
-export const SubTitle = styled('h2', cleanStyledSystem)<TypoProps>(typoStyled)
-SubTitle.defaultProps = {
-  fontSize: '3',
-  textAlign: 'center',
-}
-
-export const Text = styled('p', cleanStyledSystem)<TypoProps>(typoStyled)
+export const SubTitle = ({
+  color,
+  fontSize = '3',
+  textAlign = 'center',
+  ...p
+}: PropsWithChildren<TypoProps>) => (
+  <Text
+    as="h2"
+    color={color as string}
+    fontSize={fontSize}
+    textAlign={textAlign}
+    {...p}
+  />
+)

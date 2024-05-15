@@ -8,6 +8,7 @@ type CottonCandyInputProps = {
   hideAdders?: boolean
 }
 export default function CottonCandyInput({
+  max = 100,
   onChange,
   variant,
   hideAdders,
@@ -18,6 +19,7 @@ export default function CottonCandyInput({
   if (hideAdders) {
     return (
       <RangeInput
+        max={max}
         {...p}
         onChange={e => onChange(Number(e.target.value))}
         min={0}
@@ -31,6 +33,7 @@ export default function CottonCandyInput({
 
   return (
     <RangeInputPlus
+      max={max}
       {...p}
       onChange={onChange}
       min={0}
@@ -41,9 +44,6 @@ export default function CottonCandyInput({
       }}
     />
   )
-}
-CottonCandyInput.defaultProps = {
-  max: 100,
 }
 
 function useVariant(variant: 'atk' | 'rcv' | 'hp') {

@@ -38,31 +38,6 @@ import {
   SpaceProps,
 } from 'styled-system'
 
-const Container = styled(Box)`
-  display: grid;
-  grid-template-areas:
-    'title title'
-    'icon info';
-  place-items: center;
-`
-
-const Element = styled.div<
-  GridRowProps & GridColumnProps & GridAreaProps & FlexboxProps & FontSizeProps
->`
-  display: flex;
-  ${flexbox}
-  place-items: center;
-  text-align: center;
-  margin: ${themeGet('space.1')};
-  ${gridRow}
-  ${gridColumn}
-  ${gridArea}
-  ${fontSize}
-`
-Element.defaultProps = {
-  flexDirection: 'column',
-}
-
 type RecapBoxProps = {
   userUnit: UserUnit
   original: UserUnit
@@ -413,3 +388,29 @@ export function RecapBoxLight({
     </Box>
   )
 }
+
+const Container = styled(Box)`
+  display: grid;
+  grid-template-areas:
+    'title title'
+    'icon info';
+  place-items: center;
+`
+
+type ElementType = GridRowProps &
+  GridColumnProps &
+  GridAreaProps &
+  FlexboxProps &
+  FontSizeProps
+const Element = styled.div<ElementType>`
+  display: flex;
+  flex-direction: column;
+  ${flexbox}
+  place-items: center;
+  text-align: center;
+  margin: ${themeGet('space.1')};
+  ${gridRow}
+  ${gridColumn}
+  ${gridArea}
+  ${fontSize}
+`

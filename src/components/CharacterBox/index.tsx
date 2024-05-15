@@ -65,7 +65,12 @@ export default function CharacterBox({
       title={`${unit.id} - ${unit.name}`}
       onClick={callback}
     >
-      <Image src={unit.images.thumbnail} alt={unit.name} size={size} />
+      <Image
+        src={unit.images.thumbnail}
+        alt={unit.name}
+        size={size}
+        loading="lazy"
+      />
       <CottonCandyDisplayer cc={userUnit?.cc} />
       {userUnit && InfoDisplayer && (
         <InfoDisplayer userUnit={userUnit} options={displayer?.options} />

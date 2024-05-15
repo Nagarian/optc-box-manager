@@ -41,12 +41,6 @@ const BaseType = styled.img<SpaceProps & SizeProps>`
   ${size}
 `
 
-function Type({ value, ...p }: TypeProps) {
-  return <BaseType {...p} src={TypeToImage(value)} title={value} />
+export default function Type({ value, size = 2, ...p }: TypeProps) {
+  return <BaseType size={size} {...p} src={TypeToImage(value)} title={value} />
 }
-
-Type.defaultProps = {
-  size: 2,
-}
-
-export default Type

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
+import { FunctionComponent, PropsWithChildren } from 'react'
 import {
   color,
   ColorProps,
@@ -16,7 +17,7 @@ type InfoDisplayerProps = ColorProps &
     anchorZ?: 'normal' | 'top'
   }
 
-const InfoDisplayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
+const Displayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
   ${color}
   ${flexDirection}
   position: absolute;
@@ -73,11 +74,10 @@ const InfoDisplayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
       },
     },
   })}
-`
+` as  FunctionComponent<InfoDisplayerProps>
 
-InfoDisplayer.defaultProps = {
-  color: 'primaryText',
-  anchorZ: 'normal',
-}
+const InfoDisplayer = (p: PropsWithChildren<InfoDisplayerProps>) => (
+  <Displayer color="primaryText" anchorZ="normal" {...p} />
+)
 
 export default InfoDisplayer
