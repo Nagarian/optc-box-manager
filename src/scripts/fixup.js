@@ -22,6 +22,7 @@ export function fixupDetail(
     const renamedPotentials = {
       Enrage: 'Enrage/Reduce Increase Damage Taken duration',
       'Nutrition/Reduce Hunger duration': 'Nutrition/Reduce Hunger stacks',
+      'Ship Bind Resistance': 'Reduce Ship Bind duration',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
@@ -178,7 +179,7 @@ export function fixupEvolution(
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
         : globalOnlyReverseMap[unit.evolution.evolution] ??
-          unit.evolution.evolution,
+        unit.evolution.evolution,
     },
   }
 }
@@ -356,6 +357,96 @@ export function fixupSpecificIssue(
       unit.detail.superSpecialNotes = unit.detail.SuperSpecialNotes
       // @ts-ignore
       delete unit.detail.SuperSpecialNotes
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
+  if (unit.id === 4155) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[11] = 0
+      unit.limitStats.atk[12] = 0
+      unit.limitStats.atk[13] = 0
+      unit.limitStats.atk[14] = 0
+
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+  if (unit.id === 4156) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[11] = 0
+      unit.limitStats.atk[12] = 0
+      unit.limitStats.atk[13] = 0
+      unit.limitStats.atk[14] = 0
+
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+  if (unit.id === 4157) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[11] = 0
+      unit.limitStats.atk[12] = 0
+      unit.limitStats.atk[13] = 0
+      unit.limitStats.atk[14] = 0
+
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+  if (unit.id === 4158) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[11] = 0
+      unit.limitStats.atk[12] = 0
+      unit.limitStats.atk[13] = 0
+      unit.limitStats.atk[14] = 0
+
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+  if (unit.id === 4159) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[11] = 0
+      unit.limitStats.atk[12] = 0
+      unit.limitStats.atk[13] = 0
+      unit.limitStats.atk[14] = 0
+
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+  if (unit.id === 4162) {
+    if (Number.isNaN(unit.limitATK)) {
+      unit.limitATK = 0
+      unit.limitexATK = 0
+      unit.limitStats.atk[24] = 0
+      unit.limitStats.atk[25] = 0
+      unit.limitStats.atk[26] = 0
+      unit.limitStats.atk[27] = 0
+      unit.limitStats.atk[28] = 0
+      unit.limitStats.atk[29] = 0
+      unit.limitStats.atk[30] = 0
+      unit.limitStats.atk[31] = 0
+      unit.limitStats.atk[32] = 0
+      unit.limitStats.atk[33] = 0
+      unit.limitStats.atk[34] = 0
+      unit.limitStats.atk[35] = 0
+      unit.limitStats.atk[36] = 0
+      unit.limitStats.atk[37] = 0
+      unit.limitStats.atk[38] = 0
+      unit.limitStats.atk[39] = 0
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
