@@ -1,5 +1,7 @@
+import { ThemeProvider } from '@emotion/react'
 import { render, screen } from '@testing-library/react'
 import { ExtendedUnit } from 'models/units'
+import { lightTheme } from 'styles/theme'
 import LevelDisplayer from './LevelDisplayer'
 
 describe('Level Displayer', () => {
@@ -18,26 +20,28 @@ describe('Level Displayer', () => {
     'should display the right LB level case $lvl/$step = $str',
     ({ lvl, step, str }) => {
       render(
-        <LevelDisplayer
-          options={{ type: 'level LB' }}
-          userUnit={{
-            id: '04fdbb60-4b76-4ef1-9e95-f46851c69115',
-            unit: {} as ExtendedUnit,
-            potentials: [],
-            cc: {
-              hp: 180,
-              atk: 180,
-              rcv: 180,
-            },
-            sockets: [],
-            level: {
-              lvl: 1,
-              lvlMax: 99,
-              limitLvl: lvl,
-              limitStepLvl: step,
-            },
-          }}
-        />,
+        <ThemeProvider theme={lightTheme}>
+          <LevelDisplayer
+            options={{ type: 'level LB' }}
+            userUnit={{
+              id: '04fdbb60-4b76-4ef1-9e95-f46851c69115',
+              unit: {} as ExtendedUnit,
+              potentials: [],
+              cc: {
+                hp: 180,
+                atk: 180,
+                rcv: 180,
+              },
+              sockets: [],
+              level: {
+                lvl: 1,
+                lvlMax: 99,
+                limitLvl: lvl,
+                limitStepLvl: step,
+              },
+            }}
+          />
+        </ThemeProvider>,
       )
 
       expect(screen.getByText(str)).toBeInTheDocument()
