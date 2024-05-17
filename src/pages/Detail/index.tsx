@@ -37,7 +37,9 @@ export default function Detail({
   onDelete,
   isSugoCleaner = false,
 }: DetailProps) {
-  const [userUnit, setUserUnit] = useState<UserUnit>(original)
+  const [userUnit, setUserUnit] = useState<UserUnit>(() =>
+    isSugoCleaner ? ConsumeUnitDupe(original) : original,
+  )
   const { unit } = userUnit
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   const evolutions = useMemo(
@@ -50,14 +52,6 @@ export default function Detail({
       ).filter(Boolean) as ExtendedUnit[],
     [unit.evolution, units],
   )
-
-  useEffect(() => {
-    if (!isSugoCleaner) {
-      return
-    }
-
-    setUserUnit(u => ConsumeUnitDupe(u))
-  }, [isSugoCleaner])
 
   const onLimitBreakChange = (limitBreak: UserUnitLimitBreak) => {
     const potentialUnlockedLength =
