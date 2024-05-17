@@ -122,7 +122,7 @@ const sizes: ThemeSizes = Object.assign(si, {
   minimalRequired: '320px',
 })
 
-const breakpoints: ThemeBreakpoints = ['768px', '970px', '1024px']
+const breakpoints: ThemeBreakpoints = ['600px', '900px', '1200px']
 
 export const lightTheme: Theme = {
   colors: {

@@ -48,16 +48,16 @@ export const clean = (...propsToClean: string[]) => ({
 
 export const cleanStyledSystem = clean()
 
-export interface PlaceProps {
-  alignItems?: CSS.Property.AlignItems
-  alignContent?: CSS.Property.AlignContent
-  alignSelf?: CSS.Property.AlignSelf
-  justifyItems?: CSS.Property.JustifyItems
-  justifyContent?: CSS.Property.JustifyContent
-  justifySelf?: CSS.Property.JustifySelf
-  placeItems?: CSS.Property.PlaceItems
-  placeContent?: CSS.Property.PlaceContent
-  placeSelf?: CSS.Property.PlaceSelf
+export interface PlaceProps<ThemeType extends Theme = RequiredTheme> {
+  alignItems?: ResponsiveValue<CSS.Property.AlignItems, ThemeType>
+  alignContent?: ResponsiveValue<CSS.Property.AlignContent, ThemeType>
+  alignSelf?: ResponsiveValue<CSS.Property.AlignSelf, ThemeType>
+  justifyItems?: ResponsiveValue<CSS.Property.JustifyItems, ThemeType>
+  justifyContent?: ResponsiveValue<CSS.Property.JustifyContent, ThemeType>
+  justifySelf?: ResponsiveValue<CSS.Property.JustifySelf, ThemeType>
+  placeItems?: ResponsiveValue<CSS.Property.PlaceItems, ThemeType>
+  placeContent?: ResponsiveValue<CSS.Property.PlaceContent, ThemeType>
+  placeSelf?: ResponsiveValue<CSS.Property.PlaceSelf, ThemeType>
 }
 
 export const place = system({
@@ -83,18 +83,6 @@ export interface GapProps<
    * [MDN reference](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)
    */
   gap?: ResponsiveValue<TVal, ThemeType> | undefined
-  /**
-   * The row-gap CSS property sets the size of the gap (gutter) between an element's rows.
-   *
-   * [MDN reference](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
-   */
-  rowGap?: ResponsiveValue<TVal, ThemeType> | undefined
-  /**
-   * The column-gap CSS property sets the size of the gap (gutter) between an element's columns.
-   *
-   * [MDN reference](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
-   */
-  columnGap?: ResponsiveValue<TVal, ThemeType> | undefined
 }
 
 export const gap = system({
