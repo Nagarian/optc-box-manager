@@ -41,7 +41,7 @@ function DescriptionHighlighter({
     /(\[[A-Z]*\])/gi,
     match =>
       `${match.toUpperCase()}(${match
-        .substring(1, match.length - 2)
+        .substring(1, match.length - 1)
         .toUpperCase()})`,
   )
 
