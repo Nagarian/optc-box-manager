@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import { UnitType } from 'models/units'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
-import DEX from './images/DEX.png'
-import DUAL from './images/DUAL.png'
-import INT from './images/INT.png'
-import PSY from './images/PSY.png'
-import QCK from './images/QCK.png'
-import STR from './images/STR.png'
-import VS from './images/VS.png'
+import PSY from './images/filter_attribute_heart.png'
+import INT from './images/filter_attribute_intellect.png'
+import DUAL from './images/filter_attribute_multiplecharacter.png'
+import STR from './images/filter_attribute_power.png'
+import QCK from './images/filter_attribute_speed.png'
+import DEX from './images/filter_attribute_technical.png'
+import VS from './images/filter_attribute_vs.png'
 
 export function TypeToImage(type: UnitType) {
   switch (type) {

@@ -17,17 +17,17 @@ import ImageSkill11 from './images/potentialskill_icon_s_011.png'
 import ImageSkill12 from './images/potentialskill_icon_s_012.png'
 import ImageSkill13 from './images/potentialskill_icon_s_013.png'
 import ImageSkill14 from './images/potentialskill_icon_s_014.png'
-import ImageSkill16 from './images/potentialskill_icon_s_016.png'
 import ImageSkill19 from './images/potentialskill_icon_s_019.png'
 import ImageSkill20 from './images/potentialskill_icon_s_020.png'
 import ImageSkill21 from './images/potentialskill_icon_s_021.png'
 import ImageSkill22 from './images/potentialskill_icon_s_022.png'
+import ImageSkill23 from './images/potentialskill_icon_s_023.png'
 import ImageSkill24 from './images/potentialskill_icon_s_024.png'
 import ImageSkill25 from './images/potentialskill_icon_s_025.png'
 import ImageSkill26 from './images/potentialskill_icon_s_026.png'
 import ImageSkill27 from './images/potentialskill_icon_s_027.png'
+import ImageSkill28 from './images/potentialskill_icon_s_028.png'
 import ImageSkill100 from './images/potentialskill_icon_s_100.png'
-import ImageSkill101 from './images/potentialskill_icon_s_101.png'
 import ImageFrame from './images/potentialskill_iconframe.png'
 
 export function PotentialAbilityToImage(type: PotentialKey) {
@@ -67,7 +67,7 @@ export function PotentialAbilityToImage(type: PotentialKey) {
     case 'Reduce Slot Barrier duration':
       return ImageSkill22
     case 'Reduce Healing Reduction duration':
-      return ImageSkill16
+      return ImageSkill23
     case 'Nutrition/Reduce Hunger stacks':
       return ImageSkill24
     case 'Last Tap':
@@ -75,11 +75,11 @@ export function PotentialAbilityToImage(type: PotentialKey) {
     case 'Super Tandem':
       return ImageSkill25
     case 'Last Tap / Super Tandem':
-      return ImageSkill101
+      return ImageSkill27
     case 'Triple Special Activation':
       return ImageSkill26
     case 'Rush':
-      return ImageSkill27
+      return ImageSkill28
     default:
       return NoIcon
   }
