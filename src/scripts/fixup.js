@@ -179,7 +179,7 @@ export function fixupEvolution(
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
         : globalOnlyReverseMap[unit.evolution.evolution] ??
-        unit.evolution.evolution,
+          unit.evolution.evolution,
     },
   }
 }
@@ -370,7 +370,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -383,7 +382,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -396,7 +394,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -409,7 +406,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -422,7 +418,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }

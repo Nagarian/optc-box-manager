@@ -126,7 +126,7 @@ export default function RecapBox({
         )}
 
         {special && (
-          <Element gridArea="spe">
+          <Element gridArea="spe" title="Special">
             <SpecialLvlIcon size="2" />
             <Progression
               value={special.lvl}
@@ -147,12 +147,8 @@ export default function RecapBox({
           </Element>
         )}
 
-        <Element gridArea="cch">
-          <CottonCandyIcon
-            size="2"
-            color="specific.ccHp"
-            title="Cotton Candy HP"
-          />
+        <Element gridArea="cch" title="Cotton Candy HP">
+          <CottonCandyIcon size="2" color="specific.ccHp" />
           <Progression
             value={hp}
             max={ccLimit.hp}
@@ -162,12 +158,8 @@ export default function RecapBox({
           />
         </Element>
 
-        <Element gridArea="cca">
-          <CottonCandyIcon
-            size="2"
-            color="specific.ccAtk"
-            title="Cotton Candy ATK"
-          />
+        <Element gridArea="cca" title="Cotton Candy ATK">
+          <CottonCandyIcon size="2" color="specific.ccAtk" />
           <Progression
             value={atk}
             max={ccLimit.atk}
@@ -177,12 +169,8 @@ export default function RecapBox({
           />
         </Element>
 
-        <Element gridArea="ccr">
-          <CottonCandyIcon
-            size="2"
-            color="specific.ccRcv"
-            title="Cotton Candy RCV"
-          />
+        <Element gridArea="ccr" title="Cotton Candy RCV">
+          <CottonCandyIcon size="2" color="specific.ccRcv" />
           <Progression
             value={rcv}
             max={ccLimit.rcv}
@@ -206,8 +194,8 @@ export default function RecapBox({
 
         {pirateFest && (
           <>
-            <Element gridArea="pfs">
-              <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
+            <Element gridArea="pfs" title="Pirate Rumble Special">
+              <PirateFestSpecialIcon size="2" />
               <Progression
                 value={pirateFest.specialLvl}
                 max={10}
@@ -216,8 +204,8 @@ export default function RecapBox({
                 }
               />
             </Element>
-            <Element gridArea="pfa">
-              <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
+            <Element gridArea="pfa" title="Pirate Rumble Ability">
+              <PirateFestAbilityIcon size="2" />
               <Progression
                 value={pirateFest.abilityLvl}
                 max={5}
@@ -230,8 +218,8 @@ export default function RecapBox({
         )}
 
         {pirateFest && pirateFest.gplvl && (
-          <Element gridArea="pfg">
-            <PirateFestBothIcon size="2" title="Pirate Rumble GP" />
+          <Element gridArea="pfg" title="Pirate Rumble GP">
+            <PirateFestBothIcon size="2" />
             <Progression
               value={pirateFest.gplvl}
               max={5}
@@ -342,12 +330,7 @@ export function RecapBoxLight({
           options: { type: 'level LB' } as LevelDisplayerOption,
         }}
       />
-      <Box
-        gridArea="info"
-        marginLeft="2"
-        display="grid"
-        onClick={() => onClick?.(userUnit)}
-      >
+      <Box marginLeft="2" display="grid" onClick={() => onClick?.(userUnit)}>
         {special && (
           <Element gridRow="1" flexDirection="row">
             <SpecialLvlIcon size="2" />

@@ -69,7 +69,7 @@ export function ByUserPirateFestInput({
   return (
     <>
       <FilterContainerPanel>
-        <PirateFestSpecialIcon size="2" title="Pirate Rumble Special" />
+        <PirateFestSpecialIcon size="2" />
         Special level
         {UserPirateFestStateKeys.map(stateKey => (
           <ChoiceInput
@@ -89,7 +89,7 @@ export function ByUserPirateFestInput({
         ))}
       </FilterContainerPanel>
       <FilterContainerPanel>
-        <PirateFestAbilityIcon size="2" title="Pirate Rumble Ability" />
+        <PirateFestAbilityIcon size="2" />
         Ability level
         {UserPirateFestStateKeys.map(stateKey => (
           <ChoiceInput
@@ -109,7 +109,7 @@ export function ByUserPirateFestInput({
         ))}
       </FilterContainerPanel>
       <FilterContainerPanel>
-        <PirateFestBothIcon size="2" title="Pirate Rumble Ability" />
+        <PirateFestBothIcon size="2" />
         GP level
         {UserPirateFestStateKeys.map(stateKey => (
           <ChoiceInput

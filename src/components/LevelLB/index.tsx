@@ -32,6 +32,7 @@ export function LevelLB({
       backgroundSize="contain"
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
+      title="Level limit break"
     >
       <Text color={limitLvl === 5 ? 'primaryText' : 'white'}>{limitLvl}</Text>
       <Progression

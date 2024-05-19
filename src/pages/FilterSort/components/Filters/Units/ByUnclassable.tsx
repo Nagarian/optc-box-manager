@@ -20,7 +20,9 @@ const UnclassedFilters = {
   hasEvolved: (unit: ExtendedUnit) => {
     if (!unit.evolution) return true
     if (Array.isArray(unit.evolution.evolvers[0])) {
-      return unit.evolution.evolvers[0][0]?.toString().startsWith?.('skull') ?? false
+      return (
+        unit.evolution.evolvers[0][0]?.toString().startsWith?.('skull') ?? false
+      )
     }
     return unit.evolution.evolvers[0]?.toString().startsWith?.('skull') ?? false
   },

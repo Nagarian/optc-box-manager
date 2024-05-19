@@ -58,7 +58,7 @@ function CottonCandyStateInput({
   const color = 'specific.cc' + type[0].toUpperCase() + type.slice(1)
   return (
     <FilterContainerPanel>
-      <CottonCandyIcon color={color} size={2} title={type} />
+      <CottonCandyIcon color={color} size={2} />
       {type.toUpperCase()} + {currentMax}
       {CottonCandyStateKeys.map(stateKey => (
         <ChoiceInput
@@ -83,7 +83,7 @@ export function ByUserCottonCandyInput({
   return (
     <>
       <FilterContainerPanel>
-        <CottonCandyIcon size={2} title="All" />
+        <CottonCandyIcon size={2} />
         All +{ccLimit.all}
         {CottonCandyStateKeys.map(stateKey => (
           <ChoiceInput

@@ -67,10 +67,7 @@ import TailSpin from './tail-spin.svg?react'
 import Treasure from './treasure.svg?react'
 import VideoTreasure from './video-treasure.svg?react'
 
-type StyledIconProps = ColorProps &
-  SpaceProps &
-  SizeProps &
-  PlaceProps & { title?: string }
+type StyledIconProps = ColorProps & SpaceProps & SizeProps & PlaceProps
 
 export type Icon = FunctionComponent<StyledIconProps>
 
@@ -125,7 +122,7 @@ export const GatherIslandIcon: Icon = BaseSvg.withComponent(GatherIsland)
 export const HideIcon: Icon = BaseSvg.withComponent(Hide)
 export const ImageAnalyzerIcon: Icon = BaseSvg.withComponent(ImageAnalyzer)
 export const InkIcon: Icon = p => (
-  <BaseSvg as={Ink} color="primaryText" title="Support" {...p} />
+  <BaseSvg as={Ink} color="primaryText" {...p} />
 )
 export const LevelIcon: Icon = p => (
   <BaseSvg as={Level} color="primaryText" {...p} />
@@ -164,7 +161,7 @@ export const SpecialLvlIcon: Icon = p => (
 )
 export const SugoPullIcon: Icon = BaseSvg.withComponent(SugoPull)
 export const SupportIcon: Icon = p => (
-  <BaseSvg as={Support} color="specific.support" title="Support" {...p} />
+  <BaseSvg as={Support} color="specific.support" {...p} />
 )
 export const LevelTextIcon = () => (
   <Text color="white" as="span">
