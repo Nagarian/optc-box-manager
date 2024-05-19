@@ -1,6 +1,7 @@
 import { SearchFilterUserUnits, SearchSortCriteria } from 'models/search'
 import { useEffect } from 'react'
 import { SearchDisplayerCriteria } from '../Displayers'
+import { syncCoop } from './syncCoop'
 import { syncCottonCandy } from './syncCottonCandy'
 import { syncInk } from './syncInk'
 import { syncLevel } from './syncLevel'
@@ -66,4 +67,9 @@ export function useSyncer(
     syncApplier(syncLevel(filters, sorts, displayer))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.byUserLevel])
+
+  useEffect(() => {
+    syncApplier(syncCoop(filters, sorts, displayer))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.byUserCoop])
 }

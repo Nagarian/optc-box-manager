@@ -1,5 +1,6 @@
 import { UserUnit } from 'models/userBox'
 import { FunctionComponent } from 'react'
+import CoopDisplayer, { CoopDisplayerInput } from './CoopDisplayer'
 import { DetailedCottonCandyDisplayer } from './DetailedCottonCandyDisplayer'
 import LevelDisplayer, { LevelDisplayerInput } from './LevelDisplayer'
 import PirateFestDisplayer, {
@@ -20,6 +21,7 @@ export const UserUnitDisplayerTypeKeys = [
   'potentials',
   'potential',
   'pirateFest',
+  'coop',
 ] as const
 export type SearchDisplayerType = (typeof UserUnitDisplayerTypeKeys)[number]
 
@@ -78,5 +80,10 @@ export const SearchDisplayerBuilder: {
     label: 'Level',
     displayer: LevelDisplayer,
     input: LevelDisplayerInput,
+  },
+  coop: {
+    label: 'Coop',
+    displayer: CoopDisplayer,
+    input: CoopDisplayerInput,
   },
 }

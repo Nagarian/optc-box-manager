@@ -5,6 +5,7 @@ import { Text } from './Title'
 export type ProgressionProps = ColorProps & {
   value: number
   max: number
+  maxIcon?: string
   prefix?: string
   variant?: 'normal' | 'spaced' | 'no-max'
   isExtended?: boolean
@@ -13,6 +14,7 @@ export type ProgressionProps = ColorProps & {
 export default function Progression({
   value,
   max,
+  maxIcon,
   prefix,
   variant = 'normal',
   color = 'text',
@@ -20,7 +22,9 @@ export default function Progression({
   isDirty = false,
 }: ProgressionProps) {
   if (value === max) {
-    return (
+    return maxIcon ? (
+      <Image src={maxIcon} />
+    ) : (
       <Max width="5ch" color={isExtended ? 'red' : 'primaryText'}>
         Max{isDirty && <DirtyIndicator />}
       </Max>
@@ -52,6 +56,11 @@ const DirtyIndicator = () => (
 const Max = styled.span<WidthProps & ColorProps>`
   text-transform: uppercase;
   font-weight: bold;
+  display: inline;
   ${color};
   ${width};
+`
+
+const Image = styled.img`
+  filter: drop-shadow(0 0 1px black);
 `

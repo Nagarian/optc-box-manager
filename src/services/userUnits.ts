@@ -63,6 +63,11 @@ export function UserUnitFactory(unit: ExtendedUnit): UserUnit {
       limitLvl: unit.maxLevel === 99 ? 0 : undefined,
       limitStepLvl: unit.maxLevel === 99 ? 0 : undefined,
     },
+    coop: {
+      luck: 0,
+      captain: 0,
+      special: 0,
+    },
   }
 }
 
@@ -111,6 +116,10 @@ export function Evolve(userUnit: UserUnit, evolution?: ExtendedUnit): UserUnit {
     sockets: template.sockets.map((s, i) => userUnit.sockets[i] ?? s),
     ink: userUnit.ink ?? template.ink,
     level: isSuperEvolution ? userUnit.level : template.level,
+    coop: {
+      ...userUnit.coop,
+      luck: 0,
+    },
   }
 }
 
@@ -143,8 +152,14 @@ function computeSpecialReset(
 }
 
 export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
-  const updated = {
+  const updated: UserUnit = {
     ...userUnit,
+    coop: {
+      ...userUnit.coop,
+      luck:
+        userUnit.coop.luck +
+        (userUnit.unit.dropLocations.includes('legend') ? 2 : 1),
+    },
   }
 
   if (
@@ -428,6 +443,16 @@ export function resync(userUnit: UserUnit) {
 
   if (!userUnit.level && !!compare.level) {
     updated.level = compare.level
+    isUpdated = true
+  }
+
+  if (!userUnit.coop) {
+    updated.coop = {
+      luck: Math.trunc(userUnit.level.lvl / 5),
+      captain: 0,
+      special: 0,
+    }
+
     isUpdated = true
   }
 

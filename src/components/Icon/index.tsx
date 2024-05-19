@@ -19,9 +19,15 @@ import CameraFpp from './camera-fpp.svg?react'
 import CameraTavern from './camera-tavern.svg?react'
 import CameraTreasure from './camera-treasure.svg?react'
 import Cancel from './cancel.svg?react'
+import Lock from './character_detail_icon_lock_ability.png'
 import Clear from './clear.svg?react'
 import Close from './close.svg?react'
 import Confirm from './confirm.svg?react'
+import Coop from './coop.svg?react'
+import CoopCaptainSvg from './coop-captain.svg'
+import CoopCaptain from './coop-captain.svg?react'
+import CoopSpecialSvg from './coop-special.svg'
+import CoopSpecial from './coop-special.svg?react'
 import CottonCandySvg from './cottoncandy.svg'
 import CottonCandy from './cottoncandy.svg?react'
 import Delete from './delete.svg?react'
@@ -40,6 +46,8 @@ import LevelSvg from './level.svg'
 import Level from './level.svg?react'
 import LimitBreak from './limitbreak.svg?react'
 import Logo from './logo.png'
+import LuckSvg from './luck.svg'
+import Luck from './luck.svg?react'
 import NewsCoo from './news-coo.svg?react'
 import OpenInDB from './open-in-db.svg?react'
 import PirateFestSvg from './piratefest.svg'
@@ -90,9 +98,12 @@ const BaseImg = styled.img<StyledIconProps>(
 )
 
 export {
+  CoopCaptainSvg,
+  CoopSpecialSvg,
   CottonCandySvg,
   InkSvg,
   LevelSvg,
+  LuckSvg,
   PirateFestSvg,
   SpecialLvl,
   SpecialSvg,
@@ -110,6 +121,15 @@ export const CameraTreasureIcon: Icon = BaseSvg.withComponent(CameraTreasure)
 export const ClearIcon: Icon = BaseSvg.withComponent(Clear)
 export const CloseIcon: Icon = BaseSvg.withComponent(Close)
 export const ConfirmIcon: Icon = BaseSvg.withComponent(Confirm)
+export const CoopIcon: Icon = p => (
+  <BaseSvg as={Coop} color="primaryText" {...p} />
+)
+export const CoopCaptainIcon: Icon = p => (
+  <BaseSvg as={CoopCaptain} color="primaryText" {...p} />
+)
+export const CoopSpecialIcon: Icon = p => (
+  <BaseSvg as={CoopSpecial} color="primaryText" {...p} />
+)
 export const CottonCandyIcon: Icon = BaseSvg.withComponent(CottonCandy)
 export const DeleteIcon: Icon = BaseSvg.withComponent(Delete)
 export const DescendingIcon: Icon = BaseSvg.withComponent(Descending)
@@ -131,6 +151,12 @@ export const LimitBreakIcon: Icon = BaseSvg.withComponent(LimitBreak)
 export const LoaderIcon: Icon = BaseSvg.withComponent(TailSpin)
 export const LogoIcon: Icon = ({ color, ...p }: StyledIconProps) => (
   <BaseImg src={Logo} {...p} />
+)
+export const LockIcon: Icon = ({ color, ...p }: StyledIconProps) => (
+  <BaseImg src={Lock} {...p} />
+)
+export const LuckIcon: Icon = p => (
+  <BaseSvg as={Luck} color="primaryText" {...p} />
 )
 export const NewsCooIcon: Icon = BaseSvg.withComponent(NewsCoo)
 export const OpenInDBIcon: Icon = BaseSvg.withComponent(OpenInDB)

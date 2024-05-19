@@ -16,6 +16,12 @@ import {
 } from './Units/ByRarity'
 import byType from './Units/ByType'
 import {
+  byCoop,
+  byCoopSortLabel,
+  byCoopWithOption,
+  CoopSortInput,
+} from './UserUnits/ByCoop'
+import {
   byCottonCandy,
   bySpecificCottonCandy,
   bySpecificCottonCandyLabel,
@@ -65,6 +71,7 @@ export const UserUnitSortTypeKeys = [
   'byPirateFestGp',
   'byInkLvl',
   'byAddedToBox',
+  'byCoop',
 ] as const
 export type SearchSortType =
   | (typeof UnitSortTypeKeys)[number]
@@ -179,6 +186,14 @@ export const SearchSortBuilder: {
     optionedFn: byLevelWithOption,
     optionInput: LevelSortInput,
     optionedLabel: byLevelSortLabel,
+  },
+  byCoop: {
+    label: 'Coop',
+    type: 'userUnit',
+    fn: byCoop,
+    optionedFn: byCoopWithOption,
+    optionInput: CoopSortInput,
+    optionedLabel: byCoopSortLabel,
   },
 }
 

@@ -9,6 +9,7 @@ import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
 import { useEffect, useMemo, useState } from 'react'
 import { getLimitType } from 'services/limit'
 import { ConsumeUnitDupe, Evolve } from 'services/userUnits'
+import CoopEdit from './components/CoopEdit'
 import CottonCandyEdit from './components/CottonCandyEdit'
 import InkEdit from './components/InkEdit'
 import LevelEdit from './components/LevelEdit'
@@ -150,6 +151,12 @@ export default function Detail({
           detail={unit.detail}
           pirateFest={userUnit.pirateFest}
           onChange={pirateFest => setUserUnit({ ...userUnit, pirateFest })}
+        />
+
+        <CoopEdit
+          coop={userUnit.coop}
+          unit={unit}
+          onChange={coop => setUserUnit({ ...userUnit, coop })}
         />
 
         <InkEdit

@@ -3,8 +3,11 @@ import Box from 'components/Box'
 import CharacterBox from 'components/CharacterBox'
 import { UnitClassIcon } from 'components/Class'
 import {
+  CoopCaptainIcon,
+  CoopSpecialIcon,
   CottonCandyIcon,
   LevelTextIcon,
+  LockIcon,
   PirateFestAbilityIcon,
   PirateFestBothIcon,
   PirateFestSpecialIcon,
@@ -12,6 +15,7 @@ import {
   SupportIcon,
 } from 'components/Icon'
 import { LevelLB } from 'components/LevelLB'
+import { Luck } from 'components/Luck'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import PotentialAbility from 'components/PotentialAbility'
 import PowerSocket from 'components/PowerSocket'
@@ -56,16 +60,38 @@ export default function RecapBox({
     sockets,
     cc: { atk, hp, rcv },
     level,
+    coop,
   } = userUnit
 
   const { ccLimit } = useUserSettings()
 
   return (
-    <Container {...rest}>
+    <Box
+      display="grid"
+      placeItems="center"
+      gridTemplateColumns={['1fr 1fr', '1fr minmax(auto, 12rem) 1fr']}
+      gap="1"
+      gridTemplateAreas={[
+        `'icon title'
+         'info info'`,
+        `'title title title'
+         'full  icon  info'`,
+      ]}
+      {...rest}
+    >
       <Title gridArea="title">{unit.name}</Title>
       <Box
+        gridArea="full"
+        placeSelf="stretch"
+        backgroundImage={`url(${unit.images.full})`}
+        backgroundRepeat="no-repeat"
+        backgroundSize="contain"
+        backgroundPosition="center"
+        display={['none', 'grid']}
+        placeContent="end"
+      />
+      <Box
         gridArea="icon"
-        // alignSelf="start"
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -90,14 +116,13 @@ export default function RecapBox({
       <Box
         gridArea="info"
         display="grid"
-        gridTemplateColumns="repeat(5, 1fr)"
-        justifySelf="flex-start"
+        gridTemplateColumns="repeat(6, 1fr)"
         alignSelf="center"
         gridTemplateAreas={`
-          "spe cch cca ccr sup"
-          "po1 po2 po3 pfs pfa"
-          "so1 so2 so3 so4 so5"
-          "lvl lvl llb llb pfg"
+          "lvl lvl llb llb luk luk"
+          "spe cch cca ccr luc lus"
+          "sup so1 so2 so3 so4 so5"
+          "po1 po2 po3 pfa pfs pfg"
         `}
       >
         <Element
@@ -135,6 +160,36 @@ export default function RecapBox({
             />
           </Element>
         )}
+
+        <Element gridArea="luk" justifyContent="center">
+          <Luck lvl={coop.luck} isDirty={coop.luck !== original.coop.luck} />
+        </Element>
+
+        <Element gridArea="luc" justifyContent="center">
+          <CoopCaptainIcon size="2" />
+          {coop.captain > 0 ? (
+            <Progression
+              value={coop.captain}
+              max={5}
+              isDirty={coop.captain !== original.coop.captain}
+            />
+          ) : (
+            <LockIcon size="0" mt="1" />
+          )}
+        </Element>
+
+        <Element gridArea="lus" justifyContent="center">
+          <CoopSpecialIcon size="2" />
+          {coop.special > 0 ? (
+            <Progression
+              value={coop.special}
+              max={5}
+              isDirty={coop.special !== original.coop.special}
+            />
+          ) : (
+            <LockIcon size="0" mt="1" />
+          )}
+        </Element>
 
         {support && (
           <Element gridArea="sup">
@@ -243,7 +298,7 @@ export default function RecapBox({
             </Element>
           ))}
       </Box>
-    </Container>
+    </Box>
   )
 }
 
@@ -370,14 +425,6 @@ export function RecapBoxLight({
     </Box>
   )
 }
-
-const Container = styled(Box)`
-  display: grid;
-  grid-template-areas:
-    'title title'
-    'icon info';
-  place-items: center;
-`
 
 type ElementType = GridRowProps &
   GridColumnProps &

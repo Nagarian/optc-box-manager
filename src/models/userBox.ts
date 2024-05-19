@@ -54,6 +54,12 @@ export type UserUnitLevel = {
   limitStepLvl?: number
 }
 
+export type UserUnitCoop = {
+  luck: number
+  captain: number
+  special: number
+}
+
 export type UserUnit = {
   id: string
   unit: ExtendedUnit
@@ -66,6 +72,7 @@ export type UserUnit = {
   pirateFest?: UserUnitPirateFest
   sockets: UserUnitPowerSocket[]
   level: UserUnitLevel
+  coop: UserUnitCoop
 }
 
 export type UserBox = UserUnit[]

@@ -39,6 +39,11 @@ describe('Level Displayer', () => {
                 limitLvl: lvl,
                 limitStepLvl: step,
               },
+              coop: {
+                luck: 0,
+                captain: 0,
+                special: 0,
+              },
             }}
           />
         </ThemeProvider>,

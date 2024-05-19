@@ -1,6 +1,7 @@
 import { UserSettingEnhanced } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps, UserUnitFilter } from 'models/search'
 import { FunctionComponent } from 'react'
+import { ByUserCoopFilter, ByUserCoopInput } from './ByUserCoop'
 import {
   ByUserCottonCandyFilter,
   ByUserCottonCandyInput,
@@ -33,6 +34,7 @@ export const SearchFilterUserUnitsKeys = [
   'byUserPotential',
   'byUserInk',
   'byUserPowerSocket',
+  'byUserCoop',
 ] as const
 
 export type SearchFilterUserUnitsType =
@@ -97,5 +99,10 @@ export const UserUnitFilterBuilder: {
     title: 'Level',
     builder: ByUserLevelFilter,
     input: ByUserLevelInput,
+  },
+  byUserCoop: {
+    title: 'Coop',
+    builder: ByUserCoopFilter,
+    input: ByUserCoopInput,
   },
 }
