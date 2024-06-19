@@ -19,6 +19,7 @@ import {
   fixupFlags,
   fixupVsLastTapSuperTandem,
   fixupFestProperties,
+  fixupWrapper,
 } from './fixup.js'
 import {
   globalOnlyWrongId,
@@ -91,13 +92,13 @@ function DBFactory() {
   )
 
   db = db
-    .map(fixupImages)
-    .map(fixupEvolution)
-    .map(fixupFlags)
-    .map(fixupFestProperties)
-    .map(fixupVsLastTapSuperTandem)
-    .map(applyDropLocation)
-    .map(applyNewPirateRumble)
+    .map(fixupWrapper(fixupImages))
+    .map(fixupWrapper(fixupEvolution))
+    .map(fixupWrapper(fixupFlags))
+    .map(fixupWrapper(fixupFestProperties))
+    .map(fixupWrapper(fixupVsLastTapSuperTandem))
+    .map(fixupWrapper(applyDropLocation))
+    .map(fixupWrapper(applyNewPirateRumble))
 
   db.sort((u1, u2) => u1.id - u2.id)
   return db
