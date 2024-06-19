@@ -5,6 +5,23 @@ import {
   globalOnlyMissingInDb,
 } from './glo-jap-remapper.js'
 
+
+export function fixupWrapper(func) {
+  /** @return { import("../models/old-units").ExtendedUnit } */
+  return (
+    /** @type import("../models/old-units").ExtendedUnit */ unit,
+    /** @type number */ index,
+    /** @type import("../models/old-units").ExtendedUnit[] */ units
+  ) => {
+    try {
+      return func(unit, index, units)
+    } catch (error) {
+      console.error(`Unit ${unit.id} - ${unit.name} has crashed`)
+      throw error
+    }
+  }
+}
+
 /**
  * @typedef { ({ [key: string]: import("../models/old-units").PotentialKey })} PotentialRenamedHash
  * @typedef { ({ [key: string]: import("../models/old-units").UnitPirateFestStyle })} PirateFestRenamedHash
@@ -179,7 +196,7 @@ export function fixupEvolution(
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
         : globalOnlyReverseMap[unit.evolution.evolution] ??
-          unit.evolution.evolution,
+        unit.evolution.evolution,
     },
   }
 }
@@ -207,9 +224,30 @@ export function fixupFestProperties(
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
   // @ts-ignore
-  unit.detail.festAbility = unit.detail.festAbility?.map(str => ({
-    description: str,
-  }))
+  unit.detail.festAbility = Array.isArray(unit.detail.festAbility)
+    ? unit.detail.festAbility.map(str => ({ description: str }))
+    // @ts-ignore
+    : Array.isArray(unit.detail.festAbility?.base)
+      // @ts-ignore
+      ? unit.detail.festAbility.base.map(str => ({ description: str }))
+      : undefined
+
+  unit.detail.festSpecial = Array.isArray(unit.detail.festSpecial)
+    ? unit.detail.festSpecial
+    // @ts-ignore
+    : Array.isArray(unit.detail.festSpecial?.base)
+      // @ts-ignore
+      ? unit.detail.festSpecial.base
+      : undefined
+
+  unit.detail.festResistance = typeof unit.detail.festResistance === 'string'
+    ? unit.detail.festResistance
+    // @ts-ignore
+    : typeof unit.detail.festResistance?.base === 'string'
+      // @ts-ignore
+      ? unit.detail.festResistance.base
+      : undefined
+
   // @ts-ignore
   unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({
     description: str,
@@ -362,30 +400,6 @@ export function fixupSpecificIssue(
     }
   }
 
-  if (unit.id === 4155) {
-    if (Number.isNaN(unit.limitATK)) {
-      unit.limitATK = 0
-      unit.limitexATK = 0
-      unit.limitStats.atk[11] = 0
-      unit.limitStats.atk[12] = 0
-      unit.limitStats.atk[13] = 0
-      unit.limitStats.atk[14] = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-  if (unit.id === 4156) {
-    if (Number.isNaN(unit.limitATK)) {
-      unit.limitATK = 0
-      unit.limitexATK = 0
-      unit.limitStats.atk[11] = 0
-      unit.limitStats.atk[12] = 0
-      unit.limitStats.atk[13] = 0
-      unit.limitStats.atk[14] = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
   if (unit.id === 4157) {
     if (Number.isNaN(unit.limitATK)) {
       unit.limitATK = 0
@@ -394,54 +408,6 @@ export function fixupSpecificIssue(
       unit.limitStats.atk[12] = 0
       unit.limitStats.atk[13] = 0
       unit.limitStats.atk[14] = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-  if (unit.id === 4158) {
-    if (Number.isNaN(unit.limitATK)) {
-      unit.limitATK = 0
-      unit.limitexATK = 0
-      unit.limitStats.atk[11] = 0
-      unit.limitStats.atk[12] = 0
-      unit.limitStats.atk[13] = 0
-      unit.limitStats.atk[14] = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-  if (unit.id === 4159) {
-    if (Number.isNaN(unit.limitATK)) {
-      unit.limitATK = 0
-      unit.limitexATK = 0
-      unit.limitStats.atk[11] = 0
-      unit.limitStats.atk[12] = 0
-      unit.limitStats.atk[13] = 0
-      unit.limitStats.atk[14] = 0
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-  if (unit.id === 4162) {
-    if (Number.isNaN(unit.limitATK)) {
-      unit.limitATK = 0
-      unit.limitexATK = 0
-      unit.limitStats.atk[24] = 0
-      unit.limitStats.atk[25] = 0
-      unit.limitStats.atk[26] = 0
-      unit.limitStats.atk[27] = 0
-      unit.limitStats.atk[28] = 0
-      unit.limitStats.atk[29] = 0
-      unit.limitStats.atk[30] = 0
-      unit.limitStats.atk[31] = 0
-      unit.limitStats.atk[32] = 0
-      unit.limitStats.atk[33] = 0
-      unit.limitStats.atk[34] = 0
-      unit.limitStats.atk[35] = 0
-      unit.limitStats.atk[36] = 0
-      unit.limitStats.atk[37] = 0
-      unit.limitStats.atk[38] = 0
-      unit.limitStats.atk[39] = 0
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
