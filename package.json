@@ -24,7 +24,7 @@
     "@styled-system/css": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
     "diff": "^5.2.0",
-    "rc-slider": "^10.6.2",
+    "rc-slider": "^11.0.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
