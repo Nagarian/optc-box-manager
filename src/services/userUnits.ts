@@ -158,7 +158,7 @@ export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
       ...userUnit.coop,
       luck:
         userUnit.coop.luck +
-        (userUnit.unit.dropLocations.includes('legend') ? 2 : 1),
+        (userUnit.unit.dropLocations.includes('legend') ? 2 : 0),
     },
   }
 
