@@ -5,13 +5,12 @@ import {
   globalOnlyMissingInDb,
 } from './glo-jap-remapper.js'
 
-
 export function fixupWrapper(func) {
   /** @return { import("../models/old-units").ExtendedUnit } */
   return (
     /** @type import("../models/old-units").ExtendedUnit */ unit,
     /** @type number */ index,
-    /** @type import("../models/old-units").ExtendedUnit[] */ units
+    /** @type import("../models/old-units").ExtendedUnit[] */ units,
   ) => {
     try {
       return func(unit, index, units)
@@ -195,8 +194,8 @@ export function fixupEvolution(
       ...unit.evolution,
       evolution: Array.isArray(unit.evolution.evolution)
         ? unit.evolution.evolution.map(id => globalOnlyReverseMap[id])
-        : globalOnlyReverseMap[unit.evolution.evolution] ??
-        unit.evolution.evolution,
+        : (globalOnlyReverseMap[unit.evolution.evolution] ??
+          unit.evolution.evolution),
     },
   }
 }
@@ -226,27 +225,28 @@ export function fixupFestProperties(
   // @ts-ignore
   unit.detail.festAbility = Array.isArray(unit.detail.festAbility)
     ? unit.detail.festAbility.map(str => ({ description: str }))
-    // @ts-ignore
-    : Array.isArray(unit.detail.festAbility?.base)
-      // @ts-ignore
-      ? unit.detail.festAbility.base.map(str => ({ description: str }))
+    : // @ts-ignore
+      Array.isArray(unit.detail.festAbility?.base)
+      ? // @ts-ignore
+        unit.detail.festAbility.base.map(str => ({ description: str }))
       : undefined
 
   unit.detail.festSpecial = Array.isArray(unit.detail.festSpecial)
     ? unit.detail.festSpecial
-    // @ts-ignore
-    : Array.isArray(unit.detail.festSpecial?.base)
-      // @ts-ignore
-      ? unit.detail.festSpecial.base
+    : // @ts-ignore
+      Array.isArray(unit.detail.festSpecial?.base)
+      ? // @ts-ignore
+        unit.detail.festSpecial.base
       : undefined
 
-  unit.detail.festResistance = typeof unit.detail.festResistance === 'string'
-    ? unit.detail.festResistance
-    // @ts-ignore
-    : typeof unit.detail.festResistance?.base === 'string'
-      // @ts-ignore
-      ? unit.detail.festResistance.base
-      : undefined
+  unit.detail.festResistance =
+    typeof unit.detail.festResistance === 'string'
+      ? unit.detail.festResistance
+      : // @ts-ignore
+        typeof unit.detail.festResistance?.base === 'string'
+        ? // @ts-ignore
+          unit.detail.festResistance.base
+        : undefined
 
   // @ts-ignore
   unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({

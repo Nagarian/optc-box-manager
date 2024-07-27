@@ -21,7 +21,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
       typeof criteria.hasLimitBreak === 'boolean',
       (unit: ExtendedUnit) =>
         unit?.detail?.limit?.length
-          ? criteria.hasLimitBreak ?? false
+          ? (criteria.hasLimitBreak ?? false)
           : !criteria.hasLimitBreak,
     ],
     [
@@ -30,7 +30,7 @@ export const ByLimitBreakFilter = (criteria: ByLimitBreakCriteria) =>
         unit?.detail?.limit?.some(lb =>
           lb.description.startsWith('LOCKED WITH KEY'),
         )
-          ? criteria.hasKeyLimitBreak ?? false
+          ? (criteria.hasKeyLimitBreak ?? false)
           : !criteria.hasKeyLimitBreak,
     ],
     [
