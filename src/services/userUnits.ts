@@ -190,10 +190,14 @@ export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
   }
 
   const potentialToUpgrade =
-    userUnit.potentials.find(p =>
-      ['Rush', 'Last Tap / Super Tandem', 'Last Tap', 'Super Tandem'].includes(
-        p.type,
-      ),
+    userUnit.potentials.find(
+      p =>
+        [
+          'Rush',
+          'Last Tap / Super Tandem',
+          'Last Tap',
+          'Super Tandem',
+        ].includes(p.type) && p.lvl < 5,
     ) ?? userUnit.potentials.find(p => p.lvl < 5)
   if (potentialToUpgrade && !userUnit.unit.dropLocations.includes('legend')) {
     updated.potentials = userUnit.potentials.map(p =>
