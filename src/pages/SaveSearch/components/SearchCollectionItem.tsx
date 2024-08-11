@@ -37,7 +37,9 @@ export function SearchCollectionItem({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const validate = (name: string) => {
-    name && onUpdate({ ...search, name })
+    if (name) {
+      onUpdate({ ...search, name })
+    }
     setEditTitle(false)
   }
 

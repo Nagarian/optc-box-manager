@@ -152,7 +152,11 @@ async function loadOpenCv(waitTimeMs = 30000, stepTimeMs = 100): Promise<void> {
       const limitReached = timeSpentMs > waitTimeMs
       if (cv.Mat || limitReached) {
         clearInterval(interval)
-        limitReached ? reject(new Error('Loading OpenCV timeout')) : resolve()
+        if (limitReached) {
+          reject(new Error('Loading OpenCV timeout'))
+        } else {
+          resolve()
+        }
       } else {
         timeSpentMs += stepTimeMs
       }

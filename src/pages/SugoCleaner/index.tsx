@@ -135,7 +135,9 @@ export default function SugoCleaner({
               {...commonPopupButton}
               onClick={() => {
                 onAddUnit(openChooser)
-                currentList && remove(currentList, openChooser)
+                if (currentList) {
+                  remove(currentList, openChooser)
+                }
                 setOpenChooser(undefined)
               }}
               icon={TreasureIcon}
@@ -147,7 +149,9 @@ export default function SugoCleaner({
               <Button
                 {...commonPopupButton}
                 onClick={() => {
-                  currentList && move(currentList, 'toSell', openChooser)
+                  if (currentList) {
+                    move(currentList, 'toSell', openChooser)
+                  }
                   setOpenChooser(undefined)
                 }}
                 icon={BellyIcon}
@@ -160,7 +164,9 @@ export default function SugoCleaner({
               <Button
                 {...commonPopupButton}
                 onClick={() => {
-                  currentList && move(currentList, 'toWaiting', openChooser)
+                  if (currentList) {
+                    move(currentList, 'toWaiting', openChooser)
+                  }
                   setOpenChooser(undefined)
                 }}
                 icon={NewsCooIcon}
@@ -172,7 +178,9 @@ export default function SugoCleaner({
             <Button
               {...commonPopupButton}
               onClick={() => {
-                currentList && remove(currentList, openChooser)
+                if (currentList) {
+                  remove(currentList, openChooser)
+                }
                 setOpenChooser(undefined)
               }}
               variant="danger"
@@ -189,7 +197,9 @@ export default function SugoCleaner({
           onCancel={() => setOpenDetail(undefined)}
           onValidate={uu => {
             onUpdateUnit(uu)
-            currentList && openChooser && remove(currentList, openChooser)
+            if (currentList && openChooser) {
+              remove(currentList, openChooser)
+            }
             setOpenDetail(undefined)
             setOpenChooser(undefined)
           }}
