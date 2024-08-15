@@ -66,7 +66,7 @@ export function LevelDisplayerInput({
   onChange,
 }: SearchDisplayerInputProps<LevelDisplayerOption>) {
   return (
-    <FilterContainerPanel margin="4">
+    <FilterContainerPanel>
       {LevelDisplayerOptionTypes.map(stateKey => (
         <ChoiceInput
           key={stateKey}

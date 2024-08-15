@@ -86,7 +86,7 @@ export function PirateFestDisplayerInput({
   onChange,
 }: SearchDisplayerInputProps<PirateFestDisplayerOption>) {
   return (
-    <FilterContainerPanel margin="4">
+    <FilterContainerPanel>
       {PirateFestDisplayerOptionTypes.map(stateKey => (
         <ChoiceInput
           key={stateKey}

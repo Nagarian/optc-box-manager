@@ -76,7 +76,7 @@ export function CoopDisplayerInput({
   onChange,
 }: SearchDisplayerInputProps<CoopDisplayerOption>) {
   return (
-    <FilterContainerPanel margin="4">
+    <FilterContainerPanel>
       {coopDisplayerOptionTypes.map(stateKey => (
         <ChoiceInput
           key={stateKey}

@@ -144,7 +144,9 @@ export default function FilterSort({
       )}
 
       {displayed === 'displayer' && (
-        <Displayer searchDisplayer={displayer} onChange={setDisplayer} />
+        <Box overflowY="auto">
+          <Displayer searchDisplayer={displayer} onChange={setDisplayer} />
+        </Box>
       )}
 
       <hr />
