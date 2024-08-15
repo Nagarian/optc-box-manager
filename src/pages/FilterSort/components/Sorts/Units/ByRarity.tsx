@@ -1,11 +1,8 @@
 import styled from '@emotion/styled'
 import Box from 'components/Box'
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  UnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
 import { UnitStar } from 'models/units'
+import { SearchSortWithOptionFunction, UnitSort } from '..'
 
 const ParseStar = (star: UnitStar): number => {
   switch (star) {
@@ -43,24 +40,24 @@ export type RaritySortOption = {
   truncated: boolean
 }
 
-export const byRarity: SearchSortWithOptionFunction<RaritySortOption> = (
-  option,
-): UnitSort => {
-  return option.truncated ? byRarityTruncated : byRaritySimple
+export const byRarity: SearchSortWithOptionFunction<
+  RaritySortOption,
+  UnitSort
+> = option => {
+  return option?.truncated ? byRarityTruncated : byRaritySimple
 }
 
 const Displayer = styled.span`
   white-space: nowrap;
 `
 
-export const byRarityLabel = (option: RaritySortOption) => (
-  <Displayer>{option.truncated ? '⭐+ = ⭐' : '⭐+ ≠ ⭐'}</Displayer>
-)
+export const byRarityLabel = (option?: RaritySortOption) =>
+  option && <Displayer>{option.truncated ? '⭐+ = ⭐' : '⭐+ ≠ ⭐'}</Displayer>
 
 export function RaritySortOptionInput({
   options,
   onChange,
-}: SearchSortInputProps<RaritySortOption>) {
+}: SearchOptionInputProps<RaritySortOption>) {
   return (
     <Box display="flex" flexWrap="wrap">
       <label>

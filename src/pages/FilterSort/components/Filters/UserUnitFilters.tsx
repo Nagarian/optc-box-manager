@@ -1,7 +1,6 @@
 import Box from 'components/Box'
-import { SearchFilterUserUnits } from 'models/search'
 import FilterContainer from './FilterContainer'
-import { SearchFilterUserUnitsKeys, UserUnitFilterBuilder } from './UserUnits'
+import { SearchFilterUserUnits, UserUnitFilterBuilder } from './UserUnits'
 
 export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits
@@ -13,33 +12,32 @@ export default function UserUnitFilters({
 }: UserUnitFiltersProps) {
   return (
     <Box overflowY="auto">
-      {SearchFilterUserUnitsKeys.map(key => ({
-        key,
-        ...UserUnitFilterBuilder[key],
-      })).map(({ key, title, input: Input }) => (
-        <FilterContainer
-          key={key}
-          title={title}
-          onReset={() =>
-            onChange({
-              ...userUnitFilter,
-              [key]: undefined,
-            })
-          }
-          disableReset={!userUnitFilter[key]}
-        >
-          <Input
-            criteria={userUnitFilter[key]}
-            onChange={value =>
+      {Object.values(UserUnitFilterBuilder).map(
+        ({ key, title, input: Input }) => (
+          <FilterContainer
+            key={key}
+            title={title}
+            onReset={() =>
               onChange({
                 ...userUnitFilter,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                [key]: value,
+                [key]: undefined,
               })
             }
-          />
-        </FilterContainer>
-      ))}
+            disableReset={!userUnitFilter[key]}
+          >
+            <Input
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+              criteria={userUnitFilter[key] as any}
+              onChange={value =>
+                onChange({
+                  ...userUnitFilter,
+                  [key]: value,
+                })
+              }
+            />
+          </FilterContainer>
+        ),
+      )}
     </Box>
   )
 }

@@ -1,9 +1,6 @@
 import Box from 'components/Box'
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  UserUnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
+import { SearchSortWithOptionFunction, UserUnitSort } from '..'
 
 const CoopOptions = ['luck', 'captain lvl', 'special lvl'] as const
 
@@ -11,10 +8,11 @@ export type CoopSortOption = {
   type: (typeof CoopOptions)[number]
 }
 
-export const byCoopWithOption: SearchSortWithOptionFunction<CoopSortOption> = (
-  option,
-): UserUnitSort => {
-  switch (option.type) {
+export const byCoopWithOption: SearchSortWithOptionFunction<
+  CoopSortOption,
+  UserUnitSort
+> = option => {
+  switch (option?.type) {
     case 'captain lvl':
       return (userUnit1, userUnit2) =>
         userUnit1.coop.captain - userUnit2.coop.captain
@@ -23,19 +21,16 @@ export const byCoopWithOption: SearchSortWithOptionFunction<CoopSortOption> = (
         userUnit1.coop.special - userUnit2.coop.special
     case 'luck':
     default:
-      return byCoop
+      return (userUnit1, userUnit2) => userUnit1.coop.luck - userUnit2.coop.luck
   }
 }
 
-export const byCoop: UserUnitSort = (userUnit1, userUnit2) =>
-  userUnit1.coop.luck - userUnit2.coop.luck
-
-export const byCoopSortLabel = (option: CoopSortOption) => option.type
+export const byCoopSortLabel = (option?: CoopSortOption) => option?.type
 
 export function CoopSortInput({
   options,
   onChange,
-}: SearchSortInputProps<CoopSortOption>) {
+}: SearchOptionInputProps<CoopSortOption>) {
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="space-evenly">
       {CoopOptions.map(type => (

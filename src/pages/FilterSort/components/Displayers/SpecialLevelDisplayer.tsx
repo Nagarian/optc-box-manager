@@ -5,7 +5,7 @@ import { SearchDisplayerProps } from '.'
 
 export default function SpecialLevelDisplayer({
   userUnit: { special },
-}: SearchDisplayerProps) {
+}: SearchDisplayerProps<never>) {
   if (!special) return null
 
   return (

@@ -1,106 +1,139 @@
 import { UserSettingEnhanced } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps, UserUnitFilter } from 'models/search'
 import { FunctionComponent } from 'react'
-import { ByUserCoopFilter, ByUserCoopInput } from './ByUserCoop'
 import {
+  ByUserCoopCriteria,
+  ByUserCoopFilter,
+  ByUserCoopInput,
+} from './ByUserCoop'
+import {
+  ByUserCottonCandyCriteria,
   ByUserCottonCandyFilter,
   ByUserCottonCandyInput,
 } from './ByUserCottonCandy'
-import { ByUserInkFilter, ByUserInkInput } from './ByUserInk'
-import { ByUserLevelFilter, ByUserLevelInput } from './ByUserLevel'
+import { ByUserInkCriteria, ByUserInkFilter, ByUserInkInput } from './ByUserInk'
 import {
+  ByUserLevelCriteria,
+  ByUserLevelFilter,
+  ByUserLevelInput,
+} from './ByUserLevel'
+import {
+  ByUserLimitBreakCriteria,
   ByUserLimitBreakFilter,
   ByUserLimitBreakInput,
 } from './ByUserLimitBreak'
 import {
+  ByUserPirateFestCriteria,
   ByUserPirateFestFilter,
   ByUserPirateFestInput,
 } from './ByUserPirateFest'
-import { ByUserPotentialFilter, ByUserPotentialInput } from './ByUserPotential'
 import {
+  ByUserPotentialCriteria,
+  ByUserPotentialFilter,
+  ByUserPotentialInput,
+} from './ByUserPotential'
+import {
+  ByUserPowerSocketCriteria,
   ByUserPowerSocketFilter,
   ByUserPowerSocketInput,
 } from './ByUserPowerSocket'
-import { ByUserSpecialFilter, ByUserSpecialInput } from './ByUserSpecial'
-import { ByUserSupportFilter, ByUserSupportInput } from './ByUserSupport'
+import {
+  ByUserSpecialCriteria,
+  ByUserSpecialFilter,
+  ByUserSpecialInput,
+} from './ByUserSpecial'
+import {
+  ByUserSupportCriteria,
+  ByUserSupportFilter,
+  ByUserSupportInput,
+} from './ByUserSupport'
 
-export const SearchFilterUserUnitsKeys = [
-  'byUserLevel',
-  'byUserSpecial',
-  'byUserCottonCandy',
-  'byUserSupport',
-  'byUserPirateFest',
-  'byUserLimitBreak',
-  'byUserPotential',
-  'byUserInk',
-  'byUserPowerSocket',
-  'byUserCoop',
-] as const
-
-export type SearchFilterUserUnitsType =
-  (typeof SearchFilterUserUnitsKeys)[number]
-
-type Builder<T = unknown> = (
-  criteria: T,
-  userSetting: UserSettingEnhanced,
-) => UserUnitFilter
-
-type UserUnitFilterBuilderType<T> = {
-  title: string
-  builder: Builder<T>
-  input: FunctionComponent<SearchFilterCriteriaInputProps<T>>
+type SearchFilterUserUnitAll = {
+  byUserLevel: ByUserLevelCriteria
+  byUserSpecial: ByUserSpecialCriteria
+  byUserCottonCandy: ByUserCottonCandyCriteria
+  byUserSupport: ByUserSupportCriteria
+  byUserPirateFest: ByUserPirateFestCriteria
+  byUserLimitBreak: ByUserLimitBreakCriteria
+  byUserPotential: ByUserPotentialCriteria
+  byUserInk: ByUserInkCriteria
+  byUserPowerSocket: ByUserPowerSocketCriteria
+  byUserCoop: ByUserCoopCriteria
 }
 
+export type SearchFilterUserUnitsType = keyof SearchFilterUserUnitAll
+
+export type SearchFilterUserUnits = Partial<SearchFilterUserUnitAll>
+
 export const UserUnitFilterBuilder: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in SearchFilterUserUnitsType]: UserUnitFilterBuilderType<any>
+  [key in SearchFilterUserUnitsType]: {
+    key: key
+    title: string
+    builder: (
+      criteria: SearchFilterUserUnitAll[key],
+      userSetting: UserSettingEnhanced,
+    ) => UserUnitFilter
+    input: FunctionComponent<
+      SearchFilterCriteriaInputProps<SearchFilterUserUnitAll[key]>
+    >
+  }
 } = {
-  byUserPotential: {
-    title: 'Potential ability',
-    builder: ByUserPotentialFilter,
-    input: ByUserPotentialInput,
+  byUserLevel: {
+    key: 'byUserLevel',
+    title: 'Level',
+    builder: ByUserLevelFilter,
+    input: ByUserLevelInput,
+  },
+  byUserSpecial: {
+    key: 'byUserSpecial',
+    title: 'Special',
+    builder: ByUserSpecialFilter,
+    input: ByUserSpecialInput,
   },
   byUserCottonCandy: {
+    key: 'byUserCottonCandy',
     title: 'Cotton Candy',
     builder: ByUserCottonCandyFilter,
     input: ByUserCottonCandyInput,
   },
   byUserSupport: {
+    key: 'byUserSupport',
     title: 'Support',
     builder: ByUserSupportFilter,
     input: ByUserSupportInput,
   },
-  byUserSpecial: {
-    title: 'Special',
-    builder: ByUserSpecialFilter,
-    input: ByUserSpecialInput,
-  },
-  byUserLimitBreak: {
-    title: 'Limit Break',
-    builder: ByUserLimitBreakFilter,
-    input: ByUserLimitBreakInput,
-  },
   byUserPirateFest: {
+    key: 'byUserPirateFest',
     title: 'Pirate Rumble',
     builder: ByUserPirateFestFilter,
     input: ByUserPirateFestInput,
   },
-  byUserPowerSocket: {
-    title: 'Power Sockets',
-    builder: ByUserPowerSocketFilter,
-    input: ByUserPowerSocketInput,
+  byUserLimitBreak: {
+    key: 'byUserLimitBreak',
+    title: 'Limit Break',
+    builder: ByUserLimitBreakFilter,
+    input: ByUserLimitBreakInput,
+  },
+  byUserPotential: {
+    key: 'byUserPotential',
+    title: 'Potential ability',
+    builder: ByUserPotentialFilter,
+    input: ByUserPotentialInput,
   },
   byUserInk: {
+    key: 'byUserInk',
     title: 'Ink Effects',
     builder: ByUserInkFilter,
     input: ByUserInkInput,
   },
-  byUserLevel: {
-    title: 'Level',
-    builder: ByUserLevelFilter,
-    input: ByUserLevelInput,
+  byUserPowerSocket: {
+    key: 'byUserPowerSocket',
+    title: 'Power Sockets',
+    builder: ByUserPowerSocketFilter,
+    input: ByUserPowerSocketInput,
   },
   byUserCoop: {
+    key: 'byUserCoop',
     title: 'Coop',
     builder: ByUserCoopFilter,
     input: ByUserCoopInput,

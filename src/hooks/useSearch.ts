@@ -1,4 +1,4 @@
-import { Search, UnitSort, UserUnitSort } from 'models/search'
+import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import {
@@ -10,9 +10,11 @@ import {
   UserUnitFilterBuilder,
 } from 'pages/FilterSort/components/Filters/UserUnits'
 import {
-  DescendingSort,
-  SearchSortBuilder,
-  UnitSort2UserUnitSort,
+  isUnitSort,
+  sortUnitCriteria,
+  sortUserUnitCriteria,
+  UnitSort,
+  UserUnitSort,
 } from 'pages/FilterSort/components/Sorts'
 import { useStorage } from './useStorage'
 import { useUserSettings } from './useUserSettings'
@@ -81,44 +83,26 @@ export function useSearch(search: Search = DefaultSearch) {
   const unitFilters = Object.entries(search.filters.units || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) =>
-      UnitFilterBuilder[key as SearchFilterUnitsType].builder(criteria),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
+      UnitFilterBuilder[key as SearchFilterUnitsType].builder(criteria as any),
     )
 
   const userUnitFilters = Object.entries(search.filters.userUnits || {})
     .filter(([key, criteria]) => Boolean(criteria))
     .map(([key, criteria]) =>
       UserUnitFilterBuilder[key as SearchFilterUserUnitsType].builder(
-        criteria,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
+        criteria as any,
         userSettings,
       ),
     )
 
   const unitSorters: UnitSort[] = search.sorts
-    .filter(({ by }) => SearchSortBuilder[by].type === 'unit')
-    .map<UnitSort>(({ by, order, options }) => {
-      const fn =
-        (options && SearchSortBuilder[by].optionedFn?.(options)) ??
-        SearchSortBuilder[by].fn
+    .filter(isUnitSort)
+    .map<UnitSort>(sortUnitCriteria)
 
-      return order === 'desc'
-        ? DescendingSort(fn as UnitSort)
-        : (fn as UnitSort)
-    })
-
-  const userUnitSorters: UserUnitSort[] = search.sorts.map<UserUnitSort>(
-    ({ by, order, options }) => {
-      const builder = SearchSortBuilder[by]
-      const fn =
-        (options && SearchSortBuilder[by].optionedFn?.(options)) ??
-        SearchSortBuilder[by].fn
-
-      const uufn: UserUnitSort =
-        builder.type === 'unit'
-          ? UnitSort2UserUnitSort(fn as UnitSort)
-          : (fn as UserUnitSort)
-      return order === 'desc' ? DescendingSort(uufn) : uufn
-    },
-  )
+  const userUnitSorters: UserUnitSort[] =
+    search.sorts.map<UserUnitSort>(sortUserUnitCriteria)
 
   return {
     search,

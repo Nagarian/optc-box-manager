@@ -3,11 +3,7 @@ import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
 import { Fragment } from 'react/jsx-runtime'
 import FilterContainer from '../Filters/FilterContainer'
-import {
-  SearchDisplayerBuilder,
-  SearchDisplayerCriteria,
-  UserUnitDisplayerTypeKeys,
-} from '.'
+import { SearchDisplayerBuilder, SearchDisplayerCriteria } from '.'
 
 export type DisplayerProps = {
   searchDisplayer?: SearchDisplayerCriteria
@@ -17,9 +13,6 @@ export default function Displayer({
   searchDisplayer,
   onChange,
 }: DisplayerProps) {
-  const OptionComponent =
-    searchDisplayer && SearchDisplayerBuilder[searchDisplayer.type].input
-
   return (
     <FilterContainer
       title="Unit displayer"
@@ -32,36 +25,39 @@ export default function Displayer({
         alignContent="flex-start"
         gap="2"
       >
-        {UserUnitDisplayerTypeKeys.map(displayerType => (
-          <Fragment key={displayerType}>
-            <ChoiceInput
-              type="radio"
-              checked={searchDisplayer?.type === displayerType}
-              name="displayer-type"
-              onChange={() =>
-                onChange({
-                  type: displayerType,
-                })
-              }
-            >
-              {SearchDisplayerBuilder[displayerType].label}
-            </ChoiceInput>
+        {Object.values(SearchDisplayerBuilder).map(
+          ({ key, label, input: OptionComponent }) => (
+            <Fragment key={key}>
+              <ChoiceInput
+                type="radio"
+                checked={searchDisplayer?.type === key}
+                name="displayer-type"
+                onChange={() =>
+                  onChange({
+                    type: key,
+                  })
+                }
+              >
+                {label}
+              </ChoiceInput>
 
-            {OptionComponent &&
-              searchDisplayer &&
-              searchDisplayer.type === displayerType && (
+              {OptionComponent && searchDisplayer?.type === key && (
                 <OptionComponent
-                  options={searchDisplayer.options}
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+                  options={searchDisplayer.options as any}
                   onChange={options =>
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                     onChange({
-                      type: searchDisplayer.type,
+                      type: key,
                       options,
-                    })
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    } as any)
                   }
                 />
               )}
-          </Fragment>
-        ))}
+            </Fragment>
+          ),
+        )}
       </Panel>
     </FilterContainer>
   )

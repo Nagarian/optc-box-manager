@@ -1,5 +1,5 @@
-import { SearchSortCriteria } from 'models/search'
 import { ByUserInkCriteria } from '../Filters/UserUnits/ByUserInk'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncInk: Syncer = (filters, sorts, displayer) => {

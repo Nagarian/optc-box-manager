@@ -1,9 +1,6 @@
 import Box from 'components/Box'
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  UserUnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
+import { SearchSortWithOptionFunction, UserUnitSort } from '..'
 
 const LevelOptions = ['lvl', 'lvl Max', 'lvl LB'] as const
 
@@ -12,9 +9,10 @@ export type LevelSortOption = {
 }
 
 export const byLevelWithOption: SearchSortWithOptionFunction<
-  LevelSortOption
-> = (option): UserUnitSort => {
-  switch (option.type) {
+  LevelSortOption,
+  UserUnitSort
+> = option => {
+  switch (option?.type) {
     case 'lvl Max':
       return (userUnit1, userUnit2) =>
         userUnit1.level.lvlMax - userUnit2.level.lvlMax
@@ -31,12 +29,12 @@ export const byLevelWithOption: SearchSortWithOptionFunction<
 export const byLevel: UserUnitSort = (userUnit1, userUnit2) =>
   userUnit1.level.lvl - userUnit2.level.lvl
 
-export const byLevelSortLabel = (option: LevelSortOption) => option.type
+export const byLevelSortLabel = (option?: LevelSortOption) => option?.type
 
 export function LevelSortInput({
   options,
   onChange,
-}: SearchSortInputProps<LevelSortOption>) {
+}: SearchOptionInputProps<LevelSortOption>) {
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="space-evenly">
       {LevelOptions.map(type => (

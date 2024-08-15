@@ -1,4 +1,4 @@
-import { UnitSort } from 'models/search'
+import { UnitSort } from '..'
 
 export const byFamily: UnitSort = (unit1, unit2) =>
   unit1.family.id - unit2.family.id

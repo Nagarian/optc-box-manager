@@ -1,5 +1,5 @@
-import { UnitSort } from 'models/search'
 import { UnitType } from 'models/units'
+import { UnitSort } from '..'
 
 const _ParseType = (type: UnitType): number => {
   switch (type) {

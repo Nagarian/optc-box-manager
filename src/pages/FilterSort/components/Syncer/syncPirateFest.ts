@@ -1,10 +1,7 @@
-import { SearchSortCriteria } from 'models/search'
 import { SearchDisplayerCriteria } from '../Displayers'
-import {
-  PirateFestDisplayerOption,
-  PirateFestDisplayerOptionType,
-} from '../Displayers/PirateFestDisplayer'
+import { PirateFestDisplayerOptionType } from '../Displayers/PirateFestDisplayer'
 import { ByUserPirateFestCriteria } from '../Filters/UserUnits/ByUserPirateFest'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
@@ -32,7 +29,7 @@ export const syncPirateFest: Syncer = (filters, sorts, displayer) => {
 export function syncPirateFestDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   type: PirateFestDisplayerOptionType,
-): SearchDisplayerCriteria<PirateFestDisplayerOption> | undefined {
+): SearchDisplayerCriteria | undefined {
   if (displayer) {
     return undefined
   }

@@ -74,7 +74,11 @@ export default function CharacterBox({
       />
       <CottonCandyDisplayer cc={userUnit?.cc} />
       {userUnit && InfoDisplayer && (
-        <InfoDisplayer userUnit={userUnit} options={displayer?.options} />
+        <InfoDisplayer
+          userUnit={userUnit}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+          options={displayer?.options as any}
+        />
       )}
 
       <LimitBreakDisplayer limitBreak={userUnit?.limitBreak} />

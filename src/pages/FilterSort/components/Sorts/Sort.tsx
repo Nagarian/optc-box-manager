@@ -2,8 +2,12 @@ import styled from '@emotion/styled'
 import Box from 'components/Box'
 import Button from 'components/Button'
 import { SubTitle } from 'components/Title'
-import { SearchSortCriteria } from 'models/search'
-import { SearchSortBuilder, UnitSortTypeKeys, UserUnitSortTypeKeys } from '.'
+import {
+  SearchSortBuilder,
+  SearchSortCriteria,
+  SearchSortUnitBuilder,
+  SearchSortUserUnitBuilder,
+} from '.'
 import SearchSortItem from './components/SearchSortItem'
 
 export type SortProps = {
@@ -59,14 +63,16 @@ export default function Sort({
 
         <hr />
         <SubTitle>{'Unit sort'}</SubTitle>
-        {UnitSortTypeKeys.map(s => SortItemRender({ by: s, order: 'asc' }))}
+        {Object.values(SearchSortUnitBuilder).map(s =>
+          SortItemRender({ by: s.key, order: 'asc' }),
+        )}
 
         {!unitOnly && (
           <>
             <hr />
             <SubTitle>{'My Box sort'}</SubTitle>
-            {UserUnitSortTypeKeys.map(s =>
-              SortItemRender({ by: s, order: 'desc' }),
+            {Object.values(SearchSortUserUnitBuilder).map(s =>
+              SortItemRender({ by: s.key, order: 'desc' }),
             )}
           </>
         )}
@@ -78,7 +84,6 @@ export default function Sort({
             <SearchSortItem
               key={i}
               criteria={criteria}
-              sortBuilder={SearchSortBuilder[criteria.by]}
               onUpdate={(oldCriteria, newCriteria) =>
                 onChange(
                   searchSort.map(ss => (ss !== oldCriteria ? ss : newCriteria)),

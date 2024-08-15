@@ -1,5 +1,5 @@
-import { UserUnitSort } from 'models/search'
 import { UserUnitLimitBreak } from 'models/userBox'
+import { UserUnitSort } from '..'
 
 export const byLimitBreakLevel: UserUnitSort = (userUnit1, userUnit2) =>
   (userUnit1.limitBreak?.lvl ?? -1) - (userUnit2.limitBreak?.lvl ?? -1)

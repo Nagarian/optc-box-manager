@@ -5,8 +5,9 @@ import { CoopCaptainIcon, CoopSpecialIcon, LockIcon } from 'components/Icon'
 import { Luck } from 'components/Luck'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
+import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
-import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
+import { SearchDisplayerProps } from '.'
 
 const coopDisplayerOptionTypes = ['luck', 'captain', 'special', 'both'] as const
 export type CoopDisplayerOptionType = (typeof coopDisplayerOptionTypes)[number]
@@ -74,7 +75,7 @@ export default function CoopDisplayer({
 export function CoopDisplayerInput({
   options,
   onChange,
-}: SearchDisplayerInputProps<CoopDisplayerOption>) {
+}: SearchOptionInputProps<CoopDisplayerOption>) {
   return (
     <FilterContainerPanel>
       {coopDisplayerOptionTypes.map(stateKey => (

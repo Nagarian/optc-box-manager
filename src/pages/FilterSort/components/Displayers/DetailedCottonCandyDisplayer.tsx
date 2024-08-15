@@ -6,7 +6,7 @@ export function DetailedCottonCandyDisplayer({
   userUnit: {
     cc: { atk, hp, rcv },
   },
-}: SearchDisplayerProps) {
+}: SearchDisplayerProps<never>) {
   const sum = atk + hp + rcv
   if (!sum) return null
 

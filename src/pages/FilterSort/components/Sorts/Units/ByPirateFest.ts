@@ -1,5 +1,5 @@
-import { UnitSort } from 'models/search'
 import { UnitPirateFestStyle } from 'models/units'
+import { UnitSort } from '..'
 
 const ParseFestStyle = (type: UnitPirateFestStyle | undefined): number => {
   switch (type) {

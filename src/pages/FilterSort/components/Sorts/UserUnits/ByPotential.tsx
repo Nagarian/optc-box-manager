@@ -1,12 +1,9 @@
 import Box from 'components/Box'
 import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  UserUnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
+import { SearchSortWithOptionFunction, UserUnitSort } from '..'
 
 export const byPotentialLvl: UserUnitSort = (userUnit1, userUnit2) =>
   userUnit1.potentials.reduce((acc, current) => acc + current.lvl, 0) -
@@ -17,21 +14,25 @@ export type SpecificPotentialSortOption = {
 }
 
 export const bySpecificPotentialLvl: SearchSortWithOptionFunction<
-  SpecificPotentialSortOption
-> =
-  (option): UserUnitSort =>
-  (userUnit1, userUnit2) =>
-    (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ?? -1) -
-    (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ?? -1)
+  SpecificPotentialSortOption,
+  UserUnitSort
+> = option =>
+  !option
+    ? byPotentialLvl
+    : (userUnit1, userUnit2) =>
+        (userUnit1.potentials.find(({ type }) => type === option.type)?.lvl ??
+          -1) -
+        (userUnit2.potentials.find(({ type }) => type === option.type)?.lvl ??
+          -1)
 
 export const bySpecificPotentialLabel = (
-  option: SpecificPotentialSortOption,
-) => <PotentialAbility type={option.type} size="2" />
+  option?: SpecificPotentialSortOption,
+) => option && <PotentialAbility type={option.type} size="2" />
 
 export function SpecificPotentialSortInput({
   options,
   onChange,
-}: SearchSortInputProps<SpecificPotentialSortOption>) {
+}: SearchOptionInputProps<SpecificPotentialSortOption>) {
   return (
     <Box display="flex" flexWrap="wrap">
       {Potentials.map(potential => (

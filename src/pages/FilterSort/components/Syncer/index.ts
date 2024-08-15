@@ -1,6 +1,7 @@
-import { SearchFilterUserUnits, SearchSortCriteria } from 'models/search'
 import { useEffect } from 'react'
 import { SearchDisplayerCriteria } from '../Displayers'
+import { SearchFilterUserUnits } from '../Filters/UserUnits'
+import { SearchSortCriteria } from '../Sorts'
 import { syncCoop } from './syncCoop'
 import { syncCottonCandy } from './syncCottonCandy'
 import { syncInk } from './syncInk'

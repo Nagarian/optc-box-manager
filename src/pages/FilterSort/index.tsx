@@ -4,18 +4,16 @@ import { ClearIcon, ResetIcon, SaveSearchIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { EmptySearch } from 'hooks/useSearch'
 import { useStoredSearches } from 'hooks/useStoredSearches'
-import {
-  Search,
-  SearchFilterUnits,
-  SearchFilterUserUnits,
-  SearchSortCriteria,
-} from 'models/search'
+import { Search } from 'models/search'
 import SaveSearch from 'pages/SaveSearch'
 import { useState } from 'react'
 import { SearchDisplayerCriteria } from './components/Displayers'
 import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
+import { SearchFilterUnits } from './components/Filters/Units'
 import UserUnitFilters from './components/Filters/UserUnitFilters'
+import { SearchFilterUserUnits } from './components/Filters/UserUnits'
+import { SearchSortCriteria } from './components/Sorts'
 import Sort from './components/Sorts/Sort'
 import { useSyncer } from './components/Syncer'
 
@@ -49,7 +47,7 @@ export default function FilterSort({
 
   const [showSaveSearch, setShowSaveSearch] = useState<boolean>(false)
 
-  const computeNewSearch = () => ({
+  const computeNewSearch = (): Search => ({
     filters: {
       units: unitFilter,
       userUnits: userUnitFilter,

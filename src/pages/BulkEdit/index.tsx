@@ -7,11 +7,7 @@ import { ArrowIcon } from 'components/Icon'
 import Popup from 'components/Popup'
 import { DefaultSearch } from 'hooks/useSearch'
 import { useUserSettings } from 'hooks/useUserSettings'
-import {
-  Search,
-  SearchFilterUserUnits,
-  SearchSortCriteria,
-} from 'models/search'
+import { Search } from 'models/search'
 import {
   GameVersionIdConverter,
   GameVersionIdConverterKeys,
@@ -25,7 +21,9 @@ import {
 import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
 import { LevelDisplayerOption } from 'pages/FilterSort/components/Displayers/LevelDisplayer'
 import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
+import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
 import { ByUserLevelCriteria } from 'pages/FilterSort/components/Filters/UserUnits/ByUserLevel'
+import { SearchSortCriteria } from 'pages/FilterSort/components/Sorts'
 import { LevelSortOption } from 'pages/FilterSort/components/Sorts/UserUnits/ByLevel'
 import { ReactNode, useState } from 'react'
 import { gloToJapConverter } from 'scripts/glo-jap-remapper-proxy'
@@ -377,9 +375,11 @@ function computeSearch(edit: UserUnitBulkEdit | undefined): Search {
     uuf = {
       ...uuf,
       byUserCottonCandy: {
-        atk: (edit.cottonCandies.atk ?? 0) > 0 ? 'unmaxed' : undefined,
-        hp: (edit.cottonCandies.hp ?? 0) > 0 ? 'unmaxed' : undefined,
-        rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
+        by: {
+          atk: (edit.cottonCandies.atk ?? 0) > 0 ? 'unmaxed' : undefined,
+          hp: (edit.cottonCandies.hp ?? 0) > 0 ? 'unmaxed' : undefined,
+          rcv: (edit.cottonCandies.rcv ?? 0) > 0 ? 'unmaxed' : undefined,
+        },
       },
     }
     displayer = { type: 'cottonCandy' }

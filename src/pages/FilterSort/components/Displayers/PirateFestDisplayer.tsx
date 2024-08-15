@@ -8,8 +8,9 @@ import {
 } from 'components/Icon'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
+import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
-import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
+import { SearchDisplayerProps } from '.'
 
 const PirateFestDisplayerOptionTypes = [
   'all',
@@ -84,7 +85,7 @@ export default function PirateFestDisplayer({
 export function PirateFestDisplayerInput({
   options,
   onChange,
-}: SearchDisplayerInputProps<PirateFestDisplayerOption>) {
+}: SearchOptionInputProps<PirateFestDisplayerOption>) {
   return (
     <FilterContainerPanel>
       {PirateFestDisplayerOptionTypes.map(stateKey => (

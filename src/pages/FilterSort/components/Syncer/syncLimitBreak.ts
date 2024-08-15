@@ -1,5 +1,5 @@
-import { SearchSortCriteria } from 'models/search'
 import { ByUserLimitBreakCriteria } from '../Filters/UserUnits/ByUserLimitBreak'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncLimitBreak: Syncer = (filters, sorts, displayer) => {

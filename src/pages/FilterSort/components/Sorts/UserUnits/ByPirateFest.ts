@@ -1,4 +1,4 @@
-import { UserUnitSort } from 'models/search'
+import { UserUnitSort } from '..'
 
 export const byPirateFestSpecial: UserUnitSort = (userUnit1, userUnit2) =>
   (userUnit1.pirateFest?.specialLvl ?? -1) -

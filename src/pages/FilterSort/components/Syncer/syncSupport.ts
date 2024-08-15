@@ -1,6 +1,6 @@
-import { SearchSortCriteria } from 'models/search'
 import { SearchDisplayerCriteria } from '../Displayers'
 import { ByUserSupportCriteria } from '../Filters/UserUnits/ByUserSupport'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncSupport: Syncer = (filters, sorts, displayer) => {

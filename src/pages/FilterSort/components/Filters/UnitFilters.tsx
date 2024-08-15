@@ -1,7 +1,6 @@
 import Box from 'components/Box'
-import { SearchFilterUnits } from 'models/search'
 import FilterContainer from './FilterContainer'
-import { SearchFilterUnitsKeys, UnitFilterBuilder } from './Units'
+import { SearchFilterUnits, UnitFilterBuilder } from './Units'
 
 export type UnitFiltersProps = {
   unitFilter: SearchFilterUnits
@@ -13,10 +12,7 @@ export default function UnitFilters({
 }: UnitFiltersProps) {
   return (
     <Box overflowY="auto">
-      {SearchFilterUnitsKeys.map(key => ({
-        key,
-        ...UnitFilterBuilder[key],
-      })).map(({ key, title, input: Input }) => (
+      {Object.values(UnitFilterBuilder).map(({ key, input: Input, title }) => (
         <FilterContainer
           key={key}
           title={title}
@@ -29,11 +25,11 @@ export default function UnitFilters({
           disableReset={!unitFilter[key]}
         >
           <Input
-            criteria={unitFilter[key]}
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+            criteria={unitFilter[key] as any}
             onChange={value =>
               onChange({
                 ...unitFilter,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 [key]: value,
               })
             }

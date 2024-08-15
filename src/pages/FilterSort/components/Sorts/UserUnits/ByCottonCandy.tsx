@@ -1,14 +1,11 @@
 import Box from 'components/Box'
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  UserUnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
 import {
   CottonCandyType,
   CottonCandyTypeKeys,
   UserUnitCottonCandy,
 } from 'models/userBox'
+import { SearchSortWithOptionFunction, UserUnitSort } from '..'
 
 const ccSum = ({ atk, hp, rcv }: UserUnitCottonCandy) => atk + hp + rcv
 
@@ -20,9 +17,10 @@ export type SpecificCottonCandySortOption = {
 }
 
 export const bySpecificCottonCandy: SearchSortWithOptionFunction<
-  SpecificCottonCandySortOption
-> = (option): UserUnitSort => {
-  switch (option.cc) {
+  SpecificCottonCandySortOption,
+  UserUnitSort
+> = option => {
+  switch (option?.cc) {
     case 'atk':
       return (userUnit1, userUnit2) => userUnit1.cc.atk - userUnit2.cc.atk
     case 'hp':
@@ -35,13 +33,13 @@ export const bySpecificCottonCandy: SearchSortWithOptionFunction<
 }
 
 export const bySpecificCottonCandyLabel = (
-  option: SpecificCottonCandySortOption,
-) => option.cc
+  option?: SpecificCottonCandySortOption,
+) => option?.cc
 
 export function SpecificCottonCandySortInput({
   options,
   onChange,
-}: SearchSortInputProps<SpecificCottonCandySortOption>) {
+}: SearchOptionInputProps<SpecificCottonCandySortOption>) {
   return (
     <Box display="flex" flexWrap="wrap">
       {CottonCandyTypeKeys.map(type => (

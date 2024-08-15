@@ -1,7 +1,7 @@
-import { SearchSortCriteria } from 'models/search'
 import { CottonCandyType } from 'models/userBox'
 import { SearchDisplayerCriteria } from '../Displayers'
 import { ByUserCottonCandyCriteria } from '../Filters/UserUnits/ByUserCottonCandy'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncCottonCandy: Syncer = (filters, sorts, displayer) => {

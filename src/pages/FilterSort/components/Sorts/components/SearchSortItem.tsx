@@ -8,31 +8,12 @@ import {
 } from 'components/Icon'
 import Popup from 'components/Popup'
 import { Text } from 'components/Title'
-import { SearchSortCriteria, SearchSortInputProps } from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
 import { FunctionComponent, useState } from 'react'
-import { SearchSortBuilderProps } from '..'
+import { SearchSortBuilder, SearchSortCriteria } from '..'
 
-const Panel = styled.div`
-  display: flex;
-  align-items: center;
-  padding: ${p => p.theme.space[1]};
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  flex: 0 0 auto;
-
-  :nth-of-type(odd) {
-    background-color: ${p => p.theme.colors.primary};
-    color: ${p => p.theme.colors.primaryText};
-  }
-
-  > * {
-    margin: ${p => p.theme.space[1]};
-  }
-`
-
-export type SearchSortItemProps<T = unknown> = {
-  criteria: SearchSortCriteria<T>
-  sortBuilder: SearchSortBuilderProps<T>
+export type SearchSortItemProps = {
+  criteria: SearchSortCriteria
   onUpdate: (
     oldCriteria: SearchSortCriteria,
     newCriteria: SearchSortCriteria,
@@ -42,25 +23,27 @@ export type SearchSortItemProps<T = unknown> = {
 
 export default function SearchSortItem({
   criteria,
-  sortBuilder: { label, optionInput, optionedLabel },
   onUpdate,
   onDelete,
 }: SearchSortItemProps) {
+  const {
+    label,
+    input: optionInput,
+    optionedLabel,
+  } = SearchSortBuilder[criteria.by]
   const [showSetting, setShowSetting] = useState<boolean>(false)
   const { options } = criteria
   return (
     <>
       <Panel>
         <Text flex="1" fontSize="2" display="inline-flex" alignItems="center">
-          <>
-            {label}
-            {options && optionedLabel && (
-              <>
-                {' - '}
-                {optionedLabel(options)}
-              </>
-            )}
-          </>
+          {label}
+          {options && optionedLabel && (
+            <>
+              {' - '}
+              {optionedLabel(options as unknown as undefined)}
+            </>
+          )}
         </Text>
 
         {optionInput && (
@@ -96,12 +79,15 @@ export default function SearchSortItem({
         <OptionPopup
           onCancel={() => setShowSetting(false)}
           options={criteria.options}
-          optionInput={optionInput}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+          optionInput={optionInput as any}
           onValidate={options => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             onUpdate(criteria, {
               ...criteria,
               options,
-            })
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any)
             setShowSetting(false)
           }}
         />
@@ -110,9 +96,27 @@ export default function SearchSortItem({
   )
 }
 
-type OptionPopupProps<T = unknown> = {
+const Panel = styled.div`
+  display: flex;
+  align-items: center;
+  padding: ${p => p.theme.space[1]};
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+
+  :nth-of-type(odd) {
+    background-color: ${p => p.theme.colors.primary};
+    color: ${p => p.theme.colors.primaryText};
+  }
+
+  > * {
+    margin: ${p => p.theme.space[1]};
+  }
+`
+
+type OptionPopupProps<T> = {
   options: T
-  optionInput: FunctionComponent<SearchSortInputProps<T>>
+  optionInput: FunctionComponent<SearchOptionInputProps<T>>
   onCancel: () => void
   onValidate: (options?: T) => void
 }

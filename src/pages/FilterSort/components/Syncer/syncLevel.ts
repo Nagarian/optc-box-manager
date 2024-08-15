@@ -1,7 +1,6 @@
-import { SearchSortCriteria } from 'models/search'
 import { SearchDisplayerCriteria } from '../Displayers'
-import { LevelDisplayerOption } from '../Displayers/LevelDisplayer'
 import { ByUserLevelCriteria } from '../Filters/UserUnits/ByUserLevel'
+import { SearchSortCriteria } from '../Sorts'
 import { LevelSortOption } from '../Sorts/UserUnits/ByLevel'
 import { Syncer } from '.'
 
@@ -21,7 +20,7 @@ export const syncLevel: Syncer = (filters, sorts, displayer) => {
 export function syncLevelDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   levelCriteria: ByUserLevelCriteria,
-): SearchDisplayerCriteria<LevelDisplayerOption> | undefined {
+): SearchDisplayerCriteria | undefined {
   if (displayer && displayer.type !== 'level') {
     return undefined
   }

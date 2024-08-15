@@ -4,12 +4,13 @@ import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
+import { SearchOptionInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
-import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
+import { SearchDisplayerProps } from '.'
 
 export default function PotentialsDisplayer({
   userUnit: { potentials },
-}: SearchDisplayerProps) {
+}: SearchDisplayerProps<never>) {
   if (!Potentials.length) return null
 
   return (
@@ -54,7 +55,7 @@ export function SpecificPotentialDisplayer({
 export function SpecificPotentialDisplayerInput({
   options,
   onChange,
-}: SearchDisplayerInputProps<SpecificPotentialDisplayerOption>) {
+}: SearchOptionInputProps<SpecificPotentialDisplayerOption>) {
   return (
     <Box display="flex" flexWrap="wrap">
       {Potentials.map(potential => (

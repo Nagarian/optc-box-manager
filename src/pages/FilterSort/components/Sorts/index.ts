@@ -1,38 +1,34 @@
-import {
-  SearchSortInputProps,
-  SearchSortWithOptionFunction,
-  Sort,
-  UnitSort,
-  UserUnitSort,
-} from 'models/search'
+import { SearchOptionInputProps } from 'models/search'
+import { ExtendedUnit } from 'models/units'
+import { UserUnit } from 'models/userBox'
 import { FunctionComponent, ReactNode } from 'react'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
 import byFestStyle from './Units/ByPirateFest'
 import {
   byRarity,
   byRarityLabel,
-  byRaritySimple,
+  RaritySortOption,
   RaritySortOptionInput,
 } from './Units/ByRarity'
 import byType from './Units/ByType'
 import {
-  byCoop,
   byCoopSortLabel,
   byCoopWithOption,
   CoopSortInput,
+  CoopSortOption,
 } from './UserUnits/ByCoop'
 import {
-  byCottonCandy,
   bySpecificCottonCandy,
   bySpecificCottonCandyLabel,
   SpecificCottonCandySortInput,
+  SpecificCottonCandySortOption,
 } from './UserUnits/ByCottonCandy'
 import { byInkLvl } from './UserUnits/ByInk'
 import {
-  byLevel,
   byLevelSortLabel,
   byLevelWithOption,
   LevelSortInput,
+  LevelSortOption,
 } from './UserUnits/ByLevel'
 import {
   byLimitBreakLevel,
@@ -44,157 +40,219 @@ import {
   byPirateFestSpecial,
 } from './UserUnits/ByPirateFest'
 import {
-  byPotentialLvl,
   bySpecificPotentialLabel,
   bySpecificPotentialLvl,
   SpecificPotentialSortInput,
+  SpecificPotentialSortOption,
 } from './UserUnits/ByPotential'
 import { bySupportLvl } from './UserUnits/BySupport'
 
-export const UnitSortTypeKeys = [
-  'byType',
-  'byRarity',
-  'byFamily',
-  'byId',
-  'byLBLvlMax',
-  'byFestStyle',
-] as const
-export const UserUnitSortTypeKeys = [
-  'byLevel',
-  'byCottonCandy',
-  'bySupportLvl',
-  'byLBLvlGameLike',
-  'byLimitBreakLvl',
-  'byPotentialProgression',
-  'byPirateFestSpecial',
-  'byPirateFestAbility',
-  'byPirateFestGp',
-  'byInkLvl',
-  'byAddedToBox',
-  'byCoop',
-] as const
-export type SearchSortType =
-  | (typeof UnitSortTypeKeys)[number]
-  | (typeof UserUnitSortTypeKeys)[number]
-
-export type SearchSortBuilderProps<T = unknown> = {
-  label: string
-  type: 'unit' | 'userUnit'
-  fn: UnitSort | UserUnitSort
-  optionInput?: FunctionComponent<SearchSortInputProps<T>>
-  optionedFn?: SearchSortWithOptionFunction<T>
-  optionedLabel?: (option: T) => ReactNode
+type SortUnitOptions = {
+  byType: never
+  byRarity: RaritySortOption
+  byFamily: never
+  byId: never
+  byLBLvlMax: never
+  byFestStyle: never
 }
 
-export const SearchSortBuilder: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in SearchSortType]: SearchSortBuilderProps<any>
+type SortUserUnitOptions = {
+  byLevel: LevelSortOption
+  byCottonCandy: SpecificCottonCandySortOption
+  bySupportLvl: never
+  byLBLvlGameLike: never
+  byLimitBreakLvl: never
+  byPotentialProgression: SpecificPotentialSortOption
+  byPirateFestSpecial: never
+  byPirateFestAbility: never
+  byPirateFestGp: never
+  byInkLvl: never
+  byAddedToBox: never
+  byCoop: CoopSortOption
+}
+
+export type SearchSortUnitType = keyof SortUnitOptions
+export type SearchSortUserUnitType = keyof SortUserUnitOptions
+export type SearchSortType = SearchSortUnitType | SearchSortUserUnitType
+
+export type SortOrder = 'asc' | 'desc'
+
+export type SortCriteria<T> = {
+  [Prop in keyof T]: {
+    by: Prop
+    order: SortOrder
+    options?: T[Prop]
+  }
+}
+
+export type SearchSortUnitCriteria =
+  SortCriteria<SortUnitOptions>[keyof SortCriteria<SortUnitOptions>]
+export type SearchSortUserUnitCriteria =
+  SortCriteria<SortUserUnitOptions>[keyof SortCriteria<SortUserUnitOptions>]
+export type SearchSortCriteria =
+  | SearchSortUnitCriteria
+  | SearchSortUserUnitCriteria
+
+export function isUnitSort(
+  sort: SearchSortCriteria,
+): sort is SearchSortUnitCriteria {
+  return Object.hasOwn(SearchSortUnitBuilder, sort.by)
+}
+
+export type Sort<T> = (u1: T, u2: T) => number
+export type UnitSort = Sort<ExtendedUnit>
+export type UserUnitSort = Sort<UserUnit>
+
+export type SearchSortWithOptionFunction<T, TSort> = (options?: T) => TSort
+
+export type SearchSortBuilderProps<TKey, TOption, TSort> = {
+  key: TKey
+  label: string
+  fn: (options?: TOption) => TSort
+  input?: FunctionComponent<SearchOptionInputProps<TOption>>
+  optionedLabel?: (option?: TOption) => ReactNode
+}
+
+export const SearchSortUnitBuilder: {
+  [key in keyof SortUnitOptions]: SearchSortBuilderProps<
+    key,
+    SortUnitOptions[key],
+    UnitSort
+  >
 } = {
   byType: {
+    key: 'byType',
     label: 'Type',
-    type: 'unit',
-    fn: byType,
+    fn: () => byType,
   },
   byRarity: {
+    key: 'byRarity',
     label: 'Rarity',
-    type: 'unit',
-    fn: byRaritySimple,
-    optionedFn: byRarity,
+    fn: byRarity,
+    input: RaritySortOptionInput,
     optionedLabel: byRarityLabel,
-    optionInput: RaritySortOptionInput,
   },
   byFamily: {
+    key: 'byFamily',
     label: 'Character',
-    type: 'unit',
-    fn: byFamily,
+    fn: () => byFamily,
   },
   byId: {
+    key: 'byId',
     label: 'ID',
-    type: 'unit',
-    fn: byId,
+    fn: () => byId,
+  },
+  byLBLvlMax: {
+    key: 'byLBLvlMax',
+    label: 'LB Lvl Max',
+    fn: () => byLBLvlMax,
   },
   byFestStyle: {
+    key: 'byFestStyle',
     label: 'PR Style',
-    type: 'unit',
-    fn: byFestStyle,
+    fn: () => byFestStyle,
+  },
+}
+
+export const SearchSortUserUnitBuilder: {
+  [key in keyof SortUserUnitOptions]: SearchSortBuilderProps<
+    key,
+    SortUserUnitOptions[key],
+    UserUnitSort
+  >
+} = {
+  byLevel: {
+    key: 'byLevel',
+    label: 'Level',
+    fn: byLevelWithOption,
+    input: LevelSortInput,
+    optionedLabel: byLevelSortLabel,
   },
   byCottonCandy: {
+    key: 'byCottonCandy',
     label: 'Cotton Candy',
-    type: 'userUnit',
-    fn: byCottonCandy,
-    optionedFn: bySpecificCottonCandy,
-    optionInput: SpecificCottonCandySortInput,
+    fn: bySpecificCottonCandy,
+    input: SpecificCottonCandySortInput,
     optionedLabel: bySpecificCottonCandyLabel,
   },
   bySupportLvl: {
+    key: 'bySupportLvl',
     label: 'Support',
-    type: 'userUnit',
-    fn: bySupportLvl,
-  },
-  byLBLvlMax: {
-    label: 'LB Lvl Max',
-    type: 'unit',
-    fn: byLBLvlMax,
-  },
-  byLimitBreakLvl: {
-    label: 'LB Lvl',
-    type: 'userUnit',
-    fn: byLimitBreakLevel,
+    fn: () => bySupportLvl,
   },
   byLBLvlGameLike: {
+    key: 'byLBLvlGameLike',
     label: 'LB Lvl (Game-like)',
-    type: 'userUnit',
-    fn: byLimitBreakLevelGameLike,
+    fn: () => byLimitBreakLevelGameLike,
+  },
+  byLimitBreakLvl: {
+    key: 'byLimitBreakLvl',
+    label: 'LB Lvl',
+    fn: () => byLimitBreakLevel,
   },
   byPotentialProgression: {
+    key: 'byPotentialProgression',
     label: 'Potentials Lvl',
-    type: 'userUnit',
-    fn: byPotentialLvl,
-    optionedFn: bySpecificPotentialLvl,
-    optionInput: SpecificPotentialSortInput,
+    fn: bySpecificPotentialLvl,
+    input: SpecificPotentialSortInput,
     optionedLabel: bySpecificPotentialLabel,
   },
   byPirateFestSpecial: {
+    key: 'byPirateFestSpecial',
     label: 'PR Special Lvl',
-    type: 'userUnit',
-    fn: byPirateFestSpecial,
+    fn: () => byPirateFestSpecial,
   },
   byPirateFestAbility: {
+    key: 'byPirateFestAbility',
     label: 'PR Ability Lvl',
-    type: 'userUnit',
-    fn: byPirateFestAbility,
+    fn: () => byPirateFestAbility,
   },
   byPirateFestGp: {
+    key: 'byPirateFestGp',
     label: 'PR GP Lvl',
-    type: 'userUnit',
-    fn: byPirateFestGp,
+    fn: () => byPirateFestGp,
   },
   byInkLvl: {
+    key: 'byInkLvl',
     label: 'Ink Lvl',
-    type: 'userUnit',
-    fn: byInkLvl,
+    fn: () => byInkLvl,
   },
   byAddedToBox: {
+    key: 'byAddedToBox',
     label: 'Added to box',
-    type: 'userUnit',
-    fn: () => 1,
-  },
-  byLevel: {
-    label: 'Level',
-    type: 'userUnit',
-    fn: byLevel,
-    optionedFn: byLevelWithOption,
-    optionInput: LevelSortInput,
-    optionedLabel: byLevelSortLabel,
+    fn: () => () => 1,
   },
   byCoop: {
+    key: 'byCoop',
     label: 'Coop',
-    type: 'userUnit',
-    fn: byCoop,
-    optionedFn: byCoopWithOption,
-    optionInput: CoopSortInput,
+    fn: byCoopWithOption,
+    input: CoopSortInput,
     optionedLabel: byCoopSortLabel,
   },
+}
+
+export const SearchSortBuilder = {
+  ...SearchSortUnitBuilder,
+  ...SearchSortUserUnitBuilder,
+}
+
+export function sortUnitCriteria({
+  by,
+  order,
+  options,
+}: SearchSortUnitCriteria): UnitSort {
+  const builder = SearchSortUnitBuilder[by]
+  const opt = options as unknown as undefined
+  const fn = builder.fn(opt)
+  return order === 'desc' ? DescendingSort(fn) : fn
+}
+
+export function sortUserUnitCriteria(sort: SearchSortCriteria): UserUnitSort {
+  const options = sort.options as unknown as undefined
+  const fn = isUnitSort(sort)
+    ? UnitSort2UserUnitSort(SearchSortUnitBuilder[sort.by].fn(options))
+    : SearchSortUserUnitBuilder[sort.by].fn(options)
+  return sort.order === 'desc' ? DescendingSort(fn) : fn
 }
 
 export function DescendingSort<T>(fn: Sort<T>) {

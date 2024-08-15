@@ -1,8 +1,8 @@
-import { SearchSortCriteria } from 'models/search'
 import { PotentialKey } from 'models/units'
 import { SearchDisplayerCriteria } from '../Displayers'
 import { SpecificPotentialDisplayerOption } from '../Displayers/PotentialsDisplayer'
 import { ByUserPotentialCriteria } from '../Filters/UserUnits/ByUserPotential'
+import { SearchSortCriteria } from '../Sorts'
 import { Syncer } from '.'
 
 export const syncPotentials: Syncer = (filters, sorts, displayer) => {
@@ -27,7 +27,7 @@ export const syncPotentials: Syncer = (filters, sorts, displayer) => {
 export function syncPotentialDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   potential: PotentialKey,
-): SearchDisplayerCriteria<SpecificPotentialDisplayerOption> | undefined {
+): SearchDisplayerCriteria | undefined {
   if (displayer && displayer.type !== 'potential') {
     return undefined
   }

@@ -1,11 +1,11 @@
+import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
 import { SupportIcon } from 'components/Icon'
 import Progression from 'components/Progression'
-import InfoDisplayer from '../../../../components/CharacterBox/components/InfoDisplayer'
 import { SearchDisplayerProps } from '.'
 
 export default function SupportDisplayer({
   userUnit: { support },
-}: SearchDisplayerProps) {
+}: SearchDisplayerProps<never>) {
   if (!support || support.lvl === 0) return null
 
   return (

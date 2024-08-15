@@ -4,8 +4,9 @@ import { LevelTextIcon } from 'components/Icon'
 import { LevelLB } from 'components/LevelLB'
 import Progression from 'components/Progression'
 import { Text } from 'components/Title'
+import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
-import { SearchDisplayerInputProps, SearchDisplayerProps } from '.'
+import { SearchDisplayerProps } from '.'
 
 const LevelDisplayerOptionTypes = [
   'level',
@@ -64,7 +65,7 @@ export default function LevelDisplayer({
 export function LevelDisplayerInput({
   options,
   onChange,
-}: SearchDisplayerInputProps<LevelDisplayerOption>) {
+}: SearchOptionInputProps<LevelDisplayerOption>) {
   return (
     <FilterContainerPanel>
       {LevelDisplayerOptionTypes.map(stateKey => (

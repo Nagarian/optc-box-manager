@@ -1,10 +1,7 @@
-import { SearchSortCriteria } from 'models/search'
 import { SearchDisplayerCriteria } from '../Displayers'
-import {
-  CoopDisplayerOption,
-  CoopDisplayerOptionType,
-} from '../Displayers/CoopDisplayer'
+import { CoopDisplayerOptionType } from '../Displayers/CoopDisplayer'
 import { ByUserCoopCriteria } from '../Filters/UserUnits/ByUserCoop'
+import { SearchSortCriteria } from '../Sorts'
 import { CoopSortOption } from '../Sorts/UserUnits/ByCoop'
 import { Syncer } from '.'
 
@@ -34,7 +31,7 @@ export const syncCoop: Syncer = (filters, sorts, displayer) => {
 export function syncCoopDisplayer(
   displayer: SearchDisplayerCriteria | undefined,
   type: CoopDisplayerOptionType,
-): SearchDisplayerCriteria<CoopDisplayerOption> | undefined {
+): SearchDisplayerCriteria | undefined {
   if (displayer && displayer.type !== 'coop') {
     return undefined
   }
