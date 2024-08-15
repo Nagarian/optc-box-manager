@@ -10,6 +10,7 @@ export type ProgressionProps = ColorProps & {
   variant?: 'normal' | 'spaced' | 'no-max'
   isExtended?: boolean
   isDirty?: boolean
+  skipMax?: boolean
 }
 export default function Progression({
   value,
@@ -20,8 +21,9 @@ export default function Progression({
   color = 'text',
   isExtended = false,
   isDirty = false,
+  skipMax = false,
 }: ProgressionProps) {
-  if (value === max) {
+  if (value === max && !skipMax) {
     return maxIcon ? (
       <Image src={maxIcon} />
     ) : (
@@ -39,8 +41,10 @@ export default function Progression({
       fontWeight={variant !== 'normal' ? 'bold' : undefined}
     >
       {prefix}
-      {variant === 'normal' && `${value}/${max}`}
-      {variant === 'spaced' && `${value} / ${max}`}
+      {variant === 'normal' &&
+        `${value.toLocaleString()}/${max.toLocaleString()}`}
+      {variant === 'spaced' &&
+        `${value.toLocaleString()} / ${max.toLocaleString()}`}
       {variant === 'no-max' && `${value}`}
       {isDirty && <DirtyIndicator />}
     </Text>

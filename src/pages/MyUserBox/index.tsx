@@ -8,6 +8,7 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { UserBox, UserUnit } from 'models/userBox'
+import { SearchBoxDisplayerBuilder } from 'pages/FilterSort/components/BoxDisplayers'
 import { FlexProps, SpaceProps } from 'styled-system'
 
 type UserBoxProps = {
@@ -31,15 +32,22 @@ export default function MyUserBox({
     100,
   )
 
+  const BoxDisplayer = search?.boxDisplayer?.type
+    ? SearchBoxDisplayerBuilder[search.boxDisplayer.type].displayer
+    : undefined
+
   if (!filtered.length && userBox.length) {
     return (
-      <Box display="grid" alignContent="center" placeItems="center" p="2">
-        <GatherIslandIcon size="9" color="primaryText" />
-        <SubTitle>
-          There are no units in your box that match your current search, you
-          should try to modify your filters !
-        </SubTitle>
-      </Box>
+      <>
+        <Box display="grid" alignContent="center" placeItems="center" p="2">
+          <GatherIslandIcon size="9" color="primaryText" />
+          <SubTitle>
+            There are no units in your box that match your current search, you
+            should try to modify your filters !
+          </SubTitle>
+        </Box>
+        {BoxDisplayer && <BoxDisplayer search={search} userBox={userBox} />}
+      </>
     )
   }
 
@@ -67,6 +75,7 @@ export default function MyUserBox({
           />
         ))}
       </ResultList>
+      {BoxDisplayer && <BoxDisplayer search={search} userBox={userBox} />}
       <Pagination {...paginationProps} onPageChange={page => setPage(page)} />
     </>
   )

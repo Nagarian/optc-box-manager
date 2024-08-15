@@ -7,6 +7,8 @@ import { useStoredSearches } from 'hooks/useStoredSearches'
 import { Search } from 'models/search'
 import SaveSearch from 'pages/SaveSearch'
 import { useState } from 'react'
+import { SearchBoxDisplayerCriteria } from './components/BoxDisplayers'
+import { BoxDisplayerCriteria } from './components/BoxDisplayers/BoxDisplayerCriteria'
 import { SearchDisplayerCriteria } from './components/Displayers'
 import Displayer from './components/Displayers/Displayer'
 import UnitFilters from './components/Filters/UnitFilters'
@@ -43,6 +45,9 @@ export default function FilterSort({
   const [displayer, setDisplayer] = useState<
     SearchDisplayerCriteria | undefined
   >(search.displayer)
+  const [boxDisplayer, setBoxDisplayer] = useState<
+    SearchBoxDisplayerCriteria | undefined
+  >(search.boxDisplayer)
   const [displayed, setDisplayed] = useState<DisplayedPanel>('unit-filter')
 
   const [showSaveSearch, setShowSaveSearch] = useState<boolean>(false)
@@ -54,6 +59,7 @@ export default function FilterSort({
     },
     sorts,
     displayer,
+    boxDisplayer,
   })
 
   const applySearch = (search: Search) => {
@@ -61,6 +67,7 @@ export default function FilterSort({
     setUserUnitFilter(search.filters.userUnits || {})
     setSorts(search.sorts)
     setDisplayer(search.displayer)
+    setBoxDisplayer(search.boxDisplayer)
   }
 
   const { reseter, searches } = useStoredSearches(resetSaveKey)
@@ -143,6 +150,10 @@ export default function FilterSort({
 
       {displayed === 'displayer' && (
         <Box overflowY="auto">
+          <BoxDisplayerCriteria
+            searchBoxDisplayer={boxDisplayer}
+            onChange={setBoxDisplayer}
+          />
           <Displayer searchDisplayer={displayer} onChange={setDisplayer} />
         </Box>
       )}

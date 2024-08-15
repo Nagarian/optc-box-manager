@@ -1,3 +1,4 @@
+import { SearchBoxDisplayerCriteria } from 'pages/FilterSort/components/BoxDisplayers'
 import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
 import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
 import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
@@ -26,4 +27,5 @@ export type Search = {
   }
   sorts: SearchSortCriteria[]
   displayer?: SearchDisplayerCriteria
+  boxDisplayer?: SearchBoxDisplayerCriteria
 }
