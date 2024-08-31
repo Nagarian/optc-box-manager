@@ -59,13 +59,13 @@ function CopyBlock({ title, content, payload }: CopyBlockProps) {
   const ref = useRef<HTMLInputElement>(null)
   const [isCopied, setIsCopied] = useState<boolean>(false)
 
-  const copy = () => {
+  const copy = async () => {
     if (!ref.current) {
       return false
     }
 
     ref.current.select()
-    document.execCommand('copy')
+    await navigator.clipboard.writeText(ref.current.value)
     ref.current.blur()
     setIsCopied(true)
   }

@@ -170,7 +170,7 @@ onmessage = ({ data }: MessageEvent<MessageToWorker>) => {
     case 'INIT':
       loadOpenCv().then(
         () => self.postMessage({ type: 'READY' }),
-        error => {
+        (error: unknown) => {
           throw error
         },
       )

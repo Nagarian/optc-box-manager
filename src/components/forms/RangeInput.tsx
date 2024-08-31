@@ -1,6 +1,7 @@
 import { css, Theme } from '@emotion/react'
 import styled from '@emotion/styled'
 import * as CSS from 'csstype'
+import { InputHTMLAttributes } from 'react'
 import { space, SpaceProps } from 'styled-system'
 
 export type RangeInputProps = SpaceProps & {
@@ -45,7 +46,7 @@ const thumb = (
   ${p.value === 0 && 'filter: grayscale(0.6);'}
 `
 
-const RangeInput = styled.input<RangeInputProps>`
+const SRangeInput = styled.input<RangeInputProps>`
   appearance: none;
   width: 100%;
   background-color: transparent;
@@ -68,8 +69,8 @@ const RangeInput = styled.input<RangeInputProps>`
     ${p => thumb(p)}
   }
 `
-RangeInput.defaultProps = {
-  type: 'range',
-}
+const RangeInput = (
+  p: RangeInputProps & InputHTMLAttributes<HTMLInputElement>,
+) => <SRangeInput {...p} type="range" />
 
 export default RangeInput
