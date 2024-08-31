@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SpecialLvlIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserSpecialStateKeys = ['ongoing', 'maxed'] as const
@@ -55,5 +59,21 @@ export function ByUserSpecialInput({
         </ChoiceInput>
       ))}
     </FilterContainerPanel>
+  )
+}
+
+export function ByUserSpecialBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserSpecialCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="special">
+      <SearchRecapItem title="lvl" icon={SpecialLvlIcon}>
+        {criteria.state}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

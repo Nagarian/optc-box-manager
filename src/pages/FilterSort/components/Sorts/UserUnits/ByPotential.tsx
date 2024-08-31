@@ -27,7 +27,7 @@ export const bySpecificPotentialLvl: SearchSortWithOptionFunction<
 
 export const bySpecificPotentialLabel = (
   option?: SpecificPotentialSortOption,
-) => option && <PotentialAbility type={option.type} size="2" />
+) => option && <PotentialAbility type={option.type} size="2.5em" />
 
 export function SpecificPotentialSortInput({
   options,

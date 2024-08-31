@@ -75,7 +75,10 @@ import TailSpin from './tail-spin.svg?react'
 import Treasure from './treasure.svg?react'
 import VideoTreasure from './video-treasure.svg?react'
 
-type StyledIconProps = ColorProps & SpaceProps & SizeProps & PlaceProps
+type StyledIconProps = ColorProps &
+  SpaceProps &
+  SizeProps &
+  PlaceProps & { title?: string }
 
 export type Icon = FunctionComponent<StyledIconProps>
 

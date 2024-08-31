@@ -4,6 +4,10 @@ import { SubTitle } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export interface BySupportCriteria {
@@ -155,5 +159,37 @@ export function BySupportInput({
         </ChoiceInput>
       </FilterContainerPanel>
     </Box>
+  )
+}
+
+export function BySupportBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<BySupportCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  const {
+    hasSupport,
+    hasAtkSupport,
+    hasHpSupport,
+    hasRcvSupport,
+    hasOtherSupport,
+  } = criteria
+
+  const specific = [
+    hasAtkSupport && 'ATK',
+    hasHpSupport && 'HP',
+    hasRcvSupport && 'RCV',
+    hasOtherSupport && 'Other',
+  ]
+    .filter(str => !!str)
+    .join(', ')
+
+  return (
+    <SearchRecapItem title="support">
+      {hasSupport !== undefined && (hasSupport ? 'w/ spt' : 'w/o spt')}
+      {specific}
+    </SearchRecapItem>
   )
 }

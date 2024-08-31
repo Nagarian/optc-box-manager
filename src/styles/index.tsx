@@ -83,6 +83,8 @@ export interface GapProps<
    * [MDN reference](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)
    */
   gap?: ResponsiveValue<TVal, ThemeType> | undefined
+  rowGap?: ResponsiveValue<TVal, ThemeType> | undefined
+  columnGap?: ResponsiveValue<TVal, ThemeType> | undefined
 }
 
 export const gap = system({

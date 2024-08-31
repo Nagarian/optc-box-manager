@@ -6,6 +6,10 @@ import {
   UnitPirateFestStyle,
   UnitPirateFestStyles,
 } from 'models/units'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByPirateFestStyleCriteria {
   values: UnitPirateFestStyle[]
@@ -48,5 +52,21 @@ export function ByPirateFestStyleInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByPirateFestBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByPirateFestStyleCriteria>) {
+  if (!criteria?.values.length) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="rumble">
+      {criteria.values.map(v => (
+        <PirateFestStyleIcon key={v} type={v} size="2em" />
+      ))}
+    </SearchRecapItem>
   )
 }

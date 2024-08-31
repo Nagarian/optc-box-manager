@@ -1,3 +1,4 @@
+import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
 import ImageInput from 'components/forms/ImageInput'
 import PowerSocket from 'components/PowerSocket'
@@ -6,6 +7,10 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PowerSocketKey, PowerSockets } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 const PowerSocketStateKeys = ['hasnt', 'has', 'ongoing', 'maxed'] as const
@@ -148,5 +153,32 @@ export function ByUserPowerSocketInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByUserPowerSocketBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserPowerSocketCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="sockets">
+      <SearchRecapItem title="all">{criteria.all}</SearchRecapItem>
+      {criteria.state &&
+        Object.entries(criteria.state).map(([socketType, state]) => (
+          <Box
+            as="p"
+            key={socketType}
+            display="inline-flex"
+            alignItems="center"
+            gap="1"
+          >
+            <PowerSocket type={socketType as PowerSocketKey} size="2.5em" />
+            {state}
+          </Box>
+        ))}
+    </SearchRecapItem>
   )
 }

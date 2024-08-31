@@ -6,8 +6,10 @@ import {
   BoxStatisticsInput,
   BoxStatisticsOption,
 } from './BoxStatistics'
+import { SearchRecap } from './SearchRecap'
 
 type BoxDisplayerOptions = {
+  searchRecap: never
   boxStatistics: BoxStatisticsOption
 }
 
@@ -33,6 +35,11 @@ export const SearchBoxDisplayerBuilder: {
     input?: FunctionComponent<SearchOptionInputProps<BoxDisplayerOptions[key]>>
   }
 } = {
+  searchRecap: {
+    key: 'searchRecap',
+    label: 'Search recap',
+    displayer: SearchRecap,
+  },
   boxStatistics: {
     key: 'boxStatistics',
     label: 'Box statistics',

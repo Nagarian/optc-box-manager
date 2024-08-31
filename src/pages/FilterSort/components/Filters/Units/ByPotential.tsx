@@ -2,6 +2,10 @@ import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByPotentialCriteria {
   values: PotentialKey[]
@@ -49,5 +53,21 @@ export function ByPotentialInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByPotentialBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByPotentialCriteria>) {
+  if (!criteria?.values.length) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="potentials">
+      {criteria.values.map(v => (
+        <PotentialAbility key={v} type={v} size="2.5em" />
+      ))}
+    </SearchRecapItem>
   )
 }

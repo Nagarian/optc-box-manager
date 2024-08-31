@@ -7,6 +7,10 @@ import {
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserPirateFestStateKeys = ['ongoing', 'maxed'] as const
@@ -129,5 +133,27 @@ export function ByUserPirateFestInput({
         ))}
       </FilterContainerPanel>
     </>
+  )
+}
+
+export function ByUserPirateFestBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserPirateFestCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="pirate rumble">
+      <SearchRecapItem title="special lvl" icon={PirateFestSpecialIcon}>
+        {criteria.specialLvlState}
+      </SearchRecapItem>
+      <SearchRecapItem title="ability lvl" icon={PirateFestAbilityIcon}>
+        {criteria.abilityLvlState}
+      </SearchRecapItem>
+      <SearchRecapItem title="GP lvl" icon={PirateFestBothIcon}>
+        {criteria.gpLvlState}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

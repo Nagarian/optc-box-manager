@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { InkIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const InkStateKeys = ['locked', 'level1', 'level2'] as const
@@ -52,5 +56,21 @@ export function ByUserInkInput({
         </ChoiceInput>
       ))}
     </FilterContainerPanel>
+  )
+}
+
+export function ByUserInkBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserInkCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="ink">
+      <SearchRecapItem title="ink level" icon={InkIcon}>
+        {criteria.state}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

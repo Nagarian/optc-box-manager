@@ -2,6 +2,10 @@ import { UnitClassIcon } from 'components/Class'
 import ImageInput from 'components/forms/ImageInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitClass, UnitClasses } from 'models/units'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByClassCriteria {
   values: UnitClass[]
@@ -52,5 +56,21 @@ export function ByClassInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByClassBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByClassCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="class">
+      {criteria.values.map(v => (
+        <UnitClassIcon key={v} type={v} size="2em" />
+      ))}
+    </SearchRecapItem>
   )
 }

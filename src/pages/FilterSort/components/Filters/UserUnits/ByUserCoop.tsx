@@ -4,6 +4,10 @@ import { CoopCaptainIcon, CoopSpecialIcon, LuckIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserCoopLuckStateKeys = ['ongoing', 'maxed'] as const
@@ -146,5 +150,27 @@ export function ByUserCoopInput({
         ))}
       </FilterContainerPanel>
     </>
+  )
+}
+
+export function ByUserCoopBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserCoopCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="coop">
+      <SearchRecapItem title="luck" icon={LuckIcon}>
+        {criteria.luckState}
+      </SearchRecapItem>
+      <SearchRecapItem title="coop captain" icon={LuckIcon}>
+        {criteria.captainState}
+      </SearchRecapItem>
+      <SearchRecapItem title="coop special" icon={LuckIcon}>
+        {criteria.specialState}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

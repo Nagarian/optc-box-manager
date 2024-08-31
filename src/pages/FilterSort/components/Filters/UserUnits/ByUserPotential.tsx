@@ -1,3 +1,4 @@
+import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
 import ImageInput from 'components/forms/ImageInput'
 import PotentialAbility from 'components/PotentialAbility'
@@ -5,6 +6,10 @@ import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { UserUnit } from 'models/userBox'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const PotentialStateKeys = ['ongoing', 'maxed'] as const
@@ -79,5 +84,30 @@ export function ByUserPotentialInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByUserPotentialBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserPotentialCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="potential">
+      {Object.entries(criteria).map(([potential, state]) => (
+        <Box
+          as="p"
+          key={potential}
+          display="inline-flex"
+          alignItems="center"
+          gap="1"
+        >
+          <PotentialAbility type={potential as PotentialKey} size="2.5em" />
+          {state}
+        </Box>
+      ))}
+    </SearchRecapItem>
   )
 }

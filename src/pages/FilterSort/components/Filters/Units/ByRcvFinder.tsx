@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitCaptain, UnitSpecial } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByRcvFinderCriteria {
   captainRcv?: boolean
@@ -81,5 +85,20 @@ export function ByRcvFinderInput({
         Show RCV related special
       </ChoiceInput>
     </>
+  )
+}
+
+export function ByRcvFinderBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByRcvFinderCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="rcv finder">
+      {criteria.captainRcv && `captain`}
+      {criteria.specialRcv && `special`}
+    </SearchRecapItem>
   )
 }

@@ -5,6 +5,10 @@ import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
 import { getLimitType } from 'services/limit'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByLimitBreakCriteria {
@@ -193,5 +197,50 @@ export function ByLimitBreakInput({
         </ChoiceInput>
       </FilterContainerPanel>
     </>
+  )
+}
+
+export function ByLimitBreakBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByLimitBreakCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  const {
+    hasLimitBreak,
+    hasKeyLimitBreak,
+    hasCooldownExtension,
+    hasCaptainReductionExtension,
+    hasPotentialExtension,
+  } = criteria
+
+  const str = [
+    hasLimitBreak !== undefined && (hasLimitBreak ? 'w/ LB' : 'w/o LB'),
+    hasKeyLimitBreak !== undefined &&
+      (hasKeyLimitBreak ? 'w/ LB key' : 'w/o LB key'),
+  ]
+    .filter(str => str !== false)
+    .join(', ')
+
+  const extStr = [
+    hasCooldownExtension !== undefined &&
+      (hasCooldownExtension ? 'w/ cooldown' : 'w/o cooldown'),
+    hasCaptainReductionExtension !== undefined &&
+      (hasCaptainReductionExtension ? 'w/ capt' : 'w/o capt'),
+    hasPotentialExtension !== undefined &&
+      (hasPotentialExtension ? 'w/ potential' : 'w/o potential'),
+  ]
+    .filter(str => str !== false)
+    .join(', ')
+
+  return (
+    <SearchRecapItem title="limit break">
+      {str && extStr
+        ? `${str}; key ext: ${extStr}`
+        : str
+          ? str
+          : `key ext: ${extStr}`}
+    </SearchRecapItem>
   )
 }

@@ -3,6 +3,10 @@ import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const LimitBreakStateKeys = [
@@ -190,5 +194,21 @@ export function ByUserLimitBreakInput({
         ))}
       </FilterContainerPanel>
     </>
+  )
+}
+
+export function ByUserLimitBreakBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserLimitBreakCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="limit break">
+      <SearchRecapItem title="LB">{criteria.lbState}</SearchRecapItem>
+      <SearchRecapItem title="key-LB">{criteria.keyLbState}</SearchRecapItem>
+      <SearchRecapItem title="rainbow">{criteria.rainbowState}</SearchRecapItem>
+    </SearchRecapItem>
   )
 }

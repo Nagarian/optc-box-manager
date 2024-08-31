@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SupportIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const SupportStateKeys = [
@@ -60,5 +64,21 @@ export function ByUserSupportInput({
         </ChoiceInput>
       ))}
     </FilterContainerPanel>
+  )
+}
+
+export function ByUserSupportBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserSupportCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="support">
+      <SearchRecapItem title="lvl" icon={SupportIcon}>
+        {criteria.state}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

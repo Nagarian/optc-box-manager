@@ -6,6 +6,10 @@ import { CloseIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps, UnitFilter } from 'models/search'
 import { SpaceProps } from 'styled-system'
 import { SlideInRight } from 'styles/animation'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface BySearchBoxCriteria {
   value: string
@@ -74,3 +78,13 @@ export function BySearchBoxInput({
 const ClearButton = styled(Button)`
   animation: ${SlideInRight} 250ms;
 `
+
+export function BySearchBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<BySearchBoxCriteria>) {
+  if (!criteria?.value) {
+    return undefined
+  }
+
+  return <SearchRecapItem title="search">{criteria.value}</SearchRecapItem>
+}

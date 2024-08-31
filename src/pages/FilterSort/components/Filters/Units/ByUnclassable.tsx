@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export interface ByUnclassableCriteria {
@@ -175,4 +179,27 @@ export function ByUnclassableInput({
       </FilterContainerPanel>
     </>
   )
+}
+
+export function ByUnclassableBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUnclassableCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  const str = [
+    criteria.exclude?.globalOnly === true && `w/o gbl`,
+    criteria.exclude?.japanOnly === true && `w/o jpn`,
+    criteria.evolvedOnly === true && `w/o unvolved`,
+    criteria.superEvolvedOnly === true && `w/o unvolved/not super-evolved`,
+    criteria.isInkable !== undefined &&
+      (criteria.isInkable ? `inkable` : `not inkable`),
+    criteria.hasLevelLB !== undefined &&
+      (criteria.hasLevelLB ? `w/ LLB` : `w/o LLB`),
+  ]
+    .filter(s => !!s)
+    .join(', ')
+
+  return <SearchRecapItem title="common">{str}</SearchRecapItem>
 }

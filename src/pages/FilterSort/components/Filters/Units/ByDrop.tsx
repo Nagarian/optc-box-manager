@@ -1,10 +1,14 @@
 import styled from '@emotion/styled'
 import Box from 'components/Box'
 import ChoiceInput from 'components/forms/ChoiceInput'
-import { SubTitle } from 'components/Title'
+import { SubTitle, Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedDrop, ExtendedDropKeys, ExtendedUnit } from 'models/units'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByDropCriteria {
   dropLocations?: ExtendedDrop[]
@@ -65,3 +69,17 @@ const LabelDisplayer = styled.div`
     padding: 0.5rem 0;
   }
 `
+
+export function ByDropBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByDropCriteria>) {
+  if (!criteria?.dropLocations?.length) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="drop location">
+      {criteria.dropLocations.join(', ')}
+    </SearchRecapItem>
+  )
+}

@@ -2,6 +2,10 @@ import ImageInput from 'components/forms/ImageInput'
 import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, Rarity, UnitStar } from 'models/units'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByRarityCriteria {
   values: UnitStar[]
@@ -46,5 +50,19 @@ export function ByRarityInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByRarityBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByRarityCriteria>) {
+  if (!criteria?.values.length) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="rarity">
+      {`⭐${criteria.values.join(', ')}`}
+    </SearchRecapItem>
   )
 }

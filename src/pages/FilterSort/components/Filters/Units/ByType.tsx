@@ -2,6 +2,10 @@ import ImageInput from 'components/forms/ImageInput'
 import Type from 'components/Type'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitType, UnitTypes } from 'models/units'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 
 export interface ByTypeCriteria {
   values: UnitType[]
@@ -52,5 +56,21 @@ export function ByTypeInput({
         </ImageInput>
       ))}
     </>
+  )
+}
+
+export function ByTypeBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByTypeCriteria>) {
+  if (!criteria?.values.length) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="type">
+      {criteria.values.map(v => (
+        <Type key={v} value={v} size="2em" />
+      ))}
+    </SearchRecapItem>
   )
 }

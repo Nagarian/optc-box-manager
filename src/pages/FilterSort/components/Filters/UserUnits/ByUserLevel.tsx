@@ -2,6 +2,10 @@ import ChoiceInput from 'components/forms/ChoiceInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const UserLevelStateKeys = ['ongoing', 'maxed'] as const
@@ -149,5 +153,23 @@ export function ByUserLevelInput({
         ))}
       </FilterContainerPanel>
     </>
+  )
+}
+
+export function ByUserLevelBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserLevelCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="level">
+      <SearchRecapItem title="lvl">{criteria.state}</SearchRecapItem>
+      <SearchRecapItem title="lvl LB">{criteria.lbState}</SearchRecapItem>
+      <SearchRecapItem title="lvl (post LB)">
+        {criteria.postLbState}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }

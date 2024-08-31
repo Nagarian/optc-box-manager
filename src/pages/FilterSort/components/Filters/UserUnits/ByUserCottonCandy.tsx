@@ -4,6 +4,10 @@ import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { CottonCandyType, CottonCandyTypeKeys, UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'
+import {
+  SearchRecapItem,
+  SearchRecapItemCriteriaProps,
+} from '../../BoxDisplayers/SearchRecap/SearchRecapItem'
 import { FilterContainerPanel } from '../FilterContainer'
 
 export const CottonCandyStateKeys = ['none', 'unmaxed', 'maxed'] as const
@@ -120,5 +124,38 @@ export function ByUserCottonCandyInput({
         />
       ))}
     </>
+  )
+}
+
+export function ByUserCottonCandyBoxDisplayer({
+  criteria,
+}: SearchRecapItemCriteriaProps<ByUserCottonCandyCriteria>) {
+  if (!criteria) {
+    return undefined
+  }
+
+  return (
+    <SearchRecapItem title="cotton candy">
+      <SearchRecapItem icon={CottonCandyIcon} title="All">
+        {criteria.all}
+      </SearchRecapItem>
+      <SearchRecapItem
+        icon={CottonCandyIcon}
+        title="ATK"
+        color="specific.ccAtk"
+      >
+        {criteria.by?.atk}
+      </SearchRecapItem>
+      <SearchRecapItem icon={CottonCandyIcon} title="HP" color="specific.ccHp">
+        {criteria.by?.hp}
+      </SearchRecapItem>
+      <SearchRecapItem
+        icon={CottonCandyIcon}
+        title="RCV"
+        color="specific.ccRcv"
+      >
+        {criteria.by?.rcv}
+      </SearchRecapItem>
+    </SearchRecapItem>
   )
 }
