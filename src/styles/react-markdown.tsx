@@ -10,7 +10,7 @@ const ListItem = styled.li`
 `
 
 const OrderedList = styled.ol`
-  & > ${ListItem} {
+  & > li {
     margin-left: 2rem;
   }
 `
