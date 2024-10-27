@@ -24,7 +24,7 @@ import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, SingleUnitClass } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import { LevelDisplayerOption } from 'pages/FilterSort/components/Displayers/LevelDisplayer'
+import { LevelDisplayerOption } from 'pages/SearchBuilder/components/Displayers/LevelDisplayer'
 import {
   flexbox,
   FlexboxProps,

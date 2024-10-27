@@ -5,7 +5,7 @@ import { UserUnit } from 'models/userBox'
 import {
   SearchDisplayerBuilder,
   SearchDisplayerCriteria,
-} from 'pages/FilterSort/components/Displayers'
+} from 'pages/SearchBuilder/components/Displayers'
 import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
 import { SpecificColor } from 'styles/theme-definition'

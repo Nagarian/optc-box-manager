@@ -3,7 +3,7 @@ import CharacterBox from 'components/CharacterBox'
 import {
   DuplicateHideIcon,
   DuplicateShowIcon,
-  FilterSortIcon,
+  SearchBuilderIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
 import SearchPanel from 'components/SearchPanel'
@@ -12,12 +12,12 @@ import { DefaultSearch, mergeSearch, useSavedSearch } from 'hooks/useSearch'
 import useUserBox from 'hooks/useUserBox'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
-import FilterSort from 'pages/FilterSort'
+import { ImageAnalyzer } from 'pages/ImageAnalyzer'
+import SearchBuilder from 'pages/SearchBuilder'
 import {
   BySearchBoxCriteria,
   BySearchBoxInput,
-} from 'pages/FilterSort/components/Filters/Units/BySearchBox'
-import { ImageAnalyzer } from 'pages/ImageAnalyzer'
+} from 'pages/SearchBuilder/components/Filters/Units/BySearchBox'
 import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -61,7 +61,7 @@ export default function Add({
     }
   }, [selectedUnits])
 
-  const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
+  const [showSearchBuilder, setShowSearchBuilder] = useState<boolean>(false)
   const { search, setSearch } = useSavedSearch(saveKey, defaultSearch)
 
   return (
@@ -72,8 +72,8 @@ export default function Add({
       customAction={
         <>
           <Button
-            onClick={() => setShowFilterSort(true)}
-            icon={FilterSortIcon}
+            onClick={() => setShowSearchBuilder(true)}
+            icon={SearchBuilderIcon}
             title="Filter/Sort"
           />
 
@@ -147,15 +147,15 @@ export default function Add({
         </>
       )}
 
-      {showFilterSort && (
-        <FilterSort
+      {showSearchBuilder && (
+        <SearchBuilder
           unitOnly
-          onCancel={() => setShowFilterSort(false)}
+          onCancel={() => setShowSearchBuilder(false)}
           search={search}
           resetSaveKey={saveKey}
           onSubmit={s => {
             setSearch(s)
-            setShowFilterSort(false)
+            setShowSearchBuilder(false)
           }}
         />
       )}

@@ -1,8 +1,8 @@
-import { SearchBoxDisplayerCriteria } from 'pages/FilterSort/components/BoxDisplayers'
-import { SearchDisplayerCriteria } from 'pages/FilterSort/components/Displayers'
-import { SearchFilterUnits } from 'pages/FilterSort/components/Filters/Units'
-import { SearchFilterUserUnits } from 'pages/FilterSort/components/Filters/UserUnits'
-import { SearchSortCriteria } from 'pages/FilterSort/components/Sorts'
+import { SearchBoxDisplayerCriteria } from 'pages/SearchBuilder/components/BoxDisplayers'
+import { SearchDisplayerCriteria } from 'pages/SearchBuilder/components/Displayers'
+import { SearchFilterUnits } from 'pages/SearchBuilder/components/Filters/Units'
+import { SearchFilterUserUnits } from 'pages/SearchBuilder/components/Filters/UserUnits'
+import { SearchSortCriteria } from 'pages/SearchBuilder/components/Sorts'
 import { ExtendedUnit } from './units'
 import { UserUnit } from './userBox'
 

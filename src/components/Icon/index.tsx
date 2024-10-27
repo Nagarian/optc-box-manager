@@ -36,7 +36,6 @@ import DuplicateHide from './duplicate-hide.svg?react'
 import DuplicateShow from './duplicate-show.svg?react'
 import Edit from './edit.svg?react'
 import Evolve from './evolve.svg?react'
-import FilterSort from './filtersort.svg?react'
 import GatherIsland from './gather-island.svg?react'
 import Hide from './hide.svg?react'
 import ImageAnalyzer from './image-analyzer.svg?react'
@@ -61,6 +60,7 @@ import ResetApply from './reset-apply.svg?react'
 import ResetRemove from './reset-remove.svg?react'
 import SaveSearch from './savesearch.svg?react'
 import Search from './search.svg?react'
+import SearchBuilder from './searchbuilder.svg?react'
 import Settings from './settings.svg?react'
 import Share from './share.svg?react'
 import Show from './show.svg?react'
@@ -140,7 +140,7 @@ export const DuplicateHideIcon: Icon = BaseSvg.withComponent(DuplicateHide)
 export const DuplicateShowIcon: Icon = BaseSvg.withComponent(DuplicateShow)
 export const EditIcon: Icon = BaseSvg.withComponent(Edit)
 export const EvolveIcon: Icon = BaseSvg.withComponent(Evolve)
-export const FilterSortIcon: Icon = BaseSvg.withComponent(FilterSort)
+export const SearchBuilderIcon: Icon = BaseSvg.withComponent(SearchBuilder)
 export const GatherIslandIcon: Icon = BaseSvg.withComponent(GatherIsland)
 export const HideIcon: Icon = BaseSvg.withComponent(Hide)
 export const ImageAnalyzerIcon: Icon = BaseSvg.withComponent(ImageAnalyzer)

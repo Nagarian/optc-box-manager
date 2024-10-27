@@ -4,8 +4,8 @@ import CharacterBox from 'components/CharacterBox'
 import {
   BellyIcon,
   DeleteIcon,
-  FilterSortIcon,
   NewsCooIcon,
+  SearchBuilderIcon,
   TreasureIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
@@ -22,8 +22,8 @@ import { UserUnit } from 'models/userBox'
 import Add from 'pages/Add'
 import Detail from 'pages/Detail'
 import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
-import FilterSort from 'pages/FilterSort'
-import FilterContainer from 'pages/FilterSort/components/Filters/FilterContainer'
+import SearchBuilder from 'pages/SearchBuilder'
+import FilterContainer from 'pages/SearchBuilder/components/Filters/FilterContainer'
 import { useState } from 'react'
 
 export type SugoCleanerProps = {
@@ -231,7 +231,7 @@ function SugoCleanerList({
   showOnEmpty?: boolean
 }) {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
-  const [showFilterSort, setShowFilterSort] = useState<boolean>(false)
+  const [showSearchBuilder, setShowSearchBuilder] = useState<boolean>(false)
   const { search, setSearch } = useSavedSearch(
     `sugocleaner-${name}`,
     EmptySearch,
@@ -247,10 +247,10 @@ function SugoCleanerList({
       customAction={
         <Button
           title="Sort"
-          icon={FilterSortIcon}
+          icon={SearchBuilderIcon}
           variant="secondary"
           disabled={!list.length}
-          onClick={() => setShowFilterSort(true)}
+          onClick={() => setShowSearchBuilder(true)}
         />
       }
       onReset={() => setShowConfirmation(true)}
@@ -264,15 +264,15 @@ function SugoCleanerList({
         onAdd={onAdd}
       />
 
-      {showFilterSort && (
-        <FilterSort
+      {showSearchBuilder && (
+        <SearchBuilder
           unitOnly
-          onCancel={() => setShowFilterSort(false)}
+          onCancel={() => setShowSearchBuilder(false)}
           search={search}
           resetSaveKey="sugocleaner"
           onSubmit={s => {
             setSearch(s)
-            setShowFilterSort(false)
+            setShowSearchBuilder(false)
           }}
         />
       )}

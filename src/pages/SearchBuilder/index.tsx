@@ -21,20 +21,20 @@ import { useSyncer } from './components/Syncer'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
 
-type FilterSortProps = {
+type SearchBuilderProps = {
   resetSaveKey?: string
   onCancel: () => void
   onSubmit: (search: Search) => void
   search: Search
   unitOnly?: boolean
 }
-export default function FilterSort({
+export default function SearchBuilder({
   resetSaveKey,
   search,
   unitOnly = false,
   onCancel,
   onSubmit,
-}: FilterSortProps) {
+}: SearchBuilderProps) {
   const [unitFilter, setUnitFilter] = useState<SearchFilterUnits>(
     search.filters.units || {},
   )

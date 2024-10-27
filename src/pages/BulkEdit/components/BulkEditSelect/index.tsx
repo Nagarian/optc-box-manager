@@ -1,17 +1,17 @@
 import Button from 'components/Button'
 import CharacterBox from 'components/CharacterBox'
 import {
-  FilterSortIcon,
   ResetApplyIcon,
   ResetRemoveIcon,
+  SearchBuilderIcon,
 } from 'components/Icon'
 import Popup from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { UserUnit } from 'models/userBox'
-import FilterSort from 'pages/FilterSort'
 import MyUserBox from 'pages/MyUserBox'
+import SearchBuilder from 'pages/SearchBuilder'
 import { useEffect, useRef, useState } from 'react'
 import { SelectedList } from './styled'
 
@@ -61,7 +61,7 @@ export default function BulkEditSelect({
         <>
           <Button
             onClick={() => setShowSettings(true)}
-            icon={FilterSortIcon}
+            icon={SearchBuilderIcon}
             title="Filter/Sort"
           />
           {userUnits.filter(u => !selected.some(su => su.id === u.id))
@@ -113,7 +113,7 @@ export default function BulkEditSelect({
       )}
 
       {showSettings && (
-        <FilterSort
+        <SearchBuilder
           onCancel={() => setShowSettings(false)}
           search={search}
           onSubmit={s => {

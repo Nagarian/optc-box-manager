@@ -4,9 +4,9 @@ import Button from 'components/Button'
 import {
   AddIcon,
   EditIcon,
-  FilterSortIcon,
   GatherIslandIcon,
   LogoIcon,
+  SearchBuilderIcon,
   SettingsIcon,
   SugoPullIcon,
 } from 'components/Icon'
@@ -23,13 +23,13 @@ import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import Add from 'pages/Add'
 import BulkEdit from 'pages/BulkEdit'
 import Detail from 'pages/Detail'
-import FilterSort from 'pages/FilterSort'
+import GatherIsland from 'pages/GatherIsland'
+import MyUserBox from 'pages/MyUserBox'
+import SearchBuilder from 'pages/SearchBuilder'
 import {
   BySearchBoxCriteria,
   BySearchBoxInput,
-} from 'pages/FilterSort/components/Filters/Units/BySearchBox'
-import GatherIsland from 'pages/GatherIsland'
-import MyUserBox from 'pages/MyUserBox'
+} from 'pages/SearchBuilder/components/Filters/Units/BySearchBox'
 import Settings from 'pages/Settings'
 import SugoCleaner from 'pages/SugoCleaner'
 import { useState } from 'react'
@@ -142,7 +142,7 @@ function App() {
       )}
 
       {displayedPanel === 'filters' && (
-        <FilterSort
+        <SearchBuilder
           onCancel={closePanel}
           resetSaveKey="box"
           onSubmit={search => {
@@ -197,7 +197,7 @@ function App() {
         )}
         <Button
           onClick={() => setDisplayedPanel('filters')}
-          icon={FilterSortIcon}
+          icon={SearchBuilderIcon}
           title="Filter/Sort"
         />
         <Button

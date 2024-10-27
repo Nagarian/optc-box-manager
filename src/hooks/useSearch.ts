@@ -4,18 +4,18 @@ import { UserUnit } from 'models/userBox'
 import {
   SearchFilterUnitsType,
   UnitFilterBuilder,
-} from 'pages/FilterSort/components/Filters/Units'
+} from 'pages/SearchBuilder/components/Filters/Units'
 import {
   SearchFilterUserUnitsType,
   UserUnitFilterBuilder,
-} from 'pages/FilterSort/components/Filters/UserUnits'
+} from 'pages/SearchBuilder/components/Filters/UserUnits'
 import {
   isUnitSort,
   sortUnitCriteria,
   sortUserUnitCriteria,
   UnitSort,
   UserUnitSort,
-} from 'pages/FilterSort/components/Sorts'
+} from 'pages/SearchBuilder/components/Sorts'
 import { useStorage } from './useStorage'
 import { useUserSettings } from './useUserSettings'
 

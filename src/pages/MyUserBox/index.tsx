@@ -8,7 +8,7 @@ import usePagination from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { UserBox, UserUnit } from 'models/userBox'
-import { SearchBoxDisplayerBuilder } from 'pages/FilterSort/components/BoxDisplayers'
+import { SearchBoxDisplayerBuilder } from 'pages/SearchBuilder/components/BoxDisplayers'
 import { FlexProps, SpaceProps } from 'styled-system'
 
 type UserBoxProps = {
