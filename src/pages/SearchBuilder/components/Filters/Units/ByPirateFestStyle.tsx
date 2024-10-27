@@ -1,4 +1,4 @@
-import ImageInput from 'components/forms/ImageInput'
+import { ImageInput } from 'components/forms/ImageInput'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import {

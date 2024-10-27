@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
-import Button from 'components/Button'
+import { Button } from 'components/Button'
 import {
   AscendingIcon,
   ClearIcon,
   DescendingIcon,
   SettingsIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'
 import { FunctionComponent, useState } from 'react'
@@ -21,7 +21,7 @@ export type SearchSortItemProps = {
   onDelete: (criteria: SearchSortCriteria) => void
 }
 
-export default function SearchSortItem({
+export function SearchSortItem({
   criteria,
   onUpdate,
   onDelete,

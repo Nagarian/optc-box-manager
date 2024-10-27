@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { SubTitle } from 'components/Title'
 import {
   SearchSortBuilder,
@@ -8,18 +8,14 @@ import {
   SearchSortUnitBuilder,
   SearchSortUserUnitBuilder,
 } from '.'
-import SearchSortItem from './components/SearchSortItem'
+import { SearchSortItem } from './components/SearchSortItem'
 
 export type SortProps = {
   unitOnly: boolean
   searchSort: SearchSortCriteria[]
   onChange: (searchSort: SearchSortCriteria[]) => void
 }
-export default function Sort({
-  unitOnly,
-  searchSort = [],
-  onChange,
-}: SortProps) {
+export function Sort({ unitOnly, searchSort = [], onChange }: SortProps) {
   const SortItemRender = (criteria: SearchSortCriteria) => (
     <Button
       key={criteria.by}

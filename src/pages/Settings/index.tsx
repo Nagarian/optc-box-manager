@@ -1,5 +1,5 @@
-import Button from 'components/Button'
-import Changelog from 'components/Changelog'
+import { Button } from 'components/Button'
+import { Changelog } from 'components/Changelog'
 import {
   Icon,
   NewsCooIcon,
@@ -8,11 +8,11 @@ import {
   SkillBookIcon,
   TreasureIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { MyUserBox } from 'models/userBox'
-import AppManagment from 'pages/AppManagement'
-import Credits from 'pages/Credits'
-import ExportFor from 'pages/ExportFor'
+import { AppManagement } from 'pages/AppManagement'
+import { Credits } from 'pages/Credits'
+import { ExportFor } from 'pages/ExportFor'
 import { ReactNode, useState } from 'react'
 
 type SettingsProps = {
@@ -20,7 +20,7 @@ type SettingsProps = {
   myUserBox: MyUserBox
 }
 
-export default function Settings({ onClose, myUserBox }: SettingsProps) {
+export function Settings({ onClose, myUserBox }: SettingsProps) {
   return (
     <Popup title="Extras" onClose={onClose}>
       <SettingAction title="Credits" icon={TreasureIcon}>
@@ -44,7 +44,7 @@ export default function Settings({ onClose, myUserBox }: SettingsProps) {
       </SettingAction>
 
       <SettingAction title="Settings" icon={SettingsIcon}>
-        <AppManagment myUserBox={myUserBox} />
+        <AppManagement myUserBox={myUserBox} />
       </SettingAction>
     </Popup>
   )

@@ -1,14 +1,14 @@
-import Box from 'components/Box'
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
-import ImageInput from 'components/forms/ImageInput'
-import PotentialAbility from 'components/PotentialAbility'
-import Progression from 'components/Progression'
+import { Box } from 'components/Box'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
+import { ImageInput } from 'components/forms/ImageInput'
+import { PotentialAbility } from 'components/PotentialAbility'
+import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'
 import { PotentialKey, Potentials } from 'models/units'
 import { SearchDisplayerProps } from '.'
 
-export default function PotentialsDisplayer({
+export function PotentialsDisplayer({
   userUnit: { potentials },
 }: SearchDisplayerProps<never>) {
   if (!Potentials.length) return null

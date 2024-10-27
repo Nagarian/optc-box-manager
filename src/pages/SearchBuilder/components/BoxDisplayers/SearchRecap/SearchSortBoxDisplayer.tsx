@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { AscendingIcon, DescendingIcon } from 'components/Icon'
 import { SearchSortBuilder, SearchSortCriteria } from '../../Sorts'
 

@@ -66,6 +66,13 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': ['warn'],
       '@typescript-eslint/no-unsafe-member-access': ['warn'],
       '@typescript-eslint/no-non-null-assertion': ['warn'],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ExportDefaultDeclaration',
+          message: 'Prefer named exports',
+        },
+      ],
     },
   },
 )

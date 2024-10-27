@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function usePagination(itemCount: number, itemPerPage: number) {
+export function usePagination(itemCount: number, itemPerPage: number) {
   const [page, setPage] = useState<number>(1)
   const pageScrollRef = useRef<HTMLDivElement>(null)
 

@@ -1,4 +1,4 @@
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { Icon } from 'components/Icon'
 import { Text } from 'components/Title'
 import { PropsWithChildren } from 'react'

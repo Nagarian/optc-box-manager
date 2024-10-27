@@ -1,9 +1,9 @@
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { SupportIcon } from 'components/Icon'
-import Progression from 'components/Progression'
+import { Progression } from 'components/Progression'
 import { SearchDisplayerProps } from '.'
 
-export default function SupportDisplayer({
+export function SupportDisplayer({
   userUnit: { support },
 }: SearchDisplayerProps<never>) {
   if (!support || support.lvl === 0) return null

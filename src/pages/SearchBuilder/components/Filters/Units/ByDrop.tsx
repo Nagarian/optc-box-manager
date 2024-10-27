@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { SubTitle, Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedDrop, ExtendedDropKeys, ExtendedUnit } from 'models/units'

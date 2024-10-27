@@ -30,11 +30,7 @@ export type ImageInputProps = InputHTMLAttributes<HTMLInputElement> & {
   type: 'checkbox' | 'radio'
   children: ReactNode
 }
-export default function ImageInput({
-  type,
-  children,
-  ...rest
-}: ImageInputProps) {
+export function ImageInput({ type, children, ...rest }: ImageInputProps) {
   return (
     <Label>
       <Input type={type} {...rest} />

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Button from './Button'
+import { Button } from './Button'
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ type PaginationProps = {
   onPageChange: (page: number) => void
 }
 
-export default function Pagination({
+export function Pagination({
   current,
   maxPage,
   onPageChange,

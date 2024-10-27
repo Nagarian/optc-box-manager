@@ -1,13 +1,13 @@
 import { useTheme } from '@emotion/react'
 import { CottonCandySvg } from 'components/Icon'
-import RangeInput from './RangeInput'
+import { RangeInput } from './RangeInput'
 import { RangeInputPlus, RangeInputPlusProps } from './RangeInputPlus'
 
 type CottonCandyInputProps = {
   variant: 'atk' | 'rcv' | 'hp'
   hideAdders?: boolean
 }
-export default function CottonCandyInput({
+export function CottonCandyInput({
   max = 100,
   onChange,
   variant,

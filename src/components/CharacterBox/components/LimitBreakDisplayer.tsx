@@ -6,9 +6,7 @@ import LimitBreak from '../images/limitbreak.png'
 export type LimitBreakDisplayerProps = {
   limitBreak?: UserUnitLimitBreak
 }
-export default function LimitBreakDisplayer({
-  limitBreak,
-}: LimitBreakDisplayerProps) {
+export function LimitBreakDisplayer({ limitBreak }: LimitBreakDisplayerProps) {
   if (!limitBreak || limitBreak.lvl === 0) return null
   const { lvl, lvlMax, keyLvlMax } = limitBreak
 

@@ -1,5 +1,5 @@
-import Button from 'components/Button'
-import ExpansionPanel from 'components/ExpansionPanel'
+import { Button } from 'components/Button'
+import { ExpansionPanel } from 'components/ExpansionPanel'
 import { ArrowIcon } from 'components/Icon'
 import { Text } from 'components/Title'
 import { useEffect, useState } from 'react'

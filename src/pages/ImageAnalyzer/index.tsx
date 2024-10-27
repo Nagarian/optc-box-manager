@@ -1,6 +1,6 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { CharacterBox } from 'components/CharacterBox'
 import {
   FileButtonInput,
   FileButtonInputProps,
@@ -15,7 +15,7 @@ import {
   ShowIcon,
   VideoTreasureIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useImageAnalyzer } from 'hooks/useImageAnalyzer'
 import { ExtendedUnit } from 'models/units'

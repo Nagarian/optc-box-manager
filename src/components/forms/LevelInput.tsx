@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react'
 import { LevelSvg } from 'components/Icon'
 import { RangeInputPlus, RangeInputPlusProps } from './RangeInputPlus'
 
-export default function LevelInput({
+export function LevelInput({
   color,
   ...p
 }: Omit<RangeInputPlusProps, 'adders' | 'min' | 'thumbSvg' | 'range'>) {

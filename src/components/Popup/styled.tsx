@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { space, SpaceProps } from 'styled-system'
 import { BounceIn, FadeIn } from 'styles/animation'
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { useEffect, useRef } from 'react'
 import { Analysis, CharacterFound, SquareSize } from 'services/image-cv-worker'
 import { FadeIn } from 'styles/animation'

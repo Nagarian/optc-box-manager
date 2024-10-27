@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { SubTitle } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit } from 'models/units'

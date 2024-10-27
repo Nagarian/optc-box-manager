@@ -1,22 +1,22 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { ClearIcon, ResetIcon, SaveSearchIcon } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { EmptySearch } from 'hooks/useSearch'
 import { useStoredSearches } from 'hooks/useStoredSearches'
 import { Search } from 'models/search'
-import SaveSearch from 'pages/SaveSearch'
+import { SaveSearch } from 'pages/SaveSearch'
 import { useState } from 'react'
 import { SearchBoxDisplayerCriteria } from './components/BoxDisplayers'
 import { BoxDisplayerCriteria } from './components/BoxDisplayers/BoxDisplayerCriteria'
 import { SearchDisplayerCriteria } from './components/Displayers'
-import Displayer from './components/Displayers/Displayer'
-import UnitFilters from './components/Filters/UnitFilters'
+import { Displayer } from './components/Displayers/Displayer'
+import { UnitFilters } from './components/Filters/UnitFilters'
 import { SearchFilterUnits } from './components/Filters/Units'
-import UserUnitFilters from './components/Filters/UserUnitFilters'
+import { UserUnitFilters } from './components/Filters/UserUnitFilters'
 import { SearchFilterUserUnits } from './components/Filters/UserUnits'
 import { SearchSortCriteria } from './components/Sorts'
-import Sort from './components/Sorts/Sort'
+import { Sort } from './components/Sorts/Sort'
 import { useSyncer } from './components/Syncer'
 
 type DisplayedPanel = 'unit-filter' | 'userunit-filter' | 'sort' | 'displayer'
@@ -28,7 +28,7 @@ type SearchBuilderProps = {
   search: Search
   unitOnly?: boolean
 }
-export default function SearchBuilder({
+export function SearchBuilder({
   resetSaveKey,
   search,
   unitOnly = false,

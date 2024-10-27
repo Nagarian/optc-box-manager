@@ -1,26 +1,30 @@
 import { SearchOptionInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { FunctionComponent } from 'react'
-import CoopDisplayer, {
+import {
+  CoopDisplayer,
   CoopDisplayerInput,
   CoopDisplayerOption,
 } from './CoopDisplayer'
 import { DetailedCottonCandyDisplayer } from './DetailedCottonCandyDisplayer'
-import LevelDisplayer, {
+import {
+  LevelDisplayer,
   LevelDisplayerInput,
   LevelDisplayerOption,
 } from './LevelDisplayer'
-import PirateFestDisplayer, {
+import {
+  PirateFestDisplayer,
   PirateFestDisplayerInput,
   PirateFestDisplayerOption,
 } from './PirateFestDisplayer'
-import PotentialsDisplayer, {
+import {
+  PotentialsDisplayer,
   SpecificPotentialDisplayer,
   SpecificPotentialDisplayerInput,
   SpecificPotentialDisplayerOption,
 } from './PotentialsDisplayer'
-import SpecialLevelDisplayer from './SpecialLevelDisplayer'
-import SupportDisplayer from './SupportDisplayer'
+import { SpecialLevelDisplayer } from './SpecialLevelDisplayer'
+import { SupportDisplayer } from './SupportDisplayer'
 
 type DisplayerOptions = {
   level: LevelDisplayerOption

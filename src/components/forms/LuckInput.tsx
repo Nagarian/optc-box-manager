@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react'
 import { LuckSvg } from 'components/Icon'
 import { RangeInputPlus, RangeInputPlusProps } from './RangeInputPlus'
 
-export default function LuckInput({
+export function LuckInput({
   color,
   ...p
 }: Omit<RangeInputPlusProps, 'adders' | 'min' | 'thumbSvg' | 'range'>) {

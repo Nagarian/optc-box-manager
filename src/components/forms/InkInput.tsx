@@ -2,9 +2,9 @@ import { useTheme } from '@emotion/react'
 import { InkSvg } from 'components/Icon'
 import { InputHTMLAttributes } from 'react'
 import { SpaceProps } from 'styled-system'
-import RangeInput from './RangeInput'
+import { RangeInput } from './RangeInput'
 
-export default function InkInput(
+export function InkInput(
   p: InputHTMLAttributes<HTMLInputElement> & SpaceProps,
 ) {
   const theme = useTheme()

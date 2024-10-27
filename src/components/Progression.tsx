@@ -12,7 +12,7 @@ export type ProgressionProps = ColorProps & {
   isDirty?: boolean
   skipMax?: boolean
 }
-export default function Progression({
+export function Progression({
   value,
   max,
   maxIcon,

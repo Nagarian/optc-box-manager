@@ -1,11 +1,11 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
-import ExpansionPanel from 'components/ExpansionPanel'
-import ImageInput from 'components/forms/ImageInput'
-import PowerSocketInput from 'components/forms/PowerSocketInput'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { ImageInput } from 'components/forms/ImageInput'
+import { PowerSocketInput } from 'components/forms/PowerSocketInput'
 import { SkillBookIcon } from 'components/Icon'
-import PowerSocket from 'components/PowerSocket'
-import Progression from 'components/Progression'
+import { PowerSocket } from 'components/PowerSocket'
+import { Progression } from 'components/Progression'
 import { ExtendedUnit, PowerSockets } from 'models/units'
 import { UserUnitPowerSocket } from 'models/userBox'
 import { useState } from 'react'
@@ -17,7 +17,7 @@ type PowerSocketEditProps = {
   onChange: (PowerSockets: UserUnitPowerSocket[]) => void
 }
 
-export default function PowerSocketEdit({
+export function PowerSocketEdit({
   powerSockets,
   unit,
   onChange,

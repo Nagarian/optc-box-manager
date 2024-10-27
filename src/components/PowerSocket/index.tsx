@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Image from 'components/Image'
+import { Image } from 'components/Image'
 import { PowerSocketKey } from 'models/units'
 import { ElementType, memo } from 'react'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
@@ -64,7 +64,7 @@ const Container = styled('div', cleanStyledSystem)<
   }
 `
 
-function PowerSocket({
+function BasePowerSocket({
   type,
   size = 3,
   hideChrome,
@@ -86,4 +86,4 @@ function PowerSocket({
     </Container>
   )
 }
-export default memo(PowerSocket)
+export const PowerSocket = memo(BasePowerSocket)

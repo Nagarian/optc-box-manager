@@ -1,6 +1,6 @@
-import Box from 'components/Box'
-import ExpansionPanel from 'components/ExpansionPanel'
-import CottonCandyInput from 'components/forms/CottonCandyInput'
+import { Box } from 'components/Box'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { CottonCandyInput } from 'components/forms/CottonCandyInput'
 import { CottonCandyIcon } from 'components/Icon'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyType, UserUnitCottonCandy } from 'models/userBox'
@@ -37,10 +37,7 @@ type CottonCandyEditProps = {
   onChange: (uucc: UserUnitCottonCandy) => void
 }
 
-export default function CottonCandyEdit({
-  cc,
-  onChange,
-}: CottonCandyEditProps) {
+export function CottonCandyEdit({ cc, onChange }: CottonCandyEditProps) {
   const { ccLimit } = useUserSettings()
   return (
     <ExpansionPanel title="Cotton Candies" icon={CottonCandyIcon}>

@@ -1,4 +1,4 @@
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import {
   PirateFestAbilityIcon,
   PirateFestBothIcon,

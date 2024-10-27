@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import Progression from 'components/Progression'
+import { Box } from 'components/Box'
+import { Progression } from 'components/Progression'
 import LuckBgImg from './images/character_detail_box_luck.png'
 import LuckMax from './images/fight_together_text_luck_max_s.png'
 

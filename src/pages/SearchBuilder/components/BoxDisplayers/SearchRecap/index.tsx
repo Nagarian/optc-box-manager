@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { PropsWithChildren } from 'react'
 import { SearchFilterUnitsType, UnitFilterBuilder } from '../../Filters/Units'
 import {

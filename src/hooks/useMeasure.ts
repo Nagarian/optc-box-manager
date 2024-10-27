@@ -7,7 +7,7 @@ type BoxMeasure = {
   readonly height: number
 }
 
-export default function useMeasure<T extends HTMLElement>(): [
+export function useMeasure<T extends HTMLElement>(): [
   RefObject<T>,
   BoxMeasure,
 ] {

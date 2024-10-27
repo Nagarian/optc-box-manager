@@ -2,7 +2,7 @@ import { ThemeProvider } from '@emotion/react'
 import { render, screen } from '@testing-library/react'
 import { ExtendedUnit } from 'models/units'
 import { lightTheme } from 'styles/theme'
-import LevelDisplayer from './LevelDisplayer'
+import { LevelDisplayer } from './LevelDisplayer'
 
 describe('Level Displayer', () => {
   test.each([

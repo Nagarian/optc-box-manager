@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import CottonCandyInput from 'components/forms/CottonCandyInput'
+import { Box } from 'components/Box'
+import { CottonCandyInput } from 'components/forms/CottonCandyInput'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { CottonCandyType } from 'models/userBox'
 import { InputLabel } from 'pages/Detail/components'
@@ -9,7 +9,7 @@ const cottonCandyLimitMarksHash = [
   62, 64, 66, 68, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100,
 ]
 
-export default function CottonCandyLimitEdit() {
+export function CottonCandyLimitEdit() {
   const { userSetting, setUserSetting } = useUserSettings()
   const {
     cottonCandiesMaximumLevel: { atk, hp, rcv },

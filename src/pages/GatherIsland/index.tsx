@@ -1,10 +1,10 @@
-import Popup from 'components/Popup'
-import CottonCandyLimitEdit from './components/CottonCandyLimitEdit'
+import { Popup } from 'components/Popup'
+import { CottonCandyLimitEdit } from './components/CottonCandyLimitEdit'
 
 type GatherIslandProps = {
   onClose: () => void
 }
-export default function GatherIsland({ onClose }: GatherIslandProps) {
+export function GatherIsland({ onClose }: GatherIslandProps) {
   return (
     <Popup title="Gather Island" onClose={onClose}>
       <CottonCandyLimitEdit />

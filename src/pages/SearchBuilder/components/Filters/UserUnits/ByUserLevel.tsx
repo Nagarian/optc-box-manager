@@ -1,4 +1,4 @@
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'
 import { BooleanFilterMapper } from 'services/filterHelper'

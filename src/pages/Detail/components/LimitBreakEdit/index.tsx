@@ -1,9 +1,9 @@
 import 'rc-slider/assets/index.css'
 import { useTheme } from '@emotion/react'
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
-import ExpansionPanel from 'components/ExpansionPanel'
+import { DescriptionHighlighter } from 'components/DescriptionHighlighter'
+import { ExpansionPanel } from 'components/ExpansionPanel'
 import { LimitBreakIcon } from 'components/Icon'
-import Image from 'components/Image'
+import { Image } from 'components/Image'
 import { Text } from 'components/Title'
 import { LimitBreak, UnitCaptain, UnitDetail, UnitSailor } from 'models/units'
 import { UserUnitLimitBreak } from 'models/userBox'
@@ -24,7 +24,7 @@ type LimitBreakEditProps = {
   onChange: (special: UserUnitLimitBreak) => void
 }
 
-export default function LimitBreakEdit({
+export function LimitBreakEdit({
   limitBreak,
   detail,
   onChange,

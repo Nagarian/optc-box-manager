@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
+import { Button } from 'components/Button'
+import { CharacterBox } from 'components/CharacterBox'
 import { AddIcon } from 'components/Icon'
-import Pagination from 'components/Pagination'
-import usePagination from 'hooks/usePagination'
+import { Pagination } from 'components/Pagination'
+import { usePagination } from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
@@ -27,7 +27,7 @@ type SearchPanelProps = {
   onAdd?: () => void
 }
 
-export default function SearchPanel({
+export function SearchPanel({
   units,
   search,
   onUnitClick,

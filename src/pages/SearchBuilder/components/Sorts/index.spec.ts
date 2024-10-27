@@ -2,7 +2,7 @@ import { unitsMock } from 'mocks/UnitMock'
 import { ExtendedUnit } from 'models/units'
 import { byId } from './Units/ByCommon'
 import { byRarity } from './Units/ByRarity'
-import byType from './Units/ByType'
+import { byType } from './Units/ByType'
 
 describe('UnitSort', () => {
   describe('Sorts functions', () => {

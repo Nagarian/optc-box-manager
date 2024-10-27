@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { ClearIcon } from 'components/Icon'
 import { SubTitle } from 'components/Title'
 import { ReactNode } from 'react'
@@ -13,7 +13,7 @@ type FilterContainerProps = {
   onReset: () => void
 }
 
-export default function FilterContainer({
+export function FilterContainer({
   title,
   children,
   customAction,

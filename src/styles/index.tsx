@@ -14,7 +14,7 @@ import { FontCss } from './font'
 import { FormsCss } from './forms'
 import { ResetCss } from './reset'
 
-export default function DefaultStyles() {
+export function DefaultStyles() {
   const { currentTheme } = useThemeMode()
   return (
     <>

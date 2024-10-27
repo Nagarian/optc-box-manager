@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import {
   AddIcon,
   EditIcon,
@@ -17,21 +17,21 @@ import {
   mergeSearch,
   useSavedSearch,
 } from 'hooks/useSearch'
-import useUserBox from 'hooks/useUserBox'
+import { useUserBox } from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
-import Add from 'pages/Add'
-import BulkEdit from 'pages/BulkEdit'
-import Detail from 'pages/Detail'
-import GatherIsland from 'pages/GatherIsland'
-import MyUserBox from 'pages/MyUserBox'
-import SearchBuilder from 'pages/SearchBuilder'
+import { Add } from 'pages/Add'
+import { BulkEdit } from 'pages/BulkEdit'
+import { Detail } from 'pages/Detail'
+import { GatherIsland } from 'pages/GatherIsland'
+import { MyUserBox } from 'pages/MyUserBox'
+import { SearchBuilder } from 'pages/SearchBuilder'
 import {
   BySearchBoxCriteria,
   BySearchBoxInput,
 } from 'pages/SearchBuilder/components/Filters/Units/BySearchBox'
-import Settings from 'pages/Settings'
-import SugoCleaner from 'pages/SugoCleaner'
+import { Settings } from 'pages/Settings'
+import { SugoCleaner } from 'pages/SugoCleaner'
 import { useState } from 'react'
 
 const AppBlock = styled.div`
@@ -45,12 +45,12 @@ const AppBlock = styled.div`
 type DisplayedPanel =
   | 'add'
   | 'settings'
-  | 'filters'
+  | 'searchBuilder'
   | 'bulkedit'
   | 'sugocleaner'
   | 'gatherIsland'
 
-function App() {
+export function App() {
   const { db: unitDatabase } = useOptcDb()
   const [displayedPanel, setDisplayedPanel] = useState<DisplayedPanel>()
   const [showDetail, setShowDetail] = useState<UserUnit>()
@@ -141,7 +141,7 @@ function App() {
         <Settings onClose={closePanel} myUserBox={myUserBox} />
       )}
 
-      {displayedPanel === 'filters' && (
+      {displayedPanel === 'searchBuilder' && (
         <SearchBuilder
           onCancel={closePanel}
           resetSaveKey="box"
@@ -196,9 +196,9 @@ function App() {
           />
         )}
         <Button
-          onClick={() => setDisplayedPanel('filters')}
+          onClick={() => setDisplayedPanel('searchBuilder')}
           icon={SearchBuilderIcon}
-          title="Filter/Sort"
+          title="Search builder"
         />
         <Button
           onClick={() => setDisplayedPanel('sugocleaner')}
@@ -219,5 +219,3 @@ function App() {
     </AppBlock>
   )
 }
-
-export default App

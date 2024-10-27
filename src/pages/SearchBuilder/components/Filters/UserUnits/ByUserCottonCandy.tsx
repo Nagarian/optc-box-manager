@@ -1,4 +1,4 @@
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { CottonCandyIcon } from 'components/Icon'
 import { UserSettingEnhanced, useUserSettings } from 'hooks/useUserSettings'
 import { SearchFilterCriteriaInputProps } from 'models/search'

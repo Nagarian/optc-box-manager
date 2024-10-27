@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Image from 'components/Image'
+import { Image } from 'components/Image'
 import { PotentialKey } from 'models/units'
 import { size, SizeProps, space, SpaceProps } from 'styled-system'
 import { cleanStyledSystem } from 'styles'
@@ -104,7 +104,7 @@ const Container = styled('div', cleanStyledSystem)<SizeProps>`
   }
 `
 
-export default function PotentialAbility({
+export function PotentialAbility({
   type,
   size = 3,
   hideChrome,

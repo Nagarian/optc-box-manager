@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import CharacterBox from 'components/CharacterBox'
+import { Box } from 'components/Box'
+import { CharacterBox } from 'components/CharacterBox'
 import { UnitClassIcon } from 'components/Class'
 import {
   CoopCaptainIcon,
@@ -17,9 +17,9 @@ import {
 import { LevelLB } from 'components/LevelLB'
 import { Luck } from 'components/Luck'
 import { PirateFestStyleIcon } from 'components/PirateFestStyle'
-import PotentialAbility from 'components/PotentialAbility'
-import PowerSocket from 'components/PowerSocket'
-import Progression from 'components/Progression'
+import { PotentialAbility } from 'components/PotentialAbility'
+import { PowerSocket } from 'components/PowerSocket'
+import { Progression } from 'components/Progression'
 import { SubTitle, Text, Title } from 'components/Title'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit, SingleUnitClass } from 'models/units'
@@ -46,7 +46,7 @@ type RecapBoxProps = {
   original: UserUnit
 }
 
-export default function RecapBox({
+export function RecapBox({
   userUnit,
   original,
   ...rest

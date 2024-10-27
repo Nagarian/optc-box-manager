@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Button from 'components/Button'
+import { Button } from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import {
   DeleteIcon,
@@ -7,7 +7,7 @@ import {
   ResetRemoveIcon,
   SaveSearchIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { Text } from 'components/Title'
 import { SavedSearch } from 'hooks/useStoredSearches'
 import { useEffect, useRef, useState } from 'react'

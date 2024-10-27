@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import { ConfirmIcon } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { SubTitle } from 'components/Title'
 import { useStoredSearches } from 'hooks/useStoredSearches'
 import { Search } from 'models/search'
@@ -17,7 +17,7 @@ export type SaveSearchProps = {
   onClose: () => void
   onSearchSelected: (search: Search) => void
 }
-export default function SaveSearch({
+export function SaveSearch({
   saveKey,
   search,
   onClose,

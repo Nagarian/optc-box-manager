@@ -1,12 +1,12 @@
-import Box from 'components/Box'
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import {
   PirateFestAbilityIcon,
   PirateFestBothIcon,
   PirateFestSpecialIcon,
 } from 'components/Icon'
-import Progression from 'components/Progression'
+import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
@@ -25,7 +25,7 @@ export type PirateFestDisplayerOption = {
   type: PirateFestDisplayerOptionType
 }
 
-export default function PirateFestDisplayer({
+export function PirateFestDisplayer({
   userUnit: { pirateFest },
   options,
 }: SearchDisplayerProps<PirateFestDisplayerOption>) {

@@ -1,6 +1,6 @@
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
-import ExpansionPanel from 'components/ExpansionPanel'
-import SupportInput from 'components/forms/SupportInput'
+import { DescriptionHighlighter } from 'components/DescriptionHighlighter'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { SupportInput } from 'components/forms/SupportInput'
 import { SupportIcon } from 'components/Icon'
 import { UnitSupport } from 'models/units'
 import { UserUnitSupport } from 'models/userBox'
@@ -12,11 +12,7 @@ type SupportEditProps = {
   onChange: (support: UserUnitSupport) => void
 }
 
-export default function SupportEdit({
-  support,
-  detail,
-  onChange,
-}: SupportEditProps) {
+export function SupportEdit({ support, detail, onChange }: SupportEditProps) {
   const { lvl = 0 } = support || {}
 
   const { Characters, description } = detail || {}

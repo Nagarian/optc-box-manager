@@ -1,5 +1,5 @@
 import { MyUserBox } from 'models/userBox'
-import Backup from './components/Backup'
+import { Backup } from './components/Backup'
 import { ClearCache } from './components/ClearCache'
 import { GameVersion } from './components/GameVersion'
 import { ThemeChooser } from './components/ThemeChooser'
@@ -7,7 +7,7 @@ import { ThemeChooser } from './components/ThemeChooser'
 type AppManagementProps = {
   myUserBox: MyUserBox
 }
-export default function AppManagement({ myUserBox }: AppManagementProps) {
+export function AppManagement({ myUserBox }: AppManagementProps) {
   return (
     <>
       <ThemeChooser />

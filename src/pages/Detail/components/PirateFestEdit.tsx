@@ -1,5 +1,5 @@
-import ExpansionPanel from 'components/ExpansionPanel'
-import PirateFestInput from 'components/forms/PirateFestInput'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { PirateFestInput } from 'components/forms/PirateFestInput'
 import { PirateFestBothIcon } from 'components/Icon'
 import { UnitDetail } from 'models/units'
 import { UserUnitPirateFest } from 'models/userBox'
@@ -11,7 +11,7 @@ type PirateFestEditProps = {
   onChange: (support: UserUnitPirateFest) => void
 }
 
-export default function PirateFestEdit({
+export function PirateFestEdit({
   pirateFest: pf,
   detail,
   onChange,

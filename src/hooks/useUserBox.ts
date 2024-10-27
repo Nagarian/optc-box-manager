@@ -28,7 +28,7 @@ const replacer = (key: string, value: unknown) => {
   return (value as ExtendedUnit).id
 }
 
-export default function useUserBox(): MyUserBox {
+export function useUserBox(): MyUserBox {
   const { db, isLoaded: dbLoaded } = useOptcDb()
   const [userBox, setUserBox] = useState<UserBox>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)

@@ -1,18 +1,15 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { Fragment } from 'react/jsx-runtime'
-import FilterContainer from '../Filters/FilterContainer'
+import { FilterContainer } from '../Filters/FilterContainer'
 import { SearchDisplayerBuilder, SearchDisplayerCriteria } from '.'
 
 export type DisplayerProps = {
   searchDisplayer?: SearchDisplayerCriteria
   onChange: (criteria?: SearchDisplayerCriteria) => void
 }
-export default function Displayer({
-  searchDisplayer,
-  onChange,
-}: DisplayerProps) {
+export function Displayer({ searchDisplayer, onChange }: DisplayerProps) {
   return (
     <FilterContainer
       title="Unit displayer"

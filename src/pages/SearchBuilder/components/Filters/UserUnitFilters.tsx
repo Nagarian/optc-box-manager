@@ -1,12 +1,12 @@
-import Box from 'components/Box'
-import FilterContainer from './FilterContainer'
+import { Box } from 'components/Box'
+import { FilterContainer } from './FilterContainer'
 import { SearchFilterUserUnits, UserUnitFilterBuilder } from './UserUnits'
 
 export type UserUnitFiltersProps = {
   userUnitFilter: SearchFilterUserUnits
   onChange: (userUnitFilter: SearchFilterUserUnits) => void
 }
-export default function UserUnitFilters({
+export function UserUnitFilters({
   userUnitFilter,
   onChange,
 }: UserUnitFiltersProps) {

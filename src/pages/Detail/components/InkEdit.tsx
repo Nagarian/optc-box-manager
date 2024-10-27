@@ -1,5 +1,5 @@
-import ExpansionPanel from 'components/ExpansionPanel'
-import InkInput from 'components/forms/InkInput'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { InkInput } from 'components/forms/InkInput'
 import { InkIcon } from 'components/Icon'
 import { UserUnitInk } from 'models/userBox'
 import { InputLabel } from '.'
@@ -9,7 +9,7 @@ type InkEditProps = {
   onChange: (support: UserUnitInk) => void
 }
 
-export default function InkEdit({ ink, onChange }: InkEditProps) {
+export function InkEdit({ ink, onChange }: InkEditProps) {
   if (!ink) return null
 
   const { lvl } = ink || {}

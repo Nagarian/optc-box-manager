@@ -1,6 +1,6 @@
-import Box from 'components/Box'
-import CharacterBox from 'components/CharacterBox'
-import Popup from 'components/Popup'
+import { Box } from 'components/Box'
+import { CharacterBox } from 'components/CharacterBox'
+import { Popup } from 'components/Popup'
 import { Text } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
 import { useStorage } from 'hooks/useStorage'
@@ -10,7 +10,7 @@ import { memo, ReactNode, useCallback, useState } from 'react'
 type DevModeProps = {
   children: ReactNode
 }
-export default function DevMode({ children }: DevModeProps) {
+export function DevMode({ children }: DevModeProps) {
   const [devModeEnabled] = useStorage<boolean>('devModeEnabled', false)
   const [selected, setSelected] = useState<ExtendedUnit>()
   const callback = useCallback(

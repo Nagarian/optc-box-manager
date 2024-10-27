@@ -1,15 +1,12 @@
-import Box from 'components/Box'
-import FilterContainer from './FilterContainer'
+import { Box } from 'components/Box'
+import { FilterContainer } from './FilterContainer'
 import { SearchFilterUnits, UnitFilterBuilder } from './Units'
 
 export type UnitFiltersProps = {
   unitFilter: SearchFilterUnits
   onChange: (unitFilter: SearchFilterUnits) => void
 }
-export default function UnitFilters({
-  unitFilter,
-  onChange,
-}: UnitFiltersProps) {
+export function UnitFilters({ unitFilter, onChange }: UnitFiltersProps) {
   return (
     <Box overflowY="auto">
       {Object.values(UnitFilterBuilder).map(({ key, input: Input, title }) => (

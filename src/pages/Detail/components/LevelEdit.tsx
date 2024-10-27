@@ -1,7 +1,7 @@
 import 'rc-slider/assets/index.css'
 import { useTheme } from '@emotion/react'
-import ExpansionPanel from 'components/ExpansionPanel'
-import LevelInput from 'components/forms/LevelInput'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { LevelInput } from 'components/forms/LevelInput'
 import { LevelIcon } from 'components/Icon'
 import { levelLBFromStepLevel, levelLBMaxLevel } from 'components/LevelLB'
 import { ExtendedUnit, UnitType } from 'models/units'
@@ -15,7 +15,7 @@ type LevelEditProps = {
   onChange: (level: UserUnitLevel) => void
 }
 
-export default function LevelEdit({ level, unit, onChange }: LevelEditProps) {
+export function LevelEdit({ level, unit, onChange }: LevelEditProps) {
   const theme = useTheme()
 
   if (!level) return null

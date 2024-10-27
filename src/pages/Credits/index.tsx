@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 
-export default function Credits() {
+export function Credits() {
   return (
     <ReactMarkdown components={ReactMarkdownRenderers}>
       {creditText}

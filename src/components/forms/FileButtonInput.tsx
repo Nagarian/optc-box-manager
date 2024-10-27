@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from 'components/Button'
+import { Button, ButtonProps } from 'components/Button'
 import { useRef } from 'react'
 
 export type FileButtonInputProps = ButtonProps & {

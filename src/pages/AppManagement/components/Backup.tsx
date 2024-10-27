@@ -1,11 +1,11 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
-import ExpansionPanel from 'components/ExpansionPanel'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { ExpansionPanel } from 'components/ExpansionPanel'
 import { ArrowIcon } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { Text } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
-import useSugoCleaner from 'hooks/useSugoCleaner'
+import { useSugoCleaner } from 'hooks/useSugoCleaner'
 import { useUserSettings } from 'hooks/useUserSettings'
 import { MyUserBox } from 'models/userBox'
 import { ChangeEvent, useRef, useState } from 'react'
@@ -14,7 +14,7 @@ import { importAsJson } from 'services/share'
 type BackupProps = {
   myUserBox: MyUserBox
 }
-export default function Backup({ myUserBox }: BackupProps) {
+export function Backup({ myUserBox }: BackupProps) {
   const userSetting = useUserSettings()
   const db = useOptcDb()
   const sugoCleaner = useSugoCleaner(db.db)

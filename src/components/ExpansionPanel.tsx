@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import useMeasure from 'hooks/useMeasure'
+import { useMeasure } from 'hooks/useMeasure'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import { GridProps } from 'styled-system'
-import Box, { BoxProps } from './Box'
-import Button from './Button'
+import { Box, BoxProps } from './Box'
+import { Button } from './Button'
 import { Icon } from './Icon'
 
 type ExpandButtonProps = {
@@ -55,7 +55,7 @@ type ExpansionPanelProps = {
   children?: ReactNode
 }
 
-export default function ExpansionPanel({
+export function ExpansionPanel({
   title,
   icon,
   disabled = false,

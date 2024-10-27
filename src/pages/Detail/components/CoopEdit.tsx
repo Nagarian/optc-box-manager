@@ -1,9 +1,9 @@
 import { useTheme } from '@emotion/react'
-import Box from 'components/Box'
-import Button from 'components/Button'
-import ExpansionPanel from 'components/ExpansionPanel'
-import LuckInput from 'components/forms/LuckInput'
-import RangeInput from 'components/forms/RangeInput'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { LuckInput } from 'components/forms/LuckInput'
+import { RangeInput } from 'components/forms/RangeInput'
 import { CoopCaptainSvg, CoopIcon, CoopSpecialSvg } from 'components/Icon'
 import { ExtendedUnit } from 'models/units'
 import { UserUnitCoop } from 'models/userBox'
@@ -15,7 +15,7 @@ type LevelEditProps = {
   onChange: (level: UserUnitCoop) => void
 }
 
-export default function CoopEdit({ coop, unit, onChange }: LevelEditProps) {
+export function CoopEdit({ coop, unit, onChange }: LevelEditProps) {
   const theme = useTheme()
 
   const { luck, captain, special } = coop

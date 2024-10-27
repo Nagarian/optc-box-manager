@@ -3,14 +3,14 @@ import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import { FunctionComponent, ReactNode } from 'react'
 import { byFamily, byId, byLBLvlMax } from './Units/ByCommon'
-import byFestStyle from './Units/ByPirateFest'
+import { byFestStyle } from './Units/ByPirateFest'
 import {
   byRarity,
   byRarityLabel,
   RaritySortOption,
   RaritySortOptionInput,
 } from './Units/ByRarity'
-import byType from './Units/ByType'
+import { byType } from './Units/ByType'
 import {
   byCoopSortLabel,
   byCoopWithOption,

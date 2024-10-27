@@ -1,10 +1,10 @@
-import Box from 'components/Box'
-import CharacterBox from 'components/CharacterBox'
+import { Box } from 'components/Box'
+import { CharacterBox } from 'components/CharacterBox'
 import { GatherIslandIcon, NewsCooIcon } from 'components/Icon'
-import Pagination from 'components/Pagination'
+import { Pagination } from 'components/Pagination'
 import { ResultList } from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
-import usePagination from 'hooks/usePagination'
+import { usePagination } from 'hooks/usePagination'
 import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { UserBox, UserUnit } from 'models/userBox'
@@ -18,7 +18,7 @@ type UserBoxProps = {
   onShowDetail: (userUnit: UserUnit) => void
 }
 
-export default function MyUserBox({
+export function MyUserBox({
   userBox,
   search,
   onAddUnit,

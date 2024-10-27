@@ -24,7 +24,5 @@ const ParseType = (type: UnitType | [UnitType, UnitType]): number => {
     : _ParseType(type)
 }
 
-const byType: UnitSort = (unit1, unit2) =>
+export const byType: UnitSort = (unit1, unit2) =>
   ParseType(unit1.type) - ParseType(unit2.type)
-
-export default byType

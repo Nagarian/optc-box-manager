@@ -1,5 +1,5 @@
-import ExpansionPanel from 'components/ExpansionPanel'
-import PotentialAbilityInput from 'components/forms/PotentialAbilityInput'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { PotentialAbilityInput } from 'components/forms/PotentialAbilityInput'
 import { PotentialIcon } from 'components/Icon'
 import { PotentialKey, UnitPotential } from 'models/units'
 import { UserUnitPotentialAbility } from 'models/userBox'
@@ -39,7 +39,7 @@ type PotentialEditProps = {
   onChange: (potentials: UserUnitPotentialAbility[]) => void
 }
 
-export default function PotentialEdit({
+export function PotentialEdit({
   potentials,
   details,
   onChange,

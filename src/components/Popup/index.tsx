@@ -1,4 +1,4 @@
-import Button from 'components/Button'
+import { Button } from 'components/Button'
 import { CancelIcon, CloseIcon, ConfirmIcon } from 'components/Icon'
 import { Title } from 'components/Title'
 import { ReactNode } from 'react'
@@ -20,7 +20,7 @@ type PopupProps = {
   customAction?: ReactNode
 }
 
-export default function Popup({
+export function Popup({
   title,
   onClose,
   onCancel,

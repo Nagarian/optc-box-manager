@@ -75,8 +75,6 @@ const Displayer = styled('span', cleanStyledSystem)<InfoDisplayerProps>`
   })}
 ` as FunctionComponent<InfoDisplayerProps>
 
-const InfoDisplayer = (p: PropsWithChildren<InfoDisplayerProps>) => (
+export const InfoDisplayer = (p: PropsWithChildren<InfoDisplayerProps>) => (
   <Displayer color="primaryText" anchorZ="normal" {...p} />
 )
-
-export default InfoDisplayer

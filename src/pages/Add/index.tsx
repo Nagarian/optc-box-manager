@@ -1,19 +1,19 @@
-import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
+import { Button } from 'components/Button'
+import { CharacterBox } from 'components/CharacterBox'
 import {
   DuplicateHideIcon,
   DuplicateShowIcon,
   SearchBuilderIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
-import SearchPanel from 'components/SearchPanel'
+import { Popup } from 'components/Popup'
+import { SearchPanel } from 'components/SearchPanel'
 import { SubTitle } from 'components/Title'
 import { DefaultSearch, mergeSearch, useSavedSearch } from 'hooks/useSearch'
-import useUserBox from 'hooks/useUserBox'
+import { useUserBox } from 'hooks/useUserBox'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { ImageAnalyzer } from 'pages/ImageAnalyzer'
-import SearchBuilder from 'pages/SearchBuilder'
+import { SearchBuilder } from 'pages/SearchBuilder'
 import {
   BySearchBoxCriteria,
   BySearchBoxInput,
@@ -30,7 +30,7 @@ type AddProps = {
   allowDuplicatedUnit?: boolean
 }
 
-export default function Add({
+export function Add({
   onCancel,
   onSubmit,
   units,
@@ -74,7 +74,7 @@ export default function Add({
           <Button
             onClick={() => setShowSearchBuilder(true)}
             icon={SearchBuilderIcon}
-            title="Filter/Sort"
+            title="Search builder"
           />
 
           {!allowDuplicatedUnit && (

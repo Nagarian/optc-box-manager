@@ -1,9 +1,9 @@
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { SpecialLvlIcon } from 'components/Icon'
-import Progression from 'components/Progression'
+import { Progression } from 'components/Progression'
 import { SearchDisplayerProps } from '.'
 
-export default function SpecialLevelDisplayer({
+export function SpecialLevelDisplayer({
   userUnit: { special },
 }: SearchDisplayerProps<never>) {
   if (!special) return null

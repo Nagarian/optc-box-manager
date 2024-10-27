@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 
 export const Container = styled(Box)`
   padding: ${p => p.theme.space[2]};

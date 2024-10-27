@@ -1,4 +1,4 @@
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { SpecialLvlIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'

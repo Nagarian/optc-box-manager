@@ -1,4 +1,4 @@
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { Text } from 'components/Title'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'

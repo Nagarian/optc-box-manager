@@ -1,5 +1,5 @@
-import ImageInput from 'components/forms/ImageInput'
-import PotentialAbility from 'components/PotentialAbility'
+import { ImageInput } from 'components/forms/ImageInput'
+import { PotentialAbility } from 'components/PotentialAbility'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, PotentialKey, Potentials } from 'models/units'
 import {

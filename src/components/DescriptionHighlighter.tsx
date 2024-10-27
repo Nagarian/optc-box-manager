@@ -9,7 +9,7 @@ export type DescriptionHighlighterProps = {
   value?: ReactNode
   originalDiff?: string
 }
-function DescriptionHighlighter({
+function BaseDescriptionHighlighter({
   value,
   originalDiff,
 }: DescriptionHighlighterProps) {
@@ -52,7 +52,7 @@ function DescriptionHighlighter({
   )
 }
 
-export default memo(DescriptionHighlighter)
+export const DescriptionHighlighter = memo(BaseDescriptionHighlighter)
 
 const Orb = styled.span<{ orb: keyof OrbColor }>`
   display: inline-block;

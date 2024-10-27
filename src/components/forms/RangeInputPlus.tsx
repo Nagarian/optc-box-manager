@@ -1,7 +1,7 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { InputHTMLAttributes } from 'react'
-import RangeInput, { RangeInputProps } from './RangeInput'
+import { RangeInput, RangeInputProps } from './RangeInput'
 
 export type RangeInputPlusProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,

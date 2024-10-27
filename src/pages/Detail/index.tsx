@@ -1,25 +1,25 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
-import ExpansionPanel from 'components/ExpansionPanel'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { CharacterBox } from 'components/CharacterBox'
+import { ExpansionPanel } from 'components/ExpansionPanel'
 import { DeleteIcon, EvolveIcon, OpenInDBIcon } from 'components/Icon'
-import Popup from 'components/Popup'
+import { Popup } from 'components/Popup'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitLimitBreak } from 'models/userBox'
 import { useEffect, useMemo, useState } from 'react'
 import { getLimitType } from 'services/limit'
 import { ConsumeUnitDupe, Evolve } from 'services/userUnits'
-import CoopEdit from './components/CoopEdit'
-import CottonCandyEdit from './components/CottonCandyEdit'
-import InkEdit from './components/InkEdit'
-import LevelEdit from './components/LevelEdit'
-import LimitBreakEdit from './components/LimitBreakEdit'
-import PirateFestEdit from './components/PirateFestEdit'
-import PotentialEdit from './components/PotentialEdit'
-import PowerSocketEdit from './components/PowerSocketEdit'
-import RecapBox from './components/RecapBox'
-import SpecialLvlEdit from './components/SpecialLvlEdit'
-import SupportEdit from './components/SupportEdit'
+import { CoopEdit } from './components/CoopEdit'
+import { CottonCandyEdit } from './components/CottonCandyEdit'
+import { InkEdit } from './components/InkEdit'
+import { LevelEdit } from './components/LevelEdit'
+import { LimitBreakEdit } from './components/LimitBreakEdit'
+import { PirateFestEdit } from './components/PirateFestEdit'
+import { PotentialEdit } from './components/PotentialEdit'
+import { PowerSocketEdit } from './components/PowerSocketEdit'
+import { RecapBox } from './components/RecapBox'
+import { SpecialLvlEdit } from './components/SpecialLvlEdit'
+import { SupportEdit } from './components/SupportEdit'
 
 type DetailProps = {
   userUnit: UserUnit
@@ -30,7 +30,7 @@ type DetailProps = {
   isSugoCleaner?: boolean
 }
 
-export default function Detail({
+export function Detail({
   onCancel,
   onValidate,
   units,

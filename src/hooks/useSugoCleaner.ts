@@ -15,7 +15,7 @@ const defaultSugoCleaner: SugoCleaner = {
   toWaiting: [],
 }
 
-export default function useSugoCleaner(unitDB: ExtendedUnit[]) {
+export function useSugoCleaner(unitDB: ExtendedUnit[]) {
   const [sugoCleaner, setSugoCleaner] = useStorage<SugoCleaner>(
     'sugocleaner',
     defaultSugoCleaner,

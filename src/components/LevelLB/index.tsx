@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import Progression from 'components/Progression'
+import { Box } from 'components/Box'
+import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import LevelLimitBreakImg from './images/level-limitbreak.png'
 

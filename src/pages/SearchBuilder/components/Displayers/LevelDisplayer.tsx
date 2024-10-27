@@ -1,8 +1,8 @@
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { LevelTextIcon } from 'components/Icon'
 import { LevelLB } from 'components/LevelLB'
-import Progression from 'components/Progression'
+import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
@@ -21,7 +21,7 @@ export type LevelDisplayerOption = {
   type: LevelDisplayerOptionType
 }
 
-export default function LevelDisplayer({
+export function LevelDisplayer({
   userUnit: { level },
   options,
 }: SearchDisplayerProps<LevelDisplayerOption>) {

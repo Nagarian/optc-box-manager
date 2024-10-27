@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { CoopCaptainIcon, CoopSpecialIcon, LuckIcon } from 'components/Icon'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { UserUnit } from 'models/userBox'

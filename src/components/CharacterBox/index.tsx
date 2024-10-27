@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Image from 'components/Image'
+import { Image } from 'components/Image'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
 import {
@@ -9,8 +9,8 @@ import {
 import { gridArea, GridAreaProps, SizeProps } from 'styled-system'
 import { place, PlaceProps } from 'styles'
 import { SpecificColor } from 'styles/theme-definition'
-import CottonCandyDisplayer from './components/CottonCandyDisplayer'
-import LimitBreakDisplayer from './components/LimitBreakDisplayer'
+import { CottonCandyDisplayer } from './components/CottonCandyDisplayer'
+import { LimitBreakDisplayer } from './components/LimitBreakDisplayer'
 import Ink from './images/ink.png'
 import InkMax from './images/inkmax.png'
 import Support from './images/support.png'
@@ -38,7 +38,7 @@ type BtnProps = {
 
 export type CharacterBoxStyledProps = GridAreaProps & PlaceProps & SizeProps
 
-export default function CharacterBox({
+export function CharacterBox({
   unit: u,
   userUnit,
   onClick,

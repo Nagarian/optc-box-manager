@@ -1,6 +1,6 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
-import CharacterBox from 'components/CharacterBox'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
+import { CharacterBox } from 'components/CharacterBox'
 import {
   BellyIcon,
   DeleteIcon,
@@ -8,22 +8,22 @@ import {
   SearchBuilderIcon,
   TreasureIcon,
 } from 'components/Icon'
-import Popup from 'components/Popup'
-import SearchPanel from 'components/SearchPanel'
+import { Popup } from 'components/Popup'
+import { SearchPanel } from 'components/SearchPanel'
 import { SubTitle, Title } from 'components/Title'
 import {
   DefaultSugoCleanerSearch,
   EmptySearch,
   useSavedSearch,
 } from 'hooks/useSearch'
-import useSugoCleaner, { SugoCleanerListType } from 'hooks/useSugoCleaner'
+import { SugoCleanerListType, useSugoCleaner } from 'hooks/useSugoCleaner'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit } from 'models/userBox'
-import Add from 'pages/Add'
-import Detail from 'pages/Detail'
+import { Add } from 'pages/Add'
+import { Detail } from 'pages/Detail'
 import { RecapBoxLight } from 'pages/Detail/components/RecapBox'
-import SearchBuilder from 'pages/SearchBuilder'
-import FilterContainer from 'pages/SearchBuilder/components/Filters/FilterContainer'
+import { SearchBuilder } from 'pages/SearchBuilder'
+import { FilterContainer } from 'pages/SearchBuilder/components/Filters/FilterContainer'
 import { useState } from 'react'
 
 export type SugoCleanerProps = {
@@ -33,7 +33,7 @@ export type SugoCleanerProps = {
   onUpdateUnit: (userUnit: UserUnit) => void
   onAddUnit: (userUnit: ExtendedUnit) => void
 }
-export default function SugoCleaner({
+export function SugoCleaner({
   units,
   userBox,
   onUpdateUnit,

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
+import { Box } from 'components/Box'
 import { SearchOptionInputProps } from 'models/search'
 import { UnitStar } from 'models/units'
 import { SearchSortWithOptionFunction, UnitSort } from '..'

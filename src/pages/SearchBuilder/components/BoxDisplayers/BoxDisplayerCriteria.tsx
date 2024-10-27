@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import Box from 'components/Box'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { Fragment } from 'react/jsx-runtime'
-import FilterContainer from '../Filters/FilterContainer'
+import { FilterContainer } from '../Filters/FilterContainer'
 import { SearchBoxDisplayerBuilder, SearchBoxDisplayerCriteria } from '.'
 
 export type BoxDisplayerProps = {

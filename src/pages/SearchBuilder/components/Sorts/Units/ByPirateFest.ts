@@ -18,8 +18,6 @@ const ParseFestStyle = (type: UnitPirateFestStyle | undefined): number => {
   }
 }
 
-const byFestStyle: UnitSort = (unit1, unit2) =>
+export const byFestStyle: UnitSort = (unit1, unit2) =>
   ParseFestStyle(unit1.pirateFest.class) -
   ParseFestStyle(unit2.pirateFest.class)
-
-export default byFestStyle

@@ -2,13 +2,13 @@ import { PotentialAbilityToImage } from 'components/PotentialAbility'
 import { PotentialKey } from 'models/units'
 import { InputHTMLAttributes } from 'react'
 import { SpaceProps } from 'styled-system'
-import RangeInput from './RangeInput'
+import { RangeInput } from './RangeInput'
 
 type PotentialAbilityInputProps = SpaceProps & {
   variant: PotentialKey
 }
 
-export default function PotentialAbilityInput({
+export function PotentialAbilityInput({
   variant,
   ...p
 }: InputHTMLAttributes<HTMLInputElement> & PotentialAbilityInputProps) {

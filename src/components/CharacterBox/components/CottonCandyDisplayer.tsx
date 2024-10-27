@@ -1,12 +1,10 @@
 import { UserUnitCottonCandy } from 'models/userBox'
-import InfoDisplayer from './InfoDisplayer'
+import { InfoDisplayer } from './InfoDisplayer'
 
 export type CottonCandyDisplayerProps = {
   cc?: UserUnitCottonCandy
 }
-export default function CottonCandyDisplayer({
-  cc,
-}: CottonCandyDisplayerProps) {
+export function CottonCandyDisplayer({ cc }: CottonCandyDisplayerProps) {
   if (!cc) return null
   const sum = cc.atk + cc.hp + cc.rcv
   if (!sum) return null

@@ -1,5 +1,5 @@
-import ImageInput from 'components/forms/ImageInput'
-import Type from 'components/Type'
+import { ImageInput } from 'components/forms/ImageInput'
+import { Type } from 'components/Type'
 import { SearchFilterCriteriaInputProps } from 'models/search'
 import { ExtendedUnit, UnitType, UnitTypes } from 'models/units'
 import {

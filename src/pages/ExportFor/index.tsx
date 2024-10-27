@@ -1,5 +1,5 @@
-import Box from 'components/Box'
-import Button from 'components/Button'
+import { Box } from 'components/Box'
+import { Button } from 'components/Button'
 import { TextInput } from 'components/forms/TextInput'
 import { ConfirmIcon } from 'components/Icon'
 import { SubTitle } from 'components/Title'
@@ -12,7 +12,7 @@ type ExportForProps = {
   myUserBox: MyUserBox
 }
 
-export default function ExportFor({ myUserBox: { userBox } }: ExportForProps) {
+export function ExportFor({ myUserBox: { userBox } }: ExportForProps) {
   const payload = userBox.map(u => u.unit.dbId).join(',')
 
   return (

@@ -1,9 +1,9 @@
-import Box from 'components/Box'
-import InfoDisplayer from 'components/CharacterBox/components/InfoDisplayer'
-import ChoiceInput from 'components/forms/ChoiceInput'
+import { Box } from 'components/Box'
+import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
+import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { CoopCaptainIcon, CoopSpecialIcon, LockIcon } from 'components/Icon'
 import { Luck } from 'components/Luck'
-import Progression from 'components/Progression'
+import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'
 import { FilterContainerPanel } from '../Filters/FilterContainer'
@@ -16,7 +16,7 @@ export type CoopDisplayerOption = {
   type: CoopDisplayerOptionType
 }
 
-export default function CoopDisplayer({
+export function CoopDisplayer({
   userUnit: {
     coop: { captain, luck, special },
   },

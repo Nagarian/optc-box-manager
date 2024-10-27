@@ -2,9 +2,9 @@ import { useTheme } from '@emotion/react'
 import { SpecialSvg } from 'components/Icon'
 import { InputHTMLAttributes } from 'react'
 import { SpaceProps } from 'styled-system'
-import RangeInput from './RangeInput'
+import { RangeInput } from './RangeInput'
 
-export default function SpecialLevelInput(
+export function SpecialLevelInput(
   p: InputHTMLAttributes<HTMLInputElement> & SpaceProps,
 ) {
   const theme = useTheme()

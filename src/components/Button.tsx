@@ -41,7 +41,7 @@ export type ButtonProps = StyledButtonProps & {
   isLoading?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-const Button: FC<ButtonProps> = ({
+export function Button({
   icon: Icon,
   children,
   iconVariant,
@@ -59,7 +59,7 @@ const Button: FC<ButtonProps> = ({
   placeItems = 'center',
   placeContent = 'center',
   ...rest
-}) => {
+}: ButtonProps) {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
   const asLink = href
     ? { as: 'a' as React.ElementType, href, target: '_blank' }
@@ -90,8 +90,6 @@ const Button: FC<ButtonProps> = ({
     </Btn>
   )
 }
-
-export default Button
 
 const Btn = styled('button', cleanStyledSystem)<ButtonProps>(
   compose(flexDirection, space, color, border, typography, gridArea, place),

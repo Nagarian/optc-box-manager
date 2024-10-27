@@ -34,7 +34,7 @@ export type BoxProps = SpaceProps &
   PlaceProps &
   GapProps
 
-const Box = styled(
+export const Box = styled(
   'div',
   cleanStyledSystem,
 )<BoxProps>(
@@ -52,5 +52,3 @@ const Box = styled(
     gap,
   ),
 )
-
-export default Box

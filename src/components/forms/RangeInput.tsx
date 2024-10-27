@@ -69,8 +69,6 @@ const SRangeInput = styled.input<RangeInputProps>`
     ${p => thumb(p)}
   }
 `
-const RangeInput = (
+export const RangeInput = (
   p: RangeInputProps & InputHTMLAttributes<HTMLInputElement>,
 ) => <SRangeInput {...p} type="range" />
-
-export default RangeInput

@@ -1,7 +1,7 @@
-import Box from 'components/Box'
-import DescriptionHighlighter from 'components/DescriptionHighlighter'
-import ExpansionPanel from 'components/ExpansionPanel'
-import SpecialLevelInput from 'components/forms/SpecialLevelInput'
+import { Box } from 'components/Box'
+import { DescriptionHighlighter } from 'components/DescriptionHighlighter'
+import { ExpansionPanel } from 'components/ExpansionPanel'
+import { SpecialLevelInput } from 'components/forms/SpecialLevelInput'
 import { SpecialLvlIcon } from 'components/Icon'
 import { UnitDetail, UnitSpecial } from 'models/units'
 import { UserUnitSpecial } from 'models/userBox'
@@ -50,7 +50,7 @@ function MultiStageSpecial(special: UnitSpecial): ReactNode {
   )
 }
 
-export default function SpecialLvlEdit({
+export function SpecialLvlEdit({
   special,
   detail,
   onChange,

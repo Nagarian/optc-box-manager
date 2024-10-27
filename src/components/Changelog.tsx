@@ -13,11 +13,7 @@ type GithubLightRelease = {
 
 const localStorageKey = 'last_changelog'
 
-export default function Changelog({
-  onlyUnseen = false,
-}: {
-  onlyUnseen?: boolean
-}) {
+export function Changelog({ onlyUnseen = false }: { onlyUnseen?: boolean }) {
   const [releases, setReleases] = useState<GithubLightRelease[]>([])
   const [latestSeen, setLatestSeen] = useState<number>()
 
