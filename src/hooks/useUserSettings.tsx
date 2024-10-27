@@ -137,6 +137,7 @@ export function useUserSettings(): UserSettingEnhanced {
       if (!importedDb.themeMode) {
         throw new Error("That's not a valid Setting backup file")
       }
+      context.setUserSetting?.(migration(importedDb))
     },
     export: async () => {
       if (!context.userSetting) {
