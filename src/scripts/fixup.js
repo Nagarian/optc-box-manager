@@ -84,46 +84,58 @@ export function fixupVersusUnit(
         ...untyped.detail.sailor,
         combined: untyped.detail.sailor.character1,
       },
-      festAbility: untyped.detail.festAbility?.character1.map(
-        (/** @type any */ desc, /** @type number */ i) => ({
-          description: format({
-            character1: desc.description,
-            character2: untyped.detail.festAbility.character2[i].description,
-          }),
-        }),
-      ),
-      festSpecial: untyped.detail.festSpecial?.character1.map(
-        (/** @type any */ desc, /** @type number */ i) => ({
-          description: format({
-            character1: desc.description,
-            character2: untyped.detail.festSpecial.character2[i].description,
-          }),
-          /** @type any */
-          cooldown: `${desc.cooldown} / ${untyped.detail.festSpecial.character2[i].cooldown}`,
-        }),
-      ),
-      festGPBurst: untyped.detail.festGPBurst?.character1.map(
-        (/** @type any */ desc, /** @type number */ i) => ({
-          description: format({
-            character1: desc.description,
-            character2: untyped.detail.festGPBurst.character2[i].description,
-          }),
-          condition: format({
-            character1: desc.condition,
-            character2: untyped.detail.festGPBurst.character2[i].condition,
-          }),
-          /** @type any */
-          use: `${desc.use} / ${untyped.detail.festGPBurst.character2[i].use}`,
-        }),
-      ),
-      festGPLeader: untyped.detail.festGPLeader?.character1.map(
-        (/** @type any */ desc, /** @type number */ i) => ({
-          description: format({
-            character1: desc.description,
-            character2: untyped.detail.festGPLeader.character2[i].description,
-          }),
-        }),
-      ),
+      festAbility: Array.isArray(untyped.detail.festAbility)
+        ? untyped.detail.festAbility
+        : untyped.detail.festAbility?.character1.map(
+            (/** @type any */ desc, /** @type number */ i) => ({
+              description: format({
+                character1: desc.description,
+                character2:
+                  untyped.detail.festAbility.character2[i].description,
+              }),
+            }),
+          ),
+      festSpecial: Array.isArray(untyped.detail.festSpecial)
+        ? untyped.detail.festSpecial
+        : untyped.detail.festSpecial?.character1.map(
+            (/** @type any */ desc, /** @type number */ i) => ({
+              description: format({
+                character1: desc.description,
+                character2:
+                  untyped.detail.festSpecial.character2[i].description,
+              }),
+              /** @type any */
+              cooldown: `${desc.cooldown} / ${untyped.detail.festSpecial.character2[i].cooldown}`,
+            }),
+          ),
+      festGPBurst: Array.isArray(untyped.detail.festGPBurst)
+        ? untyped.detail.festGPBurst
+        : untyped.detail.festGPBurst?.character1.map(
+            (/** @type any */ desc, /** @type number */ i) => ({
+              description: format({
+                character1: desc.description,
+                character2:
+                  untyped.detail.festGPBurst.character2[i].description,
+              }),
+              condition: format({
+                character1: desc.condition,
+                character2: untyped.detail.festGPBurst.character2[i].condition,
+              }),
+              /** @type any */
+              use: `${desc.use} / ${untyped.detail.festGPBurst.character2[i].use}`,
+            }),
+          ),
+      festGPLeader: Array.isArray(untyped.detail.festGPLeader)
+        ? untyped.detail.festGPLeader
+        : untyped.detail.festGPLeader?.character1.map(
+            (/** @type any */ desc, /** @type number */ i) => ({
+              description: format({
+                character1: desc.description,
+                character2:
+                  untyped.detail.festGPLeader.character2[i].description,
+              }),
+            }),
+          ),
     },
   }
 }
@@ -423,6 +435,22 @@ export function fixupSpecificIssue(
   if (unit.detail.lLimit?.gpSpecial) {
     // @ts-ignore
     delete unit.detail.lLimit.gpSpecial
+  }
+
+  if (unit.id === 4210 || unit.id === 4211) {
+    // @ts-ignore
+    if (unit.detail.vsCondition) {
+      // @ts-ignore
+      unit.detail.VSCondition = unit.detail.vsCondition
+      // @ts-ignore
+      unit.detail.VSSpecial = unit.detail.vsSpecial
+      // @ts-ignore
+      delete unit.detail.vsCondition
+      // @ts-ignore
+      delete unit.detail.vsSpecial
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
   }
 
   return unit
