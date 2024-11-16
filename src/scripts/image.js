@@ -12,7 +12,10 @@ const getImage =
     try {
       const imagePath = func(id)
       return imagePath
-        ?.replace('/api/images', 'https://optc-db.github.io/api/images')
+        ?.replace(
+          '/api/images',
+          'https://2shankz.github.io/optc-db.github.io/api/images',
+        )
         .replace('http:', 'https:')
     } catch (error) {
       console.trace('Invalid unit :', id)

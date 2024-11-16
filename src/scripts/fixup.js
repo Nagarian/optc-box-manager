@@ -184,7 +184,7 @@ export function fixupImages(
     ...unit,
     images: {
       ...unit.images,
-      thumbnail: `https://optc-db.github.io/api/images/thumbnail/glo/5/000/${unit.id}.png`,
+      thumbnail: `https://2shankz.github.io/optc-db.github.io/api/images/thumbnail/glo/5/000/${unit.id}.png`,
     },
   }
 }
@@ -264,21 +264,23 @@ export function fixupFestProperties(
   unit.detail.festAttackPattern = unit.detail.festAttackPattern?.map(str => ({
     description: str,
   }))
-  // @ts-ignore
-  unit.detail.festGPBurst = unit.detail.festAbilityGP?.map(
-    ({ festGPSpecial, uses }) => ({
-      description: festGPSpecial,
-      // @ts-ignore
-      condition: unit.detail.festAbilityGPCondition,
-      use: uses,
-    }),
-  )
-  // @ts-ignore
-  unit.detail.festGPLeader = unit.detail.festAbilityGP?.map(
-    ({ festGPAbility }) => ({
-      description: festGPAbility,
-    }),
-  )
+
+  unit.detail.festGPBurst = // @ts-ignore
+    (unit.detail.festAbilityGP?.base ?? unit.detail.festAbilityGP)?.map(
+      ({ festGPSpecial, uses }) => ({
+        description: festGPSpecial,
+        // @ts-ignore
+        condition: unit.detail.festAbilityGPCondition,
+        use: uses,
+      }),
+    )
+
+  unit.detail.festGPLeader = // @ts-ignore
+    (unit.detail.festAbilityGP?.base ?? unit.detail.festAbilityGP)?.map(
+      ({ festGPAbility }) => ({
+        description: festGPAbility,
+      }),
+    )
   // @ts-ignore
   delete unit.detail.festAbilityGP
   // @ts-ignore
@@ -297,7 +299,7 @@ export function fixupSpecificIssue(
   /** @type number */ index,
   /** @type import("../models/old-units").ExtendedUnit[] */ units,
 ) {
-  if (unit.id === 2831 || unit.id === 2999 || unit.id === 3098) {
+  if ([2831, 2999, 3098].includes(unit.id)) {
     // @ts-ignore
     if (unit.detail.sailor.character1 === null) {
       // @ts-ignore
@@ -367,7 +369,7 @@ export function fixupSpecificIssue(
     }
   }
 
-  if (unit.id === 3719 || unit.id === 3720) {
+  if ([3719, 3720].includes(unit.id)) {
     // @ts-ignore
     if (unit.detail.captinNotes) {
       // @ts-ignore
@@ -379,7 +381,7 @@ export function fixupSpecificIssue(
     }
   }
 
-  if (unit.id === 3787 || unit.id === 3788) {
+  if ([3787, 3788].includes(unit.id)) {
     if (!unit.pirateFest2) {
       unit.pirateFest2 = {
         class: 'SPT',
@@ -437,7 +439,7 @@ export function fixupSpecificIssue(
     delete unit.detail.lLimit.gpSpecial
   }
 
-  if (unit.id === 4210 || unit.id === 4211) {
+  if ([4210, 4211].includes(unit.id)) {
     // @ts-ignore
     if (unit.detail.vsCondition) {
       // @ts-ignore
@@ -448,6 +450,25 @@ export function fixupSpecificIssue(
       delete unit.detail.vsCondition
       // @ts-ignore
       delete unit.detail.vsSpecial
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
+  if ([4227, 4257, 4267, 4268].includes(unit.id)) {
+    if (unit.class.length === 2) {
+      // @ts-ignore
+      unit.class = [unit.class[0], ...unit.class]
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
+  if ([4227].includes(unit.id)) {
+    // @ts-ignore
+    if (unit.detail.swap?.superTurns === '5') {
+      // @ts-ignore
+      unit.detail.swap.superTurns = parseInt(unit.detail.swap.superTurns)
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }

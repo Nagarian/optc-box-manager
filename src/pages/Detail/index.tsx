@@ -95,7 +95,7 @@ export function Detail({
             />
           )}
           <Button
-            href={`https://optc-db.github.io/characters/#/view/${unit.dbId}`}
+            href={`https://2shankz.github.io/optc-db.github.io/characters/#/view/${unit.dbId}`}
             variant="secondary"
             icon={OpenInDBIcon}
             title="See on OPTC-DB"

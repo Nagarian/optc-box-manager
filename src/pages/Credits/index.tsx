@@ -14,7 +14,7 @@ Made with 💗 and ☕ by [u/nagarian_r](https://www.reddit.com/user/nagarian_r)
 
 Please report bugs and suggestions into [Github](https://github.com/Nagarian/optc-box-manager/issues)
 
-All the information originates from [OPTC-DB](https://optc-db.github.io/)
+All the information originates from [OPTC-DB](https://2shankz.github.io/optc-db.github.io/)
 
 This site does not own any of the images. All images are owned by Eiichiro Oda/Shueisha, Toei Animation, and Bandai Namco.
 

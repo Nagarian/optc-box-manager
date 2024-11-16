@@ -44,7 +44,7 @@ const NakamaTutorial = `
 
 const OPTCDBTutorial = `
 1. Copy the content of the box above
-2. Go to [OPTC-DB](https://optc-db.github.io/characters/#/search/)
+2. Go to [OPTC-DB](https://2shankz.github.io/optc-db.github.io/characters/#/search/)
 3. Check this tutorial for more explication for the process : [Reddit -"Export" and "import" character log from optc-db](https://www.reddit.com/r/OnePieceTC/comments/7r1ldp/export_and_import_character_log_from_optcdb/)
 
 ![Export character log from OPTC-DB](https://i.imgur.com/4xt1Vib.png "Export character log from OPTC-DB")
