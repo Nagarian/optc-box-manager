@@ -4,6 +4,7 @@ export function useStorage<T>(
   key: string = 'search',
   defaultValue: T,
   migration?: (value: T) => T,
+  reviver?: (this: unknown, key: string, value: unknown) => unknown,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [value, setValue] = useState<T>(defaultValue)
 
@@ -13,7 +14,7 @@ export function useStorage<T>(
       return
     }
 
-    const parsed = JSON.parse(json) as T
+    const parsed = JSON.parse(json, reviver) as T
 
     if (!parsed) {
       return
@@ -26,7 +27,7 @@ export function useStorage<T>(
     } else {
       setValue(parsed)
     }
-  }, [key, migration, setValue])
+  }, [key, migration, setValue, reviver])
 
   useEffect(() => {
     if (value && value !== defaultValue) {

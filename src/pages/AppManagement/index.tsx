@@ -1,4 +1,5 @@
 import { MyUserBox } from 'models/userBox'
+import { AccountRecoveryPanel } from './components/AccountRecovery'
 import { Backup } from './components/Backup'
 import { ClearCache } from './components/ClearCache'
 import { GameVersion } from './components/GameVersion'
@@ -13,6 +14,7 @@ export function AppManagement({ myUserBox }: AppManagementProps) {
       <ThemeChooser />
       <GameVersion />
       <ClearCache />
+      <AccountRecoveryPanel />
       <Backup myUserBox={myUserBox} />
     </>
   )

@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
+import { Box } from 'components/Box'
 import { SubTitle, Text } from 'components/Title'
 import { Components } from 'react-markdown'
+import { space, SpaceProps } from 'styled-system'
 
 const ListItem = styled.li`
   ::before {
@@ -21,6 +23,13 @@ const Img = styled.img`
   margin: 1rem auto;
 `
 
+const BlockQuote = styled.blockquote<SpaceProps>`
+  ${space}
+  border-left: ${p => p.theme.borderWidths.thick} solid;
+  border-color: ${p => p.theme.colors.primaryText};
+  font-style: italic;
+`
+
 export const ReactMarkdownRenderers: Components = {
   h1: p => <SubTitle {...p} m="2" />,
   h2: p => <SubTitle {...p} m="2" />,
@@ -34,4 +43,5 @@ export const ReactMarkdownRenderers: Components = {
   li: p => <ListItem {...p} />,
   ol: p => <OrderedList {...p} />,
   img: p => <Img {...p} />,
+  blockquote: p => <BlockQuote m="2" pl="2" {...p} />,
 }

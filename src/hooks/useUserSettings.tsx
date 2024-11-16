@@ -4,13 +4,21 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
 } from 'react'
+import { checkReminderNotification } from 'services/notification'
 import { exportAsJson } from 'services/share'
 import { useStorage } from './useStorage'
 import { DefaultSearches, SavedSearch } from './useStoredSearches'
 
 export type ThemeMode = 'auto' | 'light' | 'dark'
 export type GameVersion = 'global' | 'japan'
+
+export type AccountRecovery = {
+  userId: string
+  password: string
+  generatedAt: Date
+}
 
 export type UserSetting = {
   settingVersion: number
@@ -23,6 +31,7 @@ export type UserSetting = {
   reseter: Record<string, string | undefined>
   themeMode: ThemeMode
   gameVersion: GameVersion
+  accountRecovery?: AccountRecovery
 }
 
 const defaultUserSettings: UserSetting = {
@@ -84,11 +93,22 @@ function migration(initial: UserSetting): UserSetting {
   return updated
 }
 
+function reviver(key: string, value: unknown) {
+  if (key !== 'generatedAt') return value
+
+  if (typeof value === 'string') {
+    return new Date(value)
+  }
+
+  return value
+}
+
 export function UserSettingsProvider({ children }: { children: ReactNode }) {
   const [userSetting, setUserSetting] = useStorage<UserSetting>(
     'userSetting',
     defaultUserSettings,
     migration,
+    reviver,
   )
 
   const { atk, hp, rcv } =
@@ -108,6 +128,16 @@ export function UserSettingsProvider({ children }: { children: ReactNode }) {
       rcv: 100 + rcv,
     },
   }
+
+  useEffect(() => {
+    const generatedAt =
+      UserSettingValue.userSetting.accountRecovery?.generatedAt
+    if (!generatedAt) {
+      return
+    }
+
+    checkReminderNotification(generatedAt)
+  }, [UserSettingValue.userSetting.accountRecovery?.generatedAt])
 
   return (
     <UserSettingsContext.Provider value={UserSettingValue}>
