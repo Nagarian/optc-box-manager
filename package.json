@@ -30,7 +30,7 @@
     "react-markdown": "^9.0.1",
     "rehype-raw": "^7.0.0",
     "styled-system": "^5.1.5",
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
