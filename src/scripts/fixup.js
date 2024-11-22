@@ -315,45 +315,33 @@ export function fixupSpecificIssue(
 
   if (unit.evolutionMap?.includes(2784)) {
     // Lucci 6+
+    unit.evolutionMap = unit.evolutionMap.includes(5016)
+      ? unit.evolutionMap
+      : [...unit.evolutionMap, 5016]
     if (unit.dbId === 1763) {
-      return {
-        ...unit,
-        evolutionMap: [...unit.evolutionMap, 5016],
-        evolution: {
-          evolution: [2784, 5016],
-          evolvers: [
-            ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
-            ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
-          ],
-        },
+      unit.evolution = {
+        evolution: [2784, 5016],
+        evolvers: [
+          ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
+          ['skullQCK', 'skullQCK', 'skullQCK', 1180, 301],
+        ],
       }
-    }
-
-    return {
-      ...unit,
-      evolutionMap: [...unit.evolutionMap, 5016],
     }
   }
 
   if (unit.evolutionMap?.includes(2830)) {
     // Robin 6+
+    unit.evolutionMap = unit.evolutionMap.includes(5062)
+      ? unit.evolutionMap
+      : [...unit.evolutionMap, 5062]
     if (unit.dbId === 1951) {
-      return {
-        ...unit,
-        evolutionMap: [...unit.evolutionMap, 5062],
-        evolution: {
-          evolution: [2830, 5062],
-          evolvers: [
-            ['skullPSY', 'skullINT', 99, 304, 267],
-            ['skullPSY', 'skullINT', 99, 304, 267],
-          ],
-        },
+      unit.evolution = {
+        evolution: [2830, 5062],
+        evolvers: [
+          ['skullPSY', 'skullINT', 99, 304, 267],
+          ['skullPSY', 'skullINT', 99, 304, 267],
+        ],
       }
-    }
-
-    return {
-      ...unit,
-      evolutionMap: [...unit.evolutionMap, 5062],
     }
   }
 
@@ -474,7 +462,41 @@ export function fixupSpecificIssue(
     }
   }
 
+  const missingEvolInMap = unit.evolutionMap
+    .map(id => missingEvolutionMap[id])
+    .filter(Boolean)[0]
+  if (!!missingEvolInMap && !unit.evolutionMap.includes(missingEvolInMap)) {
+    unit.evolutionMap = [...unit.evolutionMap, missingEvolInMap]
+  }
+
+  const missingEvolValue = missingEvolutionMap[unit.id]
+  if (missingEvolValue) {
+    if (!unit.evolution) {
+      unit.evolution = {
+        evolution: missingEvolValue,
+        evolvers: [new Array(5).fill(`${missingEvolValue}-skull`)],
+      }
+    } else {
+      console.warn(
+        `issue (evolution) with unit ${unit.id} "${unit.name}" has been fixed`,
+      )
+    }
+  }
+
   return unit
+}
+
+const missingEvolutionMap = {
+  3483: 4274,
+  3454: 4263,
+  3278: 4256,
+  2982: 4237,
+  3157: 4217,
+  3038: 4199,
+  3027: 4185,
+  3422: 4170,
+  3607: 4162,
+  3336: 4063,
 }
 
 export function removeProp(
