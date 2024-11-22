@@ -462,6 +462,11 @@ export function fixupSpecificIssue(
     }
   }
 
+  // @ts-ignore
+  if (unit.pirateFest.class === 'BAL') {
+    unit.pirateFest.class = ''
+  }
+
   const missingEvolInMap = unit.evolutionMap
     .map(id => missingEvolutionMap[id])
     .filter(Boolean)[0]
