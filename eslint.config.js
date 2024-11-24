@@ -13,6 +13,7 @@ export default tseslint.config(
       'vite.config.ts',
       'dist/',
       'src/optcdb/',
+      'src/optc-ships/',
       'src/scripts/',
       'public/',
       // 'src/services/image-cv-worker.ts'
