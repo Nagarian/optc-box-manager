@@ -19,7 +19,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
-    exclude: ['src/optcdb', 'node_modules'],
+    exclude: ['src/optcdb', 'src/optc-ships', 'node_modules'],
   },
   preview: {
     https: {
@@ -29,7 +29,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    viteTsconfigPaths(),
+    viteTsconfigPaths({ projects: ['./tsconfig.json'] }),
     svgrPlugin(),
     VitePWA({
       devOptions: {
