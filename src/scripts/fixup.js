@@ -443,7 +443,8 @@ export function fixupSpecificIssue(
     }
   }
 
-  if ([4227, 4257, 4267, 4268].includes(unit.id)) {
+  // dual unit fix
+  if ([4227, 4257, 4267, 4268, 4275, 4276].includes(unit.id)) {
     if (unit.class.length === 2) {
       // @ts-ignore
       unit.class = [unit.class[0], ...unit.class]
