@@ -1,6 +1,7 @@
 import { Button } from 'components/Button'
 import { Changelog } from 'components/Changelog'
 import {
+  GatherIslandIcon,
   Icon,
   NewsCooIcon,
   SettingsIcon,
@@ -13,6 +14,7 @@ import { MyUserBox } from 'models/userBox'
 import { AppManagement } from 'pages/AppManagement'
 import { Credits } from 'pages/Credits'
 import { ExportFor } from 'pages/ExportFor'
+import { GatherIsland } from 'pages/GatherIsland'
 import { ReactNode, useState } from 'react'
 
 type SettingsProps = {
@@ -45,6 +47,10 @@ export function Settings({ onClose, myUserBox }: SettingsProps) {
 
       <SettingAction title="Settings" icon={SettingsIcon}>
         <AppManagement myUserBox={myUserBox} />
+      </SettingAction>
+
+      <SettingAction icon={GatherIslandIcon} title="Gather Island">
+        <GatherIsland />
       </SettingAction>
     </Popup>
   )

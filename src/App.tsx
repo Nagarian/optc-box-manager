@@ -4,11 +4,10 @@ import { Button } from 'components/Button'
 import {
   AddIcon,
   EditIcon,
-  GatherIslandIcon,
   LogoIcon,
   SearchBuilderIcon,
   SettingsIcon,
-  SugoPullIcon,
+  SugoPullIcon
 } from 'components/Icon'
 import { SubTitle, Title } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
@@ -23,7 +22,6 @@ import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { Add } from 'pages/Add'
 import { BulkEdit } from 'pages/BulkEdit'
 import { Detail } from 'pages/Detail'
-import { GatherIsland } from 'pages/GatherIsland'
 import { MyUserBox } from 'pages/MyUserBox'
 import { SearchBuilder } from 'pages/SearchBuilder'
 import {
@@ -48,7 +46,6 @@ type DisplayedPanel =
   | 'searchBuilder'
   | 'bulkedit'
   | 'sugocleaner'
-  | 'gatherIsland'
 
 export function App() {
   const { db: unitDatabase } = useOptcDb()
@@ -171,10 +168,6 @@ export function App() {
         />
       )}
 
-      {displayedPanel === 'gatherIsland' && (
-        <GatherIsland onClose={closePanel} />
-      )}
-
       <Box
         display="grid"
         gridAutoFlow="column"
@@ -209,11 +202,6 @@ export function App() {
           onClick={() => setDisplayedPanel('settings')}
           icon={SettingsIcon}
           title="Extras"
-        />
-        <Button
-          onClick={() => setDisplayedPanel('gatherIsland')}
-          icon={GatherIslandIcon}
-          title="Gather Island"
         />
       </Box>
     </AppBlock>
