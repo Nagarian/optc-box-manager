@@ -7,14 +7,16 @@ import { Text } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
 import { useSugoCleaner } from 'hooks/useSugoCleaner'
 import { useUserSettings } from 'hooks/useUserSettings'
+import { MyShipBox } from 'models/shipBox'
 import { MyUserBox } from 'models/userBox'
 import { ChangeEvent, useRef, useState } from 'react'
 import { importAsJson } from 'services/share'
 
 type BackupProps = {
   myUserBox: MyUserBox
+  myShipBox: MyShipBox
 }
-export function Backup({ myUserBox }: BackupProps) {
+export function Backup({ myUserBox, myShipBox }: BackupProps) {
   const userSetting = useUserSettings()
   const db = useOptcDb()
   const sugoCleaner = useSugoCleaner(db.db)
@@ -33,6 +35,14 @@ export function Backup({ myUserBox }: BackupProps) {
         reset={myUserBox.reset}
         exportFn={myUserBox.exportDB}
         importFn={myUserBox.importDB}
+      />
+
+      <Section
+        title="Ship Box"
+        description="This backup will contain your current ship box with all your ships, their levels, their modifications, ..."
+        reset={myShipBox.reset}
+        exportFn={myShipBox.exportDB}
+        importFn={myShipBox.importDB}
       />
 
       <Section
