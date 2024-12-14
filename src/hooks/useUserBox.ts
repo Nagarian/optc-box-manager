@@ -60,7 +60,9 @@ export function useUserBox(): MyUserBox {
   return {
     userBox,
     isLoading,
-    loadingStatus: !dbLoaded ? 'Database Loading' : 'Box Syncing',
+    loadingStatus: !dbLoaded
+      ? 'Character Database Loading'
+      : 'Character Box Syncing',
     add: (...units: ExtendedUnit[]) => {
       const userUnits = units.map(UserUnitFactory)
       setUserBox(userBox.concat(userUnits))
@@ -102,7 +104,7 @@ export function useUserBox(): MyUserBox {
     },
     exportDB: async () => {
       const payload = JSON.stringify(userBox, replacer)
-      await exportAsJson(payload, 'optc-bm')
+      await exportAsJson(payload, 'optc-bm-units')
     },
   }
 }

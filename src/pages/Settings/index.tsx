@@ -10,6 +10,7 @@ import {
   TreasureIcon,
 } from 'components/Icon'
 import { Popup } from 'components/Popup'
+import { MyShipBox } from 'models/shipBox'
 import { MyUserBox } from 'models/userBox'
 import { AppManagement } from 'pages/AppManagement'
 import { Credits } from 'pages/Credits'
@@ -20,9 +21,10 @@ import { ReactNode, useState } from 'react'
 type SettingsProps = {
   onClose: () => void
   myUserBox: MyUserBox
+  myShipBox: MyShipBox
 }
 
-export function Settings({ onClose, myUserBox }: SettingsProps) {
+export function Settings({ onClose, myUserBox, myShipBox }: SettingsProps) {
   return (
     <Popup title="Extras" onClose={onClose}>
       <SettingAction title="Credits" icon={TreasureIcon}>
@@ -46,7 +48,7 @@ export function Settings({ onClose, myUserBox }: SettingsProps) {
       </SettingAction>
 
       <SettingAction title="Settings" icon={SettingsIcon}>
-        <AppManagement myUserBox={myUserBox} />
+        <AppManagement myUserBox={myUserBox} myShipBox={myShipBox} />
       </SettingAction>
 
       <SettingAction icon={GatherIslandIcon} title="Gather Island">

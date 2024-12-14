@@ -7,7 +7,7 @@ import {
   LogoIcon,
   SearchBuilderIcon,
   SettingsIcon,
-  SugoPullIcon
+  SugoPullIcon,
 } from 'components/Icon'
 import { SubTitle, Title } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
@@ -16,6 +16,7 @@ import {
   mergeSearch,
   useSavedSearch,
 } from 'hooks/useSearch'
+import { useShipBox } from 'hooks/useShipBox'
 import { useUserBox } from 'hooks/useUserBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
@@ -54,10 +55,17 @@ export function App() {
   const { search, setSearch } = useSavedSearch('search', DefaultUserBoxSearch)
 
   const myUserBox = useUserBox()
-  const { userBox, add, update, bulkUpdate, remove, isLoading, loadingStatus } =
-    myUserBox
+  const { userBox, add, update, bulkUpdate, remove } = myUserBox
 
-  if (isLoading) {
+  const myShipBox = useShipBox()
+
+  const loadingStatus = myUserBox.isLoading
+    ? myUserBox.loadingStatus
+    : myShipBox.isLoading
+      ? myShipBox.loadingStatus
+      : undefined
+
+  if (loadingStatus) {
     return (
       <AppBlock>
         <Box
@@ -135,7 +143,11 @@ export function App() {
       )}
 
       {displayedPanel === 'settings' && (
-        <Settings onClose={closePanel} myUserBox={myUserBox} />
+        <Settings
+          onClose={closePanel}
+          myUserBox={myUserBox}
+          myShipBox={myShipBox}
+        />
       )}
 
       {displayedPanel === 'searchBuilder' && (
