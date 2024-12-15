@@ -1,20 +1,16 @@
 import styled from '@emotion/styled'
-import { Box } from 'components/Box'
 import { SubTitle, Text } from 'components/Title'
 import { Components } from 'react-markdown'
 import { space, SpaceProps } from 'styled-system'
 
-const ListItem = styled.li`
-  ::before {
-    content: '🏴‍☠️ ';
-    font-size: ${p => p.theme.fontSizes[2]};
-  }
+const UnorderedList = styled.ul`
+  list-style-type: '🏴‍☠️';
+  list-style-position: outside;
+  padding-inline-start: ${p => p.theme.space[4]};
 `
-
 const OrderedList = styled.ol`
-  & > li {
-    margin-left: 2rem;
-  }
+  list-style-position: outside;
+  padding-inline-start: ${p => p.theme.space[4]};
 `
 
 const Img = styled.img`
@@ -40,7 +36,7 @@ export const ReactMarkdownRenderers: Components = {
   p: p => <Text {...p} m="1" />,
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   a: p => <a {...p} target="_blank" rel="noopener noreferrer" />,
-  li: p => <ListItem {...p} />,
+  ul: p => <UnorderedList {...p} />,
   ol: p => <OrderedList {...p} />,
   img: p => <Img {...p} />,
   blockquote: p => <BlockQuote m="2" pl="2" {...p} />,
