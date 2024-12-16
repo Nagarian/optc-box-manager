@@ -3,6 +3,7 @@ import { diffWords } from 'diff'
 import { memo, ReactNode } from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+import { ReactMarkdownRenderers } from 'styles/react-markdown'
 import { OrbColor } from 'styles/theme-definition'
 
 export type DescriptionHighlighterProps = {
@@ -25,16 +26,15 @@ function BaseDescriptionHighlighter({
     const diffs = diffWords(originalDiff, value, { ignoreCase: true })
     parts = diffs
       .filter(x => !x.removed)
-      .reduce(
-        (concat, x) =>
-          concat +
-          (x.added
-            ? (x.value.startsWith(' ') ? ' *' : '*') +
-              x.value.trim() +
-              (x.value.endsWith(' ') ? '* ' : '*')
-            : x.value),
-        '',
+      .map(x =>
+        x.added
+          ? x.value
+              .replace(/^([,-]?\s?)/, '$1*')
+              .replace(/([\s\n]*)$/, '*$1')
+              .replaceAll(/(.+)(\n-?\s?)(.+)/gi, '$1*$2*$3')
+          : x.value,
       )
+      .join('')
   }
 
   parts = parts.replace(
@@ -78,6 +78,7 @@ const DiffHiglighter = styled.em`
 `
 
 const renderers: Components = {
+  ...ReactMarkdownRenderers,
   p: p => <FakeParagraph {...p} />,
   h3: p => <Header3 {...p} />,
   a: ({ href, ...p }) => {

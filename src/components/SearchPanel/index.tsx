@@ -8,10 +8,12 @@ import { useSearch } from 'hooks/useSearch'
 import { Search } from 'models/search'
 import { ExtendedUnit } from 'models/units'
 import { flex, FlexProps, SizeProps, space, SpaceProps } from 'styled-system'
+import { gap, GapProps } from 'styles'
 
-export const ResultList = styled.div<SpaceProps & FlexProps>`
+export const ResultList = styled.div<SpaceProps & FlexProps & GapProps>`
   ${flex}
   ${space}
+  ${gap}
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
