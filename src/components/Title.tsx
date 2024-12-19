@@ -16,7 +16,7 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system'
-import { cleanStyledSystem } from 'styles'
+import { cleanStyledSystem, place, PlaceProps } from 'styles'
 
 export type TypoProps = SpaceProps &
   TypographyProps &
@@ -24,7 +24,8 @@ export type TypoProps = SpaceProps &
   FlexProps &
   LayoutProps &
   ColorProps &
-  FlexboxProps
+  FlexboxProps &
+  PlaceProps
 
 export const Text = styled('p', cleanStyledSystem)<TypoProps>(
   space,
@@ -34,6 +35,7 @@ export const Text = styled('p', cleanStyledSystem)<TypoProps>(
   flex,
   flexbox,
   layout,
+  place,
 )
 
 export const Title = ({

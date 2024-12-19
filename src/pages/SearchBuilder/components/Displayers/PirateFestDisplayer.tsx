@@ -1,11 +1,11 @@
 import { Box } from 'components/Box'
-import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { ChoiceInput } from 'components/forms/ChoiceInput'
 import {
   PirateFestAbilityIcon,
   PirateFestBothIcon,
   PirateFestSpecialIcon,
 } from 'components/Icon'
+import { InfoDisplayer } from 'components/InfoDisplayer'
 import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
 import { SearchOptionInputProps } from 'models/search'

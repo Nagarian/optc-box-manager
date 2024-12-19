@@ -1,4 +1,4 @@
-import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
+import { InfoDisplayer } from 'components/InfoDisplayer'
 import { Text } from 'components/Title'
 import { SearchDisplayerProps } from '.'
 

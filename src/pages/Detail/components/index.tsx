@@ -25,8 +25,16 @@ export function InputLabel({
   return (
     <Box display="flex" flexDirection="column">
       <Box my="2">
-        <SubTitle fontSize="1" marginBottom="2">
-          <DescriptionHighlighter value={name} /> (
+        <SubTitle
+          fontSize="1"
+          marginBottom="2"
+          display={typeof name === 'string' ? 'block' : 'flex'}
+          flexDirection="row"
+          placeItems="center"
+          placeContent="center"
+        >
+          <DescriptionHighlighter value={name} />
+          {' ('}
           <Progression
             value={value}
             max={max}
@@ -34,7 +42,7 @@ export function InputLabel({
             isExtended={isExtended}
             skipMax={skipMax}
           />
-          )
+          {')'}
         </SubTitle>
 
         {descriptions && (
