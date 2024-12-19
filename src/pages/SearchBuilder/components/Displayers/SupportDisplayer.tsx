@@ -1,5 +1,5 @@
-import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { SupportIcon } from 'components/Icon'
+import { InfoDisplayer } from 'components/InfoDisplayer'
 import { Progression } from 'components/Progression'
 import { SearchDisplayerProps } from '.'
 

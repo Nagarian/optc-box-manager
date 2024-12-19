@@ -1,5 +1,5 @@
 import { UserUnitCottonCandy } from 'models/userBox'
-import { InfoDisplayer } from './InfoDisplayer'
+import { InfoDisplayer } from '../../InfoDisplayer'
 
 export type CottonCandyDisplayerProps = {
   cc?: UserUnitCottonCandy

@@ -13,4 +13,4 @@ import { cleanStyledSystem } from 'styles'
 
 export const Image = styled('img', cleanStyledSystem)<
   SizeProps & SpaceProps & DisplayProps & GridAreaProps
->(size, space, display, gridArea)
+>(size, space, display, gridArea, 'object-fit: contain;')

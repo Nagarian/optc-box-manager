@@ -1,7 +1,7 @@
 import { Box } from 'components/Box'
-import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { ChoiceInput } from 'components/forms/ChoiceInput'
 import { CoopCaptainIcon, CoopSpecialIcon, LockIcon } from 'components/Icon'
+import { InfoDisplayer } from 'components/InfoDisplayer'
 import { Luck } from 'components/Luck'
 import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'

@@ -1,6 +1,6 @@
 import { Box } from 'components/Box'
-import { InfoDisplayer } from 'components/CharacterBox/components/InfoDisplayer'
 import { ImageInput } from 'components/forms/ImageInput'
+import { InfoDisplayer } from 'components/InfoDisplayer'
 import { PotentialAbility } from 'components/PotentialAbility'
 import { Progression } from 'components/Progression'
 import { Text } from 'components/Title'
