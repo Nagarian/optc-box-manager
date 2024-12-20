@@ -1,0 +1,768 @@
+{
+  "gemTree": {
+    "title": "Rainbow Fruit Tree",
+    "description": "Get 1 rainbow gem every {value} hours",
+    "levels": [
+      { "value": 96, "cost": 0 },
+      { "value": 95, "cost": 0 },
+      { "value": 94, "cost": 18 },
+      { "value": 93, "cost": 22 },
+      { "value": 88, "cost": 30 },
+      { "value": 87, "cost": 50 },
+      { "value": 86, "cost": 50 },
+      { "value": 85, "cost": 100 },
+      { "value": 84, "cost": 200 },
+      { "value": 80, "cost": 300 },
+      { "value": 79, "cost": 400 },
+      { "value": 78, "cost": 400 },
+      { "value": 77, "cost": 400 },
+      { "value": 76, "cost": 400 },
+      { "value": 72, "cost": 400 },
+      { "value": 71, "cost": 400 },
+      { "value": 70, "cost": 400 },
+      { "value": 69, "cost": 400 },
+      { "value": 68, "cost": 600 },
+      { "value": 64, "cost": 600 },
+      { "value": 63, "cost": 800 },
+      { "value": 62, "cost": 1200 },
+      { "value": 61, "cost": 1200 },
+      { "value": 60, "cost": 1600 },
+      { "value": 57, "cost": 2000 },
+      { "value": 54, "cost": 3000 },
+      { "value": 51, "cost": 3000 },
+      { "value": 48, "cost": 6000 },
+      { "value": 45, "cost": 16000 },
+      { "value": 42, "cost": 18000 },
+      { "value": 38, "cost": 20000 },
+      { "value": 34, "cost": 22000 },
+      { "value": 30, "cost": 26000 },
+      { "value": 26, "cost": 34000 },
+      { "value": 20, "cost": 40000 }
+    ]
+  },
+  "berryCave": {
+    "title": "Berry Cave",
+    "description": "Get {value} berrys every hour",
+    "levels": [
+      { "value": 100, "cost": 0 },
+      { "value": 200, "cost": 8 },
+      { "value": 300, "cost": 9 },
+      { "value": 400, "cost": 11 },
+      { "value": 1500, "cost": 15 },
+      { "value": 1600, "cost": 25 },
+      { "value": 1700, "cost": 25 },
+      { "value": 1800, "cost": 50 },
+      { "value": 1900, "cost": 100 },
+      { "value": 3000, "cost": 150 },
+      { "value": 3100, "cost": 200 },
+      { "value": 3200, "cost": 200 },
+      { "value": 3300, "cost": 200 },
+      { "value": 3400, "cost": 200 },
+      { "value": 3500, "cost": 200 },
+      { "value": 3600, "cost": 200 },
+      { "value": 3700, "cost": 200 },
+      { "value": 3800, "cost": 200 },
+      { "value": 3900, "cost": 300 },
+      { "value": 10000, "cost": 300 },
+      { "value": 10500, "cost": 400 },
+      { "value": 11000, "cost": 600 },
+      { "value": 11500, "cost": 600 },
+      { "value": 12000, "cost": 800 },
+      { "value": 13000, "cost": 1000 },
+      { "value": 13500, "cost": 1500 },
+      { "value": 14000, "cost": 1500 },
+      { "value": 14500, "cost": 3000 },
+      { "value": 15000, "cost": 8000 },
+      { "value": 20000, "cost": 9000 },
+      { "value": 21000, "cost": 10000 },
+      { "value": 22000, "cost": 11000 },
+      { "value": 23000, "cost": 13000 },
+      { "value": 24000, "cost": 17000 },
+      { "value": 25000, "cost": 20000 }
+    ]
+  },
+  "trainingGround": {
+    "title": "Training Ground",
+    "description": "Get {value} training points every 12 hours",
+    "levels": [
+      { "value": 2, "cost": 0 },
+      { "value": 3, "cost": 16 },
+      { "value": 4, "cost": 18 },
+      { "value": 5, "cost": 22 },
+      { "value": 12, "cost": 30 },
+      { "value": 13, "cost": 50 },
+      { "value": 14, "cost": 100 },
+      { "value": 15, "cost": 200 },
+      { "value": 16, "cost": 300 },
+      { "value": 17, "cost": 400 },
+      { "value": 18, "cost": 400 },
+      { "value": 19, "cost": 400 },
+      { "value": 20, "cost": 400 },
+      { "value": 21, "cost": 400 },
+      { "value": 22, "cost": 400 },
+      { "value": 23, "cost": 400 },
+      { "value": 24, "cost": 400 },
+      { "value": 25, "cost": 400 },
+      { "value": 26, "cost": 600 },
+      { "value": 40, "cost": 600 },
+      { "value": 42, "cost": 800 },
+      { "value": 44, "cost": 1200 },
+      { "value": 46, "cost": 1200 },
+      { "value": 48, "cost": 1600 },
+      { "value": 50, "cost": 2000 },
+      { "value": 52, "cost": 3000 },
+      { "value": 54, "cost": 3000 },
+      { "value": 56, "cost": 6000 },
+      { "value": 60, "cost": 16000 },
+      { "value": 64, "cost": 18000 },
+      { "value": 68, "cost": 20000 },
+      { "value": 72, "cost": 22000 },
+      { "value": 80, "cost": 26000 },
+      { "value": 90, "cost": 34000 },
+      { "value": 100, "cost": 40000 }
+    ]
+  },
+  "meatRoaster": {
+    "title": "Meat Roaster",
+    "description": "Get 1 great roasted meat every {value} hours",
+    "levels": [
+      { "value": 96, "cost": 0 },
+      { "value": 95, "cost": 8 },
+      { "value": 94, "cost": 9 },
+      { "value": 93, "cost": 11 },
+      { "value": 88, "cost": 15 },
+      { "value": 87, "cost": 25 },
+      { "value": 86, "cost": 25 },
+      { "value": 85, "cost": 50 },
+      { "value": 84, "cost": 100 },
+      { "value": 80, "cost": 150 },
+      { "value": 79, "cost": 200 },
+      { "value": 78, "cost": 200 },
+      { "value": 77, "cost": 200 },
+      { "value": 76, "cost": 200 },
+      { "value": 72, "cost": 200 },
+      { "value": 71, "cost": 200 },
+      { "value": 70, "cost": 200 },
+      { "value": 69, "cost": 200 },
+      { "value": 68, "cost": 300 },
+      { "value": 64, "cost": 300 },
+      { "value": 63, "cost": 400 },
+      { "value": 62, "cost": 600 },
+      { "value": 61, "cost": 600 },
+      { "value": 60, "cost": 800 },
+      { "value": 57, "cost": 1000 },
+      { "value": 54, "cost": 1500 },
+      { "value": 51, "cost": 1500 },
+      { "value": 48, "cost": 3000 },
+      { "value": 45, "cost": 8000 },
+      { "value": 42, "cost": 9000 },
+      { "value": 38, "cost": 10000 },
+      { "value": 34, "cost": 11000 },
+      { "value": 30, "cost": 13000 },
+      { "value": 26, "cost": 17000 },
+      { "value": 20, "cost": 20000 }
+    ]
+  },
+  "fishingSpot": {
+    "title": "Fishing Spot",
+    "description": "Allow to fish once per day reinforcement resources, evolution materials, and more (Super Success: {superSuccess}%, Success: {success}%, Failure: {failure}%)",
+    "levels": [
+      {
+        "value": { "superSuccess": 2, "success": 40, "failure": 58 },
+        "cost": 0
+      },
+      {
+        "value": { "superSuccess": 2, "success": 41, "failure": 57 },
+        "cost": 8
+      },
+      {
+        "value": { "superSuccess": 2, "success": 42, "failure": 56 },
+        "cost": 9
+      },
+      {
+        "value": { "superSuccess": 2, "success": 43, "failure": 55 },
+        "cost": 11
+      },
+      {
+        "value": { "superSuccess": 2, "success": 50, "failure": 48 },
+        "cost": 15
+      },
+      {
+        "value": { "superSuccess": 2, "success": 51, "failure": 47 },
+        "cost": 25
+      },
+      {
+        "value": { "superSuccess": 2, "success": 52, "failure": 46 },
+        "cost": 25
+      },
+      {
+        "value": { "superSuccess": 2, "success": 53, "failure": 45 },
+        "cost": 50
+      },
+      {
+        "value": { "superSuccess": 2, "success": 54, "failure": 44 },
+        "cost": 100
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 55, "failure": 42.5 },
+        "cost": 150
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 56, "failure": 41.5 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 57, "failure": 40.5 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 58, "failure": 39.5 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 59, "failure": 38.5 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 3, "success": 60, "failure": 37 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 3, "success": 61, "failure": 36 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 3, "success": 62, "failure": 35 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 3, "success": 63, "failure": 34 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 3, "success": 64, "failure": 33 },
+        "cost": 300
+      },
+      {
+        "value": { "superSuccess": 5, "success": 65, "failure": 30 },
+        "cost": 300
+      },
+      {
+        "value": { "superSuccess": 5, "success": 66, "failure": 29 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 5, "success": 67, "failure": 28 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 68, "failure": 27 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 69, "failure": 26 },
+        "cost": 800
+      },
+      {
+        "value": { "superSuccess": 5, "success": 70, "failure": 25 },
+        "cost": 1000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 71, "failure": 24 },
+        "cost": 1500
+      },
+      {
+        "value": { "superSuccess": 5, "success": 72, "failure": 23 },
+        "cost": 1500
+      },
+      {
+        "value": { "superSuccess": 5, "success": 73, "failure": 22 },
+        "cost": 3000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 74, "failure": 21 },
+        "cost": 8000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 75, "failure": 19 },
+        "cost": 9000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 76, "failure": 18 },
+        "cost": 10000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 77, "failure": 15 },
+        "cost": 11000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 78, "failure": 14 },
+        "cost": 13000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 79, "failure": 13 },
+        "cost": 17000
+      },
+      {
+        "value": { "superSuccess": 10, "success": 80, "failure": 10 },
+        "cost": 20000
+      }
+    ]
+  },
+  "treasureHunters": {
+    "title": "Treasure Hunters",
+    "description": "Allow to seek for treasures once per day (Super Success: {superSuccess}%, Success: {success}%, Failure: {failure}%)",
+    "levels": [
+      {
+        "value": { "superSuccess": 2, "success": 40, "failure": 58 },
+        "cost": 0
+      },
+      {
+        "value": { "superSuccess": 2, "success": 41, "failure": 57 },
+        "cost": 16
+      },
+      {
+        "value": { "superSuccess": 2, "success": 42, "failure": 56 },
+        "cost": 18
+      },
+      {
+        "value": { "superSuccess": 2, "success": 43, "failure": 55 },
+        "cost": 22
+      },
+      {
+        "value": { "superSuccess": 2, "success": 50, "failure": 48 },
+        "cost": 30
+      },
+      {
+        "value": { "superSuccess": 2, "success": 51, "failure": 47 },
+        "cost": 50
+      },
+      {
+        "value": { "superSuccess": 2, "success": 52, "failure": 46 },
+        "cost": 50
+      },
+      {
+        "value": { "superSuccess": 2, "success": 53, "failure": 45 },
+        "cost": 100
+      },
+      {
+        "value": { "superSuccess": 2, "success": 54, "failure": 44 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 55, "failure": 42.5 },
+        "cost": 300
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 56, "failure": 41.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 57, "failure": 40.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 58, "failure": 39.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 59, "failure": 38.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 60, "failure": 37 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 61, "failure": 36 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 62, "failure": 35 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 63, "failure": 34 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 64, "failure": 33 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 65, "failure": 30 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 66, "failure": 29 },
+        "cost": 800
+      },
+      {
+        "value": { "superSuccess": 5, "success": 67, "failure": 28 },
+        "cost": 1200
+      },
+      {
+        "value": { "superSuccess": 5, "success": 68, "failure": 27 },
+        "cost": 1200
+      },
+      {
+        "value": { "superSuccess": 5, "success": 69, "failure": 26 },
+        "cost": 1600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 70, "failure": 25 },
+        "cost": 2000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 71, "failure": 24 },
+        "cost": 3000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 72, "failure": 23 },
+        "cost": 3000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 73, "failure": 22 },
+        "cost": 6000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 74, "failure": 21 },
+        "cost": 16000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 75, "failure": 19 },
+        "cost": 18000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 76, "failure": 18 },
+        "cost": 20000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 77, "failure": 15 },
+        "cost": 22000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 78, "failure": 14 },
+        "cost": 26000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 79, "failure": 13 },
+        "cost": 34000
+      },
+      {
+        "value": { "superSuccess": 10, "success": 80, "failure": 10 },
+        "cost": 40000
+      }
+    ]
+  },
+  "guidingMine": {
+    "title": "Guiding Mine",
+    "description": "Allow to mine limit break ressources once per day (Super Success: {superSuccess}%, Success: {success}%, Failure: {failure}%)",
+    "levels": [
+      {
+        "value": { "superSuccess": 2, "success": 40, "failure": 58 },
+        "cost": 0
+      },
+      {
+        "value": { "superSuccess": 2, "success": 41, "failure": 57 },
+        "cost": 16
+      },
+      {
+        "value": { "superSuccess": 2, "success": 42, "failure": 56 },
+        "cost": 18
+      },
+      {
+        "value": { "superSuccess": 2, "success": 43, "failure": 55 },
+        "cost": 22
+      },
+      {
+        "value": { "superSuccess": 2, "success": 50, "failure": 48 },
+        "cost": 30
+      },
+      {
+        "value": { "superSuccess": 2, "success": 51, "failure": 47 },
+        "cost": 50
+      },
+      {
+        "value": { "superSuccess": 2, "success": 52, "failure": 46 },
+        "cost": 50
+      },
+      {
+        "value": { "superSuccess": 2, "success": 53, "failure": 45 },
+        "cost": 100
+      },
+      {
+        "value": { "superSuccess": 2, "success": 54, "failure": 44 },
+        "cost": 200
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 55, "failure": 42.5 },
+        "cost": 300
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 56, "failure": 41.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 57, "failure": 40.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 58, "failure": 39.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 2.5, "success": 59, "failure": 38.5 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 60, "failure": 37 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 61, "failure": 36 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 62, "failure": 35 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 63, "failure": 34 },
+        "cost": 400
+      },
+      {
+        "value": { "superSuccess": 3, "success": 64, "failure": 33 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 65, "failure": 30 },
+        "cost": 600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 66, "failure": 29 },
+        "cost": 800
+      },
+      {
+        "value": { "superSuccess": 5, "success": 67, "failure": 28 },
+        "cost": 1200
+      },
+      {
+        "value": { "superSuccess": 5, "success": 68, "failure": 27 },
+        "cost": 1200
+      },
+      {
+        "value": { "superSuccess": 5, "success": 69, "failure": 26 },
+        "cost": 1600
+      },
+      {
+        "value": { "superSuccess": 5, "success": 70, "failure": 25 },
+        "cost": 2000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 71, "failure": 24 },
+        "cost": 3000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 72, "failure": 23 },
+        "cost": 3000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 73, "failure": 22 },
+        "cost": 6000
+      },
+      {
+        "value": { "superSuccess": 5, "success": 74, "failure": 21 },
+        "cost": 16000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 75, "failure": 19 },
+        "cost": 18000
+      },
+      {
+        "value": { "superSuccess": 6, "success": 76, "failure": 18 },
+        "cost": 20000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 77, "failure": 15 },
+        "cost": 22000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 78, "failure": 14 },
+        "cost": 26000
+      },
+      {
+        "value": { "superSuccess": 8, "success": 79, "failure": 13 },
+        "cost": 34000
+      },
+      {
+        "value": { "superSuccess": 10, "success": 80, "failure": 10 },
+        "cost": 40000
+      }
+    ]
+  },
+  "springOfVitality": {
+    "title": "Spring of Vitality",
+    "description": "Increase max stamina by {value}",
+    "levels": [
+      { "value": 1, "cost": 8 },
+      { "value": 2, "cost": 9 },
+      { "value": 3, "cost": 11 },
+      { "value": 4, "cost": 15 },
+      { "value": 10, "cost": 25 },
+      { "value": 11, "cost": 25 },
+      { "value": 12, "cost": 50 },
+      { "value": 13, "cost": 100 },
+      { "value": 14, "cost": 150 },
+      { "value": 15, "cost": 200 },
+      { "value": 16, "cost": 200 },
+      { "value": 17, "cost": 200 },
+      { "value": 18, "cost": 200 },
+      { "value": 19, "cost": 200 },
+      { "value": 22, "cost": 200 },
+      { "value": 23, "cost": 200 },
+      { "value": 24, "cost": 200 },
+      { "value": 25, "cost": 200 },
+      { "value": 26, "cost": 300 },
+      { "value": 30, "cost": 300 },
+      { "value": 31, "cost": 400 },
+      { "value": 32, "cost": 600 },
+      { "value": 33, "cost": 600 },
+      { "value": 34, "cost": 800 },
+      { "value": 36, "cost": 1000 },
+      { "value": 37, "cost": 1500 },
+      { "value": 38, "cost": 1500 },
+      { "value": 39, "cost": 3000 },
+      { "value": 40, "cost": 8000 },
+      { "value": 43, "cost": 9000 },
+      { "value": 46, "cost": 10000 },
+      { "value": 49, "cost": 11000 },
+      { "value": 52, "cost": 13000 },
+      { "value": 55, "cost": 17000 },
+      { "value": 60, "cost": 20000 }
+    ]
+  },
+  "monumentOfFerocity": {
+    "title": "Monument of Ferocity",
+    "description": "Increase max ATK by {value}",
+    "levels": [
+      { "value": 1, "cost": 0 },
+      { "value": 3, "cost": 24 },
+      { "value": 5, "cost": 27 },
+      { "value": 7, "cost": 33 },
+      { "value": 10, "cost": 45 },
+      { "value": 12, "cost": 75 },
+      { "value": 14, "cost": 75 },
+      { "value": 16, "cost": 150 },
+      { "value": 18, "cost": 300 },
+      { "value": 30, "cost": 450 },
+      { "value": 32, "cost": 600 },
+      { "value": 34, "cost": 600 },
+      { "value": 36, "cost": 600 },
+      { "value": 38, "cost": 600 },
+      { "value": 45, "cost": 600 },
+      { "value": 47, "cost": 600 },
+      { "value": 49, "cost": 600 },
+      { "value": 51, "cost": 600 },
+      { "value": 53, "cost": 900 },
+      { "value": 60, "cost": 900 },
+      { "value": 62, "cost": 1200 },
+      { "value": 64, "cost": 1800 },
+      { "value": 66, "cost": 1800 },
+      { "value": 68, "cost": 2400 },
+      { "value": 80, "cost": 3000 },
+      { "value": 82, "cost": 4500 },
+      { "value": 84, "cost": 4500 },
+      { "value": 86, "cost": 9000 },
+      { "value": 88, "cost": 24000 },
+      { "value": 90, "cost": 27000 },
+      { "value": 92, "cost": 30000 },
+      { "value": 94, "cost": 33000 },
+      { "value": 96, "cost": 39000 },
+      { "value": 98, "cost": 51000 },
+      { "value": 100, "cost": 60000 }
+    ]
+  },
+  "monumentOfHealing": {
+    "title": "Monument of Healing",
+    "description": "Increase max RCV by {value}",
+    "levels": [
+      { "value": 1, "cost": 0 },
+      { "value": 3, "cost": 24 },
+      { "value": 5, "cost": 27 },
+      { "value": 7, "cost": 33 },
+      { "value": 10, "cost": 45 },
+      { "value": 12, "cost": 75 },
+      { "value": 14, "cost": 75 },
+      { "value": 16, "cost": 150 },
+      { "value": 18, "cost": 300 },
+      { "value": 30, "cost": 450 },
+      { "value": 32, "cost": 600 },
+      { "value": 34, "cost": 600 },
+      { "value": 36, "cost": 600 },
+      { "value": 38, "cost": 600 },
+      { "value": 45, "cost": 600 },
+      { "value": 47, "cost": 600 },
+      { "value": 49, "cost": 600 },
+      { "value": 51, "cost": 600 },
+      { "value": 53, "cost": 900 },
+      { "value": 60, "cost": 900 },
+      { "value": 62, "cost": 1200 },
+      { "value": 64, "cost": 1800 },
+      { "value": 66, "cost": 1800 },
+      { "value": 68, "cost": 2400 },
+      { "value": 80, "cost": 3000 },
+      { "value": 82, "cost": 4500 },
+      { "value": 84, "cost": 4500 },
+      { "value": 86, "cost": 9000 },
+      { "value": 88, "cost": 24000 },
+      { "value": 90, "cost": 27000 },
+      { "value": 92, "cost": 30000 },
+      { "value": 94, "cost": 33000 },
+      { "value": 96, "cost": 39000 },
+      { "value": 98, "cost": 51000 },
+      { "value": 100, "cost": 60000 }
+    ]
+  },
+  "monumentOfEndurance": {
+    "title": "Monument of Endurance",
+    "description": "Increase max HP by {value}",
+    "levels": [
+      { "value": 1, "cost": 0 },
+      { "value": 3, "cost": 24 },
+      { "value": 5, "cost": 27 },
+      { "value": 7, "cost": 33 },
+      { "value": 10, "cost": 45 },
+      { "value": 12, "cost": 75 },
+      { "value": 14, "cost": 75 },
+      { "value": 16, "cost": 150 },
+      { "value": 18, "cost": 300 },
+      { "value": 30, "cost": 450 },
+      { "value": 32, "cost": 600 },
+      { "value": 34, "cost": 600 },
+      { "value": 36, "cost": 600 },
+      { "value": 38, "cost": 600 },
+      { "value": 45, "cost": 600 },
+      { "value": 47, "cost": 600 },
+      { "value": 49, "cost": 600 },
+      { "value": 51, "cost": 600 },
+      { "value": 53, "cost": 900 },
+      { "value": 60, "cost": 900 },
+      { "value": 62, "cost": 1200 },
+      { "value": 64, "cost": 1800 },
+      { "value": 66, "cost": 1800 },
+      { "value": 68, "cost": 2400 },
+      { "value": 80, "cost": 3000 },
+      { "value": 82, "cost": 4500 },
+      { "value": 84, "cost": 4500 },
+      { "value": 86, "cost": 9000 },
+      { "value": 88, "cost": 24000 },
+      { "value": 90, "cost": 27000 },
+      { "value": 92, "cost": 30000 },
+      { "value": 94, "cost": 33000 },
+      { "value": 96, "cost": 39000 },
+      { "value": 98, "cost": 51000 },
+      { "value": 100, "cost": 60000 }
+    ]
+  }
+}

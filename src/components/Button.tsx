@@ -19,7 +19,7 @@ import {
   typography,
   variant,
 } from 'styled-system'
-import { cleanStyledSystem, place, PlaceProps } from 'styles'
+import { cleanStyledSystem, gap, GapProps, place, PlaceProps } from 'styles'
 import { Icon, LoaderIcon } from './Icon'
 
 type StyledButtonProps = SpaceProps &
@@ -30,6 +30,7 @@ type StyledButtonProps = SpaceProps &
   FontSizeProps &
   SizeProps &
   FlexDirectionProps &
+  GapProps &
   FontWeightProps & {
     variant?: 'primary' | 'secondary' | 'link' | 'danger'
     href?: string
@@ -58,6 +59,7 @@ export function Button({
   borderRadius = 4,
   placeItems = 'center',
   placeContent = 'center',
+  gap = 1,
   ...rest
 }: ButtonProps) {
   const defaultPaddingFix = !!Icon && !children ? { px: 2, py: 2 } : {}
@@ -77,10 +79,11 @@ export function Button({
       borderRadius={borderRadius}
       placeItems={placeItems}
       placeContent={placeContent}
+      gap={gap}
+      flexDirection={iconVariant === 'vertical' ? 'column' : 'row'}
       {...asLink}
       {...rest}
       {...defaultPaddingFix}
-      flexDirection={iconVariant === 'vertical' ? 'column' : 'row'}
     >
       {isLoading && <LoaderIcon size={size} marginRight={children ? 2 : 0} />}
       {Icon && (
@@ -91,8 +94,17 @@ export function Button({
   )
 }
 
-const Btn = styled('button', cleanStyledSystem)<ButtonProps>(
-  compose(flexDirection, space, color, border, typography, gridArea, place),
+const Btn = styled('button', cleanStyledSystem)<StyledButtonProps>(
+  compose(
+    flexDirection,
+    space,
+    color,
+    border,
+    typography,
+    gridArea,
+    place,
+    gap,
+  ),
   variant({
     scale: 'buttons',
     variants: {

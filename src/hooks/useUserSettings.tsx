@@ -1,3 +1,4 @@
+import { GatherIslandType } from 'models/gatherIsland'
 import {
   createContext,
   Dispatch,
@@ -20,6 +21,8 @@ export type AccountRecovery = {
   generatedAt: Date
 }
 
+export type UserGatheringIsland = Record<GatherIslandType, number>
+
 export type UserSetting = {
   settingVersion: number
   cottonCandiesMaximumLevel: {
@@ -27,6 +30,7 @@ export type UserSetting = {
     hp: number
     rcv: number
   }
+  gatheringIsland: UserGatheringIsland
   userSearches: SavedSearch[]
   reseter: Record<string, string | undefined>
   themeMode: ThemeMode
@@ -42,6 +46,19 @@ const defaultUserSettings: UserSetting = {
     addSettingSearch: DefaultSearches[1].id,
     sugocleaner: DefaultSearches[2].id,
     sugoCleanerAddSearch: DefaultSearches[3].id,
+  },
+  gatheringIsland: {
+    gemTree: 0,
+    berryCave: 0,
+    trainingGround: 0,
+    meatRoaster: 0,
+    fishingSpot: 0,
+    treasureHunters: 0,
+    guidingMine: 0,
+    springOfVitality: 0,
+    monumentOfFerocity: 0,
+    monumentOfHealing: 0,
+    monumentOfEndurance: 0,
   },
   cottonCandiesMaximumLevel: {
     atk: 0,
@@ -70,8 +87,13 @@ export const UserSettingsContext = createContext<Partial<UserSettingEnhanced>>(
   {},
 )
 
+const cottonCandyLimitMarksHash = [
+  1, 3, 5, 7, 10, 12, 14, 16, 18, 30, 32, 34, 36, 38, 45, 47, 49, 51, 53, 60,
+  62, 64, 66, 68, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100,
+]
+
 function migration(initial: UserSetting): UserSetting {
-  let updated = initial
+  let updated: UserSetting = initial
   if (initial.settingVersion === undefined) {
     updated = {
       ...defaultUserSettings,
@@ -87,6 +109,25 @@ function migration(initial: UserSetting): UserSetting {
       )
     ) {
       updated.userSearches = [...DefaultSearches, ...initial.userSearches]
+    }
+  }
+
+  if (updated.settingVersion === 2) {
+    updated.settingVersion = 3
+    updated.gatheringIsland = {
+      ...defaultUserSettings.gatheringIsland,
+      monumentOfFerocity:
+        cottonCandyLimitMarksHash.findIndex(
+          i => i === initial.cottonCandiesMaximumLevel.atk,
+        ) + 1,
+      monumentOfHealing:
+        cottonCandyLimitMarksHash.findIndex(
+          i => i === initial.cottonCandiesMaximumLevel.rcv,
+        ) + 1,
+      monumentOfEndurance:
+        cottonCandyLimitMarksHash.findIndex(
+          i => i === initial.cottonCandiesMaximumLevel.hp,
+        ) + 1,
     }
   }
 
