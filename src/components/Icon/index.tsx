@@ -63,6 +63,8 @@ import Search from './search.svg?react'
 import SearchBuilder from './searchbuilder.svg?react'
 import Settings from './settings.svg?react'
 import Share from './share.svg?react'
+import Shipyard from './shipyard.svg?react'
+import ShipyardBottle from './shipyard-bottle.svg?react'
 import Show from './show.svg?react'
 import SkillBook from './skillbook.svg?react'
 import SpecialLvl from './special.png'
@@ -183,6 +185,8 @@ export const SaveSearchIcon: Icon = BaseSvg.withComponent(SaveSearch)
 export const SettingsIcon: Icon = BaseSvg.withComponent(Settings)
 export const SearchIcon: Icon = BaseSvg.withComponent(Search)
 export const ShareIcon: Icon = BaseSvg.withComponent(Share)
+export const ShipyardIcon: Icon = BaseSvg.withComponent(Shipyard)
+export const ShipyardBottleIcon: Icon = BaseSvg.withComponent(ShipyardBottle)
 export const ShowIcon: Icon = BaseSvg.withComponent(Show)
 export const SkillBookIcon: Icon = BaseSvg.withComponent(SkillBook)
 export const SpecialLvlIcon: Icon = p => (

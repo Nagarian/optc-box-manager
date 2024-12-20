@@ -7,7 +7,10 @@ import {
   LogoIcon,
   SearchBuilderIcon,
   SettingsIcon,
+  ShipyardBottleIcon,
+  ShipyardIcon,
   SugoPullIcon,
+  TreasureIcon,
 } from 'components/Icon'
 import { SubTitle, Title } from 'components/Title'
 import { useOptcDb } from 'hooks/useOptcDb'
@@ -18,11 +21,13 @@ import {
 } from 'hooks/useSearch'
 import { useShipBox } from 'hooks/useShipBox'
 import { useUserBox } from 'hooks/useUserBox'
+import { UserShip } from 'models/shipBox'
 import { ExtendedUnit } from 'models/units'
 import { UserUnit, UserUnitBulkEdit } from 'models/userBox'
 import { Add } from 'pages/Add'
 import { BulkEdit } from 'pages/BulkEdit'
 import { Detail } from 'pages/Detail'
+import { MyShipBox } from 'pages/MyShipBox'
 import { MyUserBox } from 'pages/MyUserBox'
 import { SearchBuilder } from 'pages/SearchBuilder'
 import {
@@ -30,6 +35,7 @@ import {
   BySearchBoxInput,
 } from 'pages/SearchBuilder/components/Filters/Units/BySearchBox'
 import { Settings } from 'pages/Settings'
+import { ShipDetail } from 'pages/ShipDetail'
 import { SugoCleaner } from 'pages/SugoCleaner'
 import { useState } from 'react'
 
@@ -48,16 +54,21 @@ type DisplayedPanel =
   | 'bulkedit'
   | 'sugocleaner'
 
+type BoxMode = 'userBox' | 'shipBox'
+
 export function App() {
   const { db: unitDatabase } = useOptcDb()
   const [displayedPanel, setDisplayedPanel] = useState<DisplayedPanel>()
+  const [boxMode, setBoxMode] = useState<BoxMode>('userBox')
+
   const [showDetail, setShowDetail] = useState<UserUnit>()
   const { search, setSearch } = useSavedSearch('search', DefaultUserBoxSearch)
-
   const myUserBox = useUserBox()
   const { userBox, add, update, bulkUpdate, remove } = myUserBox
 
+  const [showShipDetail, setShowShipDetail] = useState<UserShip>()
   const myShipBox = useShipBox()
+  const { shipBox, update: shipUpdate } = myShipBox
 
   const loadingStatus = myUserBox.isLoading
     ? myUserBox.loadingStatus
@@ -95,6 +106,11 @@ export function App() {
     setShowDetail(undefined)
   }
 
+  const updateShip = (ship: UserShip) => {
+    shipUpdate(ship)
+    setShowShipDetail(undefined)
+  }
+
   const deleteUnit = (id: string) => {
     remove(id)
     setShowDetail(undefined)
@@ -107,22 +123,49 @@ export function App() {
 
   return (
     <AppBlock>
-      <BySearchBoxInput
-        criteria={search?.filters.units?.bySearchBox as BySearchBoxCriteria}
-        onChange={criteria =>
-          setSearch(
-            mergeSearch(search, {
-              filters: { units: { bySearchBox: criteria } },
-            }),
-          )
-        }
-      />
-      <MyUserBox
-        userBox={userBox}
-        search={search}
-        onAddUnit={() => setDisplayedPanel('add')}
-        onShowDetail={userUnit => setShowDetail(userUnit)}
-      />
+      {boxMode === 'userBox' && (
+        <BySearchBoxInput
+          criteria={search?.filters.units?.bySearchBox as BySearchBoxCriteria}
+          onChange={criteria =>
+            setSearch(
+              mergeSearch(search, {
+                filters: { units: { bySearchBox: criteria } },
+              }),
+            )
+          }
+        />
+      )}
+      {boxMode === 'shipBox' && (
+        <Box
+          display="grid"
+          gridAutoFlow="column"
+          placeItems="center"
+          placeContent="center"
+          gap="2"
+          px="3"
+          py="1"
+        >
+          <ShipyardBottleIcon size="2" color="secondaryText" />
+          <Title color="primaryText">Shipyard Manager</Title>
+          <ShipyardIcon size="2" color="secondaryText" />
+        </Box>
+      )}
+
+      {boxMode === 'userBox' && (
+        <MyUserBox
+          userBox={userBox}
+          search={search}
+          onAddUnit={() => setDisplayedPanel('add')}
+          onShowDetail={userUnit => setShowDetail(userUnit)}
+        />
+      )}
+
+      {boxMode === 'shipBox' && (
+        <MyShipBox
+          shipBox={shipBox}
+          onShowDetail={ship => setShowShipDetail(ship)}
+        />
+      )}
 
       {displayedPanel === 'add' && (
         <Add
@@ -139,6 +182,14 @@ export function App() {
           onValidate={updateUnit}
           userUnit={showDetail}
           units={unitDatabase}
+        />
+      )}
+
+      {!!showShipDetail && (
+        <ShipDetail
+          onCancel={() => setShowShipDetail(undefined)}
+          onValidate={updateShip}
+          userShip={showShipDetail}
         />
       )}
 
@@ -188,28 +239,50 @@ export function App() {
         py="2"
         boxShadow="none"
       >
-        <Button
-          onClick={() => setDisplayedPanel('add')}
-          icon={AddIcon}
-          title="Add new units"
-        />
-        {userBox.length > 0 && (
+        {boxMode === 'userBox' && (
+          <Button
+            onClick={() => setDisplayedPanel('add')}
+            icon={AddIcon}
+            title="Add new units"
+          />
+        )}
+        {boxMode === 'userBox' && userBox.length > 0 && (
           <Button
             onClick={() => setDisplayedPanel('bulkedit')}
             icon={EditIcon}
             title="Bulk edit"
           />
         )}
-        <Button
-          onClick={() => setDisplayedPanel('searchBuilder')}
-          icon={SearchBuilderIcon}
-          title="Search builder"
-        />
-        <Button
-          onClick={() => setDisplayedPanel('sugocleaner')}
-          icon={SugoPullIcon}
-          title="Sugo Cleaner"
-        />
+        {boxMode === 'userBox' && (
+          <Button
+            onClick={() => setDisplayedPanel('searchBuilder')}
+            icon={SearchBuilderIcon}
+            title="Search builder"
+          />
+        )}
+        {boxMode === 'userBox' && (
+          <Button
+            onClick={() => setDisplayedPanel('sugocleaner')}
+            icon={SugoPullIcon}
+            title="Sugo Cleaner"
+          />
+        )}
+
+        {boxMode === 'shipBox' && (
+          <Button
+            onClick={() => setBoxMode('userBox')}
+            icon={TreasureIcon}
+            title="Show Character Box"
+          />
+        )}
+        {boxMode === 'userBox' && (
+          <Button
+            onClick={() => setBoxMode('shipBox')}
+            icon={ShipyardIcon}
+            title="Show Ship Box"
+          />
+        )}
+
         <Button
           onClick={() => setDisplayedPanel('settings')}
           icon={SettingsIcon}
