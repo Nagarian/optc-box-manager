@@ -427,32 +427,6 @@ export function fixupSpecificIssue(
     delete unit.detail.lLimit.gpSpecial
   }
 
-  if ([4210, 4211].includes(unit.id)) {
-    // @ts-ignore
-    if (unit.detail.vsCondition) {
-      // @ts-ignore
-      unit.detail.VSCondition = unit.detail.vsCondition
-      // @ts-ignore
-      unit.detail.VSSpecial = unit.detail.vsSpecial
-      // @ts-ignore
-      delete unit.detail.vsCondition
-      // @ts-ignore
-      delete unit.detail.vsSpecial
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-
-  // dual unit fix
-  if ([4227, 4257, 4267, 4268, 4275, 4276].includes(unit.id)) {
-    if (unit.class.length === 2) {
-      // @ts-ignore
-      unit.class = [unit.class[0], ...unit.class]
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-
   if ([4227, 4276, 4287, 4289].includes(unit.id)) {
     // @ts-ignore
     if (typeof unit.detail.swap?.superTurns === 'string') {
@@ -492,18 +466,7 @@ export function fixupSpecificIssue(
   return unit
 }
 
-const missingEvolutionMap = {
-  3483: 4274,
-  3454: 4263,
-  3278: 4256,
-  2982: 4237,
-  3157: 4217,
-  3038: 4199,
-  3027: 4185,
-  3422: 4170,
-  3607: 4162,
-  3336: 4063,
-}
+const missingEvolutionMap = {}
 
 export function removeProp(
   /** @type any */ obj,
