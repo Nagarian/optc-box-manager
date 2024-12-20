@@ -6,14 +6,7 @@ import { Box, BoxProps } from './Box'
 import { Button } from './Button'
 import { Icon } from './Icon'
 
-type ExpandButtonProps = {
-  isOpen: boolean
-}
-
-const ExpandButton = styled(Button)<ExpandButtonProps>`
-  flex-direction: row-reverse;
-  justify-content: space-between;
-
+const ExpandButton = styled(Button)`
   && > * {
     margin: 0;
   }
@@ -49,7 +42,7 @@ function ExpandedPanel({
 }
 
 type ExpansionPanelProps = {
-  title: string
+  title: ReactNode
   icon?: Icon
   disabled?: boolean
   children?: ReactNode
@@ -81,9 +74,11 @@ export function ExpansionPanel({
       {...rest}
     >
       <ExpandButton
-        isOpen={isOpen}
         onClick={() => setIsOpen(!isOpen)}
         m="1"
+        gap="2"
+        flexDirection="row-reverse"
+        justifyContent="space-between"
         disabled={disabled}
         icon={icon}
         fontSize={1}
