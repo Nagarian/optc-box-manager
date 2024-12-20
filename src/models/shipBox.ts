@@ -1,9 +1,17 @@
 import { Ship } from './ships'
 
+export type UserShipModificationStatRank = 0 | 1 | 2 | 3 | 4 | 5
+
+export type UserShipModificationStat = {
+  value: number
+  rank: UserShipModificationStatRank
+}
+
 export type UserShipModification = {
-  hp: number
-  rcv: number
-  atk: number
+  hp: UserShipModificationStat
+  rcv: UserShipModificationStat
+  atk: UserShipModificationStat
+  skillsLvl: number
 }
 
 export type UserShip = {
