@@ -453,7 +453,7 @@ export function fixupSpecificIssue(
     }
   }
 
-  if ([4227, 4276, 4287].includes(unit.id)) {
+  if ([4227, 4276, 4287, 4289].includes(unit.id)) {
     // @ts-ignore
     if (typeof unit.detail.swap?.superTurns === 'string') {
       // @ts-ignore
