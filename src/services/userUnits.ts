@@ -460,6 +460,15 @@ export function resync(userUnit: UserUnit) {
     isUpdated = true
   }
 
+  if (userUnit.coop.luck < Math.trunc(userUnit.level.lvl / 5)) {
+    updated.coop = {
+      ...updated.coop,
+      luck: Math.trunc(userUnit.level.lvl / 5),
+    }
+
+    isUpdated = true
+  }
+
   return isUpdated ? updated : userUnit
 }
 
