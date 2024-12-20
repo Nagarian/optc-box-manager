@@ -15,7 +15,7 @@ export type ImageAnalyzer = {
   state?: string
   analyses: Analysis[]
   currentAnalysis?: Analysis
-  currentVideoRef?: RefObject<HTMLVideoElement>
+  currentVideoRef?: RefObject<HTMLVideoElement | null>
   allFound: CharacterFound[]
 
   initialize: () => Promise<void>
@@ -31,8 +31,8 @@ export function useImageAnalyzer(): ImageAnalyzer {
   const {
     userSetting: { gameVersion },
   } = useUserSettings()
-  const workerRef = useRef<Worker>()
-  const charactersRef = useRef<ImageData>()
+  const workerRef = useRef<Worker>(undefined)
+  const charactersRef = useRef<ImageData>(undefined)
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [state, setState] = useState<string>()
@@ -40,7 +40,7 @@ export function useImageAnalyzer(): ImageAnalyzer {
   const [analyses, setAnalyses] = useState<Analysis[]>([])
   const [currentAnalysis, setCurrentAnalysis] = useState<Analysis>()
   const currentVideoRef = useRef<HTMLVideoElement>(null)
-  const currentVideoFrameOnProcessing = useRef<ImageData>()
+  const currentVideoFrameOnProcessing = useRef<ImageData>(undefined)
   const remainingAnalysis = analyses.filter(a => !a.done).length
   const hasAnalysisToProcess = remainingAnalysis > 0
 

@@ -8,7 +8,7 @@ type BoxMeasure = {
 }
 
 export function useMeasure<T extends HTMLElement>(): [
-  RefObject<T>,
+  RefObject<T | null>,
   BoxMeasure,
 ] {
   const ref = useRef<T>(null)
