@@ -30,14 +30,7 @@ const CaptainRcvFinder = (captain: UnitCaptain) => {
 }
 
 const SpecialRcvFinder = (special: UnitSpecial) => {
-  if (Array.isArray(special)) {
-    return special.some(spe => RcvRegex.test(spe.description))
-  }
-  if (typeof special === 'string') {
-    return RcvRegex.test(special)
-  }
-
-  return false
+  return RcvRegex.test(special)
 }
 
 export const ByRcvFinderFilter = (criteria: ByRcvFinderCriteria) =>

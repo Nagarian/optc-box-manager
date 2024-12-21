@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { diffWords } from 'diff'
 import { memo, ReactNode } from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
 import { ReactMarkdownRenderers } from 'styles/react-markdown'
 import { OrbColor } from 'styles/theme-definition'
 
@@ -46,7 +46,7 @@ function BaseDescriptionHighlighter({
   )
 
   return (
-    <ReactMarkdown rehypePlugins={[rehypeRaw]} components={renderers}>
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers}>
       {parts}
     </ReactMarkdown>
   )
@@ -82,7 +82,7 @@ const renderers: Components = {
   p: p => <FakeParagraph {...p} />,
   h3: p => <Header3 {...p} />,
   a: ({ href, ...p }) => {
-    const orb = href?.replace(/\[|\]/g, '') as keyof OrbColor
+    const orb = (href as string)?.replace(/\[|\]/g, '') as keyof OrbColor
     return (
       <Orb orb={orb} {...p}>
         {orb}

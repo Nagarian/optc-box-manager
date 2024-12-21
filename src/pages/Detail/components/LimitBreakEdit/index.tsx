@@ -223,15 +223,5 @@ function SailorDescription(lockedCount: number, sailor: UnitSailor) {
 function CaptainDescription(captain: UnitCaptain) {
   if (!captain) return []
 
-  if (typeof captain === 'string') {
-    return captain === 'None' ? [] : [captain]
-  }
-
-  return [
-    'combined' in captain ? captain.combined : undefined,
-    'base' in captain ? captain.base : undefined,
-    ...Object.entries(captain)
-      .filter(([key, value]) => key.startsWith('level'))
-      .map(([key, value]) => value),
-  ].filter(v => v)
+  return captain === 'None' ? [] : [captain]
 }

@@ -2,7 +2,6 @@ import { DB } from './unitExtracter.js'
 import { writeFileSync } from 'fs'
 import { createGenerator } from 'ts-json-schema-generator'
 import Ajv from 'ajv'
-import { fixupVersusUnit } from './fixup.js'
 
 /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
 const config = {
@@ -120,13 +119,11 @@ function getErrors(db) {
   return errors
 }
 
-const DBFixed = DB.map(fixupVersusUnit)
-
 writeFileSync(
   './public/db-old.json',
-  prettify ? JSON.stringify(DBFixed, null, 2) : JSON.stringify(DBFixed),
+  prettify ? JSON.stringify(DB, null, 2) : JSON.stringify(DB),
 )
-const isValide = validate(DBFixed)
+const isValide = validate(DB)
 
 if (!isValide) {
   throw new Error('some validation errors occured')

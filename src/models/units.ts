@@ -57,19 +57,6 @@ export type BaseUnit = {
     rcv: number
   }
   number: number
-  limitStats: {
-    hp: number[]
-    atk: number[]
-    rcv: number[]
-    sailors: number[]
-    captains: number[]
-  }
-  llimitStats: {
-    sailors1: number[]
-    sailors2: number[]
-    captains: number[]
-    specials: number[]
-  }
   pirateFest: {
     class?: UnitPirateFestStyle
     DEF: number
@@ -158,73 +145,9 @@ export type UnitFestGPBurst = {
 
 export type UnitCooldown = [number, number]
 
-export type SimpleUnitSpecial =
-  | string
-  | {
-      cooldown: UnitCooldown
-      description: string
-    }[]
+export type UnitSpecial = string
 
-export type LLBSimpleUnitSpecial = {
-  base: SimpleUnitSpecial
-  llbbase?: SimpleUnitSpecial
-  llbcombined: undefined
-}
-
-export type VersusUnitSpecial = {
-  character1: SimpleUnitSpecial
-  llbcharacter1?: SimpleUnitSpecial
-  character2: SimpleUnitSpecial
-  llbcharacter2?: SimpleUnitSpecial
-}
-
-export type DualUnitV1Special = {
-  base: SimpleUnitSpecial
-  llbbase?: SimpleUnitSpecial
-  combined: SimpleUnitSpecial
-  llbcombined?: SimpleUnitSpecial
-}
-
-export type DualUnitV2Special = {
-  character1: SimpleUnitSpecial
-  character2: SimpleUnitSpecial
-  combined: SimpleUnitSpecial
-}
-
-export type UnitSpecial =
-  | SimpleUnitSpecial
-  | LLBSimpleUnitSpecial
-  | DualUnitV1Special
-  | DualUnitV2Special
-  | VersusUnitSpecial
-
-export type UnitCaptain =
-  | string
-  | undefined
-  | {
-      character1: string
-      character2: string
-      combined: string
-      llbcharacter1?: string
-      llbcharacter2?: string
-      llbcombined?: string
-    }
-  | {
-      base: string
-      level1?: string
-      level2?: string
-      level3?: string
-      level4?: string
-      level5?: string
-      level6?: string
-      llbbase?: string
-      llblevel1?: string
-      llblevel2?: string
-      llblevel3?: string
-      llblevel4?: string
-      llblevel5?: string
-      llblevel6?: string
-    }
+export type UnitCaptain = string
 
 export type UnitSailor =
   | string

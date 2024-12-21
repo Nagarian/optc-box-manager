@@ -49,7 +49,139 @@ export function fixupDetail(
     }
   }
 
+  detail.special = addNotes(
+    descriptionToMarkdown(detail.special),
+    detail.specialNotes,
+  )
+  delete detail.specialNotes
+
+  detail.captain = addNotes(
+    descriptionToMarkdown(detail.captain),
+    detail.captainNotes,
+  )
+  delete detail.captainNotes
+
+  if (detail.lLimit) {
+    for (const limit of detail.lLimit) {
+      if (limit?.captain) {
+        limit.captain = descriptionToMarkdown(limit.captain)
+      }
+
+      if (limit?.special) {
+        limit.special = descriptionToMarkdown(limit.special)
+      }
+    }
+  }
+
+  if (detail.limit) {
+    detail.limit = detail.limit.map(({ description }) => ({
+      description: descriptionToMarkdown(description),
+    }))
+  }
+
+  if (typeof detail.swap === 'string') {
+    detail.swap = addNotes(descriptionToMarkdown(detail.swap), detail.swapNotes)
+    delete detail.swapNotes
+  } else if (detail.swap) {
+    detail.swap.base = addNotes(
+      descriptionToMarkdown(detail.swap.base),
+      detail.swapNotes,
+    )
+    detail.swap.super = addNotes(
+      descriptionToMarkdown(detail.swap.super),
+      detail.superSpecialNotes,
+    )
+    detail.swap.superTurns = Number(detail.swap.superTurns)
+    delete detail.swapNotes
+  }
+
+  if (detail.rush) {
+    detail.rush.description = detail.rush.description.map(descriptionToMarkdown)
+    detail.rush.stats = detail.rush.stats.map(descriptionToMarkdown)
+  }
+
+  const keys = [
+    'captainNotes',
+    'specialNotes',
+    'sailorNotes',
+    'limitNotes',
+    'potentialNotes',
+    'lastTapNotes',
+    'superTandemNotes',
+    'supportNotes',
+    'swapNotes',
+    'superSpecialNotes',
+    'superSpecialCriteriaNotes',
+  ]
+
+  for (const key of keys) {
+    if (detail[key]?.includes('<')) {
+      detail[key] = cleanHtml(detail[key])
+    }
+  }
+
   return detail
+}
+
+function cleanHtml(description) {
+  if (!description) {
+    return undefined
+  }
+
+  return (
+    description
+      .replaceAll(/\<br\/?\>/gi, '\n\n')
+      .replaceAll(/\<\/?[uo]l\>/gi, '\n\n')
+      .replaceAll(/\<li\>/gi, '- ')
+      .replaceAll(/\<\/li\>/gi, '\n')
+      .replaceAll(/(\s?)\<b\>(\s?)/gi, ' **')
+      .replaceAll(/(\s?)\<\/b\>(\s?)/gi, '** ')
+      .replaceAll(/(\s?)\<i\>(\s?)/gi, ' *')
+      .replaceAll(/(\s?)\<\/em\>(\s?)/gi, '* ')
+      .replaceAll(/\<hr\/?\>/gi, '\n---\n')
+      // not html specific but present on the db
+      .replaceAll(/\#\{.*\}/gi, '')
+      .trim()
+  )
+}
+
+function descriptionToMarkdown(description) {
+  if (typeof description === 'string') {
+    return cleanHtml(description)
+  }
+
+  if (typeof description !== 'object') {
+    return ''
+  }
+
+  if (Array.isArray(description)) {
+    return description
+      .map(({ description }) => cleanHtml(description))
+      .map((description, i) => `- **Stage ${i + 1}:** ${description}`)
+      .join('\n')
+  }
+
+  return Object.entries(description)
+    .filter(([key, value]) => !!value)
+    .map(([key, value]) => [key, descriptionToMarkdown(value)])
+    .filter(([key, value]) => !!value)
+    .map(([key, value]) => [
+      key,
+      value.startsWith('- ')
+        ? value.replaceAll('\n- ', '\n  - ').replace(/^- /, '  - ')
+        : value,
+    ])
+    .map(([key, value]) => `- **${key}:** ${value}`)
+    .join('\n')
+}
+
+function addNotes(description, notes) {
+  if (!notes) {
+    return description
+  }
+
+  const n = cleanHtml(notes).replaceAll('\n', '\n> ')
+  return n ? `${description}\n\n> ${n}` : description
 }
 
 /** @return { import("../models/old-units").ExtendedUnit } */
@@ -63,7 +195,7 @@ export function fixupVersusUnit(
   /** @type any */
   const untyped = unit
   const format = (/** @type any */ obj) =>
-    `**Character 1:** ${obj.character1}<br/>**Character 2:** ${obj.character2}`
+    `**Character 1:** ${obj.character1}\n\n**Character 2:** ${obj.character2}`
 
   return {
     ...unit,
@@ -75,11 +207,8 @@ export function fixupVersusUnit(
     },
     detail: {
       ...untyped.detail,
-      captain: {
-        ...untyped.detail.captain,
-        combined: format(untyped.detail.captain),
-      },
-      special: format(untyped.detail.special),
+      captain: untyped.detail.captain,
+      special: untyped.detail.special,
       sailor: {
         ...untyped.detail.sailor,
         combined: untyped.detail.sailor.character1,
@@ -165,6 +294,25 @@ export function fixupVsLastTapSuperTandem(
         ],
       },
     ]
+  } else if (
+    // @ts-ignore
+    unit.detail.potential?.find(p => p.Name === 'Super Tandem/Last Tap')
+  ) {
+    unit.detail.potential = unit.detail.potential.map(p =>
+      // @ts-ignore
+      p.Name === 'Super Tandem/Last Tap'
+        ? {
+            Name: 'Last Tap / Super Tandem',
+            description: [
+              'Last Tap Ability Lv.1 / Super Tandem Ability Lv.1',
+              'Last Tap Ability Lv.2 / Super Tandem Ability Lv.2',
+              'Last Tap Ability Lv.3 / Super Tandem Ability Lv.3',
+              'Last Tap Ability Lv.4 / Super Tandem Ability Lv.4',
+              'Last Tap Ability Lv.5 / Super Tandem Ability Lv.5',
+            ],
+          }
+        : p,
+    )
   }
 
   return unit
@@ -345,18 +493,6 @@ export function fixupSpecificIssue(
     }
   }
 
-  if (unit.id === 2505) {
-    // @ts-ignore
-    if (unit.detail.special.level1) {
-      // @ts-ignore
-      unit.detail.special.llbbase = unit.detail.special.level1
-      // @ts-ignore
-      delete unit.detail.special.level1
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-
   if ([3719, 3720].includes(unit.id)) {
     // @ts-ignore
     if (unit.detail.captinNotes) {
@@ -378,6 +514,14 @@ export function fixupSpecificIssue(
         minCP: undefined,
         maxCP: undefined,
       }
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
+  if ([4004].includes(unit.id)) {
+    if (unit.detail.special?.includes('<table')) {
+      unit.detail.special = `Applies various effects depending on the character's Support Character's type, Captain's type, character's orb, and current HP percentage when the Special is activated.\n\n| | Condition | Effect |\n|------------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|\n| Captain Type | [STR] or [DEX] | Deals 80x character's ATK in [QCK] damage to all enemies at the end of the turn for 3 turns |\n| | [QCK] | Reduces Special Cooldown of all characters by 2 turns. |\n| | [PSY] or [INT] | Reduces Swap Cooldown and VS Special Cooldown of all characters by 2 turns. |\n| Character's Orb | [STR], [DEX], [QCK], [PSY] or [INT] | Reduces enemies' Corresponding Type Resistance by -20% for 1 turn. |\n| | [RCV] or [TND] | Locks all orbs for 1 turn and adds 1.1x to Chain multiplier for 1 turn. |\n| | [G] or [RAINBOW] | Reduces enemies' [STR], [DEX], [QCK], [PSY] and [INT] Resistance by -20% for 1 turn and barriers all character's orbs for 1 GREAT hit. |\n| | [SEMLA], [BLOCK] or [SUPERBLOCK] | Increases damage received by 2x for 3 turns. |\n| Percent HP | 100%-80.01% | Reduces damage received by 80% for 1 turn. |\n| | 80%-50.01% | Recovers 20,000 HP. |\n| | 50%-10.01% | Reduces damage received by 100% for 1 turn. |\n| | <=10% | Recovers all missing HP. |\n| Support Character Type | [STR] | Boosts ATK of all characters by 2x for 3 turns. |\n| | [DEX] | Boosts ATK of all characters by 2.25x for 2 turns. |\n| | [QCK] | Boosts ATK of all characters by 2.5x for 1 turn. |\n| | [PSY] | Increases boost effects of ATK UP buffs by +0.3x. |\n| | [INT] | Increases boost effects of ATK UP buffs to 2.5x. |\n| | None | Boosts Orb Effects of all characters by 2.25x for 2 turns. |\n\n> The following orbs have no effects: [WANO], [EMPTY], [BOMB]. Other orbs are untested.\n`
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -406,10 +550,6 @@ export function fixupSpecificIssue(
     if (Number.isNaN(unit.limitATK)) {
       unit.limitATK = 0
       unit.limitexATK = 0
-      unit.limitStats.atk[11] = 0
-      unit.limitStats.atk[12] = 0
-      unit.limitStats.atk[13] = 0
-      unit.limitStats.atk[14] = 0
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
@@ -425,16 +565,6 @@ export function fixupSpecificIssue(
   if (unit.detail.lLimit?.gpSpecial) {
     // @ts-ignore
     delete unit.detail.lLimit.gpSpecial
-  }
-
-  if ([4227, 4276, 4287, 4289].includes(unit.id)) {
-    // @ts-ignore
-    if (typeof unit.detail.swap?.superTurns === 'string') {
-      // @ts-ignore
-      unit.detail.swap.superTurns = parseInt(unit.detail.swap.superTurns)
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
   }
 
   // @ts-ignore
