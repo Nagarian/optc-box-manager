@@ -2,31 +2,23 @@ import sharp from 'sharp'
 import { resolve } from 'path'
 import { readdir, mkdir } from 'fs/promises'
 
-/**
- * Character Sizing, it's used for the finale cropped version
- * @typedef {({
- *  top: number,
- *  left: number,
- *  width: number,
- *  height: number,
- *  originalSize: number,
- *  croppedWidth: number
- *  croppedHeight: number,
- * })} CharacterDesiredSize
- */
+/** Character Sizing, it's used for the finale cropped version */
+type CharacterDesiredSize = {
+  top: number
+  left: number
+  width: number
+  height: number
+  originalSize: number
+  croppedWidth: number
+  croppedHeight: number
+}
+type CharacterFile = {
+  id: number
+  path: string
+}
 
-/**
- * Temporary structure
- * @typedef {({ id: number, path: string })} CharacterFile
- */
-
-/**
- *
- * @param {string} version
- * @returns {Promise<CharacterFile[]>}
- */
-async function retrievePictures(version) {
-  async function getFiles(dir) {
+async function retrievePictures(version: string): Promise<CharacterFile[]> {
+  async function getFiles(dir: string): Promise<string[]> {
     const dirents = await readdir(dir, { withFileTypes: true })
     const files = await Promise.all(
       dirents.map(dirent => {
@@ -44,18 +36,16 @@ async function retrievePictures(version) {
     .map(file => ({
       path: file,
       id: parseInt(
-        /.*(\\|\/)(?<charid>\d{4})\.(png?)/gi.exec(file).groups.charid,
+        /.*(\\|\/)(?<charid>\d{4})\.(png?)/gi.exec(file)?.groups?.charid ?? '0',
       ),
     }))
 }
 
-/**
- *
- * @param {CharacterFile[]} files
- * @param {CharacterDesiredSize} size
- * @param {string} version
- */
-async function computeMatrice(files, size, version) {
+async function computeMatrice(
+  files: CharacterFile[],
+  size: CharacterDesiredSize,
+  version: string,
+) {
   const filename = `${version}-${size.croppedWidth}x${size.croppedHeight}`
   const grid = {
     horizontal: 100,
@@ -105,7 +95,7 @@ async function computeMatrice(files, size, version) {
 const globalFiles = await retrievePictures('glo')
 const japanFiles = await retrievePictures('jap')
 
-const gloExWrongIds = {
+const gloExWrongIds: Record<number, number> = {
   2768: 5048,
   2769: 5049,
   2770: 5050,
