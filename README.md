@@ -7,7 +7,7 @@ It's build on top of the [OPTC-DB project](https://github.com/optc-db/optc-db.gi
 
 This is a [PWA app](https://web.dev/progressive-web-apps/) also you can install it on your phone, it will work as any other regular application you already have.
 
-It is hosted on github pages [at this adress](https://nagarian.github.com/optc-box-manager/), although you can just download it and run a local copy
+It is hosted on github pages [at this adress](https://nagarian.github.io/optc-box-manager/), although you can just download it and run a local copy
 
 For a more detailed explanation of how this app works, you can also check out this video:
 
@@ -18,7 +18,7 @@ For a more detailed explanation of how this app works, you can also check out th
 To install the PWA to your phone/computer
 
 - open your favorite browser
-- go to <https://nagarian.github.com/optc-box-manager/>
+- go to <https://nagarian.github.io/optc-box-manager/>
 - you should see a popup appear to install it, or click on "..." > "Add to home screen"
 
 ![Popup to install the app](./docs/images/add_to_screen.jpg)

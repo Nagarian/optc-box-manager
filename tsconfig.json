@@ -20,5 +20,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": ["src/optc-ships", "src/scripts/ship-extract.ts"]
+  "exclude": ["src/optc-ships", "src/scripts/extract-shipdb.ts"]
 }

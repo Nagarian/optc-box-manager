@@ -41,13 +41,16 @@ filters.patternToString = function () {
 filters.resilienceToString = function () {
   return function (input) {
     if (!input) return 'N/A'
-    if (input.amount) {
-      return `${conditionToString(input.condition)}Heals ${input.amount} HP every ${input.interval} seconds.`
+    switch (input.type) {
+      case 'dmgboost':
+        return `${conditionToString(input.condition)}${input.amount}x boost to ${input.attribute} enemies.`
+      case 'healing':
+        return `${conditionToString(input.condition)}Heals ${input.amount} HP every ${input.interval} seconds.`
+      case 'damage':
+        return `${conditionToString(input.condition)}${input.percentage}% reduction to ${input.attribute} damage.`
+      case 'debuff':
+        return `${conditionToString(input.condition)}${input.chance}% to resist ${input.attribute}.`
     }
-    if (input.type === 'damage') {
-      return `${conditionToString(input.condition)}${input.percentage}% reduction to ${input.attribute} damage.`
-    }
-    return `${conditionToString(input.condition)}${input.chance}% to resist ${input.attribute}.`
   }
 }
 
@@ -62,7 +65,7 @@ filters.gpconditionToString = function () {
   return function (input) {
     switch (input.type) {
       case 'time':
-        return `After ${input.count} seconds`
+        return `${input.comparator == 'after' ? 'After' : 'At Exactly'} ${input.count} seconds`
       case 'damage':
         return `After dealing damage ${input.count} times`
       case 'action':
@@ -235,13 +238,51 @@ function conditionToString(condition) {
       }
     case 'crew':
     case 'enemies':
-      return `When there are ${condition.count} or ${condition.comparator} ${condition.type} ${condition.relative ? (condition.type === 'crew' ? 'than the enemy team' : 'than your crew') : ''} remaining, `
+      return `When there are ${condition.count} or ${condition.comparator} ${condition.type} ${
+        condition.targets
+          ? arrayToString(condition.targets) + ' characters'
+          : ''
+      }${
+        condition.relative
+          ? condition.type == 'crew'
+            ? ' than the enemy team'
+            : ' than your crew'
+          : ''
+      }${condition.composition ? '' : ' remaining'}, `
     case 'trigger':
-      return `The first ${condition.count} times this character ${condition.stat === 'takes damage' ? condition.stat : 'lands a ' + condition.stat}, `
+      return `The first ${condition.count} times ${
+        condition.stat.includes('defeated')
+          ? condition.team
+            ? condition.team +
+              (condition.targets ? arrayToString(condition.targets) : '') +
+              ' characters are '
+            : ''
+          : 'this character '
+      }${
+        condition.stat == 'takes damage' ||
+        condition.stat.includes('recieves') ||
+        condition.stat.includes('defeated')
+          ? condition.stat
+          : 'lands a ' + condition.stat
+      }, `
+    case 'debuff':
+      return `If this character has ${condition.stat}, `
     case 'defeat':
-      return `When ${condition.count} characters ${condition.team === 'enemies' ? 'on the enemy team ' : condition.team === 'crew' ? 'on your crew ' : ''}are defeated, `
+      return `When ${condition.count} characters ${
+        condition.team == 'enemies'
+          ? 'on the enemy team '
+          : condition.team == 'crew'
+            ? 'on your crew '
+            : ''
+      }are defeated, `
     case 'character':
-      return `When ${arrayToStringOr(condition.families)} ${condition.families.length > 1 ? 'are' : 'is'} ${condition.team === 'enemies' ? 'on the enemy team' : condition.team === 'crew' ? 'on your crew' : ''}, `
+      return `When ${arrayToStringOr(condition.families)} ${condition.families.length > 1 ? 'are' : 'is'} ${
+        condition.team == 'enemies'
+          ? 'on the enemy team'
+          : condition.team == 'crew'
+            ? 'on your crew'
+            : ''
+      }, `
     default:
       return `UNKNOWN CONDITION ${JSON.stringify(condition)}`
   }
@@ -264,13 +305,46 @@ function targetToString(target) {
       targetStr = 'enemy'
     }
   }
-  let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}${target.targets.includes('self') || target.targets.includes('crew') || target.targets.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters'}`
+  let retVal = ` to ${target.count ? target.count + ' ' : ''}${targetStr}${
+    target.families ? ' ' + arrayToStringOr(target.families) : ''
+  }${
+    target.targets.includes('self') ||
+    target.targets.includes('crew') ||
+    target.targets.includes('enemies')
+      ? ''
+      : target.count === 1
+        ? ' character'
+        : ' characters'
+  }`
   retVal =
     retVal +
-    `${target.excludes ? ', excluding ' : ''}${target.excludes ? excludeStr : ''}${target.excludes ? (target.excludes.includes('self') || target.excludes.includes('crew') || target.excludes.includes('enemies') ? '' : target.count === 1 ? ' character' : ' characters') : ''}`
+    `${target.excludes ? ', excluding ' : ''}${
+      target.excludes ? excludeStr : ''
+    }${
+      target.excludes
+        ? target.excludes.includes('self') ||
+          target.excludes.includes('crew') ||
+          target.excludes.includes('enemies')
+          ? ''
+          : target.count == 1
+            ? ' character'
+            : ' characters'
+        : ''
+    }`
   retVal =
     retVal +
-    `${target.stat ? ' with ' + (target.percentage ? 'a ' + target.percentage + '% or ' : 'the ') + target.priority + ' ' + target.stat : ''}`
+    `${
+      target.stat
+        ? ' with ' +
+          (target.percentage
+            ? (target.priority == 'exactly' ? target.priority + ' ' : 'a ') +
+              target.percentage +
+              '%'
+            : 'the ' + target.priority) +
+          ' ' +
+          target.stat
+        : ''
+    }`
   return retVal
 }
 

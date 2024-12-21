@@ -5,9 +5,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "extract-optcdb": "node ./src/scripts/index.js",
-    "extract-image": "node ./src/scripts/cropImage.js",
-    "extract-shipdb": "tsx ./src/scripts/ship-extract.ts",
+    "extract-optcdb": "node ./src/scripts/extract-optcdb.js",
+    "extract-image": "tsx ./src/scripts/extract-image.ts",
+    "extract-shipdb": "tsx ./src/scripts/extract-shipdb.ts",
     "analyze": "source-map-explorer 'dist/assets/*.js' --no-border-checks",
     "prebuild": "npm run extract-optcdb && npm run extract-shipdb && npm run extract-image",
     "ts-check": "tsc --noEmit",
