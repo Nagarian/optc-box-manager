@@ -17,6 +17,16 @@ function cleanDescription(value: string) {
     .replace(/\[ATK_UP\]/, 'attack up')
     .replace(/\[EOT_HEAL\]/, 'end of turn heal')
     .replace(/\[EOT_HEAL_TO_DAMAGE\]/, 'eot heal slot to damage')
+
+    .replaceAll(/\<hr\/?\>/gi, '\n---\n')
+    .replaceAll(/\<br\/?\>/gi, '\n\n')
+    .replaceAll(/\<\/?[uo]l\>/gi, '\n\n')
+    .replaceAll(/\<li\>/gi, '- ')
+    .replaceAll(/\<\/li\>/gi, '\n')
+    .replaceAll(/(\s?)\<b\>(\s?)/gi, ' **')
+    .replaceAll(/(\s?)\<\/b\>(\s?)/gi, '** ')
+    .replaceAll(/(\s?)\<i\>(\s?)/gi, ' *')
+    .replaceAll(/(\s?)\<\/em\>(\s?)/gi, '* ')
 }
 
 const shipImagesHost = 'https://optc-ships.vercel.app'

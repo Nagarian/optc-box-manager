@@ -20,6 +20,7 @@ import {
   fixupVsLastTapSuperTandem,
   fixupFestProperties,
   fixupWrapper,
+  fixupVersusUnit,
 } from './fixup.js'
 import {
   globalOnlyWrongId,
@@ -60,6 +61,8 @@ function DBFactory() {
       return {
         ...unit,
         id: gameId,
+        limitStats: undefined,
+        llimitStats: undefined,
         dbId,
         images: {
           thumbnail: getUnitThumbnail(dbId),
@@ -99,6 +102,7 @@ function DBFactory() {
     .map(fixupWrapper(fixupVsLastTapSuperTandem))
     .map(fixupWrapper(applyDropLocation))
     .map(fixupWrapper(applyNewPirateRumble))
+    .map(fixupWrapper(fixupVersusUnit))
 
   db.sort((u1, u2) => u1.id - u2.id)
   return db
