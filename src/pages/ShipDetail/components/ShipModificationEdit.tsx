@@ -3,7 +3,7 @@ import { Box } from 'components/Box'
 import { DescriptionHighlighter } from 'components/DescriptionHighlighter'
 import { ExpansionPanel } from 'components/ExpansionPanel'
 import { ShipLevelInput } from 'components/forms/ShipLevelInput'
-import { SpecialLvlIcon } from 'components/Icon'
+import { ShipyardFullIcon } from 'components/Icon'
 import { SubTitle } from 'components/Title'
 import { UserShip } from 'models/shipBox'
 import { useMemo } from 'react'
@@ -43,7 +43,7 @@ export function ShipModificationEdit({
   const { skillsLvl } = modification
 
   return (
-    <ExpansionPanel title="Modification rank" icon={SpecialLvlIcon}>
+    <ExpansionPanel title="Modification rank" icon={ShipyardFullIcon}>
       {obtained && level < levels.length && (
         <SubTitle color="red" pt="3" pb="2">
           You need to first upgrade your ship to its last level to be able to

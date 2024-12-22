@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react'
 import { ExpansionPanel } from 'components/ExpansionPanel'
 import { RangeInput } from 'components/forms/RangeInput'
-import { PirateFestIcon, PirateFestSvg } from 'components/Icon'
+import { NewsCooIcon, ShipyardBottleSvg } from 'components/Icon'
 import { ShipEventLevel, ShipLevel } from 'models/ships'
 import { InputLabel } from 'pages/Detail/components'
 import { useMemo, useState } from 'react'
@@ -38,7 +38,7 @@ export function ShipEventDisplayer({
   }
 
   return (
-    <ExpansionPanel title="Event override" icon={PirateFestIcon}>
+    <ExpansionPanel title="Event override" icon={NewsCooIcon}>
       <InputLabel
         value={lvl}
         max={levels.length + eventLevels.length}
@@ -51,7 +51,7 @@ export function ShipEventDisplayer({
           onChange={e => setLvl(e.currentTarget.valueAsNumber)}
           min={1}
           max={all.length}
-          thumbSvg={PirateFestSvg}
+          thumbSvg={ShipyardBottleSvg}
           range={{
             color: theme.colors.primaryText,
           }}

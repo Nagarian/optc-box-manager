@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react'
-import { LevelSvg } from 'components/Icon'
+import { ShipyardBottleSvg } from 'components/Icon'
 import { ShipMedal } from 'components/ShipMedal'
 import { UserShipModification } from 'models/shipBox'
 import { InputLabel } from 'pages/Detail/components'
@@ -45,7 +45,7 @@ export function ShipLevelInput({
         value={value[type].value}
         onChange={v => onChange(updateModification(value, type, v))}
         adders={[-1, 1, 5, 30, 50, 100]}
-        thumbSvg={LevelSvg}
+        thumbSvg={ShipyardBottleSvg}
         range={{
           color: color ?? theme.colors.primaryText,
         }}

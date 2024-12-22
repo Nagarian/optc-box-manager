@@ -2,7 +2,7 @@ import 'rc-slider/assets/index.css'
 import { useTheme } from '@emotion/react'
 import { Box } from 'components/Box'
 import { ExpansionPanel } from 'components/ExpansionPanel'
-import { SpecialLvlIcon } from 'components/Icon'
+import { ShipyardBottleIcon, SpecialLvlIcon } from 'components/Icon'
 import { Image } from 'components/Image'
 import { Text } from 'components/Title'
 import { UserShip } from 'models/shipBox'
@@ -78,7 +78,7 @@ export function ShipLevelEdit({ userShip, onChange }: ShipLevelEditProps) {
   )
 
   return (
-    <ExpansionPanel title="Ship level" icon={SpecialLvlIcon}>
+    <ExpansionPanel title="Ship level" icon={ShipyardBottleIcon}>
       <InputLabel
         value={lvl}
         max={levels.length}

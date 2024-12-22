@@ -64,7 +64,9 @@ import SearchBuilder from './searchbuilder.svg?react'
 import Settings from './settings.svg?react'
 import Share from './share.svg?react'
 import Shipyard from './shipyard.svg?react'
+import ShipyardBottleSvg from './shipyard-bottle.svg'
 import ShipyardBottle from './shipyard-bottle.svg?react'
+import ShipyardFull from './shipyard-full.svg?react'
 import Show from './show.svg?react'
 import SkillBook from './skillbook.svg?react'
 import SpecialLvl from './special.png'
@@ -110,6 +112,7 @@ export {
   LevelSvg,
   LuckSvg,
   PirateFestSvg,
+  ShipyardBottleSvg,
   SpecialLvl,
   SpecialSvg,
   SupportSvg,
@@ -186,6 +189,7 @@ export const SettingsIcon: Icon = BaseSvg.withComponent(Settings)
 export const SearchIcon: Icon = BaseSvg.withComponent(Search)
 export const ShareIcon: Icon = BaseSvg.withComponent(Share)
 export const ShipyardIcon: Icon = BaseSvg.withComponent(Shipyard)
+export const ShipyardFullIcon: Icon = BaseSvg.withComponent(ShipyardFull)
 export const ShipyardBottleIcon: Icon = BaseSvg.withComponent(ShipyardBottle)
 export const ShowIcon: Icon = BaseSvg.withComponent(Show)
 export const SkillBookIcon: Icon = BaseSvg.withComponent(SkillBook)
