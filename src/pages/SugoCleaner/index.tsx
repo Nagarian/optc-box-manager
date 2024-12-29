@@ -3,9 +3,13 @@ import { Button } from 'components/Button'
 import { CharacterBox } from 'components/CharacterBox'
 import {
   BellyIcon,
+  CloseIcon,
   DeleteIcon,
   NewsCooIcon,
   SearchBuilderIcon,
+  SugoPullExcludeIcon,
+  SugoPullIcon,
+  SugoPullIncludeIcon,
   TreasureIcon,
 } from 'components/Icon'
 import { Popup } from 'components/Popup'
@@ -40,8 +44,17 @@ export function SugoCleaner({
   onClose,
   onAddUnit,
 }: SugoCleanerProps) {
-  const { toClean, toSell, toWaiting, addTo, move, remove, removeAll } =
-    useSugoCleaner(units)
+  const {
+    setting,
+    toClean,
+    toSell,
+    toWaiting,
+    addTo,
+    move,
+    remove,
+    removeAll,
+    setSetting,
+  } = useSugoCleaner(units)
   const [openAdd, setOpenAdd] = useState<boolean>(false)
   const [openChooser, setOpenChooser] = useState<ExtendedUnit>()
   const [openDetail, setOpenDetail] = useState<UserUnit>()
@@ -61,7 +74,39 @@ export function SugoCleaner({
   }
 
   return (
-    <Popup title="Sugo Pull Cleaner" onClose={onClose} minHeightRequired>
+    <Popup
+      title="Sugo Pull Cleaner"
+      customAction={
+        <>
+          <Button
+            onClick={() =>
+              setSetting({
+                ...setting,
+                autoConsumeLegend: !setting.autoConsumeLegend,
+              })
+            }
+            icon={
+              setting.autoConsumeLegend
+                ? SugoPullExcludeIcon
+                : SugoPullIncludeIcon
+            }
+            title={
+              setting.autoConsumeLegend
+                ? 'Disable legend auto-consume'
+                : 'Enable legend auto-consume'
+            }
+          />
+          <Button
+            variant="primary"
+            onClick={onClose}
+            icon={CloseIcon}
+            title="Close"
+          />
+        </>
+      }
+      // onClose={onClose}
+      minHeightRequired
+    >
       <SugoCleanerList
         name="toClean"
         title="To clean"
@@ -206,6 +251,7 @@ export function SugoCleaner({
           userUnit={openDetail}
           units={units}
           isSugoCleaner
+          consumeLegend={setting.autoConsumeLegend}
         />
       )}
     </Popup>

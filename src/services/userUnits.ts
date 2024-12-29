@@ -152,7 +152,10 @@ function computeSpecialReset(
   }
 }
 
-export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
+export function ConsumeUnitDupe(
+  userUnit: UserUnit,
+  consumeLegend: boolean,
+): UserUnit {
   const updated: UserUnit = {
     ...userUnit,
     coop: {
@@ -206,7 +209,10 @@ export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
           'Super Tandem',
         ].includes(p.type) && p.lvl < 5,
     ) ?? userUnit.potentials.find(p => p.lvl < 5)
-  if (potentialToUpgrade && !userUnit.unit.dropLocations.includes('legend')) {
+  if (
+    potentialToUpgrade &&
+    (consumeLegend || !userUnit.unit.dropLocations.includes('legend'))
+  ) {
     updated.potentials = userUnit.potentials.map(p =>
       p === potentialToUpgrade ? { ...p, lvl: p.lvl + 1 } : p,
     )

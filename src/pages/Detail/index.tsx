@@ -27,6 +27,7 @@ type DetailProps = {
   onValidate: (updated: UserUnit) => void
   onDelete?: (id: string) => void
   isSugoCleaner?: boolean
+  consumeLegend?: boolean
 }
 
 export function Detail({
@@ -36,9 +37,10 @@ export function Detail({
   userUnit: original,
   onDelete,
   isSugoCleaner = false,
+  consumeLegend = false,
 }: DetailProps) {
   const [userUnit, setUserUnit] = useState<UserUnit>(() =>
-    isSugoCleaner ? ConsumeUnitDupe(original) : original,
+    isSugoCleaner ? ConsumeUnitDupe(original, consumeLegend) : original,
   )
   const { unit } = userUnit
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)

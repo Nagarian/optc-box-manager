@@ -5,11 +5,20 @@ import { useStorage } from './useStorage'
 export const SugoCleanerList = ['toClean', 'toSell', 'toWaiting'] as const
 export type SugoCleanerListType = (typeof SugoCleanerList)[number]
 
+export type SugoCleanerSetting = {
+  autoConsumeLegend: boolean
+}
+
 export type SugoCleaner = {
   [key in SugoCleanerListType]: number[]
+} & {
+  setting: SugoCleanerSetting
 }
 
 const defaultSugoCleaner: SugoCleaner = {
+  setting: {
+    autoConsumeLegend: true,
+  },
   toClean: [],
   toSell: [],
   toWaiting: [],
@@ -99,5 +108,12 @@ export function useSugoCleaner(unitDB: ExtendedUnit[]) {
       const payload = JSON.stringify(sugoCleaner)
       await exportAsJson(payload, 'optc-bm-sugo-cleaner')
     },
+
+    setting: sugoCleaner.setting ?? defaultSugoCleaner.setting,
+    setSetting: (setting: SugoCleanerSetting) =>
+      setSugoCleaner({
+        ...sugoCleaner,
+        setting,
+      }),
   }
 }

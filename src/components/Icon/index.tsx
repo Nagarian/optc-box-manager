@@ -74,6 +74,8 @@ import SpecialLvl from './special.png'
 import SpecialSvg from './special.svg'
 import Special from './special.svg?react'
 import SugoPull from './sugopull.svg?react'
+import SugoPullExclude from './sugopull-exclude.svg?react'
+import SugoPullInclude from './sugopull-include.svg?react'
 import SupportSvg from './support.svg'
 import Support from './support.svg?react'
 import TailSpin from './tail-spin.svg?react'
@@ -199,6 +201,8 @@ export const SpecialLvlIcon: Icon = p => (
   <BaseSvg as={Special} color="primaryText" {...p} />
 )
 export const SugoPullIcon: Icon = BaseSvg.withComponent(SugoPull)
+export const SugoPullExcludeIcon: Icon = BaseSvg.withComponent(SugoPullExclude)
+export const SugoPullIncludeIcon: Icon = BaseSvg.withComponent(SugoPullInclude)
 export const SupportIcon: Icon = p => (
   <BaseSvg as={Support} color="specific.support" {...p} />
 )
