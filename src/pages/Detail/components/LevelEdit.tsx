@@ -3,10 +3,10 @@ import { useTheme } from '@emotion/react'
 import { ExpansionPanel } from 'components/ExpansionPanel'
 import { LevelInput } from 'components/forms/LevelInput'
 import { LevelIcon } from 'components/Icon'
-import { levelLBFromStepLevel, levelLBMaxLevel } from 'components/LevelLB'
 import { ExtendedUnit, UnitType } from 'models/units'
 import { UserUnitLevel } from 'models/userBox'
 import Slider from 'rc-slider'
+import { getUserUnitLevel } from 'services/userUnits'
 import { InputLabel } from '.'
 
 type LevelEditProps = {
@@ -56,12 +56,9 @@ export function LevelEdit({ level, unit, onChange }: LevelEditProps) {
             value={limitStepLvl}
             onChange={v => {
               const stepLvl = Array.isArray(v) ? v[0] : v
-              onChange({
-                ...level,
-                lvlMax: levelLBMaxLevel[levelLBFromStepLevel[stepLvl]],
-                limitLvl: levelLBFromStepLevel[stepLvl],
-                limitStepLvl: stepLvl,
-              })
+              onChange(
+                getUserUnitLevel({ level: level.lvl, stepLevel: stepLvl }),
+              )
             }}
             marks={{
               1: {

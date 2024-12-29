@@ -11,8 +11,6 @@ type LevelLBProps = {
 
 const stepMax = [1, 1, 2, 2, 3]
 const stepLevelMax = [0, 0, 0, 1, 0, 1, 0, 1, 2]
-export const levelLBFromStepLevel = [0, 1, 2, 2, 3, 3, 4, 4, 4, 5]
-export const levelLBMaxLevel = [99, 105, 110, 120, 130, 150]
 
 export function LevelLB({
   limitLvl,

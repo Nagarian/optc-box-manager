@@ -1,9 +1,9 @@
-import { levelLBFromStepLevel, levelLBMaxLevel } from 'components/LevelLB'
 import { ExtendedUnit, LimitBreak, PotentialKey, UnitStar } from 'models/units'
 import {
   UserUnit,
   UserUnitBulkEdit,
   UserUnitBulkEditLimitBreakState,
+  UserUnitLevel,
   UserUnitLimitBreak,
   UserUnitPotentialAbility,
   UserUnitPotentialAbilityKeyState,
@@ -549,4 +549,21 @@ function getUserUnitLuck(userUnit: UserUnit) {
   }
 
   return base
+}
+
+const levelLBFromStepLevel = [0, 1, 2, 2, 3, 3, 4, 4, 4, 5]
+const levelLBMaxLevel = [99, 105, 110, 120, 130, 150]
+export function getUserUnitLevel({
+  level,
+  stepLevel,
+}: {
+  level: number
+  stepLevel: number
+}): UserUnitLevel {
+  return {
+    lvl: level,
+    lvlMax: levelLBMaxLevel[levelLBFromStepLevel[stepLevel]],
+    limitLvl: levelLBFromStepLevel[stepLevel],
+    limitStepLvl: stepLevel,
+  }
 }
