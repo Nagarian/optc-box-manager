@@ -50,11 +50,14 @@ export type UserUnitPowerSocket = {
 export type UserUnitLevel = {
   lvl: number
   lvlMax: number
+  /** Value displayed in the circle */
   limitLvl?: number
+  /** Real value progression (similar to dupeConsumed but capped to 9)  */
   limitStepLvl?: number
 }
 
 export type UserUnitCoop = {
+  dupeConsumed: number
   luck: number
   captain: number
   special: number

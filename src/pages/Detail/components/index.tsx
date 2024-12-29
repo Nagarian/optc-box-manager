@@ -1,16 +1,12 @@
 import { Box } from 'components/Box'
 import { DescriptionHighlighter } from 'components/DescriptionHighlighter'
-import { Progression } from 'components/Progression'
+import { Progression, ProgressionProps } from 'components/Progression'
 import { SubTitle } from 'components/Title'
 import { PropsWithChildren, ReactNode } from 'react'
 
 type InputLabelProps = {
-  value: number
-  max: number
   name: ReactNode
   descriptions?: string[] | ReactNode[]
-  isExtended?: boolean
-  skipMax?: boolean
 }
 
 export function InputLabel({
@@ -18,10 +14,13 @@ export function InputLabel({
   descriptions,
   value,
   max,
+  variant = 'spaced',
   isExtended,
   skipMax,
   children,
-}: PropsWithChildren<InputLabelProps>) {
+}: PropsWithChildren<
+  InputLabelProps & Omit<ProgressionProps, 'maxIcon' | 'prefix' | 'isDirty'>
+>) {
   return (
     <Box display="flex" flexDirection="column">
       <Box my="2">
@@ -38,7 +37,7 @@ export function InputLabel({
           <Progression
             value={value}
             max={max}
-            variant="spaced"
+            variant={variant}
             isExtended={isExtended}
             skipMax={skipMax}
           />

@@ -60,10 +60,11 @@ export function UserUnitFactory(unit: ExtendedUnit): UserUnit {
     level: {
       lvl: 1,
       lvlMax: unit.maxLevel,
-      limitLvl: unit.maxLevel === 99 ? 0 : undefined,
-      limitStepLvl: unit.maxLevel === 99 ? 0 : undefined,
+      limitLvl: unit.maxLevel >= 99 ? 0 : undefined,
+      limitStepLvl: unit.maxLevel >= 99 ? 0 : undefined,
     },
     coop: {
+      dupeConsumed: 0,
       luck: 0,
       captain: 0,
       special: 0,
@@ -156,9 +157,15 @@ export function ConsumeUnitDupe(userUnit: UserUnit): UserUnit {
     ...userUnit,
     coop: {
       ...userUnit.coop,
+      dupeConsumed: userUnit.coop.dupeConsumed + 1,
       luck:
         userUnit.coop.luck +
-        (userUnit.unit.dropLocations.includes('legend') ? 2 : 0),
+        (userUnit.unit.dropLocations.includes('legend')
+          ? 2
+          : userUnit.unit.dropLocations.includes('rarerecruit') &&
+              userUnit.unit.maxLevel >= 99
+            ? 1
+            : 0),
     },
   }
 
@@ -452,7 +459,8 @@ export function resync(userUnit: UserUnit) {
 
   if (!userUnit.coop) {
     updated.coop = {
-      luck: Math.trunc(userUnit.level.lvl / 5),
+      dupeConsumed: userUnit.level.limitStepLvl ?? 0,
+      luck: 0,
       captain: 0,
       special: 0,
     }
@@ -460,10 +468,35 @@ export function resync(userUnit: UserUnit) {
     isUpdated = true
   }
 
-  if (userUnit.coop.luck < Math.trunc(userUnit.level.lvl / 5)) {
+  if (
+    !updated.coop.dupeConsumed ||
+    updated.coop.dupeConsumed < (updated.level.limitStepLvl ?? 0)
+  ) {
     updated.coop = {
       ...updated.coop,
-      luck: Math.trunc(userUnit.level.lvl / 5),
+      dupeConsumed: updated.level.limitStepLvl ?? 0,
+    }
+
+    isUpdated = true
+  } else if (
+    updated.level.limitStepLvl !== undefined &&
+    updated.level.limitStepLvl < updated.coop.dupeConsumed &&
+    updated.coop.dupeConsumed < 9
+  ) {
+    updated.level = getUserUnitLevel({
+      level: userUnit.level.lvl,
+      stepLevel: updated.coop.dupeConsumed,
+    })
+
+    isUpdated = true
+  }
+
+  const luckLevel = getUserUnitLuck(updated)
+
+  if (userUnit.coop.luck < luckLevel) {
+    updated.coop = {
+      ...updated.coop,
+      luck: luckLevel,
     }
 
     isUpdated = true
@@ -503,4 +536,17 @@ const getPotentialState = (
   }
 
   return lvl === 0 ? 'locked' : 'unlocked'
+}
+
+function getUserUnitLuck(userUnit: UserUnit) {
+  const base = Math.trunc(userUnit.level.lvl / 5)
+  if (userUnit.unit.dropLocations.includes('legend')) {
+    return base + userUnit.coop.dupeConsumed * 2
+  }
+
+  if (userUnit.unit.dropLocations.includes('rarerecruit')) {
+    return base + userUnit.coop.dupeConsumed * 1
+  }
+
+  return base
 }

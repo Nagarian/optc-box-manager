@@ -40,6 +40,7 @@ describe('Level Displayer', () => {
                 limitStepLvl: step,
               },
               coop: {
+                dupeConsumed: 0,
                 luck: 0,
                 captain: 0,
                 special: 0,

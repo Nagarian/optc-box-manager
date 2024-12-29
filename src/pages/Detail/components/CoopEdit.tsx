@@ -2,6 +2,7 @@ import { useTheme } from '@emotion/react'
 import { Box } from 'components/Box'
 import { Button } from 'components/Button'
 import { ExpansionPanel } from 'components/ExpansionPanel'
+import { DupeInput } from 'components/forms/DupeInput'
 import { LuckInput } from 'components/forms/LuckInput'
 import { RangeInput } from 'components/forms/RangeInput'
 import { CoopCaptainSvg, CoopIcon, CoopSpecialSvg } from 'components/Icon'
@@ -18,10 +19,28 @@ type LevelEditProps = {
 export function CoopEdit({ coop, unit, onChange }: LevelEditProps) {
   const theme = useTheme()
 
-  const { luck, captain, special } = coop
+  const { dupeConsumed, luck, captain, special } = coop
 
   return (
     <ExpansionPanel title="Coop stats" icon={CoopIcon}>
+      <InputLabel
+        value={dupeConsumed}
+        max={100}
+        skipMax
+        variant="no-max"
+        name="Dupe consumption"
+      >
+        <DupeInput
+          name="dupe-input"
+          value={dupeConsumed}
+          onChange={v =>
+            onChange({
+              ...coop,
+              dupeConsumed: v,
+            })
+          }
+        />
+      </InputLabel>
       <InputLabel value={luck} max={100} name="Luck">
         <LuckInput
           name="luck-input"

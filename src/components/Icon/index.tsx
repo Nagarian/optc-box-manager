@@ -33,6 +33,7 @@ import CottonCandy from './cottoncandy.svg?react'
 import Delete from './delete.svg?react'
 import Descending from './descending.svg?react'
 import DuplicateHide from './duplicate-hide.svg?react'
+import DuplicateSvg from './duplicate-show.svg'
 import DuplicateShow from './duplicate-show.svg?react'
 import Edit from './edit.svg?react'
 import Evolve from './evolve.svg?react'
@@ -108,6 +109,7 @@ export {
   CoopCaptainSvg,
   CoopSpecialSvg,
   CottonCandySvg,
+  DuplicateSvg,
   InkSvg,
   LevelSvg,
   LuckSvg,
