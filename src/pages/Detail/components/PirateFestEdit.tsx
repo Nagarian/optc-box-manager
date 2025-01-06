@@ -86,7 +86,7 @@ export function PirateFestEdit({
           descriptions={
             festGPBurst?.map(
               (a, i) =>
-                `### Leader: ${festGPLeader?.[i].description}\n\n### Burst [${a.use} uses]\n\nCondition: ${a.condition}\n\n${a.description}`,
+                `### Leader:\n\n ${festGPLeader?.[i].description}\n\n### Burst [${a.use} uses]\n\nCondition: ${a.condition}\n\n${a.description}`,
             ) ?? new Array(10).fill('Not available, please take caution')
           }
         >
