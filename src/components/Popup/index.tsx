@@ -18,6 +18,7 @@ type PopupProps = {
   minHeightRequired?: boolean
   children?: ReactNode
   customAction?: ReactNode
+  hideMainActions?: boolean
 }
 
 export function Popup({
@@ -27,6 +28,7 @@ export function Popup({
   onValidate,
   children,
   customAction,
+  hideMainActions = false,
   minHeightRequired,
   px = [2, 3, 5],
   py = [3, 3, 5],
@@ -51,7 +53,7 @@ export function Popup({
         <hr />
 
         <PopupActionPanel>
-          {onClose && (
+          {(!hideMainActions && onClose) && (
             <Button
               variant="primary"
               onClick={onClose}
@@ -60,7 +62,7 @@ export function Popup({
             />
           )}
 
-          {onCancel && (
+          {(!hideMainActions && onCancel) && (
             <Button
               variant="secondary"
               onClick={onCancel}
@@ -71,7 +73,7 @@ export function Popup({
 
           {customAction}
 
-          {onValidate && (
+          {(!hideMainActions && onValidate) && (
             <Button
               variant="primary"
               onClick={onValidate}

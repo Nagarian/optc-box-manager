@@ -104,7 +104,8 @@ export function SugoCleaner({
           />
         </>
       }
-      // onClose={onClose}
+      onClose={onClose}
+      hideMainActions
       minHeightRequired
     >
       <SugoCleanerList
