@@ -196,6 +196,11 @@ export type UnitSailor =
       combined: string
       level1?: string
       level2?: string
+      llblevel?: string
+      llblevel1?: string
+      llbcharacter1?: string
+      llbcharacter2?: string
+      llbcombined?: string
     }
 
 export type UnitSuperSwap = {
