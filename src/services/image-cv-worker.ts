@@ -306,7 +306,14 @@ function detectGenericSquare(src: Mat, analysisId: string): SquareSize[] {
     self.postMessage({
       type: 'SQUARE_DETECTED',
       analysisId,
-      square: { ...squareDetected, ...rect },
+      square: {
+        id: squareDetected.id,
+        analysisId: squareDetected.analysisId,
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height,
+      },
     })
   }
 
