@@ -172,6 +172,16 @@ export type UnitFestGPBurst = {
   use: number
 }
 
+export type UnitFestSuperSpecialDetail = {
+  description: string
+  condition: string
+}
+
+export type UnitFestSuperSpecial = {
+  base: UnitFestSuperSpecialDetail
+  llbbase: UnitFestSuperSpecialDetail
+}
+
 export type UnitCooldown = [number, number]
 
 export type UnitSpecial = string
@@ -221,6 +231,7 @@ export type UnitLevelLimitBreak = null | Partial<{
   rResilience: true
   gpAbility: true
   gpSpecial: true
+  rSuperSpecial: true
   captain: UnitCaptain
   special: UnitSpecial
   sailor: UnitSailor
@@ -254,6 +265,7 @@ export type UnitDetail = {
   festResistance?: string
   festGPLeader?: UnitFestAbility[]
   festGPBurst?: UnitFestGPBurst[]
+  festSuperSpecial?: UnitFestSuperSpecial
   swap?: string | UnitSuperSwap
   swapNotes?: string
   superSpecial?: string

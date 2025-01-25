@@ -123,6 +123,12 @@ export type UnitLastTap = {
   description: string[]
 }
 
+export type UnitRush = {
+  characterCondition: string[]
+  description: string[]
+  stats: string[]
+}
+
 export type UnitSupport = {
   Characters: string
   description: string[]
@@ -141,6 +147,16 @@ export type UnitFestGPBurst = {
   description: string
   condition: string
   use: number
+}
+
+export type UnitFestSuperSpecialDetail = {
+  description: string
+  condition: string
+}
+
+export type UnitFestSuperSpecial = {
+  base: UnitFestSuperSpecialDetail
+  llbbase: UnitFestSuperSpecialDetail
 }
 
 export type UnitCooldown = [number, number]
@@ -192,16 +208,11 @@ export type UnitLevelLimitBreak = null | Partial<{
   rResilience: true
   gpAbility: true
   gpSpecial: true
+  rSuperSpecial: true
   captain: UnitCaptain
   special: UnitSpecial
   sailor: UnitSailor
 }>
-
-export type UnitRush = {
-  characterCondition: string[]
-  description: string[]
-  stats: string[]
-}
 
 export type UnitDetail = {
   captain: UnitCaptain
@@ -227,6 +238,7 @@ export type UnitDetail = {
   festSpecial: UnitFestSpecial[]
   festGPLeader?: UnitFestAbility[]
   festGPBurst?: UnitFestGPBurst[]
+  festSuperSpecial?: UnitFestSuperSpecial
   swap?: string | UnitSuperSwap
   swapNotes?: string
   superSpecial?: string
