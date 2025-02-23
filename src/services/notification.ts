@@ -17,8 +17,12 @@ export function checkReminderNotification(generatedAt: Date) {
   }
 
   if (addDays(generatedAt, 90 - 7) < new Date()) {
-    new Notification(notificationTitle, {
-      body: `Your generated password will expire in ${relativeTimeFromDates(addDays(generatedAt, 90))} - you should update it`,
-    })
+    try {
+      new Notification(notificationTitle, {
+        body: `Your generated password will expire in ${relativeTimeFromDates(addDays(generatedAt, 90))} - you should update it`,
+      })
+    } catch (error) {
+      console.error('Failed to create notification', error)
+    }
   }
 }
