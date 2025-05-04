@@ -53,7 +53,7 @@ export function Popup({
         <hr />
 
         <PopupActionPanel>
-          {(!hideMainActions && onClose) && (
+          {!hideMainActions && onClose && (
             <Button
               variant="primary"
               onClick={onClose}
@@ -62,7 +62,7 @@ export function Popup({
             />
           )}
 
-          {(!hideMainActions && onCancel) && (
+          {!hideMainActions && onCancel && (
             <Button
               variant="secondary"
               onClick={onCancel}
@@ -73,7 +73,7 @@ export function Popup({
 
           {customAction}
 
-          {(!hideMainActions && onValidate) && (
+          {!hideMainActions && onValidate && (
             <Button
               variant="primary"
               onClick={onValidate}
