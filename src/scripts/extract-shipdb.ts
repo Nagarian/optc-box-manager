@@ -87,8 +87,8 @@ function remapShip(id: number, ship: ShipInfo): Ship {
       thumbnail: `${shipImagesHost}/icon/ship_${id.toString().padStart(4, '0')}_thumbnail.png`,
     },
     levels: ship.effect.map((c, i) => ({
-      cola: ship.cola![i],
-      superCola: ship.superCola![i],
+      cola: ship.cola?.[i] ?? 0,
+      superCola: ship.superCola?.[i] ?? 0,
       ability: {
         description: cleanDescription(ship.effect[i]),
       },
