@@ -80,6 +80,8 @@ export function PotentialAbilityToImage(type: PotentialKey) {
       return ImageSkill26
     case 'Rush':
       return ImageSkill28
+    case 'Super Tandem Boost':
+      return NoIcon
     default:
       return NoIcon
   }
