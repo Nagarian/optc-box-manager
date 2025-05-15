@@ -95,6 +95,7 @@ export const Potentials = [
   'Last Tap / Super Tandem',
   'Triple Special Activation',
   'Rush',
+  'Super Tandem Boost',
 ] as const
 
 export type PotentialKey = (typeof Potentials)[number]
@@ -231,6 +232,8 @@ export type UnitDetail = {
   lastTapNotes?: string
   superTandem?: UnitSuperTandem
   superTandemNotes?: string
+  superTandemBoost?: UnitSuperTandem
+  superTandemBoostNotes?: string
   rush?: UnitRush
   support: UnitSupport[]
   supportNotes?: string
