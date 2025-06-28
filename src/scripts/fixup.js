@@ -39,6 +39,11 @@ export function fixupDetail(
       Enrage: 'Enrage/Reduce Increase Damage Taken duration',
       'Nutrition/Reduce Hunger duration': 'Nutrition/Reduce Hunger stacks',
       'Ship Bind Resistance': 'Reduce Ship Bind duration',
+      'Sailor Despair': 'Reduce Sailor Despair duration',
+      'No Healing': 'Reduce No Healing duration',
+      'Slot Bind': 'Reduce Slot Bind duration',
+      'Healing Reduction': 'Reduce Healing Reduction duration',
+      'Special Use Limit': 'Reduce Special Use Limit duration',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
