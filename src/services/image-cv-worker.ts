@@ -663,9 +663,17 @@ function findMatching(
       0,
       cv.INTER_AREA as number,
     )
+    cv.cvtColor(imageRoi, imageRoi, cv.COLOR_RGBA2GRAY as number)
+    // Also ensure charactersMat is grayscale
+    let templateMat = new cv.Mat()
+    if (charactersMat.channels() > 1) {
+      cv.cvtColor(charactersMat, templateMat, cv.COLOR_RGBA2GRAY as number)
+    } else {
+      templateMat = charactersMat
+    }
     const dst = new cv.Mat()
     cv.matchTemplate(
-      charactersMat,
+      templateMat,
       imageRoi,
       dst,
       cv.TM_CCOEFF_NORMED as number,
@@ -673,8 +681,8 @@ function findMatching(
     )
     const result = cv.minMaxLoc(dst, mask)
     imageRoi.delete()
+    if (templateMat !== charactersMat) templateMat.delete()
     dst.delete()
-    mask.delete()
 
     return {
       val: result.maxVal,
