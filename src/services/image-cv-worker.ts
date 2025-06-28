@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 import { CV, Mat } from '@techstark/opencv-js'
+import { ImageAnalyzerSettings } from 'hooks/useUserSettings'
 import { ExtendedUnit } from 'models/units'
 
 declare const self: DedicatedWorkerGlobalScope & { cv: CV }
@@ -7,7 +8,12 @@ declare const cv: CV
 
 export type MessageToWorker =
   | { type: 'INIT' }
-  | { type: 'PROCESS_IMAGE'; characters: ImageData; analysis: Analysis }
+  | {
+      type: 'PROCESS_IMAGE'
+      characters: ImageData
+      analysis: Analysis
+      settings?: ImageAnalyzerSettings
+    }
   | { type: 'INIT_VIDEO'; characters: ImageData; analysis: Analysis }
   | { type: 'PROCESS_VIDEO'; frame: ImageData }
 
@@ -195,7 +201,13 @@ onmessage = ({ data }: MessageEvent<MessageToWorker>) => {
           break
       }
 
-      findCharacterIds(charactersMat, id, src, squares, 0.8)
+      findCharacterIds(
+        charactersMat,
+        id,
+        src,
+        squares,
+        data.settings?.minConfidence ?? 0.8,
+      )
       src.delete()
       charactersMat.delete()
       self.postMessage({

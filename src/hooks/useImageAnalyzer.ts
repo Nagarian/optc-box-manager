@@ -29,7 +29,7 @@ export type ImageAnalyzer = {
 }
 export function useImageAnalyzer(): ImageAnalyzer {
   const {
-    userSetting: { gameVersion },
+    userSetting: { gameVersion, imageAnalyzer: imageAnalyzerSettings },
   } = useUserSettings()
   const workerRef = useRef<Worker>(undefined)
   const charactersRef = useRef<ImageData>(undefined)
@@ -143,6 +143,7 @@ export function useImageAnalyzer(): ImageAnalyzer {
         type: 'PROCESS_IMAGE',
         characters: charactersRef.current,
         analysis,
+        settings: imageAnalyzerSettings,
       })
 
       return

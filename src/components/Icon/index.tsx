@@ -62,6 +62,7 @@ import ResetRemove from './reset-remove.svg?react'
 import SaveSearch from './savesearch.svg?react'
 import Search from './search.svg?react'
 import SearchBuilder from './searchbuilder.svg?react'
+import SettingsSvg from './settings.svg'
 import Settings from './settings.svg?react'
 import Share from './share.svg?react'
 import Shipyard from './shipyard.svg?react'
@@ -116,6 +117,7 @@ export {
   LevelSvg,
   LuckSvg,
   PirateFestSvg,
+  SettingsSvg,
   ShipyardBottleSvg,
   SpecialLvl,
   SpecialSvg,

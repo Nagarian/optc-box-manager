@@ -21,6 +21,10 @@ export type AccountRecovery = {
   generatedAt: Date
 }
 
+export type ImageAnalyzerSettings = {
+  minConfidence: number
+}
+
 export type UserGatheringIsland = Record<GatherIslandType, number>
 
 export type UserSetting = {
@@ -35,6 +39,7 @@ export type UserSetting = {
   reseter: Record<string, string | undefined>
   themeMode: ThemeMode
   gameVersion: GameVersion
+  imageAnalyzer: ImageAnalyzerSettings
   accountRecovery?: AccountRecovery
 }
 
@@ -67,6 +72,9 @@ const defaultUserSettings: UserSetting = {
   },
   themeMode: 'auto',
   gameVersion: 'global',
+  imageAnalyzer: {
+    minConfidence: 0.8,
+  },
 }
 
 export type UserSettingEnhanced = {
