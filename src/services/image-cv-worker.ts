@@ -405,14 +405,24 @@ function detectFirstHorizontalLine(src: Mat): number {
   whiteMask.delete()
   yellowMask.delete()
 
-  const bitwised = new cv.Mat()
+  let bitwised = new cv.Mat()
   cv.bitwise_and(src, src, bitwised, bitOr)
   bitOr.delete()
+
+  // Ensure bitwised is RGBA before converting to grayscale
+  if (bitwised.empty()) {
+    throw new Error('bitwised is empty before cvtColor')
+  }
+  if (bitwised.channels() === 1) {
+    const tmp = new cv.Mat()
+    cv.cvtColor(bitwised, tmp, cv.COLOR_GRAY2RGBA as number)
+    bitwised.delete()
+    bitwised = tmp
+  }
 
   const lines = new cv.Mat()
   cv.cvtColor(bitwised, bitwised, cv.COLOR_RGBA2GRAY as number)
   cv.Canny(bitwised, bitwised, 50, 255)
-  // cv.HoughLinesP(bitwised, lines, 0.1, Math.PI / 10.0, 150, 5, 4)
   cv.HoughLinesP(bitwised, lines, 1, Math.PI / 2, 2, 30, 1)
   bitwised.delete()
 
@@ -633,7 +643,18 @@ function findMatching(
   try {
     console.time('Finding matching')
     const mask = new cv.Mat()
-    const imageRoi = src.roi(squareToSearch)
+
+    // Bounds check
+    const maxX = src.cols
+    const maxY = src.rows
+    let { x, y, width, height } = squareToSearch
+    x = Math.max(0, Math.min(x, maxX - 1))
+    y = Math.max(0, Math.min(y, maxY - 1))
+    width = Math.max(1, Math.min(width, maxX - x))
+    height = Math.max(1, Math.min(height, maxY - y))
+
+    const roiRect = new cv.Rect(x, y, width, height)
+    const imageRoi = src.roi(roiRect)
     cv.resize(
       imageRoi,
       imageRoi,
