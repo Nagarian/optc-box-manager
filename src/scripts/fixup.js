@@ -44,6 +44,7 @@ export function fixupDetail(
       'Slot Bind': 'Reduce Slot Bind duration',
       'Healing Reduction': 'Reduce Healing Reduction duration',
       'Special Use Limit': 'Reduce Special Use Limit duration',
+      'Enrage/Increase Damage Taken': 'Enrage/Reduce Increase Damage Taken duration',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
@@ -555,6 +556,16 @@ export function fixupSpecificIssue(
     if (Number.isNaN(unit.limitATK)) {
       unit.limitATK = 0
       unit.limitexATK = 0
+    } else {
+      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
+    }
+  }
+
+  if ([4408].includes(unit.id)) {
+    // @ts-ignore
+    if (Number.isNaN(unit.detail.swap?.superTurns)) {
+      // @ts-ignore
+      unit.detail.swap.superTurns = 1
     } else {
       console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
     }
