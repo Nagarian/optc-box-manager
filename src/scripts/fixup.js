@@ -37,6 +37,7 @@ export function fixupDetail(
     /** @type PotentialRenamedHash */
     const renamedPotentials = {
       Enrage: 'Enrage/Reduce Increase Damage Taken duration',
+      'Nutrition/Hunger': 'Nutrition/Reduce Hunger stacks',
       'Nutrition/Reduce Hunger duration': 'Nutrition/Reduce Hunger stacks',
       'Ship Bind Resistance': 'Reduce Ship Bind duration',
       'Sailor Despair': 'Reduce Sailor Despair duration',
