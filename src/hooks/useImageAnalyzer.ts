@@ -214,6 +214,7 @@ export function useImageAnalyzer(): ImageAnalyzer {
   }, [
     analyses,
     hasAnalysisToProcess,
+    imageAnalyzerSettings,
     isInitialized,
     isProcessing,
     remainingAnalysis,
