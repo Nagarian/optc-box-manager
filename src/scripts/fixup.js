@@ -562,16 +562,6 @@ export function fixupSpecificIssue(
     }
   }
 
-  if ([4408].includes(unit.id)) {
-    // @ts-ignore
-    if (Number.isNaN(unit.detail.swap?.superTurns)) {
-      // @ts-ignore
-      unit.detail.swap.superTurns = 1
-    } else {
-      console.warn(`issue with unit ${unit.id} "${unit.name}" has been fixed`)
-    }
-  }
-
   // @ts-ignore
   if (unit.detail.lLimit?.gpAbility) {
     // @ts-ignore
