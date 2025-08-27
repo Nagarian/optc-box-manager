@@ -46,6 +46,8 @@ export function fixupDetail(
       'Healing Reduction': 'Reduce Healing Reduction duration',
       'Special Use Limit': 'Reduce Special Use Limit duration',
       'Enrage/Increase Damage Taken': 'Enrage/Reduce Increase Damage Taken duration',
+      'Slot Barrier': 'Reduce Slot Barrier duration',
+      'Ship Bind': 'Reduce Ship Bind duration',
     }
 
     if (detail.potential.some(p => !!renamedPotentials[p.Name])) {
