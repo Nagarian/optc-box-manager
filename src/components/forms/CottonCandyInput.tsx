@@ -8,7 +8,7 @@ type CottonCandyInputProps = {
   hideAdders?: boolean
 }
 export function CottonCandyInput({
-  max = 100,
+  max,
   onChange,
   variant,
   hideAdders,

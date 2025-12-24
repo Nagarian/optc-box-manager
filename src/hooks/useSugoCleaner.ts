@@ -30,7 +30,7 @@ export function useSugoCleaner(unitDB: ExtendedUnit[]) {
     defaultSugoCleaner,
   )
 
-  const { toClean = [], toSell = [], toWaiting = [] } = sugoCleaner
+  const { toClean, toSell, toWaiting } = sugoCleaner
 
   return {
     toClean: toClean

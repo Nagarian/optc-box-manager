@@ -74,6 +74,8 @@ export default tseslint.config(
           message: 'Prefer named exports',
         },
       ],
+      'react-hooks/set-state-in-effect': ['warn'],
+      '@typescript-eslint/no-useless-default-assignment': ['off'],
     },
   },
 )

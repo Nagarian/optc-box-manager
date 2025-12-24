@@ -15,14 +15,14 @@ const localStorageKey = 'last_changelog'
 
 export function Changelog({ onlyUnseen = false }: { onlyUnseen?: boolean }) {
   const [releases, setReleases] = useState<GithubLightRelease[]>([])
-  const [latestSeen, setLatestSeen] = useState<number>()
-
-  useEffect(() => {
+  const [latestSeen, setLatestSeen] = useState<number | undefined>(() => {
     const json = localStorage.getItem(localStorageKey)
     if (json) {
-      setLatestSeen(JSON.parse(json) as number)
+      return JSON.parse(json) as number
     }
-  }, [])
+
+    return undefined
+  })
 
   useEffect(() => {
     const fetcher = async () => {
@@ -41,6 +41,7 @@ export function Changelog({ onlyUnseen = false }: { onlyUnseen?: boolean }) {
       )
 
       localStorage.setItem(localStorageKey, JSON.stringify(json[0].id))
+      setLatestSeen(json[0].id)
     }
 
     fetcher().catch((e: unknown) => console.error(e))

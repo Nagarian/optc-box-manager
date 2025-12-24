@@ -15,7 +15,7 @@ export type SortProps = {
   searchSort: SearchSortCriteria[]
   onChange: (searchSort: SearchSortCriteria[]) => void
 }
-export function Sort({ unitOnly, searchSort = [], onChange }: SortProps) {
+export function Sort({ unitOnly, searchSort, onChange }: SortProps) {
   const SortItemRender = (criteria: SearchSortCriteria) => (
     <Button
       key={criteria.by}
