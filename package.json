@@ -24,7 +24,7 @@
     "@emotion/styled": "^11.14.1",
     "@styled-system/css": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
-    "diff": "^8.0.2",
+    "diff": "^8.0.3",
     "rc-slider": "^11.1.9",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
